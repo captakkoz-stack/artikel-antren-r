@@ -49,7 +49,7 @@
   }
 
   .tabbar{
-    max-width:1600px;
+    max-width:1800px;
     margin:22px auto 0;
     padding:0 20px;
     display:flex;
@@ -73,7 +73,7 @@
   }
 
   main{
-    max-width:1600px;
+    max-width:1800px;
     margin:0 auto;
     padding:0 20px 60px;
     display:grid;
@@ -87,7 +87,7 @@
     background:#fff;
     border:1px solid var(--line);
     border-radius:2px;
-    padding:20px 22px;
+    padding:24px 28px;
     margin-bottom:20px;
     margin-top:24px;
   }
@@ -159,7 +159,7 @@
     border-collapse:collapse;
     margin-top:6px;
     font-family: system-ui, Helvetica, Arial, sans-serif;
-    font-size:13px;
+    font-size:14.5px;
   }
   th{
     text-align:left;
@@ -280,7 +280,7 @@
     margin:-6px 0 10px;
   }
   .wordlist-scroll{
-    max-height:260px;
+    max-height:340px;
     overflow-y:auto;
   }
   .stat-grid{
@@ -313,6 +313,7 @@
     margin-bottom:14px;
   }
   .footer-tools{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+  .test-btn-row{display:flex;gap:8px;flex-wrap:wrap;}
   .rule-grid{
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -404,15 +405,18 @@
     padding:5px 10px;
     border-radius:10px;
   }
-  .conj-btn:hover{background:var(--der-bg);}  .signature{
+  .conj-btn:hover{background:var(--der-bg);}
+  .signature{
     position:fixed;
     bottom:10px;
     right:14px;
-    font-family: system-ui, Helvetica, Arial, sans-serif;
-    font-size:11px;
-    color:#a89a7d;
-    background:rgba(255,255,255,0.7);
-    padding:3px 8px;
+    font-family: Georgia, serif;
+    font-style:italic;
+    font-size:12px;
+    font-weight:600;
+    color:var(--deep);
+    background:rgba(255,255,255,0.75);
+    padding:3px 9px;
     border-radius:2px;
   }
 </style>
@@ -558,12 +562,16 @@
       </div>
       <div class="countdown" id="countdownText"></div>
 
-      <button class="btn-main" onclick="askQuestion()">Şimdi Test Et</button>
-      <button class="btn-ghost" onclick="resetStats()" style="margin-left:6px;">İstatistiği Sıfırla</button>
+      <div class="test-btn-row">
+        <button class="btn-main" onclick="askQuestion('mixed')">Şimdi Test Et (Karışık)</button>
+        <button class="btn-ghost" onclick="askQuestion('artikel-only')">Sadece Artikel Testi (der/die/das)</button>
+      </div>
+      <button class="btn-ghost" onclick="resetStats()" style="margin-top:8px;">İstatistiği Sıfırla</button>
 
       <p class="empty-note" style="margin-top:18px;">
         Not: Bu araç bir tarayıcı sekmesi olarak çalışır, gerçek bir arka plan uygulaması değildir.
         Antrenman şu an isim listesindeki (Artikel/Çoğul) kelimeleri test ediyor.
+        Sadece Artikel Testi'nde bilgisayarda <strong>Enter</strong> tuşuyla bir sonraki soruya hızlıca geçebilirsin.
       </p>
     </section>
 
@@ -735,21 +743,21 @@ const STARTER_WORDS = [
   {artikel:"die", word:"Zeitung", plural:"Zeitungen", emoji:"📰", tr:"gazete"},
   {artikel:"die", word:"Gesundheit", plural:"—", emoji:"❤️", tr:"sağlık"},
   {artikel:"das", word:"Mädchen", plural:"Mädchen", emoji:"👧", tr:"kız çocuk"},
-  {artikel:"der", word:"Lehrer", plural:"Lehrer", emoji:"👨‍🏫", tr:"öğretmen"},
+  {artikel:"der", word:"Lehrer", plural:"Lehrer", emoji:"👨‍🏫", tr:"öğretmen (erkek)"},
   {artikel:"der", word:"MP3-Player", plural:"MP3-Player", emoji:"🎧", tr:"mp3 çalar"},
   {artikel:"der", word:"Name", plural:"Namen", emoji:"🏷️", tr:"isim"},
   {artikel:"das", word:"Feuerzeug", plural:"Feuerzeuge", emoji:"🔥", tr:"çakmak"},
   {artikel:"der", word:"Wochentag", plural:"Wochentage", emoji:"📅", tr:"hafta günü"},
   {artikel:"die", word:"Nachricht", plural:"Nachrichten", emoji:"📨", tr:"haber / mesaj"},
   {artikel:"das", word:"Wort", plural:"Wörter", emoji:"📝", tr:"kelime"},
-  {artikel:"der", word:"Architekt", plural:"Architekten", emoji:"👷", tr:"mimar"},
-  {artikel:"der", word:"Journalist", plural:"Journalisten", emoji:"📰", tr:"gazeteci"},
-  {artikel:"der", word:"Designer", plural:"Designer", emoji:"🎨", tr:"tasarımcı"},
-  {artikel:"der", word:"Sekretär", plural:"Sekretäre", emoji:"🗂️", tr:"sekreter"},
-  {artikel:"der", word:"Elektriker", plural:"Elektriker", emoji:"🔌", tr:"elektrikçi"},
-  {artikel:"der", word:"Verkäufer", plural:"Verkäufer", emoji:"🛍️", tr:"satıcı"},
-  {artikel:"der", word:"Apotheker", plural:"Apotheker", emoji:"💊", tr:"eczacı"},
-  {artikel:"der", word:"Musiker", plural:"Musiker", emoji:"🎵", tr:"müzisyen"},
+  {artikel:"der", word:"Architekt", plural:"Architekten", emoji:"👷", tr:"mimar (erkek)"},
+  {artikel:"der", word:"Journalist", plural:"Journalisten", emoji:"📰", tr:"gazeteci (erkek)"},
+  {artikel:"der", word:"Designer", plural:"Designer", emoji:"🎨", tr:"tasarımcı (erkek)"},
+  {artikel:"der", word:"Sekretär", plural:"Sekretäre", emoji:"🗂️", tr:"sekreter (erkek)"},
+  {artikel:"der", word:"Elektriker", plural:"Elektriker", emoji:"🔌", tr:"elektrikçi (erkek)"},
+  {artikel:"der", word:"Verkäufer", plural:"Verkäufer", emoji:"🛍️", tr:"satıcı (erkek)"},
+  {artikel:"der", word:"Apotheker", plural:"Apotheker", emoji:"💊", tr:"eczacı (erkek)"},
+  {artikel:"der", word:"Musiker", plural:"Musiker", emoji:"🎵", tr:"müzisyen (erkek)"},
   {artikel:"der", word:"Beruf", plural:"Berufe", emoji:"💼", tr:"meslek"},
   {artikel:"die", word:"Brille", plural:"Brillen", emoji:"👓", tr:"gözlük"},
   {artikel:"die", word:"Briefmarke", plural:"Briefmarken", emoji:"✉️", tr:"pul"},
@@ -790,7 +798,29 @@ const STARTER_WORDS = [
   {artikel:"das", word:"Heft", plural:"Hefte", emoji:"📓", tr:"defter"},
   {artikel:"die", word:"Schere", plural:"Scheren", emoji:"✂️", tr:"makas"},
   {artikel:"das", word:"T-Shirt", plural:"T-Shirts", emoji:"👕", tr:"tişört"},
-  {artikel:"die", word:"Blume", plural:"Blumen", emoji:"🌸", tr:"çiçek"}
+  {artikel:"die", word:"Blume", plural:"Blumen", emoji:"🌸", tr:"çiçek"},
+  {artikel:"der", word:"Arzt", plural:"Ärzte", emoji:"👨‍⚕️", tr:"doktor (erkek)"},
+  {artikel:"die", word:"Ärztin", plural:"Ärztinnen", emoji:"👩‍⚕️", tr:"doktor (kadın)"},
+  {artikel:"der", word:"Polizist", plural:"Polizisten", emoji:"👮", tr:"polis (erkek)"},
+  {artikel:"die", word:"Polizistin", plural:"Polizistinnen", emoji:"👮‍♀️", tr:"polis (kadın)"},
+  {artikel:"der", word:"Bauarbeiter", plural:"Bauarbeiter", emoji:"👷", tr:"inşaat işçisi (erkek)"},
+  {artikel:"die", word:"Bauarbeiterin", plural:"Bauarbeiterinnen", emoji:"👷‍♀️", tr:"inşaat işçisi (kadın)"},
+  {artikel:"der", word:"Bäcker", plural:"Bäcker", emoji:"🥖", tr:"fırıncı (erkek)"},
+  {artikel:"die", word:"Bäckerin", plural:"Bäckerinnen", emoji:"🥖", tr:"fırıncı (kadın)"},
+  {artikel:"der", word:"Mechaniker", plural:"Mechaniker", emoji:"🔧", tr:"tamirci (erkek)"},
+  {artikel:"die", word:"Mechanikerin", plural:"Mechanikerinnen", emoji:"🔧", tr:"tamirci (kadın)"},
+  {artikel:"der", word:"Friseur", plural:"Friseure", emoji:"💇", tr:"kuaför (erkek)"},
+  {artikel:"die", word:"Frisörin", plural:"Frisörinnen", emoji:"💇‍♀️", tr:"kuaför (kadın)"},
+  {artikel:"die", word:"Lehrerin", plural:"Lehrerinnen", emoji:"👩‍🏫", tr:"öğretmen (kadın)"},
+  {artikel:"die", word:"Architektin", plural:"Architektinnen", emoji:"👷‍♀️", tr:"mimar (kadın)"},
+  {artikel:"die", word:"Journalistin", plural:"Journalistinnen", emoji:"📰", tr:"gazeteci (kadın)"},
+  {artikel:"die", word:"Designerin", plural:"Designerinnen", emoji:"🎨", tr:"tasarımcı (kadın)"},
+  {artikel:"die", word:"Sekretärin", plural:"Sekretärinnen", emoji:"🗂️", tr:"sekreter (kadın)"},
+  {artikel:"die", word:"Elektrikerin", plural:"Elektrikerinnen", emoji:"🔌", tr:"elektrikçi (kadın)"},
+  {artikel:"die", word:"Verkäuferin", plural:"Verkäuferinnen", emoji:"🛍️", tr:"satıcı (kadın)"},
+  {artikel:"die", word:"Apothekerin", plural:"Apothekerinnen", emoji:"💊", tr:"eczacı (kadın)"},
+  {artikel:"die", word:"Musikerin", plural:"Musikerinnen", emoji:"🎵", tr:"müzisyen (kadın)"},
+  {artikel:"das", word:"Essen", plural:"—", emoji:"🍽️", tr:"yemek"}
 ];
 
 const STARTER_VERBS = [
@@ -1552,21 +1582,30 @@ function insertChar(ch){
   input.setSelectionRange(start + 1, start + 1);
 }
 
-function buildSession(){
-  let session = shuffleArray(words).map(w => ({word:w, mode: Math.random()<0.5 ? "artikel" : "plural", answered:false}));
+function buildSession(testMode){
+  const pickMode = (w) => {
+    if(testMode === "artikel-only"){
+      const hasPlural = w.plural && w.plural !== "—";
+      if(hasPlural && Math.random() < 0.5) return "artikel-plural";
+      return "artikel";
+    }
+    return Math.random()<0.5 ? "artikel" : "plural";
+  };
+  let session = shuffleArray(words).map(w => ({word:w, mode: pickMode(w), answered:false}));
   while(session.length < 15){
-    const extra = shuffleArray(words).map(w => ({word:w, mode: Math.random()<0.5 ? "artikel" : "plural", answered:false}));
+    const extra = shuffleArray(words).map(w => ({word:w, mode: pickMode(w), answered:false}));
     session = session.concat(extra);
   }
   return shuffleArray(session);
 }
 
-function askQuestion(){
+function askQuestion(testMode){
+  testMode = testMode || "mixed";
   if(words.length === 0){
     alert("Önce isim listesine birkaç kelime ekle.");
     return;
   }
-  sessionQuestions = buildSession();
+  sessionQuestions = buildSession(testMode);
   sessionIndex = 0;
   document.getElementById("quizOverlay").classList.add("show");
   showSessionQuestion();
@@ -1575,7 +1614,7 @@ function askQuestion(){
 function showSessionQuestion(){
   currentQ = sessionQuestions[sessionIndex];
   const w = currentQ.word;
-  const isArtikelQ = currentQ.mode === "artikel";
+  const isButtonQ = currentQ.mode === "artikel" || currentQ.mode === "artikel-plural";
 
   document.getElementById("qFeedback").textContent = "";
   document.getElementById("qEmoji").textContent = w.emoji || "❔";
@@ -1583,10 +1622,15 @@ function showSessionQuestion(){
   document.getElementById("prevBtn").disabled = sessionIndex === 0;
   document.getElementById("nextBtn").disabled = sessionIndex === sessionQuestions.length - 1;
 
-  if(isArtikelQ){
-    document.getElementById("qType").textContent = "ARTİKEL NE?";
+  if(isButtonQ){
     const qw = document.getElementById("qWord");
-    qw.textContent = w.word;
+    if(currentQ.mode === "artikel-plural"){
+      document.getElementById("qType").textContent = "ÇOĞULUN ARTİKELİ NE?";
+      qw.textContent = w.plural;
+    } else {
+      document.getElementById("qType").textContent = "ARTİKEL NE?";
+      qw.textContent = w.word;
+    }
     qw.style.color = "var(--ink)";
     document.getElementById("qPluralInput").style.display = "none";
     document.getElementById("umlautRow").style.display = "none";
@@ -1641,7 +1685,9 @@ function prevQuestion(){
 }
 
 function checkArtikelAnswer(chosen, btnEl){
-  const correct = currentQ.word.artikel;
+  const isPluralQ = currentQ.mode === "artikel-plural";
+  const correct = isPluralQ ? "die" : currentQ.word.artikel;
+  const displayWord = isPluralQ ? currentQ.word.plural : currentQ.word.word;
   const allBtns = document.querySelectorAll("#qOptions .opt-btn");
   allBtns.forEach(b=>{
     b.onclick = null;
@@ -1649,9 +1695,9 @@ function checkArtikelAnswer(chosen, btnEl){
     if(b === btnEl && chosen !== correct) b.classList.add("wrong");
   });
   if(chosen === correct){
-    document.getElementById("qFeedback").textContent = "Doğru! " + correct + " " + currentQ.word.word;
+    document.getElementById("qFeedback").textContent = "Doğru! " + correct + " " + displayWord;
   } else {
-    document.getElementById("qFeedback").textContent = "Doğrusu: " + correct + " " + currentQ.word.word;
+    document.getElementById("qFeedback").textContent = "Doğrusu: " + correct + " " + displayWord;
   }
   if(!currentQ.answered){
     currentQ.answered = true;
@@ -1699,6 +1745,20 @@ function closeQuiz(){
   sessionIndex = 0;
 }
 
+document.addEventListener("keydown", (e)=>{
+  if(e.key !== "Enter") return;
+  if(!document.getElementById("quizOverlay").classList.contains("show")) return;
+
+  const pluralVisible = document.getElementById("qPluralInput").style.display !== "none";
+  if(pluralVisible && currentQ && !currentQ.answered){
+    e.preventDefault();
+    checkPluralAnswer();
+    return;
+  }
+  e.preventDefault();
+  nextQuestion();
+});
+
 loadData();
 renderWords();
 renderVerbs();
@@ -1707,7 +1767,7 @@ updateStatDisplay();
 renderMistakeStats();
 </script>
 
-<div class="signature">Erstellt von Capt. Aykut Akkoz</div>
+<div class="signature">⚓ Erstellt von Capt. Aykut Akkoz</div>
 
 </body>
 </html>
