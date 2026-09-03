@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Artikel & Verben Antrenörü</title>
+<style>
+  :root{
+    --deep: #0F2A3D;
+    --teal: #1C4B5C;
+    --brass: #C9A66B;
+    --cream: #F5F0E6;
+    --ink: #1A1A1A;
+    --sea: #4C8C6B;
+    --coral: #B5502F;
+    --line: #D9CFBB;
+
+    --der: #2B5B8A;
+    --der-bg: #DCE8F5;
+    --die: #A5334D;
+    --die-bg: #F5DCE1;
+    --das: #3F7A4E;
+    --das-bg: #DFF0E4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height:100vh;
+  }
+  header{
+    background:var(--deep);
+    color:var(--cream);
+    padding:28px 32px 22px;
+    border-bottom:4px solid var(--brass);
+  }
+  header h1{
+    margin:0;
+    font-size:26px;
+    font-weight:400;
+    letter-spacing:0.3px;
+  }
+  header p{
+    margin:6px 0 0;
+    color:var(--brass);
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-size:13.5px;
+  }
+
+  .tabbar{
+    max-width:1600px;
+    margin:22px auto 0;
+    padding:0 20px;
+    display:flex;
+    gap:6px;
+  }
+  .tab-btn{
+    background:#fff;
+    border:1px solid var(--line);
+    border-bottom:none;
+    color:#777;
+    padding:10px 22px;
+    font-family: Georgia, serif;
+    font-size:14.5px;
+    border-radius:3px 3px 0 0;
+    cursor:pointer;
+  }
+  .tab-btn.active{
+    background:var(--teal);
+    color:#fff;
+    border-color:var(--teal);
+  }
+
+  main{
+    max-width:1600px;
+    margin:0 auto;
+    padding:0 20px 60px;
+    display:grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap:28px;
+  }
+  @media (max-width:900px){
+    main{grid-template-columns:1fr;}
+  }
+  .panel{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:20px 22px;
+    margin-bottom:20px;
+    margin-top:24px;
+  }
+  .panel h2{
+    font-size:15px;
+    margin:0 0 14px;
+    color:var(--teal);
+    font-weight:700;
+    border-bottom:1px solid var(--line);
+    padding-bottom:8px;
+  }
+  .list-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid var(--line);
+    padding-bottom:8px;
+    margin-bottom:14px;
+  }
+  .list-header h2{
+    border:none;
+    padding:0;
+    margin:0;
+  }
+  label{
+    display:block;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-size:12.5px;
+    color:#555;
+    margin-bottom:4px;
+  }
+  input[type=text], select{
+    width:100%;
+    padding:8px 9px;
+    font-size:14px;
+    border:1px solid var(--line);
+    border-radius:2px;
+    margin-bottom:12px;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    background:#fdfcf9;
+  }
+  .search-row{
+    display:flex;
+    gap:8px;
+    margin-bottom:12px;
+  }
+  .search-row input{
+    margin-bottom:0;
+    flex:1;
+  }
+  button{
+    cursor:pointer;
+    border:none;
+    border-radius:2px;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-weight:600;
+    font-size:13.5px;
+    padding:9px 16px;
+    white-space:nowrap;
+  }
+  .btn-main{background:var(--teal);color:#fff;}
+  .btn-main:hover{background:var(--deep);}
+  .btn-ghost{background:transparent;color:var(--teal);border:1px solid var(--teal);}
+  .btn-ghost:hover{background:#eef4f2;}
+  .btn-add{background:var(--brass);color:var(--deep);}
+  .btn-add:hover{background:#b8925a;}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:6px;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-size:13px;
+  }
+  th{
+    text-align:left;
+    color:#777;
+    font-weight:600;
+    font-size:11.5px;
+    padding:4px 6px;
+    border-bottom:1px solid var(--line);
+  }
+  td{
+    padding:6px 6px;
+    border-bottom:1px solid #eee;
+  }
+  tr.row-der{background:var(--der-bg);}
+  tr.row-die{background:var(--die-bg);}
+  tr.row-das{background:var(--das-bg);}
+  .art-der{color:var(--der);font-weight:700;}
+  .art-die{color:var(--die);font-weight:700;}
+  .art-das{color:var(--das);font-weight:700;}
+  .emoji-cell{font-size:17px;text-align:center;}
+  .word-cell{
+    cursor:pointer;
+    border-bottom:1px dotted #999;
+  }
+  .word-cell .tr-part{
+    color:var(--brass);
+    font-style:italic;
+    font-weight:400;
+  }
+  .word-de-der{color:var(--der);font-weight:700;}
+  .word-de-die{color:var(--die);font-weight:700;}
+  .word-de-das{color:var(--das);font-weight:700;}
+  .filter-row{
+    display:flex;
+    gap:6px;
+    margin-bottom:12px;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+  }
+  .filter-btn{
+    background:#fdfcf9;
+    border:1px solid var(--line);
+    color:#777;
+    font-size:12.5px;
+    font-weight:600;
+    padding:6px 14px;
+    border-radius:12px;
+  }
+  .filter-btn.active{color:#fff;border-color:transparent;}
+  .filter-btn[data-filter="all"].active{background:var(--teal);}
+  .filter-btn[data-filter="der"].active{background:var(--der);}
+  .filter-btn[data-filter="die"].active{background:var(--die);}
+  .filter-btn[data-filter="das"].active{background:var(--das);}
+  .filter-btn[data-filter="der"]:not(.active){color:var(--der);border-color:var(--der-bg);}
+  .filter-btn[data-filter="die"]:not(.active){color:var(--die);border-color:var(--die-bg);}
+  .filter-btn[data-filter="das"]:not(.active){color:var(--das);border-color:var(--das-bg);}
+  .speak-btn{
+    background:none;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    padding:2px 5px;
+    color:var(--teal);
+  }
+  .speak-btn:hover{color:var(--deep);}
+  .speak-cell{
+    width:30px;
+    text-align:center;
+    padding:0;
+  }
+  .qspeak-btn{
+    background:none;
+    border:1px solid var(--line);
+    border-radius:50%;
+    width:34px;
+    height:34px;
+    font-size:15px;
+    cursor:pointer;
+    margin-bottom:10px;
+    color:var(--teal);
+  }
+  .qspeak-btn:hover{background:var(--cream);}
+  .nav-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:10px;
+  }
+  .progress-text{
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-size:12px;
+    color:#888;
+    min-width:50px;
+    text-align:center;
+  }
+  .nav-row button:disabled{
+    opacity:0.35;
+    cursor:default;
+  }
+  .del{
+    background:none;
+    border:none;
+    color:#B5502F;
+    font-size:12px;
+    cursor:pointer;
+    padding:2px 6px;
+  }
+  .no-match{
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-size:13px;
+    color:#888;
+    padding:14px 4px;
+  }
+  .hint-line{
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-size:11.5px;
+    color:#999;
+    margin:-6px 0 10px;
+  }
+  .wordlist-scroll{
+    max-height:260px;
+    overflow-y:auto;
+  }
+  .stat-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:10px;
+    margin-bottom:16px;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+  }
+  .stat-box{
+    background:var(--cream);
+    border:1px solid var(--line);
+    padding:12px;
+    text-align:center;
+  }
+  .stat-box .num{font-family: Georgia, serif;font-size:26px;color:var(--deep);}
+  .stat-box .lbl{font-size:11px;color:#777;margin-top:2px;}
+  .toggle-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-size:13.5px;
+    margin-bottom:14px;
+  }
+  .countdown{
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-size:12px;
+    color:#888;
+    margin-bottom:14px;
+  }
+  .footer-tools{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+  .rule-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:10px;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+  }
+  @media (max-width:600px){.rule-grid{grid-template-columns:1fr;}}
+  .rule-card{border-radius:3px;padding:12px 12px 10px;}
+  .rule-card.der{background:var(--der-bg);border-left:4px solid var(--der);}
+  .rule-card.die{background:var(--die-bg);border-left:4px solid var(--die);}
+  .rule-card.das{background:var(--das-bg);border-left:4px solid var(--das);}
+  .rule-card .title{font-weight:700;font-size:14px;margin-bottom:6px;}
+  .rule-card.der .title{color:var(--der);}
+  .rule-card.die .title{color:var(--die);}
+  .rule-card.das .title{color:var(--das);}
+  .rule-card .sfx{font-size:12px;color:#444;line-height:1.7;}
+  .rule-card .ex{font-size:11.5px;color:#666;margin-top:6px;font-style:italic;}
+  .plural-note{
+    margin-top:10px;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-size:12.5px;
+    color:#555;
+    background:var(--cream);
+    padding:8px 10px;
+    border-radius:2px;
+  }
+  .overlay{
+    position:fixed;inset:0;background:rgba(15,42,61,0.72);
+    display:none;align-items:center;justify-content:center;z-index:50;padding:20px;
+  }
+  .overlay.show{display:flex;}
+  .quiz-card{
+    background:#fdfcf9;max-width:440px;width:100%;padding:30px 28px 26px;
+    border-top:4px solid var(--brass);text-align:center;
+  }
+  .quiz-card .qtype{
+    font-family: system-ui, Helvetica, Arial, sans-serif;font-size:11.5px;
+    letter-spacing:0.5px;color:var(--brass);text-transform:uppercase;margin-bottom:10px;
+  }
+  .quiz-card .qemoji{font-size:44px;margin-bottom:6px;}
+  .quiz-card .qword{font-size:28px;margin-bottom:22px;}
+  .options{display:flex;flex-direction:column;gap:9px;margin-bottom:14px;text-align:left;}
+  .opt-btn{border:2px solid transparent;text-align:left;padding:11px 14px;font-size:14.5px;font-family: Georgia, serif;font-weight:700;}
+  .opt-btn.opt-der{background:var(--der-bg);color:var(--der);}
+  .opt-btn.opt-die{background:var(--die-bg);color:var(--die);}
+  .opt-btn.opt-das{background:var(--das-bg);color:var(--das);}
+  .opt-btn.correct{border-color:var(--sea);}
+  .opt-btn.wrong{border-color:var(--coral);}
+  .feedback{font-family: system-ui, Helvetica, Arial, sans-serif;font-size:13.5px;min-height:20px;margin-bottom:10px;}
+  .plural-input{display:flex;gap:8px;margin-bottom:8px;}
+  .plural-input input{margin-bottom:0;flex:1;}
+  .umlaut-row{
+    display:flex;
+    gap:5px;
+    justify-content:center;
+    margin-bottom:12px;
+  }
+  .umlaut-btn{
+    background:var(--cream);
+    border:1px solid var(--line);
+    color:var(--deep);
+    font-family: Georgia, serif;
+    font-size:14px;
+    padding:5px 10px;
+    border-radius:2px;
+  }
+  .umlaut-btn:hover{background:var(--der-bg);}
+  .empty-note{font-family: system-ui, Helvetica, Arial, sans-serif;font-size:13px;color:#888;line-height:1.6;}
+  .add-card{
+    background:#fdfcf9;max-width:420px;width:100%;padding:26px 26px 22px;
+    border-top:4px solid var(--teal);
+  }
+  .add-card h3{margin:0 0 16px;font-size:17px;color:var(--deep);font-weight:400;}
+  .add-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:6px;}
+  .conj-input-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0 10px;
+    margin-top:4px;
+  }
+  .conj-input-grid label{margin-bottom:2px;}
+  .conj-input-grid input{margin-bottom:8px;}
+  .conj-btn{
+    background:var(--cream);
+    border:1px solid var(--line);
+    color:var(--teal);
+    font-size:11.5px;
+    font-weight:600;
+    padding:5px 10px;
+    border-radius:10px;
+  }
+  .conj-btn:hover{background:var(--der-bg);}  .signature{
+    position:fixed;
+    bottom:10px;
+    right:14px;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-size:11px;
+    color:#a89a7d;
+    background:rgba(255,255,255,0.7);
+    padding:3px 8px;
+    border-radius:2px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Artikel &amp; Verben Antrenörü</h1>
+  <p>Goethe A1.1 kelime çalışması — der (mavi) / die (kırmızı) / das (yeşil)</p>
+</header>
+
+<div class="tabbar">
+  <button class="tab-btn active" id="tabBtnArtikel" onclick="switchTab('artikel')">İsimler (Artikel)</button>
+  <button class="tab-btn" id="tabBtnVerben" onclick="switchTab('verben')">Fiiller (Verben)</button>
+  <button class="tab-btn" id="tabBtnAdj" onclick="switchTab('adj')">Sıfatlar (Adjektive)</button>
+</div>
+
+<main>
+  <div id="artikelSection">
+    <section class="panel" style="margin-top:0;">
+      <div class="list-header">
+        <h2>Kelime Listem</h2>
+        <button class="btn-add" onclick="openAddModal()">+ Kelime Ekle</button>
+      </div>
+
+      <div class="search-row">
+        <input type="text" id="searchInput" placeholder="Kelime ara... (Tisch, Haus, kitap...)" oninput="renderWords()">
+        <button class="btn-ghost" onclick="clearSearch('artikel')">Temizle</button>
+      </div>
+      <div class="filter-row" id="filterRow">
+        <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">Tümü</button>
+        <button class="filter-btn" data-filter="der" onclick="setFilter('der')">der</button>
+        <button class="filter-btn" data-filter="die" onclick="setFilter('die')">die</button>
+        <button class="filter-btn" data-filter="das" onclick="setFilter('das')">das</button>
+      </div>
+      <div class="hint-line">Kelimeye tıkla → Türkçesini gör</div>
+
+      <div class="wordlist-scroll">
+        <table>
+          <thead><tr><th>Art.</th><th></th><th>Kelime</th><th></th><th>Çoğul</th><th></th><th></th></tr></thead>
+          <tbody id="wordTableBody"></tbody>
+        </table>
+      </div>
+
+      <div class="footer-tools">
+        <button class="btn-ghost" onclick="exportList()">Dışa Aktar (yedek)</button>
+        <button class="btn-ghost" onclick="document.getElementById('importFile').click()">İçe Aktar</button>
+        <input type="file" id="importFile" accept=".json" style="display:none" onchange="importList(event)">
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Sonek Kuralları — hızlı referans</h2>
+      <div class="rule-grid">
+        <div class="rule-card der">
+          <div class="title">der</div>
+          <div class="sfx">-er (meslek/kişi)<br>-ling, -ismus<br>-or, -ant, -ent<br>-ich, -ig</div>
+          <div class="ex">der Lehrer, der Optimismus</div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">die</div>
+          <div class="sfx">-ung, -heit, -keit<br>-schaft, -ion, -tät<br>-ei, -in</div>
+          <div class="ex">die Zeitung, die Freiheit</div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">das</div>
+          <div class="sfx">-chen, -lein<br>-um, -ment<br>-o</div>
+          <div class="ex">das Mädchen, das Museum</div>
+        </div>
+      </div>
+      <div class="plural-note">Kural: bütün çoğullar (Plural) her zaman <strong>die</strong> alır — die Tische, die Kinder, die Autos.</div>
+    </section>
+  </div>
+
+  <div id="verbenSection" style="display:none;">
+    <section class="panel" style="margin-top:0;">
+      <div class="list-header">
+        <h2>Fiil Listem</h2>
+        <button class="btn-add" onclick="openAddVerbModal()">+ Fiil Ekle</button>
+      </div>
+
+      <div class="search-row">
+        <input type="text" id="verbSearchInput" placeholder="Fiil ara... (gehen, yapmak...)" oninput="renderVerbs()">
+        <button class="btn-ghost" onclick="clearSearch('verben')">Temizle</button>
+      </div>
+      <div class="hint-line">Fiile tıkla → Türkçesini gör</div>
+
+      <div class="wordlist-scroll">
+        <table>
+          <thead><tr><th></th><th>Fiil (Infinitiv)</th><th></th><th></th><th></th></tr></thead>
+          <tbody id="verbTableBody"></tbody>
+        </table>
+      </div>
+
+      <div class="footer-tools">
+        <button class="btn-ghost" onclick="exportVerbs()">Dışa Aktar (yedek)</button>
+        <button class="btn-ghost" onclick="document.getElementById('importVerbFile').click()">İçe Aktar</button>
+        <input type="file" id="importVerbFile" accept=".json" style="display:none" onchange="importVerbs(event)">
+      </div>
+    </section>
+  </div>
+
+  <div id="adjSection" style="display:none;">
+    <section class="panel" style="margin-top:0;">
+      <div class="list-header">
+        <h2>Sıfat Listem</h2>
+        <button class="btn-add" onclick="openAddAdjModal()">+ Sıfat Ekle</button>
+      </div>
+
+      <div class="search-row">
+        <input type="text" id="adjSearchInput" placeholder="Sıfat ara... (groß, güzel...)" oninput="renderAdjectives()">
+        <button class="btn-ghost" onclick="clearSearch('adj')">Temizle</button>
+      </div>
+      <div class="hint-line">Sıfata tıkla → Türkçesini gör</div>
+
+      <div class="wordlist-scroll">
+        <table>
+          <thead><tr><th></th><th>Sıfat</th><th></th><th></th></tr></thead>
+          <tbody id="adjTableBody"></tbody>
+        </table>
+      </div>
+
+      <div class="footer-tools">
+        <button class="btn-ghost" onclick="exportAdjectives()">Dışa Aktar (yedek)</button>
+        <button class="btn-ghost" onclick="document.getElementById('importAdjFile').click()">İçe Aktar</button>
+        <input type="file" id="importAdjFile" accept=".json" style="display:none" onchange="importAdjectives(event)">
+      </div>
+    </section>
+  </div>
+
+  <div>
+    <section class="panel" style="margin-top:24px;">
+      <h2>Antrenman</h2>
+
+      <div class="stat-grid">
+        <div class="stat-box"><div class="num" id="statCorrect">0</div><div class="lbl">Doğru</div></div>
+        <div class="stat-box"><div class="num" id="statWrong">0</div><div class="lbl">Yanlış</div></div>
+      </div>
+
+      <div class="toggle-row">
+        <input type="checkbox" id="autoToggle" onchange="toggleAuto()">
+        <label style="margin:0" for="autoToggle">15 dakikada bir otomatik soru sor (bu sekme açık kalmalı)</label>
+      </div>
+      <div class="countdown" id="countdownText"></div>
+
+      <button class="btn-main" onclick="askQuestion()">Şimdi Test Et</button>
+      <button class="btn-ghost" onclick="resetStats()" style="margin-left:6px;">İstatistiği Sıfırla</button>
+
+      <p class="empty-note" style="margin-top:18px;">
+        Not: Bu araç bir tarayıcı sekmesi olarak çalışır, gerçek bir arka plan uygulaması değildir.
+        Antrenman şu an isim listesindeki (Artikel/Çoğul) kelimeleri test ediyor.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>En Çok Hata Yapılan Kelimeler</h2>
+      <div class="wordlist-scroll" style="max-height:220px;">
+        <table>
+          <thead><tr><th>Kelime</th><th>Doğru</th><th>Yanlış</th><th>Başarı</th></tr></thead>
+          <tbody id="mistakeTableBody"></tbody>
+        </table>
+      </div>
+      <div class="footer-tools">
+        <button class="btn-ghost" onclick="exportStatsCSV()">İstatistiği CSV/Excel Olarak İndir</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- Kelime Ekle penceresi (İsim) -->
+<div class="overlay" id="addOverlay">
+  <div class="add-card">
+    <h3>Yeni Kelime Ekle</h3>
+    <label>Artikel</label>
+    <select id="inpArtikel">
+      <option value="der">der</option>
+      <option value="die">die</option>
+      <option value="das">das</option>
+    </select>
+    <label>Simge (opsiyonel emoji)</label>
+    <input type="text" id="inpEmoji" placeholder="🪑" maxlength="4">
+    <label>Kelime</label>
+    <input type="text" id="inpWord" placeholder="Tisch" maxlength="80">
+    <label>Çoğul (die ...)</label>
+    <input type="text" id="inpPlural" placeholder="Tische" maxlength="80">
+    <label>Türkçesi</label>
+    <input type="text" id="inpTr" placeholder="masa" maxlength="120">
+    <div class="add-actions">
+      <button class="btn-ghost" onclick="closeAddModal()">İptal</button>
+      <button class="btn-main" onclick="addWord()">Kaydet</button>
+    </div>
+  </div>
+</div>
+
+<!-- Fiil Ekle penceresi -->
+<div class="overlay" id="addVerbOverlay">
+  <div class="add-card">
+    <h3>Yeni Fiil Ekle</h3>
+    <label>Simge (opsiyonel emoji)</label>
+    <input type="text" id="inpVerbEmoji" placeholder="🚶" maxlength="4">
+    <label>Fiil (Infinitiv)</label>
+    <input type="text" id="inpVerb" placeholder="gehen" maxlength="80">
+    <label>Türkçesi</label>
+    <input type="text" id="inpVerbTr" placeholder="gitmek" maxlength="120">
+    <div class="conj-input-grid">
+      <div><label>ich</label><input type="text" id="inpConjIch" maxlength="40"></div>
+      <div><label>du</label><input type="text" id="inpConjDu" maxlength="40"></div>
+      <div><label>er/sie/es</label><input type="text" id="inpConjEr" maxlength="40"></div>
+      <div><label>wir</label><input type="text" id="inpConjWir" maxlength="40"></div>
+      <div><label>ihr</label><input type="text" id="inpConjIhr" maxlength="40"></div>
+      <div><label>sie/Sie</label><input type="text" id="inpConjSie" maxlength="40"></div>
+    </div>
+    <div class="add-actions">
+      <button class="btn-ghost" onclick="closeAddVerbModal()">İptal</button>
+      <button class="btn-main" onclick="addVerb()">Kaydet</button>
+    </div>
+  </div>
+</div>
+
+<!-- Çekim penceresi -->
+<div class="overlay" id="conjOverlay">
+  <div class="add-card">
+    <h3 id="conjVerbTitle">gehen</h3>
+    <table>
+      <tbody id="conjTableBody"></tbody>
+    </table>
+    <div class="add-actions" style="margin-top:14px;">
+      <button class="btn-ghost" onclick="closeConjModal()">Kapat</button>
+    </div>
+  </div>
+</div>
+
+<!-- Sıfat Ekle penceresi -->
+<div class="overlay" id="addAdjOverlay">
+  <div class="add-card">
+    <h3>Yeni Sıfat Ekle</h3>
+    <label>Simge (opsiyonel emoji)</label>
+    <input type="text" id="inpAdjEmoji" placeholder="📏" maxlength="4">
+    <label>Sıfat</label>
+    <input type="text" id="inpAdj" placeholder="groß" maxlength="80">
+    <label>Türkçesi</label>
+    <input type="text" id="inpAdjTr" placeholder="büyük" maxlength="120">
+    <div class="add-actions">
+      <button class="btn-ghost" onclick="closeAddAdjModal()">İptal</button>
+      <button class="btn-main" onclick="addAdjective()">Kaydet</button>
+    </div>
+  </div>
+</div>
+
+<!-- Quiz penceresi -->
+<div class="overlay" id="quizOverlay">
+  <div class="quiz-card">
+    <div class="qtype" id="qType">ARTİKEL</div>
+    <div class="qemoji" id="qEmoji">🪑</div>
+    <div class="qword" id="qWord">Tisch</div>
+    <button class="qspeak-btn" onclick="speak(currentQ.word.word)" title="Dinle">🔊</button>
+    <div class="options" id="qOptions"></div>
+    <div class="plural-input" id="qPluralInput" style="display:none;">
+      <input type="text" id="qPluralAnswer" placeholder="sadece çoğulu yaz, 'die' yazmana gerek yok">
+      <button class="btn-main" onclick="checkPluralAnswer()">Kontrol Et</button>
+    </div>
+    <div class="umlaut-row" id="umlautRow" style="display:none;">
+      <button class="umlaut-btn" onclick="insertChar('ä')">ä</button>
+      <button class="umlaut-btn" onclick="insertChar('ö')">ö</button>
+      <button class="umlaut-btn" onclick="insertChar('ü')">ü</button>
+      <button class="umlaut-btn" onclick="insertChar('ß')">ß</button>
+      <button class="umlaut-btn" onclick="insertChar('Ä')">Ä</button>
+      <button class="umlaut-btn" onclick="insertChar('Ö')">Ö</button>
+      <button class="umlaut-btn" onclick="insertChar('Ü')">Ü</button>
+    </div>
+    <div class="feedback" id="qFeedback"></div>
+    <div class="nav-row">
+      <button class="btn-ghost" id="prevBtn" onclick="prevQuestion()">◀ Önceki</button>
+      <span id="qProgress" class="progress-text"></span>
+      <button class="btn-ghost" id="nextBtn" onclick="nextQuestion()">Sonraki ▶</button>
+    </div>
+    <button class="btn-ghost" onclick="closeQuiz()">Bitir</button>
+  </div>
+</div>
+
+<script>
+const STARTER_WORDS = [
+  {artikel:"der", word:"Tisch", plural:"Tische", emoji:"🪑", tr:"masa"},
+  {artikel:"die", word:"Lampe", plural:"Lampen", emoji:"💡", tr:"lamba"},
+  {artikel:"das", word:"Buch", plural:"Bücher", emoji:"📖", tr:"kitap"},
+  {artikel:"das", word:"Kind", plural:"Kinder", emoji:"🧒", tr:"çocuk"},
+  {artikel:"das", word:"Auto", plural:"Autos", emoji:"🚗", tr:"araba"},
+  {artikel:"die", word:"Frau", plural:"Frauen", emoji:"👩", tr:"kadın"},
+  {artikel:"der", word:"Mann", plural:"Männer", emoji:"👨", tr:"erkek"},
+  {artikel:"das", word:"Haus", plural:"Häuser", emoji:"🏠", tr:"ev"},
+  {artikel:"die", word:"Schule", plural:"Schulen", emoji:"🏫", tr:"okul"},
+  {artikel:"die", word:"Familie", plural:"Familien", emoji:"👪", tr:"aile"},
+  {artikel:"die", word:"Stadt", plural:"Städte", emoji:"🏙️", tr:"şehir"},
+  {artikel:"das", word:"Land", plural:"Länder", emoji:"🗺️", tr:"ülke"},
+  {artikel:"der", word:"Tag", plural:"Tage", emoji:"☀️", tr:"gün"},
+  {artikel:"die", word:"Woche", plural:"Wochen", emoji:"📅", tr:"hafta"},
+  {artikel:"der", word:"Monat", plural:"Monate", emoji:"🗓️", tr:"ay"},
+  {artikel:"das", word:"Jahr", plural:"Jahre", emoji:"🎉", tr:"yıl"},
+  {artikel:"die", word:"Arbeit", plural:"Arbeiten", emoji:"💼", tr:"iş"},
+  {artikel:"der", word:"Freund", plural:"Freunde", emoji:"🧑‍🤝‍🧑", tr:"arkadaş (erkek)"},
+  {artikel:"die", word:"Freundin", plural:"Freundinnen", emoji:"👭", tr:"arkadaş (kadın)"},
+  {artikel:"das", word:"Zimmer", plural:"Zimmer", emoji:"🚪", tr:"oda"},
+  {artikel:"das", word:"Fenster", plural:"Fenster", emoji:"🪟", tr:"pencere"},
+  {artikel:"die", word:"Tür", plural:"Türen", emoji:"🚪", tr:"kapı"},
+  {artikel:"die", word:"Straße", plural:"Straßen", emoji:"🛣️", tr:"sokak / cadde"},
+  {artikel:"der", word:"Stuhl", plural:"Stühle", emoji:"🪑", tr:"sandalye"},
+  {artikel:"der", word:"Computer", plural:"Computer", emoji:"💻", tr:"bilgisayar"},
+  {artikel:"das", word:"Schiff", plural:"Schiffe", emoji:"🚢", tr:"gemi"},
+  {artikel:"der", word:"Hafen", plural:"Häfen", emoji:"⚓", tr:"liman"},
+  {artikel:"das", word:"Meer", plural:"Meere", emoji:"🌊", tr:"deniz"},
+  {artikel:"die", word:"Sonne", plural:"Sonnen", emoji:"🌞", tr:"güneş"},
+  {artikel:"der", word:"Mond", plural:"Monde", emoji:"🌙", tr:"ay (gök cismi)"},
+  {artikel:"das", word:"Wasser", plural:"Wasser", emoji:"💧", tr:"su"},
+  {artikel:"der", word:"Wind", plural:"Winde", emoji:"💨", tr:"rüzgar"},
+  {artikel:"die", word:"Küche", plural:"Küchen", emoji:"🍳", tr:"mutfak"},
+  {artikel:"das", word:"Brot", plural:"Brote", emoji:"🍞", tr:"ekmek"},
+  {artikel:"der", word:"Apfel", plural:"Äpfel", emoji:"🍎", tr:"elma"},
+  {artikel:"die", word:"Milch", plural:"—", emoji:"🥛", tr:"süt"},
+  {artikel:"der", word:"Kaffee", plural:"Kaffees", emoji:"☕", tr:"kahve"},
+  {artikel:"die", word:"Zeitung", plural:"Zeitungen", emoji:"📰", tr:"gazete"},
+  {artikel:"die", word:"Gesundheit", plural:"—", emoji:"❤️", tr:"sağlık"},
+  {artikel:"das", word:"Mädchen", plural:"Mädchen", emoji:"👧", tr:"kız çocuk"},
+  {artikel:"der", word:"Lehrer", plural:"Lehrer", emoji:"👨‍🏫", tr:"öğretmen"},
+  {artikel:"der", word:"MP3-Player", plural:"MP3-Player", emoji:"🎧", tr:"mp3 çalar"},
+  {artikel:"der", word:"Name", plural:"Namen", emoji:"🏷️", tr:"isim"},
+  {artikel:"das", word:"Feuerzeug", plural:"Feuerzeuge", emoji:"🔥", tr:"çakmak"},
+  {artikel:"der", word:"Wochentag", plural:"Wochentage", emoji:"📅", tr:"hafta günü"},
+  {artikel:"die", word:"Nachricht", plural:"Nachrichten", emoji:"📨", tr:"haber / mesaj"},
+  {artikel:"das", word:"Wort", plural:"Wörter", emoji:"📝", tr:"kelime"},
+  {artikel:"der", word:"Architekt", plural:"Architekten", emoji:"👷", tr:"mimar"},
+  {artikel:"der", word:"Journalist", plural:"Journalisten", emoji:"📰", tr:"gazeteci"},
+  {artikel:"der", word:"Designer", plural:"Designer", emoji:"🎨", tr:"tasarımcı"},
+  {artikel:"der", word:"Sekretär", plural:"Sekretäre", emoji:"🗂️", tr:"sekreter"},
+  {artikel:"der", word:"Elektriker", plural:"Elektriker", emoji:"🔌", tr:"elektrikçi"},
+  {artikel:"der", word:"Verkäufer", plural:"Verkäufer", emoji:"🛍️", tr:"satıcı"},
+  {artikel:"der", word:"Apotheker", plural:"Apotheker", emoji:"💊", tr:"eczacı"},
+  {artikel:"der", word:"Musiker", plural:"Musiker", emoji:"🎵", tr:"müzisyen"},
+  {artikel:"der", word:"Beruf", plural:"Berufe", emoji:"💼", tr:"meslek"},
+  {artikel:"die", word:"Brille", plural:"Brillen", emoji:"👓", tr:"gözlük"},
+  {artikel:"die", word:"Briefmarke", plural:"Briefmarken", emoji:"✉️", tr:"pul"},
+  {artikel:"die", word:"Maus", plural:"Mäuse", emoji:"🐭", tr:"fare"},
+  {artikel:"der", word:"Bleistift", plural:"Bleistifte", emoji:"✏️", tr:"kurşun kalem"},
+  {artikel:"das", word:"Handy", plural:"Handys", emoji:"📱", tr:"cep telefonu"},
+  {artikel:"der", word:"Schlüssel", plural:"Schlüssel", emoji:"🔑", tr:"anahtar"},
+  {artikel:"der", word:"Ausweis", plural:"Ausweise", emoji:"🪪", tr:"kimlik"},
+  {artikel:"der", word:"Kugelschreiber", plural:"Kugelschreiber", emoji:"🖊️", tr:"tükenmez kalem"},
+  {artikel:"das", word:"Formular", plural:"Formulare", emoji:"📄", tr:"form"},
+  {artikel:"der", word:"Drucker", plural:"Drucker", emoji:"🖨️", tr:"yazıcı"},
+  {artikel:"der", word:"USB-Stick", plural:"USB-Sticks", emoji:"💾", tr:"USB bellek"},
+  {artikel:"das", word:"Bild", plural:"Bilder", emoji:"🖼️", tr:"resim"},
+  {artikel:"der", word:"Kopfhörer", plural:"Kopfhörer", emoji:"🎧", tr:"kulaklık"},
+  {artikel:"die", word:"Serviette", plural:"Servietten", emoji:"🧻", tr:"peçete"},
+  {artikel:"das", word:"Glas", plural:"Gläser", emoji:"🥛", tr:"bardak"},
+  {artikel:"das", word:"Taschentuch", plural:"Taschentücher", emoji:"🤧", tr:"mendil"},
+  {artikel:"die", word:"Ausbildung", plural:"Ausbildungen", emoji:"🎓", tr:"meslek eğitimi"},
+  {artikel:"die", word:"Heimatstadt", plural:"Heimatstädte", emoji:"🏡", tr:"memleket şehri"},
+  {artikel:"das", word:"Sternzeichen", plural:"Sternzeichen", emoji:"♈", tr:"burç"},
+  {artikel:"die", word:"Fremdsprache", plural:"Fremdsprachen", emoji:"🗣️", tr:"yabancı dil"},
+  {artikel:"das", word:"Getränk", plural:"Getränke", emoji:"🥤", tr:"içecek"},
+  {artikel:"der", word:"Geburtstag", plural:"Geburtstage", emoji:"🎂", tr:"doğum günü"},
+  {artikel:"die", word:"Einladung", plural:"Einladungen", emoji:"💌", tr:"davet"},
+  {artikel:"die", word:"Party", plural:"Partys", emoji:"🎉", tr:"parti"},
+  {artikel:"die", word:"Freizeit", plural:"—", emoji:"🏖️", tr:"boş zaman"},
+  {artikel:"der", word:"Baum", plural:"Bäume", emoji:"🌳", tr:"ağaç"},
+  {artikel:"die", word:"Tasche", plural:"Taschen", emoji:"👜", tr:"çanta"},
+  {artikel:"die", word:"Katze", plural:"Katzen", emoji:"🐱", tr:"kedi"},
+  {artikel:"das", word:"Mäppchen", plural:"Mäppchen", emoji:"🖍️", tr:"kalem çantası"},
+  {artikel:"das", word:"Hotel", plural:"Hotels", emoji:"🏨", tr:"otel"},
+  {artikel:"der", word:"Shop", plural:"Shops", emoji:"🏪", tr:"dükkan"},
+  {artikel:"der", word:"Hund", plural:"Hunde", emoji:"🐶", tr:"köpek"},
+  {artikel:"das", word:"Boot", plural:"Boote", emoji:"🚤", tr:"tekne"},
+  {artikel:"der", word:"Schuh", plural:"Schuhe", emoji:"👞", tr:"ayakkabı"},
+  {artikel:"der", word:"Zucker", plural:"—", emoji:"🍬", tr:"şeker"},
+  {artikel:"die", word:"Schokolade", plural:"Schokoladen", emoji:"🍫", tr:"çikolata"},
+  {artikel:"das", word:"Heft", plural:"Hefte", emoji:"📓", tr:"defter"},
+  {artikel:"die", word:"Schere", plural:"Scheren", emoji:"✂️", tr:"makas"},
+  {artikel:"das", word:"T-Shirt", plural:"T-Shirts", emoji:"👕", tr:"tişört"},
+  {artikel:"die", word:"Blume", plural:"Blumen", emoji:"🌸", tr:"çiçek"}
+];
+
+const STARTER_VERBS = [
+  {verb:"sein", emoji:"🧍", tr:"olmak", conj:{ich:"bin", du:"bist", er:"ist", wir:"sind", ihr:"seid", sie:"sind"}},
+  {verb:"haben", emoji:"🤲", tr:"sahip olmak", conj:{ich:"habe", du:"hast", er:"hat", wir:"haben", ihr:"habt", sie:"haben"}},
+  {verb:"gehen", emoji:"🚶", tr:"gitmek (yürüyerek)", conj:{ich:"gehe", du:"gehst", er:"geht", wir:"gehen", ihr:"geht", sie:"gehen"}},
+  {verb:"kommen", emoji:"🚏", tr:"gelmek", conj:{ich:"komme", du:"kommst", er:"kommt", wir:"kommen", ihr:"kommt", sie:"kommen"}},
+  {verb:"machen", emoji:"🔨", tr:"yapmak", conj:{ich:"mache", du:"machst", er:"macht", wir:"machen", ihr:"macht", sie:"machen"}},
+  {verb:"sagen", emoji:"💬", tr:"söylemek", conj:{ich:"sage", du:"sagst", er:"sagt", wir:"sagen", ihr:"sagt", sie:"sagen"}},
+  {verb:"sehen", emoji:"👀", tr:"görmek", conj:{ich:"sehe", du:"siehst", er:"sieht", wir:"sehen", ihr:"seht", sie:"sehen"}},
+  {verb:"wissen", emoji:"🧠", tr:"bilmek", conj:{ich:"weiß", du:"weißt", er:"weiß", wir:"wissen", ihr:"wisst", sie:"wissen"}},
+  {verb:"können", emoji:"💪", tr:"yapabilmek", conj:{ich:"kann", du:"kannst", er:"kann", wir:"können", ihr:"könnt", sie:"können"}},
+  {verb:"müssen", emoji:"❗", tr:"zorunda olmak", conj:{ich:"muss", du:"musst", er:"muss", wir:"müssen", ihr:"müsst", sie:"müssen"}},
+  {verb:"wollen", emoji:"🎯", tr:"istemek", conj:{ich:"will", du:"willst", er:"will", wir:"wollen", ihr:"wollt", sie:"wollen"}},
+  {verb:"sprechen", emoji:"🗣️", tr:"konuşmak", conj:{ich:"spreche", du:"sprichst", er:"spricht", wir:"sprechen", ihr:"sprecht", sie:"sprechen"}},
+  {verb:"arbeiten", emoji:"💼", tr:"çalışmak", conj:{ich:"arbeite", du:"arbeitest", er:"arbeitet", wir:"arbeiten", ihr:"arbeitet", sie:"arbeiten"}},
+  {verb:"essen", emoji:"🍽️", tr:"yemek yemek", conj:{ich:"esse", du:"isst", er:"isst", wir:"essen", ihr:"esst", sie:"essen"}},
+  {verb:"trinken", emoji:"🥤", tr:"içmek", conj:{ich:"trinke", du:"trinkst", er:"trinkt", wir:"trinken", ihr:"trinkt", sie:"trinken"}},
+  {verb:"schlafen", emoji:"😴", tr:"uyumak", conj:{ich:"schlafe", du:"schläfst", er:"schläft", wir:"schlafen", ihr:"schlaft", sie:"schlafen"}},
+  {verb:"lernen", emoji:"📚", tr:"öğrenmek", conj:{ich:"lerne", du:"lernst", er:"lernt", wir:"lernen", ihr:"lernt", sie:"lernen"}},
+  {verb:"wohnen", emoji:"🏠", tr:"oturmak / ikamet etmek", conj:{ich:"wohne", du:"wohnst", er:"wohnt", wir:"wohnen", ihr:"wohnt", sie:"wohnen"}},
+  {verb:"fahren", emoji:"🚗", tr:"sürmek / gitmek (araçla)", conj:{ich:"fahre", du:"fährst", er:"fährt", wir:"fahren", ihr:"fahrt", sie:"fahren"}},
+  {verb:"lesen", emoji:"📖", tr:"okumak", conj:{ich:"lese", du:"liest", er:"liest", wir:"lesen", ihr:"lest", sie:"lesen"}},
+  {verb:"kaufen", emoji:"🛒", tr:"satın almak", conj:{ich:"kaufe", du:"kaufst", er:"kauft", wir:"kaufen", ihr:"kauft", sie:"kaufen"}},
+  {verb:"spielen", emoji:"🎲", tr:"oynamak", conj:{ich:"spiele", du:"spielst", er:"spielt", wir:"spielen", ihr:"spielt", sie:"spielen"}},
+  {verb:"lieben", emoji:"❤️", tr:"sevmek", conj:{ich:"liebe", du:"liebst", er:"liebt", wir:"lieben", ihr:"liebt", sie:"lieben"}},
+  {verb:"helfen", emoji:"🤝", tr:"yardım etmek", conj:{ich:"helfe", du:"hilfst", er:"hilft", wir:"helfen", ihr:"helft", sie:"helfen"}},
+  {verb:"brauchen", emoji:"🔧", tr:"ihtiyaç duymak", conj:{ich:"brauche", du:"brauchst", er:"braucht", wir:"brauchen", ihr:"braucht", sie:"brauchen"}},
+  {verb:"kochen", emoji:"👨‍🍳", tr:"pişirmek", conj:{ich:"koche", du:"kochst", er:"kocht", wir:"kochen", ihr:"kocht", sie:"kochen"}},
+  {verb:"fotografieren", emoji:"📸", tr:"fotoğraf çekmek", conj:{ich:"fotografiere", du:"fotografierst", er:"fotografiert", wir:"fotografieren", ihr:"fotografiert", sie:"fotografieren"}},
+  {verb:"bleiben", emoji:"🧍", tr:"kalmak", conj:{ich:"bleibe", du:"bleibst", er:"bleibt", wir:"bleiben", ihr:"bleibt", sie:"bleiben"}},
+  {verb:"beginnen", emoji:"🏁", tr:"başlamak", conj:{ich:"beginne", du:"beginnst", er:"beginnt", wir:"beginnen", ihr:"beginnt", sie:"beginnen"}},
+  {verb:"feiern", emoji:"🎉", tr:"kutlamak", conj:{ich:"feiere", du:"feierst", er:"feiert", wir:"feiern", ihr:"feiert", sie:"feiern"}},
+  {verb:"sich verabreden", emoji:"🤝", tr:"buluşmak / randevulaşmak", conj:{ich:"verabrede", du:"verabredest", er:"verabredet", wir:"verabreden", ihr:"verabredet", sie:"verabreden"}},
+  {verb:"fliegen", emoji:"✈️", tr:"uçmak", conj:{ich:"fliege", du:"fliegst", er:"fliegt", wir:"fliegen", ihr:"fliegt", sie:"fliegen"}},
+  {verb:"telefonieren", emoji:"☎️", tr:"telefonla konuşmak", conj:{ich:"telefoniere", du:"telefonierst", er:"telefoniert", wir:"telefonieren", ihr:"telefoniert", sie:"telefonieren"}},
+  {verb:"aufräumen", emoji:"🧹", tr:"toplamak / düzenlemek", conj:{ich:"räume auf", du:"räumst auf", er:"räumt auf", wir:"räumen auf", ihr:"räumt auf", sie:"räumen auf"}},
+  {verb:"fernsehen", emoji:"📺", tr:"televizyon izlemek", conj:{ich:"sehe fern", du:"siehst fern", er:"sieht fern", wir:"sehen fern", ihr:"seht fern", sie:"sehen fern"}},
+  {verb:"reisen", emoji:"🧳", tr:"seyahat etmek", conj:{ich:"reise", du:"reist", er:"reist", wir:"reisen", ihr:"reist", sie:"reisen"}}
+];
+
+const STARTER_ADJEKTIVE = [
+  {adj:"groß", emoji:"📏", tr:"büyük"},
+  {adj:"klein", emoji:"🤏", tr:"küçük"},
+  {adj:"gut", emoji:"👍", tr:"iyi"},
+  {adj:"schlecht", emoji:"👎", tr:"kötü"},
+  {adj:"neu", emoji:"✨", tr:"yeni"},
+  {adj:"alt", emoji:"👴", tr:"eski / yaşlı"},
+  {adj:"schön", emoji:"🌸", tr:"güzel"},
+  {adj:"hässlich", emoji:"😬", tr:"çirkin"},
+  {adj:"schnell", emoji:"⚡", tr:"hızlı"},
+  {adj:"langsam", emoji:"🐢", tr:"yavaş"},
+  {adj:"teuer", emoji:"💰", tr:"pahalı"},
+  {adj:"billig", emoji:"🏷️", tr:"ucuz"},
+  {adj:"warm", emoji:"☀️", tr:"sıcak"},
+  {adj:"kalt", emoji:"❄️", tr:"soğuk"},
+  {adj:"glücklich", emoji:"😊", tr:"mutlu"},
+  {adj:"traurig", emoji:"😢", tr:"üzgün"},
+  {adj:"müde", emoji:"😴", tr:"yorgun"},
+  {adj:"hungrig", emoji:"🍽️", tr:"aç"},
+  {adj:"laut", emoji:"🔊", tr:"gürültülü"},
+  {adj:"leise", emoji:"🤫", tr:"sessiz"},
+  {adj:"einfach", emoji:"✅", tr:"kolay"},
+  {adj:"schwierig", emoji:"🧩", tr:"zor"},
+  {adj:"wichtig", emoji:"❗", tr:"önemli"},
+  {adj:"interessant", emoji:"🤔", tr:"ilginç"},
+  {adj:"lang", emoji:"📏", tr:"uzun"},
+  {adj:"kurz", emoji:"✂️", tr:"kısa"},
+  {adj:"stark", emoji:"💪", tr:"güçlü"},
+  {adj:"schwach", emoji:"🪶", tr:"zayıf"},
+  {adj:"ledig", emoji:"🙋", tr:"bekar"},
+  {adj:"verheiratet", emoji:"💍", tr:"evli"},
+  {adj:"geschieden", emoji:"📄", tr:"boşanmış"},
+  {adj:"verwitwet", emoji:"🖤", tr:"dul"},
+  {adj:"verlobt", emoji:"💍", tr:"nişanlı"},
+  {adj:"gelb", emoji:"💛", tr:"sarı"},
+  {adj:"grün", emoji:"💚", tr:"yeşil"},
+  {adj:"lila", emoji:"💜", tr:"mor"},
+  {adj:"rosa", emoji:"🌷", tr:"pembe (açık)"},
+  {adj:"pink", emoji:"🌸", tr:"pembe (parlak)"},
+  {adj:"orange", emoji:"🧡", tr:"turuncu"},
+  {adj:"braun", emoji:"🤎", tr:"kahverengi"},
+  {adj:"schwarz", emoji:"⚫", tr:"siyah"},
+  {adj:"weiß", emoji:"⚪", tr:"beyaz"},
+  {adj:"türkis", emoji:"🩵", tr:"turkuaz"},
+  {adj:"ocker", emoji:"🟤", tr:"okr sarısı"},
+  {adj:"dunkelblau", emoji:"🔵", tr:"koyu mavi"},
+  {adj:"hellblau", emoji:"💠", tr:"açık mavi"},
+  {adj:"erste", emoji:"1️⃣", tr:"birinci"},
+  {adj:"zweite", emoji:"2️⃣", tr:"ikinci"},
+  {adj:"dritte", emoji:"3️⃣", tr:"üçüncü"},
+  {adj:"vierte", emoji:"4️⃣", tr:"dördüncü"},
+  {adj:"früh", emoji:"⏰", tr:"erken"},
+  {adj:"heiß", emoji:"🔥", tr:"sıcak"},
+  {adj:"bestimmt", emoji:"✅", tr:"kesin / belirli"}
+];
+
+let words = [];
+let verbs = [];
+let adjectives = [];
+let stats = {correct:0, wrong:0};
+let countdownTimer = null;
+let secondsLeft = 900;
+let currentQ = null;
+let revealedWords = new Set();
+let revealedVerbs = new Set();
+let revealedAdj = new Set();
+let activeTab = "artikel";
+let sessionQuestions = [];
+let sessionIndex = 0;
+let wordStats = {};
+let categoryFilter = "all";
+
+function shuffleArray(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function escapeHtml(str){
+  if(str === undefined || str === null) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+let storageAvailable = true;
+try{
+  localStorage.setItem("__test__", "1");
+  localStorage.removeItem("__test__");
+}catch(e){
+  storageAvailable = false;
+}
+
+function loadData(){
+  try{
+    const w = localStorage.getItem("artikel_words");
+    words = w ? JSON.parse(w) : STARTER_WORDS.slice();
+  }catch(e){ words = STARTER_WORDS.slice(); }
+
+  try{
+    const v = localStorage.getItem("artikel_verbs");
+    verbs = v ? JSON.parse(v) : STARTER_VERBS.slice();
+  }catch(e){ verbs = STARTER_VERBS.slice(); }
+
+  try{
+    const a = localStorage.getItem("artikel_adjectives");
+    adjectives = a ? JSON.parse(a) : STARTER_ADJEKTIVE.slice();
+  }catch(e){ adjectives = STARTER_ADJEKTIVE.slice(); }
+
+  try{
+    const s = localStorage.getItem("artikel_stats");
+    stats = s ? JSON.parse(s) : {correct:0, wrong:0};
+  }catch(e){ stats = {correct:0, wrong:0}; }
+
+  try{
+    const ws = localStorage.getItem("artikel_word_stats");
+    wordStats = ws ? JSON.parse(ws) : {};
+  }catch(e){ wordStats = {}; }
+
+  let auto = false;
+  try{ auto = localStorage.getItem("artikel_auto") === "1"; }catch(e){}
+  document.getElementById("autoToggle").checked = auto;
+  if(auto) startAuto();
+
+  if(!storageAvailable){
+    const note = document.querySelector(".empty-note");
+    if(note) note.innerHTML += "<br><strong>Uyarı:</strong> Tarayıcın bu dosya için kayıt alanını (localStorage) engelliyor — eklediğin kelimeler ve istatistikler sayfa kapanınca silinecek.";
+  }
+}
+
+function saveWords(){
+  if(!storageAvailable) return;
+  try{ localStorage.setItem("artikel_words", JSON.stringify(words)); }
+  catch(e){ alert("Liste kaydedilemedi (depolama alanı dolu olabilir)."); }
+}
+function saveVerbs(){
+  if(!storageAvailable) return;
+  try{ localStorage.setItem("artikel_verbs", JSON.stringify(verbs)); }
+  catch(e){ alert("Fiil listesi kaydedilemedi (depolama alanı dolu olabilir)."); }
+}
+function saveAdjectives(){
+  if(!storageAvailable) return;
+  try{ localStorage.setItem("artikel_adjectives", JSON.stringify(adjectives)); }
+  catch(e){ alert("Sıfat listesi kaydedilemedi (depolama alanı dolu olabilir)."); }
+}
+function saveStats(){
+  if(!storageAvailable) return;
+  try{ localStorage.setItem("artikel_stats", JSON.stringify(stats)); }
+  catch(e){ /* istatistik kaydı kritik değil, sessiz geç */ }
+}
+function saveWordStats(){
+  if(!storageAvailable) return;
+  try{ localStorage.setItem("artikel_word_stats", JSON.stringify(wordStats)); }
+  catch(e){ /* istatistik kaydı kritik değil, sessiz geç */ }
+}
+
+function switchTab(tab){
+  activeTab = tab;
+  document.getElementById("artikelSection").style.display = tab === "artikel" ? "block" : "none";
+  document.getElementById("verbenSection").style.display = tab === "verben" ? "block" : "none";
+  document.getElementById("adjSection").style.display = tab === "adj" ? "block" : "none";
+  document.getElementById("tabBtnArtikel").classList.toggle("active", tab === "artikel");
+  document.getElementById("tabBtnVerben").classList.toggle("active", tab === "verben");
+  document.getElementById("tabBtnAdj").classList.toggle("active", tab === "adj");
+}
+
+function clearSearch(which){
+  if(which === "artikel"){
+    document.getElementById("searchInput").value = "";
+    renderWords();
+  } else if(which === "verben"){
+    document.getElementById("verbSearchInput").value = "";
+    renderVerbs();
+  } else {
+    document.getElementById("adjSearchInput").value = "";
+    renderAdjectives();
+  }
+}
+
+function setFilter(filter){
+  categoryFilter = filter;
+  document.querySelectorAll("#filterRow .filter-btn").forEach(b=>{
+    b.classList.toggle("active", b.dataset.filter === filter);
+  });
+  renderWords();
+}
+
+/* ---------- İSİMLER (ARTIKEL) ---------- */
+
+function renderWords(){
+  const tbody = document.getElementById("wordTableBody");
+  const query = document.getElementById("searchInput").value.trim().toLowerCase();
+  tbody.innerHTML = "";
+
+  let filtered = categoryFilter === "all"
+    ? words
+    : words.filter(w => w.artikel === categoryFilter);
+
+  filtered = query
+    ? filtered.filter(w => w.word.toLowerCase().includes(query) || w.plural.toLowerCase().includes(query) || (w.tr||"").toLowerCase().includes(query))
+    : filtered;
+
+  if(filtered.length === 0){
+    tbody.innerHTML = `<tr><td colspan="7" class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</td></tr>`;
+    return;
+  }
+
+  filtered.forEach((w) => {
+    const realIdx = words.indexOf(w);
+    const revealed = revealedWords.has(realIdx);
+    const artClass = w.artikel === "die" ? "die" : w.artikel === "das" ? "das" : "der";
+    const tr = document.createElement("tr");
+    tr.className = "row-" + artClass;
+    const wordSpan = `<span class="word-de-${artClass}">${escapeHtml(w.word)}</span>`;
+    const pluralSpan = escapeHtml(w.plural);
+    const wordDisplay = revealed
+      ? `${wordSpan} <span class="tr-part">— ${escapeHtml(w.tr) || "?"}</span>`
+      : wordSpan;
+    tr.innerHTML = `
+      <td class="art-${artClass}">${escapeHtml(w.artikel)}</td>
+      <td class="emoji-cell">${escapeHtml(w.emoji)}</td>
+      <td class="word-cell" data-idx="${realIdx}">${wordDisplay}</td>
+      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" data-speak="word" title="Dinle">🔊</button></td>
+      <td>${pluralSpan}</td>
+      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" data-speak="plural" title="Çoğulu dinle">🔊</button></td>
+      <td><button class="del" data-idx="${realIdx}" data-del="word">sil</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// Event delegation — kelime/fiil metinleri hiçbir zaman onclick string'ine gömülmez
+document.getElementById("wordTableBody").addEventListener("click", (e)=>{
+  const wcell = e.target.closest(".word-cell");
+  if(wcell){ toggleReveal("artikel", parseInt(wcell.dataset.idx, 10)); return; }
+  const speakBtn = e.target.closest(".speak-btn");
+  if(speakBtn){
+    const idx = parseInt(speakBtn.dataset.idx, 10);
+    const w = words[idx];
+    if(w) speak(speakBtn.dataset.speak === "plural" ? w.plural : w.word);
+    return;
+  }
+  const delBtn = e.target.closest(".del");
+  if(delBtn){ deleteWord(parseInt(delBtn.dataset.idx, 10)); return; }
+});
+
+function toggleReveal(which, idx){
+  const set = which === "artikel" ? revealedWords : which === "verben" ? revealedVerbs : revealedAdj;
+  if(set.has(idx)) set.delete(idx); else set.add(idx);
+  if(which === "artikel") renderWords();
+  else if(which === "verben") renderVerbs();
+  else renderAdjectives();
+}
+
+function openAddModal(){
+  ["inpWord","inpPlural","inpEmoji","inpTr"].forEach(id => document.getElementById(id).value = "");
+  document.getElementById("inpArtikel").value = "der";
+  document.getElementById("addOverlay").classList.add("show");
+  setTimeout(()=>document.getElementById("inpWord").focus(), 50);
+}
+function closeAddModal(){ document.getElementById("addOverlay").classList.remove("show"); }
+
+function addWord(){
+  const artikel = document.getElementById("inpArtikel").value;
+  const emoji = document.getElementById("inpEmoji").value.trim();
+  const word = document.getElementById("inpWord").value.trim();
+  const plural = document.getElementById("inpPlural").value.trim();
+  const tr = document.getElementById("inpTr").value.trim();
+  if(!word || !plural){
+    alert("Kelime ve çoğul alanlarını doldur.");
+    return;
+  }
+  words.push({artikel, word, plural, emoji, tr});
+  saveWords();
+  renderWords();
+  closeAddModal();
+}
+
+function deleteWord(idx){
+  words.splice(idx,1);
+  revealedWords.delete(idx);
+  saveWords();
+  renderWords();
+}
+
+function exportList(){
+  const blob = new Blob([JSON.stringify(words, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "artikel-kelime-listesi.json"; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importList(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      const imported = JSON.parse(e.target.result);
+      if(!Array.isArray(imported)){
+        alert("Dosya formatı geçersiz: bir liste (array) bekleniyor.");
+        return;
+      }
+      const clean = imported
+        .filter(item => item && typeof item === "object")
+        .map(item => ({
+          artikel: ["der","die","das"].includes(item.artikel) ? item.artikel : "der",
+          word: String(item.word || "").slice(0, 80),
+          plural: String(item.plural || "").slice(0, 80),
+          emoji: String(item.emoji || "").slice(0, 8),
+          tr: String(item.tr || "").slice(0, 120)
+        }))
+        .filter(item => item.word.length > 0);
+      words = clean;
+      saveWords();
+      renderWords();
+      alert("Liste içe aktarıldı (" + clean.length + " kelime).");
+    }catch(err){ alert("Dosya okunamadı veya bozuk."); }
+  };
+  reader.readAsText(file);
+  event.target.value = "";
+}
+
+/* ---------- FİİLLER (VERBEN) ---------- */
+
+function renderVerbs(){
+  const tbody = document.getElementById("verbTableBody");
+  const query = document.getElementById("verbSearchInput").value.trim().toLowerCase();
+  tbody.innerHTML = "";
+
+  const filtered = query
+    ? verbs.filter(v => v.verb.toLowerCase().includes(query) || (v.tr||"").toLowerCase().includes(query))
+    : verbs;
+
+  if(filtered.length === 0){
+    tbody.innerHTML = `<tr><td colspan="4" class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</td></tr>`;
+    return;
+  }
+
+  filtered.forEach((v) => {
+    const realIdx = verbs.indexOf(v);
+    const revealed = revealedVerbs.has(realIdx);
+    const tr = document.createElement("tr");
+    const verbDisplay = revealed
+      ? `${escapeHtml(v.verb)} <span class="tr-part">— ${escapeHtml(v.tr) || "?"}</span>`
+      : escapeHtml(v.verb);
+    tr.innerHTML = `
+      <td class="emoji-cell">${escapeHtml(v.emoji)}</td>
+      <td class="word-cell" data-idx="${realIdx}">${verbDisplay}</td>
+      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle">🔊</button></td>
+      <td><button class="conj-btn" data-idx="${realIdx}">çekim</button></td>
+      <td><button class="del" data-idx="${realIdx}">sil</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+document.getElementById("verbTableBody").addEventListener("click", (e)=>{
+  const wcell = e.target.closest(".word-cell");
+  if(wcell){ toggleReveal("verben", parseInt(wcell.dataset.idx, 10)); return; }
+  const speakBtn = e.target.closest(".speak-btn");
+  if(speakBtn){
+    const v = verbs[parseInt(speakBtn.dataset.idx, 10)];
+    if(v) speak(v.verb);
+    return;
+  }
+  const conjBtn = e.target.closest(".conj-btn");
+  if(conjBtn){ openConjModal(parseInt(conjBtn.dataset.idx, 10)); return; }
+  const delBtn = e.target.closest(".del");
+  if(delBtn){ deleteVerb(parseInt(delBtn.dataset.idx, 10)); return; }
+});
+
+function openConjModal(idx){
+  const v = verbs[idx];
+  if(!v) return;
+  document.getElementById("conjVerbTitle").textContent = v.verb + (v.tr ? " — " + v.tr : "");
+  const c = v.conj || {};
+  const rows = [
+    ["ich", c.ich],
+    ["du", c.du],
+    ["er / sie / es", c.er],
+    ["wir", c.wir],
+    ["ihr", c.ihr],
+    ["sie / Sie", c.sie]
+  ];
+  const tbody = document.getElementById("conjTableBody");
+  const hasAny = rows.some(r => r[1]);
+  if(!hasAny){
+    tbody.innerHTML = `<tr><td colspan="2" class="no-match">Bu fiil için çekim bilgisi eklenmemiş.</td></tr>`;
+  } else {
+    tbody.innerHTML = rows.map(([pron, form]) =>
+      `<tr><td>${escapeHtml(pron)}</td><td>${escapeHtml(form || "—")}</td></tr>`
+    ).join("");
+  }
+  document.getElementById("conjOverlay").classList.add("show");
+}
+function closeConjModal(){ document.getElementById("conjOverlay").classList.remove("show"); }
+
+function openAddVerbModal(){
+  ["inpVerb","inpVerbTr","inpVerbEmoji","inpConjIch","inpConjDu","inpConjEr","inpConjWir","inpConjIhr","inpConjSie"].forEach(id => document.getElementById(id).value = "");
+  document.getElementById("addVerbOverlay").classList.add("show");
+  setTimeout(()=>document.getElementById("inpVerb").focus(), 50);
+}
+function closeAddVerbModal(){ document.getElementById("addVerbOverlay").classList.remove("show"); }
+
+function addVerb(){
+  const emoji = document.getElementById("inpVerbEmoji").value.trim();
+  const verb = document.getElementById("inpVerb").value.trim();
+  const tr = document.getElementById("inpVerbTr").value.trim();
+  if(!verb){
+    alert("Fiil alanını doldur.");
+    return;
+  }
+  const conj = {
+    ich: document.getElementById("inpConjIch").value.trim(),
+    du: document.getElementById("inpConjDu").value.trim(),
+    er: document.getElementById("inpConjEr").value.trim(),
+    wir: document.getElementById("inpConjWir").value.trim(),
+    ihr: document.getElementById("inpConjIhr").value.trim(),
+    sie: document.getElementById("inpConjSie").value.trim()
+  };
+  verbs.push({verb, emoji, tr, conj});
+  saveVerbs();
+  renderVerbs();
+  closeAddVerbModal();
+}
+
+function deleteVerb(idx){
+  verbs.splice(idx,1);
+  revealedVerbs.delete(idx);
+  saveVerbs();
+  renderVerbs();
+}
+
+function exportVerbs(){
+  const blob = new Blob([JSON.stringify(verbs, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "fiil-listesi.json"; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importVerbs(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      const imported = JSON.parse(e.target.result);
+      if(!Array.isArray(imported)){
+        alert("Dosya formatı geçersiz: bir liste (array) bekleniyor.");
+        return;
+      }
+      const clean = imported
+        .filter(item => item && typeof item === "object")
+        .map(item => {
+          const c = item.conj && typeof item.conj === "object" ? item.conj : {};
+          return {
+            verb: String(item.verb || "").slice(0, 80),
+            emoji: String(item.emoji || "").slice(0, 8),
+            tr: String(item.tr || "").slice(0, 120),
+            conj: {
+              ich: String(c.ich || "").slice(0, 40),
+              du: String(c.du || "").slice(0, 40),
+              er: String(c.er || "").slice(0, 40),
+              wir: String(c.wir || "").slice(0, 40),
+              ihr: String(c.ihr || "").slice(0, 40),
+              sie: String(c.sie || "").slice(0, 40)
+            }
+          };
+        })
+        .filter(item => item.verb.length > 0);
+      verbs = clean;
+      saveVerbs();
+      renderVerbs();
+      alert("Fiil listesi içe aktarıldı (" + clean.length + " fiil).");
+    }catch(err){ alert("Dosya okunamadı veya bozuk."); }
+  };
+  reader.readAsText(file);
+  event.target.value = "";
+}
+
+/* ---------- SIFATLAR (ADJEKTIVE) ---------- */
+
+function renderAdjectives(){
+  const tbody = document.getElementById("adjTableBody");
+  const query = document.getElementById("adjSearchInput").value.trim().toLowerCase();
+  tbody.innerHTML = "";
+
+  const filtered = query
+    ? adjectives.filter(a => a.adj.toLowerCase().includes(query) || (a.tr||"").toLowerCase().includes(query))
+    : adjectives;
+
+  if(filtered.length === 0){
+    tbody.innerHTML = `<tr><td colspan="4" class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</td></tr>`;
+    return;
+  }
+
+  filtered.forEach((a) => {
+    const realIdx = adjectives.indexOf(a);
+    const revealed = revealedAdj.has(realIdx);
+    const tr = document.createElement("tr");
+    const adjDisplay = revealed
+      ? `${escapeHtml(a.adj)} <span class="tr-part">— ${escapeHtml(a.tr) || "?"}</span>`
+      : escapeHtml(a.adj);
+    tr.innerHTML = `
+      <td class="emoji-cell">${escapeHtml(a.emoji)}</td>
+      <td class="word-cell" data-idx="${realIdx}">${adjDisplay}</td>
+      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle">🔊</button></td>
+      <td><button class="del" data-idx="${realIdx}">sil</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+document.getElementById("adjTableBody").addEventListener("click", (e)=>{
+  const wcell = e.target.closest(".word-cell");
+  if(wcell){ toggleReveal("adj", parseInt(wcell.dataset.idx, 10)); return; }
+  const speakBtn = e.target.closest(".speak-btn");
+  if(speakBtn){
+    const a = adjectives[parseInt(speakBtn.dataset.idx, 10)];
+    if(a) speak(a.adj);
+    return;
+  }
+  const delBtn = e.target.closest(".del");
+  if(delBtn){ deleteAdjective(parseInt(delBtn.dataset.idx, 10)); return; }
+});
+
+function openAddAdjModal(){
+  ["inpAdj","inpAdjTr","inpAdjEmoji"].forEach(id => document.getElementById(id).value = "");
+  document.getElementById("addAdjOverlay").classList.add("show");
+  setTimeout(()=>document.getElementById("inpAdj").focus(), 50);
+}
+function closeAddAdjModal(){ document.getElementById("addAdjOverlay").classList.remove("show"); }
+
+function addAdjective(){
+  const emoji = document.getElementById("inpAdjEmoji").value.trim();
+  const adj = document.getElementById("inpAdj").value.trim();
+  const tr = document.getElementById("inpAdjTr").value.trim();
+  if(!adj){
+    alert("Sıfat alanını doldur.");
+    return;
+  }
+  adjectives.push({adj, emoji, tr});
+  saveAdjectives();
+  renderAdjectives();
+  closeAddAdjModal();
+}
+
+function deleteAdjective(idx){
+  adjectives.splice(idx,1);
+  revealedAdj.delete(idx);
+  saveAdjectives();
+  renderAdjectives();
+}
+
+function exportAdjectives(){
+  const blob = new Blob([JSON.stringify(adjectives, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "sifat-listesi.json"; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importAdjectives(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      const imported = JSON.parse(e.target.result);
+      if(!Array.isArray(imported)){
+        alert("Dosya formatı geçersiz: bir liste (array) bekleniyor.");
+        return;
+      }
+      const clean = imported
+        .filter(item => item && typeof item === "object")
+        .map(item => ({
+          adj: String(item.adj || "").slice(0, 80),
+          emoji: String(item.emoji || "").slice(0, 8),
+          tr: String(item.tr || "").slice(0, 120)
+        }))
+        .filter(item => item.adj.length > 0);
+      adjectives = clean;
+      saveAdjectives();
+      renderAdjectives();
+      alert("Sıfat listesi içe aktarıldı (" + clean.length + " sıfat).");
+    }catch(err){ alert("Dosya okunamadı veya bozuk."); }
+  };
+  reader.readAsText(file);
+  event.target.value = "";
+}
+
+/* ---------- İSTATİSTİK & OTOMATİK SORU ---------- */
+
+function recordWordStat(word, isCorrect){
+  if(!wordStats[word]) wordStats[word] = {correct:0, wrong:0};
+  if(isCorrect) wordStats[word].correct++; else wordStats[word].wrong++;
+  saveWordStats();
+  renderMistakeStats();
+}
+
+function renderMistakeStats(){
+  const tbody = document.getElementById("mistakeTableBody");
+  const entries = Object.entries(wordStats)
+    .map(([word, s]) => ({word, ...s, total: s.correct + s.wrong}))
+    .filter(e => e.total > 0)
+    .sort((a,b) => b.wrong - a.wrong || b.total - a.total)
+    .slice(0, 10);
+
+  if(entries.length === 0){
+    tbody.innerHTML = `<tr><td colspan="4" class="no-match">Henüz test verisi yok.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = entries.map(e => {
+    const pct = Math.round((e.correct / e.total) * 100);
+    return `<tr><td>${escapeHtml(e.word)}</td><td>${e.correct}</td><td>${e.wrong}</td><td>%${pct}</td></tr>`;
+  }).join("");
+}
+
+function exportStatsCSV(){
+  const entries = Object.entries(wordStats).map(([word, s]) => ({word, ...s}));
+  if(entries.length === 0){
+    alert("Henüz test verisi yok.");
+    return;
+  }
+  let csv = "Kelime;Dogru;Yanlis;Basari Yuzdesi\n";
+  entries
+    .sort((a,b) => b.wrong - a.wrong)
+    .forEach(e => {
+      const total = e.correct + e.wrong;
+      const pct = total > 0 ? Math.round((e.correct/total)*100) : 0;
+      csv += `${e.word};${e.correct};${e.wrong};%${pct}\n`;
+    });
+  const blob = new Blob(["\uFEFF" + csv], {type:"text/csv;charset=utf-8;"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "kelime-hata-istatistigi.csv"; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function updateStatDisplay(){
+  document.getElementById("statCorrect").textContent = stats.correct;
+  document.getElementById("statWrong").textContent = stats.wrong;
+}
+
+function resetStats(){
+  stats = {correct:0, wrong:0};
+  wordStats = {};
+  saveStats();
+  saveWordStats();
+  updateStatDisplay();
+  renderMistakeStats();
+}
+
+function toggleAuto(){
+  const on = document.getElementById("autoToggle").checked;
+  if(storageAvailable){
+    try{ localStorage.setItem("artikel_auto", on ? "1" : "0"); }catch(e){}
+  }
+  if(on){ startAuto(); } else { stopAuto(); }
+}
+
+function startAuto(){
+  stopAuto();
+  secondsLeft = 900;
+  updateCountdownText();
+  countdownTimer = setInterval(()=>{
+    secondsLeft--;
+    if(secondsLeft <= 0){
+      secondsLeft = 900;
+      askQuestion();
+    }
+    updateCountdownText();
+  }, 1000);
+}
+
+function stopAuto(){
+  if(countdownTimer){ clearInterval(countdownTimer); countdownTimer = null; }
+  document.getElementById("countdownText").textContent = "";
+}
+
+function updateCountdownText(){
+  const m = Math.floor(secondsLeft/60);
+  const s = secondsLeft%60;
+  document.getElementById("countdownText").textContent =
+    "Sıradaki otomatik soru: " + m + " dk " + (s<10?"0":"") + s + " sn sonra";
+}
+
+function pickRandom(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+function speak(text){
+  if(!('speechSynthesis' in window)){
+    alert("Tarayıcın sesli okumayı desteklemiyor.");
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = "de-DE";
+  utter.rate = 0.9;
+  window.speechSynthesis.speak(utter);
+}
+
+function insertChar(ch){
+  const input = document.getElementById("qPluralAnswer");
+  const start = input.selectionStart ?? input.value.length;
+  const end = input.selectionEnd ?? input.value.length;
+  input.value = input.value.slice(0, start) + ch + input.value.slice(end);
+  input.focus();
+  input.setSelectionRange(start + 1, start + 1);
+}
+
+function buildSession(){
+  let session = shuffleArray(words).map(w => ({word:w, mode: Math.random()<0.5 ? "artikel" : "plural", answered:false}));
+  while(session.length < 15){
+    const extra = shuffleArray(words).map(w => ({word:w, mode: Math.random()<0.5 ? "artikel" : "plural", answered:false}));
+    session = session.concat(extra);
+  }
+  return shuffleArray(session);
+}
+
+function askQuestion(){
+  if(words.length === 0){
+    alert("Önce isim listesine birkaç kelime ekle.");
+    return;
+  }
+  sessionQuestions = buildSession();
+  sessionIndex = 0;
+  document.getElementById("quizOverlay").classList.add("show");
+  showSessionQuestion();
+}
+
+function showSessionQuestion(){
+  currentQ = sessionQuestions[sessionIndex];
+  const w = currentQ.word;
+  const isArtikelQ = currentQ.mode === "artikel";
+
+  document.getElementById("qFeedback").textContent = "";
+  document.getElementById("qEmoji").textContent = w.emoji || "❔";
+  document.getElementById("qProgress").textContent = (sessionIndex+1) + " / " + sessionQuestions.length;
+  document.getElementById("prevBtn").disabled = sessionIndex === 0;
+  document.getElementById("nextBtn").disabled = sessionIndex === sessionQuestions.length - 1;
+
+  if(isArtikelQ){
+    document.getElementById("qType").textContent = "ARTİKEL NE?";
+    const qw = document.getElementById("qWord");
+    qw.textContent = w.word;
+    qw.style.color = "var(--ink)";
+    document.getElementById("qPluralInput").style.display = "none";
+    document.getElementById("umlautRow").style.display = "none";
+    const optionsDiv = document.getElementById("qOptions");
+    optionsDiv.style.display = "flex";
+    optionsDiv.innerHTML = "";
+    ["der","die","das"].forEach(opt=>{
+      const b = document.createElement("button");
+      b.className = "opt-btn opt-" + opt;
+      b.textContent = opt;
+      b.onclick = () => checkArtikelAnswer(opt, b);
+      optionsDiv.appendChild(b);
+    });
+  } else {
+    document.getElementById("qType").textContent = "ÇOĞULU NE?";
+    const qw = document.getElementById("qWord");
+    qw.textContent = w.artikel + " " + w.word;
+    qw.style.color = "var(--" + w.artikel + ")";
+    document.getElementById("qOptions").style.display = "none";
+    document.getElementById("qPluralInput").style.display = "flex";
+    document.getElementById("umlautRow").style.display = "flex";
+    document.getElementById("qPluralAnswer").value = "";
+    setTimeout(()=>document.getElementById("qPluralAnswer").focus(), 50);
+  }
+}
+
+function finalizeIfUnanswered(){
+  const q = sessionQuestions[sessionIndex];
+  if(q && !q.answered){
+    q.answered = true;
+    stats.wrong++;
+    recordWordStat(q.word.word, false);
+    saveStats();
+    updateStatDisplay();
+  }
+}
+
+function nextQuestion(){
+  finalizeIfUnanswered();
+  if(sessionIndex < sessionQuestions.length - 1){
+    sessionIndex++;
+    showSessionQuestion();
+  }
+}
+
+function prevQuestion(){
+  finalizeIfUnanswered();
+  if(sessionIndex > 0){
+    sessionIndex--;
+    showSessionQuestion();
+  }
+}
+
+function checkArtikelAnswer(chosen, btnEl){
+  const correct = currentQ.word.artikel;
+  const allBtns = document.querySelectorAll("#qOptions .opt-btn");
+  allBtns.forEach(b=>{
+    b.onclick = null;
+    if(b.textContent === correct) b.classList.add("correct");
+    if(b === btnEl && chosen !== correct) b.classList.add("wrong");
+  });
+  if(chosen === correct){
+    document.getElementById("qFeedback").textContent = "Doğru! " + correct + " " + currentQ.word.word;
+  } else {
+    document.getElementById("qFeedback").textContent = "Doğrusu: " + correct + " " + currentQ.word.word;
+  }
+  if(!currentQ.answered){
+    currentQ.answered = true;
+    if(chosen === correct) stats.correct++; else stats.wrong++;
+    recordWordStat(currentQ.word.word, chosen === correct);
+    saveStats();
+    updateStatDisplay();
+  }
+}
+
+function normalizeAnswer(str){
+  return String(str)
+    .normalize("NFC")
+    .trim()
+    .replace(/\s+/g, " ")
+    .toLowerCase();
+}
+
+function checkPluralAnswer(){
+  let given = normalizeAnswer(document.getElementById("qPluralAnswer").value);
+  if(given.startsWith("die ")) given = given.slice(4).trim();
+  const correct = normalizeAnswer(currentQ.word.plural);
+  const fb = document.getElementById("qFeedback");
+  const isCorrect = given === correct && given.length > 0;
+  if(isCorrect){
+    fb.textContent = "Doğru! die " + currentQ.word.plural;
+    fb.style.color = "#2C5A3C";
+  } else {
+    fb.textContent = "Doğrusu: die " + currentQ.word.plural;
+    fb.style.color = "#8B3A20";
+  }
+  if(!currentQ.answered){
+    currentQ.answered = true;
+    if(isCorrect) stats.correct++; else stats.wrong++;
+    recordWordStat(currentQ.word.word, isCorrect);
+    saveStats();
+    updateStatDisplay();
+  }
+}
+
+function closeQuiz(){
+  finalizeIfUnanswered();
+  document.getElementById("quizOverlay").classList.remove("show");
+  sessionQuestions = [];
+  sessionIndex = 0;
+}
+
+loadData();
+renderWords();
+renderVerbs();
+renderAdjectives();
+updateStatDisplay();
+renderMistakeStats();
+</script>
+
+<div class="signature">Erstellt von Capt. Aykut Akkoz</div>
+
+</body>
+</html>
