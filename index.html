@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Artikel & Verben Antrenörü</title>
+<title>Artikel, Verben & Adjektive Antrenörü</title>
 <style>
   :root{
     --deep: #0F2A3D;
@@ -241,6 +241,26 @@
     color:var(--teal);
   }
   .qspeak-btn:hover{background:var(--cream);}
+  .hint-btn{
+    background:none;
+    border:1px solid var(--line);
+    border-radius:14px;
+    font-size:12.5px;
+    color:var(--brass);
+    padding:5px 12px;
+    margin-left:8px;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-weight:600;
+  }
+  .hint-btn:hover{background:var(--cream);}
+  .hint-text{
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-size:13px;
+    font-style:italic;
+    color:var(--brass);
+    min-height:18px;
+    margin:6px 0 4px;
+  }
   .nav-row{
     display:flex;
     align-items:center;
@@ -354,7 +374,23 @@
     letter-spacing:0.5px;color:var(--brass);text-transform:uppercase;margin-bottom:10px;
   }
   .quiz-card .qemoji{font-size:44px;margin-bottom:6px;}
-  .quiz-card .qword{font-size:28px;margin-bottom:22px;}
+  .quiz-card .qword{font-size:28px;}
+  .qword-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:22px;
+  }
+  .result-icon{
+    font-size:34px;
+    font-weight:900;
+    line-height:1;
+    display:none;
+  }
+  .result-icon.show{display:inline-block;}
+  .result-icon.correct{color:var(--sea);}
+  .result-icon.wrong{color:var(--coral);}
   .options{display:flex;flex-direction:column;gap:9px;margin-bottom:14px;text-align:left;}
   .opt-btn{border:2px solid transparent;text-align:left;padding:11px 14px;font-size:14.5px;font-family: Georgia, serif;font-weight:700;}
   .opt-btn.opt-der{background:var(--der-bg);color:var(--der);}
@@ -424,8 +460,8 @@
 <body>
 
 <header>
-  <h1>Artikel &amp; Verben Antrenörü</h1>
-  <p>Goethe A1.1 kelime çalışması — der (mavi) / die (kırmızı) / das (yeşil)</p>
+  <h1>Artikel, Verben &amp; Adjektive Antrenörü</h1>
+  <p>A1.1 kelime çalışması — der (mavi) / die (kırmızı) / das (yeşil)</p>
 </header>
 
 <div class="tabbar">
@@ -675,8 +711,13 @@
   <div class="quiz-card">
     <div class="qtype" id="qType">ARTİKEL</div>
     <div class="qemoji" id="qEmoji">🪑</div>
-    <div class="qword" id="qWord">Tisch</div>
+    <div class="qword-row">
+      <div class="qword" id="qWord">Tisch</div>
+      <span class="result-icon" id="resultIcon"></span>
+    </div>
     <button class="qspeak-btn" onclick="speak(currentQ.word.word)" title="Dinle">🔊</button>
+    <button class="hint-btn" onclick="toggleHint()">💡 İpucu</button>
+    <div class="hint-text" id="hintText"></div>
     <div class="options" id="qOptions"></div>
     <div class="plural-input" id="qPluralInput" style="display:none;">
       <input type="text" id="qPluralAnswer" placeholder="sadece çoğulu yaz, 'die' yazmana gerek yok">
@@ -1262,25 +1303,34 @@ function openConjModal(idx){
   document.getElementById("conjVerbTitle").textContent = v.verb + (v.tr ? " — " + v.tr : "");
   const c = v.conj || {};
   const rows = [
-    ["ich", c.ich],
-    ["du", c.du],
-    ["er / sie / es", c.er],
-    ["wir", c.wir],
-    ["ihr", c.ihr],
-    ["sie / Sie", c.sie]
+    ["ich", c.ich, "ich"],
+    ["du", c.du, "du"],
+    ["er / sie / es", c.er, "er"],
+    ["wir", c.wir, "wir"],
+    ["ihr", c.ihr, "ihr"],
+    ["sie / Sie", c.sie, "sie"]
   ];
   const tbody = document.getElementById("conjTableBody");
   const hasAny = rows.some(r => r[1]);
   if(!hasAny){
-    tbody.innerHTML = `<tr><td colspan="2" class="no-match">Bu fiil için çekim bilgisi eklenmemiş.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="3" class="no-match">Bu fiil için çekim bilgisi eklenmemiş.</td></tr>`;
   } else {
-    tbody.innerHTML = rows.map(([pron, form]) =>
-      `<tr><td>${escapeHtml(pron)}</td><td>${escapeHtml(form || "—")}</td></tr>`
-    ).join("");
+    tbody.innerHTML = rows.map(([pron, form, spokenPron]) => {
+      const phrase = form ? (spokenPron + " " + form) : "";
+      const speakCell = form
+        ? `<button class="speak-btn" data-phrase="${escapeHtml(phrase)}">🔊</button>`
+        : "";
+      return `<tr><td>${escapeHtml(pron)}</td><td>${escapeHtml(form || "—")}</td><td class="speak-cell">${speakCell}</td></tr>`;
+    }).join("");
   }
   document.getElementById("conjOverlay").classList.add("show");
 }
 function closeConjModal(){ document.getElementById("conjOverlay").classList.remove("show"); }
+
+document.getElementById("conjTableBody").addEventListener("click", (e)=>{
+  const btn = e.target.closest(".speak-btn");
+  if(btn && btn.dataset.phrase){ speak(btn.dataset.phrase); }
+});
 
 function openAddVerbModal(){
   ["inpVerb","inpVerbTr","inpVerbEmoji","inpConjIch","inpConjDu","inpConjEr","inpConjWir","inpConjIhr","inpConjSie"].forEach(id => document.getElementById(id).value = "");
@@ -1632,6 +1682,10 @@ function showSessionQuestion(){
   const isButtonQ = currentQ.mode === "artikel" || currentQ.mode === "artikel-plural";
 
   document.getElementById("qFeedback").textContent = "";
+  const resIcon = document.getElementById("resultIcon");
+  resIcon.className = "result-icon";
+  resIcon.textContent = "";
+  document.getElementById("hintText").textContent = "";
   document.getElementById("qEmoji").textContent = w.emoji || "❔";
   document.getElementById("qProgress").textContent = (sessionIndex+1) + " / " + sessionQuestions.length;
   document.getElementById("prevBtn").disabled = sessionIndex === 0;
@@ -1699,6 +1753,22 @@ function prevQuestion(){
   }
 }
 
+function showResultIcon(isCorrect){
+  const el = document.getElementById("resultIcon");
+  el.textContent = isCorrect ? "✓" : "✗";
+  el.className = "result-icon show " + (isCorrect ? "correct" : "wrong");
+}
+
+function toggleHint(){
+  const hintEl = document.getElementById("hintText");
+  if(hintEl.textContent){
+    hintEl.textContent = "";
+  } else {
+    const tr = (currentQ && currentQ.word && currentQ.word.tr) ? currentQ.word.tr : "Türkçesi eklenmemiş";
+    hintEl.textContent = "İpucu: " + tr;
+  }
+}
+
 function checkArtikelAnswer(chosen, btnEl){
   const isPluralQ = currentQ.mode === "artikel-plural";
   const correct = isPluralQ ? "die" : currentQ.word.artikel;
@@ -1709,6 +1779,7 @@ function checkArtikelAnswer(chosen, btnEl){
     if(b.textContent === correct) b.classList.add("correct");
     if(b === btnEl && chosen !== correct) b.classList.add("wrong");
   });
+  showResultIcon(chosen === correct);
   if(chosen === correct){
     document.getElementById("qFeedback").textContent = "Doğru! " + correct + " " + displayWord;
   } else {
@@ -1737,6 +1808,7 @@ function checkPluralAnswer(){
   const correct = normalizeAnswer(currentQ.word.plural);
   const fb = document.getElementById("qFeedback");
   const isCorrect = given === correct && given.length > 0;
+  showResultIcon(isCorrect);
   if(isCorrect){
     fb.textContent = "Doğru! die " + currentQ.word.plural;
     fb.style.color = "#2C5A3C";
