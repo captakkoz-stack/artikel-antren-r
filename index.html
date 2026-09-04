@@ -229,6 +229,13 @@
     text-align:center;
     padding:0;
   }
+  .qtool-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin-bottom:10px;
+  }
   .qspeak-btn{
     background:none;
     border:1px solid var(--line);
@@ -237,8 +244,11 @@
     height:34px;
     font-size:15px;
     cursor:pointer;
-    margin-bottom:10px;
     color:var(--teal);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
   }
   .qspeak-btn:hover{background:var(--cream);}
   .hint-btn{
@@ -248,7 +258,8 @@
     font-size:12.5px;
     color:var(--brass);
     padding:5px 12px;
-    margin-left:8px;
+    height:34px;
+    box-sizing:border-box;
     font-family: system-ui, Helvetica, Arial, sans-serif;
     font-weight:600;
   }
@@ -442,6 +453,27 @@
     border-radius:10px;
   }
   .conj-btn:hover{background:var(--der-bg);}
+  .example-de{
+    font-family: Georgia, serif;
+    font-size:17px;
+    color:var(--ink);
+    margin:0 0 8px;
+    line-height:1.5;
+  }
+  .example-tr{
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-size:13.5px;
+    font-style:italic;
+    color:var(--brass);
+    margin:0 0 4px;
+  }
+  .beispiel-btn{
+    background:none;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    padding:2px 5px;
+  }
   .signature{
     position:fixed;
     bottom:10px;
@@ -492,7 +524,7 @@
 
       <div class="wordlist-scroll">
         <table>
-          <thead><tr><th>Art.</th><th></th><th>Kelime</th><th></th><th>Çoğul</th><th></th><th></th></tr></thead>
+          <thead><tr><th>Art.</th><th></th><th>Kelime</th><th></th><th>Çoğul</th><th></th><th>Örnek</th><th></th></tr></thead>
           <tbody id="wordTableBody"></tbody>
         </table>
       </div>
@@ -542,7 +574,7 @@
 
       <div class="wordlist-scroll">
         <table>
-          <thead><tr><th></th><th>Fiil (Infinitiv)</th><th></th><th></th><th></th></tr></thead>
+          <thead><tr><th></th><th>Fiil (Infinitiv)</th><th></th><th></th><th>Örnek</th><th></th></tr></thead>
           <tbody id="verbTableBody"></tbody>
         </table>
       </div>
@@ -570,7 +602,7 @@
 
       <div class="wordlist-scroll">
         <table>
-          <thead><tr><th></th><th>Sıfat</th><th></th><th></th></tr></thead>
+          <thead><tr><th></th><th>Sıfat</th><th></th><th>Örnek</th><th></th></tr></thead>
           <tbody id="adjTableBody"></tbody>
         </table>
       </div>
@@ -689,6 +721,19 @@
   </div>
 </div>
 
+<!-- Beispiel (örnek cümle) penceresi -->
+<div class="overlay" id="exampleOverlay">
+  <div class="add-card">
+    <h3 id="exampleTitle">Tisch</h3>
+    <p class="example-de" id="exampleSentence"></p>
+    <p class="example-tr" id="exampleTranslation"></p>
+    <div class="add-actions" style="justify-content:space-between; align-items:center;">
+      <button class="qspeak-btn" id="exampleSpeakBtn" style="margin:0;">🔊</button>
+      <button class="btn-ghost" onclick="closeExampleModal()">Kapat</button>
+    </div>
+  </div>
+</div>
+
 <!-- Sıfat Ekle penceresi -->
 <div class="overlay" id="addAdjOverlay">
   <div class="add-card">
@@ -715,8 +760,10 @@
       <div class="qword" id="qWord">Tisch</div>
       <span class="result-icon" id="resultIcon"></span>
     </div>
-    <button class="qspeak-btn" onclick="speak(currentQ.word.word)" title="Dinle">🔊</button>
-    <button class="hint-btn" onclick="toggleHint()">💡 İpucu</button>
+    <div class="qtool-row">
+      <button class="qspeak-btn" onclick="speakCurrentWord()" title="Dinle">🔊</button>
+      <button class="hint-btn" onclick="toggleHint()">💡 İpucu</button>
+    </div>
     <div class="hint-text" id="hintText"></div>
     <div class="options" id="qOptions"></div>
     <div class="plural-input" id="qPluralInput" style="display:none;">
@@ -1127,7 +1174,7 @@ function renderWords(){
     : filtered;
 
   if(filtered.length === 0){
-    tbody.innerHTML = `<tr><td colspan="7" class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="8" class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</td></tr>`;
     return;
   }
 
@@ -1149,6 +1196,7 @@ function renderWords(){
       <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" data-speak="word" title="Dinle">🔊</button></td>
       <td>${pluralSpan}</td>
       <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" data-speak="plural" title="Çoğulu dinle">🔊</button></td>
+      <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
       <td><button class="del" data-idx="${realIdx}" data-del="word">sil</button></td>
     `;
     tbody.appendChild(tr);
@@ -1166,6 +1214,8 @@ document.getElementById("wordTableBody").addEventListener("click", (e)=>{
     if(w) speak(speakBtn.dataset.speak === "plural" ? w.plural : w.word);
     return;
   }
+  const beispielBtn = e.target.closest(".beispiel-btn");
+  if(beispielBtn){ openExampleModal("word", parseInt(beispielBtn.dataset.idx, 10)); return; }
   const delBtn = e.target.closest(".del");
   if(delBtn){ deleteWord(parseInt(delBtn.dataset.idx, 10)); return; }
 });
@@ -1235,7 +1285,9 @@ function importList(event){
           word: String(item.word || "").slice(0, 80),
           plural: String(item.plural || "").slice(0, 80),
           emoji: String(item.emoji || "").slice(0, 8),
-          tr: String(item.tr || "").slice(0, 120)
+          tr: String(item.tr || "").slice(0, 120),
+          beispiel: String(item.beispiel || "").slice(0, 200),
+          beispielTr: String(item.beispielTr || "").slice(0, 200)
         }))
         .filter(item => item.word.length > 0);
       words = clean;
@@ -1260,7 +1312,7 @@ function renderVerbs(){
     : verbs;
 
   if(filtered.length === 0){
-    tbody.innerHTML = `<tr><td colspan="4" class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="6" class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</td></tr>`;
     return;
   }
 
@@ -1276,6 +1328,7 @@ function renderVerbs(){
       <td class="word-cell" data-idx="${realIdx}">${verbDisplay}</td>
       <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle">🔊</button></td>
       <td><button class="conj-btn" data-idx="${realIdx}">çekim</button></td>
+      <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
       <td><button class="del" data-idx="${realIdx}">sil</button></td>
     `;
     tbody.appendChild(tr);
@@ -1293,9 +1346,37 @@ document.getElementById("verbTableBody").addEventListener("click", (e)=>{
   }
   const conjBtn = e.target.closest(".conj-btn");
   if(conjBtn){ openConjModal(parseInt(conjBtn.dataset.idx, 10)); return; }
+  const beispielBtn = e.target.closest(".beispiel-btn");
+  if(beispielBtn){ openExampleModal("verb", parseInt(beispielBtn.dataset.idx, 10)); return; }
   const delBtn = e.target.closest(".del");
   if(delBtn){ deleteVerb(parseInt(delBtn.dataset.idx, 10)); return; }
 });
+
+function openExampleModal(type, idx){
+  let item, title;
+  if(type === "word"){ item = words[idx]; title = item ? item.word : ""; }
+  else if(type === "verb"){ item = verbs[idx]; title = item ? item.verb : ""; }
+  else { item = adjectives[idx]; title = item ? item.adj : ""; }
+  if(!item) return;
+
+  document.getElementById("exampleTitle").textContent = title;
+  const sentenceEl = document.getElementById("exampleSentence");
+  const trEl = document.getElementById("exampleTranslation");
+  const speakBtn = document.getElementById("exampleSpeakBtn");
+
+  if(item.beispiel){
+    sentenceEl.textContent = item.beispiel;
+    trEl.textContent = item.beispielTr || "";
+    speakBtn.style.display = "inline-block";
+    speakBtn.onclick = () => speak(item.beispiel);
+  } else {
+    sentenceEl.textContent = "Bu kelime için örnek cümle henüz eklenmemiş.";
+    trEl.textContent = "";
+    speakBtn.style.display = "none";
+  }
+  document.getElementById("exampleOverlay").classList.add("show");
+}
+function closeExampleModal(){ document.getElementById("exampleOverlay").classList.remove("show"); }
 
 function openConjModal(idx){
   const v = verbs[idx];
@@ -1395,6 +1476,8 @@ function importVerbs(event){
             verb: String(item.verb || "").slice(0, 80),
             emoji: String(item.emoji || "").slice(0, 8),
             tr: String(item.tr || "").slice(0, 120),
+            beispiel: String(item.beispiel || "").slice(0, 200),
+            beispielTr: String(item.beispielTr || "").slice(0, 200),
             conj: {
               ich: String(c.ich || "").slice(0, 40),
               du: String(c.du || "").slice(0, 40),
@@ -1428,7 +1511,7 @@ function renderAdjectives(){
     : adjectives;
 
   if(filtered.length === 0){
-    tbody.innerHTML = `<tr><td colspan="4" class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="5" class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</td></tr>`;
     return;
   }
 
@@ -1443,6 +1526,7 @@ function renderAdjectives(){
       <td class="emoji-cell">${escapeHtml(a.emoji)}</td>
       <td class="word-cell" data-idx="${realIdx}">${adjDisplay}</td>
       <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle">🔊</button></td>
+      <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
       <td><button class="del" data-idx="${realIdx}">sil</button></td>
     `;
     tbody.appendChild(tr);
@@ -1458,6 +1542,8 @@ document.getElementById("adjTableBody").addEventListener("click", (e)=>{
     if(a) speak(a.adj);
     return;
   }
+  const beispielBtn = e.target.closest(".beispiel-btn");
+  if(beispielBtn){ openExampleModal("adj", parseInt(beispielBtn.dataset.idx, 10)); return; }
   const delBtn = e.target.closest(".del");
   if(delBtn){ deleteAdjective(parseInt(delBtn.dataset.idx, 10)); return; }
 });
@@ -1514,7 +1600,9 @@ function importAdjectives(event){
         .map(item => ({
           adj: String(item.adj || "").slice(0, 80),
           emoji: String(item.emoji || "").slice(0, 8),
-          tr: String(item.tr || "").slice(0, 120)
+          tr: String(item.tr || "").slice(0, 120),
+          beispiel: String(item.beispiel || "").slice(0, 200),
+          beispielTr: String(item.beispielTr || "").slice(0, 200)
         }))
         .filter(item => item.adj.length > 0);
       adjectives = clean;
@@ -1636,6 +1724,15 @@ function speak(text){
   utter.lang = "de-DE";
   utter.rate = 0.9;
   window.speechSynthesis.speak(utter);
+}
+
+function speakCurrentWord(){
+  if(!currentQ) return;
+  if(currentQ.mode === "artikel-plural"){
+    speak(currentQ.word.plural);
+  } else {
+    speak(currentQ.word.word);
+  }
 }
 
 function insertChar(ch){
