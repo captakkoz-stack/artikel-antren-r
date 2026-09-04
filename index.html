@@ -663,6 +663,7 @@
       <div class="test-btn-row">
         <button class="btn-main" onclick="askQuestion('artikel-only')">Artikel Testi (der/die/das)</button>
         <button class="btn-ghost" onclick="askQuestion('noun-quiz')">İsim Testi (Türkçesi)</button>
+        <button class="btn-ghost" onclick="askQuestion('plural-only')">Çoğul Testi (yaz)</button>
         <button class="btn-ghost" onclick="askQuestion('verb-quiz')">Fiil Testi (Türkçesi)</button>
         <button class="btn-ghost" onclick="askQuestion('adj-quiz')">Sıfat Testi (Türkçesi)</button>
       </div>
@@ -1050,7 +1051,8 @@ const STARTER_VERBS = [
   {verb:"bringen", emoji:"🍽️", tr:"getirmek", beispiel:"Bringen Sie mir bitte die Speisekarte.", beispielTr:"Lütfen bana menüyü getirin.", conj:{ich:"bringe", du:"bringst", er:"bringt", wir:"bringen", ihr:"bringt", sie:"bringen"}},
   {verb:"nehmen", emoji:"🤲", tr:"almak", beispiel:"Ich nehme den Fisch.", beispielTr:"Balığı alıyorum.", conj:{ich:"nehme", du:"nimmst", er:"nimmt", wir:"nehmen", ihr:"nehmt", sie:"nehmen"}},
   {verb:"finden", emoji:"🔍", tr:"bulmak", beispiel:"Ich finde das Restaurant gut.", beispielTr:"Restoranı iyi buluyorum.", conj:{ich:"finde", du:"findest", er:"findet", wir:"finden", ihr:"findet", sie:"finden"}},
-  {verb:"bekommen", emoji:"📦", tr:"almak (sipariş)", beispiel:"Ich bekomme einen Salat.", beispielTr:"Bir salata alayım.", conj:{ich:"bekomme", du:"bekommst", er:"bekommt", wir:"bekommen", ihr:"bekommt", sie:"bekommen"}}
+  {verb:"bekommen", emoji:"📦", tr:"almak (sipariş)", beispiel:"Ich bekomme einen Salat.", beispielTr:"Bir salata alayım.", conj:{ich:"bekomme", du:"bekommst", er:"bekommt", wir:"bekommen", ihr:"bekommt", sie:"bekommen"}},
+  {verb:"mögen", emoji:"😊", tr:"sevmek / hoşlanmak", beispiel:"Ich mag Schokolade.", beispielTr:"Çikolatayı severim.", conj:{ich:"mag", du:"magst", er:"mag", wir:"mögen", ihr:"mögt", sie:"mögen"}}
 ];
 
 const STARTER_ADJEKTIVE = [
@@ -1972,12 +1974,18 @@ function buildSession(testMode){
     return shuffleArray(session);
   }
 
-  const pickMode = (w) => {
-    if(testMode === "artikel-only"){
-      const hasPlural = w.plural && w.plural !== "—";
-      if(hasPlural && Math.random() < 0.5) return "artikel-plural";
-      return "artikel";
+  if(testMode === "plural-only"){
+    const pluralable = words.filter(w => w.plural && w.plural !== "—");
+    if(pluralable.length === 0) return [];
+    let session = shuffleArray(pluralable).map(w => ({word:w, mode:"plural", category:"noun", answered:false}));
+    while(session.length < 15){
+      session = session.concat(shuffleArray(pluralable).map(w => ({word:w, mode:"plural", category:"noun", answered:false})));
     }
+    return shuffleArray(session);
+  }
+
+  const pickMode = (w) => {
+    if(testMode === "artikel-only") return "artikel";
     return Math.random()<0.5 ? "artikel" : "plural";
   };
   let session = shuffleArray(words).map(w => ({word:w, mode: pickMode(w), category:"noun", answered:false}));
@@ -1998,7 +2006,7 @@ function askQuestion(testMode){
     alert("Önce sıfat listesine birkaç sıfat ekle.");
     return;
   }
-  if((testMode === "mixed" || testMode === "artikel-only" || testMode === "noun-quiz") && words.length === 0){
+  if((testMode === "mixed" || testMode === "artikel-only" || testMode === "noun-quiz" || testMode === "plural-only") && words.length === 0){
     alert("Önce isim listesine birkaç kelime ekle.");
     return;
   }
