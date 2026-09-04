@@ -215,6 +215,22 @@
   .filter-btn[data-filter="der"]:not(.active){color:var(--der);border-color:var(--der-bg);}
   .filter-btn[data-filter="die"]:not(.active){color:var(--die);border-color:var(--die-bg);}
   .filter-btn[data-filter="das"]:not(.active){color:var(--das);border-color:var(--das-bg);}
+  .interval-row{
+    display:flex;
+    gap:6px;
+    margin:2px 0 12px;
+  }
+  .interval-btn{
+    background:#fdfcf9;
+    border:1px solid var(--line);
+    color:#777;
+    font-size:12.5px;
+    font-weight:600;
+    padding:6px 14px;
+    border-radius:12px;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+  }
+  .interval-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
   .speak-btn{
     background:none;
     border:none;
@@ -463,10 +479,20 @@
   .example-title-row{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:8px;
     margin:0 0 16px;
+    line-height:1;
   }
-  .example-title-row .qspeak-btn{margin:0;}
+  .example-title-row #exampleTitle{
+    line-height:1;
+  }
+  .example-title-row .qspeak-btn{
+    margin:0;
+    width:26px;
+    height:26px;
+    font-size:12px;
+    flex-shrink:0;
+  }
   .example-tr{
     font-family: system-ui, Helvetica, Arial, sans-serif;
     font-size:13.5px;
@@ -495,6 +521,7 @@
     border-radius:2px;
   }
 </style>
+<script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 
@@ -615,7 +642,12 @@
 
       <div class="toggle-row">
         <input type="checkbox" id="autoToggle" onchange="toggleAuto()">
-        <label style="margin:0" for="autoToggle">2 dakikada bir otomatik soru sor</label>
+        <label style="margin:0" for="autoToggle">Otomatik soru sor</label>
+      </div>
+      <div class="interval-row" id="intervalRow">
+        <button class="interval-btn" data-sec="30" onclick="setAutoInterval(30)">30 sn</button>
+        <button class="interval-btn" data-sec="60" onclick="setAutoInterval(60)">1 dk</button>
+        <button class="interval-btn active" data-sec="120" onclick="setAutoInterval(120)">2 dk</button>
       </div>
       <div class="countdown" id="countdownText"></div>
 
@@ -629,6 +661,7 @@
         Not: Bu araç bir tarayıcı sekmesi olarak çalışır, gerçek bir arka plan uygulaması değildir.
         Antrenman şu an isim listesindeki (Artikel/Çoğul) kelimeleri test ediyor.
         Sadece Artikel Testi'nde bilgisayarda <strong>Enter</strong> tuşuyla bir sonraki soruya hızlıca geçebilirsin.
+        Başka bir sekmedeyken otomatik soru gelirse, sekme başlığı yanıp söner ve (izin verirsen) bildirim gösterilir.
       </p>
     </section>
 
@@ -1018,6 +1051,7 @@ let adjectives = [];
 let stats = {correct:0, wrong:0};
 let countdownTimer = null;
 let secondsLeft = 120;
+let autoIntervalSeconds = 120;
 let currentQ = null;
 let revealedWords = new Set();
 let revealedVerbs = new Set();
@@ -1080,6 +1114,16 @@ function loadData(){
     const ws = localStorage.getItem("artikel_word_stats");
     wordStats = ws ? JSON.parse(ws) : {};
   }catch(e){ wordStats = {}; }
+
+  let savedInterval = 120;
+  try{
+    const si = parseInt(localStorage.getItem("artikel_auto_interval"), 10);
+    if([30,60,120].includes(si)) savedInterval = si;
+  }catch(e){}
+  autoIntervalSeconds = savedInterval;
+  document.querySelectorAll("#intervalRow .interval-btn").forEach(b=>{
+    b.classList.toggle("active", parseInt(b.dataset.sec, 10) === savedInterval);
+  });
 
   let auto = false;
   try{ auto = localStorage.getItem("artikel_auto") === "1"; }catch(e){}
@@ -1669,22 +1713,73 @@ function resetStats(){
   renderMistakeStats();
 }
 
+function setAutoInterval(sec){
+  autoIntervalSeconds = sec;
+  document.querySelectorAll("#intervalRow .interval-btn").forEach(b=>{
+    b.classList.toggle("active", parseInt(b.dataset.sec, 10) === sec);
+  });
+  if(storageAvailable){
+    try{ localStorage.setItem("artikel_auto_interval", String(sec)); }catch(e){}
+  }
+  if(document.getElementById("autoToggle").checked){
+    startAuto();
+  }
+}
+
+const ORIGINAL_TITLE = document.title;
+let titleFlashInterval = null;
+
+function notifyIfHidden(){
+  if(document.visibilityState !== "hidden") return;
+
+  if("Notification" in window && Notification.permission === "granted"){
+    try{
+      const n = new Notification("Yeni soru hazır! 📚", { body: "Antrenman sekmesine dön." });
+      n.onclick = () => { window.focus(); n.close(); };
+    }catch(e){}
+  }
+
+  if(!titleFlashInterval){
+    let flash = false;
+    titleFlashInterval = setInterval(()=>{
+      document.title = flash ? ORIGINAL_TITLE : "🔔 Yeni Soru Bekliyor!";
+      flash = !flash;
+    }, 1000);
+  }
+}
+
+document.addEventListener("visibilitychange", ()=>{
+  if(document.visibilityState === "visible" && titleFlashInterval){
+    clearInterval(titleFlashInterval);
+    titleFlashInterval = null;
+    document.title = ORIGINAL_TITLE;
+  }
+});
+
 function toggleAuto(){
   const on = document.getElementById("autoToggle").checked;
   if(storageAvailable){
     try{ localStorage.setItem("artikel_auto", on ? "1" : "0"); }catch(e){}
   }
-  if(on){ startAuto(); } else { stopAuto(); }
+  if(on){
+    if("Notification" in window && Notification.permission === "default"){
+      Notification.requestPermission();
+    }
+    startAuto();
+  } else {
+    stopAuto();
+  }
 }
 
 function startAuto(){
   stopAuto();
-  secondsLeft = 120;
+  secondsLeft = autoIntervalSeconds;
   updateCountdownText();
   countdownTimer = setInterval(()=>{
     secondsLeft--;
     if(secondsLeft <= 0){
-      secondsLeft = 120;
+      secondsLeft = autoIntervalSeconds;
+      notifyIfHidden();
       askQuestion();
     }
     updateCountdownText();
