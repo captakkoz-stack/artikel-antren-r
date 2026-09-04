@@ -661,8 +661,8 @@
       <div class="countdown" id="countdownText"></div>
 
       <div class="test-btn-row">
-        <button class="btn-main" onclick="askQuestion('mixed')">Şimdi Test Et (Karışık)</button>
-        <button class="btn-ghost" onclick="askQuestion('artikel-only')">Sadece Artikel Testi (der/die/das)</button>
+        <button class="btn-main" onclick="askQuestion('artikel-only')">Artikel Testi (der/die/das)</button>
+        <button class="btn-ghost" onclick="askQuestion('noun-quiz')">İsim Testi (Türkçesi)</button>
         <button class="btn-ghost" onclick="askQuestion('verb-quiz')">Fiil Testi (Türkçesi)</button>
         <button class="btn-ghost" onclick="askQuestion('adj-quiz')">Sıfat Testi (Türkçesi)</button>
       </div>
@@ -670,8 +670,8 @@
 
       <p class="empty-note" style="margin-top:18px;">
         Not: Bu araç bir tarayıcı sekmesi olarak çalışır, gerçek bir arka plan uygulaması değildir.
-        Karışık ve Sadece Artikel testleri isim listesini, Fiil/Sıfat testleri kendi listelerini kullanır.
-        Sadece Artikel Testi'nde bilgisayarda <strong>Enter</strong> tuşuyla bir sonraki soruya hızlıca geçebilirsin.
+        Artikel Testi ve İsim Testi kendi isim listesini; Fiil/Sıfat testleri kendi listelerini kullanır.
+        Artikel Testi'nde bilgisayarda <strong>Enter</strong> tuşuyla bir sonraki soruya hızlıca geçebilirsin.
         Başka bir sekmedeyken otomatik soru gelirse, sekme başlığı yanıp söner ve (izin verirsen) bildirim gösterilir.
       </p>
     </section>
@@ -1909,10 +1909,8 @@ function speakCurrentWord(){
   if(!currentQ) return;
   if(currentQ.mode === "artikel-plural"){
     speak(currentQ.word.plural);
-  } else if(currentQ.category === "verb" || currentQ.category === "adj"){
-    speak(getItemKey(currentQ.word, currentQ.category));
   } else {
-    speak(currentQ.word.word);
+    speak(getItemKey(currentQ.word, currentQ.category));
   }
 }
 
@@ -1958,6 +1956,13 @@ function buildSession(testMode){
     }
     return shuffleArray(session);
   }
+  if(testMode === "noun-quiz"){
+    let session = shuffleArray(words).map(w => ({word:w, mode:"meaning", category:"noun-meaning", answered:false}));
+    while(session.length < 15 && words.length > 0){
+      session = session.concat(shuffleArray(words).map(w => ({word:w, mode:"meaning", category:"noun-meaning", answered:false})));
+    }
+    return shuffleArray(session);
+  }
 
   const pickMode = (w) => {
     if(testMode === "artikel-only"){
@@ -1976,7 +1981,7 @@ function buildSession(testMode){
 }
 
 function askQuestion(testMode){
-  testMode = testMode || "mixed";
+  testMode = testMode || "artikel-only";
   if(testMode === "verb-quiz" && verbs.length === 0){
     alert("Önce fiil listesine birkaç fiil ekle.");
     return;
@@ -1985,7 +1990,7 @@ function askQuestion(testMode){
     alert("Önce sıfat listesine birkaç sıfat ekle.");
     return;
   }
-  if((testMode === "mixed" || testMode === "artikel-only") && words.length === 0){
+  if((testMode === "mixed" || testMode === "artikel-only" || testMode === "noun-quiz") && words.length === 0){
     alert("Önce isim listesine birkaç kelime ekle.");
     return;
   }
@@ -2020,7 +2025,7 @@ function showSessionQuestion(){
     const optionsDiv = document.getElementById("qOptions");
     optionsDiv.style.display = "flex";
     optionsDiv.innerHTML = "";
-    const list = category === "verb" ? verbs : adjectives;
+    const list = category === "verb" ? verbs : category === "adj" ? adjectives : words;
     const options = buildMeaningOptions(w, list);
     const correct = w.tr || "?";
     options.forEach(opt=>{
