@@ -594,6 +594,34 @@
       </div>
       <div class="plural-note">Kural: bütün çoğullar (Plural) her zaman <strong>die</strong> alır — die Tische, die Kinder, die Autos.</div>
     </section>
+
+    <section class="panel">
+      <h2>Nominativ &amp; Akkusativ — hızlı referans</h2>
+      <table>
+        <thead><tr><th></th><th>Nominativ</th><th>Akkusativ</th></tr></thead>
+        <tbody>
+          <tr class="row-der"><td class="art-der">der</td><td>der Mann / ein Mann</td><td>den Mann / einen Mann</td></tr>
+          <tr class="row-die"><td class="art-die">die</td><td>die Frau / eine Frau</td><td>die Frau / eine Frau</td></tr>
+          <tr class="row-das"><td class="art-das">das</td><td>das Kind / ein Kind</td><td>das Kind / ein Kind</td></tr>
+          <tr><td>Plural</td><td>die Leute</td><td>die Leute</td></tr>
+        </tbody>
+      </table>
+      <div class="plural-note">Kural: Sadece eril (<strong>der → den</strong>, <strong>ein → einen</strong>) değişir. Dişil (die), nötr (das) ve çoğulda Nominativ ile Akkusativ aynıdır. <br>Örnek cümle: "<strong>Der</strong> Mann ist hier." (Nominativ — özne) / "Ich sehe <strong>den</strong> Mann." (Akkusativ — nesne)</div>
+    </section>
+
+    <section class="panel">
+      <h2>ein/eine &amp; kein/keine — hızlı referans</h2>
+      <table>
+        <thead><tr><th></th><th>ein / eine (olumlu)</th><th>kein / keine (olumsuz)</th></tr></thead>
+        <tbody>
+          <tr class="row-der"><td class="art-der">der</td><td>ein Mann</td><td>kein Mann</td></tr>
+          <tr class="row-die"><td class="art-die">die</td><td>eine Frau</td><td>keine Frau</td></tr>
+          <tr class="row-das"><td class="art-das">das</td><td>ein Kind</td><td>kein Kind</td></tr>
+          <tr><td>Plural</td><td>— (yok)</td><td>keine Bücher</td></tr>
+        </tbody>
+      </table>
+      <div class="plural-note">Kural: <strong>ein/eine</strong> sadece tekil kelimelerde vardır, çoğulda hiç kullanılmaz (çoğul artikelsiz söylenir: "Ich habe Bücher"). <strong>kein/keine</strong> ise hem tekilde hem çoğulda kullanılır — çoğulda her zaman <strong>keine</strong> olur (Ich habe keine Bücher).</div>
+    </section>
   </div>
 
   <div id="verbenSection" style="display:none;">
@@ -615,6 +643,23 @@
           <tbody id="verbTableBody"></tbody>
         </table>
       </div>
+    </section>
+
+    <section class="panel">
+      <h2>nicht ile Olumsuzluk — hızlı referans</h2>
+      <div class="rule-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="rule-card der">
+          <div class="title">Fiil + nicht</div>
+          <div class="sfx">nicht, genelde cümlenin <strong>sonuna</strong> gelir.</div>
+          <div class="ex">Ich komme nicht.<br>Er versteht das nicht.<br>Wir arbeiten heute nicht.</div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">nicht + Sıfat</div>
+          <div class="sfx">nicht, sıfatın hemen <strong>önüne</strong> gelir.</div>
+          <div class="ex">Das ist nicht teuer.<br>Sie ist nicht müde.<br>Das Buch ist nicht interessant.</div>
+        </div>
+      </div>
+      <div class="plural-note">Kural: Bir <strong>fiili/eylemi</strong> olumsuzluyorsan nicht sona gider; bir <strong>sıfatı/özelliği</strong> olumsuzluyorsan nicht o sıfatın hemen önüne gelir.</div>
     </section>
   </div>
 
@@ -1767,8 +1812,7 @@ function renderMistakeStats(){
   const entries = Object.entries(wordStats)
     .map(([word, s]) => ({word, ...s, total: s.correct + s.wrong}))
     .filter(e => e.total > 0)
-    .sort((a,b) => b.wrong - a.wrong || b.total - a.total)
-    .slice(0, 10);
+    .sort((a,b) => b.wrong - a.wrong || b.total - a.total);
 
   if(entries.length === 0){
     tbody.innerHTML = `<tr><td colspan="4" class="no-match">Henüz test verisi yok.</td></tr>`;
@@ -1777,9 +1821,23 @@ function renderMistakeStats(){
 
   tbody.innerHTML = entries.map(e => {
     const pct = Math.round((e.correct / e.total) * 100);
-    return `<tr><td>${escapeHtml(e.word)}</td><td>${e.correct}</td><td>${e.wrong}</td><td>%${pct}</td></tr>`;
+    return `<tr><td class="word-cell" data-word="${escapeHtml(e.word)}">${escapeHtml(e.word)}</td><td>${e.correct}</td><td>${e.wrong}</td><td>%${pct}</td></tr>`;
   }).join("");
 }
+
+function reviewMistakeWord(wordText){
+  let idx = words.findIndex(w => w.word === wordText);
+  if(idx !== -1){ openExampleModal("word", idx); return; }
+  idx = verbs.findIndex(v => v.verb === wordText);
+  if(idx !== -1){ openExampleModal("verb", idx); return; }
+  idx = adjectives.findIndex(a => a.adj === wordText);
+  if(idx !== -1){ openExampleModal("adj", idx); return; }
+}
+
+document.getElementById("mistakeTableBody").addEventListener("click", (e)=>{
+  const cell = e.target.closest(".word-cell");
+  if(cell && cell.dataset.word){ reviewMistakeWord(cell.dataset.word); }
+});
 
 function exportStatsCSV(){
   const entries = Object.entries(wordStats).map(([word, s]) => ({word, ...s}));
