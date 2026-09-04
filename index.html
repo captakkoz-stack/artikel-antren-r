@@ -238,6 +238,9 @@
     font-size:14px;
     padding:2px 5px;
     color:var(--teal);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
   }
   .speak-btn:hover{color:var(--deep);}
   .speak-cell{
@@ -748,7 +751,7 @@
   <div class="add-card">
     <h3 class="example-title-row">
       <span id="exampleTitle">Tisch</span>
-      <button class="qspeak-btn" id="exampleSpeakBtn">🔊</button>
+      <button class="qspeak-btn" id="exampleSpeakBtn"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button>
     </h3>
     <p class="example-de" id="exampleSentence"></p>
     <p class="example-tr" id="exampleTranslation"></p>
@@ -785,7 +788,7 @@
       <span class="result-icon" id="resultIcon"></span>
     </div>
     <div class="qtool-row">
-      <button class="qspeak-btn" onclick="speakCurrentWord()" title="Dinle">🔊</button>
+      <button class="qspeak-btn" onclick="speakCurrentWord()" title="Dinle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button>
       <button class="hint-btn" onclick="toggleHint()">💡 İpucu</button>
     </div>
     <div class="hint-text" id="hintText"></div>
@@ -1228,9 +1231,9 @@ function renderWords(){
       <td class="art-${artClass}">${escapeHtml(w.artikel)}</td>
       <td class="emoji-cell">${escapeHtml(w.emoji)}</td>
       <td class="word-cell" data-idx="${realIdx}">${wordDisplay}</td>
-      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" data-speak="word" title="Dinle">🔊</button></td>
+      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" data-speak="word" title="Dinle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button></td>
       <td>${pluralSpan}</td>
-      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" data-speak="plural" title="Çoğulu dinle">🔊</button></td>
+      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" data-speak="plural" title="Çoğulu dinle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button></td>
       <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
       <td><button class="del" data-idx="${realIdx}" data-del="word">sil</button></td>
     `;
@@ -1361,7 +1364,7 @@ function renderVerbs(){
     tr.innerHTML = `
       <td class="emoji-cell">${escapeHtml(v.emoji)}</td>
       <td class="word-cell" data-idx="${realIdx}">${verbDisplay}</td>
-      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle">🔊</button></td>
+      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button></td>
       <td><button class="conj-btn" data-idx="${realIdx}">çekim</button></td>
       <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
       <td><button class="del" data-idx="${realIdx}">sil</button></td>
@@ -1434,7 +1437,7 @@ function openConjModal(idx){
     tbody.innerHTML = rows.map(([pron, form, spokenPron]) => {
       const phrase = form ? (spokenPron + " " + form) : "";
       const speakCell = form
-        ? `<button class="speak-btn" data-phrase="${escapeHtml(phrase)}">🔊</button>`
+        ? `<button class="speak-btn" data-phrase="${escapeHtml(phrase)}"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button>`
         : "";
       return `<tr><td>${escapeHtml(pron)}</td><td>${escapeHtml(form || "—")}</td><td class="speak-cell">${speakCell}</td></tr>`;
     }).join("");
@@ -1560,7 +1563,7 @@ function renderAdjectives(){
     tr.innerHTML = `
       <td class="emoji-cell">${escapeHtml(a.emoji)}</td>
       <td class="word-cell" data-idx="${realIdx}">${adjDisplay}</td>
-      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle">🔊</button></td>
+      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button></td>
       <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
       <td><button class="del" data-idx="${realIdx}">sil</button></td>
     `;
