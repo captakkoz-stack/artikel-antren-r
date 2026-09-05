@@ -369,6 +369,24 @@
   }
   .footer-tools{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
   .test-btn-row{display:flex;gap:8px;flex-wrap:wrap;}
+  .group-label{
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-size:11px;
+    color:#888;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    font-weight:700;
+    margin:14px 0 6px;
+  }
+  .group-label:first-child{margin-top:0;}
+  .btn-grid{display:grid; gap:8px;}
+  .btn-grid.grid-3{grid-template-columns: repeat(3, 1fr);}
+  .btn-grid.grid-2{grid-template-columns: repeat(2, 1fr);}
+  .btn-grid button{width:100%;}
+  @media (max-width:600px){
+    .btn-grid.grid-3{grid-template-columns: 1fr;}
+    .btn-grid.grid-2{grid-template-columns: 1fr;}
+  }
   .btn-review{
     background:var(--coral);
     color:#fff;
@@ -718,17 +736,31 @@
       </div>
       <div class="countdown" id="countdownText"></div>
 
-      <div class="test-btn-row">
+      <div class="group-label">İsim Testleri</div>
+      <div class="btn-grid grid-3">
         <button class="btn-main" onclick="askQuestion('artikel-only')">Artikel Testi (der/die/das)</button>
         <button class="btn-ghost" onclick="askQuestion('noun-quiz')">İsim Testi (Türkçesi)</button>
         <button class="btn-ghost" onclick="askQuestion('plural-only')">Çoğul Testi (yaz)</button>
+      </div>
+
+      <div class="group-label">Kelime Bilgisi</div>
+      <div class="btn-grid grid-2">
         <button class="btn-ghost" onclick="askQuestion('verb-quiz')">Fiil Testi (Türkçesi)</button>
         <button class="btn-ghost" onclick="askQuestion('adj-quiz')">Sıfat Testi (Türkçesi)</button>
+      </div>
+
+      <div class="group-label">Karışık &amp; Pratik</div>
+      <div class="btn-grid grid-2">
         <button class="btn-ghost" onclick="askQuestion('sentence-fill')">📝 Cümle Tamamlama (Karışık)</button>
         <button class="btn-ghost" onclick="askQuestion('smart-mixed')">🎲 Genel Karışık Sınav (Akıllı)</button>
-        <button class="btn-review" onclick="askQuestion('review-mistakes')">🔁 Yanlışlarımı Tekrar Et</button>
       </div>
-      <button class="btn-ghost" onclick="resetStats()" style="margin-top:8px;">İstatistiği Sıfırla</button>
+
+      <div class="group-label">Tekrar</div>
+      <button class="btn-review" onclick="askQuestion('review-mistakes')" style="width:100%;">🔁 Yanlışlarımı Tekrar Et</button>
+
+      <div style="margin-top:16px; text-align:right;">
+        <button class="btn-ghost" onclick="resetStats()" style="font-size:12px; padding:6px 12px;">İstatistiği Sıfırla</button>
+      </div>
 
       <p class="empty-note" style="margin-top:18px;">
         Not: Bu araç bir tarayıcı sekmesi olarak çalışır, gerçek bir arka plan uygulaması değildir.
