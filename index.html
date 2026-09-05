@@ -369,6 +369,18 @@
   }
   .footer-tools{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
   .test-btn-row{display:flex;gap:8px;flex-wrap:wrap;}
+  .btn-review{
+    background:var(--coral);
+    color:#fff;
+    border:none;
+    border-radius:2px;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-weight:600;
+    font-size:13.5px;
+    padding:9px 16px;
+    cursor:pointer;
+  }
+  .btn-review:hover{background:#9a4023;}
   .rule-grid{
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -711,6 +723,7 @@
         <button class="btn-ghost" onclick="askQuestion('plural-only')">Çoğul Testi (yaz)</button>
         <button class="btn-ghost" onclick="askQuestion('verb-quiz')">Fiil Testi (Türkçesi)</button>
         <button class="btn-ghost" onclick="askQuestion('adj-quiz')">Sıfat Testi (Türkçesi)</button>
+        <button class="btn-review" onclick="askQuestion('review-mistakes')">🔁 Yanlışlarımı Tekrar Et</button>
       </div>
       <button class="btn-ghost" onclick="resetStats()" style="margin-top:8px;">İstatistiği Sıfırla</button>
 
@@ -2009,25 +2022,96 @@ function buildMeaningOptions(item, list){
   return shuffleArray([correct, ...distractors]);
 }
 
+const RECENT_CYCLE_MS = 2 * 60 * 60 * 1000; // 2 saat
+let recentAsked = {};
+let currentTestMode = null;
+
+function loadRecentAsked(){
+  try{
+    const raw = localStorage.getItem("artikel_recent_asked");
+    recentAsked = raw ? JSON.parse(raw) : {};
+  }catch(e){ recentAsked = {}; }
+}
+
+function saveRecentAsked(){
+  if(!storageAvailable) return;
+  try{ localStorage.setItem("artikel_recent_asked", JSON.stringify(recentAsked)); }catch(e){}
+}
+
+function getUnseenPool(cycleKey, fullList, keyFn){
+  const now = Date.now();
+  let entry = recentAsked[cycleKey];
+  if(!entry || (now - entry.ts) > RECENT_CYCLE_MS){
+    entry = { ts: now, seen: [] };
+    recentAsked[cycleKey] = entry;
+  }
+  const seenSet = new Set(entry.seen);
+  let pool = fullList.filter(item => !seenSet.has(keyFn(item)));
+  if(pool.length === 0){
+    entry.ts = now;
+    entry.seen = [];
+    pool = fullList.slice();
+  }
+  return pool;
+}
+
+function markAsked(cycleKey, items, keyFn){
+  let entry = recentAsked[cycleKey];
+  if(!entry) entry = recentAsked[cycleKey] = {ts: Date.now(), seen: []};
+  const seenSet = new Set(entry.seen);
+  items.forEach(it => seenSet.add(keyFn(it)));
+  entry.seen = Array.from(seenSet);
+  saveRecentAsked();
+}
+
+const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only"];
+
+function markShownWord(word, category){
+  if(!currentTestMode || !CYCLE_MODES.includes(currentTestMode)) return;
+  const keyFn = category === "verb" ? (x => x.verb) : category === "adj" ? (x => x.adj) : (x => x.word);
+  markAsked(currentTestMode, [word], keyFn);
+}
+
 function buildSession(testMode){
+  if(testMode === "review-mistakes"){
+    const wrongKeys = Object.entries(wordStats).filter(([k,s]) => s.wrong > 0).map(([k]) => k);
+    let pool = [];
+    wrongKeys.forEach(key => {
+      const wIdx = words.findIndex(w => w.word === key);
+      if(wIdx !== -1){ pool.push({word: words[wIdx], mode:"artikel", category:"noun"}); return; }
+      const vIdx = verbs.findIndex(v => v.verb === key);
+      if(vIdx !== -1){ pool.push({word: verbs[vIdx], mode:"meaning", category:"verb"}); return; }
+      const aIdx = adjectives.findIndex(a => a.adj === key);
+      if(aIdx !== -1){ pool.push({word: adjectives[aIdx], mode:"meaning", category:"adj"}); return; }
+    });
+    if(pool.length === 0) return [];
+    let session = shuffleArray(pool).map(q => ({...q, answered:false}));
+    while(session.length < 15){
+      session = session.concat(shuffleArray(pool).map(q => ({...q, answered:false})));
+    }
+    return shuffleArray(session);
+  }
   if(testMode === "verb-quiz"){
-    let session = shuffleArray(verbs).map(v => ({word:v, mode:"meaning", category:"verb", answered:false}));
-    while(session.length < 15 && verbs.length > 0){
-      session = session.concat(shuffleArray(verbs).map(v => ({word:v, mode:"meaning", category:"verb", answered:false})));
+    const pool = getUnseenPool(testMode, verbs, v => v.verb);
+    let session = shuffleArray(pool).map(v => ({word:v, mode:"meaning", category:"verb", answered:false}));
+    while(session.length < 15 && pool.length > 0){
+      session = session.concat(shuffleArray(pool).map(v => ({word:v, mode:"meaning", category:"verb", answered:false})));
     }
     return shuffleArray(session);
   }
   if(testMode === "adj-quiz"){
-    let session = shuffleArray(adjectives).map(a => ({word:a, mode:"meaning", category:"adj", answered:false}));
-    while(session.length < 15 && adjectives.length > 0){
-      session = session.concat(shuffleArray(adjectives).map(a => ({word:a, mode:"meaning", category:"adj", answered:false})));
+    const pool = getUnseenPool(testMode, adjectives, a => a.adj);
+    let session = shuffleArray(pool).map(a => ({word:a, mode:"meaning", category:"adj", answered:false}));
+    while(session.length < 15 && pool.length > 0){
+      session = session.concat(shuffleArray(pool).map(a => ({word:a, mode:"meaning", category:"adj", answered:false})));
     }
     return shuffleArray(session);
   }
   if(testMode === "noun-quiz"){
-    let session = shuffleArray(words).map(w => ({word:w, mode:"meaning", category:"noun-meaning", answered:false}));
-    while(session.length < 15 && words.length > 0){
-      session = session.concat(shuffleArray(words).map(w => ({word:w, mode:"meaning", category:"noun-meaning", answered:false})));
+    const pool = getUnseenPool(testMode, words, w => w.word);
+    let session = shuffleArray(pool).map(w => ({word:w, mode:"meaning", category:"noun-meaning", answered:false}));
+    while(session.length < 15 && pool.length > 0){
+      session = session.concat(shuffleArray(pool).map(w => ({word:w, mode:"meaning", category:"noun-meaning", answered:false})));
     }
     return shuffleArray(session);
   }
@@ -2035,20 +2119,18 @@ function buildSession(testMode){
   if(testMode === "plural-only"){
     const pluralable = words.filter(w => w.plural && w.plural !== "—");
     if(pluralable.length === 0) return [];
-    let session = shuffleArray(pluralable).map(w => ({word:w, mode:"plural", category:"noun", answered:false}));
-    while(session.length < 15){
-      session = session.concat(shuffleArray(pluralable).map(w => ({word:w, mode:"plural", category:"noun", answered:false})));
+    const pool = getUnseenPool(testMode, pluralable, w => w.word);
+    let session = shuffleArray(pool).map(w => ({word:w, mode:"plural", category:"noun", answered:false}));
+    while(session.length < 15 && pool.length > 0){
+      session = session.concat(shuffleArray(pool).map(w => ({word:w, mode:"plural", category:"noun", answered:false})));
     }
     return shuffleArray(session);
   }
 
-  const pickMode = (w) => {
-    if(testMode === "artikel-only") return "artikel";
-    return Math.random()<0.5 ? "artikel" : "plural";
-  };
-  let session = shuffleArray(words).map(w => ({word:w, mode: pickMode(w), category:"noun", answered:false}));
-  while(session.length < 15){
-    const extra = shuffleArray(words).map(w => ({word:w, mode: pickMode(w), category:"noun", answered:false}));
+  const pool = getUnseenPool(testMode, words, w => w.word);
+  let session = shuffleArray(pool).map(w => ({word:w, mode:"artikel", category:"noun", answered:false}));
+  while(session.length < 15 && pool.length > 0){
+    const extra = shuffleArray(pool).map(w => ({word:w, mode:"artikel", category:"noun", answered:false}));
     session = session.concat(extra);
   }
   return shuffleArray(session);
@@ -2056,6 +2138,13 @@ function buildSession(testMode){
 
 function askQuestion(testMode){
   testMode = testMode || "artikel-only";
+  if(testMode === "review-mistakes"){
+    const hasWrong = Object.values(wordStats).some(s => s.wrong > 0);
+    if(!hasWrong){
+      alert("Henüz hata yaptığın bir kelime yok — önce birkaç test çöz, sonra buradan tekrar edebilirsin.");
+      return;
+    }
+  }
   if(testMode === "verb-quiz" && verbs.length === 0){
     alert("Önce fiil listesine birkaç fiil ekle.");
     return;
@@ -2070,6 +2159,7 @@ function askQuestion(testMode){
   }
   sessionQuestions = buildSession(testMode);
   sessionIndex = 0;
+  currentTestMode = testMode;
   document.getElementById("quizOverlay").classList.add("show");
   showSessionQuestion();
 }
@@ -2078,6 +2168,7 @@ function showSessionQuestion(){
   currentQ = sessionQuestions[sessionIndex];
   const w = currentQ.word;
   const category = currentQ.category || "noun";
+  markShownWord(w, category);
 
   document.getElementById("qFeedback").textContent = "";
   const resIcon = document.getElementById("resultIcon");
@@ -2294,6 +2385,7 @@ document.addEventListener("keydown", (e)=>{
   nextQuestion();
 });
 
+loadRecentAsked();
 loadData();
 renderWords();
 renderVerbs();
