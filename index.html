@@ -422,6 +422,7 @@
   }
   .quiz-card .qemoji{font-size:44px;margin-bottom:6px;}
   .quiz-card .qword{font-size:28px;}
+  .quiz-card .qword.qword-sentence{font-size:18px;line-height:1.5;}
   .qword-row{
     display:flex;
     align-items:center;
@@ -723,13 +724,15 @@
         <button class="btn-ghost" onclick="askQuestion('plural-only')">Çoğul Testi (yaz)</button>
         <button class="btn-ghost" onclick="askQuestion('verb-quiz')">Fiil Testi (Türkçesi)</button>
         <button class="btn-ghost" onclick="askQuestion('adj-quiz')">Sıfat Testi (Türkçesi)</button>
+        <button class="btn-ghost" onclick="askQuestion('sentence-fill')">📝 Cümle Tamamlama (Karışık)</button>
+        <button class="btn-ghost" onclick="askQuestion('smart-mixed')">🎲 Genel Karışık Sınav (Akıllı)</button>
         <button class="btn-review" onclick="askQuestion('review-mistakes')">🔁 Yanlışlarımı Tekrar Et</button>
       </div>
       <button class="btn-ghost" onclick="resetStats()" style="margin-top:8px;">İstatistiği Sıfırla</button>
 
       <p class="empty-note" style="margin-top:18px;">
         Not: Bu araç bir tarayıcı sekmesi olarak çalışır, gerçek bir arka plan uygulaması değildir.
-        Artikel Testi ve İsim Testi kendi isim listesini; Fiil/Sıfat testleri kendi listelerini kullanır.
+        Artikel Testi ve İsim Testi kendi isim listesini; Fiil/Sıfat testleri kendi listelerini kullanır. Genel Karışık Sınav, isim/fiil/sıfat karışık 20 soruluk bir test hazırlar ve çok hata yaptığın kelimeleri daha sık sorar.
         Artikel Testi'nde bilgisayarda <strong>Enter</strong> tuşuyla bir sonraki soruya hızlıca geçebilirsin.
         Başka bir sekmedeyken otomatik soru gelirse, sekme başlığı yanıp söner ve (izin verirsen) bildirim gösterilir.
       </p>
@@ -1999,8 +2002,12 @@ function speak(text){
 
 function speakCurrentWord(){
   if(!currentQ) return;
-  if(currentQ.mode === "artikel-plural"){
+  if(currentQ.mode === "sentence"){
+    speak(currentQ.sentence);
+  } else if(currentQ.mode === "artikel-plural"){
     speak(currentQ.word.plural);
+  } else if(currentQ.category === "noun-meaning"){
+    speak(currentQ.word.artikel + " " + currentQ.word.word);
   } else {
     speak(getItemKey(currentQ.word, currentQ.category));
   }
@@ -2031,6 +2038,59 @@ function buildMeaningOptions(item, list){
     if(d !== correct && !distractors.includes(d)) distractors.push(d);
   }
   return shuffleArray([correct, ...distractors]);
+}
+
+function escapeRegex(str){
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function blankSentence(sentence, target){
+  const re = new RegExp("\\b" + escapeRegex(target) + "\\b");
+  return sentence.replace(re, "_____");
+}
+
+function buildSentenceFillPool(){
+  const pool = [];
+  words.forEach(w => {
+    if(w.beispiel && new RegExp("\\b" + escapeRegex(w.word) + "\\b").test(w.beispiel)){
+      pool.push({kind:"word", category:"noun", item:w, target:w.word, sentence:w.beispiel, translation:w.beispielTr, emoji:w.emoji});
+      const artikelMatch = w.beispiel.match(new RegExp("\\b(Der|Die|Das|der|die|das)\\s+" + escapeRegex(w.word) + "\\b"));
+      if(artikelMatch){
+        pool.push({kind:"artikel", category:"noun", item:w, target:artikelMatch[1], correctArtikel:w.artikel, sentence:w.beispiel, translation:w.beispielTr, emoji:w.emoji});
+      }
+    }
+  });
+  adjectives.forEach(a => {
+    if(a.beispiel && new RegExp("\\b" + escapeRegex(a.adj) + "\\b").test(a.beispiel)){
+      pool.push({kind:"word", category:"adj", item:a, target:a.adj, sentence:a.beispiel, translation:a.beispielTr, emoji:a.emoji});
+    }
+  });
+  verbs.forEach(v => {
+    if(!v.beispiel) return;
+    const candidates = [];
+    if(v.conj){ Object.values(v.conj).forEach(f => { if(f) candidates.push(f); }); }
+    candidates.push(v.verb);
+    const sorted = candidates.slice().sort((a,b) => b.length - a.length);
+    let found = null;
+    for(const c of sorted){
+      if(new RegExp("\\b" + escapeRegex(c) + "\\b").test(v.beispiel)){ found = c; break; }
+    }
+    if(found){
+      pool.push({kind:"word", category:"verb", item:v, target:found, sentence:v.beispiel, translation:v.beispielTr, emoji:v.emoji});
+    }
+  });
+  return pool;
+}
+
+function buildBlankOptions(target, category, fullPool){
+  const sameCat = fullPool.filter(p => p.category === category && p.kind === "word" && p.target !== target);
+  const shuffledPool = shuffleArray(sameCat.map(p => p.target));
+  const distractors = [];
+  for(const d of shuffledPool){
+    if(distractors.length >= 2) break;
+    if(!distractors.includes(d)) distractors.push(d);
+  }
+  return shuffleArray([target, ...distractors]);
 }
 
 const RECENT_CYCLE_MS = 2 * 60 * 60 * 1000; // 2 saat
@@ -2075,7 +2135,7 @@ function markAsked(cycleKey, items, keyFn){
   saveRecentAsked();
 }
 
-const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only"];
+const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "smart-mixed"];
 
 function markShownWord(word, category){
   if(!currentTestMode || !CYCLE_MODES.includes(currentTestMode)) return;
@@ -2083,7 +2143,71 @@ function markShownWord(word, category){
   markAsked(currentTestMode, [word], keyFn);
 }
 
+function buildSmartMixedPool(){
+  const pool = [];
+  words.forEach(w => {
+    const wrongCount = (wordStats[w.word] && wordStats[w.word].wrong) || 0;
+    pool.push({category:"noun", item:w, weight: 1 + wrongCount * 3});
+  });
+  verbs.forEach(v => {
+    const wrongCount = (wordStats[v.verb] && wordStats[v.verb].wrong) || 0;
+    pool.push({category:"verb", item:v, weight: 1 + wrongCount * 3});
+  });
+  adjectives.forEach(a => {
+    const wrongCount = (wordStats[a.adj] && wordStats[a.adj].wrong) || 0;
+    pool.push({category:"adj", item:a, weight: 1 + wrongCount * 3});
+  });
+  return pool;
+}
+
+function weightedSample(pool, n){
+  const withKeys = pool.map(p => ({...p, key: Math.pow(Math.random(), 1 / p.weight)}));
+  withKeys.sort((a,b) => b.key - a.key);
+  return withKeys.slice(0, Math.min(n, withKeys.length));
+}
+
 function buildSession(testMode){
+  if(testMode === "smart-mixed"){
+    const fullPool = buildSmartMixedPool();
+    const keyOfPoolItem = (p) => p.category === "verb" ? p.item.verb : p.category === "adj" ? p.item.adj : p.item.word;
+    const now = Date.now();
+    let entry = recentAsked["smart-mixed"];
+    if(!entry || (now - entry.ts) > RECENT_CYCLE_MS){
+      entry = { ts: now, seen: [] };
+      recentAsked["smart-mixed"] = entry;
+    }
+    const seenSet = new Set(entry.seen);
+    let unseenPool = fullPool.filter(p => !seenSet.has(keyOfPoolItem(p)));
+    if(unseenPool.length === 0){
+      entry.ts = now;
+      entry.seen = [];
+      unseenPool = fullPool.slice();
+    }
+    const picked = weightedSample(unseenPool, 20);
+    let session = picked.map(p => {
+      if(p.category === "noun"){
+        const hasPlural = p.item.plural && p.item.plural !== "—";
+        const mode = (hasPlural && Math.random() < 0.5) ? "plural" : "artikel";
+        return {word:p.item, mode, category:"noun", answered:false};
+      } else if(p.category === "verb"){
+        return {word:p.item, mode:"meaning", category:"verb", answered:false};
+      } else {
+        return {word:p.item, mode:"meaning", category:"adj", answered:false};
+      }
+    });
+    return shuffleArray(session);
+  }
+  if(testMode === "sentence-fill"){
+    const pool = buildSentenceFillPool();
+    if(pool.length === 0) return [];
+    const withOptions = pool.map(p => p.kind === "artikel" ? {...p} : {...p, options: buildBlankOptions(p.target, p.category, pool)});
+    const toSessionQ = (q) => ({word:q.item, category:q.category, mode:"sentence", kind:q.kind, target:q.target, correctArtikel:q.correctArtikel, sentence:q.sentence, translation:q.translation, emoji:q.emoji, options:q.options, answered:false});
+    let session = shuffleArray(withOptions).map(toSessionQ);
+    while(session.length < 15){
+      session = session.concat(shuffleArray(withOptions).map(toSessionQ));
+    }
+    return shuffleArray(session);
+  }
   if(testMode === "review-mistakes"){
     const wrongKeys = Object.entries(wordStats).filter(([k,s]) => s.wrong > 0).map(([k]) => k);
     let pool = [];
@@ -2168,6 +2292,10 @@ function askQuestion(testMode){
     alert("Önce isim listesine birkaç kelime ekle.");
     return;
   }
+  if(testMode === "sentence-fill" && buildSentenceFillPool().length === 0){
+    alert("Cümle tamamlama testi için örnek cümlesi olan kelime bulunamadı.");
+    return;
+  }
   sessionQuestions = buildSession(testMode);
   sessionIndex = 0;
   currentTestMode = testMode;
@@ -2192,11 +2320,52 @@ function showSessionQuestion(){
   document.getElementById("nextBtn").disabled = sessionIndex === sessionQuestions.length - 1;
   document.getElementById("qConjBtn").style.display = (category === "verb") ? "inline-flex" : "none";
 
+  if(currentQ.mode === "sentence"){
+    const qw = document.getElementById("qWord");
+    document.getElementById("qPluralInput").style.display = "none";
+    document.getElementById("umlautRow").style.display = "none";
+    const optionsDiv = document.getElementById("qOptions");
+    optionsDiv.style.display = "flex";
+    optionsDiv.innerHTML = "";
+    qw.style.color = "var(--ink)";
+    qw.classList.add("qword-sentence");
+
+    if(currentQ.kind === "artikel"){
+      document.getElementById("qType").textContent = "CÜMLEDE ARTİKEL NE?";
+      qw.textContent = currentQ.sentence.replace(currentQ.target, "_____");
+      ["der","die","das"].forEach(opt=>{
+        const b = document.createElement("button");
+        b.className = "opt-btn opt-" + opt;
+        b.textContent = opt;
+        b.onclick = () => checkSentenceArtikelAnswer(opt, b);
+        optionsDiv.appendChild(b);
+      });
+      return;
+    }
+
+    document.getElementById("qType").textContent = "CÜMLEYİ TAMAMLA";
+    qw.textContent = blankSentence(currentQ.sentence, currentQ.target);
+    currentQ.options.forEach(opt=>{
+      const b = document.createElement("button");
+      b.className = "opt-btn opt-neutral";
+      b.textContent = opt;
+      b.onclick = () => checkSentenceAnswer(opt, b);
+      optionsDiv.appendChild(b);
+    });
+    return;
+  }
+  document.getElementById("qWord").classList.remove("qword-sentence");
+
   if(currentQ.mode === "meaning"){
     document.getElementById("qType").textContent = "TÜRKÇESİ NE?";
     const qw = document.getElementById("qWord");
-    qw.textContent = getItemKey(w, category);
-    qw.style.color = "var(--ink)";
+    if(category === "noun-meaning"){
+      qw.textContent = w.artikel + " " + w.word;
+      qw.style.color = "var(--" + w.artikel + ")";
+    } else {
+      qw.textContent = getItemKey(w, category);
+      qw.style.color = "var(--ink)";
+    }
     document.getElementById("qPluralInput").style.display = "none";
     document.getElementById("umlautRow").style.display = "none";
     const optionsDiv = document.getElementById("qOptions");
@@ -2249,6 +2418,57 @@ function showSessionQuestion(){
     document.getElementById("umlautRow").style.display = "flex";
     document.getElementById("qPluralAnswer").value = "";
     setTimeout(()=>document.getElementById("qPluralAnswer").focus(), 50);
+  }
+}
+
+function checkSentenceArtikelAnswer(chosen, btnEl){
+  const correct = currentQ.correctArtikel;
+  const allBtns = document.querySelectorAll("#qOptions .opt-btn");
+  allBtns.forEach(b=>{
+    b.onclick = null;
+    if(b.textContent === correct) b.classList.add("correct");
+    if(b === btnEl && chosen !== correct) b.classList.add("wrong");
+  });
+  const isCorrect = chosen === correct;
+  showResultIcon(isCorrect);
+  const key = getItemKey(currentQ.word, currentQ.category);
+  if(isCorrect){
+    document.getElementById("qFeedback").textContent = "Doğru! " + currentQ.sentence;
+  } else {
+    const reason = getArtikelReason(currentQ.word.word, correct, false);
+    document.getElementById("qFeedback").textContent = "Doğrusu: \"" + correct + "\" — " + currentQ.sentence + " — " + reason;
+  }
+  if(!currentQ.answered){
+    currentQ.answered = true;
+    if(isCorrect) stats.correct++; else stats.wrong++;
+    recordWordStat(key, isCorrect);
+    saveStats();
+    updateStatDisplay();
+  }
+}
+
+function checkSentenceAnswer(chosen, btnEl){
+  const correct = currentQ.target;
+  const allBtns = document.querySelectorAll("#qOptions .opt-btn");
+  allBtns.forEach(b=>{
+    b.onclick = null;
+    if(b.textContent === correct) b.classList.add("correct");
+    if(b === btnEl && chosen !== correct) b.classList.add("wrong");
+  });
+  const isCorrect = chosen === correct;
+  showResultIcon(isCorrect);
+  const key = getItemKey(currentQ.word, currentQ.category);
+  if(isCorrect){
+    document.getElementById("qFeedback").textContent = "Doğru! " + currentQ.sentence;
+  } else {
+    document.getElementById("qFeedback").textContent = "Doğrusu: \"" + correct + "\" — " + currentQ.sentence;
+  }
+  if(!currentQ.answered){
+    currentQ.answered = true;
+    if(isCorrect) stats.correct++; else stats.wrong++;
+    recordWordStat(key, isCorrect);
+    saveStats();
+    updateStatDisplay();
   }
 }
 
@@ -2313,10 +2533,33 @@ function toggleHint(){
   const hintEl = document.getElementById("hintText");
   if(hintEl.textContent){
     hintEl.textContent = "";
+  } else if(currentQ && currentQ.mode === "sentence"){
+    hintEl.textContent = "İpucu (çeviri): " + (currentQ.translation || "Türkçesi eklenmemiş");
   } else {
     const tr = (currentQ && currentQ.word && currentQ.word.tr) ? currentQ.word.tr : "Türkçesi eklenmemiş";
     hintEl.textContent = "İpucu: " + tr;
   }
+}
+
+function getArtikelReason(word, correctArtikel, isPluralQ){
+  if(isPluralQ) return "çünkü bütün çoğullar her zaman \"die\" alır.";
+  const lower = word.toLowerCase();
+  const dieSuffixes = ["ung","heit","keit","schaft","ion","tät","ei"];
+  const dasSuffixes = ["chen","lein","um","ment"];
+  const derSuffixes = ["ling","ismus","ant","ent"];
+  for(const suf of dieSuffixes){
+    if(lower.endsWith(suf) && correctArtikel === "die") return `çünkü "-${suf}" ile biten kelimeler genelde "die" alır.`;
+  }
+  for(const suf of dasSuffixes){
+    if(lower.endsWith(suf) && correctArtikel === "das") return `çünkü "-${suf}" ile biten kelimeler genelde "das" alır.`;
+  }
+  for(const suf of derSuffixes){
+    if(lower.endsWith(suf) && correctArtikel === "der") return `çünkü "-${suf}" ile biten kelimeler genelde "der" alır.`;
+  }
+  if(lower.endsWith("in") && correctArtikel === "die") return `çünkü kadın meslek/kişi bildiren "-in" ile biten kelimeler "die" alır.`;
+  if(lower.endsWith("er") && correctArtikel === "der") return `çünkü meslek/kişi bildiren "-er" ile biten kelimeler genelde "der" alır.`;
+  if(lower.endsWith("o") && correctArtikel === "das") return `çünkü bazı yabancı kökenli "-o" ile biten kelimeler "das" alır.`;
+  return "bu kelimenin cinsiyetinde sabit bir kural yok, ezberlemen gerekiyor.";
 }
 
 function checkArtikelAnswer(chosen, btnEl){
@@ -2333,7 +2576,9 @@ function checkArtikelAnswer(chosen, btnEl){
   if(chosen === correct){
     document.getElementById("qFeedback").textContent = "Doğru! " + correct + " " + displayWord;
   } else {
-    document.getElementById("qFeedback").textContent = "Doğrusu: " + correct + " " + displayWord;
+    const baseWord = isPluralQ ? currentQ.word.plural : currentQ.word.word;
+    const reason = getArtikelReason(baseWord, correct, isPluralQ);
+    document.getElementById("qFeedback").textContent = "Doğrusu: " + correct + " " + displayWord + " — " + reason;
   }
   if(!currentQ.answered){
     currentQ.answered = true;
