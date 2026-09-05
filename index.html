@@ -827,7 +827,7 @@
 </div>
 
 <!-- Beispiel (örnek cümle) penceresi -->
-<div class="overlay" id="exampleOverlay">
+<div class="overlay" id="exampleOverlay" style="z-index:60;">
   <div class="add-card">
     <h3 class="example-title-row">
       <span id="exampleTitle">Tisch</span>
@@ -870,6 +870,7 @@
     <div class="qtool-row">
       <button class="qspeak-btn" onclick="speakCurrentWord()" title="Dinle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button>
       <button class="hint-btn" onclick="toggleHint()">💡 İpucu</button>
+      <button class="hint-btn" onclick="openExampleForCurrentQuestion()">📘 Örnek</button>
       <button class="hint-btn" id="qConjBtn" onclick="openConjForCurrentQuestion()" style="display:none;">🔤 Çekim</button>
     </div>
     <div class="hint-text" id="hintText"></div>
@@ -1538,6 +1539,16 @@ function openExampleModal(type, idx){
   document.getElementById("exampleOverlay").classList.add("show");
 }
 function closeExampleModal(){ document.getElementById("exampleOverlay").classList.remove("show"); }
+
+function openExampleForCurrentQuestion(){
+  if(!currentQ) return;
+  const category = currentQ.category;
+  let idx, type;
+  if(category === "verb"){ idx = verbs.indexOf(currentQ.word); type = "verb"; }
+  else if(category === "adj"){ idx = adjectives.indexOf(currentQ.word); type = "adj"; }
+  else { idx = words.indexOf(currentQ.word); type = "word"; }
+  if(idx !== -1) openExampleModal(type, idx);
+}
 
 function openConjForCurrentQuestion(){
   if(!currentQ || currentQ.category !== "verb") return;
