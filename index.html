@@ -54,6 +54,7 @@
     padding:0 20px;
     display:flex;
     gap:6px;
+    flex-wrap:wrap;
   }
   .tab-btn{
     background:#fff;
@@ -602,6 +603,9 @@
   <button class="tab-btn active" id="tabBtnArtikel" onclick="switchTab('artikel')">İsimler (Artikel)</button>
   <button class="tab-btn" id="tabBtnVerben" onclick="switchTab('verben')">Fiiller (Verben)</button>
   <button class="tab-btn" id="tabBtnAdj" onclick="switchTab('adj')">Sıfatlar (Adjektive)</button>
+  <button class="tab-btn" id="tabBtnSaat" onclick="switchTab('saat')">Saatler (Uhrzeit)</button>
+  <button class="tab-btn" id="tabBtnZahl" onclick="switchTab('zahl')">Sayılar (Zahlen)</button>
+  <button class="tab-btn" id="tabBtnKonj" onclick="switchTab('konj')">Bağlaçlar (Konjunktionen)</button>
 </div>
 
 <main>
@@ -669,17 +673,18 @@
     </section>
 
     <section class="panel">
-      <h2>ein/eine &amp; kein/keine — hızlı referans</h2>
+      <h2>ein/eine &amp; kein/keine — Nominativ &amp; Akkusativ</h2>
       <table>
-        <thead><tr><th></th><th>ein / eine (olumlu)</th><th>kein / keine (olumsuz)</th></tr></thead>
+        <thead><tr><th></th><th>Nominativ</th><th>Akkusativ</th></tr></thead>
         <tbody>
-          <tr class="row-der"><td class="art-der">der</td><td>ein Mann</td><td>kein Mann</td></tr>
-          <tr class="row-die"><td class="art-die">die</td><td>eine Frau</td><td>keine Frau</td></tr>
-          <tr class="row-das"><td class="art-das">das</td><td>ein Kind</td><td>kein Kind</td></tr>
-          <tr><td>Plural</td><td>— (yok)</td><td>keine Bücher</td></tr>
+          <tr class="row-der"><td class="art-der">der</td><td>ein / kein Mann</td><td>einen / keinen Mann</td></tr>
+          <tr class="row-die"><td class="art-die">die</td><td>eine / keine Frau</td><td>eine / keine Frau</td></tr>
+          <tr class="row-das"><td class="art-das">das</td><td>ein / kein Kind</td><td>ein / kein Kind</td></tr>
+          <tr><td>Plural</td><td>— / keine Bücher</td><td>— / keine Bücher</td></tr>
         </tbody>
       </table>
-      <div class="plural-note">Kural: <strong>ein/eine</strong> sadece tekil kelimelerde vardır, çoğulda hiç kullanılmaz (çoğul artikelsiz söylenir: "Ich habe Bücher"). <strong>kein/keine</strong> ise hem tekilde hem çoğulda kullanılır — çoğulda her zaman <strong>keine</strong> olur (Ich habe keine Bücher).</div>
+      <div class="plural-note">Kural: Sadece eril (der) hâlde Akkusativ'e geçince değişir — <strong>ein → einen</strong>, <strong>kein → keinen</strong> (tıpkı der→den gibi). Dişil, nötr ve çoğulda Nominativ ile Akkusativ aynıdır.<br>
+      Ayrıca: <strong>ein/eine</strong> sadece tekilde vardır, çoğulda hiç kullanılmaz (çoğul artikelsiz söylenir: "Ich habe Bücher"). <strong>kein/keine(n)</strong> ise hem tekilde hem çoğulda kullanılır.</div>
     </section>
   </div>
 
@@ -744,6 +749,102 @@
     </section>
   </div>
 
+  <div id="saatSection" style="display:none;">
+    <section class="panel" style="margin-top:0;">
+      <div class="list-header">
+        <h2>Saat Listem</h2>
+        <button class="btn-add" onclick="openAddSaatModal()">+ Saat İfadesi Ekle</button>
+      </div>
+      <div class="search-row">
+        <input type="text" id="saatSearchInput" placeholder="Ara... (Uhr, Viertel, saat...)" oninput="renderSaat()">
+        <button class="btn-ghost" onclick="clearSearch('saat')">Temizle</button>
+      </div>
+      <div class="hint-line">İfadeye tıkla → Türkçesini gör</div>
+      <div class="wordlist-scroll">
+        <table>
+          <thead><tr><th></th><th>İfade</th><th></th><th>Örnek Cümle</th><th></th></tr></thead>
+          <tbody id="saatTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Saat Söyleme Kuralları — ince noktalar</h2>
+      <div class="rule-grid">
+        <div class="rule-card der">
+          <div class="title">Tam saat</div>
+          <div class="sfx">Saat + <strong>Uhr</strong><br>İstisna: 1 için "eins Uhr" değil <strong>"ein Uhr"</strong></div>
+          <div class="ex">3:00 → drei Uhr<br>1:00 → ein Uhr</div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">Çeyrek geçe / kala</div>
+          <div class="sfx"><strong>Viertel nach</strong> X (geçe)<br><strong>Viertel vor</strong> X+1 (kala)</div>
+          <div class="ex">3:15 → Viertel nach drei<br>3:45 → Viertel vor vier</div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">Buçuk — DİKKAT!</div>
+          <div class="sfx"><strong>halb</strong> + BİR SONRAKİ saat<br>(halb üç değil, "sonraki saate yarım")</div>
+          <div class="ex">2:30 → halb drei<br>(halb zwei DEĞİL!)</div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>Dakikalarla:</strong> 30'dan azsa <strong>X nach</strong> (geçe), 30'dan fazlaysa bir sonraki saate göre <strong>X vor</strong> (kala) kullanılır.<br>
+        3:10 → zehn nach drei &nbsp;|&nbsp; 3:50 → zehn vor vier<br>
+        <strong>En sık yapılan hata:</strong> "halb" kelimesi Türkçedeki gibi "şu saат buçuk" değil, her zaman <strong>gelecek saate yarım kalmış</strong> anlamındadır — yani 2:30 Almancada kafanda "3'e yarım var" gibi düşünülür.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>von / bis — hızlı referans</h2>
+      <p class="example-de" style="font-size:15px;">Bir zaman aralığını belirtmek için <strong>von</strong> (-den) ve <strong>bis</strong> (-e kadar) birlikte kullanılır.</p>
+      <div class="plural-note">
+        <strong>von 9 bis 17 Uhr</strong> — saat 9'dan 17'ye kadar<br>
+        <strong>von Montag bis Freitag</strong> — pazartesiden cumaya kadar<br>
+        Kural: <strong>von</strong> başlangıcı, <strong>bis</strong> bitişi gösterir — ikisi her zaman birlikte kullanılır.
+      </div>
+    </section>
+  </div>
+
+  <div id="zahlSection" style="display:none;">
+    <section class="panel" style="margin-top:0;">
+      <div class="list-header">
+        <h2>Sayı Listem</h2>
+        <button class="btn-add" onclick="openAddZahlModal()">+ Sayı Ekle</button>
+      </div>
+      <div class="search-row">
+        <input type="text" id="zahlSearchInput" placeholder="Ara... (eins, zehn, sayı...)" oninput="renderZahl()">
+        <button class="btn-ghost" onclick="clearSearch('zahl')">Temizle</button>
+      </div>
+      <div class="hint-line">Sayıya tıkla → Türkçesini gör</div>
+      <div class="wordlist-scroll">
+        <table>
+          <thead><tr><th></th><th>Sayı</th><th></th><th>Örnek Cümle</th><th></th></tr></thead>
+          <tbody id="zahlTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div id="konjSection" style="display:none;">
+    <section class="panel" style="margin-top:0;">
+      <div class="list-header">
+        <h2>Bağlaç Listem</h2>
+        <button class="btn-add" onclick="openAddKonjModal()">+ Bağlaç Ekle</button>
+      </div>
+      <div class="search-row">
+        <input type="text" id="konjSearchInput" placeholder="Ara... (und, weil, bağlaç...)" oninput="renderKonj()">
+        <button class="btn-ghost" onclick="clearSearch('konj')">Temizle</button>
+      </div>
+      <div class="hint-line">Bağlaca tıkla → Türkçesini gör</div>
+      <div class="wordlist-scroll">
+        <table>
+          <thead><tr><th></th><th>Bağlaç</th><th></th><th>Örnek Cümle</th><th></th></tr></thead>
+          <tbody id="konjTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
   <div>
     <section class="panel" style="margin-top:24px;">
       <h2>Antrenman</h2>
@@ -775,6 +876,16 @@
       <div class="btn-grid grid-2">
         <button class="btn-ghost" onclick="askQuestion('verb-quiz')">Fiil Testi (Türkçesi)</button>
         <button class="btn-ghost" onclick="askQuestion('adj-quiz')">Sıfat Testi (Türkçesi)</button>
+      </div>
+
+      <div class="group-label">Diğer Konular</div>
+      <div class="btn-grid grid-2">
+        <button class="btn-ghost" onclick="askQuestion('saat-quiz')">Saat Kelimeleri (Türkçesi)</button>
+        <button class="btn-main" onclick="askQuestion('uhrzeit-quiz')">🕐 Saat Okuma Testi (Uhrzeit)</button>
+      </div>
+      <div class="btn-grid grid-2" style="margin-top:8px;">
+        <button class="btn-ghost" onclick="askQuestion('zahl-quiz')">Sayı Testi (Türkçesi)</button>
+        <button class="btn-ghost" onclick="askQuestion('konj-quiz')">Bağlaç Testi (Türkçesi)</button>
       </div>
 
       <div class="group-label">Karışık &amp; Pratik</div>
@@ -921,6 +1032,54 @@
   </div>
 </div>
 
+<div class="overlay" id="addSaatOverlay">
+  <div class="add-card">
+    <h3>Yeni Saat İfadesi Ekle</h3>
+    <label>Simge (opsiyonel emoji)</label>
+    <input type="text" id="inpSaatEmoji" placeholder="🕐" maxlength="4">
+    <label>İfade</label>
+    <input type="text" id="inpSaat" placeholder="halb" maxlength="80">
+    <label>Türkçesi</label>
+    <input type="text" id="inpSaatTr" placeholder="buçuk" maxlength="120">
+    <div class="add-actions">
+      <button class="btn-ghost" onclick="closeAddSaatModal()">İptal</button>
+      <button class="btn-main" onclick="addSaat()">Kaydet</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="addZahlOverlay">
+  <div class="add-card">
+    <h3>Yeni Sayı Ekle</h3>
+    <label>Simge (opsiyonel emoji)</label>
+    <input type="text" id="inpZahlEmoji" placeholder="🔢" maxlength="4">
+    <label>Sayı</label>
+    <input type="text" id="inpZahl" placeholder="eins" maxlength="80">
+    <label>Türkçesi</label>
+    <input type="text" id="inpZahlTr" placeholder="bir" maxlength="120">
+    <div class="add-actions">
+      <button class="btn-ghost" onclick="closeAddZahlModal()">İptal</button>
+      <button class="btn-main" onclick="addZahl()">Kaydet</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="addKonjOverlay">
+  <div class="add-card">
+    <h3>Yeni Bağlaç Ekle</h3>
+    <label>Simge (opsiyonel emoji)</label>
+    <input type="text" id="inpKonjEmoji" placeholder="🔗" maxlength="4">
+    <label>Bağlaç</label>
+    <input type="text" id="inpKonj" placeholder="und" maxlength="80">
+    <label>Türkçesi</label>
+    <input type="text" id="inpKonjTr" placeholder="ve" maxlength="120">
+    <div class="add-actions">
+      <button class="btn-ghost" onclick="closeAddKonjModal()">İptal</button>
+      <button class="btn-main" onclick="addKonj()">Kaydet</button>
+    </div>
+  </div>
+</div>
+
 <!-- Quiz penceresi -->
 <div class="overlay" id="quizOverlay">
   <div class="quiz-card">
@@ -932,8 +1091,8 @@
     </div>
     <div class="qtool-row">
       <button class="qspeak-btn" onclick="speakCurrentWord()" title="Dinle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button>
-      <button class="hint-btn" onclick="toggleHint()">💡 İpucu</button>
-      <button class="hint-btn" onclick="openExampleForCurrentQuestion()">📘 Örnek</button>
+      <button class="hint-btn" id="qHintBtn" onclick="toggleHint()">💡 İpucu</button>
+      <button class="hint-btn" id="qExampleBtn" onclick="openExampleForCurrentQuestion()">📘 Örnek</button>
       <button class="hint-btn" id="qConjBtn" onclick="openConjForCurrentQuestion()" style="display:none;">🔤 Çekim</button>
     </div>
     <div class="hint-text" id="hintText"></div>
@@ -1094,6 +1253,35 @@ const STARTER_WORDS = [
   {artikel:"das", word:"Wörterbuch", plural:"Wörterbücher", emoji:"📕", tr:"sözlük", beispiel:"Ich benutze ein Wörterbuch.", beispielTr:"Bir sözlük kullanıyorum."},
   {artikel:"die", word:"Regel", plural:"Regeln", emoji:"📜", tr:"kural", beispiel:"Diese Regel ist wichtig.", beispielTr:"Bu kural önemli."},
   {artikel:"der", word:"Teil", plural:"Teile", emoji:"🧩", tr:"parça / bölüm", beispiel:"Das ist ein Teil des Plans.", beispielTr:"Bu planın bir parçası."},
+  {artikel:"die", word:"Premiere", plural:"Premieren", emoji:"🎬", tr:"prömiyer", beispiel:"Die Premiere ist am Freitag.", beispielTr:"Prömiyer cuma günü."},
+  {artikel:"die", word:"Tageskasse", plural:"Tageskassen", emoji:"🎟️", tr:"gişe", beispiel:"Die Tickets gibt es an der Tageskasse.", beispielTr:"Biletler gişede satılıyor."},
+  {artikel:"das", word:"Wochenende", plural:"Wochenenden", emoji:"📅", tr:"hafta sonu", beispiel:"Was machst du am Wochenende?", beispielTr:"Hafta sonu ne yapıyorsun?"},
+  {artikel:"die", word:"Lust", plural:"—", emoji:"😋", tr:"istek / keyif", beispiel:"Ich habe keine Lust.", beispielTr:"Hiç canım istemiyor."},
+  {artikel:"die", word:"Kneipe", plural:"Kneipen", emoji:"🍻", tr:"meyhane / bar", beispiel:"Wir treffen uns in der Kneipe.", beispielTr:"Barda buluşuyoruz."},
+  {artikel:"das", word:"Kino", plural:"Kinos", emoji:"🎥", tr:"sinema", beispiel:"Gehen wir ins Kino?", beispielTr:"Sinemaya gidelim mi?"},
+  {artikel:"die", word:"Textnachricht", plural:"Textnachrichten", emoji:"💬", tr:"metin mesajı", beispiel:"Ich schreibe dir eine Textnachricht.", beispielTr:"Sana bir mesaj yazıyorum."},
+  {artikel:"der", word:"Flyer", plural:"Flyer", emoji:"📄", tr:"broşür / el ilanı", beispiel:"Er verteilt Flyer auf der Straße.", beispielTr:"Sokakta broşür dağıtıyor."},
+  {artikel:"der", word:"SMS-Dialog", plural:"SMS-Dialoge", emoji:"📱", tr:"SMS yazışması", beispiel:"Der SMS-Dialog war kurz.", beispielTr:"SMS yazışması kısaydı."},
+  {artikel:"die", word:"Reihenfolge", plural:"Reihenfolgen", emoji:"🔢", tr:"sıra / sıralama", beispiel:"Bitte beachten Sie die Reihenfolge.", beispielTr:"Lütfen sıraya dikkat edin."},
+  {artikel:"das", word:"Museum", plural:"Museen", emoji:"🏛️", tr:"müze", beispiel:"Wir besuchen das Museum.", beispielTr:"Müzeyi ziyaret ediyoruz."},
+  {artikel:"die", word:"Brücke", plural:"Brücken", emoji:"🌉", tr:"köprü", beispiel:"Die Brücke ist sehr lang.", beispielTr:"Köprü çok uzun."},
+  {artikel:"die", word:"Grenze", plural:"Grenzen", emoji:"🚧", tr:"sınır", beispiel:"Die Stadt liegt an der Grenze.", beispielTr:"Şehir sınırda bulunuyor."},
+  {artikel:"die", word:"Fläche", plural:"Flächen", emoji:"📐", tr:"alan / yüzey", beispiel:"Der See hat eine große Fläche.", beispielTr:"Gölün geniş bir alanı var."},
+  {artikel:"der", word:"Bodensee", plural:"—", emoji:"🏞️", tr:"Bodensee (göl adı)", beispiel:"Der Bodensee liegt in drei Ländern.", beispielTr:"Bodensee üç ülkede bulunuyor."},
+  {artikel:"das", word:"Kaufhaus", plural:"Kaufhäuser", emoji:"🏬", tr:"alışveriş merkezi", beispiel:"Das Kaufhaus ist heute geöffnet.", beispielTr:"Alışveriş merkezi bugün açık."},
+  {artikel:"der", word:"Flughafen", plural:"Flughäfen", emoji:"✈️", tr:"havalimanı", beispiel:"Der Flughafen ist weit von hier.", beispielTr:"Havalimanı buradan uzak."},
+  {artikel:"der", word:"Bahnhof", plural:"Bahnhöfe", emoji:"🚉", tr:"tren istasyonu", beispiel:"Ich warte am Bahnhof.", beispielTr:"Tren istasyonunda bekliyorum."},
+  {artikel:"die", word:"Oper", plural:"Opern", emoji:"🎭", tr:"opera", beispiel:"Wir gehen heute in die Oper.", beispielTr:"Bugün operaya gidiyoruz."},
+  {artikel:"das", word:"Theater", plural:"Theater", emoji:"🎪", tr:"tiyatro", beispiel:"Das Theater beginnt um acht.", beispielTr:"Tiyatro sekizde başlıyor."},
+  {artikel:"die", word:"Kirche", plural:"Kirchen", emoji:"⛪", tr:"kilise", beispiel:"Die Kirche ist sehr alt.", beispielTr:"Kilise çok eski."},
+  {artikel:"die", word:"Bibliothek", plural:"Bibliotheken", emoji:"📚", tr:"kütüphane", beispiel:"Ich lerne in der Bibliothek.", beispielTr:"Kütüphanede ders çalışıyorum."},
+  {artikel:"das", word:"Restaurant", plural:"Restaurants", emoji:"🍽️", tr:"restoran", beispiel:"Das Restaurant ist sehr gut.", beispielTr:"Restoran çok iyi."},
+  {artikel:"die", word:"Philharmonie", plural:"Philharmonien", emoji:"🎻", tr:"filarmoni (konser salonu)", beispiel:"Das Konzert ist in der Philharmonie.", beispielTr:"Konser filarmonide."},
+  {artikel:"das", word:"Stadion", plural:"Stadien", emoji:"🏟️", tr:"stadyum", beispiel:"Das Stadion ist voll.", beispielTr:"Stadyum dolu."},
+  {artikel:"der", word:"Zoo", plural:"Zoos", emoji:"🦁", tr:"hayvanat bahçesi", beispiel:"Die Kinder lieben den Zoo.", beispielTr:"Çocuklar hayvanat bahçesini sever."},
+  {artikel:"der", word:"Park", plural:"Parks", emoji:"🌳", tr:"park", beispiel:"Wir spazieren im Park.", beispielTr:"Parkta yürüyoruz."},
+  {artikel:"die", word:"Öffnungszeit", plural:"Öffnungszeiten", emoji:"🕐", tr:"açılış / çalışma saati", beispiel:"Wie sind die Öffnungszeiten?", beispielTr:"Çalışma saatleri nedir?"},
+  {artikel:"das", word:"Stück", plural:"Stücke", emoji:"🎭", tr:"parça / (tiyatro) oyunu", beispiel:"Das Stück dauert zwei Stunden.", beispielTr:"Oyun iki saat sürüyor."},
   {artikel:"die", word:"Speisekarte", plural:"Speisekarten", emoji:"📖", tr:"menü", beispiel:"Können wir die Speisekarte haben?", beispielTr:"Menüyü alabilir miyiz?"},
   {artikel:"das", word:"Bier", plural:"Biere", emoji:"🍺", tr:"bira", beispiel:"Ich trinke ein Bier.", beispielTr:"Bir bira içiyorum."},
   {artikel:"das", word:"Mineralwasser", plural:"—", emoji:"💧", tr:"maden suyu", beispiel:"Ein Mineralwasser, bitte.", beispielTr:"Bir maden suyu, lütfen."},
@@ -1174,6 +1362,15 @@ const STARTER_VERBS = [
   {verb:"nehmen", emoji:"🤲", tr:"almak", beispiel:"Ich nehme den Fisch.", beispielTr:"Balığı alıyorum.", conj:{ich:"nehme", du:"nimmst", er:"nimmt", wir:"nehmen", ihr:"nehmt", sie:"nehmen"}},
   {verb:"finden", emoji:"🔍", tr:"bulmak", beispiel:"Ich finde das Restaurant gut.", beispielTr:"Restoranı iyi buluyorum.", conj:{ich:"finde", du:"findest", er:"findet", wir:"finden", ihr:"findet", sie:"finden"}},
   {verb:"bekommen", emoji:"📦", tr:"almak (sipariş)", beispiel:"Ich bekomme einen Salat.", beispielTr:"Bir salata alayım.", conj:{ich:"bekomme", du:"bekommst", er:"bekommt", wir:"bekommen", ihr:"bekommt", sie:"bekommen"}},
+  {verb:"zustimmen", emoji:"👍", tr:"kabul etmek / onaylamak", beispiel:"Ich stimme dir zu.", beispielTr:"Sana katılıyorum.", conj:{ich:"stimme zu", du:"stimmst zu", er:"stimmt zu", wir:"stimmen zu", ihr:"stimmt zu", sie:"stimmen zu"}},
+  {verb:"ablehnen", emoji:"👎", tr:"reddetmek", beispiel:"Er lehnt das Angebot ab.", beispielTr:"O teklifi reddediyor.", conj:{ich:"lehne ab", du:"lehnst ab", er:"lehnt ab", wir:"lehnen ab", ihr:"lehnt ab", sie:"lehnen ab"}},
+  {verb:"präsentieren", emoji:"📊", tr:"sunmak / tanıtmak", beispiel:"Sie präsentiert ihr Projekt.", beispielTr:"O projesini sunuyor.", conj:{ich:"präsentiere", du:"präsentierst", er:"präsentiert", wir:"präsentieren", ihr:"präsentiert", sie:"präsentieren"}},
+  {verb:"vorschlagen", emoji:"💡", tr:"önermek", beispiel:"Ich schlage ein Restaurant vor.", beispielTr:"Bir restoran öneriyorum.", conj:{ich:"schlage vor", du:"schlägst vor", er:"schlägt vor", wir:"schlagen vor", ihr:"schlagt vor", sie:"schlagen vor"}},
+  {verb:"übernehmen", emoji:"🤝", tr:"üstlenmek / devralmak", beispiel:"Er übernimmt die Verantwortung.", beispielTr:"O sorumluluğu üstleniyor.", conj:{ich:"übernehme", du:"übernimmst", er:"übernimmt", wir:"übernehmen", ihr:"übernehmt", sie:"übernehmen"}},
+  {verb:"schließen", emoji:"🔒", tr:"kapatmak / kapanmak", beispiel:"Der Laden schließt um acht.", beispielTr:"Dükkan sekizde kapanıyor.", conj:{ich:"schließe", du:"schließt", er:"schließt", wir:"schließen", ihr:"schließt", sie:"schließen"}},
+  {verb:"geben", emoji:"🎁", tr:"vermek (es gibt = var)", beispiel:"Es gibt viele Museen in der Stadt.", beispielTr:"Şehirde çok müze var.", conj:{ich:"gebe", du:"gibst", er:"gibt", wir:"geben", ihr:"gebt", sie:"geben"}},
+  {verb:"liegen", emoji:"📍", tr:"bulunmak / konumlanmak", beispiel:"Die Stadt liegt am See.", beispielTr:"Şehir gölün kenarında bulunuyor.", conj:{ich:"liege", du:"liegst", er:"liegt", wir:"liegen", ihr:"liegt", sie:"liegen"}},
+  {verb:"dauern", emoji:"⏳", tr:"sürmek (zaman)", beispiel:"Die Fahrt dauert zwei Stunden.", beispielTr:"Yolculuk iki saat sürüyor.", conj:{ich:"dauere", du:"dauerst", er:"dauert", wir:"dauern", ihr:"dauert", sie:"dauern"}},
   {verb:"mögen", emoji:"😊", tr:"sevmek / hoşlanmak", beispiel:"Ich mag Schokolade.", beispielTr:"Çikolatayı severim.", conj:{ich:"mag", du:"magst", er:"mag", wir:"mögen", ihr:"mögt", sie:"mögen"}}
 ];
 
@@ -1232,12 +1429,88 @@ const STARTER_ADJEKTIVE = [
   {adj:"früh", emoji:"⏰", tr:"erken", beispiel:"Ich stehe früh auf.", beispielTr:"Erken kalkıyorum.", komparativ:"früher", superlativ:"am frühesten"},
   {adj:"heiß", emoji:"🔥", tr:"sıcak", beispiel:"Der Kaffee ist heiß.", beispielTr:"Kahve sıcak.", komparativ:"heißer", superlativ:"am heißesten"},
   {adj:"bestimmt", emoji:"✅", tr:"kesin / belirli", beispiel:"Er kommt bestimmt.", beispielTr:"O kesinlikle geliyor."},
-  {adj:"gleich", emoji:"⏱️", tr:"aynı / hemen", beispiel:"Die Preise sind gleich.", beispielTr:"Fiyatlar aynı."}
+  {adj:"gleich", emoji:"⏱️", tr:"aynı / hemen", beispiel:"Die Preise sind gleich.", beispielTr:"Fiyatlar aynı."},
+  {adj:"schade", emoji:"😔", tr:"ne yazık / yazık", beispiel:"Das ist wirklich schade.", beispielTr:"Bu gerçekten yazık."},
+  {adj:"spät", emoji:"🌙", tr:"geç", beispiel:"Es ist schon spät.", beispielTr:"Zaten geç oldu.", komparativ:"später", superlativ:"am spätesten"},
+  {adj:"schon", emoji:"✅", tr:"zaten / bile", beispiel:"Ich bin schon fertig.", beispielTr:"Zaten bitirdim."},
+  {adj:"geöffnet", emoji:"🔓", tr:"açık", beispiel:"Das Geschäft ist geöffnet.", beispielTr:"Dükkan açık."},
+  {adj:"geschlossen", emoji:"🔒", tr:"kapalı", beispiel:"Das Museum ist heute geschlossen.", beispielTr:"Müze bugün kapalı."},
+  {adj:"hoch", emoji:"⛰️", tr:"yüksek", beispiel:"Der Berg ist sehr hoch.", beispielTr:"Dağ çok yüksek.", komparativ:"höher", superlativ:"am höchsten"},
+  {adj:"toll", emoji:"🤩", tr:"harika / süper", beispiel:"Der Film war toll.", beispielTr:"Film harikaydı.", komparativ:"toller", superlativ:"am tollsten"},
+  {adj:"circa", emoji:"≈", tr:"yaklaşık", beispiel:"Die Reise dauert circa zwei Stunden.", beispielTr:"Yolculuk yaklaşık iki saat sürüyor."}
+];
+
+const STARTER_SAAT = [
+  {zeit:"die Uhrzeit", emoji:"🕐", tr:"saat (zaman)", beispiel:"Wie ist die Uhrzeit?", beispielTr:"Saat kaç?"},
+  {zeit:"die Minute", emoji:"🕐", tr:"dakika", beispiel:"Eine Minute hat sechzig Sekunden.", beispielTr:"Bir dakikada altmış saniye var."},
+  {zeit:"die Stunde", emoji:"⏰", tr:"saat (süre)", beispiel:"Der Film dauert zwei Stunden.", beispielTr:"Film iki saat sürüyor."},
+  {zeit:"die Sekunde", emoji:"⏱️", tr:"saniye", beispiel:"Warte eine Sekunde!", beispielTr:"Bir saniye bekle!"},
+  {zeit:"das Viertel", emoji:"🕓", tr:"çeyrek", beispiel:"Viertel nach zwei.", beispielTr:"İkiyi çeyrek geçiyor."},
+  {zeit:"halb", emoji:"🕧", tr:"buçuk", beispiel:"Es ist halb drei.", beispielTr:"Saat iki buçuk."},
+  {zeit:"Punkt", emoji:"🕛", tr:"tam (saat başı)", beispiel:"Wir treffen uns Punkt zwölf.", beispielTr:"Tam saat on ikide buluşuyoruz."},
+  {zeit:"der Mittag", emoji:"☀️", tr:"öğle", beispiel:"Wir essen um Mittag.", beispielTr:"Öğlende yemek yiyoruz."},
+  {zeit:"die Mitternacht", emoji:"🌙", tr:"gece yarısı", beispiel:"Die Party endet um Mitternacht.", beispielTr:"Parti gece yarısı bitiyor."},
+  {zeit:"der Morgen", emoji:"🌅", tr:"sabah", beispiel:"Am Morgen trinke ich Kaffee.", beispielTr:"Sabah kahve içerim."},
+  {zeit:"der Vormittag", emoji:"🌤️", tr:"öğleden önce", beispiel:"Der Termin ist am Vormittag.", beispielTr:"Randevu öğleden önce."},
+  {zeit:"der Nachmittag", emoji:"🌇", tr:"öğleden sonra", beispiel:"Wir treffen uns am Nachmittag.", beispielTr:"Öğleden sonra buluşuyoruz."},
+  {zeit:"der Abend", emoji:"🌆", tr:"akşam", beispiel:"Am Abend lese ich ein Buch.", beispielTr:"Akşam bir kitap okurum."},
+  {zeit:"die Nacht", emoji:"🌃", tr:"gece", beispiel:"Gute Nacht!", beispielTr:"İyi geceler!"},
+  {zeit:"pünktlich", emoji:"⏰", tr:"dakik / tam zamanında", beispiel:"Der Zug ist pünktlich.", beispielTr:"Tren tam zamanında."},
+  {zeit:"vor", emoji:"⏳", tr:"...'e kala (saatte)", beispiel:"Es ist zehn vor drei.", beispielTr:"Saat üçe on var."},
+  {zeit:"nach", emoji:"⌛", tr:"...'i geçe (saatte)", beispiel:"Es ist Viertel nach eins.", beispielTr:"Saat biri çeyrek geçiyor."}
+];
+
+const STARTER_ZAHL = [
+  {zahl:"null", emoji:"0️⃣", tr:"sıfır", beispiel:"Null ist die erste Zahl.", beispielTr:"Sıfır ilk sayıdır."},
+  {zahl:"eins", emoji:"1️⃣", tr:"bir", beispiel:"Nach null kommt eins.", beispielTr:"Sıfırdan sonra bir gelir."},
+  {zahl:"zwei", emoji:"2️⃣", tr:"iki", beispiel:"Nach eins kommt zwei.", beispielTr:"Birden sonra iki gelir."},
+  {zahl:"drei", emoji:"3️⃣", tr:"üç", beispiel:"Nach zwei kommt drei.", beispielTr:"İkiden sonra üç gelir."},
+  {zahl:"vier", emoji:"4️⃣", tr:"dört", beispiel:"Nach drei kommt vier.", beispielTr:"Üçten sonra dört gelir."},
+  {zahl:"fünf", emoji:"5️⃣", tr:"beş", beispiel:"Nach vier kommt fünf.", beispielTr:"Dörtten sonra beş gelir."},
+  {zahl:"sechs", emoji:"6️⃣", tr:"altı", beispiel:"Nach fünf kommt sechs.", beispielTr:"Beşten sonra altı gelir."},
+  {zahl:"sieben", emoji:"7️⃣", tr:"yedi", beispiel:"Nach sechs kommt sieben.", beispielTr:"Altıdan sonra yedi gelir."},
+  {zahl:"acht", emoji:"8️⃣", tr:"sekiz", beispiel:"Nach sieben kommt acht.", beispielTr:"Yediden sonra sekiz gelir."},
+  {zahl:"neun", emoji:"9️⃣", tr:"dokuz", beispiel:"Nach acht kommt neun.", beispielTr:"Sekizden sonra dokuz gelir."},
+  {zahl:"zehn", emoji:"🔟", tr:"on", beispiel:"Nach neun kommt zehn.", beispielTr:"Dokuzdan sonra on gelir."},
+  {zahl:"elf", emoji:"🔢", tr:"on bir", beispiel:"Nach zehn kommt elf.", beispielTr:"Ondan sonra on bir gelir."},
+  {zahl:"zwölf", emoji:"🔢", tr:"on iki", beispiel:"Nach elf kommt zwölf.", beispielTr:"On birden sonra on iki gelir."},
+  {zahl:"dreizehn", emoji:"🔢", tr:"on üç", beispiel:"Nach zwölf kommt dreizehn.", beispielTr:"On ikiden sonra on üç gelir."},
+  {zahl:"vierzehn", emoji:"🔢", tr:"on dört", beispiel:"Nach dreizehn kommt vierzehn.", beispielTr:"On üçten sonra on dört gelir."},
+  {zahl:"fünfzehn", emoji:"🔢", tr:"on beş", beispiel:"Nach vierzehn kommt fünfzehn.", beispielTr:"On dörtten sonra on beş gelir."},
+  {zahl:"sechzehn", emoji:"🔢", tr:"on altı", beispiel:"Nach fünfzehn kommt sechzehn.", beispielTr:"On beşten sonra on altı gelir."},
+  {zahl:"siebzehn", emoji:"🔢", tr:"on yedi", beispiel:"Nach sechzehn kommt siebzehn.", beispielTr:"On altıdan sonra on yedi gelir."},
+  {zahl:"achtzehn", emoji:"🔢", tr:"on sekiz", beispiel:"Nach siebzehn kommt achtzehn.", beispielTr:"On yediden sonra on sekiz gelir."},
+  {zahl:"neunzehn", emoji:"🔢", tr:"on dokuz", beispiel:"Nach achtzehn kommt neunzehn.", beispielTr:"On sekizden sonra on dokuz gelir."},
+  {zahl:"zwanzig", emoji:"🔢", tr:"yirmi", beispiel:"Nach neunzehn kommt zwanzig.", beispielTr:"On dokuzdan sonra yirmi gelir."},
+  {zahl:"dreißig", emoji:"🔢", tr:"otuz", beispiel:"Nach zwanzig kommt dreißig.", beispielTr:"Yirmiden sonra otuz gelir."},
+  {zahl:"vierzig", emoji:"🔢", tr:"kırk", beispiel:"Nach dreißig kommt vierzig.", beispielTr:"Otuzdan sonra kırk gelir."},
+  {zahl:"fünfzig", emoji:"🔢", tr:"elli", beispiel:"Nach vierzig kommt fünfzig.", beispielTr:"Kırktan sonra elli gelir."},
+  {zahl:"sechzig", emoji:"🔢", tr:"altmış", beispiel:"Nach fünfzig kommt sechzig.", beispielTr:"Elliden sonra altmış gelir."},
+  {zahl:"siebzig", emoji:"🔢", tr:"yetmiş", beispiel:"Nach sechzig kommt siebzig.", beispielTr:"Altmıştan sonra yetmiş gelir."},
+  {zahl:"achtzig", emoji:"🔢", tr:"seksen", beispiel:"Nach siebzig kommt achtzig.", beispielTr:"Yetmişten sonra seksen gelir."},
+  {zahl:"neunzig", emoji:"🔢", tr:"doksan", beispiel:"Nach achtzig kommt neunzig.", beispielTr:"Seksenden sonra doksan gelir."},
+  {zahl:"hundert", emoji:"💯", tr:"yüz", beispiel:"Nach neunzig kommt hundert.", beispielTr:"Doksandan sonra yüz gelir."}
+];
+
+const STARTER_KONJ = [
+  {konj:"und", emoji:"➕", tr:"ve", beispiel:"Ich trinke Kaffee und Tee.", beispielTr:"Kahve ve çay içerim."},
+  {konj:"oder", emoji:"❓", tr:"veya", beispiel:"Möchtest du Tee oder Kaffee?", beispielTr:"Çay mı kahve mi istersin?"},
+  {konj:"aber", emoji:"↔️", tr:"ama / fakat", beispiel:"Ich bin müde, aber glücklich.", beispielTr:"Yorgunum ama mutluyum."},
+  {konj:"denn", emoji:"👉", tr:"çünkü", beispiel:"Ich bleibe zu Hause, denn ich bin krank.", beispielTr:"Evde kalıyorum çünkü hastayım."},
+  {konj:"sondern", emoji:"🔄", tr:"aksine / bilakis", beispiel:"Er ist nicht müde, sondern hungrig.", beispielTr:"O yorgun değil, aç."},
+  {konj:"weil", emoji:"👉", tr:"çünkü (yan cümle)", beispiel:"Ich lerne Deutsch, weil ich in Deutschland arbeite.", beispielTr:"Almanca öğreniyorum çünkü Almanya'da çalışıyorum."},
+  {konj:"dass", emoji:"💬", tr:"ki (bağlaç)", beispiel:"Ich weiß, dass du müde bist.", beispielTr:"Yorgun olduğunu biliyorum."},
+  {konj:"wenn", emoji:"⏳", tr:"eğer / -dığında", beispiel:"Wenn ich Zeit habe, lese ich.", beispielTr:"Zamanım olduğunda okurum."},
+  {konj:"deshalb", emoji:"➡️", tr:"bu yüzden", beispiel:"Es regnet, deshalb bleibe ich zu Hause.", beispielTr:"Yağmur yağıyor, bu yüzden evde kalıyorum."},
+  {konj:"dann", emoji:"⏭️", tr:"sonra / o zaman", beispiel:"Zuerst esse ich, dann arbeite ich.", beispielTr:"Önce yerim, sonra çalışırım."}
 ];
 
 let words = [];
 let verbs = [];
 let adjectives = [];
+let saatWords = [];
+let zahlWords = [];
+let konjWords = [];
 let stats = {correct:0, wrong:0};
 let countdownTimer = null;
 let secondsLeft = 120;
@@ -1246,6 +1519,9 @@ let currentQ = null;
 let revealedWords = new Set();
 let revealedVerbs = new Set();
 let revealedAdj = new Set();
+let revealedSaat = new Set();
+let revealedZahl = new Set();
+let revealedKonj = new Set();
 let activeTab = "artikel";
 let sessionQuestions = [];
 let sessionIndex = 0;
@@ -1296,6 +1572,21 @@ function loadData(){
   }catch(e){ adjectives = STARTER_ADJEKTIVE.slice(); }
 
   try{
+    const sa = localStorage.getItem("artikel_saat");
+    saatWords = sa ? JSON.parse(sa) : STARTER_SAAT.slice();
+  }catch(e){ saatWords = STARTER_SAAT.slice(); }
+
+  try{
+    const za = localStorage.getItem("artikel_zahl");
+    zahlWords = za ? JSON.parse(za) : STARTER_ZAHL.slice();
+  }catch(e){ zahlWords = STARTER_ZAHL.slice(); }
+
+  try{
+    const ko = localStorage.getItem("artikel_konj");
+    konjWords = ko ? JSON.parse(ko) : STARTER_KONJ.slice();
+  }catch(e){ konjWords = STARTER_KONJ.slice(); }
+
+  try{
     const s = localStorage.getItem("artikel_stats");
     stats = s ? JSON.parse(s) : {correct:0, wrong:0};
   }catch(e){ stats = {correct:0, wrong:0}; }
@@ -1341,6 +1632,21 @@ function saveAdjectives(){
   try{ localStorage.setItem("artikel_adjectives", JSON.stringify(adjectives)); }
   catch(e){ alert("Sıfat listesi kaydedilemedi (depolama alanı dolu olabilir)."); }
 }
+function saveSaat(){
+  if(!storageAvailable) return;
+  try{ localStorage.setItem("artikel_saat", JSON.stringify(saatWords)); }
+  catch(e){ alert("Saat listesi kaydedilemedi (depolama alanı dolu olabilir)."); }
+}
+function saveZahl(){
+  if(!storageAvailable) return;
+  try{ localStorage.setItem("artikel_zahl", JSON.stringify(zahlWords)); }
+  catch(e){ alert("Sayı listesi kaydedilemedi (depolama alanı dolu olabilir)."); }
+}
+function saveKonj(){
+  if(!storageAvailable) return;
+  try{ localStorage.setItem("artikel_konj", JSON.stringify(konjWords)); }
+  catch(e){ alert("Bağlaç listesi kaydedilemedi (depolama alanı dolu olabilir)."); }
+}
 function saveStats(){
   if(!storageAvailable) return;
   try{ localStorage.setItem("artikel_stats", JSON.stringify(stats)); }
@@ -1357,9 +1663,15 @@ function switchTab(tab){
   document.getElementById("artikelSection").style.display = tab === "artikel" ? "block" : "none";
   document.getElementById("verbenSection").style.display = tab === "verben" ? "block" : "none";
   document.getElementById("adjSection").style.display = tab === "adj" ? "block" : "none";
+  document.getElementById("saatSection").style.display = tab === "saat" ? "block" : "none";
+  document.getElementById("zahlSection").style.display = tab === "zahl" ? "block" : "none";
+  document.getElementById("konjSection").style.display = tab === "konj" ? "block" : "none";
   document.getElementById("tabBtnArtikel").classList.toggle("active", tab === "artikel");
   document.getElementById("tabBtnVerben").classList.toggle("active", tab === "verben");
   document.getElementById("tabBtnAdj").classList.toggle("active", tab === "adj");
+  document.getElementById("tabBtnSaat").classList.toggle("active", tab === "saat");
+  document.getElementById("tabBtnZahl").classList.toggle("active", tab === "zahl");
+  document.getElementById("tabBtnKonj").classList.toggle("active", tab === "konj");
 }
 
 function clearSearch(which){
@@ -1369,9 +1681,18 @@ function clearSearch(which){
   } else if(which === "verben"){
     document.getElementById("verbSearchInput").value = "";
     renderVerbs();
-  } else {
+  } else if(which === "adj"){
     document.getElementById("adjSearchInput").value = "";
     renderAdjectives();
+  } else if(which === "saat"){
+    document.getElementById("saatSearchInput").value = "";
+    renderSaat();
+  } else if(which === "zahl"){
+    document.getElementById("zahlSearchInput").value = "";
+    renderZahl();
+  } else if(which === "konj"){
+    document.getElementById("konjSearchInput").value = "";
+    renderKonj();
   }
 }
 
@@ -1446,11 +1767,11 @@ document.getElementById("wordTableBody").addEventListener("click", (e)=>{
 });
 
 function toggleReveal(which, idx){
-  const set = which === "artikel" ? revealedWords : which === "verben" ? revealedVerbs : revealedAdj;
+  const sets = {artikel:revealedWords, verben:revealedVerbs, adj:revealedAdj, saat:revealedSaat, zahl:revealedZahl, konj:revealedKonj};
+  const set = sets[which] || revealedWords;
   if(set.has(idx)) set.delete(idx); else set.add(idx);
-  if(which === "artikel") renderWords();
-  else if(which === "verben") renderVerbs();
-  else renderAdjectives();
+  const renderers = {artikel:renderWords, verben:renderVerbs, adj:renderAdjectives, saat:renderSaat, zahl:renderZahl, konj:renderKonj};
+  (renderers[which] || renderWords)();
 }
 
 function openAddModal(){
@@ -1581,6 +1902,10 @@ function openExampleModal(type, idx){
   let item, title;
   if(type === "word"){ item = words[idx]; title = item ? item.word : ""; }
   else if(type === "verb"){ item = verbs[idx]; title = item ? item.verb : ""; }
+  else if(type === "adj"){ item = adjectives[idx]; title = item ? item.adj : ""; }
+  else if(type === "saat"){ item = saatWords[idx]; title = item ? item.zeit : ""; }
+  else if(type === "zahl"){ item = zahlWords[idx]; title = item ? item.zahl : ""; }
+  else if(type === "konj"){ item = konjWords[idx]; title = item ? item.konj : ""; }
   else { item = adjectives[idx]; title = item ? item.adj : ""; }
   if(!item) return;
 
@@ -1609,6 +1934,9 @@ function openExampleForCurrentQuestion(){
   let idx, type;
   if(category === "verb"){ idx = verbs.indexOf(currentQ.word); type = "verb"; }
   else if(category === "adj"){ idx = adjectives.indexOf(currentQ.word); type = "adj"; }
+  else if(category === "saat"){ idx = saatWords.indexOf(currentQ.word); type = "saat"; }
+  else if(category === "zahl"){ idx = zahlWords.indexOf(currentQ.word); type = "zahl"; }
+  else if(category === "konj"){ idx = konjWords.indexOf(currentQ.word); type = "konj"; }
   else { idx = words.indexOf(currentQ.word); type = "word"; }
   if(idx !== -1) openExampleModal(type, idx);
 }
@@ -1846,6 +2174,188 @@ function deleteAdjective(idx){
   renderAdjectives();
 }
 
+const SPEAK_SVG = '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg>';
+
+/* ---------- SAATLER ---------- */
+function renderSaat(){
+  const tbody = document.getElementById("saatTableBody");
+  const query = document.getElementById("saatSearchInput").value.trim().toLowerCase();
+  tbody.innerHTML = "";
+  const filtered = query
+    ? saatWords.filter(a => a.zeit.toLowerCase().includes(query) || (a.tr||"").toLowerCase().includes(query))
+    : saatWords;
+  if(filtered.length === 0){
+    tbody.innerHTML = `<tr><td colspan="5" class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</td></tr>`;
+    return;
+  }
+  filtered.forEach((a) => {
+    const realIdx = saatWords.indexOf(a);
+    const revealed = revealedSaat.has(realIdx);
+    const tr = document.createElement("tr");
+    const disp = revealed ? `${escapeHtml(a.zeit)} <span class="tr-part">— ${escapeHtml(a.tr) || "?"}</span>` : escapeHtml(a.zeit);
+    tr.innerHTML = `
+      <td class="emoji-cell">${escapeHtml(a.emoji)}</td>
+      <td class="word-cell" data-idx="${realIdx}">${disp}</td>
+      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle">${SPEAK_SVG}</button></td>
+      <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
+      <td><button class="del" data-idx="${realIdx}">sil</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+document.getElementById("saatTableBody").addEventListener("click", (e)=>{
+  const wcell = e.target.closest(".word-cell");
+  if(wcell){ toggleReveal("saat", parseInt(wcell.dataset.idx, 10)); return; }
+  const speakBtn = e.target.closest(".speak-btn");
+  if(speakBtn){ const a = saatWords[parseInt(speakBtn.dataset.idx, 10)]; if(a) speak(a.zeit); return; }
+  const beispielBtn = e.target.closest(".beispiel-btn");
+  if(beispielBtn){ openExampleModal("saat", parseInt(beispielBtn.dataset.idx, 10)); return; }
+  const delBtn = e.target.closest(".del");
+  if(delBtn){ deleteSaat(parseInt(delBtn.dataset.idx, 10)); return; }
+});
+function openAddSaatModal(){
+  ["inpSaat","inpSaatTr","inpSaatEmoji"].forEach(id => document.getElementById(id).value = "");
+  document.getElementById("addSaatOverlay").classList.add("show");
+  setTimeout(()=>document.getElementById("inpSaat").focus(), 50);
+}
+function closeAddSaatModal(){ document.getElementById("addSaatOverlay").classList.remove("show"); }
+function addSaat(){
+  const emoji = document.getElementById("inpSaatEmoji").value.trim();
+  const zeit = document.getElementById("inpSaat").value.trim();
+  const tr = document.getElementById("inpSaatTr").value.trim();
+  if(!zeit){ alert("İfade alanını doldur."); return; }
+  saatWords.push({zeit, emoji, tr});
+  saveSaat();
+  renderSaat();
+  closeAddSaatModal();
+}
+function deleteSaat(idx){
+  saatWords.splice(idx,1);
+  revealedSaat.delete(idx);
+  saveSaat();
+  renderSaat();
+}
+
+/* ---------- SAYILAR ---------- */
+function renderZahl(){
+  const tbody = document.getElementById("zahlTableBody");
+  const query = document.getElementById("zahlSearchInput").value.trim().toLowerCase();
+  tbody.innerHTML = "";
+  const filtered = query
+    ? zahlWords.filter(a => a.zahl.toLowerCase().includes(query) || (a.tr||"").toLowerCase().includes(query))
+    : zahlWords;
+  if(filtered.length === 0){
+    tbody.innerHTML = `<tr><td colspan="5" class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</td></tr>`;
+    return;
+  }
+  filtered.forEach((a) => {
+    const realIdx = zahlWords.indexOf(a);
+    const revealed = revealedZahl.has(realIdx);
+    const tr = document.createElement("tr");
+    const disp = revealed ? `${escapeHtml(a.zahl)} <span class="tr-part">— ${escapeHtml(a.tr) || "?"}</span>` : escapeHtml(a.zahl);
+    tr.innerHTML = `
+      <td class="emoji-cell">${escapeHtml(a.emoji)}</td>
+      <td class="word-cell" data-idx="${realIdx}">${disp}</td>
+      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle">${SPEAK_SVG}</button></td>
+      <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
+      <td><button class="del" data-idx="${realIdx}">sil</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+document.getElementById("zahlTableBody").addEventListener("click", (e)=>{
+  const wcell = e.target.closest(".word-cell");
+  if(wcell){ toggleReveal("zahl", parseInt(wcell.dataset.idx, 10)); return; }
+  const speakBtn = e.target.closest(".speak-btn");
+  if(speakBtn){ const a = zahlWords[parseInt(speakBtn.dataset.idx, 10)]; if(a) speak(a.zahl); return; }
+  const beispielBtn = e.target.closest(".beispiel-btn");
+  if(beispielBtn){ openExampleModal("zahl", parseInt(beispielBtn.dataset.idx, 10)); return; }
+  const delBtn = e.target.closest(".del");
+  if(delBtn){ deleteZahl(parseInt(delBtn.dataset.idx, 10)); return; }
+});
+function openAddZahlModal(){
+  ["inpZahl","inpZahlTr","inpZahlEmoji"].forEach(id => document.getElementById(id).value = "");
+  document.getElementById("addZahlOverlay").classList.add("show");
+  setTimeout(()=>document.getElementById("inpZahl").focus(), 50);
+}
+function closeAddZahlModal(){ document.getElementById("addZahlOverlay").classList.remove("show"); }
+function addZahl(){
+  const emoji = document.getElementById("inpZahlEmoji").value.trim();
+  const zahl = document.getElementById("inpZahl").value.trim();
+  const tr = document.getElementById("inpZahlTr").value.trim();
+  if(!zahl){ alert("Sayı alanını doldur."); return; }
+  zahlWords.push({zahl, emoji, tr});
+  saveZahl();
+  renderZahl();
+  closeAddZahlModal();
+}
+function deleteZahl(idx){
+  zahlWords.splice(idx,1);
+  revealedZahl.delete(idx);
+  saveZahl();
+  renderZahl();
+}
+
+/* ---------- BAĞLAÇLAR ---------- */
+function renderKonj(){
+  const tbody = document.getElementById("konjTableBody");
+  const query = document.getElementById("konjSearchInput").value.trim().toLowerCase();
+  tbody.innerHTML = "";
+  const filtered = query
+    ? konjWords.filter(a => a.konj.toLowerCase().includes(query) || (a.tr||"").toLowerCase().includes(query))
+    : konjWords;
+  if(filtered.length === 0){
+    tbody.innerHTML = `<tr><td colspan="5" class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</td></tr>`;
+    return;
+  }
+  filtered.forEach((a) => {
+    const realIdx = konjWords.indexOf(a);
+    const revealed = revealedKonj.has(realIdx);
+    const tr = document.createElement("tr");
+    const disp = revealed ? `${escapeHtml(a.konj)} <span class="tr-part">— ${escapeHtml(a.tr) || "?"}</span>` : escapeHtml(a.konj);
+    tr.innerHTML = `
+      <td class="emoji-cell">${escapeHtml(a.emoji)}</td>
+      <td class="word-cell" data-idx="${realIdx}">${disp}</td>
+      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle">${SPEAK_SVG}</button></td>
+      <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
+      <td><button class="del" data-idx="${realIdx}">sil</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+document.getElementById("konjTableBody").addEventListener("click", (e)=>{
+  const wcell = e.target.closest(".word-cell");
+  if(wcell){ toggleReveal("konj", parseInt(wcell.dataset.idx, 10)); return; }
+  const speakBtn = e.target.closest(".speak-btn");
+  if(speakBtn){ const a = konjWords[parseInt(speakBtn.dataset.idx, 10)]; if(a) speak(a.konj); return; }
+  const beispielBtn = e.target.closest(".beispiel-btn");
+  if(beispielBtn){ openExampleModal("konj", parseInt(beispielBtn.dataset.idx, 10)); return; }
+  const delBtn = e.target.closest(".del");
+  if(delBtn){ deleteKonj(parseInt(delBtn.dataset.idx, 10)); return; }
+});
+function openAddKonjModal(){
+  ["inpKonj","inpKonjTr","inpKonjEmoji"].forEach(id => document.getElementById(id).value = "");
+  document.getElementById("addKonjOverlay").classList.add("show");
+  setTimeout(()=>document.getElementById("inpKonj").focus(), 50);
+}
+function closeAddKonjModal(){ document.getElementById("addKonjOverlay").classList.remove("show"); }
+function addKonj(){
+  const emoji = document.getElementById("inpKonjEmoji").value.trim();
+  const konj = document.getElementById("inpKonj").value.trim();
+  const tr = document.getElementById("inpKonjTr").value.trim();
+  if(!konj){ alert("Bağlaç alanını doldur."); return; }
+  konjWords.push({konj, emoji, tr});
+  saveKonj();
+  renderKonj();
+  closeAddKonjModal();
+}
+function deleteKonj(idx){
+  konjWords.splice(idx,1);
+  revealedKonj.delete(idx);
+  saveKonj();
+  renderKonj();
+}
+
 function exportAdjectives(){
   const blob = new Blob([JSON.stringify(adjectives, null, 2)], {type:"application/json"});
   const url = URL.createObjectURL(blob);
@@ -2062,7 +2572,9 @@ function speak(text){
 
 function speakCurrentWord(){
   if(!currentQ) return;
-  if(currentQ.mode === "sentence"){
+  if(currentQ.mode === "clock"){
+    speak(currentQ.correctPhrase);
+  } else if(currentQ.mode === "sentence"){
     speak(currentQ.sentence);
   } else if(currentQ.mode === "artikel-plural"){
     speak(currentQ.word.plural);
@@ -2085,6 +2597,10 @@ function insertChar(ch){
 function getItemKey(item, category){
   if(category === "verb") return item.verb;
   if(category === "adj") return item.adj;
+  if(category === "saat") return item.zeit;
+  if(category === "zahl") return item.zahl;
+  if(category === "konj") return item.konj;
+  if(category === "uhrzeit") return "Uhr " + item.digital;
   return item.word;
 }
 
@@ -2195,12 +2711,64 @@ function markAsked(cycleKey, items, keyFn){
   saveRecentAsked();
 }
 
-const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "smart-mixed"];
+const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "smart-mixed", "saat-quiz", "zahl-quiz", "konj-quiz"];
 
 function markShownWord(word, category){
   if(!currentTestMode || !CYCLE_MODES.includes(currentTestMode)) return;
-  const keyFn = category === "verb" ? (x => x.verb) : category === "adj" ? (x => x.adj) : (x => x.word);
-  markAsked(currentTestMode, [word], keyFn);
+  const keyFn = getItemKey;
+  markAsked(currentTestMode, [word], (x) => keyFn(x, category));
+}
+
+const UHR_HOUR_WORDS = {1:"eins",2:"zwei",3:"drei",4:"vier",5:"fünf",6:"sechs",7:"sieben",8:"acht",9:"neun",10:"zehn",11:"elf",12:"zwölf"};
+const UHR_MIN_WORDS = {5:"fünf",10:"zehn",20:"zwanzig",25:"fünfundzwanzig",35:"fünfunddreißig",40:"vierzig",50:"fünfzig",55:"fünfundfünfzig"};
+
+function germanTimePhrase(hour, minute){
+  const next = hour === 12 ? 1 : hour + 1;
+  if(minute === 0) return (hour === 1 ? "ein" : UHR_HOUR_WORDS[hour]) + " Uhr";
+  if(minute === 15) return "Viertel nach " + UHR_HOUR_WORDS[hour];
+  if(minute === 30) return "halb " + UHR_HOUR_WORDS[next];
+  if(minute === 45) return "Viertel vor " + UHR_HOUR_WORDS[next];
+  if(minute < 30) return UHR_MIN_WORDS[minute] + " nach " + UHR_HOUR_WORDS[hour];
+  return UHR_MIN_WORDS[60 - minute] + " vor " + UHR_HOUR_WORDS[next];
+}
+
+function buildUhrzeitSession(count){
+  const minuteOptions = [0,5,10,15,20,25,30,35,40,45,50,55];
+  const questions = [];
+  const usedTimes = new Set();
+  let safety = 0;
+  while(questions.length < count && safety < count * 20){
+    safety++;
+    const h = 1 + Math.floor(Math.random() * 12);
+    const m = minuteOptions[Math.floor(Math.random() * minuteOptions.length)];
+    const timeKey = h + ":" + m;
+    if(usedTimes.has(timeKey)) continue;
+    usedTimes.add(timeKey);
+
+    const correct = germanTimePhrase(h, m);
+    const distractorSet = new Set([correct]);
+    const distractors = [];
+    let attempts = 0;
+    while(distractors.length < 2 && attempts < 30){
+      attempts++;
+      const h2 = 1 + Math.floor(Math.random() * 12);
+      const m2 = minuteOptions[Math.floor(Math.random() * minuteOptions.length)];
+      const p2 = germanTimePhrase(h2, m2);
+      if(!distractorSet.has(p2)){ distractorSet.add(p2); distractors.push(p2); }
+    }
+    const options = shuffleArray([correct, ...distractors]);
+    const digital = h + ":" + String(m).padStart(2, "0");
+    questions.push({
+      word: {digital, tr: correct, emoji:"🕐"},
+      mode: "clock",
+      category: "uhrzeit",
+      digital,
+      correctPhrase: correct,
+      options,
+      answered:false
+    });
+  }
+  return questions;
 }
 
 function buildSmartMixedPool(){
@@ -2302,6 +2870,33 @@ function buildSession(testMode){
     }
     return shuffleArray(session);
   }
+  if(testMode === "uhrzeit-quiz"){
+    return buildUhrzeitSession(20);
+  }
+  if(testMode === "saat-quiz"){
+    const pool = getUnseenPool(testMode, saatWords, a => a.zeit);
+    let session = shuffleArray(pool).map(a => ({word:a, mode:"meaning", category:"saat", answered:false}));
+    while(session.length < 15 && pool.length > 0){
+      session = session.concat(shuffleArray(pool).map(a => ({word:a, mode:"meaning", category:"saat", answered:false})));
+    }
+    return shuffleArray(session);
+  }
+  if(testMode === "zahl-quiz"){
+    const pool = getUnseenPool(testMode, zahlWords, a => a.zahl);
+    let session = shuffleArray(pool).map(a => ({word:a, mode:"meaning", category:"zahl", answered:false}));
+    while(session.length < 15 && pool.length > 0){
+      session = session.concat(shuffleArray(pool).map(a => ({word:a, mode:"meaning", category:"zahl", answered:false})));
+    }
+    return shuffleArray(session);
+  }
+  if(testMode === "konj-quiz"){
+    const pool = getUnseenPool(testMode, konjWords, a => a.konj);
+    let session = shuffleArray(pool).map(a => ({word:a, mode:"meaning", category:"konj", answered:false}));
+    while(session.length < 15 && pool.length > 0){
+      session = session.concat(shuffleArray(pool).map(a => ({word:a, mode:"meaning", category:"konj", answered:false})));
+    }
+    return shuffleArray(session);
+  }
   if(testMode === "noun-quiz"){
     const pool = getUnseenPool(testMode, words, w => w.word);
     let session = shuffleArray(pool).map(w => ({word:w, mode:"meaning", category:"noun-meaning", answered:false}));
@@ -2348,6 +2943,18 @@ function askQuestion(testMode){
     alert("Önce sıfat listesine birkaç sıfat ekle.");
     return;
   }
+  if(testMode === "saat-quiz" && saatWords.length === 0){
+    alert("Önce saat listesine birkaç ifade ekle.");
+    return;
+  }
+  if(testMode === "zahl-quiz" && zahlWords.length === 0){
+    alert("Önce sayı listesine birkaç sayı ekle.");
+    return;
+  }
+  if(testMode === "konj-quiz" && konjWords.length === 0){
+    alert("Önce bağlaç listesine birkaç bağlaç ekle.");
+    return;
+  }
   if((testMode === "mixed" || testMode === "artikel-only" || testMode === "noun-quiz" || testMode === "plural-only") && words.length === 0){
     alert("Önce isim listesine birkaç kelime ekle.");
     return;
@@ -2379,6 +2986,29 @@ function showSessionQuestion(){
   document.getElementById("prevBtn").disabled = sessionIndex === 0;
   document.getElementById("nextBtn").disabled = sessionIndex === sessionQuestions.length - 1;
   document.getElementById("qConjBtn").style.display = (category === "verb") ? "inline-flex" : "none";
+  document.getElementById("qHintBtn").style.display = (currentQ.mode === "clock") ? "none" : "inline-flex";
+  document.getElementById("qExampleBtn").style.display = (currentQ.mode === "clock") ? "none" : "inline-flex";
+
+  if(currentQ.mode === "clock"){
+    document.getElementById("qType").textContent = "SAAT NASIL SÖYLENİR?";
+    const qw = document.getElementById("qWord");
+    qw.textContent = "Saat " + currentQ.digital;
+    qw.style.color = "var(--ink)";
+    qw.classList.remove("qword-sentence");
+    document.getElementById("qPluralInput").style.display = "none";
+    document.getElementById("umlautRow").style.display = "none";
+    const optionsDiv = document.getElementById("qOptions");
+    optionsDiv.style.display = "flex";
+    optionsDiv.innerHTML = "";
+    currentQ.options.forEach(opt=>{
+      const b = document.createElement("button");
+      b.className = "opt-btn opt-neutral";
+      b.textContent = opt;
+      b.onclick = () => checkClockAnswer(opt, b);
+      optionsDiv.appendChild(b);
+    });
+    return;
+  }
 
   if(currentQ.mode === "sentence"){
     const qw = document.getElementById("qWord");
@@ -2431,7 +3061,8 @@ function showSessionQuestion(){
     const optionsDiv = document.getElementById("qOptions");
     optionsDiv.style.display = "flex";
     optionsDiv.innerHTML = "";
-    const list = category === "verb" ? verbs : category === "adj" ? adjectives : words;
+    const listMap = {verb:verbs, adj:adjectives, saat:saatWords, zahl:zahlWords, konj:konjWords};
+    const list = listMap[category] || words;
     const options = buildMeaningOptions(w, list);
     const correct = w.tr || "?";
     options.forEach(opt=>{
@@ -2497,6 +3128,31 @@ function checkSentenceArtikelAnswer(chosen, btnEl){
   } else {
     const reason = getArtikelReason(currentQ.word.word, correct, false);
     document.getElementById("qFeedback").textContent = "Doğrusu: \"" + correct + "\" — " + currentQ.sentence + " — " + reason;
+  }
+  if(!currentQ.answered){
+    currentQ.answered = true;
+    if(isCorrect) stats.correct++; else stats.wrong++;
+    recordWordStat(key, isCorrect);
+    saveStats();
+    updateStatDisplay();
+  }
+}
+
+function checkClockAnswer(chosen, btnEl){
+  const correct = currentQ.correctPhrase;
+  const allBtns = document.querySelectorAll("#qOptions .opt-btn");
+  allBtns.forEach(b=>{
+    b.onclick = null;
+    if(b.textContent === correct) b.classList.add("correct");
+    if(b === btnEl && chosen !== correct) b.classList.add("wrong");
+  });
+  const isCorrect = chosen === correct;
+  showResultIcon(isCorrect);
+  const key = getItemKey(currentQ.word, "uhrzeit");
+  if(isCorrect){
+    document.getElementById("qFeedback").textContent = "Doğru! Saat " + currentQ.digital + " = " + correct;
+  } else {
+    document.getElementById("qFeedback").textContent = "Doğrusu: \"" + correct + "\" (Saat " + currentQ.digital + ")";
   }
   if(!currentQ.answered){
     currentQ.answered = true;
@@ -2706,6 +3362,9 @@ loadData();
 renderWords();
 renderVerbs();
 renderAdjectives();
+renderSaat();
+renderZahl();
+renderKonj();
 updateStatDisplay();
 renderMistakeStats();
 </script>
