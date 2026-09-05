@@ -658,32 +658,21 @@
     </section>
 
     <section class="panel">
-      <h2>Nominativ &amp; Akkusativ — hızlı referans</h2>
+      <h2>der / ein / kein — Nominativ &amp; Akkusativ</h2>
       <table>
         <thead><tr><th></th><th>Nominativ</th><th>Akkusativ</th></tr></thead>
         <tbody>
-          <tr class="row-der"><td class="art-der">der</td><td>der Mann / ein Mann</td><td>den Mann / einen Mann</td></tr>
-          <tr class="row-die"><td class="art-die">die</td><td>die Frau / eine Frau</td><td>die Frau / eine Frau</td></tr>
-          <tr class="row-das"><td class="art-das">das</td><td>das Kind / ein Kind</td><td>das Kind / ein Kind</td></tr>
-          <tr><td>Plural</td><td>die Leute</td><td>die Leute</td></tr>
+          <tr class="row-der"><td class="art-der">der</td><td>der / ein / kein Mann</td><td>den / einen / keinen Mann</td></tr>
+          <tr class="row-die"><td class="art-die">die</td><td>die / eine / keine Frau</td><td>die / eine / keine Frau</td></tr>
+          <tr class="row-das"><td class="art-das">das</td><td>das / ein / kein Kind</td><td>das / ein / kein Kind</td></tr>
+          <tr><td>Plural</td><td>die Leute / — / keine Bücher</td><td>die Leute / — / keine Bücher</td></tr>
         </tbody>
       </table>
-      <div class="plural-note">Kural: Sadece eril (<strong>der → den</strong>, <strong>ein → einen</strong>) değişir. Dişil (die), nötr (das) ve çoğulda Nominativ ile Akkusativ aynıdır. <br>Örnek cümle: "<strong>Der</strong> Mann ist hier." (Nominativ — özne) / "Ich sehe <strong>den</strong> Mann." (Akkusativ — nesne)</div>
-    </section>
-
-    <section class="panel">
-      <h2>ein/eine &amp; kein/keine — Nominativ &amp; Akkusativ</h2>
-      <table>
-        <thead><tr><th></th><th>Nominativ</th><th>Akkusativ</th></tr></thead>
-        <tbody>
-          <tr class="row-der"><td class="art-der">der</td><td>ein / kein Mann</td><td>einen / keinen Mann</td></tr>
-          <tr class="row-die"><td class="art-die">die</td><td>eine / keine Frau</td><td>eine / keine Frau</td></tr>
-          <tr class="row-das"><td class="art-das">das</td><td>ein / kein Kind</td><td>ein / kein Kind</td></tr>
-          <tr><td>Plural</td><td>— / keine Bücher</td><td>— / keine Bücher</td></tr>
-        </tbody>
-      </table>
-      <div class="plural-note">Kural: Sadece eril (der) hâlde Akkusativ'e geçince değişir — <strong>ein → einen</strong>, <strong>kein → keinen</strong> (tıpkı der→den gibi). Dişil, nötr ve çoğulda Nominativ ile Akkusativ aynıdır.<br>
-      Ayrıca: <strong>ein/eine</strong> sadece tekilde vardır, çoğulda hiç kullanılmaz (çoğul artikelsiz söylenir: "Ich habe Bücher"). <strong>kein/keine(n)</strong> ise hem tekilde hem çoğulda kullanılır.</div>
+      <div class="plural-note">
+        Kural: Sadece <strong>eril (der)</strong> hâlde Akkusativ'e geçince değişir — <strong>der → den</strong>, <strong>ein → einen</strong>, <strong>kein → keinen</strong>. Üçü de aynı örüntüyü takip eder. Dişil, nötr ve çoğulda Nominativ ile Akkusativ hep aynıdır.<br>
+        Örnek cümle: "<strong>Der</strong> Mann ist hier." (Nominativ — özne) / "Ich sehe <strong>den</strong> Mann." (Akkusativ — nesne)<br>
+        Ayrıca: <strong>ein/eine</strong> sadece tekilde vardır, çoğulda hiç kullanılmaz ("Ich habe Bücher"). <strong>kein/keine(n)</strong> ise hem tekilde hem çoğulda kullanılır.
+      </div>
     </section>
   </div>
 
@@ -844,26 +833,26 @@
       </div>
       <div class="countdown" id="countdownText"></div>
 
-      <div class="group-label">İsim Testleri</div>
-      <div class="btn-grid grid-3">
-        <button class="btn-ghost" onclick="askQuestion('artikel-only')">Artikel Testi (der/die/das)</button>
-        <button class="btn-ghost" onclick="askQuestion('noun-quiz')">İsim Testi (Türkçesi)</button>
-        <button class="btn-ghost" onclick="askQuestion('plural-only')">Çoğul Testi (yaz)</button>
+      <div class="group-label">Artikel Testleri</div>
+      <div class="btn-grid grid-2">
+        <button class="btn-ghost" onclick="askQuestion('artikel-only')">Artikel Testi</button>
+        <button class="btn-ghost" onclick="askQuestion('plural-only')">Çoğul Testi</button>
       </div>
 
       <div class="group-label">Kelime Bilgisi</div>
-      <div class="btn-grid grid-2">
-        <button class="btn-ghost" onclick="askQuestion('verb-quiz')">Fiil Testi (Türkçesi)</button>
-        <button class="btn-ghost" onclick="askQuestion('adj-quiz')">Sıfat Testi (Türkçesi)</button>
+      <div class="btn-grid grid-3">
+        <button class="btn-ghost" onclick="askQuestion('noun-quiz')">İsim Testi</button>
+        <button class="btn-ghost" onclick="askQuestion('verb-quiz')">Fiil Testi</button>
+        <button class="btn-ghost" onclick="askQuestion('adj-quiz')">Sıfat Testi</button>
       </div>
 
       <div class="group-label">Diğer Konular</div>
       <div class="btn-grid grid-2">
-        <button class="btn-ghost" onclick="askQuestion('saat-quiz')">Saat Kelimeleri (Türkçesi)</button>
-        <button class="btn-ghost" onclick="askQuestion('uhrzeit-quiz')">🕐 Saat Okuma Testi (Uhrzeit)</button>
+        <button class="btn-ghost" onclick="askQuestion('saat-quiz')">Saat Kelimeleri</button>
+        <button class="btn-ghost" onclick="askQuestion('uhrzeit-quiz')">🕐 Saat Okuma Testi</button>
       </div>
       <div class="btn-grid grid-2" style="margin-top:8px;">
-        <button class="btn-ghost" onclick="askQuestion('konj-quiz')">Bağlaç Testi (Türkçesi)</button>
+        <button class="btn-ghost" onclick="askQuestion('konj-quiz')">Bağlaç Testi</button>
       </div>
 
       <div class="group-label">Karışık &amp; Pratik</div>
@@ -2570,16 +2559,25 @@ function markShownWord(word, category){
 }
 
 const UHR_HOUR_WORDS = {1:"eins",2:"zwei",3:"drei",4:"vier",5:"fünf",6:"sechs",7:"sieben",8:"acht",9:"neun",10:"zehn",11:"elf",12:"zwölf"};
-const UHR_MIN_WORDS = {5:"fünf",10:"zehn",20:"zwanzig",25:"fünfundzwanzig",35:"fünfunddreißig",40:"vierzig",50:"fünfzig",55:"fünfundfünfzig"};
 
 function germanTimePhrase(hour, minute){
   const next = hour === 12 ? 1 : hour + 1;
-  if(minute === 0) return (hour === 1 ? "ein" : UHR_HOUR_WORDS[hour]) + " Uhr";
-  if(minute === 15) return "Viertel nach " + UHR_HOUR_WORDS[hour];
-  if(minute === 30) return "halb " + UHR_HOUR_WORDS[next];
-  if(minute === 45) return "Viertel vor " + UHR_HOUR_WORDS[next];
-  if(minute < 30) return UHR_MIN_WORDS[minute] + " nach " + UHR_HOUR_WORDS[hour];
-  return UHR_MIN_WORDS[60 - minute] + " vor " + UHR_HOUR_WORDS[next];
+  const h = UHR_HOUR_WORDS[hour];
+  const hNext = UHR_HOUR_WORDS[next];
+  switch(minute){
+    case 0:  return (hour === 1 ? "ein" : h) + " Uhr";
+    case 5:  return "fünf nach " + h;
+    case 10: return "zehn nach " + h;
+    case 15: return "Viertel nach " + h;
+    case 20: return "zehn vor halb " + hNext;
+    case 25: return "fünf vor halb " + hNext;
+    case 30: return "halb " + hNext;
+    case 35: return "fünf nach halb " + hNext;
+    case 40: return "zehn nach halb " + hNext;
+    case 45: return "Viertel vor " + hNext;
+    case 50: return "zehn vor " + hNext;
+    case 55: return "fünf vor " + hNext;
+  }
 }
 
 function buildUhrzeitSession(count){
