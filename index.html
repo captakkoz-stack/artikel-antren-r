@@ -353,6 +353,8 @@
     text-align:center;
   }
   .stat-box .num{font-family: Georgia, serif;font-size:26px;color:var(--deep);}
+  .stat-box .num#statCorrect{color:#2c7a2c;}
+  .stat-box .num#statWrong{color:var(--coral);}
   .stat-box .lbl{font-size:11px;color:#777;margin-top:2px;}
   .toggle-row{
     display:flex;
@@ -464,6 +466,108 @@
   .opt-btn.opt-die{background:var(--die-bg);color:var(--die);}
   .opt-btn.opt-das{background:var(--das-bg);color:var(--das);}
   .opt-btn.opt-neutral{background:var(--cream);color:var(--ink);}
+  .order-wrap{margin-top:6px;}
+  .order-answer{
+    min-height:52px;
+    border:2px dashed var(--line);
+    border-radius:4px;
+    padding:10px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+    margin-bottom:14px;
+    background:#fff;
+  }
+  .order-placeholder{color:#999;font-size:13px;font-style:italic;}
+  .order-pool{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:center;
+  }
+  .order-tile{
+    background:var(--cream);
+    border:1px solid var(--brass);
+    color:var(--ink);
+    padding:8px 14px;
+    border-radius:4px;
+    font-size:15px;
+    font-family: Georgia, serif;
+    cursor:pointer;
+    font-weight:600;
+  }
+  .order-tile:hover{background:#eee0c5;}
+  .order-tile.placed{
+    background:var(--teal);
+    color:#fff;
+    border-color:var(--teal);
+  }
+  .order-tile.placed:hover{background:#163a47;}
+  .order-tile.locked{cursor:default;opacity:0.85;}
+  .order-tile.correct-order{background:var(--das-bg);border-color:#3a7d3a;color:#2c5c2c;}
+  .order-tile.wrong-order{background:#fde3da;border-color:var(--coral);color:var(--coral);}
+
+  .adj-pair-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap:10px;
+  }
+  .adj-pair-card{
+    display:flex;
+    align-items:center;
+    border:1px solid var(--line);
+    border-radius:4px;
+    background:#fff;
+    padding:10px;
+    gap:6px;
+  }
+  .adj-pair-card.adj-solo{
+    background:var(--cream);
+  }
+  .adj-side{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:4px;
+    min-width:0;
+  }
+  .adj-emoji{font-size:20px;}
+  .adj-word{
+    font-family: Georgia, serif;
+    font-weight:700;
+    font-size:14px;
+    color:var(--deep);
+    cursor:pointer;
+    line-height:1.3;
+  }
+  .adj-word .tr-part{
+    display:block;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:11.5px;
+    color:var(--brass);
+  }
+  .adj-side-btns{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:4px;
+  }
+  .adj-side-btns button{min-width:22px;min-height:22px;flex-shrink:0;}
+  .adj-side-btns .speak-btn{width:24px;height:24px;border:1px solid var(--line);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;padding:0;}
+  .adj-side-btns .conj-btn, .adj-side-btns .del{border:1px solid var(--line);background:none;border-radius:10px;padding:3px 8px;cursor:pointer;color:var(--teal);}
+  .adj-side-btns .del{color:var(--coral);}
+  .adj-vs{
+    font-size:18px;
+    color:var(--brass);
+    font-weight:700;
+    flex-shrink:0;
+    padding:0 4px;
+  }
   .opt-btn.correct{border-color:var(--sea);}
   .opt-btn.wrong{border-color:var(--coral);}
   .feedback{font-family: system-ui, Helvetica, Arial, sans-serif;font-size:13.5px;min-height:20px;margin-bottom:10px;}
@@ -726,13 +830,10 @@
         <input type="text" id="adjSearchInput" placeholder="Sıfat ara... (groß, güzel...)" oninput="renderAdjectives()">
         <button class="btn-ghost" onclick="clearSearch('adj')">Temizle</button>
       </div>
-      <div class="hint-line">Sıfata tıkla → Türkçesini gör</div>
+      <div class="hint-line">Sıfata tıkla → Türkçesini gör. Zıt anlamlılar karşılıklı gösterilir.</div>
 
       <div class="wordlist-scroll">
-        <table>
-          <thead><tr><th></th><th>Sıfat</th><th></th><th>Derece</th><th>Örnek Cümle</th><th></th></tr></thead>
-          <tbody id="adjTableBody"></tbody>
-        </table>
+        <div id="adjPairGrid" class="adj-pair-grid"></div>
       </div>
     </section>
   </div>
@@ -839,8 +940,8 @@
   </div>
 
   <div>
-    <section class="panel" style="margin-top:24px;">
-      <h2>Antrenman</h2>
+    <section class="panel" style="margin-top:0;">
+      <h2>Antrenman Modu</h2>
 
       <div class="stat-grid">
         <div class="stat-box"><div class="num" id="statCorrect">0</div><div class="lbl">Doğru</div></div>
@@ -861,10 +962,10 @@
       <div class="group-label">Artikel Testleri</div>
       <div class="btn-grid grid-2">
         <button class="btn-ghost" onclick="askQuestion('artikel-only')">Artikel Testi</button>
-        <button class="btn-ghost" onclick="askQuestion('plural-only')">Çoğul Testi</button>
+        <button class="btn-ghost" onclick="askQuestion('plural-only')">Çoğul Artikel Testi</button>
       </div>
 
-      <div class="group-label">Kelime Bilgisi</div>
+      <div class="group-label">Almanca Türkçe Kelime Bilgisi</div>
       <div class="btn-grid grid-3">
         <button class="btn-ghost" onclick="askQuestion('noun-quiz')">İsim Testi</button>
         <button class="btn-ghost" onclick="askQuestion('verb-quiz')">Fiil Testi</button>
@@ -881,8 +982,9 @@
       </div>
 
       <div class="group-label">Karışık &amp; Pratik</div>
-      <div class="btn-grid grid-2">
+      <div class="btn-grid grid-3">
         <button class="btn-ghost" onclick="askQuestion('sentence-fill')">📝 Cümle Tamamlama</button>
+        <button class="btn-ghost" onclick="askQuestion('order-quiz')">🧩 Cümle Kurma</button>
         <button class="btn-ghost" onclick="askQuestion('smart-mixed')">🎲 Genel Karışık Sınav</button>
       </div>
 
@@ -908,9 +1010,6 @@
           <thead><tr><th>Kelime</th><th>Doğru</th><th>Yanlış</th><th>Başarı</th></tr></thead>
           <tbody id="mistakeTableBody"></tbody>
         </table>
-      </div>
-      <div class="footer-tools">
-        <button class="btn-ghost" onclick="exportStatsCSV()">İstatistiği CSV/Excel Olarak İndir</button>
       </div>
     </section>
   </div>
@@ -1017,6 +1116,8 @@
     <input type="text" id="inpAdj" placeholder="groß" maxlength="80">
     <label>Türkçesi</label>
     <input type="text" id="inpAdjTr" placeholder="büyük" maxlength="120">
+    <label>Zıt Anlamlısı (opsiyonel — listede zaten varsa yan yana gösterilir)</label>
+    <input type="text" id="inpAdjOpposite" placeholder="klein" maxlength="80">
     <div class="add-actions">
       <button class="btn-ghost" onclick="closeAddAdjModal()">İptal</button>
       <button class="btn-main" onclick="addAdjective()">Kaydet</button>
@@ -1066,13 +1167,17 @@
       <span class="result-icon" id="resultIcon"></span>
     </div>
     <div class="qtool-row">
-      <button class="qspeak-btn" onclick="speakCurrentWord()" title="Dinle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button>
+      <button class="qspeak-btn" id="qSpeakBtn" onclick="speakCurrentWord()" title="Dinle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button>
       <button class="hint-btn" id="qHintBtn" onclick="toggleHint()">💡 İpucu</button>
       <button class="hint-btn" id="qExampleBtn" onclick="openExampleForCurrentQuestion()">📘 Örnek</button>
       <button class="hint-btn" id="qConjBtn" onclick="openConjForCurrentQuestion()" style="display:none;">🔤 Çekim</button>
     </div>
     <div class="hint-text" id="hintText"></div>
     <div class="options" id="qOptions"></div>
+    <div class="order-wrap" id="orderWrap" style="display:none;">
+      <div class="order-answer" id="orderAnswer"></div>
+      <div class="order-pool" id="orderPool"></div>
+    </div>
     <div class="plural-input" id="qPluralInput" style="display:none;">
       <input type="text" id="qPluralAnswer" placeholder="sadece çoğulu yaz, 'die' yazmana gerek yok">
       <button class="btn-main" onclick="checkPluralAnswer()">Kontrol Et</button>
@@ -1277,6 +1382,17 @@ const STARTER_WORDS = [
   {artikel:"der", word:"Tee", plural:"Tees", emoji:"🍵", tr:"çay", beispiel:"Ich trinke jeden Morgen Tee.", beispielTr:"Her sabah çay içerim."},
   {artikel:"der", word:"Espresso", plural:"Espressi", emoji:"☕", tr:"espresso", beispiel:"Ein Espresso, bitte.", beispielTr:"Bir espresso, lütfen."},
   {artikel:"der", word:"Eintritt", plural:"Eintritte", emoji:"🎫", tr:"giriş / giriş ücreti", beispiel:"Der Eintritt kostet zehn Euro.", beispielTr:"Giriş ücreti on euro."},
+  {artikel:"das", word:"Motorrad", plural:"Motorräder", emoji:"🏍️", tr:"motosiklet", beispiel:"Er fährt ein Motorrad.", beispielTr:"O bir motosiklet sürüyor."},
+  {artikel:"der", word:"Hase", plural:"Hasen", emoji:"🐰", tr:"tavşan", beispiel:"Der Hase läuft schnell.", beispielTr:"Tavşan hızlı koşuyor."},
+  {artikel:"die", word:"Wohnung", plural:"Wohnungen", emoji:"🏠", tr:"daire", beispiel:"Meine Wohnung ist klein.", beispielTr:"Dairem küçük."},
+  {artikel:"der", word:"Ingenieur", plural:"Ingenieure", emoji:"👷", tr:"mühendis", beispiel:"Er arbeitet als Ingenieur.", beispielTr:"O mühendis olarak çalışıyor."},
+  {artikel:"die", word:"Ingenieurin", plural:"Ingenieurinnen", emoji:"👷‍♀️", tr:"kadın mühendis", beispiel:"Sie ist Ingenieurin.", beispielTr:"O bir kadın mühendis."},
+  {artikel:"das", word:"Praktikum", plural:"Praktika", emoji:"💼", tr:"staj", beispiel:"Ich mache ein Praktikum.", beispielTr:"Bir staj yapıyorum."},
+  {artikel:"der", word:"Kellner", plural:"Kellner", emoji:"🍽️", tr:"garson", beispiel:"Der Kellner bringt die Speisekarte.", beispielTr:"Garson menüyü getiriyor."},
+  {artikel:"die", word:"Kellnerin", plural:"Kellnerinnen", emoji:"🍽️", tr:"kadın garson", beispiel:"Die Kellnerin ist sehr freundlich.", beispielTr:"Kadın garson çok samimi."},
+  {artikel:"der", word:"Busfahrer", plural:"Busfahrer", emoji:"🚌", tr:"otobüs şoförü", beispiel:"Der Busfahrer fährt langsam.", beispielTr:"Otobüs şoförü yavaş sürüyor."},
+  {artikel:"die", word:"Busfahrerin", plural:"Busfahrerinnen", emoji:"🚌", tr:"kadın otobüs şoförü", beispiel:"Die Busfahrerin ist neu.", beispielTr:"Kadın otobüs şoförü yeni."},
+  {artikel:"die", word:"Krankenschwester", plural:"Krankenschwestern", emoji:"👩‍⚕️", tr:"hemşire", beispiel:"Die Krankenschwester hilft dem Patienten.", beispielTr:"Hemşire hastaya yardım ediyor."},
   {artikel:"die", word:"Birne", plural:"Birnen", emoji:"🍐", tr:"armut", beispiel:"Ich esse eine Birne.", beispielTr:"Bir armut yiyorum."},
   {artikel:"die", word:"Banane", plural:"Bananen", emoji:"🍌", tr:"muz", beispiel:"Die Banane ist gelb.", beispielTr:"Muz sarı."},
   {artikel:"die", word:"Orange", plural:"Orangen", emoji:"🍊", tr:"portakal", beispiel:"Die Orange ist süß.", beispielTr:"Portakal tatlı."},
@@ -1381,41 +1497,49 @@ const STARTER_VERBS = [
   {verb:"liegen", emoji:"📍", tr:"bulunmak / konumlanmak", beispiel:"Die Stadt liegt am See.", beispielTr:"Şehir gölün kenarında bulunuyor.", conj:{ich:"liege", du:"liegst", er:"liegt", wir:"liegen", ihr:"liegt", sie:"liegen"}},
   {verb:"dauern", emoji:"⏳", tr:"sürmek (zaman)", beispiel:"Die Fahrt dauert zwei Stunden.", beispielTr:"Yolculuk iki saat sürüyor.", conj:{ich:"dauere", du:"dauerst", er:"dauert", wir:"dauern", ihr:"dauert", sie:"dauern"}},
   {verb:"studieren", emoji:"🎓", tr:"üniversitede okumak", beispiel:"Ich studiere Medizin.", beispielTr:"Tıp okuyorum.", conj:{ich:"studiere", du:"studierst", er:"studiert", wir:"studieren", ihr:"studiert", sie:"studieren"}},
+  {verb:"schwimmen", emoji:"🏊", tr:"yüzmek", beispiel:"Ich schwimme jeden Tag.", beispielTr:"Her gün yüzerim.", conj:{ich:"schwimme", du:"schwimmst", er:"schwimmt", wir:"schwimmen", ihr:"schwimmt", sie:"schwimmen"}},
+  {verb:"einkaufen", emoji:"🛍️", tr:"alışveriş yapmak", beispiel:"Wir gehen heute einkaufen.", beispielTr:"Bugün alışverişe gidiyoruz.", conj:{ich:"kaufe ein", du:"kaufst ein", er:"kauft ein", wir:"kaufen ein", ihr:"kauft ein", sie:"kaufen ein"}},
+  {verb:"tanzen", emoji:"💃", tr:"dans etmek", beispiel:"Sie tanzt sehr gut.", beispielTr:"O çok iyi dans ediyor.", conj:{ich:"tanze", du:"tanzt", er:"tanzt", wir:"tanzen", ihr:"tanzt", sie:"tanzen"}},
+  {verb:"spazieren gehen", emoji:"🚶", tr:"yürüyüşe çıkmak", beispiel:"Wir gehen im Park spazieren.", beispielTr:"Parkta yürüyüşe çıkıyoruz.", conj:{ich:"gehe spazieren", du:"gehst spazieren", er:"geht spazieren", wir:"gehen spazieren", ihr:"geht spazieren", sie:"gehen spazieren"}},
+  {verb:"Rad fahren", emoji:"🚴", tr:"bisiklete binmek", beispiel:"Ich fahre gern Rad.", beispielTr:"Bisiklete binmeyi severim.", conj:{ich:"fahre Rad", du:"fährst Rad", er:"fährt Rad", wir:"fahren Rad", ihr:"fahrt Rad", sie:"fahren Rad"}},
+  {verb:"Ski fahren", emoji:"⛷️", tr:"kayak yapmak", beispiel:"Im Winter fahren wir Ski.", beispielTr:"Kışın kayak yaparız.", conj:{ich:"fahre Ski", du:"fährst Ski", er:"fährt Ski", wir:"fahren Ski", ihr:"fahrt Ski", sie:"fahren Ski"}},
+  {verb:"Picknick machen", emoji:"🧺", tr:"piknik yapmak", beispiel:"Wir machen ein Picknick im Park.", beispielTr:"Parkta piknik yapıyoruz.", conj:{ich:"mache ein Picknick", du:"machst ein Picknick", er:"macht ein Picknick", wir:"machen ein Picknick", ihr:"macht ein Picknick", sie:"machen ein Picknick"}},
+  {verb:"Gitarre spielen", emoji:"🎸", tr:"gitar çalmak", beispiel:"Er spielt sehr gut Gitarre.", beispielTr:"O çok iyi gitar çalıyor.", conj:{ich:"spiele Gitarre", du:"spielst Gitarre", er:"spielt Gitarre", wir:"spielen Gitarre", ihr:"spielt Gitarre", sie:"spielen Gitarre"}},
   {verb:"mögen", emoji:"😊", tr:"sevmek / hoşlanmak", beispiel:"Ich mag Schokolade.", beispielTr:"Çikolatayı severim.", conj:{ich:"mag", du:"magst", er:"mag", wir:"mögen", ihr:"mögt", sie:"mögen"}}
 ];
 
 const STARTER_ADJEKTIVE = [
-  {adj:"groß", emoji:"📏", tr:"büyük", beispiel:"Das Haus ist groß.", beispielTr:"Ev büyük.", komparativ:"größer", superlativ:"am größten"},
-  {adj:"klein", emoji:"🤏", tr:"küçük", beispiel:"Die Katze ist klein.", beispielTr:"Kedi küçük.", komparativ:"kleiner", superlativ:"am kleinsten"},
-  {adj:"gut", emoji:"👍", tr:"iyi", beispiel:"Das Essen ist gut.", beispielTr:"Yemek iyi.", komparativ:"besser", superlativ:"am besten"},
-  {adj:"schlecht", emoji:"👎", tr:"kötü", beispiel:"Das Wetter ist schlecht.", beispielTr:"Hava kötü.", komparativ:"schlechter", superlativ:"am schlechtesten"},
-  {adj:"neu", emoji:"✨", tr:"yeni", beispiel:"Ich habe ein neues Handy.", beispielTr:"Yeni bir telefonum var.", komparativ:"neuer", superlativ:"am neuesten"},
-  {adj:"alt", emoji:"👴", tr:"eski / yaşlı", beispiel:"Mein Opa ist alt.", beispielTr:"Dedem yaşlı.", komparativ:"älter", superlativ:"am ältesten"},
-  {adj:"schön", emoji:"🌸", tr:"güzel", beispiel:"Die Blume ist schön.", beispielTr:"Çiçek güzel.", komparativ:"schöner", superlativ:"am schönsten"},
-  {adj:"hässlich", emoji:"😬", tr:"çirkin", beispiel:"Das Bild ist hässlich.", beispielTr:"Resim çirkin.", komparativ:"hässlicher", superlativ:"am hässlichsten"},
-  {adj:"schnell", emoji:"⚡", tr:"hızlı", beispiel:"Das Auto ist schnell.", beispielTr:"Araba hızlı.", komparativ:"schneller", superlativ:"am schnellsten"},
-  {adj:"langsam", emoji:"🐢", tr:"yavaş", beispiel:"Die Schildkröte ist langsam.", beispielTr:"Kaplumbağa yavaş.", komparativ:"langsamer", superlativ:"am langsamsten"},
-  {adj:"teuer", emoji:"💰", tr:"pahalı", beispiel:"Das Handy ist teuer.", beispielTr:"Telefon pahalı.", komparativ:"teurer", superlativ:"am teuersten"},
-  {adj:"billig", emoji:"🏷️", tr:"ucuz", beispiel:"Das T-Shirt ist billig.", beispielTr:"Tişört ucuz.", komparativ:"billiger", superlativ:"am billigsten"},
-  {adj:"warm", emoji:"☀️", tr:"sıcak", beispiel:"Der Tee ist warm.", beispielTr:"Çay sıcak.", komparativ:"wärmer", superlativ:"am wärmsten"},
-  {adj:"kalt", emoji:"❄️", tr:"soğuk", beispiel:"Das Wasser ist kalt.", beispielTr:"Su soğuk.", komparativ:"kälter", superlativ:"am kältesten"},
-  {adj:"glücklich", emoji:"😊", tr:"mutlu", beispiel:"Ich bin glücklich.", beispielTr:"Mutluyum.", komparativ:"glücklicher", superlativ:"am glücklichsten"},
-  {adj:"traurig", emoji:"😢", tr:"üzgün", beispiel:"Sie ist traurig.", beispielTr:"O üzgün.", komparativ:"trauriger", superlativ:"am traurigsten"},
-  {adj:"müde", emoji:"😴", tr:"yorgun", beispiel:"Ich bin sehr müde.", beispielTr:"Çok yorgunum.", komparativ:"müder", superlativ:"am müdesten"},
-  {adj:"hungrig", emoji:"🍽️", tr:"aç", beispiel:"Das Kind ist hungrig.", beispielTr:"Çocuk aç.", komparativ:"hungriger", superlativ:"am hungrigsten"},
+  {adj:"groß", emoji:"📏", tr:"büyük", beispiel:"Das Haus ist groß.", beispielTr:"Ev büyük.", komparativ:"größer", superlativ:"am größten", opposite:"klein"},
+  {adj:"klein", emoji:"🤏", tr:"küçük", beispiel:"Die Katze ist klein.", beispielTr:"Kedi küçük.", komparativ:"kleiner", superlativ:"am kleinsten", opposite:"groß"},
+  {adj:"gut", emoji:"👍", tr:"iyi", beispiel:"Das Essen ist gut.", beispielTr:"Yemek iyi.", komparativ:"besser", superlativ:"am besten", opposite:"schlecht"},
+  {adj:"schlecht", emoji:"👎", tr:"kötü", beispiel:"Das Wetter ist schlecht.", beispielTr:"Hava kötü.", komparativ:"schlechter", superlativ:"am schlechtesten", opposite:"gut"},
+  {adj:"neu", emoji:"✨", tr:"yeni", beispiel:"Ich habe ein neues Handy.", beispielTr:"Yeni bir telefonum var.", komparativ:"neuer", superlativ:"am neuesten", opposite:"alt"},
+  {adj:"alt", emoji:"👴", tr:"eski / yaşlı", beispiel:"Mein Opa ist alt.", beispielTr:"Dedem yaşlı.", komparativ:"älter", superlativ:"am ältesten", opposite:"neu"},
+  {adj:"schön", emoji:"🌸", tr:"güzel", beispiel:"Die Blume ist schön.", beispielTr:"Çiçek güzel.", komparativ:"schöner", superlativ:"am schönsten", opposite:"hässlich"},
+  {adj:"hässlich", emoji:"😬", tr:"çirkin", beispiel:"Das Bild ist hässlich.", beispielTr:"Resim çirkin.", komparativ:"hässlicher", superlativ:"am hässlichsten", opposite:"schön"},
+  {adj:"schnell", emoji:"⚡", tr:"hızlı", beispiel:"Das Auto ist schnell.", beispielTr:"Araba hızlı.", komparativ:"schneller", superlativ:"am schnellsten", opposite:"langsam"},
+  {adj:"langsam", emoji:"🐢", tr:"yavaş", beispiel:"Die Schildkröte ist langsam.", beispielTr:"Kaplumbağa yavaş.", komparativ:"langsamer", superlativ:"am langsamsten", opposite:"schnell"},
+  {adj:"teuer", emoji:"💰", tr:"pahalı", beispiel:"Das Handy ist teuer.", beispielTr:"Telefon pahalı.", komparativ:"teurer", superlativ:"am teuersten", opposite:"billig"},
+  {adj:"billig", emoji:"🏷️", tr:"ucuz", beispiel:"Das T-Shirt ist billig.", beispielTr:"Tişört ucuz.", komparativ:"billiger", superlativ:"am billigsten", opposite:"teuer"},
+  {adj:"warm", emoji:"☀️", tr:"sıcak", beispiel:"Der Tee ist warm.", beispielTr:"Çay sıcak.", komparativ:"wärmer", superlativ:"am wärmsten", opposite:"kühl"},
+  {adj:"kalt", emoji:"❄️", tr:"soğuk", beispiel:"Das Wasser ist kalt.", beispielTr:"Su soğuk.", komparativ:"kälter", superlativ:"am kältesten", opposite:"heiß"},
+  {adj:"glücklich", emoji:"😊", tr:"mutlu", beispiel:"Ich bin glücklich.", beispielTr:"Mutluyum.", komparativ:"glücklicher", superlativ:"am glücklichsten", opposite:"traurig"},
+  {adj:"traurig", emoji:"😢", tr:"üzgün", beispiel:"Sie ist traurig.", beispielTr:"O üzgün.", komparativ:"trauriger", superlativ:"am traurigsten", opposite:"glücklich"},
+  {adj:"müde", emoji:"😴", tr:"yorgun", beispiel:"Ich bin sehr müde.", beispielTr:"Çok yorgunum.", komparativ:"müder", superlativ:"am müdesten", opposite:"wach"},
+  {adj:"hungrig", emoji:"🍽️", tr:"aç", beispiel:"Das Kind ist hungrig.", beispielTr:"Çocuk aç.", komparativ:"hungriger", superlativ:"am hungrigsten", opposite:"satt"},
   {adj:"durstig", emoji:"🥤", tr:"susamış", beispiel:"Ich bin durstig.", beispielTr:"Susadım.", komparativ:"durstiger", superlativ:"am durstigsten"},
-  {adj:"laut", emoji:"🔊", tr:"gürültülü", beispiel:"Die Musik ist laut.", beispielTr:"Müzik yüksek sesli.", komparativ:"lauter", superlativ:"am lautesten"},
-  {adj:"leise", emoji:"🤫", tr:"sessiz", beispiel:"Sei bitte leise.", beispielTr:"Lütfen sessiz ol.", komparativ:"leiser", superlativ:"am leisesten"},
-  {adj:"einfach", emoji:"✅", tr:"kolay", beispiel:"Die Aufgabe ist einfach.", beispielTr:"Görev kolay.", komparativ:"einfacher", superlativ:"am einfachsten"},
-  {adj:"schwierig", emoji:"🧩", tr:"zor", beispiel:"Deutsch ist manchmal schwierig.", beispielTr:"Almanca bazen zor.", komparativ:"schwieriger", superlativ:"am schwierigsten"},
-  {adj:"wichtig", emoji:"❗", tr:"önemli", beispiel:"Die Familie ist wichtig.", beispielTr:"Aile önemlidir.", komparativ:"wichtiger", superlativ:"am wichtigsten"},
-  {adj:"interessant", emoji:"🤔", tr:"ilginç", beispiel:"Das Buch ist interessant.", beispielTr:"Kitap ilginç.", komparativ:"interessanter", superlativ:"am interessantesten"},
-  {adj:"lang", emoji:"📏", tr:"uzun", beispiel:"Der Weg ist lang.", beispielTr:"Yol uzun.", komparativ:"länger", superlativ:"am längsten"},
-  {adj:"kurz", emoji:"✂️", tr:"kısa", beispiel:"Die Antwort ist kurz.", beispielTr:"Cevap kısa.", komparativ:"kürzer", superlativ:"am kürzesten"},
-  {adj:"stark", emoji:"💪", tr:"güçlü", beispiel:"Er ist sehr stark.", beispielTr:"O çok güçlü.", komparativ:"stärker", superlativ:"am stärksten"},
-  {adj:"schwach", emoji:"🪶", tr:"zayıf", beispiel:"Nach der Krankheit ist er schwach.", beispielTr:"Hastalıktan sonra zayıf.", komparativ:"schwächer", superlativ:"am schwächsten"},
-  {adj:"ledig", emoji:"🙋", tr:"bekar", beispiel:"Mein Bruder ist ledig.", beispielTr:"Erkek kardeşim bekar."},
-  {adj:"verheiratet", emoji:"💍", tr:"evli", beispiel:"Meine Schwester ist verheiratet.", beispielTr:"Kız kardeşim evli."},
+  {adj:"laut", emoji:"🔊", tr:"gürültülü", beispiel:"Die Musik ist laut.", beispielTr:"Müzik yüksek sesli.", komparativ:"lauter", superlativ:"am lautesten", opposite:"leise"},
+  {adj:"leise", emoji:"🤫", tr:"sessiz", beispiel:"Sei bitte leise.", beispielTr:"Lütfen sessiz ol.", komparativ:"leiser", superlativ:"am leisesten", opposite:"laut"},
+  {adj:"einfach", emoji:"✅", tr:"kolay", beispiel:"Die Aufgabe ist einfach.", beispielTr:"Görev kolay.", komparativ:"einfacher", superlativ:"am einfachsten", opposite:"schwierig"},
+  {adj:"schwierig", emoji:"🧩", tr:"zor", beispiel:"Deutsch ist manchmal schwierig.", beispielTr:"Almanca bazen zor.", komparativ:"schwieriger", superlativ:"am schwierigsten", opposite:"einfach"},
+  {adj:"wichtig", emoji:"❗", tr:"önemli", beispiel:"Die Familie ist wichtig.", beispielTr:"Aile önemlidir.", komparativ:"wichtiger", superlativ:"am wichtigsten", opposite:"unwichtig"},
+  {adj:"interessant", emoji:"🤔", tr:"ilginç", beispiel:"Das Buch ist interessant.", beispielTr:"Kitap ilginç.", komparativ:"interessanter", superlativ:"am interessantesten", opposite:"langweilig"},
+  {adj:"lang", emoji:"📏", tr:"uzun", beispiel:"Der Weg ist lang.", beispielTr:"Yol uzun.", komparativ:"länger", superlativ:"am längsten", opposite:"kurz"},
+  {adj:"kurz", emoji:"✂️", tr:"kısa", beispiel:"Die Antwort ist kurz.", beispielTr:"Cevap kısa.", komparativ:"kürzer", superlativ:"am kürzesten", opposite:"lang"},
+  {adj:"stark", emoji:"💪", tr:"güçlü", beispiel:"Er ist sehr stark.", beispielTr:"O çok güçlü.", komparativ:"stärker", superlativ:"am stärksten", opposite:"schwach"},
+  {adj:"schwach", emoji:"🪶", tr:"zayıf", beispiel:"Nach der Krankheit ist er schwach.", beispielTr:"Hastalıktan sonra zayıf.", komparativ:"schwächer", superlativ:"am schwächsten", opposite:"stark"},
+  {adj:"ledig", emoji:"🙋", tr:"bekar", beispiel:"Mein Bruder ist ledig.", beispielTr:"Erkek kardeşim bekar.", opposite:"verheiratet"},
+  {adj:"verheiratet", emoji:"💍", tr:"evli", beispiel:"Meine Schwester ist verheiratet.", beispielTr:"Kız kardeşim evli.", opposite:"ledig"},
   {adj:"geschieden", emoji:"📄", tr:"boşanmış", beispiel:"Meine Eltern sind geschieden.", beispielTr:"Ebeveynlerim boşanmış."},
   {adj:"verwitwet", emoji:"🖤", tr:"dul", beispiel:"Meine Oma ist verwitwet.", beispielTr:"Büyükannem dul."},
   {adj:"verlobt", emoji:"💍", tr:"nişanlı", beispiel:"Sie ist verlobt.", beispielTr:"O nişanlı."},
@@ -1426,29 +1550,38 @@ const STARTER_ADJEKTIVE = [
   {adj:"pink", emoji:"🌸", tr:"pembe (parlak)", beispiel:"Ihre Tasche ist pink.", beispielTr:"Onun çantası parlak pembe."},
   {adj:"orange", emoji:"🧡", tr:"turuncu", beispiel:"Die Orange ist orange.", beispielTr:"Portakal turuncu."},
   {adj:"braun", emoji:"🤎", tr:"kahverengi", beispiel:"Der Bär ist braun.", beispielTr:"Ayı kahverengi.", komparativ:"brauner", superlativ:"am braunsten"},
-  {adj:"schwarz", emoji:"⚫", tr:"siyah", beispiel:"Die Katze ist schwarz.", beispielTr:"Kedi siyah.", komparativ:"schwärzer", superlativ:"am schwärzesten"},
-  {adj:"weiß", emoji:"⚪", tr:"beyaz", beispiel:"Der Schnee ist weiß.", beispielTr:"Kar beyaz.", komparativ:"weißer", superlativ:"am weißesten"},
+  {adj:"schwarz", emoji:"⚫", tr:"siyah", beispiel:"Die Katze ist schwarz.", beispielTr:"Kedi siyah.", komparativ:"schwärzer", superlativ:"am schwärzesten", opposite:"weiß"},
+  {adj:"weiß", emoji:"⚪", tr:"beyaz", beispiel:"Der Schnee ist weiß.", beispielTr:"Kar beyaz.", komparativ:"weißer", superlativ:"am weißesten", opposite:"schwarz"},
   {adj:"türkis", emoji:"🩵", tr:"turkuaz", beispiel:"Das Meer ist türkis.", beispielTr:"Deniz turkuaz."},
   {adj:"ocker", emoji:"🟤", tr:"okr sarısı", beispiel:"Die Wand ist ocker.", beispielTr:"Duvar okr renginde."},
-  {adj:"dunkelblau", emoji:"🔵", tr:"koyu mavi", beispiel:"Sein Auto ist dunkelblau.", beispielTr:"Onun arabası koyu mavi."},
-  {adj:"hellblau", emoji:"💠", tr:"açık mavi", beispiel:"Der Himmel ist hellblau.", beispielTr:"Gökyüzü açık mavi."},
+  {adj:"dunkelblau", emoji:"🔵", tr:"koyu mavi", beispiel:"Sein Auto ist dunkelblau.", beispielTr:"Onun arabası koyu mavi.", opposite:"hellblau"},
+  {adj:"hellblau", emoji:"💠", tr:"açık mavi", beispiel:"Der Himmel ist hellblau.", beispielTr:"Gökyüzü açık mavi.", opposite:"dunkelblau"},
   {adj:"erste", emoji:"1️⃣", tr:"birinci", beispiel:"Das ist mein erster Tag.", beispielTr:"Bu benim ilk günüm."},
   {adj:"zweite", emoji:"2️⃣", tr:"ikinci", beispiel:"Er wohnt im zweiten Stock.", beispielTr:"O ikinci katta oturuyor."},
   {adj:"dritte", emoji:"3️⃣", tr:"üçüncü", beispiel:"Sie ist die Dritte in der Reihe.", beispielTr:"O sırada üçüncü."},
   {adj:"vierte", emoji:"4️⃣", tr:"dördüncü", beispiel:"Das ist die vierte Frage.", beispielTr:"Bu dördüncü soru."},
-  {adj:"früh", emoji:"⏰", tr:"erken", beispiel:"Ich stehe früh auf.", beispielTr:"Erken kalkıyorum.", komparativ:"früher", superlativ:"am frühesten"},
-  {adj:"heiß", emoji:"🔥", tr:"sıcak", beispiel:"Der Kaffee ist heiß.", beispielTr:"Kahve sıcak.", komparativ:"heißer", superlativ:"am heißesten"},
+  {adj:"früh", emoji:"⏰", tr:"erken", beispiel:"Ich stehe früh auf.", beispielTr:"Erken kalkıyorum.", komparativ:"früher", superlativ:"am frühesten", opposite:"spät"},
+  {adj:"heiß", emoji:"🔥", tr:"sıcak", beispiel:"Der Kaffee ist heiß.", beispielTr:"Kahve sıcak.", komparativ:"heißer", superlativ:"am heißesten", opposite:"kalt"},
   {adj:"bestimmt", emoji:"✅", tr:"kesin / belirli", beispiel:"Er kommt bestimmt.", beispielTr:"O kesinlikle geliyor."},
-  {adj:"gleich", emoji:"⏱️", tr:"aynı / hemen", beispiel:"Die Preise sind gleich.", beispielTr:"Fiyatlar aynı."},
+  {adj:"gleich", emoji:"⏱️", tr:"aynı / hemen", beispiel:"Die Preise sind gleich.", beispielTr:"Fiyatlar aynı.", opposite:"verschieden"},
   {adj:"schade", emoji:"😔", tr:"ne yazık / yazık", beispiel:"Das ist wirklich schade.", beispielTr:"Bu gerçekten yazık."},
-  {adj:"spät", emoji:"🌙", tr:"geç", beispiel:"Es ist schon spät.", beispielTr:"Zaten geç oldu.", komparativ:"später", superlativ:"am spätesten"},
+  {adj:"spät", emoji:"🌙", tr:"geç", beispiel:"Es ist schon spät.", beispielTr:"Zaten geç oldu.", komparativ:"später", superlativ:"am spätesten", opposite:"früh"},
   {adj:"schon", emoji:"✅", tr:"zaten / bile", beispiel:"Ich bin schon fertig.", beispielTr:"Zaten bitirdim."},
-  {adj:"geöffnet", emoji:"🔓", tr:"açık", beispiel:"Das Geschäft ist geöffnet.", beispielTr:"Dükkan açık."},
-  {adj:"geschlossen", emoji:"🔒", tr:"kapalı", beispiel:"Das Museum ist heute geschlossen.", beispielTr:"Müze bugün kapalı."},
-  {adj:"hoch", emoji:"⛰️", tr:"yüksek", beispiel:"Der Berg ist sehr hoch.", beispielTr:"Dağ çok yüksek.", komparativ:"höher", superlativ:"am höchsten"},
+  {adj:"geöffnet", emoji:"🔓", tr:"açık", beispiel:"Das Geschäft ist geöffnet.", beispielTr:"Dükkan açık.", opposite:"geschlossen"},
+  {adj:"geschlossen", emoji:"🔒", tr:"kapalı", beispiel:"Das Museum ist heute geschlossen.", beispielTr:"Müze bugün kapalı.", opposite:"geöffnet"},
+  {adj:"hoch", emoji:"⛰️", tr:"yüksek", beispiel:"Der Berg ist sehr hoch.", beispielTr:"Dağ çok yüksek.", komparativ:"höher", superlativ:"am höchsten", opposite:"niedrig"},
   {adj:"toll", emoji:"🤩", tr:"harika / süper", beispiel:"Der Film war toll.", beispielTr:"Film harikaydı.", komparativ:"toller", superlativ:"am tollsten"},
   {adj:"circa", emoji:"≈", tr:"yaklaşık", beispiel:"Die Reise dauert circa zwei Stunden.", beispielTr:"Yolculuk yaklaşık iki saat sürüyor."},
-  {adj:"eigen", emoji:"🔑", tr:"kendi / öz", beispiel:"Ich habe eine eigene Wohnung.", beispielTr:"Kendi dairem var."}
+  {adj:"eigen", emoji:"🔑", tr:"kendi / öz", beispiel:"Ich habe eine eigene Wohnung.", beispielTr:"Kendi dairem var."},
+  {adj:"elegant", emoji:"💃", tr:"şık / zarif", beispiel:"Sie trägt ein elegantes Kleid.", beispielTr:"O şık bir elbise giyiyor.", komparativ:"eleganter", superlativ:"am elegantesten"},
+  {adj:"fertig", emoji:"✅", tr:"hazır / bitmiş", beispiel:"Bist du fertig?", beispielTr:"Hazır mısın?", komparativ:"fertiger", superlativ:"am fertigsten"},
+  {adj:"satt", emoji:"😌", tr:"tok / doymuş", beispiel:"Ich bin satt.", beispielTr:"Doydum.", opposite:"hungrig"},
+  {adj:"wach", emoji:"👀", tr:"uyanık", beispiel:"Ich bin schon wach.", beispielTr:"Zaten uyanığım.", opposite:"müde"},
+  {adj:"kühl", emoji:"🌬️", tr:"serin", beispiel:"Das Wasser ist kühl.", beispielTr:"Su serin.", opposite:"warm", komparativ:"kühler", superlativ:"am kühlsten"},
+  {adj:"unwichtig", emoji:"🤷", tr:"önemsiz", beispiel:"Das ist unwichtig.", beispielTr:"Bu önemsiz.", opposite:"wichtig"},
+  {adj:"langweilig", emoji:"😴", tr:"sıkıcı", beispiel:"Der Film war langweilig.", beispielTr:"Film sıkıcıydı.", opposite:"interessant", komparativ:"langweiliger", superlativ:"am langweiligsten"},
+  {adj:"niedrig", emoji:"⬇️", tr:"alçak / düşük", beispiel:"Der Tisch ist niedrig.", beispielTr:"Masa alçak.", opposite:"hoch", komparativ:"niedriger", superlativ:"am niedrigsten"},
+  {adj:"verschieden", emoji:"🔀", tr:"farklı", beispiel:"Wir haben verschiedene Meinungen.", beispielTr:"Farklı görüşlerimiz var.", opposite:"gleich"}
 ];
 
 const STARTER_SAAT = [
@@ -2068,41 +2201,70 @@ function importVerbs(event){
 
 /* ---------- SIFATLAR (ADJEKTIVE) ---------- */
 
+function renderAdjSide(a, realIdx){
+  const revealed = revealedAdj.has(realIdx);
+  const label = revealed
+    ? `${escapeHtml(a.adj)} <span class="tr-part">— ${escapeHtml(a.tr) || "?"}</span>`
+    : escapeHtml(a.adj);
+  return `
+    <div class="adj-side">
+      <div class="adj-emoji">${escapeHtml(a.emoji)}</div>
+      <div class="adj-word" data-idx="${realIdx}">${label}</div>
+      <div class="adj-side-btns">
+        <button class="speak-btn" data-idx="${realIdx}" title="Dinle">${SPEAK_SVG}</button>
+        <button class="conj-btn" data-idx="${realIdx}" style="font-size:11px;padding:4px 8px;">derece</button>
+        <button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle" style="font-size:14px;">📘</button>
+        <button class="del" data-idx="${realIdx}" style="font-size:11px;">sil</button>
+      </div>
+    </div>`;
+}
+
+function findOppositeIdx(a, realIdx){
+  if(a.opposite){
+    const idx = adjectives.findIndex(x => x.adj === a.opposite);
+    if(idx !== -1) return idx;
+  }
+  return adjectives.findIndex((x, i) => i !== realIdx && x.opposite === a.adj);
+}
+
 function renderAdjectives(){
-  const tbody = document.getElementById("adjTableBody");
+  const grid = document.getElementById("adjPairGrid");
   const query = document.getElementById("adjSearchInput").value.trim().toLowerCase();
-  tbody.innerHTML = "";
+  grid.innerHTML = "";
 
   const filtered = query
     ? adjectives.filter(a => a.adj.toLowerCase().includes(query) || (a.tr||"").toLowerCase().includes(query))
     : adjectives;
 
   if(filtered.length === 0){
-    tbody.innerHTML = `<tr><td colspan="6" class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</td></tr>`;
+    grid.innerHTML = `<div class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</div>`;
     return;
   }
 
+  const shown = new Set();
+  let html = "";
+
   filtered.forEach((a) => {
     const realIdx = adjectives.indexOf(a);
-    const revealed = revealedAdj.has(realIdx);
-    const tr = document.createElement("tr");
-    const adjDisplay = revealed
-      ? `${escapeHtml(a.adj)} <span class="tr-part">— ${escapeHtml(a.tr) || "?"}</span>`
-      : escapeHtml(a.adj);
-    tr.innerHTML = `
-      <td class="emoji-cell">${escapeHtml(a.emoji)}</td>
-      <td class="word-cell" data-idx="${realIdx}">${adjDisplay}</td>
-      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button></td>
-      <td><button class="conj-btn" data-idx="${realIdx}">derece</button></td>
-      <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
-      <td><button class="del" data-idx="${realIdx}">sil</button></td>
-    `;
-    tbody.appendChild(tr);
+    if(shown.has(realIdx)) return;
+
+    const oppIdx = findOppositeIdx(a, realIdx);
+
+    if(oppIdx !== -1 && !shown.has(oppIdx)){
+      shown.add(realIdx);
+      shown.add(oppIdx);
+      html += `<div class="adj-pair-card">${renderAdjSide(a, realIdx)}<div class="adj-vs">↔</div>${renderAdjSide(adjectives[oppIdx], oppIdx)}</div>`;
+    } else {
+      shown.add(realIdx);
+      html += `<div class="adj-pair-card adj-solo">${renderAdjSide(a, realIdx)}</div>`;
+    }
   });
+
+  grid.innerHTML = html;
 }
 
-document.getElementById("adjTableBody").addEventListener("click", (e)=>{
-  const wcell = e.target.closest(".word-cell");
+document.getElementById("adjPairGrid").addEventListener("click", (e)=>{
+  const wcell = e.target.closest(".adj-word");
   if(wcell){ toggleReveal("adj", parseInt(wcell.dataset.idx, 10)); return; }
   const speakBtn = e.target.closest(".speak-btn");
   if(speakBtn){
@@ -2119,7 +2281,7 @@ document.getElementById("adjTableBody").addEventListener("click", (e)=>{
 });
 
 function openAddAdjModal(){
-  ["inpAdj","inpAdjTr","inpAdjEmoji"].forEach(id => document.getElementById(id).value = "");
+  ["inpAdj","inpAdjTr","inpAdjEmoji","inpAdjOpposite"].forEach(id => document.getElementById(id).value = "");
   document.getElementById("addAdjOverlay").classList.add("show");
   setTimeout(()=>document.getElementById("inpAdj").focus(), 50);
 }
@@ -2129,11 +2291,20 @@ function addAdjective(){
   const emoji = document.getElementById("inpAdjEmoji").value.trim();
   const adj = document.getElementById("inpAdj").value.trim();
   const tr = document.getElementById("inpAdjTr").value.trim();
+  const opposite = document.getElementById("inpAdjOpposite").value.trim();
   if(!adj){
     alert("Sıfat alanını doldur.");
     return;
   }
-  adjectives.push({adj, emoji, tr});
+  const newAdj = {adj, emoji, tr};
+  if(opposite) newAdj.opposite = opposite;
+  adjectives.push(newAdj);
+  if(opposite){
+    const oppIdx = adjectives.findIndex(x => x.adj === opposite);
+    if(oppIdx !== -1 && !adjectives[oppIdx].opposite){
+      adjectives[oppIdx].opposite = adj;
+    }
+  }
   sortByField(adjectives, "adj");
   saveAdjectives();
   renderAdjectives();
@@ -2487,7 +2658,9 @@ function speak(text){
 
 function speakCurrentWord(){
   if(!currentQ) return;
-  if(currentQ.mode === "clock"){
+  if(currentQ.mode === "order"){
+    speak(currentQ.correctTokens.join(" "));
+  } else if(currentQ.mode === "clock"){
     speak(currentQ.correctPhrase);
   } else if(currentQ.mode === "sentence"){
     speak(currentQ.sentence);
@@ -2515,6 +2688,7 @@ function getItemKey(item, category){
   if(category === "saat") return item.zeit;
   if(category === "konj") return item.konj;
   if(category === "uhrzeit") return "Uhr " + item.digital;
+  if(category === "order-sentence") return item.sentence;
   return item.word;
 }
 
@@ -2625,7 +2799,7 @@ function markAsked(cycleKey, items, keyFn){
   saveRecentAsked();
 }
 
-const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "smart-mixed", "saat-quiz", "konj-quiz"];
+const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "smart-mixed", "saat-quiz", "konj-quiz", "order-quiz"];
 
 function markShownWord(word, category){
   if(!currentTestMode || !CYCLE_MODES.includes(currentTestMode)) return;
@@ -2694,6 +2868,29 @@ function buildUhrzeitSession(count){
   return questions;
 }
 
+function buildOrderPool(){
+  const pool = [];
+  words.forEach(w => { if(w.beispiel) pool.push({sentence:w.beispiel, translation:w.beispielTr, emoji:w.emoji}); });
+  verbs.forEach(v => { if(v.beispiel) pool.push({sentence:v.beispiel, translation:v.beispielTr, emoji:v.emoji}); });
+  adjectives.forEach(a => { if(a.beispiel) pool.push({sentence:a.beispiel, translation:a.beispielTr, emoji:a.emoji}); });
+  saatWords.forEach(s => { if(s.beispiel) pool.push({sentence:s.beispiel, translation:s.beispielTr, emoji:s.emoji}); });
+  konjWords.forEach(k => { if(k.beispiel) pool.push({sentence:k.beispiel, translation:k.beispielTr, emoji:k.emoji}); });
+  return pool.filter(p => {
+    const n = p.sentence.trim().split(/\s+/).length;
+    return n >= 3 && n <= 8;
+  });
+}
+
+function shuffleTokens(tokens){
+  if(tokens.length <= 1) return tokens.slice();
+  let shuffled, attempts = 0;
+  do{
+    shuffled = shuffleArray(tokens.slice());
+    attempts++;
+  } while(shuffled.join(" ") === tokens.join(" ") && attempts < 10);
+  return shuffled;
+}
+
 function buildSmartMixedPool(){
   const pool = [];
   words.forEach(w => {
@@ -2747,6 +2944,23 @@ function buildSession(testMode){
       }
     });
     return shuffleArray(session);
+  }
+  if(testMode === "order-quiz"){
+    const fullPool = buildOrderPool();
+    const pool = getUnseenPool(testMode, fullPool, p => p.sentence);
+    const picked = shuffleArray(pool).slice(0, 20);
+    return picked.map(p => {
+      const tokens = p.sentence.trim().split(/\s+/);
+      return {
+        word: {sentence:p.sentence, translation:p.translation, emoji:p.emoji},
+        mode: "order",
+        category: "order-sentence",
+        correctTokens: tokens,
+        pool: shuffleTokens(tokens),
+        answer: [],
+        answered: false
+      };
+    });
   }
   if(testMode === "sentence-fill"){
     const pool = buildSentenceFillPool();
@@ -2874,6 +3088,10 @@ function askQuestion(testMode){
     alert("Cümle tamamlama testi için örnek cümlesi olan kelime bulunamadı.");
     return;
   }
+  if(testMode === "order-quiz" && buildOrderPool().length === 0){
+    alert("Cümle kurma testi için uygun cümle bulunamadı.");
+    return;
+  }
   sessionQuestions = buildSession(testMode);
   sessionIndex = 0;
   currentTestMode = testMode;
@@ -2897,8 +3115,24 @@ function showSessionQuestion(){
   document.getElementById("prevBtn").disabled = sessionIndex === 0;
   document.getElementById("nextBtn").disabled = sessionIndex === sessionQuestions.length - 1;
   document.getElementById("qConjBtn").style.display = (category === "verb") ? "inline-flex" : "none";
-  document.getElementById("qHintBtn").style.display = (currentQ.mode === "clock") ? "none" : "inline-flex";
-  document.getElementById("qExampleBtn").style.display = (currentQ.mode === "clock") ? "none" : "inline-flex";
+  const hideAux = (currentQ.mode === "clock" || currentQ.mode === "order");
+  document.getElementById("qHintBtn").style.display = hideAux ? "none" : "inline-flex";
+  document.getElementById("qExampleBtn").style.display = hideAux ? "none" : "inline-flex";
+  document.getElementById("qSpeakBtn").style.display = (currentQ.mode === "order" && !currentQ.answered) ? "none" : "inline-flex";
+  document.getElementById("orderWrap").style.display = (currentQ.mode === "order") ? "block" : "none";
+
+  if(currentQ.mode === "order"){
+    document.getElementById("qType").textContent = "CÜMLEYİ DOĞRU SIRAYA DİZ";
+    const qw = document.getElementById("qWord");
+    qw.textContent = currentQ.word.translation || "?";
+    qw.style.color = "var(--ink)";
+    qw.classList.add("qword-sentence");
+    document.getElementById("qPluralInput").style.display = "none";
+    document.getElementById("umlautRow").style.display = "none";
+    document.getElementById("qOptions").style.display = "none";
+    renderOrderUI();
+    return;
+  }
 
   if(currentQ.mode === "clock"){
     document.getElementById("qType").textContent = "SAAT NASIL SÖYLENİR?";
@@ -3047,6 +3281,67 @@ function checkSentenceArtikelAnswer(chosen, btnEl){
     saveStats();
     updateStatDisplay();
   }
+}
+
+function renderOrderUI(){
+  const answerDiv = document.getElementById("orderAnswer");
+  const poolDiv = document.getElementById("orderPool");
+  const locked = currentQ.answered;
+
+  if(currentQ.answer.length === 0){
+    answerDiv.innerHTML = '<span class="order-placeholder">Kelimeleri aşağıdan sırayla seç...</span>';
+  } else {
+    answerDiv.innerHTML = currentQ.answer.map((w, i) => {
+      let cls = "order-tile placed";
+      if(locked){
+        cls += " locked";
+        if(w === currentQ.correctTokens[i]) cls += " correct-order"; else cls += " wrong-order";
+      }
+      return `<button class="${cls}" onclick="clickAnswerTile(${i})">${escapeHtml(w)}</button>`;
+    }).join("");
+  }
+
+  poolDiv.innerHTML = currentQ.pool.map((w, i) => {
+    const cls = "order-tile" + (locked ? " locked" : "");
+    return `<button class="${cls}" onclick="clickPoolTile(${i})">${escapeHtml(w)}</button>`;
+  }).join("");
+}
+
+function clickPoolTile(idx){
+  if(!currentQ || currentQ.mode !== "order" || currentQ.answered) return;
+  const word = currentQ.pool.splice(idx, 1)[0];
+  currentQ.answer.push(word);
+  renderOrderUI();
+  if(currentQ.pool.length === 0){
+    checkOrderAnswer();
+  }
+}
+
+function clickAnswerTile(idx){
+  if(!currentQ || currentQ.mode !== "order" || currentQ.answered) return;
+  const word = currentQ.answer.splice(idx, 1)[0];
+  currentQ.pool.push(word);
+  renderOrderUI();
+}
+
+function checkOrderAnswer(){
+  const userSentence = currentQ.answer.join(" ");
+  const correctSentence = currentQ.correctTokens.join(" ");
+  const isCorrect = userSentence === correctSentence;
+  currentQ.answered = true;
+  showResultIcon(isCorrect);
+  renderOrderUI();
+  document.getElementById("qSpeakBtn").style.display = "inline-flex";
+  const key = getItemKey(currentQ.word, "order-sentence");
+  if(isCorrect){
+    document.getElementById("qFeedback").textContent = "Doğru! " + correctSentence;
+  } else {
+    document.getElementById("qFeedback").textContent = "Doğrusu: " + correctSentence;
+  }
+  stats[isCorrect ? "correct" : "wrong"]++;
+  recordWordStat(key, isCorrect);
+  saveStats();
+  updateStatDisplay();
 }
 
 function checkClockAnswer(chosen, btnEl){
