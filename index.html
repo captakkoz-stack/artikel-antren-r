@@ -2849,11 +2849,11 @@ function germanTimePhrase(hour, minute){
     case 5:  return "fünf nach " + h;
     case 10: return "zehn nach " + h;
     case 15: return "Viertel nach " + h;
-    case 20: return "zehn vor halb " + hNext;
+    case 20: return "zwanzig nach " + h;
     case 25: return "fünf vor halb " + hNext;
     case 30: return "halb " + hNext;
     case 35: return "fünf nach halb " + hNext;
-    case 40: return "zehn nach halb " + hNext;
+    case 40: return "zwanzig vor " + hNext;
     case 45: return "Viertel vor " + hNext;
     case 50: return "zehn vor " + hNext;
     case 55: return "fünf vor " + hNext;
@@ -3148,7 +3148,7 @@ function showSessionQuestion(){
   document.getElementById("qConjBtn").style.display = (category === "verb") ? "inline-flex" : "none";
   document.getElementById("qHintBtn").style.display = (currentQ.mode === "clock") ? "none" : "inline-flex";
   document.getElementById("qExampleBtn").style.display = (currentQ.mode === "clock" || currentQ.mode === "order") ? "none" : "inline-flex";
-  document.getElementById("qSpeakBtn").style.display = (currentQ.mode === "order" && !currentQ.answered) ? "none" : "inline-flex";
+  document.getElementById("qSpeakBtn").style.display = (currentQ.mode === "order" && !currentQ.solved) ? "none" : "inline-flex";
   document.getElementById("orderWrap").style.display = (currentQ.mode === "order") ? "block" : "none";
   document.getElementById("qWord").style.display = (currentQ.mode === "order") ? "none" : "block";
 
@@ -3313,7 +3313,7 @@ function checkSentenceArtikelAnswer(chosen, btnEl){
 function renderOrderUI(){
   const answerDiv = document.getElementById("orderAnswer");
   const poolDiv = document.getElementById("orderPool");
-  const locked = currentQ.answered;
+  const locked = !!currentQ.locked;
 
   if(currentQ.answer.length === 0){
     answerDiv.innerHTML = '<span class="order-placeholder">Kelimeleri aşağıdan sırayla seç...</span>';
@@ -3335,7 +3335,7 @@ function renderOrderUI(){
 }
 
 function clickPoolTile(idx){
-  if(!currentQ || currentQ.mode !== "order" || currentQ.answered) return;
+  if(!currentQ || currentQ.mode !== "order" || currentQ.locked) return;
   const word = currentQ.pool.splice(idx, 1)[0];
   currentQ.answer.push(word);
   renderOrderUI();
@@ -3345,30 +3345,49 @@ function clickPoolTile(idx){
 }
 
 function clickAnswerTile(idx){
-  if(!currentQ || currentQ.mode !== "order" || currentQ.answered) return;
+  if(!currentQ || currentQ.mode !== "order" || currentQ.locked) return;
   const word = currentQ.answer.splice(idx, 1)[0];
   currentQ.pool.push(word);
   renderOrderUI();
 }
 
 function checkOrderAnswer(){
-  const userSentence = currentQ.answer.join(" ");
-  const correctSentence = currentQ.correctTokens.join(" ");
+  const q = currentQ;
+  const userSentence = q.answer.join(" ");
+  const correctSentence = q.correctTokens.join(" ");
   const isCorrect = userSentence === correctSentence;
-  currentQ.answered = true;
+  const key = getItemKey(q.word, "order-sentence");
+
+  if(!q.answered){
+    q.answered = true;
+    stats[isCorrect ? "correct" : "wrong"]++;
+    recordWordStat(key, isCorrect);
+    saveStats();
+    updateStatDisplay();
+  }
+
+  q.locked = true;
   showResultIcon(isCorrect);
   renderOrderUI();
-  document.getElementById("qSpeakBtn").style.display = "inline-flex";
-  const key = getItemKey(currentQ.word, "order-sentence");
+
   if(isCorrect){
+    q.solved = true;
+    document.getElementById("qSpeakBtn").style.display = "inline-flex";
     document.getElementById("qFeedback").textContent = "Doğru! " + correctSentence;
   } else {
-    document.getElementById("qFeedback").textContent = "Doğrusu: " + correctSentence;
+    document.getElementById("qFeedback").textContent = "Yanlış sıralama — tekrar dene!";
+    setTimeout(()=>{
+      if(currentQ !== q || q.solved) return;
+      q.pool = shuffleTokens(q.correctTokens);
+      q.answer = [];
+      q.locked = false;
+      document.getElementById("qFeedback").textContent = "Tekrar dene — doğru sırayı bulana kadar deneyebilirsin.";
+      const resIcon = document.getElementById("resultIcon");
+      resIcon.className = "result-icon";
+      resIcon.textContent = "";
+      renderOrderUI();
+    }, 1400);
   }
-  stats[isCorrect ? "correct" : "wrong"]++;
-  recordWordStat(key, isCorrect);
-  saveStats();
-  updateStatDisplay();
 }
 
 function checkClockAnswer(chosen, btnEl){
