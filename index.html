@@ -508,9 +508,28 @@
   .order-tile.correct-order{background:var(--das-bg);border-color:#3a7d3a;color:#2c5c2c;}
   .order-tile.wrong-order{background:#fde3da;border-color:var(--coral);color:var(--coral);}
 
-  .adj-pair-grid{
+  .adj-split-wrap{
     display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: 1fr 1fr;
+    gap:20px;
+  }
+  @media (max-width:700px){
+    .adj-split-wrap{grid-template-columns:1fr;}
+  }
+  .adj-col-title{
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.4px;
+    color:var(--brass);
+    margin-bottom:8px;
+    padding-bottom:6px;
+    border-bottom:1px solid var(--line);
+  }
+  .adj-col-list{
+    display:flex;
+    flex-direction:column;
     gap:10px;
   }
   .adj-pair-card{
@@ -832,8 +851,17 @@
       </div>
       <div class="hint-line">Sıfata tıkla → Türkçesini gör. Zıt anlamlılar karşılıklı gösterilir.</div>
 
-      <div class="wordlist-scroll">
-        <div id="adjPairGrid" class="adj-pair-grid"></div>
+      <div class="wordlist-scroll" style="max-height:680px;">
+        <div id="adjPairGrid" class="adj-split-wrap">
+          <div class="adj-col">
+            <div class="adj-col-title">Zıt Anlamlı Çiftler</div>
+            <div id="adjPairsCol" class="adj-col-list"></div>
+          </div>
+          <div class="adj-col">
+            <div class="adj-col-title">Diğer Sıfatlar</div>
+            <div id="adjSolosCol" class="adj-col-list"></div>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -2228,21 +2256,23 @@ function findOppositeIdx(a, realIdx){
 }
 
 function renderAdjectives(){
-  const grid = document.getElementById("adjPairGrid");
+  const pairsCol = document.getElementById("adjPairsCol");
+  const solosCol = document.getElementById("adjSolosCol");
   const query = document.getElementById("adjSearchInput").value.trim().toLowerCase();
-  grid.innerHTML = "";
 
   const filtered = query
     ? adjectives.filter(a => a.adj.toLowerCase().includes(query) || (a.tr||"").toLowerCase().includes(query))
     : adjectives;
 
   if(filtered.length === 0){
-    grid.innerHTML = `<div class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</div>`;
+    pairsCol.innerHTML = `<div class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</div>`;
+    solosCol.innerHTML = "";
     return;
   }
 
   const shown = new Set();
-  let html = "";
+  let pairsHtml = "";
+  let solosHtml = "";
 
   filtered.forEach((a) => {
     const realIdx = adjectives.indexOf(a);
@@ -2253,14 +2283,15 @@ function renderAdjectives(){
     if(oppIdx !== -1 && !shown.has(oppIdx)){
       shown.add(realIdx);
       shown.add(oppIdx);
-      html += `<div class="adj-pair-card">${renderAdjSide(a, realIdx)}<div class="adj-vs">↔</div>${renderAdjSide(adjectives[oppIdx], oppIdx)}</div>`;
+      pairsHtml += `<div class="adj-pair-card">${renderAdjSide(a, realIdx)}<div class="adj-vs">↔</div>${renderAdjSide(adjectives[oppIdx], oppIdx)}</div>`;
     } else {
       shown.add(realIdx);
-      html += `<div class="adj-pair-card adj-solo">${renderAdjSide(a, realIdx)}</div>`;
+      solosHtml += `<div class="adj-pair-card adj-solo">${renderAdjSide(a, realIdx)}</div>`;
     }
   });
 
-  grid.innerHTML = html;
+  pairsCol.innerHTML = pairsHtml || '<div class="no-match">Çift bulunamadı.</div>';
+  solosCol.innerHTML = solosHtml || '<div class="no-match">Sonuç yok.</div>';
 }
 
 document.getElementById("adjPairGrid").addEventListener("click", (e)=>{
@@ -3115,18 +3146,14 @@ function showSessionQuestion(){
   document.getElementById("prevBtn").disabled = sessionIndex === 0;
   document.getElementById("nextBtn").disabled = sessionIndex === sessionQuestions.length - 1;
   document.getElementById("qConjBtn").style.display = (category === "verb") ? "inline-flex" : "none";
-  const hideAux = (currentQ.mode === "clock" || currentQ.mode === "order");
-  document.getElementById("qHintBtn").style.display = hideAux ? "none" : "inline-flex";
-  document.getElementById("qExampleBtn").style.display = hideAux ? "none" : "inline-flex";
+  document.getElementById("qHintBtn").style.display = (currentQ.mode === "clock") ? "none" : "inline-flex";
+  document.getElementById("qExampleBtn").style.display = (currentQ.mode === "clock" || currentQ.mode === "order") ? "none" : "inline-flex";
   document.getElementById("qSpeakBtn").style.display = (currentQ.mode === "order" && !currentQ.answered) ? "none" : "inline-flex";
   document.getElementById("orderWrap").style.display = (currentQ.mode === "order") ? "block" : "none";
+  document.getElementById("qWord").style.display = (currentQ.mode === "order") ? "none" : "block";
 
   if(currentQ.mode === "order"){
     document.getElementById("qType").textContent = "CÜMLEYİ DOĞRU SIRAYA DİZ";
-    const qw = document.getElementById("qWord");
-    qw.textContent = currentQ.word.translation || "?";
-    qw.style.color = "var(--ink)";
-    qw.classList.add("qword-sentence");
     document.getElementById("qPluralInput").style.display = "none";
     document.getElementById("umlautRow").style.display = "none";
     document.getElementById("qOptions").style.display = "none";
@@ -3455,8 +3482,9 @@ function toggleHint(){
   const hintEl = document.getElementById("hintText");
   if(hintEl.textContent){
     hintEl.textContent = "";
-  } else if(currentQ && currentQ.mode === "sentence"){
-    hintEl.textContent = "İpucu (çeviri): " + (currentQ.translation || "Türkçesi eklenmemiş");
+  } else if(currentQ && (currentQ.mode === "sentence" || currentQ.mode === "order")){
+    const tr = currentQ.mode === "order" ? currentQ.word.translation : currentQ.translation;
+    hintEl.textContent = "İpucu (çeviri): " + (tr || "Türkçesi eklenmemiş");
   } else {
     const tr = (currentQ && currentQ.word && currentQ.word.tr) ? currentQ.word.tr : "Türkçesi eklenmemiş";
     hintEl.textContent = "İpucu: " + tr;
