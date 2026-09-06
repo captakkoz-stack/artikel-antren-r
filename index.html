@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Artikel, Verben & Adjektive Antrenörü</title>
+<title>Almanca Kişisel Çalışma Antrenörü</title>
 <style>
   :root{
     --deep: #0F2A3D;
@@ -595,12 +595,12 @@
 <body>
 
 <header>
-  <h1>Artikel, Verben &amp; Adjektive Antrenörü</h1>
+  <h1>Almanca Kişisel Çalışma Antrenörü</h1>
   <p>A1.1 kelime çalışması — der (mavi) / die (kırmızı) / das (yeşil)</p>
 </header>
 
 <div class="tabbar">
-  <button class="tab-btn active" id="tabBtnArtikel" onclick="switchTab('artikel')">İsimler (Artikel)</button>
+  <button class="tab-btn active" id="tabBtnArtikel" onclick="switchTab('artikel')">Nomen (Artikel)</button>
   <button class="tab-btn" id="tabBtnVerben" onclick="switchTab('verben')">Fiiller (Verben)</button>
   <button class="tab-btn" id="tabBtnAdj" onclick="switchTab('adj')">Sıfatlar (Adjektive)</button>
   <button class="tab-btn" id="tabBtnSaat" onclick="switchTab('saat')">Saatler (Uhrzeit)</button>
@@ -611,7 +611,7 @@
   <div id="artikelSection">
     <section class="panel" style="margin-top:0;">
       <div class="list-header">
-        <h2>Kelime Listem</h2>
+        <h2>Kelime Listem (Wörterbuch)</h2>
         <button class="btn-add" onclick="openAddModal()">+ Kelime Ekle</button>
       </div>
 
@@ -679,7 +679,7 @@
   <div id="verbenSection" style="display:none;">
     <section class="panel" style="margin-top:0;">
       <div class="list-header">
-        <h2>Fiil Listem</h2>
+        <h2>Fiil Listem (Wörterbuch)</h2>
         <button class="btn-add" onclick="openAddVerbModal()">+ Fiil Ekle</button>
       </div>
 
@@ -718,7 +718,7 @@
   <div id="adjSection" style="display:none;">
     <section class="panel" style="margin-top:0;">
       <div class="list-header">
-        <h2>Sıfat Listem</h2>
+        <h2>Sıfat Listem (Wörterbuch)</h2>
         <button class="btn-add" onclick="openAddAdjModal()">+ Sıfat Ekle</button>
       </div>
 
@@ -740,7 +740,7 @@
   <div id="saatSection" style="display:none;">
     <section class="panel" style="margin-top:0;">
       <div class="list-header">
-        <h2>Saat Listem</h2>
+        <h2>Saat Listem (Wörterbuch)</h2>
         <button class="btn-add" onclick="openAddSaatModal()">+ Saat İfadesi Ekle</button>
       </div>
       <div class="search-row">
@@ -791,12 +791,37 @@
         Kural: <strong>von</strong> başlangıcı, <strong>bis</strong> bitişi gösterir — ikisi her zaman birlikte kullanılır.
       </div>
     </section>
+
+    <section class="panel">
+      <h2>als / bei / am / um — hızlı referans</h2>
+      <div class="rule-grid">
+        <div class="rule-card der">
+          <div class="title">um</div>
+          <div class="sfx">Tam saatle birlikte</div>
+          <div class="ex">um drei Uhr<br>um Mitternacht</div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">am</div>
+          <div class="sfx">Gün, tarih, günün bölümüyle</div>
+          <div class="ex">am Montag<br>am Morgen</div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">bei</div>
+          <div class="sfx">Yer, şirket, faaliyet sırasında</div>
+          <div class="ex">bei der Arbeit<br>beim Essen</div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>als</strong> bunlardan farklı bir görevde: (1) geçmişte <strong>TEK SEFERLİK</strong> bir olay için "-dığında" — <strong>Als ich acht war, ...</strong> (Sekiz yaşındayken...) (2) karşılaştırmada "-den daha" — <strong>größer als</strong> (-den daha büyük) (3) meslek/rol tanıtırken "olarak" — <strong>Er arbeitet als Lehrer.</strong> (Öğretmen olarak çalışıyor.)<br>
+        En sık karışan kural: Tekrar eden / şimdiki / gelecek olaylarda "-dığında" için <strong>wenn</strong> kullanılır — sadece geçmişte <strong>tek seferlik</strong> olaylarda <strong>als</strong> kullanılır.
+      </div>
+    </section>
   </div>
 
   <div id="konjSection" style="display:none;">
     <section class="panel" style="margin-top:0;">
       <div class="list-header">
-        <h2>Bağlaç Listem</h2>
+        <h2>Bağlaç Listem (Wörterbuch)</h2>
         <button class="btn-add" onclick="openAddKonjModal()">+ Bağlaç Ekle</button>
       </div>
       <div class="search-row">
@@ -1421,7 +1446,8 @@ const STARTER_KONJ = [
   {konj:"dass", emoji:"💬", tr:"ki (bağlaç)", beispiel:"Ich weiß, dass du müde bist.", beispielTr:"Yorgun olduğunu biliyorum."},
   {konj:"wenn", emoji:"⏳", tr:"eğer / -dığında", beispiel:"Wenn ich Zeit habe, lese ich.", beispielTr:"Zamanım olduğunda okurum."},
   {konj:"deshalb", emoji:"➡️", tr:"bu yüzden", beispiel:"Es regnet, deshalb bleibe ich zu Hause.", beispielTr:"Yağmur yağıyor, bu yüzden evde kalıyorum."},
-  {konj:"dann", emoji:"⏭️", tr:"sonra / o zaman", beispiel:"Zuerst esse ich, dann arbeite ich.", beispielTr:"Önce yerim, sonra çalışırım."}
+  {konj:"dann", emoji:"⏭️", tr:"sonra / o zaman", beispiel:"Zuerst esse ich, dann arbeite ich.", beispielTr:"Önce yerim, sonra çalışırım."},
+  {konj:"als", emoji:"🕰️", tr:"-dığında (geçmiş, tek seferlik) / -den daha / olarak (meslek)", beispiel:"Als ich acht war, hatte ich einen Hund.", beispielTr:"Sekiz yaşındayken bir köpeğim vardı."}
 ];
 
 let words = [];
@@ -1472,31 +1498,40 @@ try{
   storageAvailable = false;
 }
 
+function sortByField(arr, field){
+  arr.sort((a, b) => (a[field]||"").localeCompare((b[field]||""), "de", {sensitivity:"base"}));
+}
+
 function loadData(){
   try{
     const w = localStorage.getItem("artikel_words");
     words = w ? JSON.parse(w) : STARTER_WORDS.slice();
   }catch(e){ words = STARTER_WORDS.slice(); }
+  sortByField(words, "word");
 
   try{
     const v = localStorage.getItem("artikel_verbs");
     verbs = v ? JSON.parse(v) : STARTER_VERBS.slice();
   }catch(e){ verbs = STARTER_VERBS.slice(); }
+  sortByField(verbs, "verb");
 
   try{
     const a = localStorage.getItem("artikel_adjectives");
     adjectives = a ? JSON.parse(a) : STARTER_ADJEKTIVE.slice();
   }catch(e){ adjectives = STARTER_ADJEKTIVE.slice(); }
+  sortByField(adjectives, "adj");
 
   try{
     const sa = localStorage.getItem("artikel_saat");
     saatWords = sa ? JSON.parse(sa) : STARTER_SAAT.slice();
   }catch(e){ saatWords = STARTER_SAAT.slice(); }
+  sortByField(saatWords, "zeit");
 
   try{
     const ko = localStorage.getItem("artikel_konj");
     konjWords = ko ? JSON.parse(ko) : STARTER_KONJ.slice();
   }catch(e){ konjWords = STARTER_KONJ.slice(); }
+  sortByField(konjWords, "konj");
 
   try{
     const s = localStorage.getItem("artikel_stats");
@@ -1695,6 +1730,7 @@ function addWord(){
     return;
   }
   words.push({artikel, word, plural, emoji, tr});
+  sortByField(words, "word");
   saveWords();
   renderWords();
   closeAddModal();
@@ -1932,6 +1968,7 @@ function addVerb(){
     sie: document.getElementById("inpConjSie").value.trim()
   };
   verbs.push({verb, emoji, tr, conj});
+  sortByField(verbs, "verb");
   saveVerbs();
   renderVerbs();
   closeAddVerbModal();
@@ -2062,6 +2099,7 @@ function addAdjective(){
     return;
   }
   adjectives.push({adj, emoji, tr});
+  sortByField(adjectives, "adj");
   saveAdjectives();
   renderAdjectives();
   closeAddAdjModal();
@@ -2125,6 +2163,7 @@ function addSaat(){
   const tr = document.getElementById("inpSaatTr").value.trim();
   if(!zeit){ alert("İfade alanını doldur."); return; }
   saatWords.push({zeit, emoji, tr});
+  sortByField(saatWords, "zeit");
   saveSaat();
   renderSaat();
   closeAddSaatModal();
@@ -2185,6 +2224,7 @@ function addKonj(){
   const tr = document.getElementById("inpKonjTr").value.trim();
   if(!konj){ alert("Bağlaç alanını doldur."); return; }
   konjWords.push({konj, emoji, tr});
+  sortByField(konjWords, "konj");
   saveKonj();
   renderKonj();
   closeAddKonjModal();
