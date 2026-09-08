@@ -61,21 +61,22 @@
     gap:8px;
   }
   .side-tab{
-    background:#fffdf8;
-    border:1px solid #ddc9a0;
+    background:#EDF3ED;
+    border:1px solid #BFD4C1;
     color:var(--deep);
-    padding:14px 16px;
+    padding:16px 18px;
     font-family: Georgia, serif;
     font-size:14px;
     font-weight:600;
+    line-height:1.4;
     border-radius:3px;
     cursor:pointer;
     text-align:left;
     transition:background 0.15s;
-    border-left:4px solid #ddc9a0;
+    border-left:4px solid #BFD4C1;
   }
   .side-tab:hover:not(.active){
-    background:#f7efdd;
+    background:#dfeadf;
   }
   .side-tab.active{
     background:linear-gradient(135deg, var(--deep), #1a3d52);
@@ -96,7 +97,7 @@
   @media (max-width:900px){
     main{grid-template-columns:1fr;}
     .sidebar{flex-direction:row;flex-wrap:wrap;}
-    .side-tab{flex:1 1 45%;min-width:0;font-size:13px;border-left:1px solid #ddc9a0;border-bottom:4px solid #ddc9a0;}
+    .side-tab{flex:1 1 45%;min-width:0;font-size:13px;border-left:1px solid #BFD4C1;border-bottom:4px solid #BFD4C1;}
     .side-tab.active{border-left-color:var(--brass);border-bottom-color:var(--brass);}
   }
   .panel{
@@ -883,6 +884,55 @@
       </div>
       <div class="plural-note">Kural: Bir <strong>fiili/eylemi</strong> olumsuzluyorsan nicht sona gider; bir <strong>sıfatı/özelliği</strong> olumsuzluyorsan nicht o sıfatın hemen önüne gelir.</div>
     </section>
+
+    <section class="panel">
+      <h2>Imperativ (Emir Kipi) — hızlı referans</h2>
+      <div class="rule-grid">
+        <div class="rule-card der">
+          <div class="title">du-Form</div>
+          <div class="sfx">du-çekiminden <strong>-st</strong> düşer, "du" kalkar. Ünlü değişimi (a→ä) varsa GERİ döner!</div>
+          <div class="ex">du bringst → <strong>Bring!</strong><br>du fährst → <strong>Fahr!</strong> (Fähr değil!)<br>du schneidest → <strong>Schneid(e)!</strong><br>du isst → <strong>Iss!</strong> (istisna)</div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">ihr-Form</div>
+          <div class="sfx">Sadece "ihr" kalkar, fiil <strong>aynen</strong> kalır.</div>
+          <div class="ex">ihr bringt → <strong>Bringt!</strong><br>ihr fahrt → <strong>Fahrt!</strong></div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">Sie-Form (Nazik/Resmi)</div>
+          <div class="sfx"><strong>Mastar + Sie</strong>, fiil cümlenin en BAŞINA gelir.</div>
+          <div class="ex">Geben Sie mir 100 g Käse.<br>Bringen Sie noch einen Apfelsaft, bitte.</div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>En önemli kural:</strong> Emir kipinde normal kelime sırası bozulur — fiil <strong>her zaman cümlenin en başına</strong> gelir (du/ihr formunda özne bile hiç söylenmez!). Nezaket için cümle sonuna <strong>bitte</strong> eklenir: "Bringen Sie den Kaffee, bitte."<br>
+        Hangi kelimeler imperative olur? <strong>Her fiilin</strong> kendi du/ihr/Sie emir hâli vardır — yukarıdaki 3 kurala göre türetilir, ezber gerektiren ayrı bir kelime listesi değildir.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Modalverben: können / wollen / müssen — hızlı referans</h2>
+      <div class="rule-grid">
+        <div class="rule-card der">
+          <div class="title">können</div>
+          <div class="sfx">yapabilmek (yetenek / imkân)<br>ich kann, du kannst, er kann<br>wir können, ihr könnt, sie können</div>
+          <div class="ex">Ich kann gut Deutsch sprechen.</div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">wollen</div>
+          <div class="sfx">istemek (irade / niyet)<br>ich will, du willst, er will<br>wir wollen, ihr wollt, sie wollen</div>
+          <div class="ex">Ich will ins Kino gehen.</div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">müssen</div>
+          <div class="sfx">mecbur olmak (zorunluluk)<br>ich muss, du musst, er muss<br>wir müssen, ihr müsst, sie müssen</div>
+          <div class="ex">Ich muss heute arbeiten.</div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>Kelime sırası kuralı:</strong> Modal fiil (kann/will/muss...) cümlenin <strong>2. sırasında</strong> çekilir, asıl eylem ise <strong>mastar hâlinde cümlenin en sonuna</strong> gider — "Ich <strong>kann</strong> gut Deutsch <strong>sprechen</strong>." "Ich <strong>muss</strong> heute <strong>arbeiten</strong>."
+      </div>
+    </section>
   </div>
 
   <div id="adjSection" style="display:none;">
@@ -1506,6 +1556,25 @@ const STARTER_WORDS = [
   {artikel:"der", word:"Tee", plural:"Tees", emoji:"🍵", tr:"çay", beispiel:"Ich trinke jeden Morgen Tee.", beispielTr:"Her sabah çay içerim."},
   {artikel:"der", word:"Espresso", plural:"Espressi", emoji:"☕", tr:"espresso", beispiel:"Ein Espresso, bitte.", beispielTr:"Bir espresso, lütfen."},
   {artikel:"der", word:"Eintritt", plural:"Eintritte", emoji:"🎫", tr:"giriş / giriş ücreti", beispiel:"Der Eintritt kostet zehn Euro.", beispielTr:"Giriş ücreti on euro."},
+  {artikel:"das", word:"Vollkornbrot", plural:"—", emoji:"🍞", tr:"tam buğday ekmeği", beispiel:"Ich esse Vollkornbrot zum Frühstück.", beispielTr:"Kahvaltıda tam buğday ekmeği yerim."},
+  {artikel:"die", word:"Tüte", plural:"Tüten", emoji:"🛍️", tr:"poşet / torba", beispiel:"Ich brauche eine Tüte.", beispielTr:"Bir poşete ihtiyacım var."},
+  {artikel:"die", word:"Rechnung", plural:"Rechnungen", emoji:"🧾", tr:"hesap / fatura", beispiel:"Die Rechnung, bitte.", beispielTr:"Hesap, lütfen."},
+  {artikel:"die", word:"Kasse", plural:"Kassen", emoji:"💵", tr:"kasa", beispiel:"Bezahlen Sie an der Kasse.", beispielTr:"Kasada ödeyin."},
+  {artikel:"das", word:"Salz", plural:"—", emoji:"🧂", tr:"tuz", beispiel:"Ich brauche Salz.", beispielTr:"Tuza ihtiyacım var."},
+  {artikel:"das", word:"Messer", plural:"Messer", emoji:"🔪", tr:"bıçak", beispiel:"Ich brauche ein Messer.", beispielTr:"Bir bıçağa ihtiyacım var."},
+  {artikel:"das", word:"Geld", plural:"—", emoji:"💵", tr:"para", beispiel:"Ich habe kein Geld.", beispielTr:"Hiç param yok."},
+  {artikel:"die", word:"Marmelade", plural:"Marmeladen", emoji:"🍓", tr:"reçel", beispiel:"Ich esse Brot mit Marmelade.", beispielTr:"Reçelli ekmek yerim."},
+  {artikel:"die", word:"Cola", plural:"Colas", emoji:"🥤", tr:"kola", beispiel:"Ich trinke gern Cola.", beispielTr:"Kola içmeyi severim."},
+  {artikel:"die", word:"Wurst", plural:"Würste", emoji:"🌭", tr:"sosis / sucuk", beispiel:"Die Wurst ist lecker.", beispielTr:"Sosis lezzetli."},
+  {artikel:"das", word:"Brötchen", plural:"Brötchen", emoji:"🥐", tr:"küçük ekmek", beispiel:"Ich esse ein Brötchen zum Frühstück.", beispielTr:"Kahvaltıda bir sandviç ekmeği yerim."},
+  {artikel:"das", word:"Ei", plural:"Eier", emoji:"🥚", tr:"yumurta", beispiel:"Ich esse ein Ei zum Frühstück.", beispielTr:"Kahvaltıda bir yumurta yerim."},
+  {artikel:"das", word:"Schwimmbad", plural:"Schwimmbäder", emoji:"🏊", tr:"yüzme havuzu", beispiel:"Wir gehen ins Schwimmbad.", beispielTr:"Yüzme havuzuna gidiyoruz."},
+  {artikel:"das", word:"Bett", plural:"Betten", emoji:"🛏️", tr:"yatak", beispiel:"Ich gehe ins Bett.", beispielTr:"Yatağa gidiyorum."},
+  {artikel:"der", word:"Alltag", plural:"—", emoji:"📅", tr:"günlük yaşam", beispiel:"Der Alltag ist manchmal stressig.", beispielTr:"Günlük yaşam bazen stresli."},
+  {artikel:"der", word:"Urlaub", plural:"Urlaube", emoji:"🏖️", tr:"tatil / izin", beispiel:"Ich mache Urlaub in der Türkei.", beispielTr:"Türkiye'de tatil yapıyorum."},
+  {artikel:"der", word:"Ort", plural:"Orte", emoji:"📍", tr:"yer / mekan", beispiel:"Das ist ein schöner Ort.", beispielTr:"Bu güzel bir yer."},
+  {artikel:"die", word:"Sandburg", plural:"Sandburgen", emoji:"🏰", tr:"kum kalesi", beispiel:"Die Kinder bauen eine Sandburg.", beispielTr:"Çocuklar kum kalesi yapıyor."},
+  {artikel:"der", word:"Ausflug", plural:"Ausflüge", emoji:"🚐", tr:"gezi", beispiel:"Wir machen einen Ausflug.", beispielTr:"Bir geziye çıkıyoruz."},
   {artikel:"das", word:"Deutsch", plural:"—", emoji:"🇩🇪", tr:"Almanca (dil)", beispiel:"Ich spreche Deutsch.", beispielTr:"Almanca konuşuyorum."},
   {artikel:"die", word:"Gitarre", plural:"Gitarren", emoji:"🎸", tr:"gitar", beispiel:"Er spielt sehr gut Gitarre.", beispielTr:"O çok iyi gitar çalıyor."},
   {artikel:"der", word:"Film", plural:"Filme", emoji:"🎬", tr:"film", beispiel:"Der Film war toll.", beispielTr:"Film harikaydı."},
@@ -1641,28 +1710,28 @@ const STARTER_WORDS = [
 ];
 
 const STARTER_VERBS = [
-  {verb:"sein", emoji:"🧍", tr:"olmak", beispiel:"Ich bin müde.", beispielTr:"Ben yorgunum.", conj:{ich:"bin", du:"bist", er:"ist", wir:"sind", ihr:"seid", sie:"sind"}},
-  {verb:"haben", emoji:"🤲", tr:"sahip olmak", beispiel:"Ich habe einen Bruder.", beispielTr:"Bir erkek kardeşim var.", conj:{ich:"habe", du:"hast", er:"hat", wir:"haben", ihr:"habt", sie:"haben"}},
-  {verb:"gehen", emoji:"🚶", tr:"gitmek (yürüyerek)", beispiel:"Ich gehe zur Schule.", beispielTr:"Okula gidiyorum.", conj:{ich:"gehe", du:"gehst", er:"geht", wir:"gehen", ihr:"geht", sie:"gehen"}},
-  {verb:"kommen", emoji:"🚏", tr:"gelmek", beispiel:"Er kommt aus der Türkei.", beispielTr:"O Türkiye'den geliyor.", conj:{ich:"komme", du:"kommst", er:"kommt", wir:"kommen", ihr:"kommt", sie:"kommen"}},
-  {verb:"machen", emoji:"🔨", tr:"yapmak", beispiel:"Was machst du heute?", beispielTr:"Bugün ne yapıyorsun?", conj:{ich:"mache", du:"machst", er:"macht", wir:"machen", ihr:"macht", sie:"machen"}},
+  {verb:"sein", emoji:"🧍", tr:"olmak", beispiel:"Ich bin müde.", beispielTr:"Ben yorgunum.", conj:{ich:"bin", du:"bist", er:"ist", wir:"sind", ihr:"seid", sie:"sind"}, imperativ:{du:"Sei!", ihr:"Seid!", sie:"Seien Sie!"}},
+  {verb:"haben", emoji:"🤲", tr:"sahip olmak", beispiel:"Ich habe einen Bruder.", beispielTr:"Bir erkek kardeşim var.", conj:{ich:"habe", du:"hast", er:"hat", wir:"haben", ihr:"habt", sie:"haben"}, imperativ:{du:"Hab!", ihr:"Habt!", sie:"Haben Sie!"}},
+  {verb:"gehen", emoji:"🚶", tr:"gitmek (yürüyerek)", beispiel:"Ich gehe zur Schule.", beispielTr:"Okula gidiyorum.", conj:{ich:"gehe", du:"gehst", er:"geht", wir:"gehen", ihr:"geht", sie:"gehen"}, imperativ:{du:"Geh!", ihr:"Geht!", sie:"Gehen Sie!"}},
+  {verb:"kommen", emoji:"🚏", tr:"gelmek", beispiel:"Er kommt aus der Türkei.", beispielTr:"O Türkiye'den geliyor.", conj:{ich:"komme", du:"kommst", er:"kommt", wir:"kommen", ihr:"kommt", sie:"kommen"}, imperativ:{du:"Komm!", ihr:"Kommt!", sie:"Kommen Sie!"}},
+  {verb:"machen", emoji:"🔨", tr:"yapmak", beispiel:"Was machst du heute?", beispielTr:"Bugün ne yapıyorsun?", conj:{ich:"mache", du:"machst", er:"macht", wir:"machen", ihr:"macht", sie:"machen"}, imperativ:{du:"Mach!", ihr:"Macht!", sie:"Machen Sie!"}},
   {verb:"sagen", emoji:"💬", tr:"söylemek", beispiel:"Sie sagt die Wahrheit.", beispielTr:"O doğruyu söylüyor.", conj:{ich:"sage", du:"sagst", er:"sagt", wir:"sagen", ihr:"sagt", sie:"sagen"}},
-  {verb:"sehen", emoji:"👀", tr:"görmek", beispiel:"Ich sehe einen Vogel.", beispielTr:"Bir kuş görüyorum.", conj:{ich:"sehe", du:"siehst", er:"sieht", wir:"sehen", ihr:"seht", sie:"sehen"}},
+  {verb:"sehen", emoji:"👀", tr:"görmek", beispiel:"Ich sehe einen Vogel.", beispielTr:"Bir kuş görüyorum.", conj:{ich:"sehe", du:"siehst", er:"sieht", wir:"sehen", ihr:"seht", sie:"sehen"}, imperativ:{du:"Sieh!", ihr:"Seht!", sie:"Sehen Sie!"}},
   {verb:"wissen", emoji:"🧠", tr:"bilmek", beispiel:"Ich weiß die Antwort nicht.", beispielTr:"Cevabı bilmiyorum.", conj:{ich:"weiß", du:"weißt", er:"weiß", wir:"wissen", ihr:"wisst", sie:"wissen"}},
   {verb:"können", emoji:"💪", tr:"yapabilmek", beispiel:"Ich kann gut schwimmen.", beispielTr:"İyi yüzebilirim.", conj:{ich:"kann", du:"kannst", er:"kann", wir:"können", ihr:"könnt", sie:"können"}},
   {verb:"müssen", emoji:"❗", tr:"zorunda olmak", beispiel:"Ich muss jetzt gehen.", beispielTr:"Şimdi gitmem lazım.", conj:{ich:"muss", du:"musst", er:"muss", wir:"müssen", ihr:"müsst", sie:"müssen"}},
   {verb:"wollen", emoji:"🎯", tr:"istemek", beispiel:"Ich will ein Eis.", beispielTr:"Bir dondurma istiyorum.", conj:{ich:"will", du:"willst", er:"will", wir:"wollen", ihr:"wollt", sie:"wollen"}},
-  {verb:"sprechen", emoji:"🗣️", tr:"konuşmak", beispiel:"Sprichst du Deutsch?", beispielTr:"Almanca konuşuyor musun?", conj:{ich:"spreche", du:"sprichst", er:"spricht", wir:"sprechen", ihr:"sprecht", sie:"sprechen"}},
+  {verb:"sprechen", emoji:"🗣️", tr:"konuşmak", beispiel:"Sprichst du Deutsch?", beispielTr:"Almanca konuşuyor musun?", conj:{ich:"spreche", du:"sprichst", er:"spricht", wir:"sprechen", ihr:"sprecht", sie:"sprechen"}, imperativ:{du:"Sprich!", ihr:"Sprecht!", sie:"Sprechen Sie!"}},
   {verb:"arbeiten", emoji:"💼", tr:"çalışmak", beispiel:"Mein Vater arbeitet viel.", beispielTr:"Babam çok çalışıyor.", conj:{ich:"arbeite", du:"arbeitest", er:"arbeitet", wir:"arbeiten", ihr:"arbeitet", sie:"arbeiten"}},
-  {verb:"essen", emoji:"🍽️", tr:"yemek yemek", beispiel:"Wir essen zusammen.", beispielTr:"Birlikte yemek yiyoruz.", conj:{ich:"esse", du:"isst", er:"isst", wir:"essen", ihr:"esst", sie:"essen"}},
-  {verb:"trinken", emoji:"🥤", tr:"içmek", beispiel:"Ich trinke gern Tee.", beispielTr:"Çay içmeyi severim.", conj:{ich:"trinke", du:"trinkst", er:"trinkt", wir:"trinken", ihr:"trinkt", sie:"trinken"}},
+  {verb:"essen", emoji:"🍽️", tr:"yemek yemek", beispiel:"Wir essen zusammen.", beispielTr:"Birlikte yemek yiyoruz.", conj:{ich:"esse", du:"isst", er:"isst", wir:"essen", ihr:"esst", sie:"essen"}, imperativ:{du:"Iss!", ihr:"Esst!", sie:"Essen Sie!"}},
+  {verb:"trinken", emoji:"🥤", tr:"içmek", beispiel:"Ich trinke gern Tee.", beispielTr:"Çay içmeyi severim.", conj:{ich:"trinke", du:"trinkst", er:"trinkt", wir:"trinken", ihr:"trinkt", sie:"trinken"}, imperativ:{du:"Trink!", ihr:"Trinkt!", sie:"Trinken Sie!"}},
   {verb:"schlafen", emoji:"😴", tr:"uyumak", beispiel:"Das Kind schläft schon.", beispielTr:"Çocuk çoktan uyuyor.", conj:{ich:"schlafe", du:"schläfst", er:"schläft", wir:"schlafen", ihr:"schlaft", sie:"schlafen"}},
   {verb:"lernen", emoji:"📚", tr:"öğrenmek", beispiel:"Ich lerne Deutsch.", beispielTr:"Almanca öğreniyorum.", conj:{ich:"lerne", du:"lernst", er:"lernt", wir:"lernen", ihr:"lernt", sie:"lernen"}},
   {verb:"wohnen", emoji:"🏠", tr:"oturmak / ikamet etmek", beispiel:"Wir wohnen in İzmir.", beispielTr:"İzmir'de oturuyoruz.", conj:{ich:"wohne", du:"wohnst", er:"wohnt", wir:"wohnen", ihr:"wohnt", sie:"wohnen"}},
-  {verb:"fahren", emoji:"🚗", tr:"sürmek / gitmek (araçla)", beispiel:"Er fährt mit dem Auto.", beispielTr:"O arabayla gidiyor.", conj:{ich:"fahre", du:"fährst", er:"fährt", wir:"fahren", ihr:"fahrt", sie:"fahren"}},
-  {verb:"lesen", emoji:"📖", tr:"okumak", beispiel:"Sie liest ein Buch.", beispielTr:"O bir kitap okuyor.", conj:{ich:"lese", du:"liest", er:"liest", wir:"lesen", ihr:"lest", sie:"lesen"}},
+  {verb:"fahren", emoji:"🚗", tr:"sürmek / gitmek (araçla)", beispiel:"Er fährt mit dem Auto.", beispielTr:"O arabayla gidiyor.", conj:{ich:"fahre", du:"fährst", er:"fährt", wir:"fahren", ihr:"fahrt", sie:"fahren"}, imperativ:{du:"Fahr!", ihr:"Fahrt!", sie:"Fahren Sie!"}},
+  {verb:"lesen", emoji:"📖", tr:"okumak", beispiel:"Sie liest ein Buch.", beispielTr:"O bir kitap okuyor.", conj:{ich:"lese", du:"liest", er:"liest", wir:"lesen", ihr:"lest", sie:"lesen"}, imperativ:{du:"Lies!", ihr:"Lest!", sie:"Lesen Sie!"}},
   {verb:"kaufen", emoji:"🛒", tr:"satın almak", beispiel:"Ich kaufe Brot.", beispielTr:"Ekmek satın alıyorum.", conj:{ich:"kaufe", du:"kaufst", er:"kauft", wir:"kaufen", ihr:"kauft", sie:"kaufen"}},
-  {verb:"spielen", emoji:"🎲", tr:"oynamak", beispiel:"Die Kinder spielen im Park.", beispielTr:"Çocuklar parkta oynuyor.", conj:{ich:"spiele", du:"spielst", er:"spielt", wir:"spielen", ihr:"spielt", sie:"spielen"}},
+  {verb:"spielen", emoji:"🎲", tr:"oynamak", beispiel:"Die Kinder spielen im Park.", beispielTr:"Çocuklar parkta oynuyor.", conj:{ich:"spiele", du:"spielst", er:"spielt", wir:"spielen", ihr:"spielt", sie:"spielen"}, imperativ:{du:"Spiel!", ihr:"Spielt!", sie:"Spielen Sie!"}},
   {verb:"lieben", emoji:"❤️", tr:"sevmek", beispiel:"Ich liebe meine Familie.", beispielTr:"Ailemi seviyorum.", conj:{ich:"liebe", du:"liebst", er:"liebt", wir:"lieben", ihr:"liebt", sie:"lieben"}},
   {verb:"helfen", emoji:"🤝", tr:"yardım etmek", beispiel:"Kannst du mir helfen?", beispielTr:"Bana yardım edebilir misin?", conj:{ich:"helfe", du:"hilfst", er:"hilft", wir:"helfen", ihr:"helft", sie:"helfen"}},
   {verb:"brauchen", emoji:"🔧", tr:"ihtiyaç duymak", beispiel:"Ich brauche Wasser.", beispielTr:"Suya ihtiyacım var.", conj:{ich:"brauche", du:"brauchst", er:"braucht", wir:"brauchen", ihr:"braucht", sie:"brauchen"}},
@@ -1681,8 +1750,8 @@ const STARTER_VERBS = [
   {verb:"glauben", emoji:"🤔", tr:"inanmak / düşünmek", beispiel:"Ich glaube dir.", beispielTr:"Sana inanıyorum.", conj:{ich:"glaube", du:"glaubst", er:"glaubt", wir:"glauben", ihr:"glaubt", sie:"glauben"}},
   {verb:"wünschen", emoji:"🙏", tr:"dilemek / istemek", beispiel:"Was wünschen Sie?", beispielTr:"Ne arzu edersiniz?", conj:{ich:"wünsche", du:"wünschst", er:"wünscht", wir:"wünschen", ihr:"wünscht", sie:"wünschen"}},
   {verb:"bestellen", emoji:"📝", tr:"sipariş etmek", beispiel:"Ich möchte eine Pizza bestellen.", beispielTr:"Bir pizza sipariş etmek istiyorum.", conj:{ich:"bestelle", du:"bestellst", er:"bestellt", wir:"bestellen", ihr:"bestellt", sie:"bestellen"}},
-  {verb:"bringen", emoji:"🍽️", tr:"getirmek", beispiel:"Bringen Sie mir bitte die Speisekarte.", beispielTr:"Lütfen bana menüyü getirin.", conj:{ich:"bringe", du:"bringst", er:"bringt", wir:"bringen", ihr:"bringt", sie:"bringen"}},
-  {verb:"nehmen", emoji:"🤲", tr:"almak", beispiel:"Ich nehme den Fisch.", beispielTr:"Balığı alıyorum.", conj:{ich:"nehme", du:"nimmst", er:"nimmt", wir:"nehmen", ihr:"nehmt", sie:"nehmen"}},
+  {verb:"bringen", emoji:"🍽️", tr:"getirmek", beispiel:"Bringen Sie mir bitte die Speisekarte.", beispielTr:"Lütfen bana menüyü getirin.", conj:{ich:"bringe", du:"bringst", er:"bringt", wir:"bringen", ihr:"bringt", sie:"bringen"}, imperativ:{du:"Bring!", ihr:"Bringt!", sie:"Bringen Sie!"}},
+  {verb:"nehmen", emoji:"🤲", tr:"almak", beispiel:"Ich nehme den Fisch.", beispielTr:"Balığı alıyorum.", conj:{ich:"nehme", du:"nimmst", er:"nimmt", wir:"nehmen", ihr:"nehmt", sie:"nehmen"}, imperativ:{du:"Nimm!", ihr:"Nehmt!", sie:"Nehmen Sie!"}},
   {verb:"finden", emoji:"🔍", tr:"bulmak", beispiel:"Ich finde das Restaurant gut.", beispielTr:"Restoranı iyi buluyorum.", conj:{ich:"finde", du:"findest", er:"findet", wir:"finden", ihr:"findet", sie:"finden"}},
   {verb:"bekommen", emoji:"📦", tr:"almak (sipariş)", beispiel:"Ich bekomme einen Salat.", beispielTr:"Bir salata alayım.", conj:{ich:"bekomme", du:"bekommst", er:"bekommt", wir:"bekommen", ihr:"bekommt", sie:"bekommen"}},
   {verb:"zustimmen", emoji:"👍", tr:"kabul etmek / onaylamak", beispiel:"Ich stimme dir zu.", beispielTr:"Sana katılıyorum.", conj:{ich:"stimme zu", du:"stimmst zu", er:"stimmt zu", wir:"stimmen zu", ihr:"stimmt zu", sie:"stimmen zu"}},
@@ -1690,16 +1759,26 @@ const STARTER_VERBS = [
   {verb:"präsentieren", emoji:"📊", tr:"sunmak / tanıtmak", beispiel:"Sie präsentiert ihr Projekt.", beispielTr:"O projesini sunuyor.", conj:{ich:"präsentiere", du:"präsentierst", er:"präsentiert", wir:"präsentieren", ihr:"präsentiert", sie:"präsentieren"}},
   {verb:"vorschlagen", emoji:"💡", tr:"önermek", beispiel:"Ich schlage ein Restaurant vor.", beispielTr:"Bir restoran öneriyorum.", conj:{ich:"schlage vor", du:"schlägst vor", er:"schlägt vor", wir:"schlagen vor", ihr:"schlagt vor", sie:"schlagen vor"}},
   {verb:"übernehmen", emoji:"🤝", tr:"üstlenmek / devralmak", beispiel:"Er übernimmt die Verantwortung.", beispielTr:"O sorumluluğu üstleniyor.", conj:{ich:"übernehme", du:"übernimmst", er:"übernimmt", wir:"übernehmen", ihr:"übernehmt", sie:"übernehmen"}},
-  {verb:"schließen", emoji:"🔒", tr:"kapatmak / kapanmak", beispiel:"Der Laden schließt um acht.", beispielTr:"Dükkan sekizde kapanıyor.", conj:{ich:"schließe", du:"schließt", er:"schließt", wir:"schließen", ihr:"schließt", sie:"schließen"}},
-  {verb:"geben", emoji:"🎁", tr:"vermek (es gibt = var)", beispiel:"Es gibt viele Museen in der Stadt.", beispielTr:"Şehirde çok müze var.", conj:{ich:"gebe", du:"gibst", er:"gibt", wir:"geben", ihr:"gebt", sie:"geben"}},
+  {verb:"schließen", emoji:"🔒", tr:"kapatmak / kapanmak", beispiel:"Der Laden schließt um acht.", beispielTr:"Dükkan sekizde kapanıyor.", conj:{ich:"schließe", du:"schließt", er:"schließt", wir:"schließen", ihr:"schließt", sie:"schließen"}, imperativ:{du:"Schließ!", ihr:"Schließt!", sie:"Schließen Sie!"}},
+  {verb:"geben", emoji:"🎁", tr:"vermek (es gibt = var)", beispiel:"Es gibt viele Museen in der Stadt.", beispielTr:"Şehirde çok müze var.", conj:{ich:"gebe", du:"gibst", er:"gibt", wir:"geben", ihr:"gebt", sie:"geben"}, imperativ:{du:"Gib!", ihr:"Gebt!", sie:"Geben Sie!"}},
   {verb:"liegen", emoji:"📍", tr:"bulunmak / konumlanmak", beispiel:"Die Stadt liegt am See.", beispielTr:"Şehir gölün kenarında bulunuyor.", conj:{ich:"liege", du:"liegst", er:"liegt", wir:"liegen", ihr:"liegt", sie:"liegen"}},
   {verb:"dauern", emoji:"⏳", tr:"sürmek (zaman)", beispiel:"Die Fahrt dauert zwei Stunden.", beispielTr:"Yolculuk iki saat sürüyor.", conj:{ich:"dauere", du:"dauerst", er:"dauert", wir:"dauern", ihr:"dauert", sie:"dauern"}},
   {verb:"studieren", emoji:"🎓", tr:"üniversitede okumak", beispiel:"Ich studiere Medizin.", beispielTr:"Tıp okuyorum.", conj:{ich:"studiere", du:"studierst", er:"studiert", wir:"studieren", ihr:"studiert", sie:"studieren"}},
-  {verb:"zeigen", emoji:"👉", tr:"göstermek", beispiel:"Zeig mir bitte deinen Ausweis.", beispielTr:"Lütfen bana kimliğini göster.", conj:{ich:"zeige", du:"zeigst", er:"zeigt", wir:"zeigen", ihr:"zeigt", sie:"zeigen"}},
-  {verb:"schreiben", emoji:"✍️", tr:"yazmak", beispiel:"Schreib das in dein Heft.", beispielTr:"Bunu defterine yaz.", conj:{ich:"schreibe", du:"schreibst", er:"schreibt", wir:"schreiben", ihr:"schreibt", sie:"schreiben"}},
-  {verb:"warten", emoji:"⏳", tr:"beklemek", beispiel:"Ich warte am Bahnhof.", beispielTr:"Tren istasyonunda bekliyorum.", conj:{ich:"warte", du:"wartest", er:"wartet", wir:"warten", ihr:"wartet", sie:"warten"}},
+  {verb:"zeigen", emoji:"👉", tr:"göstermek", beispiel:"Zeig mir bitte deinen Ausweis.", beispielTr:"Lütfen bana kimliğini göster.", conj:{ich:"zeige", du:"zeigst", er:"zeigt", wir:"zeigen", ihr:"zeigt", sie:"zeigen"}, imperativ:{du:"Zeig!", ihr:"Zeigt!", sie:"Zeigen Sie!"}},
+  {verb:"schreiben", emoji:"✍️", tr:"yazmak", beispiel:"Schreib das in dein Heft.", beispielTr:"Bunu defterine yaz.", conj:{ich:"schreibe", du:"schreibst", er:"schreibt", wir:"schreiben", ihr:"schreibt", sie:"schreiben"}, imperativ:{du:"Schreib!", ihr:"Schreibt!", sie:"Schreiben Sie!"}},
+  {verb:"warten", emoji:"⏳", tr:"beklemek", beispiel:"Ich warte am Bahnhof.", beispielTr:"Tren istasyonunda bekliyorum.", conj:{ich:"warte", du:"wartest", er:"wartet", wir:"warten", ihr:"wartet", sie:"warten"}, imperativ:{du:"Warte!", ihr:"Wartet!", sie:"Warten Sie!"}},
   {verb:"kosten", emoji:"💰", tr:"-e mal olmak", beispiel:"Wie viel kostet das?", beispielTr:"Bu ne kadar tutuyor?", conj:{ich:"koste", du:"kostest", er:"kostet", wir:"kosten", ihr:"kostet", sie:"kosten"}},
   {verb:"fragen", emoji:"❓", tr:"sormak", beispiel:"Ich frage den Lehrer.", beispielTr:"Öğretmene soruyorum.", conj:{ich:"frage", du:"fragst", er:"fragt", wir:"fragen", ihr:"fragt", sie:"fragen"}},
+  {verb:"schneiden", emoji:"🔪", tr:"kesmek", beispiel:"Ich schneide das Brot.", beispielTr:"Ekmeği kesiyorum.", conj:{ich:"schneide", du:"schneidest", er:"schneidet", wir:"schneiden", ihr:"schneidet", sie:"schneiden"}, imperativ:{du:"Schneide!", ihr:"Schneidet!", sie:"Schneiden Sie!"}},
+  {verb:"holen", emoji:"🛒", tr:"getirmek / almak", beispiel:"Ich hole das Buch.", beispielTr:"Kitabı getiriyorum.", conj:{ich:"hole", du:"holst", er:"holt", wir:"holen", ihr:"holt", sie:"holen"}, imperativ:{du:"Hol!", ihr:"Holt!", sie:"Holen Sie!"}},
+  {verb:"schmecken", emoji:"😋", tr:"tadı olmak / lezzetli olmak", beispiel:"Die Suppe schmeckt gut.", beispielTr:"Çorba güzel tadıyor.", conj:{ich:"schmecke", du:"schmeckst", er:"schmeckt", wir:"schmecken", ihr:"schmeckt", sie:"schmecken"}},
+  {verb:"öffnen", emoji:"🔓", tr:"açmak", beispiel:"Ich öffne die Tür.", beispielTr:"Kapıyı açıyorum.", conj:{ich:"öffne", du:"öffnest", er:"öffnet", wir:"öffnen", ihr:"öffnet", sie:"öffnen"}, imperativ:{du:"Öffne!", ihr:"Öffnet!", sie:"Öffnen Sie!"}},
+  {verb:"treffen", emoji:"🤝", tr:"buluşmak / karşılaşmak", beispiel:"Ich treffe meine Freunde.", beispielTr:"Arkadaşlarımla buluşuyorum.", conj:{ich:"treffe", du:"triffst", er:"trifft", wir:"treffen", ihr:"trefft", sie:"treffen"}},
+  {verb:"picknicken", emoji:"🧺", tr:"piknik yapmak", beispiel:"Wir picknicken im Park.", beispielTr:"Parkta piknik yapıyoruz.", conj:{ich:"picknicke", du:"picknickst", er:"picknickt", wir:"picknicken", ihr:"picknickt", sie:"picknicken"}},
+  {verb:"fischen", emoji:"🎣", tr:"balık tutmak", beispiel:"Er geht gern fischen.", beispielTr:"O balık tutmayı sever.", conj:{ich:"fische", du:"fischst", er:"fischt", wir:"fischen", ihr:"fischt", sie:"fischen"}},
+  {verb:"üben", emoji:"📝", tr:"pratik yapmak", beispiel:"Ich übe jeden Tag Deutsch.", beispielTr:"Her gün Almanca pratiği yapıyorum.", conj:{ich:"übe", du:"übst", er:"übt", wir:"üben", ihr:"übt", sie:"üben"}},
+  {verb:"bauen", emoji:"🏗️", tr:"inşa etmek / yapmak", beispiel:"Die Kinder bauen eine Sandburg.", beispielTr:"Çocuklar kum kalesi yapıyor.", conj:{ich:"baue", du:"baust", er:"baut", wir:"bauen", ihr:"baut", sie:"bauen"}},
+  {verb:"Ruhe haben", emoji:"🧘", tr:"sakin / huzurlu olmak", beispiel:"Ich will meine Ruhe haben.", beispielTr:"Huzur içinde olmak istiyorum.", conj:{ich:"habe Ruhe", du:"hast Ruhe", er:"hat Ruhe", wir:"haben Ruhe", ihr:"habt Ruhe", sie:"haben Ruhe"}},
   {verb:"schwimmen", emoji:"🏊", tr:"yüzmek", beispiel:"Ich schwimme jeden Tag.", beispielTr:"Her gün yüzerim.", conj:{ich:"schwimme", du:"schwimmst", er:"schwimmt", wir:"schwimmen", ihr:"schwimmt", sie:"schwimmen"}},
   {verb:"einkaufen", emoji:"🛍️", tr:"alışveriş yapmak", beispiel:"Wir gehen heute einkaufen.", beispielTr:"Bugün alışverişe gidiyoruz.", conj:{ich:"kaufe ein", du:"kaufst ein", er:"kauft ein", wir:"kaufen ein", ihr:"kauft ein", sie:"kaufen ein"}},
   {verb:"tanzen", emoji:"💃", tr:"dans etmek", beispiel:"Sie tanzt sehr gut.", beispielTr:"O çok iyi dans ediyor.", conj:{ich:"tanze", du:"tanzt", er:"tanzt", wir:"tanzen", ihr:"tanzt", sie:"tanzen"}},
@@ -1800,6 +1879,8 @@ const STARTER_ADJEKTIVE = [
   {adj:"schwer", emoji:"🏋️", tr:"ağır / zor", beispiel:"Meine Tasche ist schwer.", beispielTr:"Çantam ağır.", komparativ:"schwerer", superlativ:"am schwersten", opposite:"leicht"},
   {adj:"leicht", emoji:"🪶", tr:"hafif / kolay", beispiel:"Der Rucksack ist leicht.", beispielTr:"Sırt çantası hafif.", komparativ:"leichter", superlativ:"am leichtesten", opposite:"schwer"},
   {adj:"offen", emoji:"🔓", tr:"açık", beispiel:"Die Tür ist offen.", beispielTr:"Kapı açık."},
+  {adj:"mehrere", emoji:"🔢", tr:"birkaç / çeşitli", beispiel:"Ich habe mehrere Bücher.", beispielTr:"Birkaç kitabım var."},
+  {adj:"immer", emoji:"♾️", tr:"her zaman", beispiel:"Ich trinke immer Kaffee am Morgen.", beispielTr:"Sabahları her zaman kahve içerim."},
   {adj:"elegant", emoji:"💃", tr:"şık / zarif", beispiel:"Sie trägt ein elegantes Kleid.", beispielTr:"O şık bir elbise giyiyor.", komparativ:"eleganter", superlativ:"am elegantesten"},
   {adj:"fertig", emoji:"✅", tr:"hazır / bitmiş", beispiel:"Bist du fertig?", beispielTr:"Hazır mısın?", komparativ:"fertiger", superlativ:"am fertigsten"},
   {adj:"satt", emoji:"😌", tr:"tok / doymuş", beispiel:"Ich bin satt.", beispielTr:"Doydum.", opposite:"hungrig"},
@@ -2329,10 +2410,11 @@ function openConjModal(idx){
   ];
   const tbody = document.getElementById("conjTableBody");
   const hasAny = rows.some(r => r[1]);
+  let html = "";
   if(!hasAny){
-    tbody.innerHTML = `<tr><td colspan="3" class="no-match">Bu fiil için çekim bilgisi eklenmemiş.</td></tr>`;
+    html = `<tr><td colspan="3" class="no-match">Bu fiil için çekim bilgisi eklenmemiş.</td></tr>`;
   } else {
-    tbody.innerHTML = rows.map(([pron, form, spokenPron]) => {
+    html = rows.map(([pron, form, spokenPron]) => {
       const phrase = form ? (spokenPron + " " + form) : "";
       const speakCell = form
         ? `<button class="speak-btn" data-phrase="${escapeHtml(phrase)}"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button>`
@@ -2340,6 +2422,16 @@ function openConjModal(idx){
       return `<tr><td>${escapeHtml(pron)}</td><td>${escapeHtml(form || "—")}</td><td class="speak-cell">${speakCell}</td></tr>`;
     }).join("");
   }
+  const imp = v.imperativ;
+  if(imp && (imp.du || imp.ihr || imp.sie)){
+    html += `<tr><td colspan="3" style="background:var(--cream);font-weight:700;font-size:12px;color:var(--brass);">— IMPERATIV (Emir Kipi) —</td></tr>`;
+    [["du", imp.du], ["ihr", imp.ihr], ["Sie", imp.sie]].forEach(([label, form]) => {
+      if(!form) return;
+      const speakCell = `<button class="speak-btn" data-phrase="${escapeHtml(form)}"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button>`;
+      html += `<tr><td>(${escapeHtml(label)})</td><td>${escapeHtml(form)}</td><td class="speak-cell">${speakCell}</td></tr>`;
+    });
+  }
+  tbody.innerHTML = html;
   document.getElementById("conjOverlay").classList.add("show");
 }
 function closeConjModal(){ document.getElementById("conjOverlay").classList.remove("show"); }
