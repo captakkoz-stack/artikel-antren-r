@@ -49,10 +49,13 @@
   }
 
   .tabbar{
-    display:flex;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
     gap:6px;
-    flex-wrap:wrap;
     margin-bottom:0;
+  }
+  @media (max-width:600px){
+    .tabbar{grid-template-columns: repeat(2, 1fr);}
   }
   .tab-btn{
     background:#fffdf8;
@@ -358,7 +361,7 @@
     font-family: system-ui, Helvetica, Arial, sans-serif;
   }
   .stat-box{
-    background:#fff;
+    background:var(--cream);
     border:1px solid var(--line);
     padding:12px;
     text-align:center;
@@ -1037,6 +1040,7 @@
   </div>
 
   <div>
+    <div id="rightColSpacer" style="height:0;"></div>
     <section class="panel" style="margin-top:0;">
       <h2>Antrenman Modu</h2>
 
@@ -3959,6 +3963,19 @@ renderKonj();
 renderFrage();
 updateStatDisplay();
 renderMistakeStats();
+
+function syncColumnAlignment(){
+  const tabbar = document.querySelector(".tabbar");
+  const spacer = document.getElementById("rightColSpacer");
+  if(!tabbar || !spacer) return;
+  if(window.innerWidth <= 900){
+    spacer.style.height = "0px";
+    return;
+  }
+  spacer.style.height = tabbar.getBoundingClientRect().height + "px";
+}
+syncColumnAlignment();
+window.addEventListener("resize", syncColumnAlignment);
 </script>
 
 <div class="signature"><span class="sig-note">Persönliche Lernnotizen</span><span class="sig-divider"></span><span class="sig-name">⚓ Erstellt von Capt. Aykut Akkoz</span></div>
