@@ -180,6 +180,8 @@
   .btn-main:hover{background:var(--deep);}
   .btn-ghost{background:transparent;color:var(--teal);border:1px solid var(--teal);}
   .btn-ghost:hover{background:#eef4f2;}
+  .btn-test{background:#F0E6F7;border:1px solid #C9A8DE;color:var(--deep);}
+  .btn-test:hover{background:#E4D3F0;}
   .btn-add{background:var(--brass);color:var(--deep);}
   .btn-add:hover{background:#b8925a;}
   table{
@@ -1151,35 +1153,35 @@
 
       <div class="group-label">Artikel Testleri</div>
       <div class="btn-grid grid-2">
-        <button class="btn-ghost" onclick="askQuestion('artikel-only')">Artikel Testi</button>
-        <button class="btn-ghost" onclick="askQuestion('plural-only')">Çoğul Artikel Testi</button>
+        <button class="btn-ghost btn-test" onclick="askQuestion('artikel-only')">Artikel Testi</button>
+        <button class="btn-ghost btn-test" onclick="askQuestion('plural-only')">Çoğul Artikel Testi</button>
       </div>
       <div class="btn-grid" style="margin-top:8px;">
-        <button class="btn-ghost" onclick="askQuestion('nomakk-quiz')">Nominativ / Akkusativ Ayrım Testi</button>
+        <button class="btn-ghost btn-test" onclick="askQuestion('nomakk-quiz')">Nominativ / Akkusativ Ayrım Testi</button>
       </div>
 
       <div class="group-label">Almanca Türkçe Kelime Bilgisi</div>
       <div class="btn-grid grid-3">
-        <button class="btn-ghost" onclick="askQuestion('noun-quiz')">İsim Testi</button>
-        <button class="btn-ghost" onclick="askQuestion('verb-quiz')">Fiil Testi</button>
-        <button class="btn-ghost" onclick="askQuestion('adj-quiz')">Sıfat Testi</button>
+        <button class="btn-ghost btn-test" onclick="askQuestion('noun-quiz')">İsim Testi</button>
+        <button class="btn-ghost btn-test" onclick="askQuestion('verb-quiz')">Fiil Testi</button>
+        <button class="btn-ghost btn-test" onclick="askQuestion('adj-quiz')">Sıfat Testi</button>
       </div>
 
       <div class="group-label">Diğer Konular</div>
       <div class="btn-grid grid-2">
-        <button class="btn-ghost" onclick="askQuestion('saat-quiz')">Saat &amp; Takvim Kelimeleri</button>
-        <button class="btn-ghost" onclick="askQuestion('uhrzeit-quiz')">🕐 Saat Okuma Testi</button>
+        <button class="btn-ghost btn-test" onclick="askQuestion('saat-quiz')">Saat &amp; Takvim Kelimeleri</button>
+        <button class="btn-ghost btn-test" onclick="askQuestion('uhrzeit-quiz')">🕐 Saat Okuma Testi</button>
       </div>
       <div class="btn-grid grid-2" style="margin-top:8px;">
-        <button class="btn-ghost" onclick="askQuestion('konj-quiz')">Bağlaç Testi</button>
-        <button class="btn-ghost" onclick="askQuestion('frage-quiz')">Soru Kelimesi Testi</button>
+        <button class="btn-ghost btn-test" onclick="askQuestion('konj-quiz')">Bağlaç Testi</button>
+        <button class="btn-ghost btn-test" onclick="askQuestion('frage-quiz')">Soru Kelimesi Testi</button>
       </div>
 
       <div class="group-label">Karışık &amp; Pratik</div>
       <div class="btn-grid grid-3">
-        <button class="btn-ghost" onclick="askQuestion('sentence-fill')">📝 Cümle Tamamlama</button>
-        <button class="btn-ghost" onclick="askQuestion('order-quiz')">🧩 Cümle Kurma</button>
-        <button class="btn-ghost" onclick="askQuestion('smart-mixed')">🎲 Genel Karışık Sınav</button>
+        <button class="btn-ghost btn-test" onclick="askQuestion('sentence-fill')">📝 Cümle Tamamlama</button>
+        <button class="btn-ghost btn-test" onclick="askQuestion('order-quiz')">🧩 Cümle Kurma</button>
+        <button class="btn-ghost btn-test" onclick="askQuestion('smart-mixed')">🎲 Genel Karışık Sınav</button>
       </div>
 
       <div class="group-label">Tekrar</div>
@@ -3234,6 +3236,11 @@ function buildSentenceFillPool(){
       pool.push({kind:"word", category:"frage", item:f, target:f.frage, sentence:f.beispiel, translation:f.beispielTr, emoji:f.emoji});
     }
   });
+  konjWords.forEach(k => {
+    if(k.beispiel && new RegExp("\\b" + escapeRegex(k.konj) + "\\b", "i").test(k.beispiel)){
+      pool.push({kind:"word", category:"konj", item:k, target:k.konj, sentence:k.beispiel, translation:k.beispielTr, emoji:k.emoji});
+    }
+  });
   return pool;
 }
 
@@ -3290,7 +3297,7 @@ function markAsked(cycleKey, items, keyFn){
   saveRecentAsked();
 }
 
-const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "smart-mixed", "saat-quiz", "konj-quiz", "order-quiz", "frage-quiz"];
+const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "smart-mixed", "saat-quiz", "order-quiz"];
 
 function markShownWord(word, category){
   if(!currentTestMode || !CYCLE_MODES.includes(currentTestMode)) return;
@@ -3631,18 +3638,26 @@ function buildSession(testMode){
     return shuffleArray(session);
   }
   if(testMode === "konj-quiz"){
-    const pool = getUnseenPool(testMode, konjWords, a => a.konj);
-    let session = shuffleArray(pool).map(a => ({word:a, mode:"meaning", category:"konj", answered:false}));
-    while(session.length < 15 && pool.length > 0){
-      session = session.concat(shuffleArray(pool).map(a => ({word:a, mode:"meaning", category:"konj", answered:false})));
+    const fullPool = buildSentenceFillPool();
+    const catPool = fullPool.filter(p => p.category === "konj");
+    if(catPool.length === 0) return [];
+    const withOptions = catPool.map(p => ({...p, options: buildBlankOptions(p.target, p.category, fullPool)}));
+    const toSessionQ = (q) => ({word:q.item, category:q.category, mode:"sentence", kind:q.kind, target:q.target, sentence:q.sentence, translation:q.translation, emoji:q.emoji, options:q.options, answered:false});
+    let session = shuffleArray(withOptions).map(toSessionQ);
+    while(session.length < 50){
+      session = session.concat(shuffleArray(withOptions).map(toSessionQ));
     }
     return shuffleArray(session);
   }
   if(testMode === "frage-quiz"){
-    const pool = getUnseenPool(testMode, frageWords, a => a.frage);
-    let session = shuffleArray(pool).map(a => ({word:a, mode:"meaning", category:"frage", answered:false}));
-    while(session.length < 15 && pool.length > 0){
-      session = session.concat(shuffleArray(pool).map(a => ({word:a, mode:"meaning", category:"frage", answered:false})));
+    const fullPool = buildSentenceFillPool();
+    const catPool = fullPool.filter(p => p.category === "frage");
+    if(catPool.length === 0) return [];
+    const withOptions = catPool.map(p => ({...p, options: buildBlankOptions(p.target, p.category, fullPool)}));
+    const toSessionQ = (q) => ({word:q.item, category:q.category, mode:"sentence", kind:q.kind, target:q.target, sentence:q.sentence, translation:q.translation, emoji:q.emoji, options:q.options, answered:false});
+    let session = shuffleArray(withOptions).map(toSessionQ);
+    while(session.length < 50){
+      session = session.concat(shuffleArray(withOptions).map(toSessionQ));
     }
     return shuffleArray(session);
   }
