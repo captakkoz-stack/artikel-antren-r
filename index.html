@@ -3447,10 +3447,18 @@ const MODAL_IMPERATIV_PRACTICE = [
   {sentence:"Fahrt langsam!", translation:"Yavaş sürün!", emoji:"🐢"}
 ];
 
+const ARTICLE_FORMS = {
+  der: {nom:{def:"der", indef:"ein", neg:"kein"}, akk:{def:"den", indef:"einen", neg:"keinen"}},
+  die: {nom:{def:"die", indef:"eine", neg:"keine"}, akk:{def:"die", indef:"eine", neg:"keine"}},
+  das: {nom:{def:"das", indef:"ein", neg:"kein"}, akk:{def:"das", indef:"ein", neg:"kein"}}
+};
+
+function capitalizeFirst(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+
 function buildNomAkkSession(count){
-  const derWords = words.filter(w => w.artikel === "der");
+  const allNouns = words.filter(w => w.artikel === "der" || w.artikel === "die" || w.artikel === "das");
   const questions = [];
-  if(derWords.length === 0) return questions;
+  if(allNouns.length === 0) return questions;
 
   const nomTemplates = [
     {de:"{ART} {word} ist hier.", tr:(tr)=>`'${tr}' burada.`},
@@ -3462,31 +3470,48 @@ function buildNomAkkSession(count){
     {de:"Er kauft {art} {word}.", tr:(tr)=>`Onu satın alıyor: '${tr}'.`},
     {de:"Wir brauchen {art} {word}.", tr:(tr)=>`Ona ihtiyacımız var: '${tr}'.`}
   ];
+  const articleTypes = ["def", "indef", "neg"];
+  const getForm = (gender, caseType, type) => ARTICLE_FORMS[gender][caseType][type];
+
+  function buildOptions(gender, caseType, type, correct){
+    const opts = new Set([correct]);
+    const oppCase = caseType === "nom" ? "akk" : "nom";
+    const oppForm = getForm(gender, oppCase, type);
+    if(oppForm !== correct) opts.add(oppForm);
+    const otherGenders = ["der", "die", "das"].filter(g => g !== gender);
+    for(const g of otherGenders){
+      if(opts.size >= 3) break;
+      const f = getForm(g, caseType, type);
+      if(!opts.has(f)) opts.add(f);
+    }
+    return shuffleArray([...opts]);
+  }
 
   const used = new Set();
   let attempts = 0;
-  while(questions.length < count && attempts < count * 20){
+  while(questions.length < count && attempts < count * 25){
     attempts++;
-    const w = derWords[Math.floor(Math.random() * derWords.length)];
+    const w = allNouns[Math.floor(Math.random() * allNouns.length)];
     const isNom = Math.random() < 0.5;
+    const caseType = isNom ? "nom" : "akk";
+    const type = articleTypes[Math.floor(Math.random() * articleTypes.length)];
     const tSet = isNom ? nomTemplates : akkTemplates;
     const t = tSet[Math.floor(Math.random() * tSet.length)];
-    const key = w.word + "|" + t.de;
+    const key = w.word + "|" + t.de + "|" + type;
     if(used.has(key)) continue;
     used.add(key);
 
-    const sentence = t.de.replace("{word}", w.word).replace("{ART}", "Der").replace("{art}", "den");
-    const target = isNom ? "Der" : "den";
-    const wrongCase = isNom ? "Den" : "der";
-    const wrongGender = isNom ? "Die" : "die";
-    const options = shuffleArray([target, wrongCase, wrongGender]);
+    const rawForm = getForm(w.artikel, caseType, type);
+    const displayForm = isNom ? capitalizeFirst(rawForm) : rawForm;
+    const sentence = t.de.replace("{word}", w.word).replace("{ART}", displayForm).replace("{art}", displayForm);
+    const options = buildOptions(w.artikel, caseType, type, rawForm).map(f => isNom ? capitalizeFirst(f) : f);
 
     questions.push({
       word: w,
       category: "noun",
       mode: "sentence",
       kind: "nomakk",
-      target: target,
+      target: displayForm,
       sentence: sentence,
       translation: t.tr(w.tr),
       emoji: w.emoji,
@@ -3595,7 +3620,7 @@ function buildSession(testMode){
     });
   }
   if(testMode === "nomakk-quiz"){
-    return buildNomAkkSession(20);
+    return buildNomAkkSession(200);
   }
   if(testMode === "sentence-fill"){
     const pool = buildSentenceFillPool();
@@ -3735,7 +3760,7 @@ function askQuestion(testMode){
     alert("Önce soru kelimesi listesine birkaç kelime ekle.");
     return;
   }
-  if(testMode === "nomakk-quiz" && words.filter(w=>w.artikel==="der").length === 0){
+  if(testMode === "nomakk-quiz" && words.length === 0){
     alert("Önce isim listesine birkaç 'der' ismi ekle.");
     return;
   }
