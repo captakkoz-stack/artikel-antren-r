@@ -537,6 +537,34 @@
   .order-tile.locked{cursor:default;opacity:0.85;}
   .order-tile.correct-order{background:var(--das-bg);border-color:#3a7d3a;color:#2c5c2c;}
   .order-tile.wrong-order{background:#fde3da;border-color:var(--coral);color:var(--coral);}
+  .order-tile.role-subj{background:#E2E2E2;border-color:#999;color:#444;}
+  .order-tile.role-verb{background:#F0DFB0;border-color:var(--brass);color:#6b4e1e;}
+  .order-tile.role-zeit{background:#CFE8F5;border-color:#7FB8D9;color:#1c5877;}
+  .order-tile.role-modal{background:#E8DAF0;border-color:#B98FD1;color:#5b3a75;}
+  .order-tile.role-lokal{background:#DCEEDC;border-color:#8FC28F;color:#2c5c2c;}
+  .order-tile.role-obj{background:#F5DFC8;border-color:#D9A15F;color:#8a5a1e;}
+  .role-legend{
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:10px;
+    padding-top:10px;
+    border-top:1px dashed var(--line);
+  }
+  .role-chip{
+    font-size:11px;
+    font-weight:700;
+    padding:3px 10px;
+    border-radius:10px;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+  }
+  .role-chip.role-subj{background:#E2E2E2;color:#444;}
+  .role-chip.role-verb{background:#F0DFB0;color:#6b4e1e;}
+  .role-chip.role-zeit{background:#CFE8F5;color:#1c5877;}
+  .role-chip.role-modal{background:#E8DAF0;color:#5b3a75;}
+  .role-chip.role-lokal{background:#DCEEDC;color:#2c5c2c;}
+  .role-chip.role-obj{background:#F5DFC8;color:#8a5a1e;}
 
   .adj-split-wrap{
     display:grid;
@@ -3518,22 +3546,22 @@ const MODAL_IMPERATIV_PRACTICE = [
 ];
 
 const ZEIT_ORT_PRACTICE = [
-  {sentence:"Ich fahre morgen nach Berlin.", translation:"Yarın Berlin'e gidiyorum.", emoji:"🚗"},
-  {sentence:"Wir gehen heute ins Kino.", translation:"Bugün sinemaya gidiyoruz.", emoji:"🎬"},
-  {sentence:"Sie kommt später nach Hause.", translation:"O eve daha sonra geliyor.", emoji:"🏠"},
-  {sentence:"Er geht heute ins Büro.", translation:"O bugün ofise gidiyor.", emoji:"🏢"},
-  {sentence:"Ich bin morgen im Büro.", translation:"Yarın ofisteyim.", emoji:"💼"},
-  {sentence:"Wir sind am Abend im Park.", translation:"Akşam parktayız.", emoji:"🌳"},
-  {sentence:"Ich kaufe heute ein Buch.", translation:"Bugün bir kitap alıyorum.", emoji:"📚"},
-  {sentence:"Er schreibt morgen eine Mail.", translation:"O yarın bir e-posta yazıyor.", emoji:"📧"},
-  {sentence:"Ich lese jetzt ein Buch.", translation:"Şimdi bir kitap okuyorum.", emoji:"📖"},
-  {sentence:"Ich brauche heute Geld.", translation:"Bugün paraya ihtiyacım var.", emoji:"💰"},
-  {sentence:"Wir kaufen morgen Obst.", translation:"Yarın meyve alıyoruz.", emoji:"🍎"},
-  {sentence:"Sie trinkt morgens Kaffee.", translation:"O sabahları kahve içer.", emoji:"☕"},
-  {sentence:"Ich fahre morgen mit dem Auto nach Hause.", translation:"Yarın arabayla eve gidiyorum.", emoji:"🚙"},
-  {sentence:"Er kommt später mit dem Auto nach Hause.", translation:"O daha sonra arabayla eve geliyor.", emoji:"🚗"},
-  {sentence:"Ich fahre am Wochenende mit dem Auto nach Berlin.", translation:"Hafta sonu arabayla Berlin'e gidiyorum.", emoji:"🗺️"},
-  {sentence:"Wir gehen heute mit den Kindern in den Park.", translation:"Bugün çocuklarla parka gidiyoruz.", emoji:"👨‍👩‍👧"}
+  {sentence:"Ich fahre morgen nach Berlin.", translation:"Yarın Berlin'e gidiyorum.", emoji:"🚗", roles:["subj","verb","zeit","lokal","lokal"]},
+  {sentence:"Wir gehen heute ins Kino.", translation:"Bugün sinemaya gidiyoruz.", emoji:"🎬", roles:["subj","verb","zeit","lokal","lokal"]},
+  {sentence:"Sie kommt später nach Hause.", translation:"O eve daha sonra geliyor.", emoji:"🏠", roles:["subj","verb","zeit","lokal","lokal"]},
+  {sentence:"Er geht heute ins Büro.", translation:"O bugün ofise gidiyor.", emoji:"🏢", roles:["subj","verb","zeit","lokal","lokal"]},
+  {sentence:"Ich bin morgen im Büro.", translation:"Yarın ofisteyim.", emoji:"💼", roles:["subj","verb","zeit","lokal","lokal"]},
+  {sentence:"Wir sind am Abend im Park.", translation:"Akşam parktayız.", emoji:"🌳", roles:["subj","verb","zeit","zeit","lokal","lokal"]},
+  {sentence:"Ich kaufe heute ein Buch.", translation:"Bugün bir kitap alıyorum.", emoji:"📚", roles:["subj","verb","zeit","obj","obj"]},
+  {sentence:"Er schreibt morgen eine Mail.", translation:"O yarın bir e-posta yazıyor.", emoji:"📧", roles:["subj","verb","zeit","obj","obj"]},
+  {sentence:"Ich lese jetzt ein Buch.", translation:"Şimdi bir kitap okuyorum.", emoji:"📖", roles:["subj","verb","zeit","obj","obj"]},
+  {sentence:"Ich brauche heute Geld.", translation:"Bugün paraya ihtiyacım var.", emoji:"💰", roles:["subj","verb","zeit","obj"]},
+  {sentence:"Wir kaufen morgen Obst.", translation:"Yarın meyve alıyoruz.", emoji:"🍎", roles:["subj","verb","zeit","obj"]},
+  {sentence:"Sie trinkt morgens Kaffee.", translation:"O sabahları kahve içer.", emoji:"☕", roles:["subj","verb","zeit","obj"]},
+  {sentence:"Ich fahre morgen mit dem Auto nach Hause.", translation:"Yarın arabayla eve gidiyorum.", emoji:"🚙", roles:["subj","verb","zeit","modal","modal","modal","lokal","lokal"]},
+  {sentence:"Er kommt später mit dem Auto nach Hause.", translation:"O daha sonra arabayla eve geliyor.", emoji:"🚗", roles:["subj","verb","zeit","modal","modal","modal","lokal","lokal"]},
+  {sentence:"Ich fahre am Wochenende mit dem Auto nach Berlin.", translation:"Hafta sonu arabayla Berlin'e gidiyorum.", emoji:"🗺️", roles:["subj","verb","zeit","zeit","modal","modal","modal","lokal","lokal"]},
+  {sentence:"Wir gehen heute mit den Kindern in den Park.", translation:"Bugün çocuklarla parka gidiyoruz.", emoji:"👨‍👩‍👧", roles:["subj","verb","zeit","modal","modal","modal","lokal","lokal","lokal"]}
 ];
 
 function buildZeitOrtSession(count){
@@ -3544,6 +3572,7 @@ function buildZeitOrtSession(count){
       mode: "order",
       category: "order-sentence",
       correctTokens: tokens,
+      roles: item.roles,
       pool: shuffleTokens(tokens),
       answer: [],
       answered: false
@@ -3784,6 +3813,7 @@ function buildSession(testMode){
         mode: "order",
         category: "order-sentence",
         correctTokens: tokens,
+        roles: p.roles,
         pool: shuffleTokens(tokens),
         answer: [],
         answered: false
@@ -4140,22 +4170,37 @@ function checkSentenceArtikelAnswer(chosen, btnEl){
   }
 }
 
+const ROLE_LABELS = {subj:"Özne", verb:"Fiil", zeit:"Zaman", modal:"Nasıl", lokal:"Yer", obj:"Nesne"};
+const ROLE_ORDER = ["subj", "verb", "zeit", "modal", "lokal", "obj"];
+
 function renderOrderUI(){
   const answerDiv = document.getElementById("orderAnswer");
   const poolDiv = document.getElementById("orderPool");
   const locked = !!currentQ.locked;
+  const showRoles = currentQ.solved && currentQ.roles;
 
   if(currentQ.answer.length === 0){
     answerDiv.innerHTML = '<span class="order-placeholder">Kelimeleri aşağıdan sırayla seç...</span>';
   } else {
-    answerDiv.innerHTML = currentQ.answer.map((w, i) => {
+    let html = currentQ.answer.map((w, i) => {
       let cls = "order-tile placed";
       if(locked){
         cls += " locked";
-        if(w === currentQ.correctTokens[i]) cls += " correct-order"; else cls += " wrong-order";
+        if(w === currentQ.correctTokens[i]){
+          cls += (showRoles && currentQ.roles[i]) ? (" role-" + currentQ.roles[i]) : " correct-order";
+        } else {
+          cls += " wrong-order";
+        }
       }
       return `<button class="${cls}" onclick="clickAnswerTile(${i})">${escapeHtml(w)}</button>`;
     }).join("");
+    if(showRoles){
+      const usedRoles = ROLE_ORDER.filter(r => currentQ.roles.includes(r));
+      html += '<div class="role-legend">' + usedRoles.map(r =>
+        `<span class="role-chip role-${r}">${ROLE_LABELS[r]}</span>`
+      ).join("") + '</div>';
+    }
+    answerDiv.innerHTML = html;
   }
 
   poolDiv.innerHTML = currentQ.pool.map((w, i) => {
@@ -4197,11 +4242,11 @@ function checkOrderAnswer(){
   }
 
   q.locked = true;
+  if(isCorrect) q.solved = true;
   showResultIcon(isCorrect);
   renderOrderUI();
 
   if(isCorrect){
-    q.solved = true;
     document.getElementById("qSpeakBtn").style.display = "inline-flex";
     document.getElementById("qFeedback").textContent = "Doğru! " + correctSentence;
   } else {
