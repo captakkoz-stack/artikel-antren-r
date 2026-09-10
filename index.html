@@ -857,6 +857,30 @@
     </section>
 
     <section class="panel">
+      <h2>Cümle Ortasında Sıralama (Zaman / Yer / Nesne) — hızlı referans</h2>
+      <div class="rule-grid">
+        <div class="rule-card der">
+          <div class="title">Zaman + Yer</div>
+          <div class="sfx">Zaman önce, Yer sonra gelir.</div>
+          <div class="ex">Ich fahre <strong>morgen</strong> <strong>nach Berlin</strong>.<br><span style="color:#999;">(zaman → yer)</span></div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">Zaman + Nesne</div>
+          <div class="sfx">Zaman önce, Nesne sonra gelir.</div>
+          <div class="ex">Ich kaufe <strong>heute</strong> <strong>ein Buch</strong>.<br><span style="color:#999;">(zaman → nesne)</span></div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">TeKaMoLo (genel sıra)</div>
+          <div class="sfx">Zaman → Sebep → Nasıl → Yer sırasıyla dizilir.</div>
+          <div class="ex">Ich fahre <strong>morgen</strong> <strong>mit dem Auto</strong> <strong>nach Berlin</strong>.</div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>Pratik kural:</strong> Almancada <strong>"Zeit vor Ort"</strong> (zaman, yerden önce) ezberlemeye değer bir kısayoldur — Türkçede sıra ters olabildiği için ("Berlin'e yarın gidiyorum" gibi) bu noktada hata yapmak kolaydır. Cümlenin ortasında (fiilden sonra) sıra genelde şöyledir: <strong>Özne → Zaman → Nesne/Nasıl → Yer</strong>.
+      </div>
+    </section>
+
+    <section class="panel">
       <h2>Akkusativ ne zaman kullanılır? — hızlı referans</h2>
       <div class="rule-grid">
         <div class="rule-card der">
@@ -1212,6 +1236,9 @@
         <button class="btn-ghost btn-test" onclick="askQuestion('sentence-fill')">📝 Cümle Tamamlama</button>
         <button class="btn-ghost btn-test" onclick="askQuestion('order-quiz')">🧩 Cümle Kurma</button>
         <button class="btn-ghost btn-test" onclick="askQuestion('smart-mixed')">🎲 Genel Karışık Sınav</button>
+      </div>
+      <div class="btn-grid" style="margin-top:8px;">
+        <button class="btn-ghost btn-test" onclick="askQuestion('zeitort-quiz')">🗺️ Zaman / Yer / Nesne Sırası Testi</button>
       </div>
 
       <div class="group-label">Tekrar</div>
@@ -3490,6 +3517,45 @@ const MODAL_IMPERATIV_PRACTICE = [
   {sentence:"Fahrt langsam!", translation:"Yavaş sürün!", emoji:"🐢"}
 ];
 
+const ZEIT_ORT_PRACTICE = [
+  {sentence:"Ich fahre morgen nach Berlin.", translation:"Yarın Berlin'e gidiyorum.", emoji:"🚗"},
+  {sentence:"Wir gehen heute ins Kino.", translation:"Bugün sinemaya gidiyoruz.", emoji:"🎬"},
+  {sentence:"Sie kommt später nach Hause.", translation:"O eve daha sonra geliyor.", emoji:"🏠"},
+  {sentence:"Er geht heute ins Büro.", translation:"O bugün ofise gidiyor.", emoji:"🏢"},
+  {sentence:"Ich bin morgen im Büro.", translation:"Yarın ofisteyim.", emoji:"💼"},
+  {sentence:"Wir sind am Abend im Park.", translation:"Akşam parktayız.", emoji:"🌳"},
+  {sentence:"Ich kaufe heute ein Buch.", translation:"Bugün bir kitap alıyorum.", emoji:"📚"},
+  {sentence:"Er schreibt morgen eine Mail.", translation:"O yarın bir e-posta yazıyor.", emoji:"📧"},
+  {sentence:"Ich lese jetzt ein Buch.", translation:"Şimdi bir kitap okuyorum.", emoji:"📖"},
+  {sentence:"Ich brauche heute Geld.", translation:"Bugün paraya ihtiyacım var.", emoji:"💰"},
+  {sentence:"Wir kaufen morgen Obst.", translation:"Yarın meyve alıyoruz.", emoji:"🍎"},
+  {sentence:"Sie trinkt morgens Kaffee.", translation:"O sabahları kahve içer.", emoji:"☕"},
+  {sentence:"Ich fahre morgen mit dem Auto nach Hause.", translation:"Yarın arabayla eve gidiyorum.", emoji:"🚙"},
+  {sentence:"Er kommt später mit dem Auto nach Hause.", translation:"O daha sonra arabayla eve geliyor.", emoji:"🚗"},
+  {sentence:"Ich fahre am Wochenende mit dem Auto nach Berlin.", translation:"Hafta sonu arabayla Berlin'e gidiyorum.", emoji:"🗺️"},
+  {sentence:"Wir gehen heute mit den Kindern in den Park.", translation:"Bugün çocuklarla parka gidiyoruz.", emoji:"👨‍👩‍👧"}
+];
+
+function buildZeitOrtSession(count){
+  function toQ(item){
+    const tokens = item.sentence.trim().split(/\s+/);
+    return {
+      word: {sentence:item.sentence, translation:item.translation, emoji:item.emoji},
+      mode: "order",
+      category: "order-sentence",
+      correctTokens: tokens,
+      pool: shuffleTokens(tokens),
+      answer: [],
+      answered: false
+    };
+  }
+  let session = shuffleArray(ZEIT_ORT_PRACTICE).map(toQ);
+  while(session.length < count){
+    session = session.concat(shuffleArray(ZEIT_ORT_PRACTICE).map(toQ));
+  }
+  return shuffleArray(session);
+}
+
 const ARTICLE_FORMS = {
   der: {nom:{def:"der", indef:"ein", neg:"kein"}, akk:{def:"den", indef:"einen", neg:"keinen"}},
   die: {nom:{def:"die", indef:"eine", neg:"keine"}, akk:{def:"die", indef:"eine", neg:"keine"}},
@@ -3636,6 +3702,7 @@ function buildOrderPool(){
   frageWords.forEach(f => { if(f.beispiel) pool.push({sentence:f.beispiel, translation:f.beispielTr, emoji:f.emoji}); });
   WORTSTELLUNG_PRACTICE.forEach(w => pool.push(w));
   MODAL_IMPERATIV_PRACTICE.forEach(w => pool.push(w));
+  ZEIT_ORT_PRACTICE.forEach(w => pool.push(w));
   return pool.filter(p => {
     const n = p.sentence.trim().split(/\s+/).length;
     return n >= 2 && n <= 8;
@@ -3722,6 +3789,9 @@ function buildSession(testMode){
         answered: false
       };
     });
+  }
+  if(testMode === "zeitort-quiz"){
+    return buildZeitOrtSession(50);
   }
   if(testMode === "nomakk-quiz"){
     return buildNomAkkSession(200);
