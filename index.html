@@ -1054,27 +1054,54 @@
     </section>
 
     <section class="panel">
-      <h2>als / bei / am / um — hızlı referans</h2>
+      <h2>im / am / um (+ bei, als, von) — hızlı referans</h2>
       <div class="rule-grid">
         <div class="rule-card der">
-          <div class="title">um</div>
-          <div class="sfx">Tam saatle birlikte</div>
-          <div class="ex">um drei Uhr<br>um Mitternacht</div>
+          <div class="title">im</div>
+          <div class="sfx">Ay ve mevsimlerle</div>
+          <div class="ex">im Mai<br>im Winter</div>
         </div>
         <div class="rule-card die">
           <div class="title">am</div>
           <div class="sfx">Gün, tarih, günün bölümüyle</div>
-          <div class="ex">am Montag<br>am Morgen</div>
+          <div class="ex">am Montag<br>am 10. Mai<br>am Morgen</div>
         </div>
         <div class="rule-card das">
-          <div class="title">bei</div>
-          <div class="sfx">Yer, şirket, faaliyet sırasında</div>
-          <div class="ex">bei der Arbeit<br>beim Essen</div>
+          <div class="title">um</div>
+          <div class="sfx">Tam saatle birlikte</div>
+          <div class="ex">um drei Uhr<br>um Mitternacht</div>
         </div>
       </div>
       <div class="plural-note">
-        <strong>als</strong> bunlardan farklı bir görevde: (1) geçmişte <strong>TEK SEFERLİK</strong> bir olay için "-dığında" — <strong>Als ich acht war, ...</strong> (Sekiz yaşındayken...) (2) karşılaştırmada "-den daha" — <strong>größer als</strong> (-den daha büyük) (3) meslek/rol tanıtırken "olarak" — <strong>Er arbeitet als Lehrer.</strong> (Öğretmen olarak çalışıyor.)<br>
+        <strong>bei</strong>: yer, şirket, faaliyet sırasında — <strong>bei der Arbeit</strong>, <strong>beim Essen</strong>.<br>
+        <strong>als</strong>: (1) geçmişte <strong>TEK SEFERLİK</strong> bir olay için "-dığında" — <strong>Als ich acht war, ...</strong> (2) karşılaştırmada "-den daha" — <strong>größer als</strong> (3) meslek/rol tanıtırken "olarak" — <strong>Er arbeitet als Lehrer.</strong><br>
+        <strong>von</strong>: başlangıç noktası / aitlik / kaynak — <strong>von 9 bis 17 Uhr</strong> (saatten saate), <strong>das Auto von meinem Vater</strong> (babamın arabası).<br>
         En sık karışan kural: Tekrar eden / şimdiki / gelecek olaylarda "-dığında" için <strong>wenn</strong> kullanılır — sadece geçmişte <strong>tek seferlik</strong> olaylarda <strong>als</strong> kullanılır.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Sıra Sayıları (Ordinalzahlen) — hızlı referans</h2>
+      <div class="rule-grid">
+        <div class="rule-card der">
+          <div class="title">1. 1–19 arası: -te</div>
+          <div class="sfx">Çoğu sayıya "-te" eklenir. Düzensizler: <strong>erste</strong> (1.), <strong>dritte</strong> (3.), <strong>siebte</strong> (7.)</div>
+          <div class="ex">zweite (2.), siebte (7.), dreizehnte (13.)</div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">2. 20 ve üzeri: -ste</div>
+          <div class="sfx">Yirmiden itibaren "-ste" eklenir.</div>
+          <div class="ex">zwanzigste (20.), siebenundzwanzigste (27.)</div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">3. Kullanım: der / am</div>
+          <div class="sfx">Tarih sorarken <strong>der</strong> ile; randevu/tarih belirtirken <strong>am</strong> ile (+ <strong>-n</strong> eki!)</div>
+          <div class="ex">Welches Datum ist heute? <strong>Der</strong> zehnte Mai.<br>Der Termin ist <strong>am</strong> zehnte<strong>n</strong> Mai.</div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>Yazılı kısaltma:</strong> Sayının yanına nokta konur, bu "sıra sayısı" olduğunu gösterir — <strong>der 10.05.</strong> = "der zehnte Mai", <strong>am 10.05.</strong> = "am zehnten Mai".<br>
+        Örnek: "Vom 1. bis zum 27. Juni" = "Vom ersten bis zum siebenundzwanzigsten Juni" (1'den 27'ye kadar).
       </div>
     </section>
   </div>
@@ -1175,6 +1202,9 @@
       <div class="btn-grid grid-2" style="margin-top:8px;">
         <button class="btn-ghost btn-test" onclick="askQuestion('konj-quiz')">Bağlaç Testi</button>
         <button class="btn-ghost btn-test" onclick="askQuestion('frage-quiz')">Soru Kelimesi Testi</button>
+      </div>
+      <div class="btn-grid" style="margin-top:8px;">
+        <button class="btn-ghost btn-test" onclick="askQuestion('prep-quiz')">im / am / um / bei / von Testi</button>
       </div>
 
       <div class="group-label">Karışık &amp; Pratik</div>
@@ -1634,6 +1664,9 @@ const STARTER_WORDS = [
   {artikel:"die", word:"Butter", plural:"—", emoji:"🧈", tr:"tereyağı", beispiel:"Ich esse Brot mit Butter.", beispielTr:"Tereyağlı ekmek yerim."},
   {artikel:"der", word:"Preis", plural:"Preise", emoji:"💰", tr:"fiyat", beispiel:"Der Preis ist hoch.", beispielTr:"Fiyat yüksek."},
   {artikel:"das", word:"Hühnerfleisch", plural:"—", emoji:"🍗", tr:"tavuk eti", beispiel:"Ich esse gern Hühnerfleisch.", beispielTr:"Tavuk etini severim."},
+  {artikel:"der", word:"Frühling", plural:"—", emoji:"🌷", tr:"ilkbahar", beispiel:"Im Frühling blühen die Blumen.", beispielTr:"İlkbaharda çiçekler açar."},
+  {artikel:"der", word:"Sommer", plural:"—", emoji:"☀️", tr:"yaz", beispiel:"Im Sommer ist es heiß.", beispielTr:"Yazın hava sıcaktır."},
+  {artikel:"der", word:"Herbst", plural:"—", emoji:"🍂", tr:"sonbahar", beispiel:"Im Herbst fallen die Blätter.", beispielTr:"Sonbaharda yapraklar düşer."},
   {artikel:"das", word:"Deutsch", plural:"—", emoji:"🇩🇪", tr:"Almanca (dil)", beispiel:"Ich spreche Deutsch.", beispielTr:"Almanca konuşuyorum."},
   {artikel:"die", word:"Gitarre", plural:"Gitarren", emoji:"🎸", tr:"gitar", beispiel:"Er spielt sehr gut Gitarre.", beispielTr:"O çok iyi gitar çalıyor."},
   {artikel:"der", word:"Film", plural:"Filme", emoji:"🎬", tr:"film", beispiel:"Der Film war toll.", beispielTr:"Film harikaydı."},
@@ -1841,6 +1874,7 @@ const STARTER_VERBS = [
   {verb:"organisieren", emoji:"🗂️", tr:"organize etmek / düzenlemek", beispiel:"Wir organisieren eine Party.", beispielTr:"Bir parti düzenliyoruz.", conj:{ich:"organisiere", du:"organisierst", er:"organisiert", wir:"organisieren", ihr:"organisiert", sie:"organisieren"}},
   {verb:"klingen", emoji:"🔊", tr:"kulağa gelmek / ses çıkarmak", beispiel:"Das klingt gut.", beispielTr:"Bu kulağa iyi geliyor.", conj:{ich:"klinge", du:"klingst", er:"klingt", wir:"klingen", ihr:"klingt", sie:"klingen"}},
   {verb:"kennen", emoji:"🤝", tr:"tanımak (kişi/yer)", beispiel:"Ich kenne diese Stadt gut.", beispielTr:"Bu şehri iyi tanırım.", conj:{ich:"kenne", du:"kennst", er:"kennt", wir:"kennen", ihr:"kennt", sie:"kennen"}},
+  {verb:"schauen", emoji:"👀", tr:"bakmak", beispiel:"Ich schaue aus dem Fenster.", beispielTr:"Pencereden dışarı bakıyorum.", conj:{ich:"schaue", du:"schaust", er:"schaut", wir:"schauen", ihr:"schaut", sie:"schauen"}},
   {verb:"schwimmen", emoji:"🏊", tr:"yüzmek", beispiel:"Ich schwimme jeden Tag.", beispielTr:"Her gün yüzerim.", conj:{ich:"schwimme", du:"schwimmst", er:"schwimmt", wir:"schwimmen", ihr:"schwimmt", sie:"schwimmen"}},
   {verb:"einkaufen", emoji:"🛍️", tr:"alışveriş yapmak", beispiel:"Wir gehen heute einkaufen.", beispielTr:"Bugün alışverişe gidiyoruz.", conj:{ich:"kaufe ein", du:"kaufst ein", er:"kauft ein", wir:"kaufen ein", ihr:"kauft ein", sie:"kaufen ein"}},
   {verb:"tanzen", emoji:"💃", tr:"dans etmek", beispiel:"Sie tanzt sehr gut.", beispielTr:"O çok iyi dans ediyor.", conj:{ich:"tanze", du:"tanzt", er:"tanzt", wir:"tanzen", ihr:"tanzt", sie:"tanzen"}},
@@ -3193,6 +3227,7 @@ function getItemKey(item, category){
   if(category === "frage") return item.frage;
   if(category === "uhrzeit") return "Uhr " + item.digital;
   if(category === "order-sentence") return item.sentence;
+  if(category === "prep") return item.sentence;
   return item.word;
 }
 
@@ -3522,6 +3557,67 @@ function buildNomAkkSession(count){
   return questions;
 }
 
+const PREP_DIALOG_PRACTICE = [
+  {sentence:"Kommst du am Mittwoch mit ins Theater?", target:"am", translation:"Çarşamba günü bizimle tiyatroya gelir misin?", emoji:"🎭"},
+  {sentence:"Georg und ich treffen uns um acht.", target:"um", translation:"Georg ve ben saat sekizde buluşuyoruz.", emoji:"🕗"},
+  {sentence:"Wollen wir im Winter Urlaub machen?", target:"im", translation:"Kışın tatile çıkalım mı?", emoji:"❄️"},
+  {sentence:"Kannst du am Donnerstag zu Hause bleiben?", target:"am", translation:"Perşembe günü evde kalabilir misin?", emoji:"🏠"},
+  {sentence:"Von Montag bis Freitag muss Sabine um 6:00 Uhr aufstehen.", target:"um", translation:"Pazartesiden cumaya Sabine saat 6'da kalkmalı.", emoji:"⏰"},
+  {sentence:"Am Wochenende kann sie lange schlafen.", target:"Am", translation:"Hafta sonu uzun uyuyabilir.", emoji:"😴"},
+  {sentence:"Eva hat im Februar viele Termine.", target:"im", translation:"Eva'nın şubatta çok randevusu var.", emoji:"📆"},
+  {sentence:"Im März hat sie mehr Zeit.", target:"Im", translation:"Martta daha çok zamanı var.", emoji:"🌱"},
+  {sentence:"Ich bin bei der Arbeit.", target:"bei", translation:"İşteyim.", emoji:"💼"},
+  {sentence:"Ich arbeite von neun bis siebzehn Uhr.", target:"von", translation:"Saat dokuzdan beşe kadar çalışırım.", emoji:"🕐"},
+  {sentence:"Am Morgen trinke ich Kaffee.", target:"Am", translation:"Sabahları kahve içerim.", emoji:"☕"},
+  {sentence:"Im Sommer ist es sehr heiß.", target:"Im", translation:"Yazın hava çok sıcaktır.", emoji:"☀️"},
+  {sentence:"Der Termin ist am zehnten Mai.", target:"am", translation:"Randevu 10 Mayıs'ta.", emoji:"📅"},
+  {sentence:"Wir treffen uns um Mitternacht.", target:"um", translation:"Gece yarısı buluşuyoruz.", emoji:"🌙"},
+  {sentence:"Am Montag habe ich Deutschkurs.", target:"Am", translation:"Pazartesi Almanca kursum var.", emoji:"📚"},
+  {sentence:"Im Herbst fallen die Blätter.", target:"Im", translation:"Sonbaharda yapraklar düşer.", emoji:"🍂"},
+  {sentence:"Im Frühling blühen die Blumen.", target:"Im", translation:"İlkbaharda çiçekler açar.", emoji:"🌷"},
+  {sentence:"Ich bin am Abend zu Hause.", target:"am", translation:"Akşam evdeyim.", emoji:"🌆"},
+  {sentence:"Der Kurs beginnt um neun Uhr.", target:"um", translation:"Kurs saat dokuzda başlıyor.", emoji:"🕘"},
+  {sentence:"Wir treffen uns bei mir zu Hause.", target:"bei", translation:"Bende buluşuyoruz.", emoji:"🏠"},
+  {sentence:"Von Montag bis Freitag arbeite ich.", target:"Von", translation:"Pazartesiden cumaya çalışırım.", emoji:"💼"},
+  {sentence:"Am Freitag beginnt das Wochenende.", target:"Am", translation:"Cuma hafta sonu başlar.", emoji:"🎉"},
+  {sentence:"Im Januar ist es kalt.", target:"Im", translation:"Ocakta hava soğuktur.", emoji:"❄️"},
+  {sentence:"Ich warte am Bahnhof.", target:"am", translation:"Tren istasyonunda bekliyorum.", emoji:"🚉"},
+  {sentence:"Das Konzert ist um acht Uhr.", target:"um", translation:"Konser saat sekizde.", emoji:"🎼"},
+  {sentence:"Bei Regen bleibe ich zu Hause.", target:"Bei", translation:"Yağmur yağınca evde kalırım.", emoji:"🌧️"},
+  {sentence:"Im Dezember feiern wir Weihnachten.", target:"Im", translation:"Aralıkta Noel'i kutlarız.", emoji:"🎄"},
+  {sentence:"Am Samstag schlafe ich lange.", target:"Am", translation:"Cumartesi uzun uyurum.", emoji:"🛌"},
+  {sentence:"Ich arbeite seit drei Jahren bei Siemens.", target:"bei", translation:"Üç yıldır Siemens'te çalışıyorum.", emoji:"🏢"},
+  {sentence:"Das Geschenk ist von meiner Mutter.", target:"von", translation:"Hediye annemden.", emoji:"🎁"}
+];
+
+function buildPrepDialogSession(count){
+  const prepSet = ["im", "am", "um", "bei", "von"];
+  function buildQ(item){
+    const targetLower = item.target.toLowerCase();
+    const otherPreps = prepSet.filter(p => p !== targetLower);
+    const isCapital = item.target[0] === item.target[0].toUpperCase();
+    const distractors = shuffleArray(otherPreps).slice(0, 2).map(d => isCapital ? capitalizeFirst(d) : d);
+    const options = shuffleArray([item.target, ...distractors]);
+    return {
+      word: {sentence:item.sentence, translation:item.translation, emoji:item.emoji},
+      category: "prep",
+      mode: "sentence",
+      kind: "word",
+      target: item.target,
+      sentence: item.sentence,
+      translation: item.translation,
+      emoji: item.emoji,
+      options: options,
+      answered: false
+    };
+  }
+  let session = shuffleArray(PREP_DIALOG_PRACTICE).map(buildQ);
+  while(session.length < count){
+    session = session.concat(shuffleArray(PREP_DIALOG_PRACTICE).map(buildQ));
+  }
+  return shuffleArray(session);
+}
+
 function buildOrderPool(){
   const pool = [];
   words.forEach(w => { if(w.beispiel) pool.push({sentence:w.beispiel, translation:w.beispielTr, emoji:w.emoji}); });
@@ -3621,6 +3717,9 @@ function buildSession(testMode){
   }
   if(testMode === "nomakk-quiz"){
     return buildNomAkkSession(200);
+  }
+  if(testMode === "prep-quiz"){
+    return buildPrepDialogSession(200);
   }
   if(testMode === "sentence-fill"){
     const pool = buildSentenceFillPool();
