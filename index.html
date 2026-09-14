@@ -438,11 +438,13 @@
     gap:10px;
     font-family: system-ui, Helvetica, Arial, sans-serif;
   }
-  @media (max-width:600px){.rule-grid{grid-template-columns:1fr;}}
+  .rule-grid.cols-4{grid-template-columns: 1fr 1fr 1fr 1fr;}
+  @media (max-width:600px){.rule-grid, .rule-grid.cols-4{grid-template-columns:1fr;}}
   .rule-card{border-radius:3px;padding:12px 12px 10px;}
   .rule-card.der{background:var(--der-bg);border-left:4px solid var(--der);}
   .rule-card.die{background:var(--die-bg);border-left:4px solid var(--die);}
   .rule-card.das{background:var(--das-bg);border-left:4px solid var(--das);}
+  .rule-card.konj-extra{background:#F0E6F7;border-left:4px solid #B98FD1;}
   .rule-card .title{font-weight:700;font-size:14px;margin-bottom:6px;}
   .rule-card.der .title{color:var(--der);}
   .rule-card.die .title{color:var(--die);}
@@ -546,7 +548,7 @@
     border-color:var(--teal);
   }
   .order-tile.placed:hover{background:#163a47;}
-  .order-tile.locked{cursor:default;opacity:0.85;}
+  .order-tile.locked{cursor:not-allowed;opacity:0.6;}
   .order-tile.correct-order{background:var(--das-bg);border-color:#3a7d3a;color:#2c5c2c;}
   .order-tile.wrong-order{background:#fde3da;border-color:var(--coral);color:var(--coral);}
   .order-tile.role-subj{background:#E2E2E2;border-color:#999;color:#444;}
@@ -1021,26 +1023,34 @@
     </section>
 
     <section class="panel">
-      <h2>Modalverben: können / wollen / müssen — hızlı referans</h2>
-      <div class="rule-grid">
+      <h2>Modalverben: können / wollen / müssen / dürfen — hızlı referans</h2>
+      <div class="rule-grid cols-4">
         <div class="rule-card der">
           <div class="title">können</div>
           <div class="sfx">yapabilmek (yetenek / imkân)<br>ich kann, du kannst, er kann<br>wir können, ihr könnt, sie können</div>
-          <div class="ex">Ich kann gut Deutsch sprechen.</div>
+          <div class="ex">Ich kann gut Deutsch sprechen.<br><strong>+ nicht:</strong> Ich kann nicht schwimmen. <span style="color:#999;">(beceremiyorum)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">wollen</div>
           <div class="sfx">istemek (irade / niyet)<br>ich will, du willst, er will<br>wir wollen, ihr wollt, sie wollen</div>
-          <div class="ex">Ich will ins Kino gehen.</div>
+          <div class="ex">Ich will ins Kino gehen.<br><strong>+ nicht:</strong> Ich will nicht gehen. <span style="color:#999;">(istemiyorum)</span></div>
         </div>
         <div class="rule-card das">
           <div class="title">müssen</div>
           <div class="sfx">mecbur olmak (zorunluluk)<br>ich muss, du musst, er muss<br>wir müssen, ihr müsst, sie müssen</div>
-          <div class="ex">Ich muss heute arbeiten.</div>
+          <div class="ex">Ich muss heute arbeiten.<br><strong>+ nicht:</strong> Ich muss nicht arbeiten. <span style="color:#999;">(zorunlu değilim, istersem yaparım)</span></div>
+        </div>
+        <div class="rule-card konj-extra">
+          <div class="title">dürfen</div>
+          <div class="sfx">izinli olmak (izin)<br>ich darf, du darfst, er darf<br>wir dürfen, ihr dürft, sie dürfen</div>
+          <div class="ex">Hier darf man nicht rauchen.<br><strong>+ nicht:</strong> Ich darf nicht rauchen. <span style="color:#999;">(yasak!)</span></div>
         </div>
       </div>
       <div class="plural-note">
-        <strong>Kelime sırası kuralı:</strong> Modal fiil (kann/will/muss...) cümlenin <strong>2. sırasında</strong> çekilir, asıl eylem ise <strong>mastar hâlinde cümlenin en sonuna</strong> gider — "Ich <strong>kann</strong> gut Deutsch <strong>sprechen</strong>." "Ich <strong>muss</strong> heute <strong>arbeiten</strong>."
+        <strong>Kelime sırası kuralı:</strong> Modal fiil (kann/will/muss/darf...) cümlenin <strong>2. sırasında</strong> çekilir, asıl eylem ise <strong>mastar hâlinde cümlenin en sonuna</strong> gider — "Ich <strong>kann</strong> gut Deutsch <strong>sprechen</strong>." "Ich <strong>muss</strong> heute <strong>arbeiten</strong>."<br>
+        <strong>dürfen vs können:</strong> "dürfen" izin/kurala dayalı imkânı ("Kurallara göre yapabilirim/yapamam"), "können" ise yetenek/fiziksel imkânı ("elimden gelir/gelmez") anlatır — "Ich darf nicht rauchen." (yasak) ile "Ich kann nicht schwimmen." (beceremem) farkı gibi.<br>
+        <strong>⚠️ EN SIK YAPILAN HATA — nicht müssen ≠ nicht dürfen:</strong> Türkçede ikisi de "yapmamalı/yapmak zorunda değil" gibi dursa da Almancada TAM TERS iki anlam taşır! <strong>"nicht müssen"</strong> = zorunluluk YOK, istersen yaparsın istemezsen yapmazsın (serbest) — "Du musst nicht kommen." (Gelmek zorunda değilsin, istersen gelme istersen gel.) <strong>"nicht dürfen"</strong> = YASAK, kesinlikle yapılmaması gerekir — "Du darfst nicht kommen." (Gelmen yasak / gelemezsin.)<br>
+        <strong>möchte vs wollen:</strong> İkisi de "istemek" anlamına gelir ama <strong>möchte</strong> çok daha <strong>nazik/kibar</strong> bir istektir (İngilizcedeki "would like" gibi), <strong>wollen</strong> ise daha <strong>direkt/sert</strong> bir irade bildirir — Bir kafede "Ich möchte einen Kaffee." (Bir kahve rica ediyorum) demek nazikken, "Ich will einen Kaffee." (Bir kahve istiyorum!) daha kaba/buyurgan durur. Çekimi: ich möchte, du möchtest, er möchte, wir möchten, ihr möchtet, sie möchten.
       </div>
     </section>
   </div>
@@ -1760,6 +1770,110 @@ const STARTER_WORDS = [
   {artikel:"der", word:"Abschied", plural:"Abschiede", emoji:"👋", tr:"veda", beispiel:"Der Abschied war traurig.", beispielTr:"Veda üzücüydü."},
   {artikel:"die", word:"Begrüßung", plural:"Begrüßungen", emoji:"🤝", tr:"karşılama / selamlama", beispiel:"Die Begrüßung war kurz.", beispielTr:"Karşılama kısaydı."},
   {artikel:"die", word:"Wendung", plural:"Wendungen", emoji:"💬", tr:"kalıp ifade / dönüş", beispiel:"Das ist eine wichtige Wendung.", beispielTr:"Bu önemli bir ifade."},
+  {artikel:"der", word:"Kopf", plural:"Köpfe", emoji:"🤕", tr:"kafa", beispiel:"Mein Kopf tut weh.", beispielTr:"Başım ağrıyor."},
+  {artikel:"die", word:"Hand", plural:"Hände", emoji:"✋", tr:"el", beispiel:"Ich wasche meine Hände.", beispielTr:"Ellerimi yıkıyorum."},
+  {artikel:"der", word:"Fuß", plural:"Füße", emoji:"🦶", tr:"ayak", beispiel:"Mein Fuß tut weh.", beispielTr:"Ayağım ağrıyor."},
+  {artikel:"das", word:"Auge", plural:"Augen", emoji:"👁️", tr:"göz", beispiel:"Sie hat blaue Augen.", beispielTr:"Onun mavi gözleri var."},
+  {artikel:"das", word:"Ohr", plural:"Ohren", emoji:"👂", tr:"kulak", beispiel:"Mein Ohr tut weh.", beispielTr:"Kulağım ağrıyor."},
+  {artikel:"die", word:"Nase", plural:"Nasen", emoji:"👃", tr:"burun", beispiel:"Meine Nase ist kalt.", beispielTr:"Burnum soğuk."},
+  {artikel:"der", word:"Mund", plural:"Münder", emoji:"👄", tr:"ağız", beispiel:"Mach den Mund auf!", beispielTr:"Ağzını aç!"},
+  {artikel:"der", word:"Arm", plural:"Arme", emoji:"💪", tr:"kol", beispiel:"Mein Arm tut weh.", beispielTr:"Kolum ağrıyor."},
+  {artikel:"das", word:"Bein", plural:"Beine", emoji:"🦵", tr:"bacak", beispiel:"Mein Bein tut weh.", beispielTr:"Bacağım ağrıyor."},
+  {artikel:"das", word:"Gesicht", plural:"Gesichter", emoji:"😊", tr:"yüz", beispiel:"Ich wasche mein Gesicht.", beispielTr:"Yüzümü yıkıyorum."},
+  {artikel:"der", word:"Zahn", plural:"Zähne", emoji:"🦷", tr:"diş", beispiel:"Mein Zahn tut weh.", beispielTr:"Dişim ağrıyor."},
+  {artikel:"der", word:"Rücken", plural:"Rücken", emoji:"🔙", tr:"sırt", beispiel:"Mein Rücken tut weh.", beispielTr:"Sırtım ağrıyor."},
+  {artikel:"der", word:"Bauch", plural:"Bäuche", emoji:"🤰", tr:"karın", beispiel:"Mein Bauch tut weh.", beispielTr:"Karnım ağrıyor."},
+  {artikel:"die", word:"Hose", plural:"Hosen", emoji:"👖", tr:"pantolon", beispiel:"Ich trage eine Hose.", beispielTr:"Pantolon giyiyorum."},
+  {artikel:"das", word:"Hemd", plural:"Hemden", emoji:"👔", tr:"gömlek", beispiel:"Er trägt ein Hemd.", beispielTr:"O gömlek giyiyor."},
+  {artikel:"die", word:"Jacke", plural:"Jacken", emoji:"🧥", tr:"ceket / mont", beispiel:"Zieh deine Jacke an!", beispielTr:"Montunu giy!"},
+  {artikel:"der", word:"Mantel", plural:"Mäntel", emoji:"🧥", tr:"palto", beispiel:"Im Winter trage ich einen Mantel.", beispielTr:"Kışın palto giyerim."},
+  {artikel:"der", word:"Rock", plural:"Röcke", emoji:"👗", tr:"etek", beispiel:"Sie trägt einen Rock.", beispielTr:"O etek giyiyor."},
+  {artikel:"die", word:"Mütze", plural:"Mützen", emoji:"🧢", tr:"bere / kasket", beispiel:"Setz deine Mütze auf!", beispielTr:"Bereni tak!"},
+  {artikel:"der", word:"Handschuh", plural:"Handschuhe", emoji:"🧤", tr:"eldiven", beispiel:"Im Winter trage ich Handschuhe.", beispielTr:"Kışın eldiven giyerim."},
+  {artikel:"die", word:"Socke", plural:"Socken", emoji:"🧦", tr:"çorap", beispiel:"Ich ziehe meine Socken an.", beispielTr:"Çoraplarımı giyiyorum."},
+  {artikel:"der", word:"Pullover", plural:"Pullover", emoji:"🧶", tr:"kazak", beispiel:"Ich trage einen Pullover.", beispielTr:"Kazak giyiyorum."},
+  {artikel:"der", word:"Schrank", plural:"Schränke", emoji:"🗄️", tr:"dolap", beispiel:"Die Kleider sind im Schrank.", beispielTr:"Kıyafetler dolapta."},
+  {artikel:"der", word:"Boden", plural:"Böden", emoji:"🟫", tr:"zemin / yer", beispiel:"Die Katze liegt auf dem Boden.", beispielTr:"Kedi yerde yatıyor."},
+  {artikel:"die", word:"Decke", plural:"Decken", emoji:"🔲", tr:"tavan / battaniye", beispiel:"Die Decke ist weiß.", beispielTr:"Tavan beyaz."},
+  {artikel:"der", word:"Spiegel", plural:"Spiegel", emoji:"🪞", tr:"ayna", beispiel:"Ich schaue in den Spiegel.", beispielTr:"Aynaya bakıyorum."},
+  {artikel:"der", word:"Teppich", plural:"Teppiche", emoji:"🟥", tr:"halı", beispiel:"Der Teppich ist bunt.", beispielTr:"Halı renkli."},
+  {artikel:"der", word:"Platz", plural:"Plätze", emoji:"🏛️", tr:"meydan / yer", beispiel:"Der Platz ist groß.", beispielTr:"Meydan büyük."},
+  {artikel:"die", word:"Ecke", plural:"Ecken", emoji:"📐", tr:"köşe", beispiel:"Das Geschäft ist an der Ecke.", beispielTr:"Dükkan köşede."},
+  {artikel:"der", word:"Stern", plural:"Sterne", emoji:"⭐", tr:"yıldız", beispiel:"Die Sterne sind schön.", beispielTr:"Yıldızlar güzel."},
+  {artikel:"die", word:"Wolke", plural:"Wolken", emoji:"☁️", tr:"bulut", beispiel:"Der Himmel ist voller Wolken.", beispielTr:"Gökyüzü bulutlarla dolu."},
+  {artikel:"das", word:"Fahrrad", plural:"Fahrräder", emoji:"🚲", tr:"bisiklet", beispiel:"Ich fahre mit dem Fahrrad.", beispielTr:"Bisikletle gidiyorum."},
+  {artikel:"das", word:"Flugzeug", plural:"Flugzeuge", emoji:"✈️", tr:"uçak", beispiel:"Das Flugzeug fliegt hoch.", beispielTr:"Uçak yükseklerde uçuyor."},
+  {artikel:"der", word:"Bus", plural:"Busse", emoji:"🚌", tr:"otobüs", beispiel:"Ich fahre mit dem Bus.", beispielTr:"Otobüsle gidiyorum."},
+  {artikel:"der", word:"Schüler", plural:"Schüler", emoji:"🎒", tr:"öğrenci (erkek)", beispiel:"Der Schüler lernt Deutsch.", beispielTr:"Öğrenci Almanca öğreniyor."},
+  {artikel:"der", word:"Stift", plural:"Stifte", emoji:"✏️", tr:"kalem", beispiel:"Ich brauche einen Stift.", beispielTr:"Bir kaleme ihtiyacım var."},
+  {artikel:"die", word:"Klasse", plural:"Klassen", emoji:"🏫", tr:"sınıf", beispiel:"Meine Klasse ist groß.", beispielTr:"Sınıfım kalabalık."},
+  {artikel:"die", word:"Universität", plural:"Universitäten", emoji:"🎓", tr:"üniversite", beispiel:"Ich studiere an der Universität.", beispielTr:"Üniversitede okuyorum."},
+  {artikel:"der", word:"Nachbar", plural:"Nachbarn", emoji:"🏘️", tr:"komşu", beispiel:"Ich kenne meinen Nachbarn.", beispielTr:"Komşumu tanırım."},
+  {artikel:"der", word:"Chef", plural:"Chefs", emoji:"👔", tr:"patron / şef", beispiel:"Der Chef ist im Büro.", beispielTr:"Patron ofiste."},
+  {artikel:"die", word:"Traube", plural:"Trauben", emoji:"🍇", tr:"üzüm", beispiel:"Ich esse gern Trauben.", beispielTr:"Üzüm yemeyi severim."},
+  {artikel:"die", word:"Kirsche", plural:"Kirschen", emoji:"🍒", tr:"kiraz", beispiel:"Die Kirschen sind süß.", beispielTr:"Kirazlar tatlı."},
+  {artikel:"die", word:"Erdbeere", plural:"Erdbeeren", emoji:"🍓", tr:"çilek", beispiel:"Ich mag Erdbeeren.", beispielTr:"Çileği severim."},
+  {artikel:"der", word:"Pfirsich", plural:"Pfirsiche", emoji:"🍑", tr:"şeftali", beispiel:"Der Pfirsich ist süß.", beispielTr:"Şeftali tatlı."},
+  {artikel:"die", word:"Ananas", plural:"Ananas", emoji:"🍍", tr:"ananas", beispiel:"Die Ananas ist lecker.", beispielTr:"Ananas lezzetli."},
+  {artikel:"die", word:"Karotte", plural:"Karotten", emoji:"🥕", tr:"havuç", beispiel:"Ich esse Karotten.", beispielTr:"Havuç yerim."},
+  {artikel:"der", word:"Kohl", plural:"—", emoji:"🥬", tr:"lahana", beispiel:"Ich esse keinen Kohl.", beispielTr:"Lahana yemem."},
+  {artikel:"der", word:"Brokkoli", plural:"—", emoji:"🥦", tr:"brokoli", beispiel:"Brokkoli ist gesund.", beispielTr:"Brokoli sağlıklı."},
+  {artikel:"der", word:"Spinat", plural:"—", emoji:"🥬", tr:"ıspanak", beispiel:"Ich esse Spinat.", beispielTr:"Ispanak yerim."},
+  {artikel:"der", word:"Pfeffer", plural:"—", emoji:"🧂", tr:"karabiber", beispiel:"Ich brauche Pfeffer.", beispielTr:"Karabibere ihtiyacım var."},
+  {artikel:"der", word:"Essig", plural:"—", emoji:"🍶", tr:"sirke", beispiel:"Ich brauche Essig zum Kochen.", beispielTr:"Yemek pişirmek için sirkeye ihtiyacım var."},
+  {artikel:"der", word:"Saft", plural:"Säfte", emoji:"🧃", tr:"meyve suyu", beispiel:"Ich trinke gern Saft.", beispielTr:"Meyve suyu içmeyi severim."},
+  {artikel:"das", word:"Pferd", plural:"Pferde", emoji:"🐴", tr:"at", beispiel:"Das Pferd läuft schnell.", beispielTr:"At hızlı koşuyor."},
+  {artikel:"die", word:"Kuh", plural:"Kühe", emoji:"🐄", tr:"inek", beispiel:"Die Kuh ist braun.", beispielTr:"İnek kahverengi."},
+  {artikel:"das", word:"Schwein", plural:"Schweine", emoji:"🐷", tr:"domuz", beispiel:"Das Schwein ist rosa.", beispielTr:"Domuz pembe."},
+  {artikel:"der", word:"Elefant", plural:"Elefanten", emoji:"🐘", tr:"fil", beispiel:"Der Elefant ist groß.", beispielTr:"Fil büyük."},
+  {artikel:"der", word:"Affe", plural:"Affen", emoji:"🐒", tr:"maymun", beispiel:"Der Affe ist im Zoo.", beispielTr:"Maymun hayvanat bahçesinde."},
+  {artikel:"die", word:"Ente", plural:"Enten", emoji:"🦆", tr:"ördek", beispiel:"Die Ente schwimmt im See.", beispielTr:"Ördek gölde yüzüyor."},
+  {artikel:"das", word:"Huhn", plural:"Hühner", emoji:"🐔", tr:"tavuk", beispiel:"Das Huhn ist klein.", beispielTr:"Tavuk küçük."},
+  {artikel:"der", word:"Koch", plural:"Köche", emoji:"👨‍🍳", tr:"aşçı (erkek)", beispiel:"Der Koch kocht das Essen.", beispielTr:"Aşçı yemeği pişiriyor."},
+  {artikel:"die", word:"Köchin", plural:"Köchinnen", emoji:"👩‍🍳", tr:"aşçı (kadın)", beispiel:"Die Köchin arbeitet in der Küche.", beispielTr:"Kadın aşçı mutfakta çalışıyor."},
+  {artikel:"der", word:"Topf", plural:"Töpfe", emoji:"🍲", tr:"tencere", beispiel:"Der Topf ist heiß.", beispielTr:"Tencere sıcak."},
+  {artikel:"die", word:"Pfanne", plural:"Pfannen", emoji:"🍳", tr:"tava", beispiel:"Die Pfanne ist neu.", beispielTr:"Tava yeni."},
+  {artikel:"die", word:"Gabel", plural:"Gabeln", emoji:"🍴", tr:"çatal", beispiel:"Ich brauche eine Gabel.", beispielTr:"Bir çatala ihtiyacım var."},
+  {artikel:"der", word:"Löffel", plural:"Löffel", emoji:"🥄", tr:"kaşık", beispiel:"Ich brauche einen Löffel.", beispielTr:"Bir kaşığa ihtiyacım var."},
+  {artikel:"der", word:"Teller", plural:"Teller", emoji:"🍽️", tr:"tabak", beispiel:"Der Teller ist leer.", beispielTr:"Tabak boş."},
+  {artikel:"die", word:"Tasse", plural:"Tassen", emoji:"☕", tr:"fincan", beispiel:"Ich trinke Kaffee aus der Tasse.", beispielTr:"Fincandan kahve içiyorum."},
+  {artikel:"der", word:"Herd", plural:"—", emoji:"🔥", tr:"ocak", beispiel:"Der Herd ist neu.", beispielTr:"Ocak yeni."},
+  {artikel:"die", word:"Seife", plural:"Seifen", emoji:"🧼", tr:"sabun", beispiel:"Ich wasche mich mit Seife.", beispielTr:"Sabunla yıkanırım."},
+  {artikel:"das", word:"Handtuch", plural:"Handtücher", emoji:"🏳️", tr:"havlu", beispiel:"Das Handtuch ist weiß.", beispielTr:"Havlu beyaz."},
+  {artikel:"die", word:"Zahnbürste", plural:"Zahnbürsten", emoji:"🪥", tr:"diş fırçası", beispiel:"Ich brauche eine neue Zahnbürste.", beispielTr:"Yeni bir diş fırçasına ihtiyacım var."},
+  {artikel:"die", word:"Dusche", plural:"Duschen", emoji:"🚿", tr:"duş", beispiel:"Ich gehe unter die Dusche.", beispielTr:"Duşa giriyorum."},
+  {artikel:"die", word:"Badewanne", plural:"Badewannen", emoji:"🛁", tr:"küvet", beispiel:"Die Badewanne ist voll.", beispielTr:"Küvet dolu."},
+  {artikel:"die", word:"Toilette", plural:"Toiletten", emoji:"🚽", tr:"tuvalet", beispiel:"Wo ist die Toilette?", beispielTr:"Tuvalet nerede?"},
+  {artikel:"das", word:"Kissen", plural:"Kissen", emoji:"🛏️", tr:"yastık", beispiel:"Das Kissen ist groß.", beispielTr:"Yastık büyük."},
+  {artikel:"der", word:"Sessel", plural:"Sessel", emoji:"🛋️", tr:"koltuk", beispiel:"Der Sessel ist bequem.", beispielTr:"Koltuk rahat."},
+  {artikel:"die", word:"Kommode", plural:"Kommoden", emoji:"🗄️", tr:"şifonyer", beispiel:"Die Kommode ist alt.", beispielTr:"Şifonyer eski."},
+  {artikel:"der", word:"Vorhang", plural:"Vorhänge", emoji:"🪟", tr:"perde", beispiel:"Der Vorhang ist blau.", beispielTr:"Perde mavi."},
+  {artikel:"der", word:"Fernseher", plural:"Fernseher", emoji:"📺", tr:"televizyon", beispiel:"Ich schaue Fernseher.", beispielTr:"Televizyon izliyorum."},
+  {artikel:"das", word:"Radio", plural:"Radios", emoji:"📻", tr:"radyo", beispiel:"Ich höre Radio.", beispielTr:"Radyo dinliyorum."},
+  {artikel:"das", word:"Internet", plural:"—", emoji:"🌐", tr:"internet", beispiel:"Ich brauche Internet.", beispielTr:"İnternete ihtiyacım var."},
+  {artikel:"das", word:"Tablet", plural:"Tablets", emoji:"📱", tr:"tablet", beispiel:"Ich lese auf dem Tablet.", beispielTr:"Tablette okuyorum."},
+  {artikel:"das", word:"Kabel", plural:"Kabel", emoji:"🔌", tr:"kablo", beispiel:"Das Kabel ist kaputt.", beispielTr:"Kablo bozuk."},
+  {artikel:"der", word:"Fußball", plural:"Fußbälle", emoji:"⚽", tr:"futbol", beispiel:"Ich spiele gern Fußball.", beispielTr:"Futbol oynamayı severim."},
+  {artikel:"das", word:"Tennis", plural:"—", emoji:"🎾", tr:"tenis", beispiel:"Ich spiele Tennis.", beispielTr:"Tenis oynuyorum."},
+  {artikel:"der", word:"Basketball", plural:"Basketbälle", emoji:"🏀", tr:"basketbol", beispiel:"Er spielt Basketball.", beispielTr:"O basketbol oynuyor."},
+  {artikel:"der", word:"Ball", plural:"Bälle", emoji:"⚽", tr:"top", beispiel:"Der Ball ist rot.", beispielTr:"Top kırmızı."},
+  {artikel:"die", word:"Schweiz", plural:"—", emoji:"🇨🇭", tr:"İsviçre", beispiel:"Die Schweiz ist schön.", beispielTr:"İsviçre güzel."},
+  {artikel:"die", word:"Türkei", plural:"—", emoji:"🇹🇷", tr:"Türkiye", beispiel:"Ich komme aus der Türkei.", beispielTr:"Türkiye'den geliyorum."},
+  {artikel:"das", word:"Schlafzimmer", plural:"Schlafzimmer", emoji:"🛏️", tr:"yatak odası", beispiel:"Mein Schlafzimmer ist klein.", beispielTr:"Yatak odam küçük."},
+  {artikel:"das", word:"Badezimmer", plural:"Badezimmer", emoji:"🛁", tr:"banyo", beispiel:"Das Badezimmer ist sauber.", beispielTr:"Banyo temiz."},
+  {artikel:"der", word:"Balkon", plural:"Balkone", emoji:"🏠", tr:"balkon", beispiel:"Der Balkon ist groß.", beispielTr:"Balkon büyük."},
+  {artikel:"die", word:"Garage", plural:"Garagen", emoji:"🚗", tr:"garaj", beispiel:"Das Auto ist in der Garage.", beispielTr:"Araba garajda."},
+  {artikel:"der", word:"Keller", plural:"Keller", emoji:"🕳️", tr:"bodrum", beispiel:"Der Keller ist kalt.", beispielTr:"Bodrum soğuk."},
+  {artikel:"der", word:"Flur", plural:"Flure", emoji:"🚪", tr:"koridor", beispiel:"Der Flur ist lang.", beispielTr:"Koridor uzun."},
+  {artikel:"der", word:"Nebel", plural:"—", emoji:"🌫️", tr:"sis", beispiel:"Heute ist Nebel.", beispielTr:"Bugün sisli."},
+  {artikel:"das", word:"Gewitter", plural:"Gewitter", emoji:"⛈️", tr:"gök gürültülü fırtına", beispiel:"Das Gewitter ist laut.", beispielTr:"Fırtına gürültülü."},
+  {artikel:"der", word:"Sturm", plural:"Stürme", emoji:"🌪️", tr:"fırtına", beispiel:"Der Sturm ist stark.", beispielTr:"Fırtına güçlü."},
+  {artikel:"der", word:"Cent", plural:"Cent", emoji:"🪙", tr:"sent", beispiel:"Das kostet fünfzig Cent.", beispielTr:"Bu elli sent tutuyor."},
+  {artikel:"das", word:"Foto", plural:"Fotos", emoji:"📷", tr:"fotoğraf", beispiel:"Ich mache ein Foto.", beispielTr:"Bir fotoğraf çekiyorum."},
+  {artikel:"der", word:"Brief", plural:"Briefe", emoji:"✉️", tr:"mektup", beispiel:"Ich schreibe einen Brief.", beispielTr:"Bir mektup yazıyorum."},
+  {artikel:"die", word:"Karte", plural:"Karten", emoji:"🗺️", tr:"kart / harita", beispiel:"Ich brauche eine Karte.", beispielTr:"Bir haritaya ihtiyacım var."},
+  {artikel:"die", word:"Adresse", plural:"Adressen", emoji:"🏠", tr:"adres", beispiel:"Wie ist deine Adresse?", beispielTr:"Adresin ne?"},
+  {artikel:"die", word:"Nummer", plural:"Nummern", emoji:"🔢", tr:"numara", beispiel:"Wie ist deine Nummer?", beispielTr:"Numaran ne?"},
   {artikel:"das", word:"Deutsch", plural:"—", emoji:"🇩🇪", tr:"Almanca (dil)", beispiel:"Ich spreche Deutsch.", beispielTr:"Almanca konuşuyorum."},
   {artikel:"die", word:"Gitarre", plural:"Gitarren", emoji:"🎸", tr:"gitar", beispiel:"Er spielt sehr gut Gitarre.", beispielTr:"O çok iyi gitar çalıyor."},
   {artikel:"der", word:"Film", plural:"Filme", emoji:"🎬", tr:"film", beispiel:"Der Film war toll.", beispielTr:"Film harikaydı."},
@@ -1966,6 +2080,31 @@ const STARTER_VERBS = [
   {verb:"kennen", emoji:"🤝", tr:"tanımak (kişi/yer)", beispiel:"Ich kenne diese Stadt gut.", beispielTr:"Bu şehri iyi tanırım.", conj:{ich:"kenne", du:"kennst", er:"kennt", wir:"kennen", ihr:"kennt", sie:"kennen"}},
   {verb:"schauen", emoji:"👀", tr:"bakmak", beispiel:"Ich schaue aus dem Fenster.", beispielTr:"Pencereden dışarı bakıyorum.", conj:{ich:"schaue", du:"schaust", er:"schaut", wir:"schauen", ihr:"schaut", sie:"schauen"}},
   {verb:"bezahlen", emoji:"💳", tr:"ödemek", beispiel:"Bezahlen Sie an der Kasse.", beispielTr:"Kasada ödeyin.", conj:{ich:"bezahle", du:"bezahlst", er:"bezahlt", wir:"bezahlen", ihr:"bezahlt", sie:"bezahlen"}},
+  {verb:"dürfen", emoji:"✅", tr:"izinli olmak (yapabilir)", beispiel:"Hier darf man nicht rauchen.", beispielTr:"Burada sigara içilmez (içme izni yok).", conj:{ich:"darf", du:"darfst", er:"darf", wir:"dürfen", ihr:"dürft", sie:"dürfen"}},
+  {verb:"möchten", emoji:"🙏", tr:"istemek (nazikçe)", beispiel:"Ich möchte einen Kaffee.", beispielTr:"Bir kahve rica ediyorum.", conj:{ich:"möchte", du:"möchtest", er:"möchte", wir:"möchten", ihr:"möchtet", sie:"möchten"}},
+  {verb:"heißen", emoji:"🏷️", tr:"adı olmak", beispiel:"Wie heißt du?", beispielTr:"Adın ne?", conj:{ich:"heiße", du:"heißt", er:"heißt", wir:"heißen", ihr:"heißt", sie:"heißen"}},
+  {verb:"sollen", emoji:"💡", tr:"tavsiye edilmek / -meli", beispiel:"Du sollst mehr Wasser trinken.", beispielTr:"Daha çok su içmelisin.", conj:{ich:"soll", du:"sollst", er:"soll", wir:"sollen", ihr:"sollt", sie:"sollen"}},
+  {verb:"verstehen", emoji:"🧠", tr:"anlamak", beispiel:"Ich verstehe das nicht.", beispielTr:"Bunu anlamıyorum.", conj:{ich:"verstehe", du:"verstehst", er:"versteht", wir:"verstehen", ihr:"versteht", sie:"verstehen"}},
+  {verb:"hören", emoji:"👂", tr:"duymak / dinlemek", beispiel:"Ich höre Musik.", beispielTr:"Müzik dinliyorum.", conj:{ich:"höre", du:"hörst", er:"hört", wir:"hören", ihr:"hört", sie:"hören"}},
+  {verb:"suchen", emoji:"🔍", tr:"aramak / bulmaya çalışmak", beispiel:"Ich suche das Buch.", beispielTr:"Kitabı arıyorum.", conj:{ich:"suche", du:"suchst", er:"sucht", wir:"suchen", ihr:"sucht", sie:"suchen"}},
+  {verb:"antworten", emoji:"💬", tr:"cevap vermek", beispiel:"Ich antworte auf die Frage.", beispielTr:"Soruyu cevaplıyorum.", conj:{ich:"antworte", du:"antwortest", er:"antwortet", wir:"antworten", ihr:"antwortet", sie:"antworten"}},
+  {verb:"denken", emoji:"🤔", tr:"düşünmek", beispiel:"Ich denke oft an dich.", beispielTr:"Seni sık sık düşünüyorum.", conj:{ich:"denke", du:"denkst", er:"denkt", wir:"denken", ihr:"denkt", sie:"denken"}},
+  {verb:"aufstehen", emoji:"⏰", tr:"kalkmak", beispiel:"Ich stehe um sieben Uhr auf.", beispielTr:"Saat yedide kalkarım.", conj:{ich:"stehe auf", du:"stehst auf", er:"steht auf", wir:"stehen auf", ihr:"steht auf", sie:"stehen auf"}},
+  {verb:"anrufen", emoji:"📞", tr:"aramak (telefonla)", beispiel:"Ich rufe dich morgen an.", beispielTr:"Seni yarın ararım.", conj:{ich:"rufe an", du:"rufst an", er:"ruft an", wir:"rufen an", ihr:"ruft an", sie:"rufen an"}},
+  {verb:"singen", emoji:"🎤", tr:"şarkı söylemek", beispiel:"Ich singe gern.", beispielTr:"Şarkı söylemeyi severim.", conj:{ich:"singe", du:"singst", er:"singt", wir:"singen", ihr:"singt", sie:"singen"}},
+  {verb:"laufen", emoji:"🏃", tr:"koşmak / yürümek", beispiel:"Ich laufe jeden Tag.", beispielTr:"Her gün koşarım.", conj:{ich:"laufe", du:"läufst", er:"läuft", wir:"laufen", ihr:"lauft", sie:"laufen"}},
+  {verb:"waschen", emoji:"🧼", tr:"yıkamak", beispiel:"Ich wasche meine Hände.", beispielTr:"Ellerimi yıkıyorum.", conj:{ich:"wasche", du:"wäschst", er:"wäscht", wir:"waschen", ihr:"wascht", sie:"waschen"}},
+  {verb:"gefallen", emoji:"😊", tr:"hoşuna gitmek", beispiel:"Das gefällt mir gut.", beispielTr:"Bu hoşuma gidiyor.", conj:{ich:"gefalle", du:"gefällst", er:"gefällt", wir:"gefallen", ihr:"gefallt", sie:"gefallen"}},
+  {verb:"sich freuen", emoji:"🥳", tr:"sevinmek", beispiel:"Ich freue mich auf die Ferien.", beispielTr:"Tatili dört gözle bekliyorum.", conj:{ich:"freue mich", du:"freust dich", er:"freut sich", wir:"freuen uns", ihr:"freut euch", sie:"freuen sich"}},
+  {verb:"besuchen", emoji:"🏠", tr:"ziyaret etmek", beispiel:"Ich besuche meine Familie.", beispielTr:"Ailemi ziyaret ediyorum.", conj:{ich:"besuche", du:"besuchst", er:"besucht", wir:"besuchen", ihr:"besucht", sie:"besuchen"}},
+  {verb:"verkaufen", emoji:"💰", tr:"satmak", beispiel:"Er verkauft sein Auto.", beispielTr:"O arabasını satıyor.", conj:{ich:"verkaufe", du:"verkaufst", er:"verkauft", wir:"verkaufen", ihr:"verkauft", sie:"verkaufen"}},
+  {verb:"anfangen", emoji:"🚦", tr:"başlamak", beispiel:"Der Kurs fängt um neun an.", beispielTr:"Kurs dokuzda başlıyor.", conj:{ich:"fange an", du:"fängst an", er:"fängt an", wir:"fangen an", ihr:"fangt an", sie:"fangen an"}},
+  {verb:"legen", emoji:"📥", tr:"yatay koymak", beispiel:"Ich lege das Buch auf den Tisch.", beispielTr:"Kitabı masaya koyuyorum.", conj:{ich:"lege", du:"legst", er:"legt", wir:"legen", ihr:"legt", sie:"legen"}},
+  {verb:"stellen", emoji:"📤", tr:"dikey koymak", beispiel:"Ich stelle die Tasse auf den Tisch.", beispielTr:"Fincanı masaya koyuyorum.", conj:{ich:"stelle", du:"stellst", er:"stellt", wir:"stellen", ihr:"stellt", sie:"stellen"}},
+  {verb:"setzen", emoji:"🪑", tr:"oturtmak", beispiel:"Ich setze mich auf den Stuhl.", beispielTr:"Sandalyeye oturuyorum.", conj:{ich:"setze", du:"setzt", er:"setzt", wir:"setzen", ihr:"setzt", sie:"setzen"}},
+  {verb:"tragen", emoji:"🎒", tr:"taşımak / giymek", beispiel:"Ich trage eine Tasche.", beispielTr:"Bir çanta taşıyorum.", conj:{ich:"trage", du:"trägst", er:"trägt", wir:"tragen", ihr:"tragt", sie:"tragen"}},
+  {verb:"fallen", emoji:"⬇️", tr:"düşmek", beispiel:"Das Buch fällt auf den Boden.", beispielTr:"Kitap yere düşüyor.", conj:{ich:"falle", du:"fällst", er:"fällt", wir:"fallen", ihr:"fallt", sie:"fallen"}},
+  {verb:"steigen", emoji:"🚌", tr:"binmek / çıkmak", beispiel:"Ich steige in den Bus.", beispielTr:"Otobüse biniyorum.", conj:{ich:"steige", du:"steigst", er:"steigt", wir:"steigen", ihr:"steigt", sie:"steigen"}},
   {verb:"schwimmen", emoji:"🏊", tr:"yüzmek", beispiel:"Ich schwimme jeden Tag.", beispielTr:"Her gün yüzerim.", conj:{ich:"schwimme", du:"schwimmst", er:"schwimmt", wir:"schwimmen", ihr:"schwimmt", sie:"schwimmen"}},
   {verb:"einkaufen", emoji:"🛍️", tr:"alışveriş yapmak", beispiel:"Wir gehen heute einkaufen.", beispielTr:"Bugün alışverişe gidiyoruz.", conj:{ich:"kaufe ein", du:"kaufst ein", er:"kauft ein", wir:"kaufen ein", ihr:"kauft ein", sie:"kaufen ein"}},
   {verb:"tanzen", emoji:"💃", tr:"dans etmek", beispiel:"Sie tanzt sehr gut.", beispielTr:"O çok iyi dans ediyor.", conj:{ich:"tanze", du:"tanzt", er:"tanzt", wir:"tanzen", ihr:"tanzt", sie:"tanzen"}},
@@ -2072,6 +2211,24 @@ const STARTER_ADJEKTIVE = [
   {adj:"oft", emoji:"🔁", tr:"sık sık", beispiel:"Ich gehe oft ins Schwimmbad.", beispielTr:"Sık sık yüzme havuzuna giderim."},
   {adj:"dringend", emoji:"🚨", tr:"acil", beispiel:"Das ist sehr dringend.", beispielTr:"Bu çok acil.", komparativ:"dringender", superlativ:"am dringendsten"},
   {adj:"bekannt", emoji:"⭐", tr:"tanınmış / bilinen", beispiel:"Er ist sehr bekannt.", beispielTr:"O çok tanınmış.", komparativ:"bekannter", superlativ:"am bekanntesten"},
+  {adj:"froh", emoji:"😊", tr:"mutlu / sevinçli", beispiel:"Ich bin froh.", beispielTr:"Mutluyum.", komparativ:"froher", superlativ:"am frohesten"},
+  {adj:"wütend", emoji:"😠", tr:"öfkeli", beispiel:"Er ist wütend.", beispielTr:"O öfkeli.", komparativ:"wütender", superlativ:"am wütendsten"},
+  {adj:"nervös", emoji:"😰", tr:"gergin", beispiel:"Ich bin nervös.", beispielTr:"Gerginim.", komparativ:"nervöser", superlativ:"am nervösesten"},
+  {adj:"zufrieden", emoji:"🙂", tr:"memnun", beispiel:"Ich bin zufrieden.", beispielTr:"Memnunum.", komparativ:"zufriedener", superlativ:"am zufriedensten"},
+  {adj:"grau", emoji:"🔘", tr:"gri", beispiel:"Der Himmel ist grau.", beispielTr:"Gökyüzü gri.", komparativ:"grauer", superlativ:"am grauesten"},
+  {adj:"noch", emoji:"⏳", tr:"hâlâ / henüz", beispiel:"Ich bin noch hier.", beispielTr:"Hâlâ buradayım."},
+  {adj:"auch", emoji:"➕", tr:"de / da / dahi", beispiel:"Ich komme auch.", beispielTr:"Ben de geliyorum."},
+  {adj:"sehr", emoji:"❗", tr:"çok", beispiel:"Das ist sehr gut.", beispielTr:"Bu çok iyi."},
+  {adj:"viel", emoji:"🔢", tr:"çok (miktar)", beispiel:"Ich habe viel Zeit.", beispielTr:"Çok zamanım var."},
+  {adj:"wenig", emoji:"➖", tr:"az", beispiel:"Ich habe wenig Geld.", beispielTr:"Az param var."},
+  {adj:"hier", emoji:"📍", tr:"burada", beispiel:"Ich wohne hier.", beispielTr:"Burada oturuyorum."},
+  {adj:"dort", emoji:"📌", tr:"orada", beispiel:"Das Buch ist dort.", beispielTr:"Kitap orada."},
+  {adj:"da", emoji:"👉", tr:"orada / işte", beispiel:"Da ist mein Auto.", beispielTr:"İşte arabam."},
+  {adj:"links", emoji:"⬅️", tr:"solda / sola", beispiel:"Geh nach links!", beispielTr:"Sola git!"},
+  {adj:"rechts", emoji:"➡️", tr:"sağda / sağa", beispiel:"Geh nach rechts!", beispielTr:"Sağa git!"},
+  {adj:"geradeaus", emoji:"⬆️", tr:"dosdoğru", beispiel:"Geh geradeaus!", beispielTr:"Dümdüz git!"},
+  {adj:"richtig", emoji:"✔️", tr:"doğru", beispiel:"Deine Antwort ist richtig.", beispielTr:"Cevabın doğru.", komparativ:"richtiger", superlativ:"am richtigsten"},
+  {adj:"falsch", emoji:"❌", tr:"yanlış", beispiel:"Das ist falsch.", beispielTr:"Bu yanlış.", komparativ:"falscher", superlativ:"am falschesten"},
   {adj:"elegant", emoji:"💃", tr:"şık / zarif", beispiel:"Sie trägt ein elegantes Kleid.", beispielTr:"O şık bir elbise giyiyor.", komparativ:"eleganter", superlativ:"am elegantesten"},
   {adj:"fertig", emoji:"✅", tr:"hazır / bitmiş", beispiel:"Bist du fertig?", beispielTr:"Hazır mısın?", komparativ:"fertiger", superlativ:"am fertigsten"},
   {adj:"satt", emoji:"😌", tr:"tok / doymuş", beispiel:"Ich bin satt.", beispielTr:"Doydum.", opposite:"hungrig"},
