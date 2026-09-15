@@ -439,12 +439,14 @@
     font-family: system-ui, Helvetica, Arial, sans-serif;
   }
   .rule-grid.cols-4{grid-template-columns: 1fr 1fr 1fr 1fr;}
-  @media (max-width:600px){.rule-grid, .rule-grid.cols-4{grid-template-columns:1fr;}}
+  .rule-grid.cols-5{grid-template-columns: 1fr 1fr 1fr 1fr 1fr;}
+  @media (max-width:600px){.rule-grid, .rule-grid.cols-4, .rule-grid.cols-5{grid-template-columns:1fr;}}
   .rule-card{border-radius:3px;padding:12px 12px 10px;}
   .rule-card.der{background:var(--der-bg);border-left:4px solid var(--der);}
   .rule-card.die{background:var(--die-bg);border-left:4px solid var(--die);}
   .rule-card.das{background:var(--das-bg);border-left:4px solid var(--das);}
   .rule-card.konj-extra{background:#F0E6F7;border-left:4px solid #B98FD1;}
+  .rule-card.konj-extra2{background:#E6F0F7;border-left:4px solid #7FA8D9;}
   .rule-card .title{font-weight:700;font-size:14px;margin-bottom:6px;}
   .rule-card.der .title{color:var(--der);}
   .rule-card.die .title{color:var(--die);}
@@ -810,7 +812,7 @@
     </div>
     <div>
       <div class="signature"><span class="sig-note">Persönliche Lernnotizen</span><span class="sig-divider"></span><span class="sig-name">⚓ Erstellt von Capt. Aykut Akkoz</span></div>
-      <div class="last-updated">Zuletzt aktualisiert: 13.09.2026</div>
+      <div class="last-updated">Zuletzt aktualisiert: 15.09.2026</div>
     </div>
   </div>
 </header>
@@ -1058,8 +1060,8 @@
     </section>
 
     <section class="panel">
-      <h2>Modalverben: können / wollen / müssen / dürfen — hızlı referans</h2>
-      <div class="rule-grid cols-4">
+      <h2>Modalverben: können / wollen / müssen / dürfen / sollen — hızlı referans</h2>
+      <div class="rule-grid cols-5">
         <div class="rule-card der">
           <div class="title">können</div>
           <div class="sfx">yapabilmek (yetenek / imkân)<br>ich kann, du kannst, er kann<br>wir können, ihr könnt, sie können</div>
@@ -1080,9 +1082,15 @@
           <div class="sfx">izinli olmak (izin)<br>ich darf, du darfst, er darf<br>wir dürfen, ihr dürft, sie dürfen</div>
           <div class="ex">Hier darf man nicht rauchen.<br><strong>+ nicht:</strong> Ich darf nicht rauchen. <span style="color:#999;">(yasak!)</span></div>
         </div>
+        <div class="rule-card konj-extra2">
+          <div class="title">sollen</div>
+          <div class="sfx">tavsiye edilmek / -meli (başkasının isteği)<br>ich soll, du sollst, er soll<br>wir sollen, ihr sollt, sie sollen</div>
+          <div class="ex">Du sollst mehr Wasser trinken.<br><strong>+ nicht:</strong> Du sollst nicht so viel arbeiten. <span style="color:#999;">(tavsiye edilmiyor)</span></div>
+        </div>
       </div>
       <div class="plural-note">
-        <strong>Kelime sırası kuralı:</strong> Modal fiil (kann/will/muss/darf...) cümlenin <strong>2. sırasında</strong> çekilir, asıl eylem ise <strong>mastar hâlinde cümlenin en sonuna</strong> gider — "Ich <strong>kann</strong> gut Deutsch <strong>sprechen</strong>." "Ich <strong>muss</strong> heute <strong>arbeiten</strong>."<br>
+        <strong>Kelime sırası kuralı:</strong> Modal fiil (kann/will/muss/darf/soll...) cümlenin <strong>2. sırasında</strong> çekilir, asıl eylem ise <strong>mastar hâlinde cümlenin en sonuna</strong> gider — "Ich <strong>kann</strong> gut Deutsch <strong>sprechen</strong>." "Ich <strong>muss</strong> heute <strong>arbeiten</strong>."<br>
+        <strong>sollen vs müssen:</strong> "müssen" kendi zorunluluğun/gereksinimin ("Ich muss arbeiten." — çalışmam gerekiyor, kendi durumumdan), "sollen" ise BAŞKASININ isteği/tavsiyesi/beklentisi ("Der Arzt sagt, ich soll mehr schlafen." — doktor öyle söylüyor, tavsiye/beklenti dışarıdan geliyor).<br>
         <strong>dürfen vs können:</strong> "dürfen" izin/kurala dayalı imkânı ("Kurallara göre yapabilirim/yapamam"), "können" ise yetenek/fiziksel imkânı ("elimden gelir/gelmez") anlatır — "Ich darf nicht rauchen." (yasak) ile "Ich kann nicht schwimmen." (beceremem) farkı gibi.<br>
         <strong>⚠️ EN SIK YAPILAN HATA — nicht müssen ≠ nicht dürfen:</strong> Türkçede ikisi de "yapmamalı/yapmak zorunda değil" gibi dursa da Almancada TAM TERS iki anlam taşır! <strong>"nicht müssen"</strong> = zorunluluk YOK, istersen yaparsın istemezsen yapmazsın (serbest) — "Du musst nicht kommen." (Gelmek zorunda değilsin, istersen gelme istersen gel.) <strong>"nicht dürfen"</strong> = YASAK, kesinlikle yapılmaması gerekir — "Du darfst nicht kommen." (Gelmen yasak / gelemezsin.)<br>
         <strong>möchte vs wollen:</strong> İkisi de "istemek" anlamına gelir ama <strong>möchte</strong> çok daha <strong>nazik/kibar</strong> bir istektir (İngilizcedeki "would like" gibi), <strong>wollen</strong> ise daha <strong>direkt/sert</strong> bir irade bildirir — Bir kafede "Ich möchte einen Kaffee." (Bir kahve rica ediyorum) demek nazikken, "Ich will einen Kaffee." (Bir kahve istiyorum!) daha kaba/buyurgan durur. Çekimi: ich möchte, du möchtest, er möchte, wir möchten, ihr möchtet, sie möchten.
@@ -1126,7 +1134,9 @@
         </thead>
         <tbody>
           <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;"><strong>Wir</strong></td><td style="padding:8px; color:var(--brass); font-weight:700;">fangen</td><td style="padding:8px;">gleich mit der Planung</td><td style="padding:8px; color:var(--coral); font-weight:700;">an.</td></tr>
-          <tr><td style="padding:8px;"><strong>Marek</strong></td><td style="padding:8px; color:var(--brass); font-weight:700;">kauft</td><td style="padding:8px;">im Supermarkt</td><td style="padding:8px; color:var(--coral); font-weight:700;">ein.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;"><strong>Marek</strong></td><td style="padding:8px; color:var(--brass); font-weight:700;">kauft</td><td style="padding:8px;">im Supermarkt</td><td style="padding:8px; color:var(--coral); font-weight:700;">ein.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;"><strong>Er</strong></td><td style="padding:8px; color:var(--brass); font-weight:700;">holt</td><td style="padding:8px;">mich am Bahnhof</td><td style="padding:8px; color:var(--coral); font-weight:700;">ab.</td></tr>
+          <tr><td style="padding:8px;"><strong>Sie</strong></td><td style="padding:8px; color:var(--brass); font-weight:700;">bringt</td><td style="padding:8px;">einen Kuchen</td><td style="padding:8px; color:var(--coral); font-weight:700;">mit.</td></tr>
         </tbody>
       </table>
       <div class="plural-note" style="margin-top:0;">
