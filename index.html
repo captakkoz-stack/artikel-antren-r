@@ -823,8 +823,9 @@
     <button class="side-tab active" id="tabBtnArtikel" onclick="switchTab('artikel')">İsimler (Nomen mit Artikel)</button>
     <button class="side-tab" id="tabBtnVerben" onclick="switchTab('verben')">Fiiller (Verben)</button>
     <button class="side-tab" id="tabBtnAdj" onclick="switchTab('adj')">Sıfatlar (Adjektive)</button>
-    <button class="side-tab" id="tabBtnSaat" onclick="switchTab('saat')">Saatler & Takvim (Uhrzeit)</button>
     <button class="side-tab" id="tabBtnKonj" onclick="switchTab('konj')">Bağlaçlar (Konjunktionen)</button>
+    <button class="side-tab" id="tabBtnPraep" onclick="switchTab('praep')">Edatlar (Präpositionen)</button>
+    <button class="side-tab" id="tabBtnSaat" onclick="switchTab('saat')">Saatler & Takvim (Uhrzeit & Kalender)</button>
     <button class="side-tab" id="tabBtnFrage" onclick="switchTab('frage')">Soru Kelimeleri (W-Fragen)</button>
   </nav>
   <div class="left-col">
@@ -1340,6 +1341,50 @@
     </section>
   </div>
 
+  <div id="praepSection" style="display:none;">
+    <section class="panel" style="margin-top:0;">
+      <div class="list-header">
+        <h2>Edat Listem (Wörterbuch)</h2>
+        <button class="btn-add" onclick="openAddPraepModal()">+ Edat Ekle</button>
+      </div>
+      <div class="search-row">
+        <input type="text" id="praepSearchInput" placeholder="Ara... (mit, für, edat...)" oninput="renderPraep()">
+        <button class="btn-ghost" onclick="clearSearch('praep')">Temizle</button>
+      </div>
+      <div class="hint-line">Edata tıkla → Türkçesini gör</div>
+      <div class="wordlist-scroll">
+        <table>
+          <thead><tr><th></th><th>Edat</th><th></th><th>Örnek Cümle</th><th></th></tr></thead>
+          <tbody id="praepTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Präpositionen (Edatlar) — hızlı referans</h2>
+      <div class="rule-grid">
+        <div class="rule-card der">
+          <div class="title">Sadece Akkusativ</div>
+          <div class="sfx">für, durch, ohne, gegen, um</div>
+          <div class="ex">Das ist für dich.<br>Ich gehe durch den Park.</div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">Sadece Dativ</div>
+          <div class="sfx">mit, nach, bei, seit, von, zu, aus, gegenüber</div>
+          <div class="ex">Ich fahre mit dem Auto.<br>Ich komme aus der Türkei.</div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">Wechselpräpositionen</div>
+          <div class="sfx">in, an, auf, über, unter, vor, hinter, neben, zwischen</div>
+          <div class="ex">Ich bin in der Schule. (konum→Dativ)<br>Ich gehe in die Schule. (hareket→Akkusativ)</div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>Wechselpräpositionen</strong> (değişken edatlar) hem Akkusativ hem Dativ alabilir: <strong>hareket/yön</strong> varsa ("nereye?") Akkusativ, <strong>konum/durum</strong> varsa ("nerede?") Dativ kullanılır. Bu 9 edatı ezberlemek işini kolaylaştırır: <strong>in, an, auf, über, unter, vor, hinter, neben, zwischen</strong>.
+      </div>
+    </section>
+  </div>
+
   </div>
 
   <div>
@@ -1353,7 +1398,7 @@
 
       <div class="toggle-row">
         <input type="checkbox" id="autoToggle" onchange="toggleAuto()">
-        <label style="margin:0" for="autoToggle">Otomatik soru sor</label>
+        <label style="margin:0" for="autoToggle">Otomatik Artikel Testi</label>
       </div>
       <div class="interval-row" id="intervalRow">
         <button class="interval-btn" data-sec="30" onclick="setAutoInterval(30)">30 sn</button>
@@ -1403,7 +1448,7 @@
         Not: Bu araç bir tarayıcı sekmesi olarak çalışır, gerçek bir arka plan uygulaması değildir.
         Artikel Testi ve İsim Testi kendi isim listesini; Fiil/Sıfat testleri kendi listelerini kullanır.
         Artikel Testi'nde bilgisayarda <strong>Enter</strong> tuşuyla bir sonraki soruya hızlıca geçebilirsin.
-        Başka bir sekmedeyken otomatik soru gelirse, sekme başlığı yanıp söner ve (izin verirsen) bildirim gösterilir.
+        Başka bir sekmedeyken otomatik Artikel sorusu gelirse, sekme başlığı yanıp söner ve (izin verirsen) bildirim gösterilir.
       </p>
     </section>
 
@@ -1573,6 +1618,22 @@
     <div class="add-actions">
       <button class="btn-ghost" onclick="closeAddFrageModal()">İptal</button>
       <button class="btn-main" onclick="addFrage()">Kaydet</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="addPraepOverlay">
+  <div class="add-card">
+    <h3>Yeni Edat Ekle</h3>
+    <label>Simge (opsiyonel emoji)</label>
+    <input type="text" id="inpPraepEmoji" placeholder="📍" maxlength="4">
+    <label>Edat</label>
+    <input type="text" id="inpPraep" placeholder="mit" maxlength="80">
+    <label>Türkçesi</label>
+    <input type="text" id="inpPraepTr" placeholder="ile" maxlength="120">
+    <div class="add-actions">
+      <button class="btn-ghost" onclick="closeAddPraepModal()">İptal</button>
+      <button class="btn-main" onclick="addPraep()">Kaydet</button>
     </div>
   </div>
 </div>
@@ -2410,12 +2471,38 @@ const STARTER_FRAGE = [
   {frage:"wie oft", emoji:"🔁", tr:"ne sıklıkla", beispiel:"Wie oft gehst du ins Kino?", beispielTr:"Sinemaya ne sıklıkla gidersin?"}
 ];
 
+const STARTER_PRAEP = [
+  {praep:"für", emoji:"🎁", tr:"için (Akkusativ)", beispiel:"Das Geschenk ist für dich.", beispielTr:"Hediye senin için."},
+  {praep:"durch", emoji:"➡️", tr:"içinden / aracılığıyla (Akkusativ)", beispiel:"Ich gehe durch den Park.", beispielTr:"Parkın içinden geçiyorum."},
+  {praep:"ohne", emoji:"🚫", tr:"-sız (Akkusativ)", beispiel:"Ich trinke Kaffee ohne Zucker.", beispielTr:"Şekersiz kahve içerim."},
+  {praep:"gegen", emoji:"⚔️", tr:"karşı (Akkusativ)", beispiel:"Er spielt gegen mich.", beispielTr:"O bana karşı oynuyor."},
+  {praep:"um", emoji:"🕐", tr:"saatte / etrafında (Akkusativ)", beispiel:"Wir treffen uns um sieben Uhr.", beispielTr:"Saat yedide buluşuyoruz."},
+  {praep:"mit", emoji:"🤝", tr:"ile (Dativ)", beispiel:"Ich fahre mit dem Auto.", beispielTr:"Arabayla gidiyorum."},
+  {praep:"nach", emoji:"🏠", tr:"sonra / -e doğru (Dativ)", beispiel:"Ich gehe nach Hause.", beispielTr:"Eve gidiyorum."},
+  {praep:"bei", emoji:"📍", tr:"yanında / -de (Dativ)", beispiel:"Ich bin bei der Arbeit.", beispielTr:"İşteyim."},
+  {praep:"seit", emoji:"⏳", tr:"-den beri (Dativ)", beispiel:"Ich lerne seit einem Jahr Deutsch.", beispielTr:"Bir yıldır Almanca öğreniyorum."},
+  {praep:"von", emoji:"👉", tr:"-den (Dativ)", beispiel:"Das Geschenk ist von meiner Mutter.", beispielTr:"Hediye annemden."},
+  {praep:"zu", emoji:"🚶", tr:"-e / -ye (Dativ)", beispiel:"Ich gehe zu meinem Freund.", beispielTr:"Arkadaşıma gidiyorum."},
+  {praep:"aus", emoji:"🌍", tr:"-den / içinden (Dativ)", beispiel:"Ich komme aus der Türkei.", beispielTr:"Türkiye'denim."},
+  {praep:"gegenüber", emoji:"↔️", tr:"karşısında (Dativ)", beispiel:"Die Schule ist gegenüber dem Park.", beispielTr:"Okul parkın karşısında."},
+  {praep:"in", emoji:"📦", tr:"içinde / içine", beispiel:"Ich bin in der Schule.", beispielTr:"Okuldayım."},
+  {praep:"an", emoji:"📌", tr:"yanında / kenarında", beispiel:"Das Bild hängt an der Wand.", beispielTr:"Tablo duvarda asılı."},
+  {praep:"auf", emoji:"⬆️", tr:"üzerinde / üstüne", beispiel:"Das Buch liegt auf dem Tisch.", beispielTr:"Kitap masanın üzerinde."},
+  {praep:"über", emoji:"☁️", tr:"üzerinde / hakkında", beispiel:"Der Vogel fliegt über das Haus.", beispielTr:"Kuş evin üzerinde uçuyor."},
+  {praep:"unter", emoji:"⬇️", tr:"altında", beispiel:"Die Katze liegt unter dem Tisch.", beispielTr:"Kedi masanın altında yatıyor."},
+  {praep:"vor", emoji:"⏮️", tr:"önünde / önce", beispiel:"Ich stehe vor der Tür.", beispielTr:"Kapının önünde duruyorum."},
+  {praep:"hinter", emoji:"⏭️", tr:"arkasında", beispiel:"Das Auto steht hinter dem Haus.", beispielTr:"Araba evin arkasında."},
+  {praep:"neben", emoji:"↔️", tr:"yanında", beispiel:"Der Stuhl steht neben dem Tisch.", beispielTr:"Sandalye masanın yanında."},
+  {praep:"zwischen", emoji:"↕️", tr:"arasında", beispiel:"Der Ball liegt zwischen den Büchern.", beispielTr:"Top kitapların arasında."}
+];
+
 let words = [];
 let verbs = [];
 let adjectives = [];
 let saatWords = [];
 let konjWords = [];
 let frageWords = [];
+let praepWords = [];
 let stats = {correct:0, wrong:0};
 let countdownTimer = null;
 let secondsLeft = 120;
@@ -2427,6 +2514,7 @@ let revealedAdj = new Set();
 let revealedSaat = new Set();
 let revealedKonj = new Set();
 let revealedFrage = new Set();
+let revealedPraep = new Set();
 let activeTab = "artikel";
 let sessionQuestions = [];
 let sessionIndex = 0;
@@ -2502,6 +2590,12 @@ function loadData(){
   sortByField(frageWords, "frage");
 
   try{
+    const pr = localStorage.getItem("artikel_praep");
+    praepWords = pr ? JSON.parse(pr) : STARTER_PRAEP.slice();
+  }catch(e){ praepWords = STARTER_PRAEP.slice(); }
+  sortByField(praepWords, "praep");
+
+  try{
     const s = localStorage.getItem("artikel_stats");
     stats = s ? JSON.parse(s) : {correct:0, wrong:0};
   }catch(e){ stats = {correct:0, wrong:0}; }
@@ -2561,6 +2655,11 @@ function saveFrage(){
   if(!storageAvailable) return;
   try{ localStorage.setItem("artikel_frage", JSON.stringify(frageWords)); }
   catch(e){ alert("Soru kelimesi listesi kaydedilemedi (depolama alanı dolu olabilir)."); }
+}
+function savePraep(){
+  if(!storageAvailable) return;
+  try{ localStorage.setItem("artikel_praep", JSON.stringify(praepWords)); }
+  catch(e){ alert("Edat listesi kaydedilemedi (depolama alanı dolu olabilir)."); }
 }
 function saveStats(){
   if(!storageAvailable) return;
@@ -2631,12 +2730,14 @@ function switchTab(tab){
   document.getElementById("saatSection").style.display = tab === "saat" ? "block" : "none";
   document.getElementById("konjSection").style.display = tab === "konj" ? "block" : "none";
   document.getElementById("frageSection").style.display = tab === "frage" ? "block" : "none";
+  document.getElementById("praepSection").style.display = tab === "praep" ? "block" : "none";
   document.getElementById("tabBtnArtikel").classList.toggle("active", tab === "artikel");
   document.getElementById("tabBtnVerben").classList.toggle("active", tab === "verben");
   document.getElementById("tabBtnAdj").classList.toggle("active", tab === "adj");
   document.getElementById("tabBtnSaat").classList.toggle("active", tab === "saat");
   document.getElementById("tabBtnKonj").classList.toggle("active", tab === "konj");
   document.getElementById("tabBtnFrage").classList.toggle("active", tab === "frage");
+  document.getElementById("tabBtnPraep").classList.toggle("active", tab === "praep");
 }
 
 function clearSearch(which){
@@ -2658,6 +2759,9 @@ function clearSearch(which){
   } else if(which === "frage"){
     document.getElementById("frageSearchInput").value = "";
     renderFrage();
+  } else if(which === "praep"){
+    document.getElementById("praepSearchInput").value = "";
+    renderPraep();
   }
 }
 
@@ -2732,10 +2836,10 @@ document.getElementById("wordTableBody").addEventListener("click", (e)=>{
 });
 
 function toggleReveal(which, idx){
-  const sets = {artikel:revealedWords, verben:revealedVerbs, adj:revealedAdj, saat:revealedSaat, konj:revealedKonj, frage:revealedFrage};
+  const sets = {artikel:revealedWords, verben:revealedVerbs, adj:revealedAdj, saat:revealedSaat, konj:revealedKonj, frage:revealedFrage, praep:revealedPraep};
   const set = sets[which] || revealedWords;
   if(set.has(idx)) set.delete(idx); else set.add(idx);
-  const renderers = {artikel:renderWords, verben:renderVerbs, adj:renderAdjectives, saat:renderSaat, konj:renderKonj, frage:renderFrage};
+  const renderers = {artikel:renderWords, verben:renderVerbs, adj:renderAdjectives, saat:renderSaat, konj:renderKonj, frage:renderFrage, praep:renderPraep};
   (renderers[which] || renderWords)();
 }
 
@@ -2872,6 +2976,7 @@ function openExampleModal(type, idx){
   else if(type === "saat"){ item = saatWords[idx]; title = item ? item.zeit : ""; }
   else if(type === "konj"){ item = konjWords[idx]; title = item ? item.konj : ""; }
   else if(type === "frage"){ item = frageWords[idx]; title = item ? item.frage : ""; }
+  else if(type === "praep"){ item = praepWords[idx]; title = item ? item.praep : ""; }
   else { item = adjectives[idx]; title = item ? item.adj : ""; }
   if(!item) return;
 
@@ -3378,6 +3483,67 @@ function deleteFrage(idx){
   renderFrage();
 }
 
+/* ---------- EDATLAR (PRÄPOSITIONEN) ---------- */
+function renderPraep(){
+  const tbody = document.getElementById("praepTableBody");
+  const query = document.getElementById("praepSearchInput").value.trim().toLowerCase();
+  tbody.innerHTML = "";
+  const filtered = query
+    ? praepWords.filter(a => a.praep.toLowerCase().includes(query) || (a.tr||"").toLowerCase().includes(query))
+    : praepWords;
+  if(filtered.length === 0){
+    tbody.innerHTML = `<tr><td colspan="5" class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</td></tr>`;
+    return;
+  }
+  filtered.forEach((a) => {
+    const realIdx = praepWords.indexOf(a);
+    const revealed = revealedPraep.has(realIdx);
+    const tr = document.createElement("tr");
+    const disp = revealed ? `${escapeHtml(a.praep)} <span class="tr-part">— ${escapeHtml(a.tr) || "?"}</span>` : escapeHtml(a.praep);
+    tr.innerHTML = `
+      <td class="emoji-cell">${escapeHtml(a.emoji)}</td>
+      <td class="word-cell" data-idx="${realIdx}">${disp}</td>
+      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle">${SPEAK_SVG}</button></td>
+      <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
+      <td><button class="del" data-idx="${realIdx}">sil</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+document.getElementById("praepTableBody").addEventListener("click", (e)=>{
+  const wcell = e.target.closest(".word-cell");
+  if(wcell){ toggleReveal("praep", parseInt(wcell.dataset.idx, 10)); return; }
+  const speakBtn = e.target.closest(".speak-btn");
+  if(speakBtn){ const a = praepWords[parseInt(speakBtn.dataset.idx, 10)]; if(a) speak(a.praep); return; }
+  const beispielBtn = e.target.closest(".beispiel-btn");
+  if(beispielBtn){ openExampleModal("praep", parseInt(beispielBtn.dataset.idx, 10)); return; }
+  const delBtn = e.target.closest(".del");
+  if(delBtn){ deletePraep(parseInt(delBtn.dataset.idx, 10)); return; }
+});
+function openAddPraepModal(){
+  ["inpPraep","inpPraepTr","inpPraepEmoji"].forEach(id => document.getElementById(id).value = "");
+  document.getElementById("addPraepOverlay").classList.add("show");
+  setTimeout(()=>document.getElementById("inpPraep").focus(), 50);
+}
+function closeAddPraepModal(){ document.getElementById("addPraepOverlay").classList.remove("show"); }
+function addPraep(){
+  const emoji = document.getElementById("inpPraepEmoji").value.trim();
+  const praep = document.getElementById("inpPraep").value.trim();
+  const tr = document.getElementById("inpPraepTr").value.trim();
+  if(!praep){ alert("Edat alanını doldur."); return; }
+  praepWords.push({praep, emoji, tr});
+  sortByField(praepWords, "praep");
+  savePraep();
+  renderPraep();
+  closeAddPraepModal();
+}
+function deletePraep(idx){
+  praepWords.splice(idx,1);
+  revealedPraep.delete(idx);
+  savePraep();
+  renderPraep();
+}
+
 function exportAdjectives(){
   const blob = new Blob([JSON.stringify(adjectives, null, 2)], {type:"application/json"});
   const url = URL.createObjectURL(blob);
@@ -3627,6 +3793,7 @@ function getItemKey(item, category){
   if(category === "uhrzeit") return "Uhr " + item.digital;
   if(category === "order-sentence") return item.sentence;
   if(category === "prep") return item.sentence;
+  if(category === "pronoun") return item.sentence;
   return item.word;
 }
 
@@ -3952,9 +4119,46 @@ const ARTICLE_FORMS = {
 function capitalizeFirst(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
 
 function buildNomAkkSession(count){
+  const PRONOUN_PRACTICE = [
+    {sentence:"Er sieht mich.", target:"mich", options:["mich","ich","dich"], tr:"O beni görüyor."},
+    {sentence:"Ich sehe dich.", target:"dich", options:["dich","du","ihn"], tr:"Seni görüyorum."},
+    {sentence:"Ich kenne ihn.", target:"ihn", options:["ihn","er","sie"], tr:"Onu tanıyorum."},
+    {sentence:"Er besucht uns.", target:"uns", options:["uns","wir","euch"], tr:"O bizi ziyaret ediyor."},
+    {sentence:"Ich sehe euch.", target:"euch", options:["euch","ihr","uns"], tr:"Sizi görüyorum."},
+    {sentence:"Sie liebt ihn.", target:"ihn", options:["ihn","er","mich"], tr:"O onu seviyor."},
+    {sentence:"Du kennst mich.", target:"mich", options:["mich","ich","ihn"], tr:"Sen beni tanıyorsun."},
+    {sentence:"Wir sehen dich.", target:"dich", options:["dich","du","euch"], tr:"Seni görüyoruz."},
+    {sentence:"Ich rufe dich an.", target:"dich", options:["dich","du","ihn"], tr:"Seni arıyorum."},
+    {sentence:"Er ruft mich an.", target:"mich", options:["mich","ich","uns"], tr:"O beni arıyor."},
+    {sentence:"Wir brauchen ihn.", target:"ihn", options:["ihn","er","sie"], tr:"Ona ihtiyacımız var."},
+    {sentence:"Ich verstehe dich nicht.", target:"dich", options:["dich","du","euch"], tr:"Seni anlamıyorum."}
+  ];
+  const pronounCount = Math.round(count * 0.25);
+  const nounCount = count - pronounCount;
+
+  function toPronounQ(item){
+    return {
+      word: {sentence:item.sentence, translation:item.tr, emoji:"👤"},
+      category: "pronoun",
+      mode: "sentence",
+      kind: "word",
+      target: item.target,
+      sentence: item.sentence,
+      translation: item.tr,
+      emoji: "👤",
+      options: shuffleArray(item.options),
+      answered: false
+    };
+  }
+  let pronounQs = shuffleArray(PRONOUN_PRACTICE).map(toPronounQ);
+  while(pronounQs.length < pronounCount){
+    pronounQs = pronounQs.concat(shuffleArray(PRONOUN_PRACTICE).map(toPronounQ));
+  }
+  pronounQs = pronounQs.slice(0, pronounCount);
+
   const allNouns = getUnseenPool("nomakk-quiz", words.filter(w => w.artikel === "der" || w.artikel === "die" || w.artikel === "das"), w => w.word);
   const questions = [];
-  if(allNouns.length === 0) return questions;
+  if(allNouns.length === 0) return shuffleArray(pronounQs);
 
   const nomTemplates = [
     {de:"{ART} {word} ist hier.", tr:(tr)=>`'${tr}' burada.`},
@@ -3985,7 +4189,7 @@ function buildNomAkkSession(count){
 
   const used = new Set();
   let attempts = 0;
-  while(questions.length < count && attempts < count * 25){
+  while(questions.length < nounCount && attempts < nounCount * 25){
     attempts++;
     const w = allNouns[Math.floor(Math.random() * allNouns.length)];
     const isNom = Math.random() < 0.5;
@@ -4015,7 +4219,7 @@ function buildNomAkkSession(count){
       answered: false
     });
   }
-  return questions;
+  return shuffleArray(questions.concat(pronounQs));
 }
 
 const PREP_DIALOG_PRACTICE = [
@@ -4846,6 +5050,7 @@ renderAdjectives();
 renderSaat();
 renderKonj();
 renderFrage();
+renderPraep();
 updateStatDisplay();
 renderMistakeStats();
 </script>
