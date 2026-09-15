@@ -530,6 +530,14 @@
     gap:8px;
     justify-content:center;
   }
+  .tile-meaning-hint{
+    min-height:18px;
+    text-align:center;
+    font-size:13px;
+    color:var(--teal);
+    font-style:italic;
+    margin-top:8px;
+  }
   .order-tile{
     background:var(--cream);
     border:1px solid var(--brass);
@@ -1511,6 +1519,7 @@
     <div class="order-wrap" id="orderWrap" style="display:none;">
       <div class="order-answer" id="orderAnswer"></div>
       <div class="order-pool" id="orderPool"></div>
+      <div class="tile-meaning-hint" id="tileMeaningHint"></div>
     </div>
     <div class="plural-input" id="qPluralInput" style="display:none;">
       <input type="text" id="qPluralAnswer" placeholder="sadece çoğulu yaz, 'die' yazmana gerek yok">
@@ -2473,7 +2482,10 @@ let favoriteWords = new Set();
 function loadFavorites(){
   try{
     const raw = localStorage.getItem("artikel_favorites");
-    favoriteWords = new Set(raw ? JSON.parse(raw) : []);
+    const arr = raw ? JSON.parse(raw) : [];
+    // Eski formatta (sadece isim, "noun::" öneki olmadan) kaydedilmiş favorileri taşı
+    const migrated = arr.map(k => k.includes("::") ? k : "noun::" + k);
+    favoriteWords = new Set(migrated);
   }catch(e){ favoriteWords = new Set(); }
 }
 
@@ -2483,9 +2495,17 @@ function saveFavorites(){
   catch(e){ /* kritik değil, sessiz geç */ }
 }
 
+function getFavKey(item){
+  if(!item) return null;
+  if(item.word !== undefined) return "noun::" + item.word;
+  if(item.verb !== undefined) return "verb::" + item.verb;
+  if(item.adj !== undefined) return "adj::" + item.adj;
+  return null;
+}
+
 function toggleFavorite(){
-  if(!currentQ || !currentQ.word || !currentQ.word.word) return;
-  const key = currentQ.word.word;
+  const key = getFavKey(currentQ && currentQ.word);
+  if(!key) return;
   if(favoriteWords.has(key)) favoriteWords.delete(key);
   else favoriteWords.add(key);
   saveFavorites();
@@ -2495,12 +2515,13 @@ function toggleFavorite(){
 function updateFavoriteStarUI(){
   const btn = document.getElementById("qFavBtn");
   if(!btn) return;
-  if(!currentQ || !currentQ.word || currentQ.word.artikel === undefined){
+  const key = getFavKey(currentQ && currentQ.word);
+  if(!key){
     btn.style.display = "none";
     return;
   }
   btn.style.display = "inline-flex";
-  const isFav = favoriteWords.has(currentQ.word.word);
+  const isFav = favoriteWords.has(key);
   btn.textContent = isFav ? "★" : "☆";
   btn.classList.toggle("active", isFav);
 }
@@ -4157,11 +4178,19 @@ function buildSession(testMode){
   }
 
   if(testMode === "favorites-quiz"){
-    const favList = words.filter(w => favoriteWords.has(w.word));
+    const favNouns = words.filter(w => favoriteWords.has(getFavKey(w)));
+    const favVerbs = verbs.filter(v => favoriteWords.has(getFavKey(v)));
+    const favAdjs = adjectives.filter(a => favoriteWords.has(getFavKey(a)));
+    const favList = [
+      ...favNouns.map(w => ({word:w, category:"noun-meaning"})),
+      ...favVerbs.map(v => ({word:v, category:"verb"})),
+      ...favAdjs.map(a => ({word:a, category:"adj"})),
+    ];
     if(favList.length === 0) return [];
-    let session = shuffleArray(favList).map(w => ({word:w, mode:"artikel", category:"noun", answered:false}));
+    const toQ = (f) => ({word:f.word, mode:"meaning", category:f.category, answered:false});
+    let session = shuffleArray(favList).map(toQ);
     while(session.length < 15){
-      session = session.concat(shuffleArray(favList).map(w => ({word:w, mode:"artikel", category:"noun", answered:false})));
+      session = session.concat(shuffleArray(favList).map(toQ));
     }
     return shuffleArray(session);
   }
@@ -4259,6 +4288,7 @@ function showSessionQuestion(){
     document.getElementById("qPluralInput").style.display = "none";
     document.getElementById("umlautRow").style.display = "none";
     document.getElementById("qOptions").style.display = "none";
+    document.getElementById("tileMeaningHint").textContent = "";
     renderOrderUI();
     return;
   }
@@ -4451,10 +4481,37 @@ function renderOrderUI(){
   }).join("");
 }
 
+function lookupWordMeaning(rawToken){
+  const clean = rawToken.replace(/[.,!?]/g, "");
+  const cleanLower = clean.toLowerCase();
+  let hit = words.find(w => w.word === clean);
+  if(!hit) hit = words.find(w => w.word.toLowerCase() === cleanLower);
+  if(hit) return hit.tr;
+  hit = verbs.find(v => v.verb.toLowerCase() === cleanLower);
+  if(hit) return hit.tr;
+  hit = adjectives.find(a => a.adj.toLowerCase() === cleanLower);
+  if(hit) return hit.tr;
+  hit = konjWords.find(k => k.konj.toLowerCase() === cleanLower);
+  if(hit) return hit.tr;
+  hit = frageWords.find(f => f.frage.toLowerCase() === cleanLower);
+  if(hit) return hit.tr;
+  hit = saatWords.find(s => s.zeit.toLowerCase() === cleanLower);
+  if(hit) return hit.tr;
+  return null;
+}
+
+function showTileMeaning(word){
+  const el = document.getElementById("tileMeaningHint");
+  if(!el) return;
+  const tr = lookupWordMeaning(word);
+  el.textContent = tr ? (word.replace(/[.,!?]/g, "") + " = " + tr) : "";
+}
+
 function clickPoolTile(idx){
   if(!currentQ || currentQ.mode !== "order" || currentQ.locked) return;
   const word = currentQ.pool.splice(idx, 1)[0];
   currentQ.answer.push(word);
+  showTileMeaning(word);
   renderOrderUI();
   if(currentQ.pool.length === 0){
     checkOrderAnswer();
@@ -4465,6 +4522,7 @@ function clickAnswerTile(idx){
   if(!currentQ || currentQ.mode !== "order" || currentQ.locked) return;
   const word = currentQ.answer.splice(idx, 1)[0];
   currentQ.pool.push(word);
+  showTileMeaning(word);
   renderOrderUI();
 }
 
