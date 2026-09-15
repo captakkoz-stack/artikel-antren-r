@@ -1381,20 +1381,17 @@
       </div>
 
       <div class="group-label">Diğer Konular</div>
-      <div class="btn-grid grid-2">
-        <button class="btn-ghost btn-test" onclick="askQuestion('saat-quiz')">Saat &amp; Takvim Kelimeleri</button>
+      <div class="btn-grid">
         <button class="btn-ghost btn-test" onclick="askQuestion('uhrzeit-quiz')">🕐 Saat Okuma Testi</button>
       </div>
-      <div class="btn-grid grid-2" style="margin-top:8px;">
-        <button class="btn-ghost btn-test" onclick="askQuestion('konj-quiz')">Bağlaç Testi</button>
+      <div class="btn-grid" style="margin-top:8px;">
         <button class="btn-ghost btn-test" onclick="askQuestion('frage-quiz')">W-Frage Bulma Testi</button>
       </div>
 
       <div class="group-label">Pratik Test</div>
-      <div class="btn-grid grid-3">
+      <div class="btn-grid grid-2">
         <button class="btn-ghost btn-test" onclick="askQuestion('sentence-fill')">📝 Cümle Tamamlama</button>
         <button class="btn-ghost btn-test" onclick="askQuestion('order-quiz')">🧩 Cümle Kurma</button>
-        <button class="btn-ghost btn-test" onclick="askQuestion('smart-mixed')">🎲 Genel Karışık Sınav</button>
       </div>
       <div class="btn-grid" style="margin-top:8px;">
         <button class="btn-ghost btn-test" onclick="askQuestion('prep-quiz')">im / am / um / bei / von Testi</button>
@@ -1409,7 +1406,7 @@
 
       <p class="empty-note" style="margin-top:18px;">
         Not: Bu araç bir tarayıcı sekmesi olarak çalışır, gerçek bir arka plan uygulaması değildir.
-        Artikel Testi ve İsim Testi kendi isim listesini; Fiil/Sıfat testleri kendi listelerini kullanır. Genel Karışık Sınav, isim/fiil/sıfat karışık 20 soruluk bir test hazırlar ve çok hata yaptığın kelimeleri daha sık sorar.
+        Artikel Testi ve İsim Testi kendi isim listesini; Fiil/Sıfat testleri kendi listelerini kullanır.
         Artikel Testi'nde bilgisayarda <strong>Enter</strong> tuşuyla bir sonraki soruya hızlıca geçebilirsin.
         Başka bir sekmedeyken otomatik soru gelirse, sekme başlığı yanıp söner ve (izin verirsen) bildirim gösterilir.
       </p>
@@ -3755,7 +3752,7 @@ function markAsked(cycleKey, items, keyFn){
   saveRecentAsked();
 }
 
-const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "smart-mixed", "saat-quiz", "order-quiz", "konj-quiz", "frage-quiz", "sentence-fill", "prep-quiz", "nomakk-quiz"];
+const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "order-quiz", "frage-quiz", "sentence-fill", "prep-quiz", "nomakk-quiz"];
 
 function markShownWord(word, category){
   if(!currentTestMode || !CYCLE_MODES.includes(currentTestMode)) return;
@@ -4140,36 +4137,6 @@ function weightedSample(pool, n){
 }
 
 function buildSession(testMode){
-  if(testMode === "smart-mixed"){
-    const fullPool = buildSmartMixedPool();
-    const keyOfPoolItem = (p) => p.category === "verb" ? p.item.verb : p.category === "adj" ? p.item.adj : p.item.word;
-    const now = Date.now();
-    let entry = recentAsked["smart-mixed"];
-    if(!entry || (now - entry.ts) > RECENT_CYCLE_MS){
-      entry = { ts: now, seen: [] };
-      recentAsked["smart-mixed"] = entry;
-    }
-    const seenSet = new Set(entry.seen);
-    let unseenPool = fullPool.filter(p => !seenSet.has(keyOfPoolItem(p)));
-    if(unseenPool.length === 0){
-      entry.ts = now;
-      entry.seen = [];
-      unseenPool = fullPool.slice();
-    }
-    const picked = weightedSample(unseenPool, 20);
-    let session = picked.map(p => {
-      if(p.category === "noun"){
-        const hasPlural = p.item.plural && p.item.plural !== "—";
-        const mode = (hasPlural && Math.random() < 0.5) ? "plural" : "artikel";
-        return {word:p.item, mode, category:"noun", answered:false};
-      } else if(p.category === "verb"){
-        return {word:p.item, mode:"meaning", category:"verb", answered:false};
-      } else {
-        return {word:p.item, mode:"meaning", category:"adj", answered:false};
-      }
-    });
-    return shuffleArray(session);
-  }
   if(testMode === "order-quiz"){
     const fullPool = buildOrderPool();
     const pool = getUnseenPool(testMode, fullPool, p => p.sentence);
@@ -4242,26 +4209,6 @@ function buildSession(testMode){
   }
   if(testMode === "uhrzeit-quiz"){
     return buildUhrzeitSession(20);
-  }
-  if(testMode === "saat-quiz"){
-    const pool = getUnseenPool(testMode, saatWords, a => a.zeit);
-    let session = shuffleArray(pool).map(a => ({word:a, mode:"meaning", category:"saat", answered:false}));
-    while(session.length < 15 && pool.length > 0){
-      session = session.concat(shuffleArray(pool).map(a => ({word:a, mode:"meaning", category:"saat", answered:false})));
-    }
-    return shuffleArray(session);
-  }
-  if(testMode === "konj-quiz"){
-    const fullPool = buildSentenceFillPool();
-    const catPool = getUnseenPool(testMode, fullPool.filter(p => p.category === "konj"), p => getItemKey(p.item, p.category));
-    if(catPool.length === 0) return [];
-    const withOptions = catPool.map(p => ({...p, options: buildBlankOptions(p.target, p.category, fullPool)}));
-    const toSessionQ = (q) => ({word:q.item, category:q.category, mode:"sentence", kind:q.kind, target:q.target, sentence:q.sentence, translation:q.translation, emoji:q.emoji, options:q.options, answered:false});
-    let session = shuffleArray(withOptions).map(toSessionQ);
-    while(session.length < 50){
-      session = session.concat(shuffleArray(withOptions).map(toSessionQ));
-    }
-    return shuffleArray(session);
   }
   if(testMode === "frage-quiz"){
     const fullPool = buildSentenceFillPool();
@@ -4337,14 +4284,6 @@ function askQuestion(testMode){
   }
   if(testMode === "adj-quiz" && adjectives.length === 0){
     alert("Önce sıfat listesine birkaç sıfat ekle.");
-    return;
-  }
-  if(testMode === "saat-quiz" && saatWords.length === 0){
-    alert("Önce saat listesine birkaç ifade ekle.");
-    return;
-  }
-  if(testMode === "konj-quiz" && konjWords.length === 0){
-    alert("Önce bağlaç listesine birkaç bağlaç ekle.");
     return;
   }
   if(testMode === "frage-quiz" && frageWords.length === 0){
