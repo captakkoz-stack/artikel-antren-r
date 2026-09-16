@@ -136,10 +136,29 @@
     background:var(--sage-bg, #EDF3ED);
     border-left:4px solid var(--brass);
     padding:10px 16px;
-    margin:28px 0 14px;
+    margin:0 0 14px;
     border-radius:2px;
   }
-  #referansSection > .referans-group-title:first-child{margin-top:0;}
+  .ref-subtabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:20px;
+  }
+  .ref-subtab{
+    background:#fff;
+    border:1px solid var(--brass);
+    color:var(--deep);
+    padding:9px 16px;
+    border-radius:20px;
+    font-size:13.5px;
+    font-weight:700;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    cursor:pointer;
+    transition:background 0.15s, color 0.15s;
+  }
+  .ref-subtab:hover{background:#F5EFE0;}
+  .ref-subtab.active{background:var(--deep); color:#fff; border-color:var(--deep);}
   .list-header{
     display:flex;
     justify-content:space-between;
@@ -1055,7 +1074,15 @@
   </div>
 
   <div id="referansSection" style="display:none;">
-    <h2 class="referans-group-title">📌 İsimler (Nomen) — Gramer Kuralları</h2>
+    <div class="ref-subtabs">
+      <button class="ref-subtab" id="refTabNomen" onclick="switchReferansGroup('nomen')">İsimler (Nomen) — Gramer Kuralları</button>
+      <button class="ref-subtab" id="refTabVerben" onclick="switchReferansGroup('verben')">Fiiller (Verben) — Gramer Kuralları</button>
+      <button class="ref-subtab" id="refTabSaatler" onclick="switchReferansGroup('saatler')">Saatler & Takvim — Gramer Kuralları</button>
+      <button class="ref-subtab" id="refTabFrage" onclick="switchReferansGroup('frage')">Soru Kelimeleri (W-Fragen) — Gramer Kuralları</button>
+      <button class="ref-subtab" id="refTabPraep" onclick="switchReferansGroup('praep')">Edatlar (Präpositionen) — Gramer Kuralları</button>
+    </div>
+    <div id="refGroupNomen" class="ref-group" style="display:none;">
+      <h2 class="referans-group-title">📌 İsimler (Nomen) — Gramer Kuralları</h2>
     <section class="panel">
       <h2>Sonek Kuralları — hızlı referans</h2>
       <div class="rule-grid">
@@ -1239,7 +1266,10 @@
         <strong>Unutma:</strong> sein/ihr'in kendisi de (mein/dein gibi) sahiplenilen NESNENİN cinsiyetine göre çekilir — "sein Computer" (der, ek yok) ama "seine Wohnung" (die, -e eki). Yani BURADA İKİ AYRI KURAL AYNI ANDA ÇALIŞIYOR: (1) sein/ihr seçimi SAHİBİN cinsiyetine, (2) -e eki alıp almaması SAHİPLENİLEN NESNENİN cinsiyetine bağlıdır.
       </div>
     </section>
-    <h2 class="referans-group-title">📌 Fiiller (Verben) — Gramer Kuralları</h2>
+    
+    </div>
+    <div id="refGroupVerben" class="ref-group" style="display:none;">
+      <h2 class="referans-group-title">📌 Fiiller (Verben) — Gramer Kuralları</h2>
     <section class="panel">
       <h2>nicht ile Olumsuzluk — hızlı referans</h2>
       <div class="rule-grid" style="grid-template-columns:1fr 1fr;">
@@ -1391,7 +1421,10 @@
         Yani: <strong>modal fiil yoksa</strong> → bölünür, ön ek sona gider. <strong>Modal fiil varsa</strong> → bölünmez, bütün fiil (mastar) sona gider.
       </div>
     </section>
-    <h2 class="referans-group-title">📌 Saatler & Takvim — Gramer Kuralları</h2>
+    
+    </div>
+    <div id="refGroupSaatler" class="ref-group" style="display:none;">
+      <h2 class="referans-group-title">📌 Saatler & Takvim — Gramer Kuralları</h2>
     <section class="panel">
       <h2>Saat Söyleme Kuralları — ince noktalar</h2>
       <div class="rule-grid">
@@ -1476,7 +1509,10 @@
         Örnek: "Vom 1. bis zum 27. Juni" = "Vom ersten bis zum siebenundzwanzigsten Juni" (1'den 27'ye kadar).
       </div>
     </section>
-    <h2 class="referans-group-title">📌 Soru Kelimeleri (W-Fragen) — Gramer Kuralları</h2>
+    
+    </div>
+    <div id="refGroupFrage" class="ref-group" style="display:none;">
+      <h2 class="referans-group-title">📌 Soru Kelimeleri (W-Fragen) — Gramer Kuralları</h2>
     <section class="panel">
       <h2>W-Fragen — hızlı referans</h2>
       <p class="example-de" style="font-size:15px;">Soru kelimesi her zaman cümlenin <strong>1. sırasında</strong>, çekimli fiil ise hemen <strong>2. sırada</strong> gelir (Wortstellung kuralıyla aynı mantık).</p>
@@ -1486,7 +1522,10 @@
         Kural: Evet/Hayır sorusundan farkı — W-Fragen'de cevap "ja/nein" değil, sorulan bilgidir.
       </div>
     </section>
-    <h2 class="referans-group-title">📌 Edatlar (Präpositionen) — Gramer Kuralları</h2>
+    
+    </div>
+    <div id="refGroupPraep" class="ref-group" style="display:none;">
+      <h2 class="referans-group-title">📌 Edatlar (Präpositionen) — Gramer Kuralları</h2>
     <section class="panel">
       <h2>Präpositionen (Edatlar) — hızlı referans</h2>
       <div class="rule-grid">
@@ -1537,6 +1576,8 @@
         <strong>Dikkat:</strong> "zu" burada gördüğün "zu" edatından (-e/-ye, Dativ) <strong>farklı bir kullanımdır</strong> — aynı kelime, sıfattan önce gelince "fazla/aşırı" anlamına geçer.
       </div>
     </section>
+    </div>
+
   </div>
 
   </div>
@@ -3114,6 +3155,17 @@ function switchTab(tab){
   document.getElementById("tabBtnFrage").classList.toggle("active", tab === "frage");
   document.getElementById("tabBtnPraep").classList.toggle("active", tab === "praep");
   document.getElementById("tabBtnReferans").classList.toggle("active", tab === "referans");
+  if(tab === "referans" && !document.querySelector("#referansSection .ref-group[style*='block']")){
+    switchReferansGroup("nomen");
+  }
+}
+
+function switchReferansGroup(group){
+  ["nomen","verben","saatler","frage","praep"].forEach(g => {
+    const capitalized = g.charAt(0).toUpperCase() + g.slice(1);
+    document.getElementById("refGroup" + capitalized).style.display = (g === group) ? "block" : "none";
+    document.getElementById("refTab" + capitalized).classList.toggle("active", g === group);
+  });
 }
 
 function clearSearch(which){
