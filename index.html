@@ -4148,6 +4148,37 @@ function blankSentence(sentence, target){
   return sentence.replace(re, "_____");
 }
 
+const FRAGE_EXTRA_PRACTICE = [
+  {frage:"wann", beispiel:"Wann beginnt der Unterricht?", beispielTr:"Ders ne zaman başlıyor?", emoji:"⏰"},
+  {frage:"wann", beispiel:"Wann bist du zu Hause?", beispielTr:"Ne zaman evde olacaksın?", emoji:"🏠"},
+  {frage:"warum", beispiel:"Warum bist du traurig?", beispielTr:"Neden üzgünsün?", emoji:"😢"},
+  {frage:"warum", beispiel:"Warum kommst du nicht mit?", beispielTr:"Neden bizimle gelmiyorsun?", emoji:"🚶"},
+  {frage:"was", beispiel:"Was isst du gern?", beispielTr:"Ne yemeyi seversin?", emoji:"🍽️"},
+  {frage:"was", beispiel:"Was ist dein Beruf?", beispielTr:"Mesleğin ne?", emoji:"💼"},
+  {frage:"welche", beispiel:"Welches Buch liest du?", beispielTr:"Hangi kitabı okuyorsun?", emoji:"📚"},
+  {frage:"welche", beispiel:"Welche Sprache sprichst du?", beispielTr:"Hangi dili konuşuyorsun?", emoji:"🗣️"},
+  {frage:"wen", beispiel:"Wen besuchst du morgen?", beispielTr:"Yarın kimi ziyaret ediyorsun?", emoji:"🏠"},
+  {frage:"wen", beispiel:"Wen liebst du am meisten?", beispielTr:"En çok kimi seviyorsun?", emoji:"❤️"},
+  {frage:"wer", beispiel:"Wer kommt zur Party?", beispielTr:"Partiye kim geliyor?", emoji:"🎉"},
+  {frage:"wer", beispiel:"Wer ist diese Frau?", beispielTr:"Bu kadın kim?", emoji:"🙋"},
+  {frage:"wie", beispiel:"Wie ist das Wetter heute?", beispielTr:"Bugün hava nasıl?", emoji:"🌤️"},
+  {frage:"wie", beispiel:"Wie schmeckt die Suppe?", beispielTr:"Çorbanın tadı nasıl?", emoji:"🍲"},
+  {frage:"wie lange", beispiel:"Wie lange bleibst du hier?", beispielTr:"Burada ne kadar kalıyorsun?", emoji:"⏳"},
+  {frage:"wie lange", beispiel:"Wie lange arbeitest du heute?", beispielTr:"Bugün ne kadar çalışıyorsun?", emoji:"💼"},
+  {frage:"wie oft", beispiel:"Wie oft siehst du fern?", beispielTr:"Ne sıklıkla televizyon izliyorsun?", emoji:"📺"},
+  {frage:"wie oft", beispiel:"Wie oft besuchst du deine Eltern?", beispielTr:"Ailenizi ne sıklıkla ziyaret ediyorsun?", emoji:"👨‍👩‍👧"},
+  {frage:"wie viel", beispiel:"Wie viel Zeit hast du?", beispielTr:"Ne kadar zamanın var?", emoji:"⏱️"},
+  {frage:"wie viel", beispiel:"Wie viel Geld brauchst du?", beispielTr:"Ne kadar paraya ihtiyacın var?", emoji:"💶"},
+  {frage:"wie viele", beispiel:"Wie viele Bücher hast du?", beispielTr:"Kaç kitabın var?", emoji:"📚"},
+  {frage:"wie viele", beispiel:"Wie viele Sprachen sprichst du?", beispielTr:"Kaç dil konuşuyorsun?", emoji:"🗣️"},
+  {frage:"wo", beispiel:"Wo ist die Toilette?", beispielTr:"Tuvalet nerede?", emoji:"🚻"},
+  {frage:"wo", beispiel:"Wo arbeitest du?", beispielTr:"Nerede çalışıyorsun?", emoji:"💼"},
+  {frage:"woher", beispiel:"Woher hast du das Buch?", beispielTr:"Kitabı nereden aldın?", emoji:"📚"},
+  {frage:"woher", beispiel:"Woher weißt du das?", beispielTr:"Bunu nereden biliyorsun?", emoji:"🤔"},
+  {frage:"wohin", beispiel:"Wohin fährst du im Urlaub?", beispielTr:"Tatilde nereye gidiyorsun?", emoji:"✈️"},
+  {frage:"wohin", beispiel:"Wohin gehen wir heute?", beispielTr:"Bugün nereye gidiyoruz?", emoji:"🚶"}
+];
+
 function buildSentenceFillPool(){
   const pool = [];
   words.forEach(w => {
@@ -4181,6 +4212,12 @@ function buildSentenceFillPool(){
   frageWords.forEach(f => {
     if(f.beispiel && new RegExp("\\b" + escapeRegex(f.frage) + "\\b", "i").test(f.beispiel)){
       pool.push({kind:"word", category:"frage", item:f, target:f.frage, sentence:f.beispiel, translation:f.beispielTr, emoji:f.emoji});
+    }
+  });
+  FRAGE_EXTRA_PRACTICE.forEach(fe => {
+    const match = frageWords.find(f => f.frage === fe.frage);
+    if(match){
+      pool.push({kind:"word", category:"frage", item:match, target:fe.frage, sentence:fe.beispiel, translation:fe.beispielTr, emoji:fe.emoji});
     }
   });
   konjWords.forEach(k => {
@@ -4244,7 +4281,7 @@ function markAsked(cycleKey, items, keyFn){
   saveRecentAsked();
 }
 
-const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "order-quiz", "frage-quiz", "sentence-fill", "prep-quiz", "nomakk-quiz", "listening-quiz"];
+const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "order-quiz", "sentence-fill", "nomakk-quiz", "listening-quiz"];
 
 function markShownWord(word, category){
   if(!currentTestMode || !CYCLE_MODES.includes(currentTestMode)) return;
@@ -4474,9 +4511,21 @@ function buildNomAkkSession(count){
     {sentence:"Ich rufe dich an.", target:"dich", options:["dich","du","ihn"], tr:"Seni arıyorum."},
     {sentence:"Er ruft mich an.", target:"mich", options:["mich","ich","uns"], tr:"O beni arıyor."},
     {sentence:"Wir brauchen ihn.", target:"ihn", options:["ihn","er","sie"], tr:"Ona ihtiyacımız var."},
-    {sentence:"Ich verstehe dich nicht.", target:"dich", options:["dich","du","euch"], tr:"Seni anlamıyorum."}
+    {sentence:"Ich verstehe dich nicht.", target:"dich", options:["dich","du","euch"], tr:"Seni anlamıyorum."},
+    {sentence:"Sie sieht mich nicht.", target:"mich", options:["mich","ich","dich"], tr:"O beni görmüyor."},
+    {sentence:"Du besuchst uns oft.", target:"uns", options:["uns","wir","euch"], tr:"Sen bizi sık ziyaret ediyorsun."},
+    {sentence:"Wir kennen sie gut.", target:"sie", options:["sie","ihn","ihr"], tr:"Onu iyi tanıyoruz."},
+    {sentence:"Ich sehe euch morgen.", target:"euch", options:["euch","ihr","uns"], tr:"Sizi yarın görüyorum."},
+    {sentence:"Er liebt sie sehr.", target:"sie", options:["sie","ihn","ihr"], tr:"O onu çok seviyor."},
+    {sentence:"Sie ruft uns an.", target:"uns", options:["uns","wir","dich"], tr:"O bizi arıyor."},
+    {sentence:"Ich besuche dich bald.", target:"dich", options:["dich","du","ihn"], tr:"Seni yakında ziyaret edeceğim."},
+    {sentence:"Wir sehen ihn selten.", target:"ihn", options:["ihn","er","sie"], tr:"Onu nadiren görüyoruz."},
+    {sentence:"Du rufst mich nie an.", target:"mich", options:["mich","ich","uns"], tr:"Beni hiç aramıyorsun."},
+    {sentence:"Sie kennt euch nicht.", target:"euch", options:["euch","ihr","uns"], tr:"O sizi tanımıyor."},
+    {sentence:"Ich brauche dich jetzt.", target:"dich", options:["dich","du","euch"], tr:"Şimdi sana ihtiyacım var."},
+    {sentence:"Wir lieben euch.", target:"euch", options:["euch","ihr","sie"], tr:"Sizi seviyoruz."}
   ];
-  const pronounCount = Math.min(Math.round(count * 0.25), PRONOUN_PRACTICE.length * 3);
+  const pronounCount = PRONOUN_PRACTICE.length;
   const nounCount = count - pronounCount;
 
   function toPronounQ(item){
@@ -4601,7 +4650,52 @@ const PREP_DIALOG_PRACTICE = [
   {sentence:"Das ist nicht gut.", target:"nicht", translation:"Bu iyi değil.", emoji:"👎"},
   {sentence:"Der Kaffee ist zu heiß.", target:"zu", translation:"Kahve çok sıcak (fazlasıyla).", emoji:"☕"},
   {sentence:"Ich bin sehr müde.", target:"sehr", translation:"Çok yorgunum.", emoji:"😴"},
-  {sentence:"Das Zimmer ist nicht groß.", target:"nicht", translation:"Oda büyük değil.", emoji:"🚪"}
+  {sentence:"Das Zimmer ist nicht groß.", target:"nicht", translation:"Oda büyük değil.", emoji:"🚪"},
+  {sentence:"Im Mai fahren wir nach Italien.", target:"Im", translation:"Mayısta İtalya'ya gidiyoruz.", emoji:"🇮🇹"},
+  {sentence:"Im April regnet es oft.", target:"Im", translation:"Nisanda sık sık yağmur yağar.", emoji:"🌧️"},
+  {sentence:"Im Juni beginnen die Ferien.", target:"Im", translation:"Haziranda tatil başlıyor.", emoji:"🏖️"},
+  {sentence:"Im Büro ist es sehr ruhig.", target:"Im", translation:"Ofiste çok sessiz.", emoji:"💼"},
+  {sentence:"Im Restaurant gibt es gutes Essen.", target:"Im", translation:"Restoranda iyi yemek var.", emoji:"🍽️"},
+  {sentence:"Im Park spielen die Kinder.", target:"Im", translation:"Parkta çocuklar oynuyor.", emoji:"🌳"},
+  {sentence:"Im Supermarkt kaufe ich Obst.", target:"Im", translation:"Süpermarkette meyve alıyorum.", emoji:"🛒"},
+  {sentence:"Im Auto höre ich gern Musik.", target:"Im", translation:"Arabada müzik dinlemeyi severim.", emoji:"🚗"},
+  {sentence:"Am Dienstag habe ich frei.", target:"Am", translation:"Salı günü izinliyim.", emoji:"📆"},
+  {sentence:"Am Sonntag gehen wir spazieren.", target:"Am", translation:"Pazar günü yürüyüşe çıkıyoruz.", emoji:"🚶"},
+  {sentence:"Am Nachmittag mache ich Sport.", target:"Am", translation:"Öğleden sonra spor yapıyorum.", emoji:"🏋️"},
+  {sentence:"Am Ende der Woche bin ich müde.", target:"Am", translation:"Haftanın sonunda yorgunum.", emoji:"😴"},
+  {sentence:"Am Telefon spricht sie Englisch.", target:"Am", translation:"Telefonda İngilizce konuşuyor.", emoji:"📞"},
+  {sentence:"Am Fenster steht eine Lampe.", target:"Am", translation:"Pencerede bir lamba duruyor.", emoji:"💡"},
+  {sentence:"Am Wochenende besuche ich meine Eltern.", target:"Am", translation:"Hafta sonu ailemi ziyaret ediyorum.", emoji:"👨‍👩‍👧"},
+  {sentence:"Der Zug fährt um sieben ab.", target:"um", translation:"Tren yedide kalkıyor.", emoji:"🚆"},
+  {sentence:"Wir essen um zwölf Uhr Mittag.", target:"um", translation:"Saat on ikide öğle yemeği yiyoruz.", emoji:"🍽️"},
+  {sentence:"Die Party beginnt um neunzehn Uhr.", target:"um", translation:"Parti saat on dokuzda başlıyor.", emoji:"🎉"},
+  {sentence:"Um Mitternacht ist die Stadt still.", target:"Um", translation:"Gece yarısı şehir sessizdir.", emoji:"🌙"},
+  {sentence:"Ich stehe um sechs Uhr auf.", target:"um", translation:"Saat altıda kalkarım.", emoji:"⏰"},
+  {sentence:"Der Film endet um zweiundzwanzig Uhr.", target:"um", translation:"Film saat yirmi ikide bitiyor.", emoji:"🎬"},
+  {sentence:"Sie kommt um halb drei nach Hause.", target:"um", translation:"Eve iki buçukta geliyor.", emoji:"🏠"},
+  {sentence:"Bei schlechtem Wetter bleiben wir drinnen.", target:"Bei", translation:"Kötü havada içeride kalıyoruz.", emoji:"⛈️"},
+  {sentence:"Ich wohne bei meiner Schwester.", target:"bei", translation:"Kız kardeşimin yanında kalıyorum.", emoji:"🏠"},
+  {sentence:"Bei der Arbeit trage ich eine Uniform.", target:"Bei", translation:"İşte üniforma giyerim.", emoji:"👔"},
+  {sentence:"Bei uns gibt es viel Schnee im Winter.", target:"Bei", translation:"Bizde kışın çok kar yağar.", emoji:"❄️"},
+  {sentence:"Er lernt Deutsch bei einem Sprachlehrer.", target:"bei", translation:"Bir dil öğretmeninden Almanca öğreniyor.", emoji:"👨‍🏫"},
+  {sentence:"Bei Fragen kannst du mich anrufen.", target:"Bei", translation:"Sorun olursa beni arayabilirsin.", emoji:"📞"},
+  {sentence:"Der Brief ist von meinem Freund.", target:"von", translation:"Mektup arkadaşımdan.", emoji:"✉️"},
+  {sentence:"Von hier bis zur Schule sind es zehn Minuten.", target:"Von", translation:"Buradan okula on dakika var.", emoji:"🏫"},
+  {sentence:"Das Auto ist von meinem Vater.", target:"von", translation:"Araba babamdan.", emoji:"🚗"},
+  {sentence:"Ich komme gerade von der Arbeit.", target:"von", translation:"Şu an işten geliyorum.", emoji:"💼"},
+  {sentence:"Von wem ist dieses Geschenk?", target:"Von", translation:"Bu hediye kimden?", emoji:"🎁"},
+  {sentence:"Die Musik ist zu laut.", target:"zu", translation:"Müzik çok gürültülü (fazlasıyla).", emoji:"🔊"},
+  {sentence:"Der Koffer ist zu schwer.", target:"zu", translation:"Bavul çok ağır (fazlasıyla).", emoji:"🧳"},
+  {sentence:"Das Zimmer ist zu klein für uns.", target:"zu", translation:"Oda bizim için çok küçük.", emoji:"🚪"},
+  {sentence:"Die Aufgabe ist zu schwierig.", target:"zu", translation:"Görev çok zor (fazlasıyla).", emoji:"📝"},
+  {sentence:"Das Essen schmeckt sehr lecker.", target:"sehr", translation:"Yemek çok lezzetli.", emoji:"😋"},
+  {sentence:"Ich bin heute sehr glücklich.", target:"sehr", translation:"Bugün çok mutluyum.", emoji:"😊"},
+  {sentence:"Der Film war sehr interessant.", target:"sehr", translation:"Film çok ilginçti.", emoji:"🎬"},
+  {sentence:"Sie ist immer sehr freundlich.", target:"sehr", translation:"O her zaman çok nazik.", emoji:"🙂"},
+  {sentence:"Ich verstehe das Wort nicht.", target:"nicht", translation:"Kelimeyi anlamıyorum.", emoji:"❓"},
+  {sentence:"Er ist heute nicht da.", target:"nicht", translation:"O bugün burada değil.", emoji:"🚫"},
+  {sentence:"Das Wetter ist heute nicht schön.", target:"nicht", translation:"Bugün hava güzel değil.", emoji:"🌥️"},
+  {sentence:"Wir haben leider nicht viel Zeit.", target:"nicht", translation:"Maalesef çok zamanımız yok.", emoji:"⏳"}
 ];
 
 function buildPrepDialogSession(count){
@@ -4625,13 +4719,7 @@ function buildPrepDialogSession(count){
       answered: false
     };
   }
-  const unseenFirst = getUnseenPool("prep-quiz", PREP_DIALOG_PRACTICE, item => item.sentence);
-  const target = Math.min(count, PREP_DIALOG_PRACTICE.length * 3);
-  let session = shuffleArray(unseenFirst).map(buildQ);
-  while(session.length < target){
-    session = session.concat(shuffleArray(PREP_DIALOG_PRACTICE).map(buildQ));
-  }
-  return shuffleArray(session);
+  return shuffleArray(PREP_DIALOG_PRACTICE).map(buildQ);
 }
 
 const READING_TEXTS = [
@@ -5060,16 +5148,11 @@ function buildSession(testMode){
   }
   if(testMode === "frage-quiz"){
     const fullPool = buildSentenceFillPool();
-    const catPool = getUnseenPool(testMode, fullPool.filter(p => p.category === "frage"), p => getItemKey(p.item, p.category));
+    const catPool = fullPool.filter(p => p.category === "frage");
     if(catPool.length === 0) return [];
     const withOptions = catPool.map(p => ({...p, options: buildBlankOptions(p.target, p.category, fullPool)}));
     const toSessionQ = (q) => ({word:q.item, category:q.category, mode:"sentence", kind:q.kind, target:q.target, sentence:q.sentence, translation:q.translation, emoji:q.emoji, options:q.options, answered:false});
-    const target = Math.min(50, withOptions.length * 3);
-    let session = shuffleArray(withOptions).map(toSessionQ);
-    while(session.length < target){
-      session = session.concat(shuffleArray(withOptions).map(toSessionQ));
-    }
-    return shuffleArray(session);
+    return shuffleArray(withOptions).map(toSessionQ);
   }
   if(testMode === "noun-quiz"){
     const pool = getUnseenPool(testMode, words, w => w.word);
