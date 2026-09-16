@@ -870,7 +870,7 @@
     <button class="side-tab" id="tabBtnPraep" onclick="switchTab('praep')">Edatlar (Präpositionen)</button>
     <button class="side-tab" id="tabBtnSaat" onclick="switchTab('saat')">Saatler & Takvim (Uhrzeit & Kalender)</button>
     <button class="side-tab" id="tabBtnFrage" onclick="switchTab('frage')">Soru Kelimeleri (W-Fragen)</button>
-    <button class="side-tab" id="tabBtnReferans" onclick="switchTab('referans')">📌 Hızlı Referans</button>
+    <button class="side-tab" id="tabBtnReferans" onclick="switchTab('referans')">📌 Hızlı Referans (Gramer Kuralları)</button>
   </nav>
   <div class="left-col">
   <div id="artikelSection">
@@ -1266,10 +1266,145 @@
         <strong>Unutma:</strong> sein/ihr'in kendisi de (mein/dein gibi) sahiplenilen NESNENİN cinsiyetine göre çekilir — "sein Computer" (der, ek yok) ama "seine Wohnung" (die, -e eki). Yani BURADA İKİ AYRI KURAL AYNI ANDA ÇALIŞIYOR: (1) sein/ihr seçimi SAHİBİN cinsiyetine, (2) -e eki alıp almaması SAHİPLENİLEN NESNENİN cinsiyetine bağlıdır.
       </div>
     </section>
-    
+
+    <section class="panel">
+      <h2>Çoğul Ekleri (Pluralformen) — hızlı referans</h2>
+      <div class="plural-note" style="margin-top:0;">
+        Almancada çoğul eki tahmin edilemez — her isim sözlükte kendi çoğul biçimiyle birlikte ezberlenmelidir. Ama 5 ana kalıbı tanımak işini kolaylaştırır.
+      </div>
+      <table style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13px;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--brass);">
+            <th style="text-align:left; padding:8px;">-(e)n</th>
+            <th style="text-align:left; padding:8px;">-s</th>
+            <th style="text-align:left; padding:8px;">-(¨)e</th>
+            <th style="text-align:left; padding:8px;">-(¨)er</th>
+            <th style="text-align:left; padding:8px;">(¨)- değişmez</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:8px; vertical-align:top;">die Tasche → Taschen<br>die Küche → Küchen</td>
+          <td style="padding:8px; vertical-align:top;">das Handy → Handys<br>das Auto → Autos</td>
+          <td style="padding:8px; vertical-align:top;">der Sohn → Söhne<br>die Hand → Hände</td>
+          <td style="padding:8px; vertical-align:top;">das Kind → Kinder<br>das Buch → Bücher</td>
+          <td style="padding:8px; vertical-align:top;">der Lehrer → Lehrer<br>der Vater → Väter</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="plural-note">
+        <strong>İpucu:</strong> -in ile biten dişil meslek isimleri her zaman -nen çoğul eki alır (die Lehrerin → Lehrerinnen). -chen/-lein ile biten küçültme isimleri (das Mädchen gibi) hiç ek almaz.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Miktar Belirteçleri (Mengenangaben) — hızlı referans</h2>
+      <div class="rule-grid">
+        <div class="rule-card der">
+          <div class="title">Ağırlık / Hacim</div>
+          <div class="sfx">ein Kilo, 100 Gramm, ein Liter</div>
+          <div class="ex">Ich brauche ein Kilo Äpfel.<br>Ich kaufe 100 Gramm Käse.</div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">Kap / Ambalaj</div>
+          <div class="sfx">eine Dose, ein Becher, eine Flasche</div>
+          <div class="ex">Ich nehme eine Dose Tomaten.<br>Wir brauchen eine Flasche Öl.</div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">Diğer Ambalaj</div>
+          <div class="sfx">ein Glas, eine Packung</div>
+          <div class="ex">Ich kaufe ein Glas Marmelade.<br>Gib mir eine Packung Reis.</div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>Kural:</strong> Miktar belirteci + isim arasında hiçbir bağlaç ya da ek gerekmez — direkt yan yana gelirler: "ein Kilo <strong>Äpfel</strong>", "eine Flasche <strong>Öl</strong>". Miktar belirteci de kendi sıfat/isim gibi Akkusativ'e göre değişebilir (einen Becher, eine Flasche gibi).
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Fiyat Söyleme (Preise) — hızlı referans</h2>
+      <table style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:14px;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--brass);">
+            <th style="text-align:left; padding:8px;">Yazılış</th>
+            <th style="text-align:left; padding:8px;">Söyleniş</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;">0,30 €</td><td style="padding:8px;">dreißig Cent</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;">1,05 €</td><td style="padding:8px;">ein Euro fünf</td></tr>
+          <tr><td style="padding:8px;">2,40 €</td><td style="padding:8px;">zwei Euro vierzig / zwei vierzig</td></tr>
+        </tbody>
+      </table>
+      <div class="plural-note">
+        <strong>Kural:</strong> 1 euro altı (< 1,00 €) sadece Cent olarak söylenir. 1 euro üstü için iki yol var: "X Euro Y" (tam söyleniş) ya da kısaca "X Y" (Euro kelimesi düşürülüp sadece iki sayı art arda söylenir — "zwei vierzig" gibi).
+      </div>
+    </section>
     </div>
     <div id="refGroupVerben" class="ref-group" style="display:none;">
       <h2 class="referans-group-title">📌 Fiiller (Verben) — Gramer Kuralları</h2>
+
+    <section class="panel" style="margin-top:0;">
+      <h2>Sport: İsim + Fiil mi, Sadece Fiil mi? — hızlı referans</h2>
+      <div class="rule-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="rule-card der">
+          <div class="title">İsim + Fiil ile anlatılanlar</div>
+          <div class="sfx">Volleyball spielen, Ski fahren, Yoga machen</div>
+          <div class="ex">Er spielt Volleyball.<br>Sie fährt gern Ski.</div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">Tek başına fiille anlatılanlar</div>
+          <div class="sfx">schwimmen, wandern, joggen</div>
+          <div class="ex">Er schwimmt jeden Tag.<br>Sie wandert am Wochenende.</div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>Kural yok, ezber gerekir:</strong> Bazı sporlar "isim + machen/spielen/fahren" kalıbıyla, bazıları TEK BAŞINA bir fiille anlatılır — hangi sporun hangi kalıba girdiğini kelimeyle birlikte öğrenmek gerekir.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>gern / nicht gern — Kelime Sırası</h2>
+      <table style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--brass);">
+            <th style="text-align:left; padding:8px;">Cümle tipi</th>
+            <th style="text-align:left; padding:8px;">Örnek</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;">Düz cümle</td><td style="padding:8px;">Ich koche <strong>gern</strong>. / Ich koche <strong>nicht gern</strong>.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;">W-Frage</td><td style="padding:8px;">Was kochst du <strong>gern</strong>?</td></tr>
+          <tr><td style="padding:8px;">Evet/Hayır sorusu</td><td style="padding:8px;">Kochst du <strong>gern</strong>?</td></tr>
+        </tbody>
+      </table>
+      <div class="plural-note">
+        <strong>Kural:</strong> "gern"/"nicht gern" her zaman FİİLDEN SONRA gelir, nesneden ÖNCE gelir — "Ich spiele gern Tennis." (Ich spiele Tennis gern DEĞİL). Konum, cümle tipinden (düz/soru) bağımsız olarak hep fiilin hemen ardındadır.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>essen, geben, nehmen — Düzensiz Çekim</h2>
+      <table style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:14px;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--brass);">
+            <th style="text-align:left; padding:8px;"></th>
+            <th style="text-align:left; padding:8px;">essen</th>
+            <th style="text-align:left; padding:8px;">geben</th>
+            <th style="text-align:left; padding:8px;">nehmen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;">ich</td><td style="padding:8px;">esse</td><td style="padding:8px;">gebe</td><td style="padding:8px;">nehme</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;">du</td><td style="padding:8px; color:var(--coral); font-weight:700;">isst</td><td style="padding:8px; color:var(--coral); font-weight:700;">gibst</td><td style="padding:8px; color:var(--coral); font-weight:700;">nimmst</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;">er/es/sie</td><td style="padding:8px; color:var(--coral); font-weight:700;">isst</td><td style="padding:8px; color:var(--coral); font-weight:700;">gibt</td><td style="padding:8px; color:var(--coral); font-weight:700;">nimmt</td></tr>
+          <tr><td style="padding:8px;">wir/ihr/sie</td><td style="padding:8px;">essen/esst/essen</td><td style="padding:8px;">geben/gebt/geben</td><td style="padding:8px;">nehmen/nehmt/nehmen</td></tr>
+        </tbody>
+      </table>
+      <div class="plural-note">
+        <strong>Kural:</strong> Bu üç fiil (ve genel olarak kök ünlüsü "e" olan birçok düzensiz fiil) sadece <strong>du</strong> ve <strong>er/es/sie</strong> formlarında değişir — ünlü değişimi (e→i/ie) ya da ekstra harf ekleniyor. wir/ihr/sie formları her zaman düzenli kalır.
+      </div>
+    </section>
+
     <section class="panel">
       <h2>nicht ile Olumsuzluk — hızlı referans</h2>
       <div class="rule-grid" style="grid-template-columns:1fr 1fr;">
