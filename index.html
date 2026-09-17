@@ -2066,6 +2066,7 @@
     <div class="qtool-row">
       <button class="qspeak-btn" id="qSpeakBtn" onclick="speakCurrentWord()" title="Dinle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button>
       <button class="hint-btn" id="qHintBtn" onclick="toggleHint()">💡 İpucu</button>
+      <button class="hint-btn" id="qTrBtn" onclick="toggleTurkishMeaning()" style="display:none;">🇹🇷 Türkçesi</button>
       <button class="hint-btn" id="qExampleBtn" onclick="openExampleForCurrentQuestion()">📘 Örnek</button>
       <button class="hint-btn" id="qConjBtn" onclick="openConjForCurrentQuestion()" style="display:none;">🔤 Çekim</button>
     </div>
@@ -5703,6 +5704,7 @@ function showSessionQuestion(){
   document.getElementById("nextBtn").disabled = sessionIndex === sessionQuestions.length - 1;
   document.getElementById("qConjBtn").style.display = (category === "verb") ? "inline-flex" : "none";
   document.getElementById("qHintBtn").style.display = (currentQ.mode === "clock") ? "none" : "inline-flex";
+  document.getElementById("qTrBtn").style.display = (currentQ.mode === "artikel" || currentQ.mode === "artikel-plural") ? "inline-flex" : "none";
   document.getElementById("qExampleBtn").style.display = (currentQ.mode === "clock" || currentQ.mode === "order") ? "none" : "inline-flex";
   document.getElementById("qSpeakBtn").style.display = (currentQ.mode === "order" && !currentQ.solved) ? "none" : "inline-flex";
   document.getElementById("orderWrap").style.display = (currentQ.mode === "order") ? "block" : "none";
@@ -6151,6 +6153,18 @@ function showResultIcon(isCorrect){
 
 function toggleHint(){
   const hintEl = document.getElementById("hintText");
+  if(currentQ && (currentQ.mode === "artikel" || currentQ.mode === "artikel-plural")){
+    if(hintEl.textContent.startsWith("İpucu (sonek kuralı)")){
+      hintEl.textContent = "";
+      return;
+    }
+    const isPluralQ = currentQ.mode === "artikel-plural";
+    const baseWord = isPluralQ ? currentQ.word.plural : currentQ.word.word;
+    const correct = isPluralQ ? "die" : currentQ.word.artikel;
+    const reason = getArtikelReason(baseWord, correct, isPluralQ);
+    hintEl.textContent = "İpucu (sonek kuralı): " + reason;
+    return;
+  }
   if(hintEl.textContent){
     hintEl.textContent = "";
   } else if(currentQ && (currentQ.mode === "sentence" || currentQ.mode === "order")){
@@ -6160,6 +6174,16 @@ function toggleHint(){
     const tr = (currentQ && currentQ.word && currentQ.word.tr) ? currentQ.word.tr : "Türkçesi eklenmemiş";
     hintEl.textContent = "İpucu: " + tr;
   }
+}
+
+function toggleTurkishMeaning(){
+  const hintEl = document.getElementById("hintText");
+  if(hintEl.textContent.startsWith("Türkçesi:")){
+    hintEl.textContent = "";
+    return;
+  }
+  const tr = (currentQ && currentQ.word && currentQ.word.tr) ? currentQ.word.tr : "Türkçesi eklenmemiş";
+  hintEl.textContent = "Türkçesi: " + tr;
 }
 
 function getArtikelReason(word, correctArtikel, isPluralQ){
