@@ -5839,7 +5839,8 @@ function showSessionQuestion(){
       qw.textContent = w.plural;
     } else {
       document.getElementById("qType").textContent = "ARTİKEL NE?";
-      qw.textContent = w.word;
+      const hasPlural = w.plural && w.plural !== "—" && w.plural !== w.word;
+      qw.innerHTML = w.word + (hasPlural ? ` <span style="font-size:0.45em; color:#999; font-weight:400;">(${w.plural})</span>` : "");
     }
     qw.style.color = "var(--ink)";
     document.getElementById("qPluralInput").style.display = "none";
