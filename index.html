@@ -1777,8 +1777,7 @@
           <button class="btn-ghost btn-test" onclick="askQuestion('nomakk-quiz')">Nominativ / Akkusativ Ayrım Testi</button>
           <button class="btn-ghost btn-test" onclick="askQuestion('favorites-quiz')">⭐ Favori Kelimeler Testi</button>
         </div>
-        <div class="btn-grid grid-2" style="margin-top:8px;">
-          <button class="btn-ghost btn-test" onclick="askQuestion('sonek-quiz')">🔤 Sonek Tanıma Testi</button>
+        <div class="btn-grid" style="margin-top:8px;">
           <button class="btn-ghost btn-test" onclick="askQuestion('plural-guess-quiz')">🔢 Çoğul Tahmin Testi</button>
         </div>
       </div>
@@ -1799,9 +1798,8 @@
           <button class="btn-ghost btn-test" onclick="askQuestion('uhrzeit-quiz')">🕐 Saat Okuma Testi</button>
           <button class="btn-ghost btn-test" onclick="askQuestion('frage-quiz')">W-Frage Bulma Testi</button>
         </div>
-        <div class="btn-grid grid-2" style="margin-top:8px;">
+        <div class="btn-grid" style="margin-top:8px;">
           <button class="btn-ghost btn-test" onclick="askQuestion('ordinal-quiz')">🥇 Sıra Sayıları Testi</button>
-          <button class="btn-ghost btn-test" onclick="askQuestion('sport-classify-quiz')">⚽ Spor: İsim+Fiil mi?</button>
         </div>
       </div>
 
@@ -4572,7 +4570,7 @@ function markAsked(cycleKey, items, keyFn){
   saveRecentAsked();
 }
 
-const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "order-quiz", "sentence-fill", "nomakk-quiz", "listening-quiz", "sonek-quiz", "plural-guess-quiz", "irregular-verb-quiz"];
+const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "order-quiz", "sentence-fill", "nomakk-quiz", "listening-quiz", "plural-guess-quiz", "irregular-verb-quiz"];
 
 function markShownWord(word, category){
   if(!currentTestMode || !CYCLE_MODES.includes(currentTestMode)) return;
@@ -4789,33 +4787,6 @@ const ARTICLE_FORMS = {
 
 function capitalizeFirst(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
 
-/* ---------- SONEK TANIMA TESTİ ---------- */
-const SUFFIX_RULES = [
-  {suffixes:["er","ling","ismus","or","ant","ent","ich","ig"], artikel:"der"},
-  {suffixes:["ung","heit","keit","schaft","tion","ion","tät","ei","in"], artikel:"die"},
-  {suffixes:["chen","lein","um","ment"], artikel:"das"}
-];
-function getSuffixMatch(word){
-  for(const rule of SUFFIX_RULES){
-    for(const suf of rule.suffixes){
-      if(word.endsWith(suf)) return {artikel: rule.artikel, suffix: suf};
-    }
-  }
-  return null;
-}
-function buildSonekQuizSession(count){
-  const pool = words.filter(w => { const m = getSuffixMatch(w.word); return m && m.artikel === w.artikel; });
-  if(pool.length === 0) return [];
-  const unseenFirst = getUnseenPool("sonek-quiz", pool, w => w.word);
-  const toQ = (w) => ({word:w, mode:"artikel", category:"noun", answered:false});
-  let session = shuffleArray(unseenFirst).map(toQ);
-  const target = Math.min(count, pool.length);
-  while(session.length < target){
-    session = session.concat(shuffleArray(pool).map(toQ));
-  }
-  return shuffleArray(session).slice(0, target);
-}
-
 /* ---------- ÇOĞUL TAHMİN TESTİ ---------- */
 function buildPluralGuessSession(count){
   const pool = words.filter(w => w.plural && w.plural !== "—" && w.plural !== w.word);
@@ -4909,34 +4880,6 @@ function buildOrdinalSession(){
     };
   }
   return shuffleArray(ORDINAL_PRACTICE.map(toQ));
-}
-
-/* ---------- SPOR: İSİM+FİİL Mİ SADECE FİİL Mİ? TESTİ ---------- */
-const SPORT_CLASSIFY_PRACTICE = [
-  {sport:"Volleyball", type:"nounverb", tr:"voleybol"},
-  {sport:"Fußball", type:"nounverb", tr:"futbol"},
-  {sport:"Basketball", type:"nounverb", tr:"basketbol"},
-  {sport:"Ski", type:"nounverb", tr:"kayak"},
-  {sport:"Yoga", type:"nounverb", tr:"yoga"},
-  {sport:"Tennis", type:"nounverb", tr:"tenis"},
-  {sport:"schwimmen", type:"verb", tr:"yüzmek"},
-  {sport:"wandern", type:"verb", tr:"doğa yürüyüşü yapmak"},
-  {sport:"joggen", type:"verb", tr:"koşu yapmak"}
-];
-function buildSportClassifySession(){
-  function toQ(item){
-    return {
-      word: {sentence: item.sport, translation: item.tr}, category: "sport-classify", mode: "sentence",
-      kind: "word", target: item.type === "nounverb" ? "İsim + Fiil" : "Sadece Fiil",
-      sentence: item.sport, translation: item.tr,
-      emoji: "⚽", options: shuffleArray(["İsim + Fiil", "Sadece Fiil"]), answered: false
-    };
-  }
-  let session = shuffleArray(SPORT_CLASSIFY_PRACTICE).map(toQ);
-  while(session.length < 20){
-    session = session.concat(shuffleArray(SPORT_CLASSIFY_PRACTICE).map(toQ));
-  }
-  return shuffleArray(session);
 }
 
 function buildNomAkkSession(count){
@@ -5572,9 +5515,6 @@ function buildSession(testMode){
   if(testMode === "nomakk-quiz"){
     return buildNomAkkSession(200);
   }
-  if(testMode === "sonek-quiz"){
-    return buildSonekQuizSession(107);
-  }
   if(testMode === "plural-guess-quiz"){
     return buildPluralGuessSession(150);
   }
@@ -5583,9 +5523,6 @@ function buildSession(testMode){
   }
   if(testMode === "ordinal-quiz"){
     return buildOrdinalSession();
-  }
-  if(testMode === "sport-classify-quiz"){
-    return buildSportClassifySession();
   }
   if(testMode === "listening-quiz"){
     return buildListeningSession(50);
@@ -5658,7 +5595,6 @@ function buildSession(testMode){
     }
     return shuffleArray(session);
   }
-
   if(testMode === "plural-only"){
     const pluralable = words.filter(w => w.plural && w.plural !== "—");
     if(pluralable.length === 0) return [];
