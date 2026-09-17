@@ -159,6 +159,30 @@
   }
   .ref-subtab:hover{background:#F5EFE0;}
   .ref-subtab.active{background:var(--deep); color:#fff; border-color:var(--deep);}
+  .test-subtabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin:14px 0 14px;
+  }
+  .test-subtab{
+    flex:1;
+    min-width:0;
+    background:#fff;
+    border:1px solid var(--brass);
+    color:var(--deep);
+    padding:8px 6px;
+    border-radius:16px;
+    font-size:12px;
+    font-weight:700;
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    cursor:pointer;
+    transition:background 0.15s, color 0.15s;
+    white-space:normal;
+  }
+  .test-subtab:hover{background:#F5EFE0;}
+  .test-subtab.active{background:var(--deep); color:#fff; border-color:var(--deep);}
+  .test-group .group-label:first-child{margin-top:0;}
   .list-header{
     display:flex;
     justify-content:space-between;
@@ -1737,39 +1761,61 @@
       </div>
       <div class="countdown" id="countdownText"></div>
 
-      <div class="group-label">Artikel Testleri</div>
-      <div class="btn-grid grid-2">
-        <button class="btn-ghost btn-test" onclick="askQuestion('artikel-only')">Artikel Testi</button>
-        <button class="btn-ghost btn-test" onclick="askQuestion('plural-only')">Çoğul Artikel Testi</button>
-      </div>
-      <div class="btn-grid grid-2" style="margin-top:8px;">
-        <button class="btn-ghost btn-test" onclick="askQuestion('nomakk-quiz')">Nominativ / Akkusativ Ayrım Testi</button>
-        <button class="btn-ghost btn-test" onclick="askQuestion('favorites-quiz')">⭐ Favori Kelimeler Testi</button>
+      <div class="test-subtabs">
+        <button class="test-subtab" id="testTabArtikel" onclick="switchTestGroup('artikel')">Artikel</button>
+        <button class="test-subtab" id="testTabKelime" onclick="switchTestGroup('kelime')">Kelime Bilgisi</button>
+        <button class="test-subtab" id="testTabGramer" onclick="switchTestGroup('gramer')">Gramer</button>
+        <button class="test-subtab" id="testTabPratik" onclick="switchTestGroup('pratik')">Pratik</button>
       </div>
 
-      <div class="group-label">Almanca Türkçe Kelime Bilgisi</div>
-      <div class="btn-grid grid-3">
-        <button class="btn-ghost btn-test" onclick="askQuestion('noun-quiz')">İsim Testi</button>
-        <button class="btn-ghost btn-test" onclick="askQuestion('verb-quiz')">Fiil Testi</button>
-        <button class="btn-ghost btn-test" onclick="askQuestion('adj-quiz')">Sıfat Testi</button>
+      <div id="testGroupArtikel" class="test-group" style="display:none;">
+        <div class="btn-grid grid-2">
+          <button class="btn-ghost btn-test" onclick="askQuestion('artikel-only')">Artikel Testi</button>
+          <button class="btn-ghost btn-test" onclick="askQuestion('plural-only')">Çoğul Artikel Testi</button>
+        </div>
+        <div class="btn-grid grid-2" style="margin-top:8px;">
+          <button class="btn-ghost btn-test" onclick="askQuestion('nomakk-quiz')">Nominativ / Akkusativ Ayrım Testi</button>
+          <button class="btn-ghost btn-test" onclick="askQuestion('favorites-quiz')">⭐ Favori Kelimeler Testi</button>
+        </div>
+        <div class="btn-grid grid-2" style="margin-top:8px;">
+          <button class="btn-ghost btn-test" onclick="askQuestion('sonek-quiz')">🔤 Sonek Tanıma Testi</button>
+          <button class="btn-ghost btn-test" onclick="askQuestion('plural-guess-quiz')">🔢 Çoğul Tahmin Testi</button>
+        </div>
       </div>
 
-      <div class="group-label">Diğer Konular</div>
-      <div class="btn-grid grid-2">
-        <button class="btn-ghost btn-test" onclick="askQuestion('uhrzeit-quiz')">🕐 Saat Okuma Testi</button>
-        <button class="btn-ghost btn-test" onclick="askQuestion('frage-quiz')">W-Frage Bulma Testi</button>
+      <div id="testGroupKelime" class="test-group" style="display:none;">
+        <div class="btn-grid grid-3">
+          <button class="btn-ghost btn-test" onclick="askQuestion('noun-quiz')">İsim Testi</button>
+          <button class="btn-ghost btn-test" onclick="askQuestion('verb-quiz')">Fiil Testi</button>
+          <button class="btn-ghost btn-test" onclick="askQuestion('adj-quiz')">Sıfat Testi</button>
+        </div>
+        <div class="btn-grid" style="margin-top:8px;">
+          <button class="btn-ghost btn-test" onclick="askQuestion('irregular-verb-quiz')">🔁 Düzensiz Fiil Çekim Testi</button>
+        </div>
       </div>
 
-      <div class="group-label">Pratik Test</div>
-      <div class="btn-grid grid-3">
-        <button class="btn-ghost btn-test" onclick="askQuestion('sentence-fill')">📝 Cümle Tamamlama</button>
-        <button class="btn-ghost btn-test" onclick="askQuestion('order-quiz')">🧩 Cümle Kurma</button>
-        <button class="btn-ghost btn-test" onclick="askQuestion('prep-quiz')">im / am / zu / sehr / nicht Testi</button>
+      <div id="testGroupGramer" class="test-group" style="display:none;">
+        <div class="btn-grid grid-2">
+          <button class="btn-ghost btn-test" onclick="askQuestion('uhrzeit-quiz')">🕐 Saat Okuma Testi</button>
+          <button class="btn-ghost btn-test" onclick="askQuestion('frage-quiz')">W-Frage Bulma Testi</button>
+        </div>
+        <div class="btn-grid grid-2" style="margin-top:8px;">
+          <button class="btn-ghost btn-test" onclick="askQuestion('ordinal-quiz')">🥇 Sıra Sayıları Testi</button>
+          <button class="btn-ghost btn-test" onclick="askQuestion('sport-classify-quiz')">⚽ Spor: İsim+Fiil mi?</button>
+        </div>
       </div>
-      <div class="btn-grid grid-3" style="margin-top:8px;">
-        <button class="btn-ghost btn-test" onclick="openReadingModal()">📖 Basit Okuma</button>
-        <button class="btn-ghost btn-test" onclick="askQuestion('listening-quiz')">🎧 Basit Dinleme</button>
-        <button class="btn-ghost btn-test" onclick="openMatchModal()">🔗 Kelime Eşleştirme</button>
+
+      <div id="testGroupPratik" class="test-group" style="display:none;">
+        <div class="btn-grid grid-3">
+          <button class="btn-ghost btn-test" onclick="askQuestion('sentence-fill')">📝 Cümle Tamamlama</button>
+          <button class="btn-ghost btn-test" onclick="askQuestion('order-quiz')">🧩 Cümle Kurma</button>
+          <button class="btn-ghost btn-test" onclick="askQuestion('prep-quiz')">im / am / zu / sehr / nicht Testi</button>
+        </div>
+        <div class="btn-grid grid-3" style="margin-top:8px;">
+          <button class="btn-ghost btn-test" onclick="openReadingModal()">📖 Basit Okuma</button>
+          <button class="btn-ghost btn-test" onclick="askQuestion('listening-quiz')">🎧 Basit Dinleme</button>
+          <button class="btn-ghost btn-test" onclick="openMatchModal()">🔗 Kelime Eşleştirme</button>
+        </div>
       </div>
 
       <div class="group-label">Tekrar</div>
@@ -3303,6 +3349,15 @@ function switchReferansGroup(group){
   });
 }
 
+function switchTestGroup(group){
+  ["artikel","kelime","gramer","pratik"].forEach(g => {
+    const capitalized = g.charAt(0).toUpperCase() + g.slice(1);
+    document.getElementById("testGroup" + capitalized).style.display = (g === group) ? "block" : "none";
+    document.getElementById("testTab" + capitalized).classList.toggle("active", g === group);
+  });
+  try{ localStorage.setItem("artikel_last_testgroup", group); }catch(e){}
+}
+
 function clearSearch(which){
   if(which === "artikel"){
     document.getElementById("searchInput").value = "";
@@ -4357,7 +4412,9 @@ function getItemKey(item, category){
   if(category === "order-sentence") return item.sentence;
   if(category === "prep") return item.sentence;
   if(category === "pronoun") return item.sentence;
+  if(category === "possessiv") return item.sentence;
   if(category === "listening") return item.sentence;
+  if(category === "irregular-verb") return item.verb;
   return item.word;
 }
 
@@ -4515,7 +4572,7 @@ function markAsked(cycleKey, items, keyFn){
   saveRecentAsked();
 }
 
-const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "order-quiz", "sentence-fill", "nomakk-quiz", "listening-quiz"];
+const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "order-quiz", "sentence-fill", "nomakk-quiz", "listening-quiz", "sonek-quiz", "plural-guess-quiz", "irregular-verb-quiz"];
 
 function markShownWord(word, category){
   if(!currentTestMode || !CYCLE_MODES.includes(currentTestMode)) return;
@@ -4732,6 +4789,156 @@ const ARTICLE_FORMS = {
 
 function capitalizeFirst(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
 
+/* ---------- SONEK TANIMA TESTİ ---------- */
+const SUFFIX_RULES = [
+  {suffixes:["er","ling","ismus","or","ant","ent","ich","ig"], artikel:"der"},
+  {suffixes:["ung","heit","keit","schaft","tion","ion","tät","ei","in"], artikel:"die"},
+  {suffixes:["chen","lein","um","ment"], artikel:"das"}
+];
+function getSuffixMatch(word){
+  for(const rule of SUFFIX_RULES){
+    for(const suf of rule.suffixes){
+      if(word.endsWith(suf)) return {artikel: rule.artikel, suffix: suf};
+    }
+  }
+  return null;
+}
+function buildSonekQuizSession(count){
+  const pool = words.filter(w => { const m = getSuffixMatch(w.word); return m && m.artikel === w.artikel; });
+  if(pool.length === 0) return [];
+  const unseenFirst = getUnseenPool("sonek-quiz", pool, w => w.word);
+  const toQ = (w) => ({word:w, mode:"artikel", category:"noun", answered:false});
+  let session = shuffleArray(unseenFirst).map(toQ);
+  const target = Math.min(count, pool.length);
+  while(session.length < target){
+    session = session.concat(shuffleArray(pool).map(toQ));
+  }
+  return shuffleArray(session).slice(0, target);
+}
+
+/* ---------- ÇOĞUL TAHMİN TESTİ ---------- */
+function buildPluralGuessSession(count){
+  const pool = words.filter(w => w.plural && w.plural !== "—" && w.plural !== w.word);
+  if(pool.length === 0) return [];
+  function buildOptions(item){
+    const correct = item.plural;
+    const stem = item.word.replace(/[äöü]/g, m => ({ä:"a",ö:"o",ü:"u"}[m])).slice(0, -1);
+    const fakes = [item.word + "e", item.word + "s", item.word + "en", item.word];
+    const distractorPool = shuffleArray([...fakes, ...pool.filter(p => p !== item).map(p => p.plural)]);
+    const opts = new Set([correct]);
+    for(const d of distractorPool){
+      if(opts.size >= 3) break;
+      if(d !== correct) opts.add(d);
+    }
+    return shuffleArray([...opts]);
+  }
+  const unseenFirst = getUnseenPool("plural-guess-quiz", pool, w => w.word);
+  const toQ = (w) => ({
+    word: w, category: "plural-guess", mode: "sentence",
+    kind: "word", target: w.plural,
+    sentence: (w.artikel === "die" ? "die" : w.artikel) + " " + w.word,
+    translation: w.tr, emoji: w.emoji,
+    options: buildOptions(w), answered: false
+  });
+  let session = shuffleArray(unseenFirst).map(toQ);
+  const target = Math.min(count, pool.length);
+  while(session.length < target){
+    session = session.concat(shuffleArray(pool).map(toQ));
+  }
+  return shuffleArray(session).slice(0, target);
+}
+
+/* ---------- DÜZENSİZ FİİL ÇEKİM TESTİ ---------- */
+function isIrregularVerb(v){
+  if(!v.conj || !v.conj.ich || !v.conj.du) return false;
+  const ichWord = v.conj.ich.split(" ")[0];
+  const duWord = v.conj.du.split(" ")[0];
+  const stem = ichWord.endsWith("e") ? ichWord.slice(0, -1) : ichWord;
+  return !duWord.startsWith(stem);
+}
+function buildIrregularVerbSession(count){
+  const pool = verbs.filter(isIrregularVerb);
+  if(pool.length === 0) return [];
+  const persons = ["du", "er"];
+  function buildQ(v){
+    const person = persons[Math.floor(Math.random() * persons.length)];
+    const correct = v.conj[person];
+    const distractorPool = shuffleArray(pool.filter(p => p !== v).map(p => p.conj[person]));
+    const opts = new Set([correct]);
+    for(const d of distractorPool){
+      if(opts.size >= 3) break;
+      if(d !== correct) opts.add(d);
+    }
+    return {
+      word: v, category: "irregular-verb", mode: "sentence",
+      kind: "word", target: correct,
+      sentence: (person === "du" ? "du ___ (" : "er/sie ___ (") + v.verb + ")",
+      translation: v.tr, emoji: v.emoji,
+      options: shuffleArray([...opts]), answered: false
+    };
+  }
+  const unseenFirst = getUnseenPool("irregular-verb-quiz", pool, v => v.verb);
+  let session = shuffleArray(unseenFirst).map(buildQ);
+  const target = Math.min(count, pool.length);
+  while(session.length < target){
+    session = session.concat(shuffleArray(pool).map(buildQ));
+  }
+  return shuffleArray(session).slice(0, target);
+}
+
+/* ---------- SIRA SAYILARI TESTİ ---------- */
+const ORDINAL_PRACTICE = [
+  {num:"1.", word:"erste", tr:"birinci"}, {num:"2.", word:"zweite", tr:"ikinci"},
+  {num:"3.", word:"dritte", tr:"üçüncü"}, {num:"4.", word:"vierte", tr:"dördüncü"},
+  {num:"5.", word:"fünfte", tr:"beşinci"}, {num:"6.", word:"sechste", tr:"altıncı"},
+  {num:"7.", word:"siebte", tr:"yedinci"}, {num:"8.", word:"achte", tr:"sekizinci"},
+  {num:"9.", word:"neunte", tr:"dokuzuncu"}, {num:"10.", word:"zehnte", tr:"onuncu"},
+  {num:"11.", word:"elfte", tr:"on birinci"}, {num:"12.", word:"zwölfte", tr:"on ikinci"},
+  {num:"13.", word:"dreizehnte", tr:"on üçüncü"}, {num:"19.", word:"neunzehnte", tr:"on dokuzuncu"},
+  {num:"20.", word:"zwanzigste", tr:"yirminci"}, {num:"21.", word:"einundzwanzigste", tr:"yirmi birinci"},
+  {num:"30.", word:"dreißigste", tr:"otuzuncu"}, {num:"31.", word:"einunddreißigste", tr:"otuz birinci"}
+];
+function buildOrdinalSession(){
+  function toQ(item){
+    const distractorPool = shuffleArray(ORDINAL_PRACTICE.filter(o => o !== item).map(o => o.word));
+    const opts = shuffleArray([item.word, distractorPool[0], distractorPool[1]]);
+    return {
+      word: {sentence: item.num, translation: item.tr}, category: "ordinal", mode: "sentence",
+      kind: "word", target: item.word, sentence: item.num, translation: item.tr,
+      emoji: "🔢", options: opts, answered: false
+    };
+  }
+  return shuffleArray(ORDINAL_PRACTICE.map(toQ));
+}
+
+/* ---------- SPOR: İSİM+FİİL Mİ SADECE FİİL Mİ? TESTİ ---------- */
+const SPORT_CLASSIFY_PRACTICE = [
+  {sport:"Volleyball", type:"nounverb", tr:"voleybol"},
+  {sport:"Fußball", type:"nounverb", tr:"futbol"},
+  {sport:"Basketball", type:"nounverb", tr:"basketbol"},
+  {sport:"Ski", type:"nounverb", tr:"kayak"},
+  {sport:"Yoga", type:"nounverb", tr:"yoga"},
+  {sport:"Tennis", type:"nounverb", tr:"tenis"},
+  {sport:"schwimmen", type:"verb", tr:"yüzmek"},
+  {sport:"wandern", type:"verb", tr:"doğa yürüyüşü yapmak"},
+  {sport:"joggen", type:"verb", tr:"koşu yapmak"}
+];
+function buildSportClassifySession(){
+  function toQ(item){
+    return {
+      word: {sentence: item.sport, translation: item.tr}, category: "sport-classify", mode: "sentence",
+      kind: "word", target: item.type === "nounverb" ? "İsim + Fiil" : "Sadece Fiil",
+      sentence: item.sport, translation: item.tr,
+      emoji: "⚽", options: shuffleArray(["İsim + Fiil", "Sadece Fiil"]), answered: false
+    };
+  }
+  let session = shuffleArray(SPORT_CLASSIFY_PRACTICE).map(toQ);
+  while(session.length < 20){
+    session = session.concat(shuffleArray(SPORT_CLASSIFY_PRACTICE).map(toQ));
+  }
+  return shuffleArray(session);
+}
+
 function buildNomAkkSession(count){
   const PRONOUN_PRACTICE = [
     {sentence:"Er sieht mich.", target:"mich", options:["mich","ich","dich"], tr:"O beni görüyor."},
@@ -4760,7 +4967,47 @@ function buildNomAkkSession(count){
     {sentence:"Wir lieben euch.", target:"euch", options:["euch","ihr","sie"], tr:"Sizi seviyoruz."}
   ];
   const pronounCount = PRONOUN_PRACTICE.length;
-  const nounCount = count - pronounCount;
+
+  const POSSESSIV_PRACTICE_QUIZ = [
+    {sentence:"Mein Auto ist rot.", target:"Mein", options:["Mein","Dein","Sein"], tr:"Arabam kırmızı."},
+    {sentence:"Ist das deine Tasche?", target:"deine", options:["deine","dein","meine"], tr:"Bu senin çantan mı?"},
+    {sentence:"Sein Computer ist neu.", target:"Sein", options:["Sein","Ihr","Mein"], tr:"Onun (erkek) bilgisayarı yeni."},
+    {sentence:"Ihre Wohnung ist klein.", target:"Ihre", options:["Ihre","Sein","Ihr"], tr:"Onun (kadın) evi küçük."},
+    {sentence:"Unser Haus hat einen Garten.", target:"Unser", options:["Unser","Euer","Ihr"], tr:"Bizim evimizin bahçesi var."},
+    {sentence:"Ist das euer Hund?", target:"euer", options:["euer","unser","ihr"], tr:"Bu sizin köpeğiniz mi?"},
+    {sentence:"Ihre Kinder sind klein.", target:"Ihre", options:["Ihre","Sein","Unsere"], tr:"Onların çocukları küçük."},
+    {sentence:"Das ist Herr Meyer. Sein Sohn heißt Paul.", target:"Sein", options:["Sein","Ihr","Ihre"], tr:"Bu Bay Meyer. Onun oğlunun adı Paul."},
+    {sentence:"Das ist Frau Klein. Ihre Tochter heißt Lisa.", target:"Ihre", options:["Ihre","Sein","Seine"], tr:"Bu Bayan Klein. Onun kızının adı Lisa."},
+    {sentence:"Meine Schwester wohnt in Bonn.", target:"Meine", options:["Meine","Mein","Deine"], tr:"Kız kardeşim Bonn'da oturuyor."},
+    {sentence:"Dein Bruder ist sehr nett.", target:"Dein", options:["Dein","Deine","Sein"], tr:"Kardeşin çok kibar."},
+    {sentence:"Wo ist sein Schlüssel?", target:"sein", options:["sein","seine","ihr"], tr:"Onun (erkek) anahtarı nerede?"},
+    {sentence:"Wo ist ihr Buch?", target:"ihr", options:["ihr","ihre","sein"], tr:"Onun (kadın) kitabı nerede?"},
+    {sentence:"Unsere Freunde kommen heute.", target:"Unsere", options:["Unsere","Unser","Eure"], tr:"Arkadaşlarımız bugün geliyor."},
+    {sentence:"Eure Wohnung ist sehr hell.", target:"Eure", options:["Eure","Euer","Unsere"], tr:"Sizin eviniz çok aydınlık."},
+    {sentence:"Ist das Ihr Auto, Herr Schmidt?", target:"Ihr", options:["Ihr","Ihre","dein"], tr:"Bu sizin arabanız mı, Bay Schmidt?"},
+    {sentence:"Meine Eltern sind im Urlaub.", target:"Meine", options:["Meine","Mein","Seine"], tr:"Ebeveynlerim tatilde."},
+    {sentence:"Sein Zimmer ist sehr ordentlich.", target:"Sein", options:["Sein","Ihr","Meine"], tr:"Onun (erkek) odası çok düzenli."},
+    {sentence:"Ihr Handy ist kaputt.", target:"Ihr", options:["Ihr","Sein","Ihre"], tr:"Onun (kadın) telefonu bozuk."},
+    {sentence:"Unser Lehrer ist sehr freundlich.", target:"Unser", options:["Unser","Unsere","Euer"], tr:"Öğretmenimiz çok nazik."}
+  ];
+  const possessivCount = POSSESSIV_PRACTICE_QUIZ.length;
+  const nounCount = count - pronounCount - possessivCount;
+
+  function toPossessivQ(item){
+    return {
+      word: {sentence:item.sentence, translation:item.tr, emoji:"👪"},
+      category: "possessiv",
+      mode: "sentence",
+      kind: "word",
+      target: item.target,
+      sentence: item.sentence,
+      translation: item.tr,
+      emoji: "👪",
+      options: shuffleArray(item.options),
+      answered: false
+    };
+  }
+  const possessivQs = shuffleArray(POSSESSIV_PRACTICE_QUIZ).map(toPossessivQ);
 
   function toPronounQ(item){
     return {
@@ -4784,7 +5031,7 @@ function buildNomAkkSession(count){
 
   const allNouns = getUnseenPool("nomakk-quiz", words.filter(w => w.artikel === "der" || w.artikel === "die" || w.artikel === "das"), w => w.word);
   const questions = [];
-  if(allNouns.length === 0) return shuffleArray(pronounQs);
+  if(allNouns.length === 0) return shuffleArray(pronounQs.concat(possessivQs));
 
   const nomTemplates = [
     {de:"{ART} {word} ist hier.", tr:(tr)=>`'${tr}' burada.`},
@@ -4845,7 +5092,7 @@ function buildNomAkkSession(count){
       answered: false
     });
   }
-  return shuffleArray(questions.concat(pronounQs));
+  return shuffleArray(questions.concat(pronounQs).concat(possessivQs));
 }
 
 const PREP_DIALOG_PRACTICE = [
@@ -5324,6 +5571,21 @@ function buildSession(testMode){
   }
   if(testMode === "nomakk-quiz"){
     return buildNomAkkSession(200);
+  }
+  if(testMode === "sonek-quiz"){
+    return buildSonekQuizSession(107);
+  }
+  if(testMode === "plural-guess-quiz"){
+    return buildPluralGuessSession(150);
+  }
+  if(testMode === "irregular-verb-quiz"){
+    return buildIrregularVerbSession(32);
+  }
+  if(testMode === "ordinal-quiz"){
+    return buildOrdinalSession();
+  }
+  if(testMode === "sport-classify-quiz"){
+    return buildSportClassifySession();
   }
   if(testMode === "listening-quiz"){
     return buildListeningSession(50);
@@ -6076,6 +6338,12 @@ renderFrage();
 renderPraep();
 updateStatDisplay();
 renderMistakeStats();
+let savedTestGroup = "artikel";
+try{
+  const stg = localStorage.getItem("artikel_last_testgroup");
+  if(["artikel","kelime","gramer","pratik"].includes(stg)) savedTestGroup = stg;
+}catch(e){}
+switchTestGroup(savedTestGroup);
 </script>
 
 
