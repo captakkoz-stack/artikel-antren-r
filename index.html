@@ -5612,12 +5612,12 @@ function buildSession(testMode){
     const favVerbs = verbs.filter(v => favoriteWords.has(getFavKey(v)));
     const favAdjs = adjectives.filter(a => favoriteWords.has(getFavKey(a)));
     const favList = [
-      ...favNouns.map(w => ({word:w, category:"noun-meaning"})),
-      ...favVerbs.map(v => ({word:v, category:"verb"})),
-      ...favAdjs.map(a => ({word:a, category:"adj"})),
+      ...favNouns.map(w => ({word:w, category:"noun", mode:"artikel"})),
+      ...favVerbs.map(v => ({word:v, category:"verb", mode:"meaning"})),
+      ...favAdjs.map(a => ({word:a, category:"adj", mode:"meaning"})),
     ];
     if(favList.length === 0) return [];
-    const toQ = (f) => ({word:f.word, mode:"meaning", category:f.category, answered:false});
+    const toQ = (f) => ({word:f.word, mode:f.mode, category:f.category, answered:false});
     let session = shuffleArray(favList).map(toQ);
     while(session.length < 15){
       session = session.concat(shuffleArray(favList).map(toQ));
