@@ -880,7 +880,7 @@
     </div>
     <div>
       <div class="signature"><span class="sig-note">Persönliche Lernnotizen</span><span class="sig-divider"></span><span class="sig-name">⚓ Erstellt von Capt. Aykut Akkoz</span></div>
-      <div class="last-updated">Zuletzt aktualisiert: 16.09.2026</div>
+      <div class="last-updated">Zuletzt aktualisiert: 24.09.2026</div>
     </div>
   </div>
 </header>
@@ -2713,7 +2713,22 @@ const STARTER_WORDS = [
   {artikel:"der", word:"Rentner", plural:"Rentner", emoji:"👴", tr:"emekli (erkek)", beispiel:"Mein Opa ist Rentner.", beispielTr:"Dedem emekli."},
   {artikel:"das", word:"Rätsel", plural:"Rätsel", emoji:"🧩", tr:"bilmece / bulmaca", beispiel:"Das Rätsel ist schwierig.", beispielTr:"Bulmaca zor."},
   {artikel:"der", word:"Steckbrief", plural:"Steckbriefe", emoji:"📋", tr:"kısa tanıtım / profil formu", beispiel:"Wir schreiben einen Steckbrief.", beispielTr:"Bir tanıtım formu yazıyoruz."},
-  {artikel:"der", word:"Stammbaum", plural:"Stammbäume", emoji:"🌳", tr:"soy ağacı / aile ağacı", beispiel:"Ich male einen Stammbaum für die Schule.", beispielTr:"Okul için bir soy ağacı çiziyorum."}
+  {artikel:"der", word:"Stammbaum", plural:"Stammbäume", emoji:"🌳", tr:"soy ağacı / aile ağacı", beispiel:"Ich male einen Stammbaum für die Schule.", beispielTr:"Okul için bir soy ağacı çiziyorum."},
+  {artikel:"die", word:"Eiche", plural:"Eichen", emoji:"🌳", tr:"meşe (ağacı)", beispiel:"Der Tisch ist aus Eiche.", beispielTr:"Masa meşeden yapılmış."},
+  {artikel:"das", word:"Frühjahr", plural:"—", emoji:"🌱", tr:"ilkbahar", beispiel:"Im Frühjahr blühen die Blumen.", beispielTr:"İlkbaharda çiçekler açar."},
+  {artikel:"das", word:"Gestell", plural:"Gestelle", emoji:"🗄️", tr:"çerçeve / raf iskeleti", beispiel:"Das Regal hat ein Gestell aus Metall.", beispielTr:"Rafın metal bir iskeleti var."},
+  {artikel:"das", word:"Holz", plural:"—", emoji:"🪵", tr:"tahta / odun", beispiel:"Der Tisch ist aus Holz.", beispielTr:"Masa tahtadan yapılmış."},
+  {artikel:"die", word:"Geldbörse", plural:"Geldbörsen", emoji:"👛", tr:"cüzdan", beispiel:"Meine Geldbörse ist braun.", beispielTr:"Cüzdanım kahverengi."},
+  {artikel:"das", word:"Streichholz", plural:"Streichhölzer", emoji:"🔥", tr:"kibrit", beispiel:"Ich brauche ein Streichholz.", beispielTr:"Bir kibrite ihtiyacım var."},
+  {artikel:"die", word:"Kuckucksuhr", plural:"Kuckucksuhren", emoji:"🕰️", tr:"guguklu saat", beispiel:"Die Kuckucksuhr hängt an der Wand.", beispielTr:"Guguklu saat duvarda asılı."},
+  {artikel:"die", word:"Wanduhr", plural:"Wanduhren", emoji:"🕐", tr:"duvar saati", beispiel:"Die Wanduhr zeigt zehn Uhr.", beispielTr:"Duvar saati onu gösteriyor."},
+  {artikel:"das", word:"Notizbuch", plural:"Notizbücher", emoji:"📓", tr:"not defteri", beispiel:"Ich schreibe in mein Notizbuch.", beispielTr:"Not defterime yazıyorum."},
+  {artikel:"das", word:"Papier", plural:"—", emoji:"📄", tr:"kağıt", beispiel:"Ich brauche ein Blatt Papier.", beispielTr:"Bir yaprak kağıda ihtiyacım var."},
+  {artikel:"der", word:"Ring", plural:"Ringe", emoji:"💍", tr:"yüzük", beispiel:"Der Ring ist aus Gold.", beispielTr:"Yüzük altından yapılmış."},
+  {artikel:"die", word:"Kette", plural:"Ketten", emoji:"📿", tr:"kolye / zincir", beispiel:"Sie trägt eine goldene Kette.", beispielTr:"Altın bir kolye takıyor."},
+  {artikel:"der", word:"Schlüsselanhänger", plural:"Schlüsselanhänger", emoji:"🔑", tr:"anahtarlık", beispiel:"Der Schlüsselanhänger ist aus Leder.", beispielTr:"Anahtarlık deriden yapılmış."},
+  {artikel:"die", word:"Puppe", plural:"Puppen", emoji:"🪆", tr:"oyuncak bebek", beispiel:"Das Kind spielt mit der Puppe.", beispielTr:"Çocuk oyuncak bebekle oynuyor."},
+  {artikel:"der", word:"König", plural:"Könige", emoji:"👑", tr:"kral", beispiel:"Der König lebt im Schloss.", beispielTr:"Kral şatoda yaşıyor."}
 ];
 
 const STARTER_VERBS = [
@@ -2858,7 +2873,8 @@ const STARTER_VERBS = [
   {verb:"sich vorstellen", emoji:"🙋", tr:"kendini tanıtmak", beispiel:"Ich stelle mich kurz vor.", beispielTr:"Kendimi kısaca tanıtıyorum.", conj:{ich:"stelle mich vor", du:"stellst dich vor", er:"stellt sich vor", wir:"stellen uns vor", ihr:"stellt euch vor", sie:"stellen sich vor"}},
   {verb:"entschuldigen", emoji:"🙏", tr:"özür dilemek", beispiel:"Entschuldigen Sie bitte.", beispielTr:"Lütfen özür dilerim.", conj:{ich:"entschuldige", du:"entschuldigst", er:"entschuldigt", wir:"entschuldigen", ihr:"entschuldigt", sie:"entschuldigen"}},
   {verb:"wiederholen", emoji:"🔁", tr:"tekrarlamak", beispiel:"Bitte wiederholen Sie das.", beispielTr:"Lütfen bunu tekrarlayın.", conj:{ich:"wiederhole", du:"wiederholst", er:"wiederholt", wir:"wiederholen", ihr:"wiederholt", sie:"wiederholen"}},
-  {verb:"fehlen", emoji:"❓", tr:"eksik olmak", beispiel:"Ein Wort fehlt im Satz.", beispielTr:"Cümlede bir kelime eksik.", conj:{ich:"fehle", du:"fehlst", er:"fehlt", wir:"fehlen", ihr:"fehlt", sie:"fehlen"}}
+  {verb:"fehlen", emoji:"❓", tr:"eksik olmak", beispiel:"Ein Wort fehlt im Satz.", beispielTr:"Cümlede bir kelime eksik.", conj:{ich:"fehle", du:"fehlst", er:"fehlt", wir:"fehlen", ihr:"fehlt", sie:"fehlen"}},
+  {verb:"zeichnen", emoji:"✏️", tr:"çizmek", beispiel:"Ich zeichne ein Bild.", beispielTr:"Bir resim çiziyorum.", conj:{ich:"zeichne", du:"zeichnest", er:"zeichnet", wir:"zeichnen", ihr:"zeichnet", sie:"zeichnen"}}
 ];
 
 const STARTER_ADJEKTIVE = [
@@ -3004,7 +3020,11 @@ const STARTER_ADJEKTIVE = [
   {adj:"getrennt", emoji:"➗", tr:"ayrı", beispiel:"Wir zahlen getrennt.", beispielTr:"Ayrı ayrı ödüyoruz."},
   {adj:"selten", emoji:"🔍", tr:"nadir", beispiel:"Ich esse selten Fleisch.", beispielTr:"Nadiren et yerim.", opposite:"oft"},
   {adj:"klar", emoji:"👍", tr:"açık / tabii", beispiel:"Ja, klar!", beispielTr:"Evet, tabii!"},
-  {adj:"ähnlich", emoji:"🔗", tr:"benzer", beispiel:"Die Zwillinge sehen sich ähnlich.", beispielTr:"İkizler birbirine benziyor.", komparativ:"ähnlicher", superlativ:"am ähnlichsten"}
+  {adj:"ähnlich", emoji:"🔗", tr:"benzer", beispiel:"Die Zwillinge sehen sich ähnlich.", beispielTr:"İkizler birbirine benziyor.", komparativ:"ähnlicher", superlativ:"am ähnlichsten"},
+  {adj:"eckig", emoji:"📐", tr:"köşeli", beispiel:"Der Tisch ist eckig.", beispielTr:"Masa köşeli.", opposite:"rund", komparativ:"eckiger", superlativ:"am eckigsten"},
+  {adj:"rund", emoji:"⭕", tr:"yuvarlak", beispiel:"Der Teller ist rund.", beispielTr:"Tabak yuvarlak.", opposite:"eckig", komparativ:"runder", superlativ:"am rundesten"},
+  {adj:"rückwärts", emoji:"⬅️", tr:"geriye doğru", beispiel:"Das Auto fährt rückwärts.", beispielTr:"Araba geri geri gidiyor."},
+  {adj:"hübsch", emoji:"😊", tr:"güzel / şirin", beispiel:"Das Kleid ist hübsch.", beispielTr:"Elbise güzel.", komparativ:"hübscher", superlativ:"am hübschesten"}
 ];
 
 const STARTER_SAAT = [
