@@ -1681,7 +1681,31 @@
         Kural: Evet/Hayır sorusundan farkı — W-Fragen'de cevap "ja/nein" değil, sorulan bilgidir.
       </div>
     </section>
-    
+
+    <section class="panel">
+      <h2>ja / nein / doch — hızlı referans</h2>
+      <div class="plural-note" style="margin-top:0;">
+        Olumsuz bir soruya <strong>olumlu (evet anlamında)</strong> cevap verirken sade "ja" yetmez — özel olarak <strong>doch</strong> kullanılır. Türkçede tam karşılığı olmayan bu ayrım, Almancada belirsizliği ortadan kaldırır.
+      </div>
+      <table style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--brass);">
+            <th style="text-align:left; padding:8px;">Soru</th>
+            <th style="text-align:left; padding:8px;">Cevap</th>
+            <th style="text-align:left; padding:8px;">Anlamı</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;">Kommst du nicht mit?</td><td style="padding:8px;"><strong>Nein.</strong></td><td style="padding:8px;">Hayır, gelmiyorum.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;">Kommst du nicht mit?</td><td style="padding:8px;"><strong>Doch!</strong></td><td style="padding:8px;">Hayır (yanılıyorsun), geliyorum!</td></tr>
+          <tr><td style="padding:8px;">Hast du kein Geld?</td><td style="padding:8px;"><strong>Doch</strong>, ich habe Geld.</td><td style="padding:8px;">Hayır, param var!</td></tr>
+        </tbody>
+      </table>
+      <div class="plural-note">
+        <strong>Formül:</strong> Olumsuz soru + olumlu (düzeltme) cevap → her zaman <strong>doch</strong>. Olumlu soruya normal "ja/nein" kullanılır, "doch" gerekmez.
+      </div>
+    </section>
+
     </div>
     <div id="refGroupPraep" class="ref-group" style="display:none;">
       <h2 class="referans-group-title">📌 Edatlar (Präpositionen) — Gramer Kuralları</h2>
@@ -2685,7 +2709,11 @@ const STARTER_WORDS = [
   {artikel:"der", word:"Kiosk", plural:"Kioske", emoji:"🏪", tr:"büfe", beispiel:"Der Kiosk ist an der Ecke.", beispielTr:"Büfe köşede."},
   {artikel:"die", word:"Metzgerei", plural:"Metzgereien", emoji:"🥩", tr:"kasap", beispiel:"Ich kaufe Fleisch in der Metzgerei.", beispielTr:"Kasaptan et alıyorum."},
   {artikel:"das", word:"Croissant", plural:"Croissants", emoji:"🥐", tr:"kruvasan", beispiel:"Ich esse ein Croissant.", beispielTr:"Bir kruvasan yiyorum."},
-  {artikel:"die", word:"Olive", plural:"Oliven", emoji:"🫒", tr:"zeytin", beispiel:"Ich mag Oliven.", beispielTr:"Zeytini severim."}
+  {artikel:"die", word:"Olive", plural:"Oliven", emoji:"🫒", tr:"zeytin", beispiel:"Ich mag Oliven.", beispielTr:"Zeytini severim."},
+  {artikel:"der", word:"Rentner", plural:"Rentner", emoji:"👴", tr:"emekli (erkek)", beispiel:"Mein Opa ist Rentner.", beispielTr:"Dedem emekli."},
+  {artikel:"das", word:"Rätsel", plural:"Rätsel", emoji:"🧩", tr:"bilmece / bulmaca", beispiel:"Das Rätsel ist schwierig.", beispielTr:"Bulmaca zor."},
+  {artikel:"der", word:"Steckbrief", plural:"Steckbriefe", emoji:"📋", tr:"kısa tanıtım / profil formu", beispiel:"Wir schreiben einen Steckbrief.", beispielTr:"Bir tanıtım formu yazıyoruz."},
+  {artikel:"der", word:"Stammbaum", plural:"Stammbäume", emoji:"🌳", tr:"soy ağacı / aile ağacı", beispiel:"Ich male einen Stammbaum für die Schule.", beispielTr:"Okul için bir soy ağacı çiziyorum."}
 ];
 
 const STARTER_VERBS = [
@@ -2829,7 +2857,8 @@ const STARTER_VERBS = [
   {verb:"zusammenwohnen", emoji:"🏠", tr:"birlikte yaşamak", beispiel:"Wir wohnen zusammen.", beispielTr:"Birlikte yaşıyoruz.", conj:{ich:"wohne zusammen", du:"wohnst zusammen", er:"wohnt zusammen", wir:"wohnen zusammen", ihr:"wohnt zusammen", sie:"wohnen zusammen"}},
   {verb:"sich vorstellen", emoji:"🙋", tr:"kendini tanıtmak", beispiel:"Ich stelle mich kurz vor.", beispielTr:"Kendimi kısaca tanıtıyorum.", conj:{ich:"stelle mich vor", du:"stellst dich vor", er:"stellt sich vor", wir:"stellen uns vor", ihr:"stellt euch vor", sie:"stellen sich vor"}},
   {verb:"entschuldigen", emoji:"🙏", tr:"özür dilemek", beispiel:"Entschuldigen Sie bitte.", beispielTr:"Lütfen özür dilerim.", conj:{ich:"entschuldige", du:"entschuldigst", er:"entschuldigt", wir:"entschuldigen", ihr:"entschuldigt", sie:"entschuldigen"}},
-  {verb:"wiederholen", emoji:"🔁", tr:"tekrarlamak", beispiel:"Bitte wiederholen Sie das.", beispielTr:"Lütfen bunu tekrarlayın.", conj:{ich:"wiederhole", du:"wiederholst", er:"wiederholt", wir:"wiederholen", ihr:"wiederholt", sie:"wiederholen"}}
+  {verb:"wiederholen", emoji:"🔁", tr:"tekrarlamak", beispiel:"Bitte wiederholen Sie das.", beispielTr:"Lütfen bunu tekrarlayın.", conj:{ich:"wiederhole", du:"wiederholst", er:"wiederholt", wir:"wiederholen", ihr:"wiederholt", sie:"wiederholen"}},
+  {verb:"fehlen", emoji:"❓", tr:"eksik olmak", beispiel:"Ein Wort fehlt im Satz.", beispielTr:"Cümlede bir kelime eksik.", conj:{ich:"fehle", du:"fehlst", er:"fehlt", wir:"fehlen", ihr:"fehlt", sie:"fehlen"}}
 ];
 
 const STARTER_ADJEKTIVE = [
@@ -2974,7 +3003,8 @@ const STARTER_ADJEKTIVE = [
   {adj:"eingeladen", emoji:"🎉", tr:"davetli", beispiel:"Du bist herzlich eingeladen.", beispielTr:"Sen candan davetlisin."},
   {adj:"getrennt", emoji:"➗", tr:"ayrı", beispiel:"Wir zahlen getrennt.", beispielTr:"Ayrı ayrı ödüyoruz."},
   {adj:"selten", emoji:"🔍", tr:"nadir", beispiel:"Ich esse selten Fleisch.", beispielTr:"Nadiren et yerim.", opposite:"oft"},
-  {adj:"klar", emoji:"👍", tr:"açık / tabii", beispiel:"Ja, klar!", beispielTr:"Evet, tabii!"}
+  {adj:"klar", emoji:"👍", tr:"açık / tabii", beispiel:"Ja, klar!", beispielTr:"Evet, tabii!"},
+  {adj:"ähnlich", emoji:"🔗", tr:"benzer", beispiel:"Die Zwillinge sehen sich ähnlich.", beispielTr:"İkizler birbirine benziyor.", komparativ:"ähnlicher", superlativ:"am ähnlichsten"}
 ];
 
 const STARTER_SAAT = [
