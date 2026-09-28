@@ -5332,10 +5332,14 @@ function buildDativPrepSession(){
 }
 
 const DATIV_WORD_RE = /^[A-Za-zÄÖÜäöüß-]+$/;
+const N_DEKLINATION_WORDS = new Set(["Affe","Architekt","Elefant","Hase","Journalist","Kollege","Kunde","Löwe","Nachbar","Name","Patient","Polizist","Student"]);
+const INVARIANT_UNIT_WORDS = new Set(["Gramm","Euro","Cent","Liter","Pfund"]);
 function isDativNounOk(w){
   if(!w || !w.word || /\s/.test(w.word)) return false;
   if(w.artikel === "die" && w.plural === w.word) return false;
   if(w.word === "Chips" || w.word === "Nudeln") return false;
+  if(N_DEKLINATION_WORDS.has(w.word)) return false;
+  if(INVARIANT_UNIT_WORDS.has(w.word)) return false;
   return true;
 }
 function dativPluralOf(w){
@@ -5344,6 +5348,12 @@ function dativPluralOf(w){
 }
 function pickOne(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
 
+const DATIV_ARTIKEL_TEMPLATES = {
+  mit: ["Ich spreche mit ARTIKEL NOUN.", "Er kommt mit ARTIKEL NOUN.", "Wir fahren mit ARTIKEL NOUN."],
+  von: ["Ich komme gerade von ARTIKEL NOUN.", "Das ist ein Geschenk von ARTIKEL NOUN.", "Sie erzählt von ARTIKEL NOUN."],
+  bei: ["Ich bin heute bei ARTIKEL NOUN.", "Es liegt bei ARTIKEL NOUN.", "Wir bleiben bei ARTIKEL NOUN."],
+  zu: ["Ich gehe jetzt zu ARTIKEL NOUN.", "Wir fahren zu ARTIKEL NOUN.", "Sie geht zu ARTIKEL NOUN."]
+};
 function buildDativArtikelSession(count){
   const base = words.filter(isDativNounOk);
   const pool = getUnseenPool("dativ-artikel-quiz", base, w => getItemKey(w, "dativ-artikel"));
@@ -5356,13 +5366,15 @@ function buildDativArtikelSession(count){
     if(usePl){
       const dpl = dativPluralOf(w);
       target = "den";
-      sentence = prep + " den " + dpl;
-      display = prep + " _____ " + dpl;
+      const tmpl = pickOne(DATIV_PLURAL_TEMPLATES[prep]);
+      sentence = tmpl.replace("ARTIKEL", target).replace("PLURAL", dpl);
+      display = tmpl.replace("ARTIKEL", "_____").replace("PLURAL", dpl);
       inl = "(çoğul: die " + w.plural + " — " + w.tr + ")";
     } else {
       target = w.artikel === "die" ? "der" : "dem";
-      sentence = prep + " " + target + " " + w.word;
-      display = prep + " _____ " + w.word;
+      const tmpl = pickOne(DATIV_ARTIKEL_TEMPLATES[prep]);
+      sentence = tmpl.replace("ARTIKEL", target).replace("NOUN", w.word);
+      display = tmpl.replace("ARTIKEL", "_____").replace("NOUN", w.word);
       inl = "(" + w.artikel + " " + w.word + " — " + w.tr + ")";
     }
     return {
@@ -5374,6 +5386,14 @@ function buildDativArtikelSession(count){
   });
 }
 
+const DATIV_PLURAL_TEMPLATES = {
+  mit: ["Ich spreche mit den PLURAL.", "Wir fahren mit den PLURAL."],
+  von: ["Wir kommen gerade von den PLURAL.", "Das ist ein Geschenk von den PLURAL."],
+  bei: ["Er wohnt bei den PLURAL.", "Wir bleiben bei den PLURAL."],
+  zu: ["Sie geht zu den PLURAL.", "Wir fahren zu den PLURAL."],
+  aus: ["Sie kommt aus den PLURAL.", "Das Licht kommt aus den PLURAL."],
+  nach: ["Wir fragen nach den PLURAL.", "Sie sucht nach den PLURAL."]
+};
 function buildDativPluralSession(count){
   const base = words.filter(w => isDativNounOk(w) && w.plural && w.plural !== "—" && DATIV_WORD_RE.test(w.plural));
   const pool = getUnseenPool("dativ-plural-quiz", base, w => getItemKey(w, "dativ-plural"));
@@ -5381,6 +5401,9 @@ function buildDativPluralSession(count){
   return shuffleArray(pool).slice(0, count).map(w => {
     const prep = pickOne(preps);
     const dpl = dativPluralOf(w);
+    const tmpl = pickOne(DATIV_PLURAL_TEMPLATES[prep]);
+    const sentence = tmpl.replace("PLURAL", dpl);
+    const display = tmpl.replace("PLURAL", "_____");
     const extra = shuffleArray([w.word + "n", w.plural + "n", w.word + "en", w.plural + "en", w.word + "e"]);
     const first = (w.plural !== dpl) ? [w.plural, w.word] : [w.word];
     const distract = [];
@@ -5390,7 +5413,7 @@ function buildDativPluralSession(count){
     }
     return {
       word:w, category:"dativ-plural", mode:"sentence", kind:"dativplural",
-      target:dpl, sentence: prep + " den " + dpl, display: prep + " den _____",
+      target:dpl, sentence, display,
       translation:w.tr, emoji:w.emoji,
       qtype:"ÇOĞUL DATİV (den + -n)",
       inlineTr:"(" + w.artikel + " " + w.word + " → die " + w.plural + " — " + w.tr + ")",
