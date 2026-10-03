@@ -882,6 +882,102 @@
     color:var(--cream);
     letter-spacing:0.2px;
   }
+
+/* ============ HIKÂYELER (Kleine Geschichten) — izole "kg-" namespace ============ */
+.kg-wrap{
+  --kg-bg: var(--cream);
+  --kg-surface: #FFFFFF;
+  --kg-ink: var(--ink);
+  --kg-muted: #7a7266;
+  --kg-line: var(--line);
+  --kg-teal: var(--teal);
+  --kg-teal-ink: #FFFFFF;
+  --kg-mark: var(--brass);
+  --kg-good: var(--sea);
+  --kg-good-bg: var(--das-bg);
+  --kg-bad: var(--coral);
+  --kg-bad-bg: var(--die-bg);
+  --kg-serif: Georgia, 'Times New Roman', serif;
+  --kg-sans: system-ui, Helvetica, Arial, sans-serif;
+  background:var(--kg-bg); color:var(--kg-ink); font-family:var(--kg-sans);
+  border-radius:10px; overflow:hidden;
+}
+.kg-wrap *,.kg-wrap *::before,.kg-wrap *::after{box-sizing:border-box;}
+.kg-wrap button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;background:none;}
+.kg-wrap button:focus-visible{outline:3px solid var(--kg-teal);outline-offset:2px;}
+.kg-main{max-width:640px;margin:0 auto;padding:18px 16px 28px;}
+
+.kg-switch{display:flex;gap:8px;padding:10px 16px 0;max-width:640px;margin:0 auto;}
+.kg-switch button{flex:1;padding:10px 8px;border-radius:8px 8px 0 0;font-weight:600;color:var(--kg-muted);border-bottom:3px solid transparent;}
+.kg-switch button[aria-current="page"]{color:var(--kg-teal);border-bottom-color:var(--kg-teal);background:var(--kg-surface);}
+
+.kg-brand{font-family:var(--kg-serif);font-weight:700;font-size:28px;line-height:1.1;letter-spacing:-.01em;margin:6px 0 4px;}
+.kg-sub{color:var(--kg-muted);margin:0 0 18px;}
+.kg-note{background:var(--kg-surface);border:1px solid var(--kg-line);border-radius:8px;padding:10px 14px;font-size:13.5px;color:var(--kg-muted);margin:0 0 16px;}
+.kg-note strong{color:var(--kg-ink);}
+
+.kg-shelf{display:flex;flex-direction:column;gap:12px;}
+.kg-book{display:flex;width:100%;text-align:left;background:var(--kg-surface);border:1px solid var(--kg-line);border-radius:8px;padding:0;overflow:hidden;}
+.kg-cover{flex:0 0 72px;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;}
+.kg-bk-body{padding:12px 14px;flex:1;min-width:0;}
+.kg-bk-title{font-family:var(--kg-serif);font-weight:700;font-size:19px;line-height:1.2;margin:0;}
+.kg-bk-tr{color:var(--kg-muted);margin:2px 0 8px;font-size:14px;}
+.kg-bk-meta{font-size:13px;color:var(--kg-muted);display:flex;flex-wrap:wrap;align-items:center;gap:4px;}
+.kg-lvl{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px;border:1.5px solid var(--kg-teal);color:var(--kg-teal);margin-right:6px;}
+.kg-badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--kg-good-bg);color:var(--kg-good);margin-left:4px;}
+.kg-perf{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:#F0E4D4;color:#8A5A2A;margin-left:4px;}
+.kg-prat{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--der-bg);color:var(--der);margin-left:4px;}
+.kg-mix{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:#EDE0F5;color:#6A3F94;margin-left:4px;}
+
+.kg-topbar{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.kg-back{padding:8px 10px 8px 0;font-weight:600;color:var(--kg-teal);}
+.kg-rtitle{font-family:var(--kg-serif);font-weight:700;font-size:24px;line-height:1.15;margin:4px 0 2px;}
+.kg-tools{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px;}
+.kg-chip{border:1px solid var(--kg-line);background:var(--kg-surface);border-radius:99px;padding:7px 14px;font-weight:600;font-size:14px;}
+.kg-chip[aria-pressed="true"]{background:var(--kg-teal);color:var(--kg-teal-ink);border-color:var(--kg-teal);}
+.kg-sent{display:flex;gap:10px;padding:12px 8px 12px 0;border-top:1px solid var(--kg-line);transition:background .2s;}
+.kg-sent.kg-now{background:color-mix(in srgb,var(--kg-mark) 22%,transparent);}
+.kg-play{flex:0 0 36px;height:36px;border-radius:50%;border:1px solid var(--kg-line);background:var(--kg-surface);display:flex;align-items:center;justify-content:center;color:var(--kg-teal);}
+.kg-play svg{width:14px;height:14px;}
+.kg-de{font-family:var(--kg-serif);font-size:19px;line-height:1.6;margin:0;}
+.kg-w{padding:0;margin:0;font:inherit;color:inherit;text-decoration:underline dotted color-mix(in srgb,var(--kg-muted) 70%,transparent);text-underline-offset:4px;text-decoration-thickness:1.5px;border-radius:3px;}
+.kg-w.kg-sel{background:var(--kg-mark);color:#12232E;text-decoration:none;}
+.kg-tr-line{margin:2px 0 0;color:var(--kg-muted);font-size:14.5px;}
+.kg-cta{display:block;width:100%;margin-top:22px;padding:14px;border:0;border-radius:8px;background:var(--kg-teal);color:var(--kg-teal-ink);font-weight:700;font-size:16px;}
+.kg-cta.kg-alt{background:var(--kg-surface);color:var(--kg-ink);border:1px solid var(--kg-line);margin-top:10px;}
+
+.kg-sheet{position:fixed;left:0;right:0;bottom:0;z-index:900;background:var(--kg-surface);border-top:1px solid var(--kg-line);
+  border-radius:14px 14px 0 0;padding:16px 18px calc(16px + env(safe-area-inset-bottom,0px));
+  transform:translateY(105%);transition:transform .22s ease;box-shadow:0 -6px 24px rgba(0,0,0,.18);max-width:640px;margin:0 auto;}
+.kg-sheet.kg-open{transform:none;}
+.kg-sw{font-family:var(--kg-serif);font-weight:700;font-size:23px;margin:0;}
+.kg-sm{margin:4px 0 12px;font-size:16px;}
+.kg-srow{display:flex;gap:8px;}
+.kg-srow .kg-chip{flex:1;text-align:center;}
+.kg-close{position:absolute;right:12px;top:8px;font-size:24px;color:var(--kg-muted);padding:6px 10px;}
+
+.kg-qprog{color:var(--kg-muted);font-weight:600;margin:8px 0;}
+.kg-q{font-family:var(--kg-serif);font-weight:700;font-size:23px;line-height:1.3;margin:0 0 16px;}
+.kg-opt{display:block;width:100%;text-align:left;padding:14px 15px;margin-bottom:9px;border:1.5px solid var(--kg-line);border-radius:8px;background:var(--kg-surface);font-size:16.5px;font-family:var(--kg-serif);}
+.kg-opt.kg-ok{border-color:var(--kg-good);background:var(--kg-good-bg);}
+.kg-opt.kg-no{border-color:var(--kg-bad);background:var(--kg-bad-bg);}
+.kg-opt:disabled{cursor:default;}
+.kg-fb{margin:10px 0 0;font-weight:600;}
+.kg-score{font-family:var(--kg-serif);font-weight:700;font-size:56px;line-height:1;margin:16px 0 6px;}
+
+.kg-wrow{display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid var(--kg-line);}
+.kg-wrow .kg-t{flex:1;}
+.kg-wrow b{font-family:var(--kg-serif);font-size:18px;}
+.kg-wrow span{display:block;color:var(--kg-muted);font-size:14px;}
+.kg-empty{padding:24px 0;color:var(--kg-muted);}
+.kg-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--kg-ink);color:var(--kg-bg);padding:10px 16px;border-radius:8px;font-weight:600;z-index:910;opacity:0;pointer-events:none;transition:opacity .2s;}
+.kg-toast.kg-show{opacity:1;}
+@media (prefers-reduced-motion:reduce){.kg-sheet,.kg-toast,.kg-sent{transition:none;}}
+@media (max-width:480px){
+  .kg-brand{font-size:24px;} .kg-rtitle{font-size:21px;} .kg-de{font-size:17.5px;} .kg-q{font-size:20px;}
+  .kg-score{font-size:46px;}
+}
+
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -896,7 +992,7 @@
     </div>
     <div>
       <div class="signature"><span class="sig-note">Persönliche Lernnotizen</span><span class="sig-divider"></span><span class="sig-name">⚓ Erstellt von Capt. Aykut Akkoz</span></div>
-      <div class="last-updated">Zuletzt aktualisiert: 30.09.2026</div>
+      <div class="last-updated">Zuletzt aktualisiert: 03.10.2026</div>
     </div>
   </div>
 </header>
@@ -911,6 +1007,7 @@
     <button class="side-tab" id="tabBtnSaat" onclick="switchTab('saat')">Saatler & Takvim (Uhrzeit & Kalender)</button>
     <button class="side-tab" id="tabBtnFrage" onclick="switchTab('frage')">Soru Kelimeleri (W-Fragen)</button>
     <button class="side-tab" id="tabBtnReferans" onclick="switchTab('referans')">📌 Hızlı Referans (Gramer Kuralları)</button>
+    <button class="side-tab" id="tabBtnHikayeler" onclick="switchTab('hikayeler')">📖 Hikâyeler</button>
   </nav>
   <div class="left-col">
   <div id="artikelSection">
@@ -2318,6 +2415,26 @@
     </section>
     </div>
 
+  </div>
+
+  <div id="hikayelerSection" class="kg-wrap" style="display:none;">
+    <div class="kg-switch" id="kgSwitch">
+      <button data-tab="home" aria-current="page">Hikâyeler</button>
+      <button data-tab="words">Kelimelerim</button>
+    </div>
+    <div class="kg-main" id="kgApp"></div>
+    <div class="kg-sheet" id="kgSheet" role="dialog" aria-label="Kelime anlamı" aria-hidden="true">
+      <button class="kg-close" id="kgSclose" aria-label="Kapat">×</button>
+      <div class="kg-sheet-in">
+        <p class="kg-sw" id="kgSw"></p>
+        <p class="kg-sm" id="kgSm"></p>
+        <div class="kg-srow">
+          <button class="kg-chip" id="kgSspeak">Dinle</button>
+          <button class="kg-chip" id="kgSsave">Kaydet</button>
+        </div>
+      </div>
+    </div>
+    <div class="kg-toast" id="kgToast"></div>
   </div>
 
   </div>
@@ -4069,8 +4186,13 @@ function switchTab(tab){
   document.getElementById("tabBtnFrage").classList.toggle("active", tab === "frage");
   document.getElementById("tabBtnPraep").classList.toggle("active", tab === "praep");
   document.getElementById("tabBtnReferans").classList.toggle("active", tab === "referans");
+  document.getElementById("hikayelerSection").style.display = tab === "hikayeler" ? "block" : "none";
+  document.getElementById("tabBtnHikayeler").classList.toggle("active", tab === "hikayeler");
   if(tab === "referans" && !document.querySelector("#referansSection .ref-group[style*='block']")){
     switchReferansGroup("nomen");
+  }
+  if(tab === "hikayeler" && window.KG){
+    window.KG.init();
   }
 }
 
@@ -7361,6 +7483,733 @@ try{
 switchTestGroup(savedTestGroup);
 </script>
 
+<script>
+
+/* ============ HIKÂYELER (Kleine Geschichten) — izole modül ============ */
+window.KG = (function(){
+"use strict";
+
+// Kleine Geschichten – veri (STORIES + DICT)
+const STORIES=[
+{id:"anna",lvl:"A1",icon:"👋",color:"#3D5A80",title:"Ich bin Anna",tr:"Ben Anna",
+ s:[
+ ["Hallo! Ich bin Anna.","Merhaba! Ben Anna."],
+ ["Ich bin 25 Jahre alt.","25 yaşındayım."],
+ ["Ich komme aus Deutschland, aber ich wohne jetzt in Berlin.","Almanya'dan geliyorum ama şimdi Berlin'de yaşıyorum."],
+ ["Berlin ist eine große Stadt.","Berlin büyük bir şehir."],
+ ["Meine Familie ist nicht groß.","Ailem büyük değil."],
+ ["Mein Vater heißt Peter und er ist Lehrer.","Babamın adı Peter ve o öğretmen."],
+ ["Meine Mutter heißt Maria und sie ist Ärztin.","Annemin adı Maria ve o doktor."],
+ ["Ich habe auch einen Bruder. Er heißt Tim.","Bir de erkek kardeşim var. Adı Tim."],
+ ["Tim ist 20 Jahre alt und studiert in Hamburg.","Tim 20 yaşında ve Hamburg'da üniversitede okuyor."],
+ ["Ich arbeite in einem Büro.","Bir ofiste çalışıyorum."],
+ ["Ich habe auch einen Hund. Er heißt Max.","Bir köpeğim de var. Adı Max."],
+ ["Max ist braun und sehr lieb.","Max kahverengi ve çok sevimli."],
+ ["Am Wochenende gehe ich mit Max im Park spazieren.","Hafta sonu Max'le parkta yürüyüşe çıkarım."],
+ ["Ich spiele auch gern Gitarre.","Gitar çalmayı da severim."],
+ ["Und du? Wie heißt du?","Ya sen? Adın ne?"]],
+ q:[
+ {q:"Woher kommt Anna?",o:["Aus Deutschland","Aus der Türkei","Aus Italien"]},
+ {q:"Wo wohnt Anna jetzt?",o:["In Berlin","In Hamburg","In München"]},
+ {q:"Was ist Annas Mutter von Beruf?",o:["Ärztin","Lehrerin","Köchin"]},
+ {q:"Wo studiert Tim?",o:["In Hamburg","In Berlin","In Wien"]},
+ {q:"Was macht Anna am Wochenende?",o:["Sie geht mit Max spazieren.","Sie arbeitet im Büro.","Sie besucht Tim."]}]},
+
+{id:"cafe",lvl:"A1",icon:"☕",color:"#8A5A44",title:"Im Café",tr:"Kafede",
+ s:[
+ ["Tom ist heute in der Stadt. Das Wetter ist kalt.","Tom bugün şehirde. Hava soğuk."],
+ ["Er geht in ein kleines Café.","Küçük bir kafeye giriyor."],
+ ["Im Café ist es warm und gemütlich.","Kafede sıcak ve rahat bir ortam var."],
+ ["Er sitzt an einem Tisch am Fenster.","Pencerenin kenarındaki bir masada oturuyor."],
+ ["Die Kellnerin kommt.","Garson geliyor."],
+ ["„Guten Tag! Was möchten Sie?“","“İyi günler! Ne istersiniz?”"],
+ ["„Ich möchte einen Kaffee und ein Brötchen, bitte.“","“Bir kahve ve bir sandviç ekmeği istiyorum, lütfen.”"],
+ ["„Mit Käse oder mit Schinken?“","“Peynirli mi, jambonlu mu?”"],
+ ["„Mit Käse, bitte.“","“Peynirli, lütfen.”"],
+ ["Tom trinkt den Kaffee und isst das Brötchen.","Tom kahveyi içiyor ve ekmeği yiyor."],
+ ["Der Kaffee ist heiß und das Brötchen ist lecker.","Kahve sıcak ve ekmek lezzetli."],
+ ["Dann kommt seine Freundin Lena.","Sonra arkadaşı Lena geliyor."],
+ ["Sie bestellt einen Tee.","O bir çay sipariş ediyor."],
+ ["Die beiden sprechen und lachen zwei Stunden lang.","İkisi iki saat boyunca konuşup gülüyor."],
+ ["„Die Rechnung, bitte!“ – „Hier, bitte. Zusammen macht das fünf Euro.“","“Hesap, lütfen!” – “Buyurun. Toplam beş avro.”"],
+ ["„Danke! Auf Wiedersehen!“","“Teşekkürler! Hoşça kalın!”"]],
+ q:[
+ {q:"Wie ist das Wetter?",o:["Kalt","Heiß","Schön"]},
+ {q:"Wo sitzt Tom?",o:["Am Fenster","An der Tür","Draußen"]},
+ {q:"Was isst Tom?",o:["Ein Brötchen mit Käse","Ein Brötchen mit Schinken","Einen Kuchen"]},
+ {q:"Was bestellt Lena?",o:["Einen Tee","Einen Kaffee","Ein Wasser"]},
+ {q:"Wie viel kostet es zusammen?",o:["Fünf Euro","Vier Euro","Sechs Euro"]}]},
+
+{id:"tag",lvl:"A1",icon:"⏰",color:"#2F7D6D",title:"Mein Tag",tr:"Günüm",
+ s:[
+ ["Ich stehe jeden Morgen um sieben Uhr auf.","Her sabah saat yedide kalkarım."],
+ ["Zuerst dusche ich und dann frühstücke ich.","Önce duş alırım, sonra kahvaltı ederim."],
+ ["Zum Frühstück esse ich Brot mit Marmelade und trinke Tee.","Kahvaltıda reçelli ekmek yerim ve çay içerim."],
+ ["Um acht Uhr gehe ich aus dem Haus.","Saat sekizde evden çıkarım."],
+ ["Ich fahre mit dem Bus zur Arbeit.","Otobüsle işe giderim."],
+ ["Die Fahrt dauert dreißig Minuten.","Yolculuk otuz dakika sürer."],
+ ["Die Arbeit beginnt um neun Uhr.","İş saat dokuzda başlar."],
+ ["Ich arbeite am Computer und telefoniere viel.","Bilgisayarda çalışırım ve çok telefonla konuşurum."],
+ ["Um zwölf Uhr habe ich Mittagspause.","Saat on ikide öğle arasım var."],
+ ["Ich esse mit meinen Kollegen in der Kantine.","İş arkadaşlarımla kantinde yemek yerim."],
+ ["Um siebzehn Uhr ist die Arbeit zu Ende.","Saat on yedide iş biter."],
+ ["Danach gehe ich einkaufen.","Sonra alışverişe giderim."],
+ ["Am Abend koche ich und sehe fern.","Akşam yemek yaparım ve televizyon izlerim."],
+ ["Manchmal rufe ich meine Mutter an.","Bazen annemi ararım."],
+ ["Um zehn Uhr gehe ich ins Bett. Ich bin müde.","Saat onda yatağa giderim. Yorgunum."]],
+ q:[
+ {q:"Wann steht die Person auf?",o:["Um sieben Uhr","Um acht Uhr","Um neun Uhr"]},
+ {q:"Wie lange dauert die Fahrt?",o:["Dreißig Minuten","Zehn Minuten","Eine Stunde"]},
+ {q:"Wo isst die Person mittags?",o:["In der Kantine","Zu Hause","Im Café"]},
+ {q:"Wann ist die Arbeit zu Ende?",o:["Um siebzehn Uhr","Um zwölf Uhr","Um zehn Uhr"]},
+ {q:"Was macht die Person manchmal?",o:["Sie ruft ihre Mutter an.","Sie geht ins Kino.","Sie spielt Fußball."]}]},
+
+{id:"einkauf",lvl:"A1",icon:"🛒",color:"#A2483F",title:"Der Einkauf",tr:"Alışveriş",
+ s:[
+ ["Lisa will heute Abend für ihre Freunde kochen.","Lisa bu akşam arkadaşları için yemek yapmak istiyor."],
+ ["Deshalb geht sie zum Supermarkt.","Bu yüzden süpermarkete gidiyor."],
+ ["Sie hat einen Einkaufszettel.","Bir alışveriş listesi var."],
+ ["Darauf stehen: Milch, Brot, Äpfel und Käse.","Üzerinde şunlar yazıyor: süt, ekmek, elma ve peynir."],
+ ["Zuerst nimmt sie einen Einkaufswagen.","Önce bir alışveriş arabası alıyor."],
+ ["Die Milch kostet einen Euro und das Brot zwei Euro.","Süt bir avro, ekmek iki avro."],
+ ["Die Äpfel sind rot und süß. Lisa kauft ein Kilo.","Elmalar kırmızı ve tatlı. Lisa bir kilo alıyor."],
+ ["Das kostet drei Euro.","Bu üç avro tutuyor."],
+ ["Der Käse ist teuer. Er kostet sechs Euro.","Peynir pahalı. Altı avro."],
+ ["An der Kasse steht eine lange Schlange.","Kasada uzun bir kuyruk var."],
+ ["Lisa wartet fünf Minuten.","Lisa beş dakika bekliyor."],
+ ["„Das macht zwölf Euro“, sagt die Kassiererin.","“Toplam on iki avro,” diyor kasiyer."],
+ ["Lisa bezahlt mit Karte.","Lisa kartla ödüyor."],
+ ["Dann geht sie mit zwei schweren Tüten nach Hause.","Sonra iki ağır poşetle eve gidiyor."]],
+ q:[
+ {q:"Warum geht Lisa zum Supermarkt?",o:["Sie will kochen.","Sie hat Hunger.","Sie braucht Schuhe."]},
+ {q:"Wie viel kosten die Äpfel?",o:["Drei Euro","Zwei Euro","Sechs Euro"]},
+ {q:"Wo steht eine lange Schlange?",o:["An der Kasse","Im Café","Auf der Straße"]},
+ {q:"Wie lange wartet Lisa?",o:["Fünf Minuten","Zehn Minuten","Eine Stunde"]},
+ {q:"Wie bezahlt Lisa?",o:["Mit Karte","Bar","Mit dem Handy"]}]},
+
+{id:"arzt",lvl:"A2",icon:"🩺",color:"#2B7A8C",title:"Beim Arzt",tr:"Doktorda",
+ s:[
+ ["Herr Kaya ist krank.","Bay Kaya hasta."],
+ ["Er hat Kopfschmerzen und Fieber.","Başı ağrıyor ve ateşi var."],
+ ["Er ruft in der Praxis an und bekommt einen Termin für zehn Uhr.","Muayenehaneyi arıyor ve saat on için randevu alıyor."],
+ ["In der Praxis muss er im Wartezimmer warten.","Muayenehanede bekleme odasında beklemek zorunda."],
+ ["Nach zwanzig Minuten ruft die Ärztin seinen Namen.","Yirmi dakika sonra doktor adını çağırıyor."],
+ ["Sie fragt: „Was fehlt Ihnen?“","Soruyor: “Neyiniz var?”"],
+ ["„Ich habe seit zwei Tagen Fieber und mein Hals tut weh.“","“İki gündür ateşim var ve boğazım ağrıyor.”"],
+ ["Die Ärztin untersucht ihn. Sie misst das Fieber.","Doktor onu muayene ediyor. Ateşini ölçüyor."],
+ ["„Sie haben eine Grippe“, sagt sie.","“Gribiniz var,” diyor."],
+ ["„Sie müssen im Bett bleiben und viel Wasser trinken.“","“Yatakta kalmanız ve çok su içmeniz gerekiyor.”"],
+ ["Sie gibt ihm ein Rezept für Tabletten.","Ona hap için bir reçete veriyor."],
+ ["„Nehmen Sie die Tabletten dreimal am Tag.“","“Hapları günde üç kez alın.”"],
+ ["Herr Kaya geht in die Apotheke.","Bay Kaya eczaneye gidiyor."],
+ ["Nach einer Woche ist er wieder gesund.","Bir hafta sonra yeniden sağlıklı."]],
+ q:[
+ {q:"Was hat Herr Kaya?",o:["Kopfschmerzen und Fieber","Bauchschmerzen","Husten"]},
+ {q:"Wann hat er den Termin?",o:["Um zehn Uhr","Um acht Uhr","Um zwölf Uhr"]},
+ {q:"Wie lange wartet er?",o:["Zwanzig Minuten","Zwei Minuten","Zwei Stunden"]},
+ {q:"Was soll er tun?",o:["Im Bett bleiben und viel Wasser trinken","Arbeiten","Sport machen"]},
+ {q:"Wie oft nimmt er die Tabletten?",o:["Dreimal am Tag","Einmal am Tag","Zweimal am Tag"]}]},
+
+{id:"wohnung",lvl:"A2",icon:"🏠",color:"#7A6A2F",title:"Die Wohnungssuche",tr:"Ev arayışı",
+ s:[
+ ["Sara sucht eine neue Wohnung in Köln.","Sara Köln'de yeni bir daire arıyor."],
+ ["Ihre alte Wohnung ist zu klein und zu laut.","Eski dairesi çok küçük ve çok gürültülü."],
+ ["Sie liest viele Anzeigen im Internet.","İnternette birçok ilan okuyor."],
+ ["Eine Anzeige gefällt ihr sehr gut: „Zwei Zimmer, Balkon, 600 Euro warm.“","Bir ilan çok hoşuna gidiyor: “İki oda, balkon, 600 avro (faturalar dahil).”"],
+ ["Sie ruft den Vermieter an und fragt: „Ist die Wohnung noch frei?“","Ev sahibini arıyor ve soruyor: “Daire hâlâ boş mu?”"],
+ ["„Ja“, sagt er, „Sie können morgen kommen.“","“Evet,” diyor, “yarın gelebilirsiniz.”"],
+ ["Am nächsten Tag besichtigt Sara die Wohnung.","Ertesi gün Sara daireyi gezip görüyor."],
+ ["Die Wohnung ist hell und hat eine kleine Küche.","Daire aydınlık ve küçük bir mutfağı var."],
+ ["Im Wohnzimmer gibt es ein großes Fenster.","Oturma odasında büyük bir pencere var."],
+ ["Vom Balkon sieht man einen Park.","Balkondan bir park görünüyor."],
+ ["Das Bad ist neu, aber das Schlafzimmer ist ziemlich klein.","Banyo yeni ama yatak odası oldukça küçük."],
+ ["„Gibt es eine Haltestelle in der Nähe?“","“Yakınlarda bir durak var mı?”"],
+ ["„Ja, die Straßenbahn hält direkt vor dem Haus.“","“Evet, tramvay tam evin önünde duruyor.”"],
+ ["Sara überlegt kurz. Dann sagt sie: „Ich nehme die Wohnung!“","Sara kısaca düşünüyor. Sonra diyor ki: “Daireyi tutuyorum!”"],
+ ["Nächsten Monat zieht sie um. Sie ist sehr glücklich.","Önümüzdeki ay taşınıyor. Çok mutlu."]],
+ q:[
+ {q:"Warum sucht Sara eine neue Wohnung?",o:["Die alte ist zu klein und zu laut.","Die alte ist zu teuer.","Die alte ist zu weit weg."]},
+ {q:"Wie viele Zimmer hat die neue Wohnung?",o:["Zwei","Drei","Vier"]},
+ {q:"Wie viel kostet die Wohnung warm?",o:["600 Euro","500 Euro","700 Euro"]},
+ {q:"Was sieht man vom Balkon?",o:["Einen Park","Das Meer","Eine Straße"]},
+ {q:"Wann zieht Sara um?",o:["Nächsten Monat","Morgen","Nächstes Jahr"]}]},
+
+{id:"schiff",lvl:"A2",icon:"⚓",color:"#14456B",title:"Ein Tag auf dem Schiff",tr:"Gemide bir gün",
+ s:[
+ ["Kapitän Bauer steht um sechs Uhr auf.","Kaptan Bauer saat altıda kalkıyor."],
+ ["Das Schiff ist mitten auf dem Meer.","Gemi denizin tam ortasında."],
+ ["Zuerst geht er auf die Brücke. Dort arbeitet der Offizier.","Önce köprüüstüne çıkıyor. Orada zabit çalışıyor."],
+ ["„Guten Morgen! Wie ist das Wetter?“","“Günaydın! Hava nasıl?”"],
+ ["„Der Wind ist stark, aber das Meer ist ruhig.“","“Rüzgâr kuvvetli ama deniz sakin.”"],
+ ["Der Kapitän schaut auf die Karte und auf den Kompass.","Kaptan haritaya ve pusulaya bakıyor."],
+ ["„Wir fahren noch zehn Stunden bis zum nächsten Hafen.“","“Bir sonraki limana daha on saat var.”"],
+ ["Um acht Uhr frühstückt die Crew zusammen.","Saat sekizde mürettebat birlikte kahvaltı ediyor."],
+ ["Danach kontrolliert der Kapitän das Schiff.","Sonra kaptan gemiyi kontrol ediyor."],
+ ["Im Maschinenraum ist es laut und heiß.","Makine dairesi gürültülü ve sıcak."],
+ ["Der Ingenieur prüft die Motoren. „Alles in Ordnung“, sagt er.","Mühendis motorları kontrol ediyor. “Her şey yolunda,” diyor."],
+ ["Am Nachmittag macht die Crew eine Sicherheitsübung.","Öğleden sonra mürettebat bir emniyet tatbikatı yapıyor."],
+ ["Alle müssen eine Schwimmweste anziehen.","Herkes can yeleği giymek zorunda."],
+ ["Abends schreibt der Kapitän einen Bericht.","Akşamları kaptan bir rapor yazıyor."],
+ ["Er telefoniert mit seiner Familie. Sie ist weit weg, aber er denkt oft an sie.","Ailesiyle telefonda konuşuyor. Aile çok uzakta ama sık sık onları düşünüyor."],
+ ["Um zehn Uhr geht er schlafen. Morgen kommen sie im Hafen an.","Saat onda uyumaya gidiyor. Yarın limana varacaklar."]],
+ q:[
+ {q:"Wann steht der Kapitän auf?",o:["Um sechs Uhr","Um sieben Uhr","Um acht Uhr"]},
+ {q:"Wie ist das Meer?",o:["Ruhig","Stark","Kalt"]},
+ {q:"Wie lange fährt das Schiff noch bis zum Hafen?",o:["Zehn Stunden","Zwei Stunden","Zwanzig Stunden"]},
+ {q:"Wo ist es laut und heiß?",o:["Im Maschinenraum","Auf der Brücke","In der Küche"]},
+ {q:"Was muss die Crew bei der Übung anziehen?",o:["Eine Schwimmweste","Einen Helm","Handschuhe"]}]},
+
+{id:"geburtstag",lvl:"A1",icon:"🎂",color:"#C9664B",title:"Der Geburtstag",tr:"Doğum günü",tense:"prat",
+ s:[
+ ["Gestern war Lenas Geburtstag.","Dün Lena'nın doğum günüydü."],
+ ["Sie wurde dreißig Jahre alt.","Otuz yaşına girdi."],
+ ["Ihre Freunde kamen um sechs Uhr.","Arkadaşları saat altıda geldi."],
+ ["Alle brachten Geschenke mit.","Herkes hediye getirdi."],
+ ["Lena bekam einen schönen Blumenstrauß.","Lena güzel bir çiçek buketi aldı."],
+ ["Ihre Mutter backte einen großen Kuchen.","Annesi büyük bir pasta pişirdi."],
+ ["Der Kuchen war ein Schokoladenkuchen.","Pasta çikolatalı bir pastaydı."],
+ ["Alle sangen Happy Birthday.","Herkes doğum günü şarkısını söyledi."],
+ ["Lena machte die Kerzen aus.","Lena mumları söndürdü."],
+ ["Dann aßen alle Kuchen und tranken Saft.","Sonra herkes pasta yedi ve meyve suyu içti."],
+ ["Später tanzten die Gäste zur Musik.","Daha sonra misafirler müzik eşliğinde dans etti."],
+ ["Lena lachte viel und war sehr glücklich.","Lena çok güldü ve çok mutluydu."],
+ ["Die Party dauerte bis Mitternacht.","Parti gece yarısına kadar sürdü."],
+ ["Am Ende bedankte sich Lena bei allen.","Sonunda Lena herkese teşekkür etti."],
+ ["Es war ein wunderschöner Tag.","Harika bir gündü."]],
+ q:[
+ {q:"Wie alt wurde Lena?",o:["Dreißig Jahre","Zwanzig Jahre","Fünfundzwanzig Jahre"]},
+ {q:"Wer backte den Kuchen?",o:["Ihre Mutter","Ihre Freundin","Lena selbst"]},
+ {q:"Was für ein Kuchen war es?",o:["Ein Schokoladenkuchen","Ein Apfelkuchen","Ein Käsekuchen"]},
+ {q:"Was machten die Gäste nach dem Essen?",o:["Sie tanzten.","Sie gingen nach Hause.","Sie sahen fern."]},
+ {q:"Wie lange dauerte die Party?",o:["Bis Mitternacht","Bis acht Uhr","Bis zehn Uhr"]}]},
+
+{id:"zoo",lvl:"A1",icon:"🦁",color:"#4A7A4E",title:"Im Zoo",tr:"Hayvanat bahçesinde",tense:"mix",
+ s:[
+ ["Die Familie Schmidt geht gern in den Zoo.","Schmidt ailesi hayvanat bahçesine gitmeyi sever."],
+ ["Normalerweise gehen sie einmal im Monat dorthin.","Genelde ayda bir kez oraya giderler."],
+ ["Letzten Sonntag war das Wetter besonders schön.","Geçen pazar hava özellikle güzeldi."],
+ ["Also fuhren sie mit dem Auto zum Zoo.","Bu yüzden hayvanat bahçesine arabayla gittiler."],
+ ["Zuerst sahen die Kinder die Elefanten.","Önce çocuklar filleri gördü."],
+ ["Die Elefanten waren riesig und grau.","Filler kocaman ve griydi."],
+ ["Dann liefen sie zu den Affen.","Sonra maymunlara doğru koştular."],
+ ["Die Affen spielten lustig in den Bäumen.","Maymunlar ağaçlarda eğlenceli bir şekilde oynadı."],
+ ["Der kleine Tom wollte unbedingt die Löwen sehen.","Küçük Tom mutlaka aslanları görmek istedi."],
+ ["Der Löwe schlief die ganze Zeit.","Aslan tüm vakit boyunca uyudu."],
+ ["Die Familie aß zu Mittag im Zoo-Restaurant.","Aile öğle yemeğini hayvanat bahçesi restoranında yedi."],
+ ["Nach dem Essen kauften sie Eis.","Yemekten sonra dondurma aldılar."],
+ ["Am Nachmittag sahen sie noch die Pinguine.","Öğleden sonra bir de penguenleri gördüler."],
+ ["Die Kinder waren am Abend sehr müde.","Çocuklar akşam çok yorgundu."],
+ ["Es war wieder ein toller Tag im Zoo.","Yine hayvanat bahçesinde harika bir gündü."]],
+ q:[
+ {q:"Wie oft geht die Familie normalerweise in den Zoo?",o:["Einmal im Monat","Jeden Tag","Einmal im Jahr"]},
+ {q:"Wie war das Wetter am letzten Sonntag?",o:["Schön","Schlecht","Kalt"]},
+ {q:"Was wollte Tom unbedingt sehen?",o:["Die Löwen","Die Affen","Die Vögel"]},
+ {q:"Was machte der Löwe?",o:["Er schlief.","Er spielte.","Er aß."]},
+ {q:"Was kauften sie nach dem Essen?",o:["Eis","Kaffee","Souvenirs"]}]},
+
+{id:"ferien_meer",lvl:"A2",icon:"🏖️",color:"#1D7A8C",title:"Die Ferien am Meer",tr:"Deniz kenarındaki tatil",tense:"prat",
+ s:[
+ ["Im August fuhr Familie Yilmaz ans Meer.","Ağustos'ta Yilmaz ailesi denize gitti."],
+ ["Sie mieteten ein kleines Ferienhaus.","Küçük bir tatil evi kiraladılar."],
+ ["Das Haus stand direkt am Strand.","Ev tam sahilin kenarındaydı."],
+ ["Jeden Morgen schwammen die Kinder im Meer.","Her sabah çocuklar denizde yüzdü."],
+ ["Das Wasser war warm und klar.","Su sıcak ve berraktı."],
+ ["Am Nachmittag bauten sie Sandburgen.","Öğleden sonra kum kaleleri yaptılar."],
+ ["Der Vater fischte oft vom Boot aus.","Baba sık sık tekneden balık tuttu."],
+ ["Einmal fing er einen großen Fisch.","Bir keresinde büyük bir balık yakaladı."],
+ ["Abends grillten sie am Strand.","Akşamları sahilde mangal yaptılar."],
+ ["Die Sterne am Himmel waren wunderschön.","Gökyüzündeki yıldızlar çok güzeldi."],
+ ["Eines Tages regnete es den ganzen Tag.","Bir gün tüm gün yağmur yağdı."],
+ ["Da blieben alle im Haus und spielten Karten.","O zaman herkes evde kaldı ve kart oynadı."],
+ ["Die zwei Wochen vergingen sehr schnell.","İki hafta çok çabuk geçti."],
+ ["Am letzten Tag weinte die kleine Tochter.","Son gün küçük kız ağladı."],
+ ["Sie wollte nicht nach Hause fahren.","Eve dönmek istemedi."]],
+ q:[
+ {q:"Wohin fuhr die Familie im August?",o:["Ans Meer","In die Berge","Nach Berlin"]},
+ {q:"Wo stand das Ferienhaus?",o:["Direkt am Strand","In der Stadt","Im Wald"]},
+ {q:"Was fing der Vater einmal?",o:["Einen großen Fisch","Eine Krabbe","Nichts"]},
+ {q:"Was machten sie bei Regen?",o:["Sie spielten Karten.","Sie schwammen trotzdem.","Sie fuhren nach Hause."]},
+ {q:"Warum weinte die Tochter am letzten Tag?",o:["Sie wollte nicht nach Hause fahren.","Sie war krank.","Sie hatte Hunger."]}]},
+
+{id:"telefonanruf",lvl:"A1",icon:"📞",color:"#7A5A9A",title:"Ein Telefonanruf",tr:"Bir telefon görüşmesi",tense:"mix",
+ s:[
+ ["Mehmet telefoniert jeden Abend mit seiner Mutter.","Mehmet her akşam annesiyle telefonda konuşur."],
+ ["Sie wohnt weit weg, in der Türkei.","O uzakta, Türkiye'de yaşıyor."],
+ ["Gestern rief Mehmet sie wie immer an.","Dün Mehmet her zamanki gibi onu aradı."],
+ ["Seine Mutter war sehr fröhlich am Telefon.","Annesi telefonda çok neşeliydi."],
+ ["Sie erzählte von ihrem Garten.","Bahçesinden bahsetti."],
+ ["Die Tomaten wurden endlich rot.","Domatesler sonunda kızardı."],
+ ["Mehmet fragte nach seinem Vater.","Babasını sordu."],
+ ["Sein Vater war im Garten und arbeitete.","Babası bahçedeydi ve çalışıyordu."],
+ ["Mehmet erzählte auch von seiner Arbeit.","Mehmet de işinden bahsetti."],
+ ["Er hatte eine neue Idee für ein Projekt.","Bir proje için yeni bir fikri vardı."],
+ ["Seine Mutter freute sich sehr darüber.","Annesi buna çok sevindi."],
+ ["Sie sprachen auch über die nächsten Feiertage.","Bir sonraki tatiller hakkında da konuştular."],
+ ["Mehmet wollte im Sommer nach Hause fliegen.","Mehmet yazın eve uçmak istedi."],
+ ["Das Gespräch dauerte fast eine Stunde.","Konuşma neredeyse bir saat sürdü."],
+ ["Am Ende sagten beide: „Ich hab dich lieb!“","Sonunda ikisi de “Seni seviyorum!” dedi."]],
+ q:[
+ {q:"Wo wohnt Mehmets Mutter?",o:["In der Türkei","In Deutschland","In Österreich"]},
+ {q:"Wovon erzählte die Mutter zuerst?",o:["Von ihrem Garten","Von der Arbeit","Von den Nachbarn"]},
+ {q:"Was machte der Vater gerade?",o:["Er arbeitete im Garten.","Er schlief.","Er kochte."]},
+ {q:"Wann wollte Mehmet nach Hause fliegen?",o:["Im Sommer","Im Winter","An Weihnachten"]},
+ {q:"Wie lange dauerte das Gespräch?",o:["Fast eine Stunde","Zehn Minuten","Zwei Stunden"]}]},
+
+{id:"schluessel",lvl:"A2",icon:"🔑",color:"#8C5A2B",title:"Der verlorene Schlüssel",tr:"Kayıp anahtar",tense:"prat",
+ s:[
+ ["Am Montagmorgen wollte Frau Vogel zur Arbeit gehen.","Pazartesi sabahı Bayan Vogel işe gitmek istedi."],
+ ["Sie suchte ihren Schlüssel, aber er war weg.","Anahtarını aradı ama yoktu."],
+ ["Zuerst schaute sie in ihrer Handtasche.","Önce çantasına baktı."],
+ ["Dann suchte sie auf dem Küchentisch.","Sonra mutfak masasına baktı."],
+ ["Der Schlüssel war nirgendwo zu finden.","Anahtar hiçbir yerde bulunamadı."],
+ ["Sie wurde langsam nervös.","Yavaş yavaş gerginleşti."],
+ ["Plötzlich erinnerte sie sich an den Abend davor.","Birden önceki akşamı hatırladı."],
+ ["Sie kam spät nach Hause und legte die Jacke auf den Stuhl.","Geç eve geldi ve ceketini sandalyeye bıraktı."],
+ ["Schnell lief sie zum Stuhl im Flur.","Hızlıca koridordaki sandalyeye koştu."],
+ ["Der Schlüssel steckte in der Jackentasche!","Anahtar ceketin cebindeydi!"],
+ ["Frau Vogel atmete erleichtert auf.","Bayan Vogel rahatlayarak nefes aldı."],
+ ["Sie zog schnell die Schuhe an.","Hızlıca ayakkabılarını giydi."],
+ ["Dann rannte sie zur Haltestelle.","Sonra durağa koştu."],
+ ["Zum Glück kam der Bus etwas später.","Neyse ki otobüs biraz geç geldi."],
+ ["So kam sie doch noch pünktlich zur Arbeit.","Böylece yine de işe zamanında vardı."]],
+ q:[
+ {q:"Was suchte Frau Vogel?",o:["Ihren Schlüssel","Ihr Handy","Ihre Brille"]},
+ {q:"Wo fand sie den Schlüssel am Ende?",o:["In der Jackentasche","In der Handtasche","Auf dem Tisch"]},
+ {q:"Wie fühlte sie sich zuerst?",o:["Nervös","Glücklich","Müde"]},
+ {q:"Was zog sie an, bevor sie ging?",o:["Die Schuhe","Die Jacke","Den Mantel"]},
+ {q:"Kam sie pünktlich zur Arbeit?",o:["Ja","Nein","Das steht nicht im Text"]}]},
+
+{id:"schultag",lvl:"A2",icon:"🏫",color:"#2B6B6B",title:"Mein erster Kurstag",tr:"Kurstaki ilk günüm",tense:"prat",
+ s:[
+ ["Mein erster Tag im Deutschkurs war sehr aufregend.","Almanca kursundaki ilk günüm çok heyecan vericiydi."],
+ ["Ich stand früh auf und packte meine Tasche.","Erken kalktım ve çantamı hazırladım."],
+ ["Im Kursraum saßen schon viele Leute.","Kurs odasında zaten birçok kişi oturuyordu."],
+ ["Sie kamen aus vielen verschiedenen Ländern.","Birçok farklı ülkeden geliyorlardı."],
+ ["Die Lehrerin hieß Frau Krause.","Öğretmenin adı Bayan Krause'ydu."],
+ ["Sie lächelte freundlich und begrüßte uns.","Güler yüzlü bir şekilde gülümsedi ve bizi karşıladı."],
+ ["Zuerst stellten wir uns alle vor.","Önce hepimiz kendimizi tanıttık."],
+ ["Ich war sehr nervös und sprach leise.","Çok gergindim ve alçak sesle konuştum."],
+ ["Wir lernten die ersten deutschen Wörter.","İlk Almanca kelimeleri öğrendik."],
+ ["Die Aussprache war am Anfang schwer.","Telaffuz başta zordu."],
+ ["In der Pause sprach ich mit einem Mann aus Spanien.","Molada İspanya'dan bir adamla konuştum."],
+ ["Wir lachten viel über unsere Fehler.","Hatalarımıza çok güldük."],
+ ["Nach drei Stunden war der Kurs zu Ende.","Üç saat sonra kurs sona erdi."],
+ ["Ich war müde, aber auch stolz auf mich.","Yorgundum ama kendimle de gurur duydum."],
+ ["Am nächsten Tag freute ich mich schon auf den Kurs.","Ertesi gün kursa gitmeyi şimdiden dört gözle bekliyordum."]],
+ q:[
+ {q:"Wie hieß die Lehrerin?",o:["Frau Krause","Frau Bauer","Frau Schmidt"]},
+ {q:"Woher kamen die Kursteilnehmer?",o:["Aus vielen Ländern","Nur aus der Türkei","Nur aus Spanien"]},
+ {q:"Mit wem sprach die Person in der Pause?",o:["Mit einem Mann aus Spanien","Mit der Lehrerin","Mit niemandem"]},
+ {q:"Wie lange dauerte der Kurs?",o:["Drei Stunden","Eine Stunde","Den ganzen Tag"]},
+ {q:"Wie fühlte sich die Person am Ende?",o:["Müde, aber stolz","Traurig","Gelangweilt"]}]},
+
+{id:"fussballspiel",lvl:"A2",icon:"⚽",color:"#3F7F4A",title:"Das Fußballspiel",tr:"Futbol maçı",tense:"mix",
+ s:[
+ ["Ali spielt jeden Samstag Fußball mit seinen Freunden.","Ali her cumartesi arkadaşlarıyla futbol oynar."],
+ ["Letzten Samstag war das Spiel besonders wichtig.","Geçen cumartesi maç özellikle önemliydi."],
+ ["Beide Mannschaften waren sehr stark.","Her iki takım da çok güçlüydü."],
+ ["Das Spiel begann um vier Uhr.","Maç saat dörtte başladı."],
+ ["In der ersten Halbzeit passierte nicht viel.","İlk yarıda pek bir şey olmadı."],
+ ["Dann schoss Ali ein Tor.","Sonra Ali bir gol attı."],
+ ["Seine Mannschaft jubelte laut.","Takımı yüksek sesle sevindi."],
+ ["Der Gegner schoss aber auch ein Tor.","Ama rakip de bir gol attı."],
+ ["Es stand am Ende eins zu eins.","Sonunda bir-bir berabere kaldı."],
+ ["Das Spiel ging in die Verlängerung.","Maç uzatmaya gitti."],
+ ["In der letzten Minute schoss Ali noch ein Tor.","Son dakikada Ali bir gol daha attı."],
+ ["Alle Zuschauer schrien vor Freude.","Tüm seyirciler sevinçten bağırdı."],
+ ["Alis Mannschaft gewann das Spiel zwei zu eins.","Ali'nin takımı maçı iki-bir kazandı."],
+ ["Nach dem Spiel feierten sie zusammen.","Maçtan sonra birlikte kutladılar."],
+ ["Es war der schönste Tag der Saison.","Sezonun en güzel günüydü."]],
+ q:[
+ {q:"Wann spielt Ali normalerweise Fußball?",o:["Jeden Samstag","Jeden Sonntag","Jeden Tag"]},
+ {q:"Wie viele Tore schoss Ali insgesamt?",o:["Zwei","Eins","Drei"]},
+ {q:"Wie stand das Spiel vor der Verlängerung?",o:["Eins zu eins","Zwei zu null","Null zu null"]},
+ {q:"Wer gewann das Spiel?",o:["Alis Mannschaft","Der Gegner","Niemand"]},
+ {q:"Was machten sie nach dem Spiel?",o:["Sie feierten.","Sie gingen nach Hause.","Sie weinten."]}]},
+
+{id:"regentag",lvl:"A1",icon:"🌧️",color:"#4A6A8A",title:"Ein Regentag",tr:"Yağmurlu bir gün",tense:"mix",
+ s:[
+ ["Normalerweise spielen die Kinder nach der Schule draußen.","Normalde çocuklar okuldan sonra dışarıda oynar."],
+ ["Letzten Dienstag regnete es aber den ganzen Tag.","Ama geçen salı tüm gün yağmur yağdı."],
+ ["Die Kinder konnten nicht nach draußen gehen.","Çocuklar dışarı çıkamadı."],
+ ["Also blieben sie zu Hause und langweilten sich.","Bu yüzden evde kaldılar ve sıkıldılar."],
+ ["Die Mutter hatte eine gute Idee.","Annenin iyi bir fikri vardı."],
+ ["Sie holte ein großes Puzzle aus dem Schrank.","Dolaptan büyük bir yapboz çıkardı."],
+ ["Die Kinder setzten sich an den Tisch.","Çocuklar masaya oturdu."],
+ ["Zusammen bauten sie das Puzzle drei Stunden lang.","Birlikte üç saat boyunca yapbozu yaptılar."],
+ ["Danach backten sie Kekse in der Küche.","Sonra mutfakta kurabiye pişirdiler."],
+ ["Die ganze Wohnung roch nach Schokolade.","Tüm daire çikolata kokuyordu."],
+ ["Am Nachmittag hörte der Regen endlich auf.","Öğleden sonra yağmur sonunda durdu."],
+ ["Schnell zogen die Kinder ihre Stiefel an.","Çocuklar hızlıca botlarını giydi."],
+ ["Sie sprangen fröhlich in die Pfützen.","Su birikintilerine neşeyle atladılar."],
+ ["Am Abend waren alle nass, aber glücklich.","Akşam herkes ıslaktı ama mutluydu."],
+ ["Es war trotz des Regens ein schöner Tag.","Yağmura rağmen güzel bir gündü."]],
+ q:[
+ {q:"Was machen die Kinder normalerweise nach der Schule?",o:["Sie spielen draußen.","Sie schlafen.","Sie lernen."]},
+ {q:"Was machten die Kinder, weil es regnete?",o:["Sie bauten ein Puzzle.","Sie sahen fern.","Sie schliefen."]},
+ {q:"Was backten sie in der Küche?",o:["Kekse","Kuchen","Brot"]},
+ {q:"Was machten die Kinder, als der Regen aufhörte?",o:["Sie sprangen in die Pfützen.","Sie gingen schlafen.","Sie lasen Bücher."]},
+ {q:"Wie fühlten sich alle am Abend?",o:["Nass, aber glücklich","Traurig","Krank"]}]}
+];
+
+const DICT={
+hallo:"merhaba",kommen:"gelmek; onlar geliyor (kommen: sie kommen)",ich:"ben",bin:"-im/-ım (sein: ich bin)",anna:"Anna (isim)",jahre:"die Jahre — yıl",alt:"yaşlı; yaş için: … yaşında",
+komme:"geliyorum (kommen)",aus:"-den/-dan (köken)",deutschland:"Almanya",wohne:"yaşıyorum, oturuyorum (wohnen)",in:"-de/-da; içinde",
+berlin:"Berlin",mein:"benim (der/das kelimeleri için)",vater:"der Vater — baba",heißt:"adı … (heißen)",peter:"Peter (isim)",
+er:"o (erkek)",ist:"-dir/-dır (sein: er/sie/es ist)",lehrer:"der Lehrer — öğretmen",meine:"benim (die kelimeleri için)",
+mutter:"die Mutter — anne",maria:"Maria (isim)",sie:"o (kadın); onlar; Sie = siz",ärztin:"die Ärztin — kadın doktor",
+habe:"sahibim (haben: ich habe)",einen:"bir (eril, Akkusativ)",hund:"der Hund — köpek",max:"Max (isim)",mag:"severim (mögen)",sehr:"çok",
+woher:"nereden",kommt:"gelir (kommen: er/sie kommt)",der:"belirli tanımlık (eril)",türkei:"die Türkei — Türkiye",italien:"İtalya",
+was:"ne",annas:"Anna'nın",arzt:"der Arzt — doktor",koch:"der Koch — aşçı",wie:"nasıl",hans:"Hans (isim)",
+tom:"Tom (isim)",im:"in dem: -de/-da",café:"das Café — kafe",möchte:"istiyorum / istiyor (möchten)",kaffee:"der Kaffee — kahve",
+die:"belirli tanımlık (dişil / çoğul)",kellnerin:"die Kellnerin — kadın garson",guten:"iyi (Guten Tag = iyi günler)",tag:"der Tag — gün",
+möchten:"istemek (Was möchten Sie? = Ne istersiniz?)",und:"ve",ein:"bir (eril/nötr)",brötchen:"das Brötchen — küçük ekmek",
+bitte:"lütfen; rica ederim",gern:"memnuniyetle",das:"belirli tanımlık (nötr); bu",kostet:"tutar, … eder (kosten)",vier:"dört",
+euro:"der Euro — avro",trinkt:"içer (trinken)",den:"belirli tanımlık (eril, Akkusativ)",isst:"yer (essen)",heiß:"sıcak",lecker:"lezzetli",
+danke:"teşekkürler",auf:"üzerinde; Auf Wiedersehen: hoşça kalın",wiedersehen:"görüşmek (Auf Wiedersehen = hoşça kalın)",
+es:"o (nötr); bunu",viel:"çok (Wie viel? = Ne kadar?)",zwei:"iki",zehn:"on",tee:"der Tee — çay",kuchen:"der Kuchen — pasta, kek",
+wasser:"das Wasser — su",kalt:"soğuk",
+stehe:"kalkarım (aufstehen: ich stehe … auf)",um:"saat … 'de'",sieben:"yedi",uhr:"die Uhr — saat",dann:"sonra",dusche:"duş alırım (duschen)",
+frühstücke:"kahvaltı ederim (frühstücken)",acht:"sekiz",gehe:"giderim (gehen)",zur:"zu der: -e (dişil)",arbeit:"die Arbeit — iş",
+fahre:"giderim (araçla) (fahren)",mit:"ile",dem:"belirli tanımlık (Dativ, eril/nötr)",bus:"der Bus — otobüs",zwölf:"on iki",
+esse:"yerim (essen)",mittagessen:"das Mittagessen — öğle yemeği",am:"an dem: -de (am Abend = akşam)",abend:"der Abend — akşam",
+koche:"yemek yaparım (kochen)",ins:"in das: -e (içine)",bett:"das Bett — yatak",wann:"ne zaman",person:"die Person — kişi",
+steht:"kalkar (aufstehen: er/sie steht … auf)",auto:"das Auto — araba",fahrrad:"das Fahrrad — bisiklet",macht:"yapar (machen)",
+kocht:"yemek yapar (kochen)",arbeitet:"çalışır (arbeiten)",geht:"gider (gehen)",
+schiff:"das Schiff — gemi",hafen:"der Hafen — liman",groß:"büyük",blau:"mavi",kapitän:"der Kapitän — kaptan",herr:"der Herr — Bay",
+bauer:"Bauer (soyadı)",heute:"bugün",montag:"Pazartesi",wetter:"das Wetter — hava",schön:"güzel",sonne:"die Sonne — güneş",
+scheint:"parlar (scheinen)",fünf:"beş",matrosen:"die Matrosen — tayfalar",tragen:"taşımak",kisten:"die Kisten — sandıklar",
+fährt:"gider (araçla) (fahren: er/sie fährt)",nach:"-e (şehir/ülke yönü)",hamburg:"Hamburg",alle:"herkes",sagen:"söylemek",
+gute:"iyi",reise:"die Reise — yolculuk",welche:"hangi",farbe:"die Farbe — renk",hat:"sahip (haben: er/sie/es hat)",rot:"kırmızı",
+grün:"yeşil",wohin:"nereye",istanbul:"İstanbul",schlecht:"kötü",
+lisa:"Lisa (isim)",zum:"zu dem: -e (eril/nötr)",supermarkt:"der Supermarkt — süpermarket",braucht:"ihtiyacı var (brauchen)",
+milch:"die Milch — süt",brot:"das Brot — ekmek",äpfel:"die Äpfel — elmalar",kosten:"tutar (çoğul) (kosten)",sind:"-dir/-lar (sein: sie sind)",
+süß:"tatlı",bezahlt:"öder (bezahlen)",sechs:"altı",hause:"nach Hause = eve (doğru)",drei:"üç",käse:"der Käse — peynir",
+wurst:"die Wurst — sosis, salam",eier:"die Eier — yumurtalar",gelb:"sarı",sauer:"ekşi",klein:"küçük"
+};
+Object.assign(DICT,{
+abends:"akşamları",aber:"ama, fakat",alles:"her şey",als:"olarak (als Fotografin = fotoğrafçı olarak)",alte:"eski (die alte Wohnung)",
+an:"-e, -de (yakınında); anrufen = aramak",anzeige:"die Anzeige — ilan",anzeigen:"die Anzeigen — ilanlar",anziehen:"giymek (ziehen … an)",
+apotheke:"die Apotheke — eczane",arbeite:"çalışırım (arbeiten)",arbeiten:"çalışmak",auch:"de/da, ayrıca",bad:"das Bad — banyo",
+bahnhof:"der Bahnhof — tren garı",bald:"yakında",balkon:"der Balkon — balkon",bar:"nakit (bar bezahlen)",
+bauchschmerzen:"die Bauchschmerzen — karın ağrısı",beginnt:"başlar (beginnen)",bei:"-de, -in yanında (bei der Übung = tatbikatta)",
+beiden:"ikisi",bekommt:"alır (bekommen)",bereit:"hazır",bericht:"der Bericht — rapor",beruf:"der Beruf — meslek (von Beruf = mesleği)",
+besichtigt:"gezip görür (besichtigen)",bestellt:"sipariş eder (bestellen)",besucht:"ziyaret eder (besuchen)",bis:"-e kadar",
+blaue:"mavi (das blaue Schiff)",bleiben:"kalmak",braun:"kahverengi",bruder:"der Bruder — erkek kardeş",
+brücke:"die Brücke — köprü; geminin köprüüstü",buch:"das Buch — kitap",büro:"das Büro — ofis",clara:"Clara (isim)",
+computer:"der Computer — bilgisayar",crew:"die Crew — mürettebat",danach:"ondan sonra",darauf:"üzerinde",dauert:"sürer (dauern)",
+denkt:"düşünür (denken; an … denken = -i düşünmek)",deshalb:"bu yüzden",direkt:"doğrudan, tam",dort:"orada",draußen:"dışarıda",
+dreimal:"üç kez",dreißig:"otuz",du:"sen",eine:"bir (dişil)",einem:"bir (Dativ, eril/nötr)",einer:"bir (Dativ, dişil)",
+einkaufen:"alışveriş yapmak",einkaufswagen:"der Einkaufswagen — alışveriş arabası",einkaufszettel:"der Einkaufszettel — alışveriş listesi",
+einmal:"bir kez",eins:"bir (sayı)",ende:"das Ende — son (zu Ende = bitti)",englischen:"İngiliz (Englischer Garten = İngiliz Bahçesi)",
+erste:"ilk, birinci",essen:"yemek yemek; yerler",fahren:"gitmek (araçla)",fahrt:"die Fahrt — yolculuk",familie:"die Familie — aile",
+fehlt:"eksik (Was fehlt Ihnen? = Neyiniz var?)",fenster:"das Fenster — pencere",fern:"uzak (fernsehen = televizyon izlemek)",
+fertig:"bitmiş, hazır",fieber:"das Fieber — ateş",film:"der Film — film",fisch:"der Fisch — balık",flugzeug:"das Flugzeug — uçak",
+fotografin:"die Fotografin — kadın fotoğrafçı",fotos:"die Fotos — fotoğraflar",fragt:"sorar (fragen)",frau:"die Frau — kadın; Bayan",
+frei:"boş, serbest",freunde:"die Freunde — arkadaşlar",freundin:"die Freundin — kız arkadaş",frühstück:"das Frühstück — kahvaltı",
+frühstückt:"kahvaltı eder (frühstücken)",fußball:"der Fußball — futbol",für:"için",garten:"der Garten — bahçe",
+gebacken:"pişirdi (backen: hat gebacken)",geblieben:"kaldı (bleiben: ist geblieben)",gedauert:"sürdü (dauern: hat gedauert)",
+gefahren:"gitti (fahren: ist gefahren)",gefragt:"sordu (fragen: hat gefragt)",gefrühstückt:"kahvaltı etti",gefällt:"hoşuna gider (gefallen)",
+gegangen:"gitti (gehen: ist gegangen)",gegessen:"yedi (essen: hat gegessen)",gehört:"dinledi, duydu (hören)",geklingelt:"çaldı (klingeln)",
+gelacht:"güldü (lachen)",gelesen:"okudu (lesen)",gemacht:"yaptı (machen)",gemütlich:"rahat, samimi",gepackt:"hazırladı (packen)",
+geputzt:"temizledi (putzen)",geregnet:"yağmur yağdı (regnen)",gesagt:"dedi (sagen)",geschienen:"parladı (scheinen)",
+geschossen:"attı (schießen: Tore geschossen = gol attı)",gesessen:"oturdu (sitzen)",gespielt:"oynadı (spielen)",gesprochen:"konuştu (sprechen)",
+gesund:"sağlıklı",getroffen:"buluştu (treffen)",gewaschen:"yıkadı (waschen)",gezeigt:"gösterdi (zeigen)",gibt:"verir (geben); es gibt = vardır",
+gitarre:"die Gitarre — gitar",glücklich:"mutlu",grippe:"die Grippe — grip",große:"büyük (das große Schiff)",großes:"büyük (ein großes Fenster)",
+gut:"iyi",haben:"sahip olmak",hals:"der Hals — boğaz",haltestelle:"die Haltestelle — durak",handschuhe:"die Handschuhe — eldivenler",
+handy:"das Handy — cep telefonu",haus:"das Haus — ev",hell:"aydınlık",helm:"der Helm — baret, kask",hier:"burada; Hier, bitte = buyurun",
+hotel:"das Hotel — otel",hunger:"der Hunger — açlık",husten:"der Husten — öksürük",hähnchen:"das Hähnchen — tavuk",hält:"durur (halten)",
+ihm:"ona (erkek, Dativ)",ihn:"onu (erkek)",ihnen:"size (Sie, Dativ)",ihr:"ona (kadın, Dativ); onun",ihre:"onun (dişil/çoğul)",
+ingenieur:"der Ingenieur — mühendis",internet:"das Internet — internet",ja:"evet",jahr:"das Jahr — yıl",jahren:"die Jahre (Dativ) — yıl",
+jeden:"her (eril, Akkusativ)",jetzt:"şimdi",jonas:"Jonas (isim)",kai:"der Kai — rıhtım",kantine:"die Kantine — kantin",
+karte:"die Karte — kart; harita",kartoffeln:"die Kartoffeln — patatesler",kasse:"die Kasse — kasa",kassiererin:"die Kassiererin — kadın kasiyer",
+kauft:"satın alır (kaufen)",kaya:"Kaya (soyadı)",kilo:"das Kilo — kilo",kino:"das Kino — sinema",kleine:"küçük",kleines:"küçük (ein kleines Café)",
+kochen:"yemek yapmak",kollegen:"die Kollegen — iş arkadaşları",kommst:"gelirsin (kommen: du kommst)",kompass:"der Kompass — pusula",
+kontrolliert:"kontrol eder (kontrollieren)",kopfschmerzen:"die Kopfschmerzen — baş ağrısı",krank:"hasta",kurz:"kısa; kısaca",
+köchin:"die Köchin — kadın aşçı",köln:"Köln (şehir)",können:"-ebilmek (Sie können = -ebilirsiniz)",küche:"die Küche — mutfak",
+lachen:"gülmek",lang:"uzun; boyunca",lange:"uzun süre",langweilig:"sıkıcı",laut:"gürültülü; yüksek sesle",lehrerin:"die Lehrerin — kadın öğretmen",
+lena:"Lena (isim)",letztes:"geçen (letztes Wochenende)",leute:"die Leute — insanlar",lieb:"sevimli, tatlı",liegt:"bulunur, durur (liegen)",
+liest:"okur (lesen)",london:"Londra",lustig:"komik, eğlenceli",machen:"yapmak",man:"insan, kişi (genel özne: görülür)",manchmal:"bazen",
+marienplatz:"Marienplatz (Münih'te meydan)",marmelade:"die Marmelade — reçel",maschinenraum:"der Maschinenraum — makine dairesi",
+matrose:"der Matrose — tayfa",meer:"das Meer — deniz",meinen:"benim (eril Akk. / çoğul Dativ)",minuten:"die Minuten — dakikalar",mir:"bana",
+misst:"ölçer (messen)",mittag:"der Mittag — öğle",mittags:"öğleleri",mittagspause:"die Mittagspause — öğle arası",
+mitten:"ortasında (mitten auf dem Meer)",monat:"der Monat — ay",montagmorgen:"Pazartesi sabahı",morgen:"yarın; sabah",
+motoren:"die Motoren — motorlar",musik:"die Musik — müzik",muss:"-mek zorunda (müssen: er muss)",müde:"yorgun",münchen:"Münih",
+müssen:"-mek zorunda olmak",nachmittag:"der Nachmittag — öğleden sonra",namen:"der Name — isim (Akkusativ: den Namen)",neben:"yanında",
+nehme:"alırım (nehmen)",nehmen:"almak",nette:"hoş, nazik",neu:"yeni",neue:"yeni (eine neue Wohnung)",neun:"dokuz",nicht:"değil",
+nimmt:"alır (nehmen)",noch:"hâlâ, daha",nächsten:"bir sonraki",nächstes:"gelecek",nähe:"die Nähe — yakınlık (in der Nähe = yakında)",
+oder:"veya",offizier:"der Offizier — zabit",oft:"sık sık",oma:"die Oma — nine",ordnung:"die Ordnung — düzen (in Ordnung = yolunda)",
+papiere:"die Papiere — evraklar",park:"der Park — park",pizza:"die Pizza — pizza",platz:"der Platz — meydan; saha",
+pommes:"die Pommes — patates kızartması",praxis:"die Praxis — muayenehane",prüft:"kontrol eder (prüfen)",
+rechnung:"die Rechnung — hesap, fatura",reis:"der Reis — pirinç, pilav",rezept:"das Rezept — reçete; tarif",riesig:"kocaman",
+rotterdam:"Rotterdam (şehir)",rufe:"ararım (anrufen: ich rufe … an)",ruft:"çağırır; arar (rufen)",ruhig:"sakin",
+sagt:"söyler (sagen: er/sie sagt)",salat:"der Salat — salata",samstag:"Cumartesi",sara:"Sara (isim)",sauber:"temiz",schaut:"bakar (schauen)",
+schiffen:"die Schiffe (Dativ) — gemiler",schinken:"der Schinken — jambon",schlafen:"uyumak",schlafzimmer:"das Schlafzimmer — yatak odası",
+schlange:"die Schlange — kuyruk; yılan",schon:"zaten, çoktan",schreibt:"yazar (schreiben)",schuhe:"die Schuhe — ayakkabılar",
+schwere:"ağır (schwere Kisten)",schweren:"ağır (mit zwei schweren Tüten)",schwimmweste:"die Schwimmweste — can yeleği",
+sehe:"görürüm (sehen; fernsehen = TV izlemek)",sein:"olmak; onun",seine:"onun (dişil/çoğul)",seinen:"onun (eril Akk. / çoğul Dativ)",
+seiner:"onun (dişil, Dativ)",seit:"-den beri",sicherheitsübung:"die Sicherheitsübung — emniyet tatbikatı",siebzehn:"on yedi",
+sieht:"görür (sehen)",sitzt:"oturur (sitzen)",soll:"-meli (sollen: er soll)",sonntag:"Pazar",spazieren:"yürüyüşe (spazieren gehen)",
+spiel:"das Spiel — oyun, maç",spiele:"oynarım, çalarım (spielen)",spielen:"oynamak",spielt:"oynar (spielen)",sport:"der Sport — spor",
+sporttasche:"die Sporttasche — spor çantası",sprechen:"konuşmak",stadt:"die Stadt — şehir",stark:"kuvvetli, güçlü",stehen:"durmak; yazılı olmak",
+straße:"die Straße — sokak, cadde",straßenbahn:"die Straßenbahn — tramvay",studiert:"üniversitede okur (studieren)",
+stunde:"die Stunde — saat (süre)",stunden:"die Stunden — saatler",sucht:"arar (suchen)",suppe:"die Suppe — çorba",
+tabletten:"die Tabletten — haplar",tagen:"die Tage (Dativ) — günler",telefoniere:"telefonla konuşurum (telefonieren)",
+telefoniert:"telefonla konuşur",termin:"der Termin — randevu",teuer:"pahalı",tim:"Tim (isim)",tisch:"der Tisch — masa",toll:"harika",
+tore:"die Tore — goller",trinke:"içerim (trinken)",trinken:"içmek",tun:"yapmak",tut:"yapar (tun); weh tun = ağrımak",tür:"die Tür — kapı",
+tüten:"die Tüten — poşetler",untersucht:"muayene eder (untersuchen)",vermieter:"der Vermieter — ev sahibi",viele:"birçok",
+vom:"von dem: -den",von:"-den; -in",vor:"önünde; önce",war:"idi (sein: er/sie/es war)",waren:"idi (sein: sie waren)",warm:"sıcak, ılık",
+warten:"beklemek",wartet:"bekler (warten)",wartezimmer:"das Wartezimmer — bekleme odası",warum:"neden",weg:"uzakta, gitmiş",
+weh:"acı (weh tun = ağrımak)",weit:"uzak",weißwurst:"die Weißwurst — Bavyera sosisi",wen:"kimi",wieder:"yine",wien:"Viyana",
+will:"istiyor (wollen: sie will)",wind:"der Wind — rüzgâr",wir:"biz",wo:"nerede",woche:"die Woche — hafta",
+wochenende:"das Wochenende — hafta sonu",wohnt:"yaşar (wohnen)",wohnung:"die Wohnung — daire",wohnzimmer:"das Wohnzimmer — oturma odası",
+wollte:"istedi (wollen: er wollte)",wollten:"istediler (wollen)",wäsche:"die Wäsche — çamaşır",zieht:"taşınır (umziehen: zieht … um)",
+ziemlich:"oldukça",zimmer:"das Zimmer — oda",zu:"çok (zu klein); -e",zuerst:"önce",zug:"der Zug — tren",zusammen:"birlikte; toplam",
+zwanzig:"yirmi",zweimal:"iki kez",überlegt:"düşünür (überlegen)",übung:"die Übung — alıştırma, tatbikat"
+});
+Object.assign(DICT,{
+gestern:"dün",wurde:"oldu (werden: er/sie/es wurde)",wurden:"oldular (werden: sie wurden)",lenas:"Lena'nın",
+kamen:"geldiler (kommen: sie kamen)",kam:"geldi (kommen: er/sie kam)",brachten:"getirdiler (bringen: sie brachten)",geschenke:"die Geschenke — hediyeler",
+bekam:"aldı (bekommen: er/sie bekam)",blumenstrauß:"der Blumenstrauß — çiçek buketi",backte:"pişirdi (backen: er/sie backte)",großen:"büyük (großer/große/großes çekimi)",
+schönen:"güzel (schön çekimi)",schoner:"güzel (schön çekimi)",schöner:"güzel (schön çekimi)",schönste:"en güzel",
+sangen:"söylediler (singen: sie sangen)",kerzen:"die Kerzen — mumlar (die Kerze)",machte:"yaptı (machen: er/sie machte)",machten:"yaptılar (machen: sie machten)",
+aß:"yedi (essen: er/sie aß)",aßen:"yediler (essen: sie aßen)",tranken:"içtiler (trinken: sie tranken)",saft:"der Saft — meyve suyu",
+tanzten:"dans ettiler (tanzen: sie tanzten)",gäste:"die Gäste — misafirler (der Gast)",lachte:"güldü (lachen: er/sie lachte)",lachten:"güldüler (lachen: sie lachten)",
+party:"die Party — parti",dauerte:"sürdü (dauern: er/sie/es dauerte)",mitternacht:"die Mitternacht — gece yarısı",bedankte:"teşekkür etti (sich bedanken: er/sie bedankte sich)",
+allen:"herkese (alle — Dativ çoğul)",wunderschön:"çok güzel",wunderschöner:"çok güzel (çekim)",zoo:"der Zoo — hayvanat bahçesi",
+normalerweise:"normalde",besonders:"özellikle",fuhren:"gittiler (araçla) (fahren: sie fuhren)",fuhr:"gitti (araçla) (fahren: er/sie fuhr)",
+sahen:"gördüler (sehen: sie sahen)",sehen:"görmek (sehen mastar)",elefanten:"die Elefanten — filler (der Elefant)",grau:"gri",
+liefen:"koştular (laufen: sie liefen)",affen:"die Affen — maymunlar (der Affe)",spielten:"oynadılar (spielen: sie spielten)",bäumen:"die Bäume (Dativ) — ağaçlar (der Baum)",
+unbedingt:"mutlaka",löwen:"aslanları/aslanlara (der Löwe)",löwe:"der Löwe — aslan",schlief:"uyudu (schlafen: er/sie schlief)",
+ganze:"bütün, tüm (ganz çekimi)",ganzen:"bütün, tüm (ganz çekimi)",zeit:"die Zeit — zaman",restaurant:"das Restaurant — restoran",
+kauften:"satın aldılar (kaufen: sie kauften)",eis:"das Eis — dondurma",pinguine:"die Pinguine — penguenler (der Pinguin)",toller:"harika (toll çekimi)",
+august:"der August — Ağustos",mieteten:"kiraladılar (mieten: sie mieteten)",ferienhaus:"das Ferienhaus — tatil evi",strand:"der Strand — plaj",
+schwammen:"yüzdüler (schwimmen: sie schwammen)",klar:"berrak, net; tabii",bauten:"inşa ettiler, yaptılar (bauen: sie bauten)",sandburgen:"die Sandburgen — kum kaleleri (die Sandburg)",
+boot:"das Boot — tekne",fischte:"balık tuttu (fischen: er/sie fischte)",fing:"yakaladı (fangen: er/sie fing)",grillten:"mangal yaptılar (grillen: sie grillten)",
+sterne:"die Sterne — yıldızlar (der Stern)",himmel:"der Himmel — gökyüzü",eines:"bir (Genitiv; eines Tages = bir gün)",tages:"günün (der Tag — Genitiv)",
+regnete:"yağmur yağdı (regnen: es regnete)",blieben:"kaldılar (bleiben: sie blieben)",karten:"die Karten — kartlar (die Karte)",vergingen:"geçti (vergehen: sie vergingen — zaman için)",
+wochen:"die Wochen — haftalar (die Woche)",weinte:"ağladı (weinen: er/sie weinte)",tochter:"die Tochter — kız evlat",mehmet:"Mehmet (isim)",
+mehmets:"Mehmet'in",weit:"uzak(ta)",rief:"aradı (anrufen: er/sie rief … an)",immer:"her zaman",
+fröhlich:"neşeli",telefon:"das Telefon — telefon",erzählte:"anlattı (erzählen: er/sie erzählte)",fragte:"sordu (fragen: er/sie fragte)",
+arbeitete:"çalıştı (arbeiten: er/sie arbeitete)",idee:"die Idee — fikir",projekt:"das Projekt — proje",freute:"sevindi (sich freuen: er/sie freute sich)",
+darüber:"bunun hakkında, buna",sprachen:"konuştular (sprechen: sie sprachen)",sprach:"konuştu (sprechen: er/sie sprach)",nächsten:"bir sonraki (nächster çekimi)",
+feiertage:"die Feiertage — tatil günleri (der Feiertag)",sommer:"der Sommer — yaz",fliegen:"uçmak (fliegen mastar)",gespräch:"das Gespräch — konuşma, görüşme",
+fast:"neredeyse",hab:"sahibim (haben'in kısaltması: ich hab = ich habe)",montagmorgen:"Pazartesi sabahı",vogel:"Vogel (soyadı)",
+schlüssel:"der Schlüssel — anahtar",suchte:"aradı (suchen: er/sie suchte)",schaute:"baktı (schauen: er/sie schaute)",handtasche:"die Handtasche — el çantası",
+küchentisch:"der Küchentisch — mutfak masası",nirgendwo:"hiçbir yerde",langsam:"yavaş",nervös:"gergin",
+plötzlich:"aniden",erinnerte:"hatırladı (sich erinnern: er/sie erinnerte sich)",davor:"önceki, öncesinde",legte:"koydu, bıraktı (legen: er/sie legte)",
+jacke:"die Jacke — ceket",stuhl:"der Stuhl — sandalye",flur:"der Flur — koridor",steckte:"içindeydi, saplıydı (stecken: er/sie/es steckte)",
+jackentasche:"die Jackentasche — ceket cebi",atmete:"nefes aldı (atmen: er/sie atmete)",erleichtert:"rahatlamış",zog:"giydi (anziehen: er/sie zog … an)",
+schnell:"hızlı, çabuk",rannte:"koştu (rennen: er/sie rannte)",glück:"das Glück — şans, mutluluk (zum Glück = neyse ki)",später:"daha sonra",
+pünktlich:"dakik, tam zamanında",deutschkurs:"der Deutschkurs — Almanca kursu",aufregend:"heyecan verici",früh:"erken",
+packte:"hazırladı, paketledi (packen: er/sie packte)",kursraum:"der Kursraum — kurs odası",saßen:"oturuyorlardı (sitzen: sie saßen)",verschiedenen:"farklı, çeşitli (verschieden çekimi)",
+ländern:"die Länder (Dativ) — ülkeler (das Land)",krause:"Krause (soyadı)",lächelte:"gülümsedi (lächeln: er/sie lächelte)",freundlich:"güler yüzlü, dostça",
+begrüßte:"karşıladı, selamladı (begrüßen: er/sie begrüßte)",stellten:"tanıttılar (vorstellen: sie stellten … vor)",leise:"alçak sesle, sessizce",lernten:"öğrendiler (lernen: sie lernten)",
+ersten:"ilk (erster çekimi)",erster:"ilk",wörter:"die Wörter — kelimeler (das Wort)",deutschen:"Almanca (deutsch çekimi)",
+aussprache:"die Aussprache — telaffuz",anfang:"der Anfang — başlangıç",schwer:"zor; ağır",pause:"die Pause — ara, mola",
+mann:"der Mann — adam",spanien:"Spanien — İspanya",fehler:"die Fehler — hatalar (der Fehler)",kurs:"der Kurs — kurs",
+stolz:"gurur duyan",ali:"Ali (isim)",alis:"Ali'nin",wichtig:"önemli",
+mannschaften:"die Mannschaften — takımlar (die Mannschaft)",mannschaft:"die Mannschaft — takım",begann:"başladı (beginnen: er/sie/es begann)",halbzeit:"die Halbzeit — devre (futbol)",
+passierte:"oldu, gerçekleşti (passieren: es passierte)",schoss:"attı, vurdu (schießen: er/sie schoss)",jubelte:"sevindi, tezahürat yaptı (jubeln: er/sie jubelte)",gegner:"der Gegner — rakip",
+verlängerung:"die Verlängerung — uzatma (maç)",minute:"die Minute — dakika",zuschauer:"die Zuschauer — seyirciler (der Zuschauer)",schrien:"bağırdılar (schreien: sie schrien)",
+freude:"die Freude — sevinç",gewann:"kazandı (gewinnen: er/sie gewann)",feierten:"kutladılar (feiern: sie feierten)",saison:"die Saison — sezon",
+schule:"die Schule — okul",dienstag:"der Dienstag — Salı",regen:"der Regen — yağmur",konnten:"yapabildiler (können: sie konnten)",
+langweilten:"sıkıldılar (sich langweilen: sie langweilten sich)",holte:"getirdi, çıkardı (holen: er/sie holte)",puzzle:"das Puzzle — yapboz",schrank:"der Schrank — dolap",
+setzten:"oturdular (sich setzen: sie setzten sich)",tasche:"die Tasche — çanta",backten:"pişirdiler (backen: sie backten)",kekse:"die Kekse — kurabiyeler (der Keks)",
+schokolade:"die Schokolade — çikolata",schokoladenkuchen:"der Schokoladenkuchen — çikolatalı pasta",roch:"kokuyordu (riechen: es roch)",hörte:"duydu; (auf+hören bağlamında) durdu",
+aufhörte:"durdu (aufhören: yan cümlede birleşik yazılır)",zogen:"giydiler (anziehen: sie zogen … an)",stiefel:"die Stiefel — botlar (der Stiefel)",sprangen:"atladılar (springen: sie sprangen)",
+pfützen:"die Pfützen — su birikintileri (die Pfütze)",nass:"ıslak",tor:"das Tor — gol; kapı",tomaten:"die Tomaten — domatesler (die Tomate)",
+endlich:"sonunda",trotz:"rağmen",also:"bu yüzden, öyleyse",so:"böyle, öyle; bu kadar",
+doch:"yine de; ama",insgesamt:"toplamda",bevor:"önce (zaman bağlacı)",weil:"çünkü",
+wem:"kime (soru zamiri)",wer:"kim (soru zamiri)",wovon:"neyden, ne hakkında",ihrem:"onun (dişil/çoğul, Dativ)",
+ihren:"onun (eril Akk. / çoğul Dativ)",ihrer:"onun (dişil, Dativ/Genitiv)",seinem:"onun (eril/nötr, Dativ)",sich:"kendi(si) — dönüşlü zamir",
+mich:"beni",uns:"bize, bizi",unsere:"bizim",dich:"seni",
+da:"o zaman; orada",des:"-in (Genitiv tanımlık, eril/nötr)",über:"hakkında; üzerinde",ans:"an das: -e, -a (içine/yönüne)",
+regens:"yağmurun (der Regen — Genitiv)",happy:"mutlu (İngilizce — doğum günü şarkısından)",birthday:"doğum günü (İngilizce)",dorthin:"oraya",
+freunden:"arkadaşlara, arkadaşlarla (der Freund — Dativ çoğul)",gerade:"şu anda, tam da",fühlte:"hissetti (sich fühlen: er/sie fühlte sich)",fühlten:"hissettiler (sich fühlen: sie fühlten sich)",
+beide:"ikisi de",vielen:"birçok (viele çekimi)",ging:"gitti (gehen: er/sie ging)",gehen:"gitmek (gehen mastar)",
+finden:"bulmak (finden mastar)",fand:"buldu (finden: er/sie fand)",hatte:"sahipti (haben: er/sie/es hatte)",hieß:"adı …idi (heißen: er/sie hieß)",
+letzten:"geçen, son (letzter çekimi)",kinder:"die Kinder — çocuklar (das Kind)",kursteilnehmer:"die Kursteilnehmer — kursiyerler (der Kursteilnehmer)",sagten:"dediler (sagen: sie sagten)",
+schmidt:"Schmidt (soyadı)",yilmaz:"Yilmaz (soyadı)",spät:"geç",geburtstag:"der Geburtstag — doğum günü",
+apfelkuchen:"der Apfelkuchen — elmalı pasta",käsekuchen:"der Käsekuchen — peynirli pasta (cheesecake)",berge:"die Berge — dağlar (der Berg)",brille:"die Brille — gözlük",
+bücher:"die Bücher — kitaplar (das Buch)",fünfundzwanzig:"yirmi beş",gelangweilt:"sıkılmış",gingen:"gittiler (gehen: sie gingen)",
+kochte:"yemek yaptı (kochen: er/sie kochte)",krabbe:"die Krabbe — yengeç",lasen:"okudular (lesen: sie lasen)",lernen:"öğrenmek (lernen mastar)",
+lief:"koştu (laufen: er/sie lief)",mantel:"der Mantel — palto",nachbarn:"die Nachbarn — komşular (der Nachbar)",nein:"hayır",
+nichts:"hiçbir şey",niemand:"hiç kimse",niemandem:"hiç kimseye (Dativ)",null:"sıfır",
+nur:"sadece",schliefen:"uyudular (schlafen: sie schliefen)",selbst:"kendisi",souvenirs:"die Souvenirs — hediyelik eşyalar",
+spielte:"oynadı (spielen: er/sie spielte)",text:"der Text — metin",traurig:"üzgün",trotzdem:"yine de, buna rağmen",
+vögel:"die Vögel — kuşlar (der Vogel)",wald:"der Wald — orman",weihnachten:"Noel",weinten:"ağladılar (weinen: sie weinten)",
+winter:"der Winter — kış",österreich:"Österreich — Avusturya",etwas:"biraz; bir şey",stand:"duruyordu; ayakta kalktı (stehen/aufstehen: er/sie/es stand)"
+});
+
+
+const PERFEKT_STORIES = new Set([]); // İleride Perfekt işlenince buraya eklenecek
+const PRATERITUM_STORIES = new Set(["geburtstag","ferien_meer","schluessel","schultag"]);
+const MIXED_STORIES = new Set(["zoo","telefonanruf","fussballspiel","regentag"]);
+
+let S={done:{},saved:[]};
+try{const r=localStorage.getItem('kg_state');if(r){const p=JSON.parse(r);S.done=p.done||{};S.saved=p.saved||[];}}catch(e){}
+function persist(){try{localStorage.setItem('kg_state',JSON.stringify(S));}catch(e){}}
+const $=s=>document.querySelector(s);
+let app=null;
+let cur={view:'home'},showTr=true,reading=false,selWord=null,qz=null,inited=false;
+
+const ICON_PLAY='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+const story=id=>STORIES.find(s=>s.id===id);
+const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+function toast(m){const t=$('#kgToast');if(!t)return;t.textContent=m;t.classList.add('kg-show');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('kg-show'),1800);}
+
+/* ---------- speech (izole — ana uygulamanın speak()'ine dokunmaz) ---------- */
+function kgCanSpeak(){if(!('speechSynthesis' in window)){toast('Bu tarayıcı sesli okumayı desteklemiyor');return false;}return true;}
+function kgUtter(text,rate){const u=new SpeechSynthesisUtterance(text);u.lang='de-DE';u.rate=rate||.85;
+  try{const v=speechSynthesis.getVoices().find(v=>v.lang&&v.lang.toLowerCase().startsWith('de'));if(v)u.voice=v;}catch(e){}return u;}
+function kgSpeak(text){if(!kgCanSpeak())return;kgStopReading();speechSynthesis.speak(kgUtter(text));}
+function kgStopReading(){try{speechSynthesis.cancel();}catch(e){}reading=false;document.querySelectorAll('.kg-sent.kg-now').forEach(e=>e.classList.remove('kg-now'));const b=$('#kgReadall');if(b){b.textContent='Hepsini dinle';b.setAttribute('aria-pressed','false');}}
+function kgReadAll(){
+  if(reading){kgStopReading();return;}
+  if(!kgCanSpeak())return;
+  const st=story(cur.arg);speechSynthesis.cancel();reading=true;
+  const b=$('#kgReadall');b.textContent='Durdur';b.setAttribute('aria-pressed','true');
+  st.s.forEach((x,i)=>{const u=kgUtter(x[0].replace(/[„“”]/g,''));
+    u.onstart=()=>{document.querySelectorAll('.kg-sent').forEach((e,j)=>e.classList.toggle('kg-now',j===i));const el=document.querySelectorAll('.kg-sent')[i];if(el)el.scrollIntoView({block:'center',behavior:'smooth'});};
+    u.onend=()=>{if(i===st.s.length-1)kgStopReading();};
+    speechSynthesis.speak(u);});
+}
+
+/* ---------- views ---------- */
+function go(view,arg){kgStopReading();closeSheet();cur={view,arg};render();if(app)app.scrollIntoView({block:'start',behavior:'instant'});}
+function render(){
+  if(!app) app=$('#kgApp');
+  if(!app) return;
+  const tab=cur.view==='words'?'words':'home';
+  document.querySelectorAll('#kgSwitch button').forEach(b=>{if(b.dataset.tab===tab)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
+  ({home:viewHome,read:viewRead,quiz:viewQuiz,result:viewResult,words:viewWords})[cur.view]();
+}
+function viewHome(){
+  const n=Object.keys(S.done).length;
+  const hasPerf=STORIES.some(s=>PERFEKT_STORIES.has(s.id));
+  app.innerHTML=`<h1 class="kg-brand">Kleine Geschichten</h1>
+  <p class="kg-sub">A1/A2 Almanca hikâyeler · ${n} / ${STORIES.length} tamamlandı</p>
+  <p class="kg-note"><span class="kg-prat">🕰 Präteritum</span> işaretli hikâyeler baştan sona geçmiş zamanla (war, hatte, ging, kam gibi) anlatılmıştır. <span class="kg-mix">🔀 Karışık</span> işaretli hikâyeler şimdiki zaman ile Präteritum'u bir arada kullanır.${hasPerf?' <span class="kg-perf">⚡ Perfekt</span> işaretli hikâyeler ise "hat gemacht / ist gegangen" kalıbını kullanır — bunu henüz işlemediyseniz sona saklayın.':''} Rozetsiz hikâyeler tamamen şimdiki zamanla yazılmıştır.</p>
+  <div class="kg-shelf">${STORIES.map(s=>{const d=S.done[s.id];const perf=PERFEKT_STORIES.has(s.id);const prat=PRATERITUM_STORIES.has(s.id);const mix=MIXED_STORIES.has(s.id);return `
+   <button class="kg-book" data-open="${s.id}"><div class="kg-cover" style="background:${s.color}" aria-hidden="true">${s.icon}</div>
+   <div class="kg-bk-body"><h2 class="kg-bk-title">${s.title}</h2><p class="kg-bk-tr">${s.tr}</p>
+   <span class="kg-bk-meta"><span class="kg-lvl">${s.lvl}</span>${s.s.length} cümle · ${s.q.length} soru${perf?'<span class="kg-perf">⚡ Perfekt</span>':''}${prat?'<span class="kg-prat">🕰 Präteritum</span>':''}${mix?'<span class="kg-mix">🔀 Karışık</span>':''}${d!==undefined?`<span class="kg-badge">En iyi ${d}/${s.q.length}</span>`:''}</span></div></button>`}).join('')}</div>`;
+}
+function wrapWords(t){return esc(t).replace(/([A-Za-zÄÖÜäöüßéÉ]+)/g,'<button class="kg-w" data-w="$1">$1</button>');}
+function viewRead(){
+  const st=story(cur.arg);
+  app.innerHTML=`<div class="kg-topbar"><button class="kg-back" data-go="home">‹ Hikâyeler</button></div>
+  <h1 class="kg-rtitle">${st.title}</h1><p class="kg-sub" style="margin:0"><span class="kg-lvl">${st.lvl}</span>Kelimeye dokun, anlamını gör.</p>
+  <div class="kg-tools"><button class="kg-chip" id="kgReadall" aria-pressed="false">Hepsini dinle</button>
+  <button class="kg-chip" id="kgTrtog" aria-pressed="${showTr}">Türkçe çeviri</button></div>
+  <div id="kgSents">${st.s.map((x,i)=>`<div class="kg-sent"><button class="kg-play" data-play="${i}" aria-label="Cümleyi dinle">${ICON_PLAY}</button>
+   <div><p class="kg-de">${wrapWords(x[0])}</p><p class="kg-tr-line" ${showTr?'':'hidden'}>${esc(x[1])}</p></div></div>`).join('')}</div>
+  <button class="kg-cta" data-quiz="${st.id}">Soruları çöz</button>`;
+}
+function kgShuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startQuiz(id){const st=story(id);qz={id,i:0,score:0,answered:false,qs:st.q.map(q=>({q:q.q,a:q.o[0],o:kgShuffle(q.o)}))};go('quiz',id);}
+function viewQuiz(){
+  if(!qz||qz.id!==cur.arg)return startQuiz(cur.arg);
+  const st=story(qz.id),q=qz.qs[qz.i];
+  app.innerHTML=`<div class="kg-topbar"><button class="kg-back" data-go-read="${st.id}">‹ ${st.title}</button></div>
+  <p class="kg-qprog">Soru ${qz.i+1} / ${qz.qs.length}</p><h1 class="kg-q">${q.q}</h1>
+  <div id="kgOpts">${q.o.map((o,k)=>`<button class="kg-opt" data-opt="${k}">${o}</button>`).join('')}</div>
+  <p class="kg-fb" id="kgFb" aria-live="polite"></p><div id="kgNextwrap"></div>`;
+}
+function answer(k){
+  if(qz.answered)return;qz.answered=true;
+  const q=qz.qs[qz.i],ok=q.o[k]===q.a;if(ok)qz.score++;
+  document.querySelectorAll('#kgOpts .kg-opt').forEach((b,j)=>{b.disabled=true;if(q.o[j]===q.a)b.classList.add('kg-ok');else if(j===k)b.classList.add('kg-no');});
+  $('#kgFb').textContent=ok?'Doğru!':'Doğru cevap: '+q.a;$('#kgFb').style.color=ok?'var(--kg-good)':'var(--kg-bad)';
+  const last=qz.i===qz.qs.length-1;
+  $('#kgNextwrap').innerHTML=`<button class="kg-cta" id="kgNext">${last?'Sonucu gör':'Sonraki soru'}</button>`;
+  $('#kgNext').focus();
+}
+function next(){
+  if(qz.i<qz.qs.length-1){qz.i++;qz.answered=false;viewQuiz();if(app)app.scrollIntoView({block:'start',behavior:'instant'});return;}
+  const prev=S.done[qz.id];if(prev===undefined||qz.score>prev){S.done[qz.id]=qz.score;persist();}
+  go('result',qz.id);
+}
+function viewResult(){
+  const st=story(cur.arg),n=st.q.length,sc=qz?qz.score:0;
+  const msg=sc===n?'Harika, hepsi doğru!':sc>=n-1?'Çok iyi!':'Hikâyeyi bir daha okuyup tekrar dene.';
+  const idx=STORIES.findIndex(s=>s.id===st.id),nx=STORIES[idx+1];
+  app.innerHTML=`<h1 class="kg-brand">${st.title}</h1><p class="kg-score">${sc}/${n}</p><p style="font-size:17px;margin:0">${msg}</p>
+  <button class="kg-cta" data-quiz="${st.id}">Soruları tekrar çöz</button>
+  <button class="kg-cta kg-alt" data-go-read="${st.id}">Hikâyeyi tekrar oku</button>
+  ${nx?`<button class="kg-cta kg-alt" data-open="${nx.id}">Sıradaki: ${nx.title}</button>`:''}
+  <button class="kg-cta kg-alt" data-go="home">Hikâye listesi</button>`;
+}
+function viewWords(){
+  app.innerHTML=`<h1 class="kg-brand">Kelimelerim</h1><p class="kg-sub">${S.saved.length} kelime kayıtlı</p>`+
+  (S.saved.length?S.saved.map((x,i)=>`<div class="kg-wrow"><div class="kg-t"><b>${esc(x.w)}</b><span>${esc(x.m)}</span></div>
+   <button class="kg-play" data-sp="${i}" aria-label="Dinle">${ICON_PLAY}</button><button class="kg-chip" data-rm="${i}">Sil</button></div>`).join('')
+   :'<p class="kg-empty">Henüz kelime yok. Bir hikâyede kelimeye dokun, sonra "Kaydet"e bas.</p>');
+}
+
+/* ---------- sheet ---------- */
+function openSheet(btn){
+  document.querySelectorAll('.kg-w.kg-sel').forEach(e=>e.classList.remove('kg-sel'));btn.classList.add('kg-sel');
+  const w=btn.dataset.w,m=DICT[w.toLowerCase()]||'Bu kelime sözlükte yok.';
+  selWord={w,m};$('#kgSw').textContent=w;$('#kgSm').textContent=m;updateSave();
+  const sh=$('#kgSheet');sh.classList.add('kg-open');sh.setAttribute('aria-hidden','false');kgSpeak(w);
+}
+function closeSheet(){const sh=$('#kgSheet');if(!sh)return;sh.classList.remove('kg-open');sh.setAttribute('aria-hidden','true');document.querySelectorAll('.kg-w.kg-sel').forEach(e=>e.classList.remove('kg-sel'));}
+function isSaved(){return selWord&&S.saved.some(x=>x.w.toLowerCase()===selWord.w.toLowerCase());}
+function updateSave(){const b=$('#kgSsave');const s=isSaved();b.textContent=s?'Kaydedildi':'Kaydet';b.setAttribute('aria-pressed',s);}
+function toggleSave(){
+  if(!selWord||!DICT[selWord.w.toLowerCase()])return;
+  if(isSaved())S.saved=S.saved.filter(x=>x.w.toLowerCase()!==selWord.w.toLowerCase());else S.saved.unshift(selWord);
+  persist();updateSave();
+}
+
+/* ---------- events (KG konteynerine bağlı — ana uygulamayla çakışmaz) ---------- */
+function bindEvents(){
+  const root=document.getElementById("hikayelerSection");
+  if(!root||root.dataset.kgBound)return;
+  root.dataset.kgBound="1";
+  root.addEventListener('click',e=>{
+    const t=e.target.closest('button');if(!t)return;
+    if(t.classList.contains('kg-w'))return openSheet(t);
+    if(t.id==='kgReadall')return kgReadAll();
+    if(t.id==='kgTrtog'){showTr=!showTr;t.setAttribute('aria-pressed',showTr);document.querySelectorAll('.kg-tr-line').forEach(p=>p.hidden=!showTr);return;}
+    if(t.id==='kgNext')return next();
+    if(t.dataset.tab)return go(t.dataset.tab);
+    if(t.dataset.open)return go('read',t.dataset.open);
+    if(t.dataset.go)return go(t.dataset.go);
+    if(t.dataset.goRead)return go('read',t.dataset.goRead);
+    if(t.dataset.quiz)return startQuiz(t.dataset.quiz);
+    if(t.dataset.opt!==undefined)return answer(+t.dataset.opt);
+    if(t.dataset.play!==undefined){const st=story(cur.arg);return kgSpeak(st.s[+t.dataset.play][0].replace(/[„“”]/g,''));}
+    if(t.dataset.sp!==undefined)return kgSpeak(S.saved[+t.dataset.sp].w);
+    if(t.dataset.rm!==undefined){S.saved.splice(+t.dataset.rm,1);persist();return viewWords();}
+  });
+  // Sheet kendi kapatma/kaydet butonları ayrı konteynerde (fixed position, sheet document body'ye yakın ama hikayelerSection dışında render edilmiyor; sheet DOM'u hikayelerSection içinde kalıyor)
+  const sheet=document.getElementById('kgSheet');
+  if(sheet){
+    sheet.addEventListener('click', e=>{
+      const t=e.target.closest('button'); if(!t) return;
+      if(t.id==='kgSclose') return closeSheet();
+      if(t.id==='kgSspeak') return selWord && kgSpeak(selWord.w);
+      if(t.id==='kgSsave') return toggleSave();
+    });
+  }
+  document.addEventListener('keydown',e=>{if(e.key==='Escape' && document.getElementById('hikayelerSection').style.display!=='none')closeSheet();});
+}
+
+function init(){
+  if(inited)return;
+  inited=true;
+  try{speechSynthesis.getVoices();}catch(e){}
+  bindEvents();
+  render();
+}
+
+return { init };
+})();
+
+</script>
 
 </body>
 </html>
