@@ -921,6 +921,7 @@
 .kg-wrap button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;background:none;}
 .kg-wrap button:focus-visible{outline:3px solid var(--kg-teal);outline-offset:2px;}
 .kg-main{max-width:640px;margin:0 auto;padding:18px 16px 28px;}
+.kg-home .kg-main, .kg-home .kg-switch{max-width:1000px;}
 
 .kg-switch{display:flex;gap:8px;padding:10px 16px 0;max-width:640px;margin:0 auto;}
 .kg-switch button{flex:1;padding:10px 8px;border-radius:8px 8px 0 0;font-weight:600;color:var(--kg-muted);border-bottom:3px solid transparent;}
@@ -931,11 +932,12 @@
 .kg-note{background:var(--kg-surface);border:1px solid var(--kg-line);border-radius:8px;padding:10px 14px;font-size:13.5px;color:var(--kg-muted);margin:0 0 16px;}
 .kg-note strong{color:var(--kg-ink);}
 
-.kg-shelf{display:flex;flex-direction:column;gap:12px;}
-.kg-book{display:flex;width:100%;text-align:left;background:var(--kg-surface);border:1px solid var(--kg-line);border-radius:8px;padding:0;overflow:hidden;}
-.kg-cover{flex:0 0 72px;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;}
-.kg-bk-body{padding:12px 14px;flex:1;min-width:0;}
-.kg-bk-title{font-family:var(--kg-serif);font-weight:700;font-size:19px;line-height:1.2;margin:0;}
+.kg-shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;}
+.kg-book{display:flex;flex-direction:column;white-space:normal;width:100%;text-align:left;background:var(--kg-surface);border:1px solid var(--kg-line);border-radius:10px;padding:0;overflow:hidden;transition:transform .12s, box-shadow .12s;}
+.kg-book:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.12);}
+.kg-cover{flex:0 0 auto;height:84px;width:100%;display:flex;align-items:center;justify-content:center;font-size:40px;color:#fff;}
+.kg-bk-body{padding:10px 12px 12px;flex:1;min-width:0;}
+.kg-bk-title{font-family:var(--kg-serif);font-weight:700;font-size:17px;line-height:1.2;margin:0;hyphens:auto;overflow-wrap:break-word;}
 .kg-bk-tr{color:var(--kg-muted);margin:2px 0 8px;font-size:14px;}
 .kg-bk-meta{font-size:13px;color:var(--kg-muted);display:flex;flex-wrap:wrap;align-items:center;gap:4px;}
 .kg-lvl{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px;border:1.5px solid var(--kg-teal);color:var(--kg-teal);margin-right:6px;}
@@ -989,6 +991,12 @@
 .kg-toast.kg-show{opacity:1;}
 @media (prefers-reduced-motion:reduce){.kg-sheet,.kg-toast,.kg-sent{transition:none;}}
 @media (max-width:480px){
+  .kg-shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+  .kg-bk-meta{font-size:12px;}
+  .kg-bk-tr{font-size:13px;margin-bottom:6px;}
+  .kg-lvl,.kg-badge,.kg-perf,.kg-prat,.kg-mix{font-size:11px;padding:2px 7px;}
+  .kg-cover{height:68px;font-size:34px;}
+  .kg-bk-title{font-size:14.5px;}
   .kg-brand{font-size:24px;} .kg-rtitle{font-size:21px;} .kg-de{font-size:17.5px;} .kg-q{font-size:20px;}
   .kg-score{font-size:46px;}
 }
@@ -8992,6 +9000,7 @@ function go(view,arg){kgStopReading();closeSheet();cur={view,arg};render();if(ap
 function render(){
   if(!app) app=$('#kgApp');
   if(!app) return;
+  const kgWrap=document.getElementById('hikayelerSection'); if(kgWrap) kgWrap.classList.toggle('kg-home', cur.view==='home');
   const tab=cur.view==='words'?'words':'home';
   document.querySelectorAll('#kgSwitch button').forEach(b=>{if(b.dataset.tab===tab)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
   ({home:viewHome,read:viewRead,quiz:viewQuiz,result:viewResult,words:viewWords})[cur.view]();
@@ -9004,7 +9013,7 @@ function viewHome(){
   <p class="kg-note"><span class="kg-prat">🕰 Präteritum</span> işaretli hikâyeler baştan sona geçmiş zamanla (war, hatte, ging, kam gibi) anlatılmıştır. <span class="kg-mix">🔀 Karışık</span> işaretli hikâyeler şimdiki zaman ile Präteritum'u bir arada kullanır.${hasPerf?' <span class="kg-perf">⚡ Perfekt</span> işaretli hikâyeler ise "hat gemacht / ist gegangen" kalıbını kullanır — bunu henüz işlemediyseniz sona saklayın.':''} Rozetsiz hikâyeler tamamen şimdiki zamanla yazılmıştır.</p>
   <div class="kg-shelf">${STORIES.map(s=>{const d=S.done[s.id];const perf=PERFEKT_STORIES.has(s.id);const prat=PRATERITUM_STORIES.has(s.id);const mix=MIXED_STORIES.has(s.id);return `
    <button class="kg-book" data-open="${s.id}"><div class="kg-cover" style="background:${s.color}" aria-hidden="true">${s.icon}</div>
-   <div class="kg-bk-body"><h2 class="kg-bk-title">${s.title}</h2><p class="kg-bk-tr">${s.tr}</p>
+   <div class="kg-bk-body"><h2 class="kg-bk-title" lang="de">${s.title}</h2><p class="kg-bk-tr">${s.tr}</p>
    <span class="kg-bk-meta"><span class="kg-lvl">${s.lvl}</span>${s.s.length} cümle · ${s.q.length} soru${perf?'<span class="kg-perf">⚡ Perfekt</span>':''}${prat?'<span class="kg-prat">🕰 Präteritum</span>':''}${mix?'<span class="kg-mix">🔀 Karışık</span>':''}${d!==undefined?`<span class="kg-badge">En iyi ${d}/${s.q.length}</span>`:''}</span></div></button>`}).join('')}</div>`;
 }
 function wrapWords(t){return esc(t).replace(/([A-Za-zÄÖÜäöüßéÉ]+)/g,'<button class="kg-w" data-w="$1">$1</button>');}
