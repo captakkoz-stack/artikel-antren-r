@@ -170,6 +170,16 @@
   @media (max-width:400px){
     .mtbl th, .mtbl td{font-size:10px !important;}
   }
+  main.no-right{grid-template-columns:200px 1fr;}
+  @media (max-width:900px){ main.no-right{grid-template-columns:1fr;} }
+  .test-details{border:1px solid var(--line); border-radius:10px; margin:8px 0; background:#fff; overflow:hidden;}
+  .test-details > summary{cursor:pointer; padding:11px 14px; font-weight:700; font-size:13.5px; color:var(--deep); list-style:none; display:flex; justify-content:space-between; align-items:center; gap:8px; font-family: system-ui, Helvetica, Arial, sans-serif;}
+  .test-details > summary::-webkit-details-marker{display:none;}
+  .test-details > summary::after{content:"▾"; color:var(--brass); transition:transform .15s;}
+  .test-details[open] > summary{border-bottom:1px solid var(--line); background:#FBF7EE;}
+  .test-details[open] > summary::after{transform:rotate(180deg);}
+  .test-details .gcount{font-weight:400; color:#8a8a8a; font-size:12px; margin-left:4px;}
+  .test-details .inner{padding:10px;}
   .test-subtabs{
     display:flex;
     flex-wrap:wrap;
@@ -2623,7 +2633,7 @@
 
   </div>
 
-  <div>
+  <div id="rightPanel">
     <section class="panel" style="margin-top:0;">
       <h2>Antrenman Modu</h2>
 
@@ -2685,52 +2695,49 @@
       </div>
 
       <div id="testGroupGramer" class="test-group" style="display:none;">
-        <div class="btn-grid grid-2">
-          <button class="btn-ghost btn-test" onclick="askQuestion('uhrzeit-quiz')">🕐 Saat Okuma Testi</button>
-          <button class="btn-ghost btn-test" onclick="askQuestion('frage-quiz')">W-Frage Bulma Testi</button>
-        </div>
-        <div class="btn-grid" style="margin-top:8px;">
-          <button class="btn-ghost btn-test" onclick="askQuestion('ordinal-quiz')">🥇 Sıra Sayıları Testi</button>
-        </div>
-        <div class="btn-grid" style="margin-top:12px; font-size:12px; color:#8a8a8a;">Yeni konular — pratik</div>
-        <div class="btn-grid grid-2" style="margin-top:8px;">
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-akkprep')">📍 Akkusativ Edatı<br><span style="font-size:11px; font-weight:400;">für · durch · ohne · gegen · um</span></button>
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-wechsel')">🔀 Wechsel Edat<br><span style="font-size:11px; font-weight:400;">wo? / wohin?</span></button>
-        </div>
-        <div class="btn-grid grid-2" style="margin-top:8px;">
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-praet')">🕰️ war / hatte<br><span style="font-size:11px; font-weight:400;">Präteritum</span></button>
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-doch')">💬 ja / nein / doch<br><span style="font-size:11px; font-weight:400;">olumsuz soruya cevap</span></button>
-        </div>
-        <div class="btn-grid grid-2" style="margin-top:8px;">
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-man')">👥 man<br><span style="font-size:11px; font-weight:400;">3. tekil şahıs fiil</span></button>
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-genitiv')">🔑 Genitiv-s<br><span style="font-size:11px; font-weight:400;">Peters · Max'</span></button>
-        </div>
-        <div class="btn-grid grid-2" style="margin-top:8px;">
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-geht')">📅 Geht es …?<br><span style="font-size:11px; font-weight:400;">am · um · im</span></button>
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-verbpos')">🧱 Fiilin yeri<br><span style="font-size:11px; font-weight:400;">zuerst · dann · danach</span></button>
-        </div>
-        <div class="btn-grid grid-2" style="margin-top:8px;">
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-konj')">🔗 Bağlaç seç<br><span style="font-size:11px; font-weight:400;">und · weil · denn · dass</span></button>
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-quant')">⚖️ Miktar & Fiyat<br><span style="font-size:11px; font-weight:400;">Kilo · Flasche · Euro</span></button>
-        </div>
-        <div class="btn-grid grid-2" style="margin-top:8px;">
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-gefallen')">👍 gefallen / finden<br><span style="font-size:11px; font-weight:400;">Dativ ↔ Akkusativ</span></button>
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-seinihr')">👤 sein / ihr<br><span style="font-size:11px; font-weight:400;">iyelik</span></button>
-        </div>
-        <div class="btn-grid grid-2" style="margin-top:8px;">
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-modal')">🧰 Modalverben<br><span style="font-size:11px; font-weight:400;">kann · muss · will · darf · soll</span></button>
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-imperativ')">📣 Imperativ<br><span style="font-size:11px; font-weight:400;">Komm! · Kommt! · Kommen Sie!</span></button>
-        </div>
-        <div class="btn-grid grid-2" style="margin-top:8px;">
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-nicht')">🚫 nicht / kein<br><span style="font-size:11px; font-weight:400;">olumsuzluk</span></button>
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-trennbar')">🪢 Bölünen fiiller<br><span style="font-size:11px; font-weight:400;">ich rufe … an</span></button>
-        </div>
-        <div class="btn-grid" style="margin-top:8px;">
-          <button class="btn-ghost btn-test" onclick="askQuestion('gq-kasus')">🎯 Fiil hangi hâli istiyor?<br><span style="font-size:11px; font-weight:400;">helfen → Dativ · sehen → Akkusativ</span></button>
-        </div>
-        <div class="btn-grid" style="margin-top:8px;">
+        <div class="btn-grid" style="margin-bottom:6px;">
           <button class="btn-ghost btn-test" onclick="askQuestion('gq-mix')">🎯 Yeni Konular Karışık Tur</button>
         </div>
+        <details class="test-details" data-gkey="zaman">
+          <summary><span>⏰ Zaman & Sayılar<span class="gcount">(4)</span></span></summary>
+          <div class="inner"><div class="btn-grid grid-2">
+            <button class="btn-ghost btn-test" onclick="askQuestion('uhrzeit-quiz')">🕐 Saat Okuma</button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('ordinal-quiz')">🥇 Sıra Sayıları</button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-geht')">📅 Geht es …?<br><span style="font-size:11px; font-weight:400;">am · um · im</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-quant')">⚖️ Miktar & Fiyat<br><span style="font-size:11px; font-weight:400;">Kilo · Flasche · Euro</span></button>
+          </div></div>
+        </details>
+        <details class="test-details" data-gkey="hal">
+          <summary><span>📍 Edatlar & Hâller<span class="gcount">(5)</span></span></summary>
+          <div class="inner"><div class="btn-grid grid-2">
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-akkprep')">📍 Akkusativ Edatı<br><span style="font-size:11px; font-weight:400;">für · durch · ohne · gegen · um</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-wechsel')">🔀 Wechsel Edat<br><span style="font-size:11px; font-weight:400;">wo? / wohin?</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-kasus')">🎯 Fiil hangi hâli istiyor?<br><span style="font-size:11px; font-weight:400;">helfen → Dativ · sehen → Akkusativ</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-genitiv')">🔑 Genitiv-s<br><span style="font-size:11px; font-weight:400;">Peters · Max'</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-seinihr')">👤 sein / ihr<br><span style="font-size:11px; font-weight:400;">iyelik</span></button>
+          </div></div>
+        </details>
+        <details class="test-details" data-gkey="fiil">
+          <summary><span>🧱 Fiil & Cümle Kuruluşu<span class="gcount">(8)</span></span></summary>
+          <div class="inner"><div class="btn-grid grid-2">
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-verbpos')">🧱 Fiilin yeri<br><span style="font-size:11px; font-weight:400;">zuerst · dann · danach</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-trennbar')">🪢 Bölünen fiiller<br><span style="font-size:11px; font-weight:400;">ich rufe … an</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-modal')">🧰 Modalverben<br><span style="font-size:11px; font-weight:400;">kann · muss · will · darf · soll</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-imperativ')">📣 Imperativ<br><span style="font-size:11px; font-weight:400;">Komm! · Kommt! · Kommen Sie!</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-praet')">🕰️ war / hatte<br><span style="font-size:11px; font-weight:400;">Präteritum</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-man')">👥 man<br><span style="font-size:11px; font-weight:400;">3. tekil şahıs fiil</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-nicht')">🚫 nicht / kein<br><span style="font-size:11px; font-weight:400;">olumsuzluk</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-gefallen')">👍 gefallen / finden<br><span style="font-size:11px; font-weight:400;">Dativ ↔ Akkusativ</span></button>
+          </div></div>
+        </details>
+        <details class="test-details" data-gkey="baglac">
+          <summary><span>🔗 Bağlaç & Soru<span class="gcount">(3)</span></span></summary>
+          <div class="inner"><div class="btn-grid grid-2">
+            <button class="btn-ghost btn-test" onclick="askQuestion('frage-quiz')">❓ W-Frage Bulma</button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-konj')">🔗 Bağlaç seç<br><span style="font-size:11px; font-weight:400;">und · weil · denn · dass</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-doch')">💬 ja / nein / doch<br><span style="font-size:11px; font-weight:400;">olumsuz soruya cevap</span></button>
+          </div></div>
+        </details>
       </div>
 
       <div id="testGroupDativ" class="test-group" style="display:none;">
@@ -4481,6 +4488,10 @@ function switchTab(tab){
   if(tab === "referans" && !document.querySelector("#referansSection .ref-group[style*='block']")){
     switchReferansGroup("nomen");
   }
+  const rightPanel = document.getElementById("rightPanel");
+  if(rightPanel) rightPanel.style.display = (tab === "hikayeler") ? "none" : "";
+  const mainEl = document.querySelector("main");
+  if(mainEl) mainEl.classList.toggle("no-right", tab === "hikayeler");
   if(tab === "hikayeler" && window.KG){
     window.KG.init();
   }
@@ -8217,6 +8228,19 @@ try{
   const stg = localStorage.getItem("artikel_last_testgroup");
   if(["artikel","kelime","gramer","dativ","pratik"].includes(stg)) savedTestGroup = stg;
 }catch(e){}
+(function(){
+  const KEY = "artikel_gramer_open";
+  let stored = null;
+  try{ stored = JSON.parse(localStorage.getItem(KEY)); }catch(e){}
+  const ds = [...document.querySelectorAll("#testGroupGramer details.test-details")];
+  ds.forEach((d, i) => {
+    d.open = Array.isArray(stored) ? stored.includes(d.dataset.gkey) : (i === 0);
+    d.addEventListener("toggle", () => {
+      const open = ds.filter(x => x.open).map(x => x.dataset.gkey);
+      try{ localStorage.setItem(KEY, JSON.stringify(open)); }catch(e){}
+    });
+  });
+})();
 switchTestGroup(savedTestGroup);
 </script>
 
