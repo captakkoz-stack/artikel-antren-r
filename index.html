@@ -180,6 +180,17 @@
   .test-details[open] > summary::after{transform:rotate(180deg);}
   .test-details .gcount{font-weight:400; color:#8a8a8a; font-size:12px; margin-left:4px;}
   .test-details .inner{padding:10px;}
+  .report-fab{position:fixed;left:14px;bottom:14px;width:42px;height:42px;border-radius:50%;border:1px solid var(--brass);background:#fff;font-size:20px;line-height:1;box-shadow:0 2px 8px rgba(0,0,0,.22);cursor:pointer;z-index:40;opacity:.92;display:flex;align-items:center;justify-content:center;padding:0;}
+  .report-fab:hover{opacity:1;transform:scale(1.06);}
+  #reportOverlay .add-card{max-height:92vh;overflow-y:auto;}
+  #reportOverlay select, #reportOverlay textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:6px;padding:9px 10px;font-family:system-ui,Helvetica,Arial,sans-serif;font-size:14px;background:#fff;margin-bottom:10px;}
+  #reportOverlay textarea{resize:vertical;min-height:84px;}
+  .rp-context{background:#F5EFE0;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:12.5px;color:#555;margin-bottom:10px;font-family:system-ui,Helvetica,Arial,sans-serif;word-break:break-word;line-height:1.4;}
+  .rp-note{font-size:11.5px;color:#8a8a8a;margin:-4px 0 10px;font-family:system-ui,Helvetica,Arial,sans-serif;}
+  .rp-actions{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 8px;}
+  .rp-actions button{flex:1 1 40%;white-space:normal;}
+  .rp-status{min-height:18px;font-size:12.5px;margin-bottom:6px;font-family:system-ui,Helvetica,Arial,sans-serif;}
+  .rp-status.ok{color:var(--sea);} .rp-status.err{color:var(--coral);}
   .test-subtabs{
     display:flex;
     flex-wrap:wrap;
@@ -367,10 +378,15 @@
   }
   .qtool-row{
     display:flex;
+    flex-wrap:wrap;
     align-items:center;
     justify-content:center;
     gap:8px;
     margin-bottom:10px;
+  }
+  @media (max-width:480px){
+    .qtool-row{gap:6px;}
+    .qtool-row .hint-btn{padding:5px 9px; font-size:12px;}
   }
   .qspeak-btn{
     background:none;
@@ -2827,6 +2843,39 @@
   </div>
 </div>
 
+<!-- Hata Bildir penceresi -->
+<div class="overlay" id="reportOverlay" style="z-index:1100;">
+  <div class="add-card">
+    <h3>🐞 Hata Bildir</h3>
+    <label>Neredesin? (otomatik alınır)</label>
+    <div id="rpContext" class="rp-context"></div>
+    <label>Hata türü</label>
+    <select id="rpCategory">
+      <option>Yanlış artikel (der / die / das)</option>
+      <option>Yanlış Türkçe karşılık</option>
+      <option>Yazım hatası</option>
+      <option>Soru ya da cevap hatalı</option>
+      <option>Örnek cümle hatalı</option>
+      <option>Uygulama çalışmıyor / görüntü bozuk</option>
+      <option>Eksik kelime / öneri</option>
+      <option>Diğer</option>
+    </select>
+    <label>Ne yanlış? Doğrusu ne olmalı?</label>
+    <textarea id="rpNote" maxlength="500" placeholder="Örn: 'der Tisch' yazıyor ama Türkçesi 'sandalye' çıkmış, doğrusu 'masa'."></textarea>
+    <div class="rp-note">Not ve konum bilgisi sahibine iletilir. Kişisel bilgi yazma.</div>
+    <div class="rp-actions">
+      <button class="btn-main" id="rpDirect" onclick="sendReport('direct')">📨 Gönder</button>
+      <button class="btn-ghost" id="rpWa" onclick="sendReport('wa')" style="display:none;">💬 WhatsApp</button>
+      <button class="btn-ghost" id="rpMail" onclick="sendReport('mail')" style="display:none;">✉️ E-posta</button>
+      <button class="btn-ghost" id="rpShare" onclick="sendReport('share')" style="display:none;">↗ Paylaş…</button>
+      <button class="btn-ghost" id="rpCopy" onclick="sendReport('copy')">📋 Kopyala</button>
+    </div>
+    <div id="rpStatus" class="rp-status"></div>
+    <div class="add-actions"><button class="btn-ghost" onclick="closeReport()">Kapat</button></div>
+  </div>
+</div>
+<button class="report-fab" id="reportFab" onclick="openReport()" title="Hata bildir" aria-label="Hata bildir">🐞</button>
+
 <!-- Fiil Ekle penceresi -->
 <div class="overlay" id="addVerbOverlay">
   <div class="add-card">
@@ -3028,6 +3077,7 @@
       <button class="hint-btn" id="qTrBtn" onclick="toggleTurkishMeaning()" style="display:none;">🇹🇷 Türkçesi</button>
       <button class="hint-btn" id="qExampleBtn" onclick="openExampleForCurrentQuestion()">📘 Örnek</button>
       <button class="hint-btn" id="qConjBtn" onclick="openConjForCurrentQuestion()" style="display:none;">🔤 Çekim</button>
+      <button class="qspeak-btn" id="qReportBtn" onclick="openReport()" title="Bu soruda hata var" aria-label="Hata bildir" style="font-size:14px;">🐞</button>
     </div>
     <div class="hint-text" id="hintText"></div>
     <div class="options" id="qOptions"></div>
@@ -8249,6 +8299,136 @@ try{
     });
   });
 })();
+
+/* ---------- HATA BİLDİR SİSTEMİ ---------- */
+// İstersen doldur: whatsapp: "905551112233" (ülke kodlu, + ve boşluk yok), email: "ad@ornek.com"
+const REPORT_CONFIG = { whatsapp: "", email: "" };
+let reportLastSend = 0;
+
+function collectReportContext(){
+  const tabNames = {artikel:"İsimler", verben:"Fiiller", adj:"Sıfatlar", konj:"Bağlaçlar", praep:"Edatlar", saat:"Saatler & Takvim", frage:"Soru Kelimeleri", referans:"Hızlı Referans", hikayeler:"Hikâyeler"};
+  const txt = id => { const e = document.getElementById(id); return e ? (e.innerText || e.textContent || "").replace(/\s+/g," ").trim() : ""; };
+  const sel = id => { const e = document.getElementById(id); return (e && e.selectedIndex >= 0) ? e.options[e.selectedIndex].text : ""; };
+  const ctx = {place:"", lines:[]};
+  try{
+    const quizOpen = document.getElementById("quizOverlay").classList.contains("show") && typeof currentQ !== "undefined" && currentQ;
+    if(quizOpen){
+      const q = currentQ;
+      const opts = [...document.querySelectorAll("#qOptions .opt-btn")].map(b => b.textContent.trim()).filter(Boolean);
+      const wrong = document.querySelector("#qOptions .opt-btn.wrong");
+      const target = q.target || (q.word && (q.word.artikel || q.word.tr)) || "";
+      ctx.place = "Test: " + (currentTestMode || "?") + " · soru " + (sessionIndex + 1) + "/" + sessionQuestions.length;
+      ctx.lines.push("Soru türü: " + txt("qType"));
+      ctx.lines.push("Soru: " + txt("qWord"));
+      if(opts.length) ctx.lines.push("Seçenekler: " + opts.join(" | "));
+      if(target) ctx.lines.push("Uygulamadaki doğru cevap: " + target);
+      if(wrong) ctx.lines.push("Verilen cevap: " + wrong.textContent.trim());
+      if(txt("qFeedback")) ctx.lines.push("Geri bildirim: " + txt("qFeedback"));
+      return ctx;
+    }
+    ctx.place = "Sekme: " + (tabNames[activeTab] || activeTab);
+    if(activeTab === "artikel"){
+      const s = (document.getElementById("searchInput")||{}).value; if(s) ctx.lines.push("Arama: " + s);
+      if(sel("topicFilterSelect") && !sel("topicFilterSelect").startsWith("🔎")) ctx.lines.push("Konu filtresi: " + sel("topicFilterSelect"));
+    } else if(activeTab === "verben"){
+      const s = (document.getElementById("verbSearchInput")||{}).value; if(s) ctx.lines.push("Arama: " + s);
+      if(sel("verbTopicSelect") && !sel("verbTopicSelect").startsWith("🔎")) ctx.lines.push("Konu filtresi: " + sel("verbTopicSelect"));
+    } else if(activeTab === "adj"){
+      const s = (document.getElementById("adjSearchInput")||{}).value; if(s) ctx.lines.push("Arama: " + s);
+      if(sel("adjTopicSelect") && !sel("adjTopicSelect").startsWith("🔎")) ctx.lines.push("Konu filtresi: " + sel("adjTopicSelect"));
+    } else if(activeTab === "referans"){
+      const a = document.querySelector(".ref-subtab.active"); if(a) ctx.lines.push("Alt sekme: " + a.textContent.trim());
+    } else if(activeTab === "hikayeler" && window.KG && window.KG.getContext){
+      const k = window.KG.getContext();
+      ctx.place = "Hikâyeler" + (k.storyTitle ? " · " + k.storyTitle : "") + (k.view ? " (" + k.view + ")" : "");
+      if(k.qIndex) ctx.lines.push("Hikâye sorusu: " + k.qIndex);
+      if(k.word) ctx.lines.push("Seçili kelime: " + k.word + " → " + (k.meaning || ""));
+    }
+  }catch(e){ ctx.lines.push("(bağlam okunamadı)"); }
+  return ctx;
+}
+
+function reportMeta(){
+  const v = (document.querySelector(".last-updated")||{}).textContent || "";
+  return "Sürüm: " + v.trim() + "\nCihaz: " + window.innerWidth + "x" + window.innerHeight + " · " + (navigator.userAgent||"").slice(0, 90);
+}
+
+function openReport(){
+  const ctx = collectReportContext();
+  window.__reportCtx = ctx;
+  document.getElementById("rpContext").innerHTML = escapeHtml(ctx.place) + (ctx.lines.length ? "<br>" + ctx.lines.map(escapeHtml).join("<br>") : "");
+  document.getElementById("rpNote").value = "";
+  const st = document.getElementById("rpStatus"); st.textContent = ""; st.className = "rp-status";
+  document.getElementById("rpWa").style.display = REPORT_CONFIG.whatsapp ? "" : "none";
+  document.getElementById("rpMail").style.display = REPORT_CONFIG.email ? "" : "none";
+  document.getElementById("rpShare").style.display = (navigator.share) ? "" : "none";
+  document.getElementById("reportOverlay").classList.add("show");
+  setTimeout(() => document.getElementById("rpNote").focus(), 60);
+}
+function closeReport(){ document.getElementById("reportOverlay").classList.remove("show"); }
+
+function buildReportText(){
+  const ctx = window.__reportCtx || {place:"", lines:[]};
+  const cat = document.getElementById("rpCategory").value;
+  const note = document.getElementById("rpNote").value.trim();
+  return "🐞 HATA BİLDİRİMİ — Almanca Antrenörü\nTür: " + cat + "\nNot: " + note + "\nKonum: " + ctx.place +
+    (ctx.lines.length ? "\n" + ctx.lines.join("\n") : "") + "\n" + reportMeta();
+}
+function reportStatus(msg, ok){
+  const st = document.getElementById("rpStatus"); st.textContent = msg; st.className = "rp-status " + (ok ? "ok" : "err");
+}
+function slugify(s, n){ return String(s||"").replace(/[\s/\\|?#]+/g, "-").slice(0, n); }
+
+function sendReport(kind){
+  const note = document.getElementById("rpNote").value.trim();
+  if(note.length < 3){ reportStatus("Lütfen kısaca ne yanlış olduğunu yaz.", false); document.getElementById("rpNote").focus(); return; }
+  const text = buildReportText();
+  const ctx = window.__reportCtx || {place:""};
+  const cat = document.getElementById("rpCategory").value;
+
+  if(kind === "direct"){
+    if(Date.now() - reportLastSend < 4000){ reportStatus("Biraz bekle, az önce gönderdin.", false); return; }
+    if(!(window.goatcounter && typeof window.goatcounter.count === "function")){
+      reportStatus("Doğrudan gönderim şu an kullanılamıyor (reklam engelleyici ya da bağlantı olabilir). Aşağıdan başka bir yol seç.", false);
+      return;
+    }
+    const id = Date.now().toString(36);
+    const path = ("/bildirim/" + slugify(cat, 24) + "/" + slugify(ctx.place, 60) + "/" + slugify(note, 160) + "/" + id).slice(0, 320);
+    try{
+      window.goatcounter.count({path: path, title: (cat + " — " + note + " — " + ctx.place).slice(0, 300), event: true});
+      reportLastSend = Date.now();
+      reportStatus("✅ Gönderildi, teşekkürler!", true);
+    }catch(e){ reportStatus("Gönderilemedi, başka bir yol dene.", false); }
+    return;
+  }
+  if(kind === "wa"){
+    window.open("https://wa.me/" + REPORT_CONFIG.whatsapp + "?text=" + encodeURIComponent(text.slice(0, 1500)), "_blank");
+    reportStatus("WhatsApp açıldı, mesajı gönder.", true); return;
+  }
+  if(kind === "mail"){
+    window.location.href = "mailto:" + REPORT_CONFIG.email + "?subject=" + encodeURIComponent("Hata bildirimi — Almanca Antrenörü") + "&body=" + encodeURIComponent(text.slice(0, 1500));
+    reportStatus("E-posta uygulaması açıldı, göndermeyi unutma.", true); return;
+  }
+  if(kind === "share"){
+    navigator.share({title: "Hata bildirimi", text: text}).then(() => reportStatus("Paylaşıldı.", true)).catch(() => {});
+    return;
+  }
+  if(kind === "copy"){
+    const done = () => reportStatus("📋 Kopyalandı. İstediğin yere yapıştırabilirsin.", true);
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+    } else fallbackCopy(text, done);
+  }
+}
+function fallbackCopy(text, done){
+  const ta = document.createElement("textarea"); ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); done(); }catch(e){ reportStatus("Kopyalanamadı.", false); }
+  document.body.removeChild(ta);
+}
+document.addEventListener("keydown", (e) => {
+  if(e.key === "Escape" && document.getElementById("reportOverlay").classList.contains("show")) closeReport();
+});
 switchTestGroup(savedTestGroup);
 </script>
 
@@ -9126,7 +9306,12 @@ function init(){
   render();
 }
 
-return { init };
+return { init, getContext(){
+  const st = cur.arg ? story(cur.arg) : null;
+  return { view:cur.view, storyId: st ? st.id : null, storyTitle: st ? st.title : null,
+           word: selWord ? selWord.w : null, meaning: selWord ? selWord.m : null,
+           qIndex: (qz && cur.view === 'quiz') ? qz.i + 1 : null };
+} };
 })();
 
 </script>
