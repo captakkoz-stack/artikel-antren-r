@@ -2794,6 +2794,9 @@
       <div class="group-label">Tekrar</div>
       <button class="btn-review" onclick="askQuestion('review-mistakes')" style="width:100%;">🔁 Yanlışlarımı Tekrar Et</button>
 
+      <div class="group-label">Geri bildirim</div>
+      <button class="btn-ghost" onclick="openReport('oneri')" style="width:100%;">💡 Tavsiye / Öneri Gönder</button>
+
       <div style="margin-top:16px; text-align:right;">
         <button class="btn-ghost" onclick="resetStats()" style="font-size:12px; padding:6px 12px;">İstatistiği Sıfırla</button>
       </div>
@@ -2846,10 +2849,10 @@
 <!-- Hata Bildir penceresi -->
 <div class="overlay" id="reportOverlay" style="z-index:1100;">
   <div class="add-card">
-    <h3>🐞 Hata Bildir</h3>
+    <h3 id="rpTitle">🐞 Hata Bildir</h3>
     <label>Neredesin? (otomatik alınır)</label>
     <div id="rpContext" class="rp-context"></div>
-    <label>Hata türü</label>
+    <label>Tür</label>
     <select id="rpCategory">
       <option>Yanlış artikel (der / die / das)</option>
       <option>Yanlış Türkçe karşılık</option>
@@ -2858,9 +2861,10 @@
       <option>Örnek cümle hatalı</option>
       <option>Uygulama çalışmıyor / görüntü bozuk</option>
       <option>Eksik kelime / öneri</option>
+      <option>Tavsiye / öneri</option>
       <option>Diğer</option>
     </select>
-    <label>Ne yanlış? Doğrusu ne olmalı?</label>
+    <label id="rpNoteLabel">Ne yanlış? Doğrusu ne olmalı?</label>
     <textarea id="rpNote" maxlength="500" placeholder="Örn: 'der Tisch' yazıyor ama Türkçesi 'sandalye' çıkmış, doğrusu 'masa'."></textarea>
     <div class="rp-note">Not ve konum bilgisi sahibine iletilir. Kişisel bilgi yazma.</div>
     <div class="rp-actions">
@@ -8304,6 +8308,16 @@ try{
 // İstersen doldur: whatsapp: "905551112233" (ülke kodlu, + ve boşluk yok), email: "ad@ornek.com"
 const REPORT_CONFIG = { whatsapp: "", email: "" };
 let reportLastSend = 0;
+const TEST_NAMES = {
+  "artikel-only":"Artikel Testi","plural-only":"Çoğul Artikel Testi","nomakk-quiz":"Nominativ/Akkusativ Testi","plural-guess-quiz":"Çoğul Tahmin Testi",
+  "favorites-quiz":"Favori Kelimeler Testi","noun-quiz":"İsim Testi","verb-quiz":"Fiil Testi","adj-quiz":"Sıfat Testi","irregular-verb-quiz":"Düzensiz Fiil Çekim Testi",
+  "uhrzeit-quiz":"Saat Okuma Testi","frage-quiz":"W-Frage Testi","ordinal-quiz":"Sıra Sayıları Testi","sentence-fill":"Cümle Tamamlama","order-quiz":"Cümle Kurma",
+  "prep-quiz":"im/am/zu/sehr/nicht Testi","listening-quiz":"Basit Dinleme","review-mistakes":"Yanlışlarımı Tekrar Et",
+  "dativ-prep-quiz":"Dativ Edatı Seç","dativ-artikel-quiz":"Dativ Artikel","dativ-plural-quiz":"Dativ Çoğul","dativ-pronoun-quiz":"Dativ Zamir","dativ-mix-quiz":"Dativ Karışık",
+  "gq-akkprep":"Akkusativ Edatı","gq-wechsel":"Wechsel Edat","gq-praet":"war / hatte","gq-doch":"ja / nein / doch","gq-man":"man","gq-genitiv":"Genitiv-s",
+  "gq-geht":"Geht es …?","gq-verbpos":"Fiilin yeri","gq-konj":"Bağlaç seç","gq-quant":"Miktar & Fiyat","gq-gefallen":"gefallen / finden","gq-seinihr":"sein / ihr",
+  "gq-modal":"Modalverben","gq-imperativ":"Imperativ","gq-nicht":"nicht / kein","gq-trennbar":"Bölünen fiiller","gq-kasus":"Fiil hangi hâli istiyor?","gq-mix":"Yeni Konular Karışık"
+};
 
 function collectReportContext(){
   const tabNames = {artikel:"İsimler", verben:"Fiiller", adj:"Sıfatlar", konj:"Bağlaçlar", praep:"Edatlar", saat:"Saatler & Takvim", frage:"Soru Kelimeleri", referans:"Hızlı Referans", hikayeler:"Hikâyeler"};
@@ -8317,7 +8331,7 @@ function collectReportContext(){
       const opts = [...document.querySelectorAll("#qOptions .opt-btn")].map(b => b.textContent.trim()).filter(Boolean);
       const wrong = document.querySelector("#qOptions .opt-btn.wrong");
       const target = q.target || (q.word && (q.word.artikel || q.word.tr)) || "";
-      ctx.place = "Test: " + (currentTestMode || "?") + " · soru " + (sessionIndex + 1) + "/" + sessionQuestions.length;
+      ctx.place = "Test: " + (TEST_NAMES[currentTestMode] || currentTestMode || "?") + " · soru " + (sessionIndex + 1) + "/" + sessionQuestions.length;
       ctx.lines.push("Soru türü: " + txt("qType"));
       ctx.lines.push("Soru: " + txt("qWord"));
       if(opts.length) ctx.lines.push("Seçenekler: " + opts.join(" | "));
@@ -8353,7 +8367,15 @@ function reportMeta(){
   return "Sürüm: " + v.trim() + "\nCihaz: " + window.innerWidth + "x" + window.innerHeight + " · " + (navigator.userAgent||"").slice(0, 90);
 }
 
-function openReport(){
+const RP_DEFAULT_PLACEHOLDER = "Örn: 'der Tisch' yazıyor ama Türkçesi 'sandalye' çıkmış, doğrusu 'masa'.";
+function openReport(mode){
+  const sug = (mode === "oneri");
+  window.__reportSug = sug;
+  document.getElementById("rpTitle").textContent = sug ? "💡 Tavsiye / Öneri" : "🐞 Hata Bildir";
+  document.getElementById("rpNoteLabel").textContent = sug ? "Önerin ya da tavsiyen nedir?" : "Ne yanlış? Doğrusu ne olmalı?";
+  document.getElementById("rpNote").placeholder = sug ? "Örn: 'Fiiller için zaman bağlaçlarına özel bir test eklenirse çok iyi olur.'" : RP_DEFAULT_PLACEHOLDER;
+  const catSel = document.getElementById("rpCategory");
+  catSel.selectedIndex = sug ? [...catSel.options].findIndex(o => o.text.startsWith("Tavsiye")) : 0;
   const ctx = collectReportContext();
   window.__reportCtx = ctx;
   document.getElementById("rpContext").innerHTML = escapeHtml(ctx.place) + (ctx.lines.length ? "<br>" + ctx.lines.map(escapeHtml).join("<br>") : "");
@@ -8371,7 +8393,7 @@ function buildReportText(){
   const ctx = window.__reportCtx || {place:"", lines:[]};
   const cat = document.getElementById("rpCategory").value;
   const note = document.getElementById("rpNote").value.trim();
-  return "🐞 HATA BİLDİRİMİ — Almanca Antrenörü\nTür: " + cat + "\nNot: " + note + "\nKonum: " + ctx.place +
+  return (window.__reportSug ? "💡 TAVSİYE / ÖNERİ" : "🐞 HATA BİLDİRİMİ") + " — Almanca Antrenörü\nTür: " + cat + "\nNot: " + note + "\nKonum: " + ctx.place +
     (ctx.lines.length ? "\n" + ctx.lines.join("\n") : "") + "\n" + reportMeta();
 }
 function reportStatus(msg, ok){
@@ -8393,9 +8415,10 @@ function sendReport(kind){
       return;
     }
     const id = Date.now().toString(36);
-    const path = ("/bildirim/" + slugify(cat, 24) + "/" + slugify(ctx.place, 60) + "/" + slugify(note, 160) + "/" + id).slice(0, 320);
+    const path = ((window.__reportSug ? "/oneri/" : "/bildirim/") + slugify(cat, 24) + "/" + slugify(ctx.place, 60) + "/" + slugify(note, 160) + "/" + id).slice(0, 320);
     try{
-      window.goatcounter.count({path: path, title: (cat + " — " + note + " — " + ctx.place).slice(0, 300), event: true});
+      const detail = (ctx.lines || []).join(" | ");
+      window.goatcounter.count({path: path, title: [cat, note, ctx.place, detail].filter(Boolean).join(" — ").slice(0, 450), event: true});
       reportLastSend = Date.now();
       reportStatus("✅ Gönderildi, teşekkürler!", true);
     }catch(e){ reportStatus("Gönderilemedi, başka bir yol dene.", false); }
