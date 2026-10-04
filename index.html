@@ -157,7 +157,12 @@
     cursor:pointer;
     transition:background 0.15s, color 0.15s;
   }
+  .ref-subtab{max-width:100%; white-space:normal; text-align:center; line-height:1.25;}
   .ref-subtab:hover{background:#F5EFE0;}
+  @media (max-width:480px){
+    .rule-grid[style*="1fr 1fr 1fr"]{grid-template-columns:1fr !important;}
+    .btn-add{white-space:normal; max-width:100%;}
+  }
   .ref-subtab.active{background:var(--deep); color:#fff; border-color:var(--deep);}
   @media (max-width:600px){
     .mtbl th, .mtbl td{padding:5px 1px !important; font-size:11px !important; word-break:normal;}
@@ -1400,6 +1405,35 @@
         <strong>Günlük hayatta:</strong> Konuşurken "von + isim" çok daha yaygındır, "-s" eki daha çok yazı dilinde görülür.
       </div>
     </section>
+<section class="panel">
+      <h2>man — belirsiz özne zamiri</h2>
+      <div class="plural-note" style="margin-top:0;">
+        <strong>man</strong>, belirli bir kişiyi değil, <strong>genel olarak insanları</strong> kastettiğinde kullanılır — Türkçedeki <strong>"-ılır/-ilir" pasif yapısına</strong> ya da genel "insan" kullanımına karşılık gelir. Kim yaptığı önemli değildir, kural/genel bilgi anlatılır.
+      </div>
+      <div class="rule-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="rule-card der">
+          <div class="title">Genel kural / talimat</div>
+          <div class="ex"><strong>Man</strong> muss hier ruhig sein.<br><span style="color:#999;">(Burada sessiz olmak gerekir.)</span></div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">Yasak</div>
+          <div class="ex">Hier darf <strong>man</strong> nicht fotografieren.<br><span style="color:#999;">(Burada fotoğraf çekilmez.)</span></div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">Genel bilgi sorma</div>
+          <div class="ex">Wie schreibt <strong>man</strong> das Wort?<br><span style="color:#999;">(Bu kelime nasıl yazılır?)</span></div>
+        </div>
+        <div class="rule-card der">
+          <div class="title">"İnsan" / belirsiz özne</div>
+          <div class="ex">In diesem Restaurant isst <strong>man</strong> gut.<br><span style="color:#999;">(Bu restoranda güzel yenir.)</span></div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>Tek gramer kuralı:</strong> "man" her zaman <strong>3. tekil şahıs (er/sie/es)</strong> gibi çekilir — man mach<strong>t</strong>, man kann, man muss, man darf, man sag<strong>t</strong>. Başka hiçbir çekim yoktur, hep bu tek form kullanılır.<br>
+        <strong>Türkçe karşılaştırma:</strong> Türkçede bunu genelde fiili PASİF yaparak çözeriz ("yapılır", "denir", "içilmez") — özneyi hiç söylemeyiz. Almanca ise özneyi somut bir kelimeyle ("man") söyler, ama bu kelime "belirli biri" değil, "insanlar genel olarak" demektir.<br>
+        <strong>Dikkat:</strong> "man" ile "Mann" (adam) karıştırılmasın — "man" tek n ile yazılır ve küçük harfle başlar (isim değildir).
+      </div>
+    </section>
     <section class="panel">
       <h2>İyelik Zamirleri (Possessivartikel) — hızlı referans</h2>
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px; margin-bottom:14px;">
@@ -1578,35 +1612,7 @@
       </div>
     </section>
 
-    <section class="panel">
-      <h2>man — belirsiz özne zamiri</h2>
-      <div class="plural-note" style="margin-top:0;">
-        <strong>man</strong>, belirli bir kişiyi değil, <strong>genel olarak insanları</strong> kastettiğinde kullanılır — Türkçedeki <strong>"-ılır/-ilir" pasif yapısına</strong> ya da genel "insan" kullanımına karşılık gelir. Kim yaptığı önemli değildir, kural/genel bilgi anlatılır.
-      </div>
-      <div class="rule-grid" style="grid-template-columns:1fr 1fr;">
-        <div class="rule-card der">
-          <div class="title">Genel kural / talimat</div>
-          <div class="ex"><strong>Man</strong> muss hier ruhig sein.<br><span style="color:#999;">(Burada sessiz olmak gerekir.)</span></div>
-        </div>
-        <div class="rule-card die">
-          <div class="title">Yasak</div>
-          <div class="ex">Hier darf <strong>man</strong> nicht fotografieren.<br><span style="color:#999;">(Burada fotoğraf çekilmez.)</span></div>
-        </div>
-        <div class="rule-card das">
-          <div class="title">Genel bilgi sorma</div>
-          <div class="ex">Wie schreibt <strong>man</strong> das Wort?<br><span style="color:#999;">(Bu kelime nasıl yazılır?)</span></div>
-        </div>
-        <div class="rule-card der">
-          <div class="title">"İnsan" / belirsiz özne</div>
-          <div class="ex">In diesem Restaurant isst <strong>man</strong> gut.<br><span style="color:#999;">(Bu restoranda güzel yenir.)</span></div>
-        </div>
-      </div>
-      <div class="plural-note">
-        <strong>Tek gramer kuralı:</strong> "man" her zaman <strong>3. tekil şahıs (er/sie/es)</strong> gibi çekilir — man mach<strong>t</strong>, man kann, man muss, man darf, man sag<strong>t</strong>. Başka hiçbir çekim yoktur, hep bu tek form kullanılır.<br>
-        <strong>Türkçe karşılaştırma:</strong> Türkçede bunu genelde fiili PASİF yaparak çözeriz ("yapılır", "denir", "içilmez") — özneyi hiç söylemeyiz. Almanca ise özneyi somut bir kelimeyle ("man") söyler, ama bu kelime "belirli biri" değil, "insanlar genel olarak" demektir.<br>
-        <strong>Dikkat:</strong> "man" ile "Mann" (adam) karıştırılmasın — "man" tek n ile yazılır ve küçük harfle başlar (isim değildir).
-      </div>
-    </section>
+    
 
     <section class="panel" style="margin-top:0;">
       <h2>Dativ nedir? (wem? = kime?)</h2>
@@ -1774,95 +1780,13 @@
       </div>
     </section>
 
-    <section class="panel">
-      <h2>Dativ edatları: aus · bei · mit · nach · seit · von · zu</h2>
-      <div class="plural-note" style="margin-top:0;">
-        Bu 7 edattan sonra isim <strong>her zaman Dativ</strong> olur, istisnası yoktur. Ezber kalıbı: <strong>"aus – bei – mit – nach – seit – von – zu"</strong>. Türkçede hepsi "-den, -de, -e, ile" gibi birkaç ekin içine sıkıştığı için karışıyor. Her birinin asıl işi aşağıda ayrı ayrı:
-      </div>
-      <div class="rule-grid">
-        <div class="rule-card der">
-          <div class="title">aus — içinden · köken · madde</div>
-          <div class="sfx">① İçinden dışarı: -den/-dan<br>② Köken, memleket: -li, -den gelmek<br>③ Yapıldığı madde: -den yapılmış</div>
-          <div class="ex">Er nimmt die Geldbörse <strong>aus</strong> der Tasche.<br><span style="color:#999;">(Cüzdanı çantadan çıkarıyor.)</span><br>Ich komme <strong>aus</strong> Izmir. <span style="color:#999;">(İzmir'liyim.)</span><br>Der Tisch ist <strong>aus</strong> Holz. <span style="color:#999;">(Masa tahtadan.)</span></div>
-        </div>
-        <div class="rule-card die">
-          <div class="title">bei — yanında · -de · -da</div>
-          <div class="sfx">① Birinin yanında/evinde BULUNMAK (hareket yok)<br>② Çalıştığı yer: bei einer Firma<br>③ Durum/koşul: bei Regen (yağmurda)</div>
-          <div class="ex">Er wohnt <strong>bei</strong> seinen Eltern. <span style="color:#999;">(Ailesinin yanında oturuyor.)</span><br>Sie arbeitet <strong>bei</strong> einer großen Firma. <span style="color:#999;">(Büyük bir şirkette çalışıyor.)</span><br><strong>Bei</strong> Regen nehmen wir den Bus. <span style="color:#999;">(Yağmurda otobüse biniyoruz.)</span></div>
-        </div>
-        <div class="rule-card das">
-          <div class="title">mit — ile (birlikte · araç · alet · içerik)</div>
-          <div class="sfx">① Birlikte: kişiyle<br>② Araç: mit dem Zug, mit dem Fahrrad<br>③ Alet: mit einem Bleistift<br>④ İçerik: Kaffee mit Milch</div>
-          <div class="ex">Ich spiele <strong>mit</strong> meinem Bruder Fußball. <span style="color:#999;">(Kardeşimle futbol oynuyorum.)</span><br>Wir fahren <strong>mit</strong> dem Fahrrad zur Schule. <span style="color:#999;">(Okula bisikletle gidiyoruz.)</span><br>Sie schreibt <strong>mit</strong> einem Bleistift. <span style="color:#999;">(Kurşun kalemle yazıyor.)</span></div>
-        </div>
-        <div class="rule-card der">
-          <div class="title">nach — sonra · -e doğru · yön</div>
-          <div class="sfx">① Zaman: sonra (nach der Arbeit)<br>② Şehir/ülke, ARTİKELSİZ: nach Berlin, nach Italien<br>③ Yön: nach links / nach rechts<br>④ nach Hause = eve (yön)</div>
-          <div class="ex"><strong>Nach</strong> dem Essen trinken wir Tee. <span style="color:#999;">(Yemekten sonra çay içiyoruz.)</span><br>Ich fliege morgen <strong>nach</strong> Berlin. <span style="color:#999;">(Yarın Berlin'e uçuyorum.)</span><br>Er geht <strong>nach</strong> Hause. <span style="color:#999;">(Eve gidiyor.)</span></div>
-        </div>
-        <div class="rule-card die">
-          <div class="title">seit — -den beri · -dır</div>
-          <div class="sfx">① Geçmişte başlayıp HÂLÂ süren şey<br>② Süre: seit einem Jahr (bir yıldır)<br>③ Başlangıç: seit Montag, seit gestern<br>Fiil ŞİMDİKİ zamanda kalır!</div>
-          <div class="ex">Ich lerne <strong>seit</strong> einem Jahr Deutsch. <span style="color:#999;">(Bir yıldır Almanca öğreniyorum.)</span><br>Sie ist <strong>seit</strong> gestern krank. <span style="color:#999;">(Dünden beri hasta.)</span></div>
-        </div>
-        <div class="rule-card das">
-          <div class="title">von — -den · -ın · tarafından</div>
-          <div class="sfx">① Kişiden gelen: ein Brief von ...<br>② Sahiplik: das Auto von meinem Vater<br>③ von … bis …: -den … -e kadar<br>④ Bahsetmek: von etwas erzählen<br>⑤ Bir yerden ayrılıp gelmek: von der Arbeit</div>
-          <div class="ex">Der Brief ist <strong>von</strong> meiner Freundin. <span style="color:#999;">(Mektup arkadaşımdan.)</span><br>Ich arbeite <strong>von</strong> Montag bis Freitag. <span style="color:#999;">(Pazartesiden cumaya çalışıyorum.)</span><br>Ich komme gerade <strong>von</strong> der Arbeit. <span style="color:#999;">(Şimdi işten geliyorum.)</span></div>
-        </div>
-        <div class="rule-card der">
-          <div class="title">zu — -e/-a gitmek · sabit kalıplar</div>
-          <div class="sfx">① Kişiye/yere gitmek: zu meinem Freund<br>② Sabit: zu Hause (evde), zu Fuß (yürüyerek)<br>③ Davet/etkinlik: zu meiner Party</div>
-          <div class="ex">Ich gehe <strong>zu</strong> meinem Freund. <span style="color:#999;">(Arkadaşıma gidiyorum.)</span><br>Wir gehen <strong>zu</strong> Fuß. <span style="color:#999;">(Yürüyerek gidiyoruz.)</span><br>Ich bin heute <strong>zu</strong> Hause. <span style="color:#999;">(Bugün evdeyim.)</span></div>
-        </div>
-      </div>
-    </section>
+    
 
-    <section class="panel">
-      <h2>Karıştırılan edatlar — farkı bil</h2>
-      <div style="overflow-x:auto;">
-      <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
-        <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Çift</th><th style="text-align:left; padding:8px;">Fark ve örnek</th></tr></thead>
-        <tbody>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>aus ↔ von</strong></td><td style="padding:8px; vertical-align:top;"><strong>aus</strong> = bir şeyin İÇİNDEN dışarı, köken, madde. <strong>von</strong> = kişiden, sahiplik, bir yerden ayrılıp gelme.<br>aus dem Haus (evden çıkıyor) ↔ von der Arbeit (işten geliyor)</td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>bei ↔ zu</strong></td><td style="padding:8px; vertical-align:top;"><strong>bei</strong> = yanında BULUNMAK (wo?). <strong>zu</strong> = yanına GİTMEK (wohin?).<br>Ich bin <strong>bei</strong> ihm. (Onun yanındayım.) ↔ Ich gehe <strong>zu</strong> ihm. (Ona gidiyorum.)</td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>nach ↔ zu</strong></td><td style="padding:8px; vertical-align:top;"><strong>nach</strong> = şehir/ülke (artikelsiz) ve "eve". <strong>zu</strong> = kişi/kurum ve "evde".<br>Ich fahre <strong>nach</strong> Berlin. ↔ Ich fahre <strong>zu</strong> meiner Oma.<br>Er geht <strong>nach</strong> Hause. (eve gidiyor) ↔ Er ist <strong>zu</strong> Hause. (evde)</td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>nach ↔ seit</strong></td><td style="padding:8px; vertical-align:top;"><strong>nach</strong> = bir şeyden SONRA (bitti). <strong>seit</strong> = başladığından BERİ (hâlâ sürüyor).<br><strong>Nach</strong> dem Essen trinken wir Tee. ↔ Ich lerne <strong>seit</strong> einem Jahr Deutsch.</td></tr>
-          <tr><td style="padding:8px; vertical-align:top;"><strong>mit ↔ bei</strong></td><td style="padding:8px; vertical-align:top;"><strong>mit</strong> = birlikte. <strong>bei</strong> = onun evinde/yanında.<br>Ich wohne <strong>mit</strong> meinen Eltern. (birlikte yaşıyoruz) ↔ Ich wohne <strong>bei</strong> meinen Eltern. (onların evinde kalıyorum)</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </section>
+    
 
-    <section class="panel">
-      <h2>Soruya bak, edatı seç</h2>
-      <div style="overflow-x:auto;">
-      <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
-        <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Soru</th><th style="text-align:left; padding:8px;">Edat</th><th style="text-align:left; padding:8px;">Örnek cevap</th></tr></thead>
-        <tbody>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Woher? (nereden)</td><td style="padding:8px; vertical-align:top;"><strong>aus / von</strong></td><td style="padding:8px; vertical-align:top;">Aus Izmir. / Von der Arbeit.</td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Bei wem? (kimin yanında)</td><td style="padding:8px; vertical-align:top;"><strong>bei</strong></td><td style="padding:8px; vertical-align:top;">Bei meinen Eltern.</td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Zu wem? / Wohin?</td><td style="padding:8px; vertical-align:top;"><strong>zu / nach</strong></td><td style="padding:8px; vertical-align:top;">Zu meinem Freund. / Nach Hause.</td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Wann? (ne zaman)</td><td style="padding:8px; vertical-align:top;"><strong>nach</strong></td><td style="padding:8px; vertical-align:top;">Nach der Arbeit.</td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Seit wann? (ne zamandır)</td><td style="padding:8px; vertical-align:top;"><strong>seit</strong></td><td style="padding:8px; vertical-align:top;">Seit einem Jahr.</td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Womit? / Mit wem?</td><td style="padding:8px; vertical-align:top;"><strong>mit</strong></td><td style="padding:8px; vertical-align:top;">Mit dem Zug. / Mit meinem Bruder.</td></tr>
-          <tr><td style="padding:8px; vertical-align:top;">Von wem? (kimden)</td><td style="padding:8px; vertical-align:top;"><strong>von</strong></td><td style="padding:8px; vertical-align:top;">Von meiner Freundin.</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </section>
+    
 
-    <section class="panel">
-      <h2>Kısaltmalar ve Wechselpräpositionen</h2>
-      <div class="plural-note" style="margin-top:0;">
-        <strong>Kısaltmalar (edat + dem/der birleşir):</strong> zu + dem = <strong>zum</strong> · zu + der = <strong>zur</strong> · bei + dem = <strong>beim</strong> · von + dem = <strong>vom</strong> · in + dem = <strong>im</strong> · an + dem = <strong>am</strong><br>
-        Ich gehe <strong>zum</strong> Arzt. — Wir sind <strong>beim</strong> Bäcker. — Das kommt <strong>vom</strong> Markt.
-      </div>
-      <div class="plural-note">
-        <strong>Wechselpräpositionen (in, an, auf, ...):</strong> konum (wo?) = <strong>Dativ</strong>, yön/hareket (wohin?) = <strong>Akkusativ</strong>.<br>
-        Das Buch liegt <strong>auf dem Tisch</strong>. (nerede? → Dativ) ↔ Ich lege das Buch <strong>auf den Tisch</strong>. (nereye? → Akkusativ)
-      </div>
-    </section>
+    
 
     </div>
     <div id="refGroupVerben" class="ref-group" style="display:none;">
@@ -2157,49 +2081,8 @@
     </div>
     <div id="refGroupSaatler" class="ref-group" style="display:none;">
       <h2 class="referans-group-title">📌 Saatler & Takvim — Gramer Kuralları</h2>
+    
     <section class="panel" style="margin-top:0;">
-      <h2>Randevu önerme: "Geht es …?" ve "Ich bitte um …"</h2>
-      <div class="plural-note" style="margin-top:0;">
-        <strong>Geht es am Montag um 10 Uhr?</strong> = "Pazartesi saat 10'da olur mu?" Bir gün/saat önerip karşı tarafın uygun olup olmadığını sorarken kullanılır. Evet/hayır sorusu olduğu için <strong>fiil (geht) cümlenin başındadır</strong>.
-      </div>
-      <div class="rule-grid" style="grid-template-columns:1fr 1fr 1fr;">
-        <div class="rule-card der">
-          <div class="title">am + gün</div>
-          <div class="sfx">Hangi gün?</div>
-          <div class="ex">am Montag · am Freitag<br><span style="color:#999;">(pazartesi, cuma)</span></div>
-        </div>
-        <div class="rule-card die">
-          <div class="title">um + saat</div>
-          <div class="sfx">Saat kaçta?</div>
-          <div class="ex">um 10 Uhr · um 14 Uhr<br><span style="color:#999;">(10'da, 14'te)</span></div>
-        </div>
-        <div class="rule-card das">
-          <div class="title">Geht es …?</div>
-          <div class="sfx">Olur mu?</div>
-          <div class="ex">Geht es am Mittwoch um 9 Uhr?<br><span style="color:#999;">(Çarşamba 9'da olur mu?)</span></div>
-        </div>
-      </div>
-      <div style="overflow-x:auto;">
-      <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
-        <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Kalıp</th><th style="text-align:left; padding:8px;">Anlamı</th></tr></thead>
-        <tbody>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Geht es am Samstag um 15 Uhr?</td><td style="padding:8px; vertical-align:top;">Cumartesi saat 15'te olur mu?</td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Geht es heute um 18 Uhr?</td><td style="padding:8px; vertical-align:top;">Bugün saat 18'de olur mu?</td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>Ja, das geht.</strong></td><td style="padding:8px; vertical-align:top;">Evet, olur.</td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>Nein, das geht leider nicht.</strong></td><td style="padding:8px; vertical-align:top;">Hayır, maalesef olmaz.</td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Am Mittwoch geht es leider nicht. Geht es am Donnerstag?</td><td style="padding:8px; vertical-align:top;">Çarşamba maalesef olmaz. Perşembe olur mu?</td></tr>
-          <tr><td style="padding:8px; vertical-align:top;"><strong>Ich bitte um Rückmeldung.</strong></td><td style="padding:8px; vertical-align:top;">Geri dönüş (yanıt) rica ediyorum.</td></tr>
-        </tbody>
-      </table>
-      </div>
-      <div class="plural-note">
-        <strong>bitten um + Akkusativ:</strong> "um" her zaman Akkusativ ister: Ich bitte um <strong>eine</strong> Antwort. · Ich bitte um <strong>eine</strong> Rückmeldung bis Freitag. (bis = ... e kadar)<br>
-        <strong>Mini e-posta örneği:</strong> "Guten Tag Frau Weber, geht es am Dienstag um 11 Uhr? Ich bitte um eine Rückmeldung bis Montag. Viele Grüße"<br>
-        <strong>Dikkat:</strong> Gün için <strong>am</strong>, saat için <strong>um</strong> — ikisi birlikte gelir: am Montag <strong>um</strong> 10 Uhr. (Detay: "im / am / um" kartı)<br>
-        <em>Not: "Geht es …?" ve "Ich bitte um Rückmeldung" yazışmalarda sık geçen yardımcı kalıplardır; "Das geht leider nicht" ve "Viele Grüße" de aynı bağlamda birlikte öğretildiği için ekledim.</em>
-      </div>
-    </section>
-    <section class="panel">
       <h2>Saat Söyleme Kuralları — ince noktalar</h2>
       <div class="rule-grid">
         <div class="rule-card der">
@@ -2257,6 +2140,48 @@
         <strong>als</strong>: (1) geçmişte <strong>TEK SEFERLİK</strong> bir olay için "-dığında" — <strong>Als ich acht war, ...</strong> (2) karşılaştırmada "-den daha" — <strong>größer als</strong> (3) meslek/rol tanıtırken "olarak" — <strong>Er arbeitet als Lehrer.</strong><br>
         <strong>von</strong>: başlangıç noktası / aitlik / kaynak — <strong>von 9 bis 17 Uhr</strong> (saatten saate), <strong>das Auto von meinem Vater</strong> (babamın arabası).<br>
         En sık karışan kural: Tekrar eden / şimdiki / gelecek olaylarda "-dığında" için <strong>wenn</strong> kullanılır — sadece geçmişte <strong>tek seferlik</strong> olaylarda <strong>als</strong> kullanılır.
+      </div>
+    </section>
+<section class="panel">
+      <h2>Randevu önerme: "Geht es …?" ve "Ich bitte um …"</h2>
+      <div class="plural-note" style="margin-top:0;">
+        <strong>Geht es am Montag um 10 Uhr?</strong> = "Pazartesi saat 10'da olur mu?" Bir gün/saat önerip karşı tarafın uygun olup olmadığını sorarken kullanılır. Evet/hayır sorusu olduğu için <strong>fiil (geht) cümlenin başındadır</strong>.
+      </div>
+      <div class="rule-grid" style="grid-template-columns:1fr 1fr 1fr;">
+        <div class="rule-card der">
+          <div class="title">am + gün</div>
+          <div class="sfx">Hangi gün?</div>
+          <div class="ex">am Montag · am Freitag<br><span style="color:#999;">(pazartesi, cuma)</span></div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">um + saat</div>
+          <div class="sfx">Saat kaçta?</div>
+          <div class="ex">um 10 Uhr · um 14 Uhr<br><span style="color:#999;">(10'da, 14'te)</span></div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">Geht es …?</div>
+          <div class="sfx">Olur mu?</div>
+          <div class="ex">Geht es am Mittwoch um 9 Uhr?<br><span style="color:#999;">(Çarşamba 9'da olur mu?)</span></div>
+        </div>
+      </div>
+      <div style="overflow-x:auto;">
+      <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
+        <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Kalıp</th><th style="text-align:left; padding:8px;">Anlamı</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Geht es am Samstag um 15 Uhr?</td><td style="padding:8px; vertical-align:top;">Cumartesi saat 15'te olur mu?</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Geht es heute um 18 Uhr?</td><td style="padding:8px; vertical-align:top;">Bugün saat 18'de olur mu?</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>Ja, das geht.</strong></td><td style="padding:8px; vertical-align:top;">Evet, olur.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>Nein, das geht leider nicht.</strong></td><td style="padding:8px; vertical-align:top;">Hayır, maalesef olmaz.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Am Mittwoch geht es leider nicht. Geht es am Donnerstag?</td><td style="padding:8px; vertical-align:top;">Çarşamba maalesef olmaz. Perşembe olur mu?</td></tr>
+          <tr><td style="padding:8px; vertical-align:top;"><strong>Ich bitte um Rückmeldung.</strong></td><td style="padding:8px; vertical-align:top;">Geri dönüş (yanıt) rica ediyorum.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="plural-note">
+        <strong>bitten um + Akkusativ:</strong> "um" her zaman Akkusativ ister: Ich bitte um <strong>eine</strong> Antwort. · Ich bitte um <strong>eine</strong> Rückmeldung bis Freitag. (bis = ... e kadar)<br>
+        <strong>Mini e-posta örneği:</strong> "Guten Tag Frau Weber, geht es am Dienstag um 11 Uhr? Ich bitte um eine Rückmeldung bis Montag. Viele Grüße"<br>
+        <strong>Dikkat:</strong> Gün için <strong>am</strong>, saat için <strong>um</strong> — ikisi birlikte gelir: am Montag <strong>um</strong> 10 Uhr. (Detay: "im / am / um" kartı)<br>
+        <em>Not: "Geht es …?" ve "Ich bitte um Rückmeldung" yazışmalarda sık geçen yardımcı kalıplardır; "Das geht leider nicht" ve "Viele Grüße" de aynı bağlamda birlikte öğretildiği için ekledim.</em>
       </div>
     </section>
     <section class="panel">
@@ -2372,7 +2297,121 @@
     </div>
     <div id="refGroupPraep" class="ref-group" style="display:none;">
       <h2 class="referans-group-title">📌 Edatlar (Präpositionen) — Gramer Kuralları</h2>
-    <section class="panel">
+<section class="panel" style="margin-top:0;">
+      <h2>Tüm edatlar — büyük özet tablosu</h2>
+      <div style="overflow-x:auto;">
+      <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
+        <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Grup</th><th style="text-align:left; padding:8px;">Edatlar</th><th style="text-align:left; padding:8px;">Hangi hâl?</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Sadece Akkusativ</td><td style="padding:8px; vertical-align:top;">für, durch, ohne, gegen, um</td><td style="padding:8px; vertical-align:top;">Her zaman <strong>Akkusativ</strong></td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Sadece Dativ</td><td style="padding:8px; vertical-align:top;">aus, bei, mit, nach, seit, von, zu (+ gegenüber)</td><td style="padding:8px; vertical-align:top;">Her zaman <strong>Dativ</strong></td></tr>
+          <tr><td style="padding:8px; vertical-align:top;">Wechselpräpositionen</td><td style="padding:8px; vertical-align:top;">in, an, auf, über, unter, vor, hinter, neben, zwischen</td><td style="padding:8px; vertical-align:top;">Wo? → <strong>Dativ</strong><br>Wohin? → <strong>Akkusativ</strong></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="plural-note">
+        <strong>Karışıklığı çözmenin en hızlı yolu:</strong> Önce edatın hangi GRUPTA olduğunu hatırla (yukarıdaki 3 grup). Sadece Wechselpräpositionen için EK BİR SORU sormana gerek var: "wo?" mi "wohin?" mi. Diğer 12 edat (5 Akkusativ + 7 Dativ) için hiç düşünmeden hep aynı hâli kullan.
+      </div>
+    </section>
+<section class="panel">
+      <h2>Präpositionen (Edatlar) — hızlı referans</h2>
+      <div class="rule-grid">
+        <div class="rule-card der">
+          <div class="title">Sadece Akkusativ</div>
+          <div class="sfx">für, durch, ohne, gegen, um</div>
+          <div class="ex">Das ist für dich.<br>Ich gehe durch den Park.</div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">Sadece Dativ</div>
+          <div class="sfx">mit, nach, bei, seit, von, zu, aus, gegenüber</div>
+          <div class="ex">Ich fahre mit dem Auto.<br>Ich komme aus der Türkei.</div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">Wechselpräpositionen</div>
+          <div class="sfx">in, an, auf, über, unter, vor, hinter, neben, zwischen</div>
+          <div class="ex">Ich bin in der Schule. (konum→Dativ)<br>Ich gehe in die Schule. (hareket→Akkusativ)</div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>Wechselpräpositionen</strong> (değişken edatlar) hem Akkusativ hem Dativ alabilir: <strong>hareket/yön</strong> varsa ("nereye?") Akkusativ, <strong>konum/durum</strong> varsa ("nerede?") Dativ kullanılır. Bu 9 edatı ezberlemek işini kolaylaştırır: <strong>in, an, auf, über, unter, vor, hinter, neben, zwischen</strong>.
+      </div>
+    </section>
+<section class="panel">
+      <h2>Dativ edatları: aus · bei · mit · nach · seit · von · zu</h2>
+      <div class="plural-note" style="margin-top:0;">
+        Bu 7 edattan sonra isim <strong>her zaman Dativ</strong> olur, istisnası yoktur. Ezber kalıbı: <strong>"aus – bei – mit – nach – seit – von – zu"</strong>. Türkçede hepsi "-den, -de, -e, ile" gibi birkaç ekin içine sıkıştığı için karışıyor. Her birinin asıl işi aşağıda ayrı ayrı:
+      </div>
+      <div class="rule-grid">
+        <div class="rule-card der">
+          <div class="title">aus — içinden · köken · madde</div>
+          <div class="sfx">① İçinden dışarı: -den/-dan<br>② Köken, memleket: -li, -den gelmek<br>③ Yapıldığı madde: -den yapılmış</div>
+          <div class="ex">Er nimmt die Geldbörse <strong>aus</strong> der Tasche.<br><span style="color:#999;">(Cüzdanı çantadan çıkarıyor.)</span><br>Ich komme <strong>aus</strong> Izmir. <span style="color:#999;">(İzmir'liyim.)</span><br>Der Tisch ist <strong>aus</strong> Holz. <span style="color:#999;">(Masa tahtadan.)</span></div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">bei — yanında · -de · -da</div>
+          <div class="sfx">① Birinin yanında/evinde BULUNMAK (hareket yok)<br>② Çalıştığı yer: bei einer Firma<br>③ Durum/koşul: bei Regen (yağmurda)</div>
+          <div class="ex">Er wohnt <strong>bei</strong> seinen Eltern. <span style="color:#999;">(Ailesinin yanında oturuyor.)</span><br>Sie arbeitet <strong>bei</strong> einer großen Firma. <span style="color:#999;">(Büyük bir şirkette çalışıyor.)</span><br><strong>Bei</strong> Regen nehmen wir den Bus. <span style="color:#999;">(Yağmurda otobüse biniyoruz.)</span></div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">mit — ile (birlikte · araç · alet · içerik)</div>
+          <div class="sfx">① Birlikte: kişiyle<br>② Araç: mit dem Zug, mit dem Fahrrad<br>③ Alet: mit einem Bleistift<br>④ İçerik: Kaffee mit Milch</div>
+          <div class="ex">Ich spiele <strong>mit</strong> meinem Bruder Fußball. <span style="color:#999;">(Kardeşimle futbol oynuyorum.)</span><br>Wir fahren <strong>mit</strong> dem Fahrrad zur Schule. <span style="color:#999;">(Okula bisikletle gidiyoruz.)</span><br>Sie schreibt <strong>mit</strong> einem Bleistift. <span style="color:#999;">(Kurşun kalemle yazıyor.)</span></div>
+        </div>
+        <div class="rule-card der">
+          <div class="title">nach — sonra · -e doğru · yön</div>
+          <div class="sfx">① Zaman: sonra (nach der Arbeit)<br>② Şehir/ülke, ARTİKELSİZ: nach Berlin, nach Italien<br>③ Yön: nach links / nach rechts<br>④ nach Hause = eve (yön)</div>
+          <div class="ex"><strong>Nach</strong> dem Essen trinken wir Tee. <span style="color:#999;">(Yemekten sonra çay içiyoruz.)</span><br>Ich fliege morgen <strong>nach</strong> Berlin. <span style="color:#999;">(Yarın Berlin'e uçuyorum.)</span><br>Er geht <strong>nach</strong> Hause. <span style="color:#999;">(Eve gidiyor.)</span></div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">seit — -den beri · -dır</div>
+          <div class="sfx">① Geçmişte başlayıp HÂLÂ süren şey<br>② Süre: seit einem Jahr (bir yıldır)<br>③ Başlangıç: seit Montag, seit gestern<br>Fiil ŞİMDİKİ zamanda kalır!</div>
+          <div class="ex">Ich lerne <strong>seit</strong> einem Jahr Deutsch. <span style="color:#999;">(Bir yıldır Almanca öğreniyorum.)</span><br>Sie ist <strong>seit</strong> gestern krank. <span style="color:#999;">(Dünden beri hasta.)</span></div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">von — -den · -ın · tarafından</div>
+          <div class="sfx">① Kişiden gelen: ein Brief von ...<br>② Sahiplik: das Auto von meinem Vater<br>③ von … bis …: -den … -e kadar<br>④ Bahsetmek: von etwas erzählen<br>⑤ Bir yerden ayrılıp gelmek: von der Arbeit</div>
+          <div class="ex">Der Brief ist <strong>von</strong> meiner Freundin. <span style="color:#999;">(Mektup arkadaşımdan.)</span><br>Ich arbeite <strong>von</strong> Montag bis Freitag. <span style="color:#999;">(Pazartesiden cumaya çalışıyorum.)</span><br>Ich komme gerade <strong>von</strong> der Arbeit. <span style="color:#999;">(Şimdi işten geliyorum.)</span></div>
+        </div>
+        <div class="rule-card der">
+          <div class="title">zu — -e/-a gitmek · sabit kalıplar</div>
+          <div class="sfx">① Kişiye/yere gitmek: zu meinem Freund<br>② Sabit: zu Hause (evde), zu Fuß (yürüyerek)<br>③ Davet/etkinlik: zu meiner Party</div>
+          <div class="ex">Ich gehe <strong>zu</strong> meinem Freund. <span style="color:#999;">(Arkadaşıma gidiyorum.)</span><br>Wir gehen <strong>zu</strong> Fuß. <span style="color:#999;">(Yürüyerek gidiyoruz.)</span><br>Ich bin heute <strong>zu</strong> Hause. <span style="color:#999;">(Bugün evdeyim.)</span></div>
+        </div>
+      </div>
+    </section>
+<section class="panel">
+      <h2>Karıştırılan edatlar — farkı bil</h2>
+      <div style="overflow-x:auto;">
+      <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
+        <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Çift</th><th style="text-align:left; padding:8px;">Fark ve örnek</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>aus ↔ von</strong></td><td style="padding:8px; vertical-align:top;"><strong>aus</strong> = bir şeyin İÇİNDEN dışarı, köken, madde. <strong>von</strong> = kişiden, sahiplik, bir yerden ayrılıp gelme.<br>aus dem Haus (evden çıkıyor) ↔ von der Arbeit (işten geliyor)</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>bei ↔ zu</strong></td><td style="padding:8px; vertical-align:top;"><strong>bei</strong> = yanında BULUNMAK (wo?). <strong>zu</strong> = yanına GİTMEK (wohin?).<br>Ich bin <strong>bei</strong> ihm. (Onun yanındayım.) ↔ Ich gehe <strong>zu</strong> ihm. (Ona gidiyorum.)</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>nach ↔ zu</strong></td><td style="padding:8px; vertical-align:top;"><strong>nach</strong> = şehir/ülke (artikelsiz) ve "eve". <strong>zu</strong> = kişi/kurum ve "evde".<br>Ich fahre <strong>nach</strong> Berlin. ↔ Ich fahre <strong>zu</strong> meiner Oma.<br>Er geht <strong>nach</strong> Hause. (eve gidiyor) ↔ Er ist <strong>zu</strong> Hause. (evde)</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>nach ↔ seit</strong></td><td style="padding:8px; vertical-align:top;"><strong>nach</strong> = bir şeyden SONRA (bitti). <strong>seit</strong> = başladığından BERİ (hâlâ sürüyor).<br><strong>Nach</strong> dem Essen trinken wir Tee. ↔ Ich lerne <strong>seit</strong> einem Jahr Deutsch.</td></tr>
+          <tr><td style="padding:8px; vertical-align:top;"><strong>mit ↔ bei</strong></td><td style="padding:8px; vertical-align:top;"><strong>mit</strong> = birlikte. <strong>bei</strong> = onun evinde/yanında.<br>Ich wohne <strong>mit</strong> meinen Eltern. (birlikte yaşıyoruz) ↔ Ich wohne <strong>bei</strong> meinen Eltern. (onların evinde kalıyorum)</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+<section class="panel">
+      <h2>Soruya bak, edatı seç</h2>
+      <div style="overflow-x:auto;">
+      <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
+        <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Soru</th><th style="text-align:left; padding:8px;">Edat</th><th style="text-align:left; padding:8px;">Örnek cevap</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Woher? (nereden)</td><td style="padding:8px; vertical-align:top;"><strong>aus / von</strong></td><td style="padding:8px; vertical-align:top;">Aus Izmir. / Von der Arbeit.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Bei wem? (kimin yanında)</td><td style="padding:8px; vertical-align:top;"><strong>bei</strong></td><td style="padding:8px; vertical-align:top;">Bei meinen Eltern.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Zu wem? / Wohin?</td><td style="padding:8px; vertical-align:top;"><strong>zu / nach</strong></td><td style="padding:8px; vertical-align:top;">Zu meinem Freund. / Nach Hause.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Wann? (ne zaman)</td><td style="padding:8px; vertical-align:top;"><strong>nach</strong></td><td style="padding:8px; vertical-align:top;">Nach der Arbeit.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Seit wann? (ne zamandır)</td><td style="padding:8px; vertical-align:top;"><strong>seit</strong></td><td style="padding:8px; vertical-align:top;">Seit einem Jahr.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Womit? / Mit wem?</td><td style="padding:8px; vertical-align:top;"><strong>mit</strong></td><td style="padding:8px; vertical-align:top;">Mit dem Zug. / Mit meinem Bruder.</td></tr>
+          <tr><td style="padding:8px; vertical-align:top;">Von wem? (kimden)</td><td style="padding:8px; vertical-align:top;"><strong>von</strong></td><td style="padding:8px; vertical-align:top;">Von meiner Freundin.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+<section class="panel">
       <h2>Akkusativ edatları: für · durch · ohne · gegen · um</h2>
       <div class="plural-note" style="margin-top:0;">
         Bu 5 edattan sonra isim <strong>her zaman Akkusativ</strong> olur, istisnası yoktur. Ezber kalıbı: <strong>"für – durch – ohne – gegen – um"</strong>. Her birinin asıl işi aşağıda ayrı ayrı:
@@ -2405,31 +2444,7 @@
         </div>
       </div>
     </section>
-
-    <section class="panel">
-      <h2>Präpositionen (Edatlar) — hızlı referans</h2>
-      <div class="rule-grid">
-        <div class="rule-card der">
-          <div class="title">Sadece Akkusativ</div>
-          <div class="sfx">für, durch, ohne, gegen, um</div>
-          <div class="ex">Das ist für dich.<br>Ich gehe durch den Park.</div>
-        </div>
-        <div class="rule-card die">
-          <div class="title">Sadece Dativ</div>
-          <div class="sfx">mit, nach, bei, seit, von, zu, aus, gegenüber</div>
-          <div class="ex">Ich fahre mit dem Auto.<br>Ich komme aus der Türkei.</div>
-        </div>
-        <div class="rule-card das">
-          <div class="title">Wechselpräpositionen</div>
-          <div class="sfx">in, an, auf, über, unter, vor, hinter, neben, zwischen</div>
-          <div class="ex">Ich bin in der Schule. (konum→Dativ)<br>Ich gehe in die Schule. (hareket→Akkusativ)</div>
-        </div>
-      </div>
-      <div class="plural-note">
-        <strong>Wechselpräpositionen</strong> (değişken edatlar) hem Akkusativ hem Dativ alabilir: <strong>hareket/yön</strong> varsa ("nereye?") Akkusativ, <strong>konum/durum</strong> varsa ("nerede?") Dativ kullanılır. Bu 9 edatı ezberlemek işini kolaylaştırır: <strong>in, an, auf, über, unter, vor, hinter, neben, zwischen</strong>.
-      </div>
-    </section>
-    <section class="panel">
+<section class="panel">
       <h2>Wechselpräpositionen (9 tanesi tek tek): in · an · auf · über · unter · vor · hinter · neben · zwischen</h2>
       <div class="plural-note" style="margin-top:0;">
         Bu 9 edat DURUMA göre hem Dativ hem Akkusativ alır — <strong>tek soruyla</strong> karar ver: <strong>"Wo?" (nerede? — hareket yok) → Dativ</strong>, <strong>"Wohin?" (nereye? — hareket var) → Akkusativ</strong>. Her edatın anlamı ve iki hâldeki örneği aşağıda:
@@ -2486,8 +2501,7 @@
         <strong>Dikkat:</strong> "hängen" hem durum ("asılı olmak" → Dativ) hem hareket ("asmak" → Akkusativ) anlamında kullanılabilir — cümlenin GENELİNE bak, sadece fiile değil.
       </div>
     </section>
-
-    <section class="panel">
+<section class="panel">
       <h2>Wo ist …? — Eşyanın yerini sorma ve söyleme</h2>
       <div class="plural-note" style="margin-top:0;">
         Bir şeyin <strong>nerede durduğunu</strong> sorarken <strong>"Wo ist …?"</strong> (çoğulda "Wo sind …?") kullanılır. Cevapta 9 edattan biri + <strong>Dativ</strong> gelir (çünkü hareket yok, "wo?" sorusu).<br>
@@ -2515,8 +2529,18 @@
         <strong>Kısaltmalar:</strong> an dem = <strong>am</strong> · in dem = <strong>im</strong> (der/die ile kısaltma olmaz: an der Wand).
       </div>
     </section>
-
-    <section class="panel">
+<section class="panel">
+      <h2>Kısaltmalar ve Wechselpräpositionen</h2>
+      <div class="plural-note" style="margin-top:0;">
+        <strong>Kısaltmalar (edat + dem/der birleşir):</strong> zu + dem = <strong>zum</strong> · zu + der = <strong>zur</strong> · bei + dem = <strong>beim</strong> · von + dem = <strong>vom</strong> · in + dem = <strong>im</strong> · an + dem = <strong>am</strong><br>
+        Ich gehe <strong>zum</strong> Arzt. — Wir sind <strong>beim</strong> Bäcker. — Das kommt <strong>vom</strong> Markt.
+      </div>
+      <div class="plural-note">
+        <strong>Wechselpräpositionen (in, an, auf, ...):</strong> konum (wo?) = <strong>Dativ</strong>, yön/hareket (wohin?) = <strong>Akkusativ</strong>.<br>
+        Das Buch liegt <strong>auf dem Tisch</strong>. (nerede? → Dativ) ↔ Ich lege das Buch <strong>auf den Tisch</strong>. (nereye? → Akkusativ)
+      </div>
+    </section>
+<section class="panel">
       <h2>Akkusativ kısaltmaları (Wechselpräpositionen ile)</h2>
       <div class="plural-note" style="margin-top:0;">
         Tıpkı Dativ'deki <strong>zum, beim, im, am</strong> gibi, Akkusativ yön bildirirken de edat + <strong>das</strong> kısaltılır:
@@ -2535,24 +2559,7 @@
         Bu kısaltmalar SADECE Akkusativ + <strong>das</strong> (nötr) ile olur. der/die ile kısaltma yapılmaz — "in die Schule" kısalmaz, öyle kalır.
       </div>
     </section>
-
-    <section class="panel">
-      <h2>Tüm edatlar — büyük özet tablosu</h2>
-      <div style="overflow-x:auto;">
-      <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
-        <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Grup</th><th style="text-align:left; padding:8px;">Edatlar</th><th style="text-align:left; padding:8px;">Hangi hâl?</th></tr></thead>
-        <tbody>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Sadece Akkusativ</td><td style="padding:8px; vertical-align:top;">für, durch, ohne, gegen, um</td><td style="padding:8px; vertical-align:top;">Her zaman <strong>Akkusativ</strong></td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Sadece Dativ</td><td style="padding:8px; vertical-align:top;">aus, bei, mit, nach, seit, von, zu (+ gegenüber)</td><td style="padding:8px; vertical-align:top;">Her zaman <strong>Dativ</strong></td></tr>
-          <tr><td style="padding:8px; vertical-align:top;">Wechselpräpositionen</td><td style="padding:8px; vertical-align:top;">in, an, auf, über, unter, vor, hinter, neben, zwischen</td><td style="padding:8px; vertical-align:top;">Wo? → <strong>Dativ</strong><br>Wohin? → <strong>Akkusativ</strong></td></tr>
-        </tbody>
-      </table>
-      </div>
-      <div class="plural-note">
-        <strong>Karışıklığı çözmenin en hızlı yolu:</strong> Önce edatın hangi GRUPTA olduğunu hatırla (yukarıdaki 3 grup). Sadece Wechselpräpositionen için EK BİR SORU sormana gerek var: "wo?" mi "wohin?" mi. Diğer 12 edat (5 Akkusativ + 7 Dativ) için hiç düşünmeden hep aynı hâli kullan.
-      </div>
-    </section>
-    <section class="panel">
+<section class="panel">
       <h2>zu, sehr oder nicht? — hızlı referans</h2>
       <div class="plural-note" style="margin-top:0;">
         Üçü de bir sıfatın önüne gelip onu güçlendirir/değiştirir ama <strong>anlamları taban tabana zıttır</strong> — bu yüzden karıştırmak ciddi anlam hatalarına yol açar.
@@ -2579,6 +2586,17 @@
         <strong>Dikkat:</strong> "zu" burada gördüğün "zu" edatından (-e/-ye, Dativ) <strong>farklı bir kullanımdır</strong> — aynı kelime, sıfattan önce gelince "fazla/aşırı" anlamına geçer.
       </div>
     </section>
+    
+
+    
+    
+
+    
+
+    
+
+    
+    
     </div>
 
   </div>
@@ -2698,6 +2716,17 @@
         <div class="btn-grid grid-2" style="margin-top:8px;">
           <button class="btn-ghost btn-test" onclick="askQuestion('gq-gefallen')">👍 gefallen / finden<br><span style="font-size:11px; font-weight:400;">Dativ ↔ Akkusativ</span></button>
           <button class="btn-ghost btn-test" onclick="askQuestion('gq-seinihr')">👤 sein / ihr<br><span style="font-size:11px; font-weight:400;">iyelik</span></button>
+        </div>
+        <div class="btn-grid grid-2" style="margin-top:8px;">
+          <button class="btn-ghost btn-test" onclick="askQuestion('gq-modal')">🧰 Modalverben<br><span style="font-size:11px; font-weight:400;">kann · muss · will · darf · soll</span></button>
+          <button class="btn-ghost btn-test" onclick="askQuestion('gq-imperativ')">📣 Imperativ<br><span style="font-size:11px; font-weight:400;">Komm! · Kommt! · Kommen Sie!</span></button>
+        </div>
+        <div class="btn-grid grid-2" style="margin-top:8px;">
+          <button class="btn-ghost btn-test" onclick="askQuestion('gq-nicht')">🚫 nicht / kein<br><span style="font-size:11px; font-weight:400;">olumsuzluk</span></button>
+          <button class="btn-ghost btn-test" onclick="askQuestion('gq-trennbar')">🪢 Bölünen fiiller<br><span style="font-size:11px; font-weight:400;">ich rufe … an</span></button>
+        </div>
+        <div class="btn-grid" style="margin-top:8px;">
+          <button class="btn-ghost btn-test" onclick="askQuestion('gq-kasus')">🎯 Fiil hangi hâli istiyor?<br><span style="font-size:11px; font-weight:400;">helfen → Dativ · sehen → Akkusativ</span></button>
         </div>
         <div class="btn-grid" style="margin-top:8px;">
           <button class="btn-ghost btn-test" onclick="askQuestion('gq-mix')">🎯 Yeni Konular Karışık Tur</button>
@@ -7193,6 +7222,102 @@ const GQ_BANK = {
  ]}
 };
 const GQ_ORDER = ["gq-akkprep","gq-wechsel","gq-praet","gq-doch","gq-man","gq-genitiv","gq-geht","gq-verbpos","gq-konj","gq-quant","gq-gefallen","gq-seinihr"];
+Object.assign(GQ_BANK, {
+"gq-modal": {emoji:"🧰", qtype:"MODALVERB — DOĞRU FORM?",
+ hint:"können: kann · kannst · kann · können · könnt · können. wollen: will · willst. müssen: muss · musst. dürfen: darf · darfst. sollen: soll · sollst. ich ve er/sie/es aynıdır. Modal fiil 2. sırada, ana fiil (mastar) en sonda.",
+ items:[
+ ["Ich ___ gut Deutsch sprechen.","kann",["können","kannst"],"İyi Almanca konuşabiliyorum."],
+ ["Du ___ heute arbeiten.","musst",["muss","müsst"],"Bugün çalışmak zorundasın."],
+ ["Er ___ ins Kino gehen.","will",["wollen","willst"],"O sinemaya gitmek istiyor."],
+ ["Wir ___ hier nicht rauchen.","dürfen",["darf","dürft"],"Burada sigara içemeyiz (yasak)."],
+ ["Ihr ___ mehr Wasser trinken.","sollt",["sollen","sollst"],"Daha çok su içmelisiniz."],
+ ["Ich ___ nicht schwimmen.","kann",["können","kannst"],"Yüzemiyorum."],
+ ["Sie ___ morgen früh aufstehen.","muss",["müssen","musst"],"O (kadın) yarın erken kalkmak zorunda."],
+ ["___ ich hier sitzen?","Darf",["Dürfen","Darfst"],"Burada oturabilir miyim?"],
+ ["Was ___ du essen?","willst",["wollen","will"],"Ne yemek istiyorsun?"],
+ ["Ihr ___ pünktlich sein.","müsst",["muss","müssen"],"Dakik olmalısınız."],
+ ["Wir ___ heute Abend ins Restaurant gehen.","wollen",["will","wollt"],"Bu akşam restorana gitmek istiyoruz."],
+ ["Du ___ nicht so viel arbeiten.","sollst",["soll","sollt"],"Bu kadar çok çalışmamalısın."],
+ ["Die Kinder ___ im Park spielen.","dürfen",["darf","darfst"],"Çocuklar parkta oynayabilir (izinli)."],
+ ["___ du mir helfen?","Kannst",["Kann","Können"],"Bana yardım edebilir misin?"],
+ ["Er ___ nicht kommen, er ist krank.","kann",["können","kannst"],"Gelemiyor, hasta."],
+ ["Ich ___ dich morgen anrufen.","muss",["müssen","musst"],"Seni yarın aramam gerekiyor."]
+ ]},
+"gq-imperativ": {emoji:"📣", qtype:"EMİR KİPİ (IMPERATIV)",
+ hint:"du: -st düşer, du kalkar (kommst → Komm!; fährst → Fahr!; isst → Iss!). ihr: sadece ihr kalkar (kommt → Kommt!). Sie: mastar + Sie, fiil başta (Kommen Sie!).",
+ items:[
+ ["___ bitte das Fenster! (du, öffnen)","Öffne",["Öffnest","Öffnet"],"Lütfen pencereyi aç!"],
+ ["___ mir bitte den Stift! (du, geben)","Gib",["Gibst","Gebt"],"Bana lütfen kalemi ver!"],
+ ["___ schnell! (du, kommen)","Komm",["Kommst","Kommt"],"Çabuk gel!"],
+ ["___ nicht so laut! (ihr, sprechen)","Sprecht",["Sprich","Sprechen Sie"],"Bu kadar yüksek sesle konuşmayın!"],
+ ["___ bitte hier! (Sie, warten)","Warten Sie",["Wartet","Warte"],"Lütfen burada bekleyin."],
+ ["___ mir bitte! (Sie, helfen)","Helfen Sie",["Helft","Hilf"],"Lütfen bana yardım edin."],
+ ["___ langsam! (du, fahren)","Fahr",["Fähr","Fährst"],"Yavaş sür!"],
+ ["___ mich morgen an! (ihr, anrufen)","Ruft",["Rufst","Rufen"],"Beni yarın arayın!"],
+ ["___ den Kaffee, bitte! (Sie, bringen)","Bringen Sie",["Bring","Bringt"],"Lütfen kahveyi getirin."],
+ ["___ doch etwas! (du, essen)","Iss",["Isst","Esse"],"Hadi biraz bir şey ye!"],
+ ["___ die Tür zu! (du, machen)","Mach",["Machst","Macht"],"Kapıyı kapat!"],
+ ["___ mir den Weg! (du, zeigen)","Zeig",["Zeigst","Zeigt"],"Bana yolu göster!"],
+ ["___ nicht so lange! (ihr, warten)","Wartet",["Warte","Warten Sie"],"Bu kadar uzun beklemeyin!"]
+ ]},
+"gq-nicht": {emoji:"🚫", qtype:"NICHT MI, KEIN MI?",
+ hint:"kein = isim yok (Ich habe keine Zeit.), nicht = fiil / sıfat / bilinen şey olumsuz (Er kommt nicht. Das ist nicht teuer.). kein: der/das → kein / keinen (Akk.), die/çoğul → keine.",
+ items:[
+ ["Ich habe ___ Zeit.","keine",["nicht","kein"],"Vaktim yok."],
+ ["Das ist ___ mein Buch.","nicht",["kein","keine"],"Bu benim kitabım değil."],
+ ["Ich habe ___ Hund.","keinen",["nicht","keine"],"Köpeğim yok."],
+ ["Er kommt heute ___.","nicht",["kein","keine"],"Bugün gelmiyor."],
+ ["Das Auto ist ___ neu.","nicht",["kein","keine"],"Araba yeni değil."],
+ ["Sie hat ___ Schwester.","keine",["nicht","keinen"],"Onun kız kardeşi yok."],
+ ["Ich trinke ___ Kaffee.","keinen",["nicht","keine"],"Kahve içmiyorum."],
+ ["Wir haben ___ Auto.","kein",["keine","nicht"],"Arabamız yok."],
+ ["Er ist ___ müde.","nicht",["kein","keine"],"O yorgun değil."],
+ ["Ich esse ___ Fleisch.","kein",["keine","nicht"],"Et yemiyorum."],
+ ["Das ist ___ Tisch, das ist ein Stuhl.","kein",["nicht","keine"],"Bu masa değil, sandalye."],
+ ["Wir arbeiten heute ___.","nicht",["kein","keine"],"Bugün çalışmıyoruz."],
+ ["Ich habe ___ Hunger.","keinen",["nicht","keine"],"Karnım aç değil."],
+ ["Das Essen ist ___ teuer.","nicht",["kein","keine"],"Yemek pahalı değil."],
+ ["Hast du ___ Geschwister?","keine",["nicht","kein"],"Kardeşin yok mu?"]
+ ]},
+"gq-trennbar": {emoji:"🪢", qtype:"BÖLÜNEN FİİL — DOĞRU CÜMLE?", choose:true,
+ hint:"Normal cümlede fiil kökü 2. sırada, ön ek (an, ein, ab, mit, auf…) en sonda. Modal fiil varsa fiil bölünmez: mastar olarak en sonda (Ich möchte dich anrufen.).",
+ items:[
+ ["Annemi arıyorum.","Ich rufe meine Mutter an.",["Ich anrufe meine Mutter.","Ich rufe an meine Mutter."]],
+ ["Arkadaşlarımızı davet ediyoruz.","Wir laden unsere Freunde ein.",["Wir einladen unsere Freunde.","Wir laden ein unsere Freunde."]],
+ ["O beni istasyondan alıyor.","Er holt mich am Bahnhof ab.",["Er abholt mich am Bahnhof.","Er holt ab mich am Bahnhof."]],
+ ["O bir pasta getiriyor.","Sie bringt einen Kuchen mit.",["Sie mitbringt einen Kuchen.","Sie bringt mit einen Kuchen."]],
+ ["Odayı topluyoruz.","Wir räumen das Zimmer auf.",["Wir aufräumen das Zimmer.","Wir räumen auf das Zimmer."]],
+ ["Saat altıda kalkıyorum.","Ich stehe um sechs Uhr auf.",["Ich aufstehe um sechs Uhr.","Ich stehe auf um sechs Uhr."]],
+ ["Bugün alışveriş yapıyoruz.","Wir kaufen heute ein.",["Wir einkaufen heute.","Wir kaufen ein heute."]],
+ ["Seni yarın aramak istiyorum.","Ich möchte dich morgen anrufen.",["Ich möchte dich morgen rufe an.","Ich möchte an dich morgen rufen."]],
+ ["Arkadaşlarımızı davet etmeliyiz.","Wir müssen unsere Freunde einladen.",["Wir müssen unsere Freunde laden ein.","Wir müssen einladen unsere Freunde."]],
+ ["Kurs saat sekizde başlıyor.","Der Kurs fängt um acht Uhr an.",["Der Kurs anfängt um acht Uhr.","Der Kurs fängt an um acht Uhr."]],
+ ["Sen de geliyor musun?","Kommst du mit?",["Mitkommst du?","Kommst mit du?"]]
+ ]},
+"gq-kasus": {emoji:"🎯", qtype:"FİİL HANGİ HÂLİ İSTİYOR?",
+ hint:"Sadece Dativ: helfen, danken, gehören, antworten, schmecken, gefallen. Sadece Akkusativ: sehen, kaufen, brauchen, lieben, finden, kennen. İkisi birden: geben, zeigen, schenken (kime = Dativ, neyi = Akkusativ).",
+ items:[
+ ["Ich helfe ___ Mann.","dem",["den","der"],"Adama yardım ediyorum."],
+ ["Ich sehe ___ Mann.","den",["dem","der"],"Adamı görüyorum."],
+ ["Wir danken ___ Lehrerin.","der",["die","den"],"Öğretmene teşekkür ediyoruz."],
+ ["Er kauft ___ Tisch.","den",["dem","der"],"Masayı satın alıyor."],
+ ["Das Auto gehört ___ Frau.","der",["die","dem"],"Araba kadına ait."],
+ ["Ich brauche ___ Stift.","den",["dem","der"],"Bir kaleme ihtiyacım var (o kaleme)."],
+ ["Ich antworte ___ Kind.","dem",["das","den"],"Çocuğa cevap veriyorum."],
+ ["Sie liebt ___ Hund.","den",["dem","der"],"O köpeği seviyor."],
+ ["Ich zeige ___ Frau das Haus.","der",["die","dem"],"Kadına evi gösteriyorum."],
+ ["Ich sehe ___ Frau.","die",["der","dem"],"Kadını görüyorum."],
+ ["Wir kaufen ___ Buch.","das",["dem","den"],"Kitabı satın alıyoruz."],
+ ["Er hilft ___ Freund.","dem",["den","der"],"Arkadaşına yardım ediyor."],
+ ["Sie schenkt ___ Mutter Blumen.","der",["die","dem"],"Annesine çiçek hediye ediyor."],
+ ["Ich finde ___ Film gut.","den",["dem","der"],"Filmi iyi buluyorum."],
+ ["Ich helfe ___.","dir",["dich","du"],"Sana yardım ediyorum."],
+ ["Ich sehe ___.","dich",["dir","du"],"Seni görüyorum."],
+ ["Er dankt ___.","mir",["mich","ich"],"Bana teşekkür ediyor."],
+ ["Sie kennt ___.","mich",["mir","ich"],"O beni tanıyor."]
+ ]}
+});
+GQ_ORDER.push("gq-modal","gq-imperativ","gq-nicht","gq-trennbar","gq-kasus");
 
 function gqFull(bank, it){ return bank.choose ? it[1] : it[0].replace("___", it[1]); }
 function gqQuestion(bank, it){
@@ -7213,7 +7338,7 @@ function buildGqSession(mode){
     let all = [];
     GQ_ORDER.forEach(m => {
       const b = GQ_BANK[m];
-      all = all.concat(shuffleArray(b.items).slice(0, 3).map(it => gqQuestion(b, it)));
+      all = all.concat(shuffleArray(b.items).slice(0, 2).map(it => gqQuestion(b, it)));
     });
     return shuffleArray(all);
   }
