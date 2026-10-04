@@ -180,7 +180,7 @@
   .test-details[open] > summary::after{transform:rotate(180deg);}
   .test-details .gcount{font-weight:400; color:#8a8a8a; font-size:12px; margin-left:4px;}
   .test-details .inner{padding:10px;}
-  .report-fab{position:fixed;left:14px;bottom:14px;width:42px;height:42px;border-radius:50%;border:1px solid var(--brass);background:#fff;font-size:20px;line-height:1;box-shadow:0 2px 8px rgba(0,0,0,.22);cursor:pointer;z-index:40;opacity:.92;display:flex;align-items:center;justify-content:center;padding:0;}
+  .report-fab{position:fixed;right:14px;bottom:14px;width:42px;height:42px;border-radius:50%;border:1px solid var(--brass);background:#fff;font-size:20px;line-height:1;box-shadow:0 2px 8px rgba(0,0,0,.22);cursor:pointer;z-index:40;opacity:.92;display:flex;align-items:center;justify-content:center;padding:0;}
   .report-fab:hover{opacity:1;transform:scale(1.06);}
   #reportOverlay .add-card{max-height:92vh;overflow-y:auto;}
   #reportOverlay select, #reportOverlay textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:6px;padding:9px 10px;font-family:system-ui,Helvetica,Arial,sans-serif;font-size:14px;background:#fff;margin-bottom:10px;}
@@ -191,6 +191,18 @@
   .rp-actions button{flex:1 1 40%;white-space:normal;}
   .rp-status{min-height:18px;font-size:12.5px;margin-bottom:6px;font-family:system-ui,Helvetica,Arial,sans-serif;}
   .rp-status.ok{color:var(--sea);} .rp-status.err{color:var(--coral);}
+  #referansSection{max-width:1000px;}
+  .ref-tools{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 6px;}
+  .ref-tools .btn-ghost{font-size:12.5px; padding:6px 12px; white-space:normal;}
+  .ref-sec > h2.ref-toggle{cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:10px; user-select:none;}
+  .ref-sec > h2.ref-toggle::after{content:"▾"; color:var(--brass); font-size:16px; flex-shrink:0; transition:transform .15s;}
+  .ref-sec.open > h2.ref-toggle::after{transform:rotate(180deg);}
+  .ref-sec > h2.ref-toggle:hover{color:var(--deep);}
+  .ref-sec > h2.ref-toggle:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+  .ref-sec .ref-body{display:none;}
+  .ref-sec.open .ref-body{display:block;}
+  .ref-sec:not(.open){padding:13px 22px; margin-bottom:0; margin-top:8px;}
+  .ref-sec:not(.open) > h2.ref-toggle{margin:0; padding-bottom:0; border-bottom:none;}
   .test-subtabs{
     display:flex;
     flex-wrap:wrap;
@@ -1017,6 +1029,75 @@
   .kg-score{font-size:46px;}
 }
 
+
+  /* --- Telefon: isim ve fiil tabloları yana kaydırma gerektirmesin --- */
+  @media (max-width:600px){
+    table.mob-rows, table.mob-rows tbody{display:block;}
+    table.mob-rows thead{display:none;}
+    table.mob-rows tr{display:grid; align-items:center; border-bottom:1px solid #eee; padding:2px 0;}
+    table.mob-rows td{border-bottom:none; padding:4px 3px; min-width:0; overflow-wrap:anywhere;}
+    table.mob-rows td.no-match{grid-area:auto !important; grid-column:1 / -1 !important;}
+    #wordTable tr{grid-template-columns:44px 30px 1fr 34px 34px 34px;}
+    #wordTable td:nth-child(1){grid-area:1 / 1;}
+    #wordTable td:nth-child(2){grid-area:1 / 2;}
+    #wordTable td:nth-child(3){grid-area:1 / 3;}
+    #wordTable td:nth-child(4){grid-area:1 / 4;}
+    #wordTable td:nth-child(7){grid-area:1 / 5;}
+    #wordTable td:nth-child(8){grid-area:1 / 6;}
+    #wordTable td:nth-child(5){grid-area:2 / 1 / 3 / 4; color:#555;}
+    #wordTable td:nth-child(5)::before{content:"Çoğul: "; color:#999; font-size:11px;}
+    #wordTable td:nth-child(6){grid-area:2 / 4;}
+    #verbTable tr{grid-template-columns:30px 1fr 34px 34px;}
+    #verbTable td:nth-child(1){grid-area:1 / 1;}
+    #verbTable td:nth-child(2){grid-area:1 / 2 / 2 / 4;}
+    #verbTable td:nth-child(3){grid-area:1 / 4;}
+    #verbTable td:nth-child(4){grid-area:2 / 1 / 3 / 3;}
+    #verbTable td:nth-child(5){grid-area:2 / 3;}
+    #verbTable td:nth-child(6){grid-area:2 / 4;}
+    table.mob-rows5 tr{grid-template-columns:30px 1fr 34px 34px 34px;}
+    table.mob-rows .del{padding:9px 4px; font-size:13px;}
+  }
+  /* --- Dokunmatik cihazlar: iOS yakınlaşmasını önle + parmak dostu hedefler (kuralların EN SONUNDA olmalı) --- */
+  @media (pointer:coarse){
+    input:not([type=checkbox]):not([type=radio]):not([type=range]), textarea, select{font-size:16px !important;}
+    .speak-btn{padding:9px 9px;}
+    .beispiel-btn{padding:8px 8px;}
+    .del{padding:9px 10px; font-size:14px;}
+    .adj-side-btns .speak-btn{width:34px; height:34px;}
+    .adj-side-btns .conj-btn, .adj-side-btns .del{padding:8px 10px;}
+    .filter-btn, .interval-btn{min-height:36px;}
+    .test-subtab{min-height:38px;}
+    .btn-ghost{min-height:36px;}
+    .conj-btn, .adj-side-btns .conj-btn{padding:8px 12px !important;}
+    .adj-side-btns .del{padding:8px 12px !important;}
+    .kg-close{min-width:40px; min-height:40px;}
+  }
+  @media (max-width:600px) and (pointer:coarse){
+    table.mob-rows .del{padding:9px 7px; font-size:13px;}
+  }
+
+/* --- Hikâyeler: başlık bandı --- */
+.kg-hero{position:relative;text-align:center;padding:30px 20px 22px;margin:0 0 20px;color:#F5F0E6;
+  background:radial-gradient(120% 140% at 50% 0%, #1C4B5C 0%, #0F2A3D 62%);
+  border:1px solid var(--brass);border-radius:3px;
+  box-shadow:inset 0 0 0 5px #0F2A3D, inset 0 0 0 6px rgba(201,166,107,.55), 0 6px 18px rgba(15,42,61,.22);}
+.kg-hero .kg-eyebrow{font-family:system-ui,Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--brass);margin:0 0 10px;}
+.kg-hero .kg-brand{font-family:var(--kg-serif);font-weight:400;font-size:clamp(30px,5vw,46px);letter-spacing:.015em;line-height:1.1;color:#F7F1E3;margin:0;text-shadow:0 1px 0 rgba(0,0,0,.35);}
+.kg-orn{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px auto 12px;max-width:260px;color:var(--brass);}
+.kg-orn span{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--brass));}
+.kg-orn span:last-child{background:linear-gradient(270deg,transparent,var(--brass));}
+.kg-orn i{font-style:normal;font-size:14px;line-height:1;}
+.kg-hero .kg-tagline{font-family:var(--kg-serif);font-style:italic;font-size:15px;color:#D9CDB0;margin:0 0 16px;text-wrap:balance;}
+.kg-prog{display:flex;flex-direction:column;align-items:center;gap:7px;font-family:system-ui,Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:.04em;color:#CDBF9F;}
+.kg-prog-bar{width:min(220px,70%);height:4px;border-radius:3px;background:rgba(245,240,230,.18);overflow:hidden;}
+.kg-prog-bar i{display:block;height:100%;background:linear-gradient(90deg,#B08D4F,var(--brass));border-radius:3px;transition:width .5s;}
+@media (max-width:480px){
+  .kg-hero{padding:24px 12px 18px;}
+  .kg-hero .kg-brand{font-size:28px;}
+  .kg-hero .kg-eyebrow{letter-spacing:.24em;font-size:10px;}
+  .kg-hero .kg-tagline{font-size:13.5px;}
+}
+@media (prefers-reduced-motion:reduce){.kg-prog-bar i{transition:none;}}
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1046,7 +1127,7 @@
     <button class="side-tab" id="tabBtnSaat" onclick="switchTab('saat')">Saatler & Takvim (Uhrzeit & Kalender)</button>
     <button class="side-tab" id="tabBtnFrage" onclick="switchTab('frage')">Soru Kelimeleri (W-Fragen)</button>
     <button class="side-tab" id="tabBtnReferans" onclick="switchTab('referans')">📌 Hızlı Referans (Gramer Kuralları)</button>
-    <button class="side-tab" id="tabBtnHikayeler" onclick="switchTab('hikayeler')">📖 Hikâyeler</button>
+    <button class="side-tab" id="tabBtnHikayeler" onclick="switchTab('hikayeler')">📖 Hikâyeler (Kleine Geschichten)</button>
   </nav>
   <div class="left-col">
   <div id="artikelSection">
@@ -1074,7 +1155,7 @@
       <div class="hint-line">Kelimeye tıkla → Türkçesini gör</div>
 
       <div class="wordlist-scroll">
-        <table>
+        <table id="wordTable" class="mob-rows">
           <thead><tr><th>Art.</th><th></th><th>Kelime</th><th></th><th>Çoğul</th><th></th><th>Örnek Cümle</th><th></th></tr></thead>
           <tbody id="wordTableBody"></tbody>
         </table>
@@ -1117,7 +1198,7 @@
       <div class="hint-line">Fiile tıkla → Türkçesini gör</div>
 
       <div class="wordlist-scroll">
-        <table>
+        <table id="verbTable" class="mob-rows">
           <thead><tr><th></th><th>Fiil (Infinitiv)</th><th></th><th></th><th>Örnek Cümle</th><th></th></tr></thead>
           <tbody id="verbTableBody"></tbody>
         </table>
@@ -1182,7 +1263,7 @@
       </div>
       <div class="hint-line">İfadeye tıkla → Türkçesini gör</div>
       <div class="wordlist-scroll">
-        <table>
+        <table class="mob-rows mob-rows5">
           <thead><tr><th></th><th>İfade</th><th></th><th>Örnek Cümle</th><th></th></tr></thead>
           <tbody id="saatTableBody"></tbody>
         </table>
@@ -1210,7 +1291,7 @@
       </div>
       <div class="hint-line">Bağlaca tıkla → Türkçesini gör</div>
       <div class="wordlist-scroll">
-        <table>
+        <table class="mob-rows mob-rows5">
           <thead><tr><th></th><th>Bağlaç</th><th></th><th>Örnek Cümle</th><th></th></tr></thead>
           <tbody id="konjTableBody"></tbody>
         </table>
@@ -1230,7 +1311,7 @@
       </div>
       <div class="hint-line">Kelimeye tıkla → Türkçesini gör</div>
       <div class="wordlist-scroll">
-        <table>
+        <table class="mob-rows mob-rows5">
           <thead><tr><th></th><th>Soru Kelimesi</th><th></th><th>Örnek Cümle</th><th></th></tr></thead>
           <tbody id="frageTableBody"></tbody>
         </table>
@@ -1252,7 +1333,7 @@
       </div>
       <div class="hint-line">Edata tıkla → Türkçesini gör</div>
       <div class="wordlist-scroll">
-        <table>
+        <table class="mob-rows mob-rows5">
           <thead><tr><th></th><th>Edat</th><th></th><th>Örnek Cümle</th><th></th></tr></thead>
           <tbody id="praepTableBody"></tbody>
         </table>
@@ -1265,6 +1346,16 @@
   </div>
 
   <div id="referansSection" style="display:none;">
+    <div class="search-row">
+      <input type="text" id="refSearch" placeholder="Tüm kartlarda ara… (ör. Dativ, weil, man, edat)" oninput="applyRefSearch()">
+      <button class="btn-ghost" onclick="clearRefSearch()">Temizle</button>
+    </div>
+    <div class="ref-tools">
+      <button class="btn-ghost" onclick="refToggleAll(true)">Hepsini aç</button>
+      <button class="btn-ghost" onclick="refToggleAll(false)">Hepsini kapat</button>
+    </div>
+    <div class="hint-line" id="refHint">Kart başlığına dokun → aç / kapat</div>
+    <div class="hint-line" id="refSearchInfo" style="display:none;"></div>
     <div class="ref-subtabs">
       <button class="ref-subtab" id="refTabNomen" onclick="switchReferansGroup('nomen')">İsimler (Nomen) — Gramer Kuralları</button>
       <button class="ref-subtab" id="refTabDativ" onclick="switchReferansGroup('dativ')">Dativ (wem?) — Gramer Kuralları</button>
@@ -4551,15 +4642,17 @@ function switchTab(tab){
     switchReferansGroup("nomen");
   }
   const rightPanel = document.getElementById("rightPanel");
-  if(rightPanel) rightPanel.style.display = (tab === "hikayeler") ? "none" : "";
+  if(rightPanel) rightPanel.style.display = (tab === "hikayeler" || tab === "referans") ? "none" : "";
   const mainEl = document.querySelector("main");
-  if(mainEl) mainEl.classList.toggle("no-right", tab === "hikayeler");
+  if(mainEl) mainEl.classList.toggle("no-right", tab === "hikayeler" || tab === "referans");
   if(tab === "hikayeler" && window.KG){
     window.KG.init();
   }
 }
 
 function switchReferansGroup(group){
+  const rsb = document.getElementById("refSearch");
+  if(rsb && rsb.value){ rsb.value = ""; applyRefSearch(); }
   ["nomen","dativ","verben","saatler","frage","praep","konj"].forEach(g => {
     const capitalized = g.charAt(0).toUpperCase() + g.slice(1);
     document.getElementById("refGroup" + capitalized).style.display = (g === group) ? "block" : "none";
@@ -4715,6 +4808,7 @@ function addWord(){
 }
 
 function deleteWord(idx){
+  if(!confirm("\"" + (words[idx] ? words[idx].word : "") + "\" listeden silinsin mi?")) return;
   words.splice(idx,1);
   revealedWords.delete(idx);
   saveWords();
@@ -4967,6 +5061,7 @@ function addVerb(){
 }
 
 function deleteVerb(idx){
+  if(!confirm("\"" + (verbs[idx] ? verbs[idx].verb : "") + "\" listeden silinsin mi?")) return;
   verbs.splice(idx,1);
   revealedVerbs.delete(idx);
   saveVerbs();
@@ -5140,6 +5235,7 @@ function addAdjective(){
 }
 
 function deleteAdjective(idx){
+  if(!confirm("\"" + (adjectives[idx] ? adjectives[idx].adj : "") + "\" listeden silinsin mi?")) return;
   adjectives.splice(idx,1);
   revealedAdj.delete(idx);
   saveAdjectives();
@@ -8452,6 +8548,76 @@ function fallbackCopy(text, done){
 document.addEventListener("keydown", (e) => {
   if(e.key === "Escape" && document.getElementById("reportOverlay").classList.contains("show")) closeReport();
 });
+
+/* ---------- HIZLI REFERANS: açılır kartlar + arama ---------- */
+function refNorm(s){
+  return String(s||"").toLocaleLowerCase("tr").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/ı/g,"i").replace(/ß/g,"ss");
+}
+function setRefOpen(sec, open){
+  sec.classList.toggle("open", open);
+  const h = sec.querySelector(":scope > h2.ref-toggle");
+  if(h) h.setAttribute("aria-expanded", open ? "true" : "false");
+}
+function initRefAccordion(){
+  document.querySelectorAll("#referansSection .ref-group section.panel").forEach(sec => {
+    const h = [...sec.children].find(el => el.tagName === "H2");
+    if(!h) return;
+    const body = document.createElement("div");
+    body.className = "ref-body";
+    while(h.nextSibling) body.appendChild(h.nextSibling);
+    sec.appendChild(body);
+    sec.classList.add("ref-sec");
+    h.classList.add("ref-toggle");
+    h.setAttribute("role","button"); h.setAttribute("tabindex","0"); h.setAttribute("aria-expanded","false");
+    const toggle = () => { delete sec.dataset.auto; setRefOpen(sec, !sec.classList.contains("open")); };
+    h.addEventListener("click", toggle);
+    h.addEventListener("keydown", e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); toggle(); } });
+  });
+}
+function applyRefSearch(){
+  const q = refNorm((document.getElementById("refSearch").value || "").trim());
+  const info = document.getElementById("refSearchInfo");
+  const hint = document.getElementById("refHint");
+  const act = document.querySelector("#referansSection .ref-subtab.active");
+  const activeId = act ? "refGroup" + act.id.replace("refTab","") : null;
+  let hits = 0;
+  document.querySelectorAll("#referansSection .ref-group").forEach(g => {
+    const secs = [...g.querySelectorAll("section.ref-sec")];
+    if(!q){
+      secs.forEach(s => { s.style.display = ""; if(s.dataset.auto === "1"){ setRefOpen(s, false); delete s.dataset.auto; } });
+      g.style.display = (g.id === activeId) ? "block" : "none";
+      return;
+    }
+    let any = false;
+    secs.forEach(s => {
+      if(s._n === undefined) s._n = refNorm(s.textContent);
+      const hit = s._n.includes(q);
+      s.style.display = hit ? "" : "none";
+      if(hit){
+        any = true; hits++;
+        if(!s.classList.contains("open")){ setRefOpen(s, true); s.dataset.auto = "1"; }
+      } else if(s.dataset.auto === "1"){ setRefOpen(s, false); delete s.dataset.auto; }
+    });
+    g.style.display = any ? "block" : "none";
+  });
+  info.style.display = q ? "" : "none";
+  hint.style.display = q ? "none" : "";
+  info.textContent = q ? (hits ? hits + " kart bulundu (tüm sekmelerde)" : "Sonuç yok. Başka bir kelime dene.") : "";
+}
+function clearRefSearch(){
+  document.getElementById("refSearch").value = "";
+  applyRefSearch();
+}
+function refToggleAll(open){
+  document.querySelectorAll("#referansSection .ref-group").forEach(g => {
+    if(getComputedStyle(g).display === "none") return;
+    g.querySelectorAll("section.ref-sec").forEach(s => {
+      if(s.style.display === "none") return;
+      delete s.dataset.auto; setRefOpen(s, open);
+    });
+  });
+}
+initRefAccordion();
 switchTestGroup(savedTestGroup);
 </script>
 
@@ -9211,8 +9377,14 @@ function render(){
 function viewHome(){
   const n=Object.keys(S.done).length;
   const hasPerf=STORIES.some(s=>PERFEKT_STORIES.has(s.id));
-  app.innerHTML=`<h1 class="kg-brand">Kleine Geschichten</h1>
-  <p class="kg-sub">A1/A2 Almanca hikâyeler · ${n} / ${STORIES.length} tamamlandı</p>
+  const pct = STORIES.length ? Math.round(n / STORIES.length * 100) : 0;
+  app.innerHTML=`<header class="kg-hero">
+    <div class="kg-eyebrow">Lesesaal · Okuma Salonu</div>
+    <h1 class="kg-brand">Kleine Geschichten</h1>
+    <div class="kg-orn" aria-hidden="true"><span></span><i>❖</i><span></span></div>
+    <p class="kg-tagline">Kısa hikâyelerle Almanca okuma ve dinleme · A1&nbsp;/&nbsp;A2</p>
+    <div class="kg-prog" role="progressbar" aria-valuenow="${n}" aria-valuemin="0" aria-valuemax="${STORIES.length}"><div class="kg-prog-bar"><i style="width:${pct}%"></i></div><span>${n} / ${STORIES.length} hikâye tamamlandı</span></div>
+  </header>
   <p class="kg-note"><span class="kg-prat">🕰 Präteritum</span> işaretli hikâyeler baştan sona geçmiş zamanla (war, hatte, ging, kam gibi) anlatılmıştır. <span class="kg-mix">🔀 Karışık</span> işaretli hikâyeler şimdiki zaman ile Präteritum'u bir arada kullanır.${hasPerf?' <span class="kg-perf">⚡ Perfekt</span> işaretli hikâyeler ise "hat gemacht / ist gegangen" kalıbını kullanır — bunu henüz işlemediyseniz sona saklayın.':''} Rozetsiz hikâyeler tamamen şimdiki zamanla yazılmıştır.</p>
   <div class="kg-shelf">${STORIES.map(s=>{const d=S.done[s.id];const perf=PERFEKT_STORIES.has(s.id);const prat=PRATERITUM_STORIES.has(s.id);const mix=MIXED_STORIES.has(s.id);return `
    <button class="kg-book" data-open="${s.id}"><div class="kg-cover" style="background:${s.color}" aria-hidden="true">${s.icon}</div>
