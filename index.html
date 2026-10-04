@@ -1031,7 +1031,9 @@
 
 
   /* --- Telefon: isim ve fiil tabloları yana kaydırma gerektirmesin --- */
-  @media (max-width:600px){
+  @media (max-width:600px), (max-height:500px) and (pointer:coarse){
+    .wordlist-scroll{max-height:none !important; overflow-y:visible;}
+    table.mob-rows td.more-cell{grid-area:auto !important; grid-column:1 / -1 !important; text-align:center; padding:12px 0;}
     table.mob-rows, table.mob-rows tbody{display:block;}
     table.mob-rows thead{display:none;}
     table.mob-rows tr{display:grid; align-items:center; border-bottom:1px solid #eee; padding:2px 0;}
@@ -1098,6 +1100,29 @@
   .kg-hero .kg-tagline{font-size:13.5px;}
 }
 @media (prefers-reduced-motion:reduce){.kg-prog-bar i{transition:none;}}
+
+  /* --- Pencereler: ekrandan uzun kartlar üstten kesilmesin, kaydırılabilsin (yatay telefon) --- */
+  .overlay{align-items:flex-start; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch;}
+  .overlay > *{margin:auto;}
+  @supports (height:100dvh){ #reportOverlay .add-card{max-height:92dvh;} }
+  html.no-scroll, html.no-scroll body{overflow:hidden;}
+  /* --- Liste kutusu: büyük ekranda ekrana oranla --- */
+  .wordlist-scroll{max-height:max(340px, 62vh);}
+  /* --- Akıllı 🐞: küçük, yarı saydam, kaydırırken/klavye açıkken gizli --- */
+  .report-fab{width:36px; height:36px; font-size:17px; opacity:.55;
+    right:calc(10px + env(safe-area-inset-right, 0px)); bottom:calc(10px + env(safe-area-inset-bottom, 0px));
+    transition:opacity .2s, transform .2s;}
+  .report-fab:hover, .report-fab:focus-visible, .report-fab:active{opacity:1;}
+  .report-fab.fab-hide{opacity:0; transform:scale(.6); pointer-events:none;}
+  .app-toast{position:fixed; left:50%; bottom:64px; transform:translateX(-50%) translateY(12px); background:#0F2A3D; color:#F5F0E6;
+    padding:10px 16px; border-radius:8px; font:600 13px/1.4 system-ui,Helvetica,Arial,sans-serif; z-index:1300; max-width:88vw; text-align:center;
+    box-shadow:0 6px 18px rgba(0,0,0,.3); opacity:0; pointer-events:none; transition:opacity .2s, transform .2s;}
+  .app-toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  .jump-tests{display:none; font-weight:700; color:var(--teal); text-decoration:none; white-space:nowrap;}
+  .jump-tests-btn{display:inline-block; margin:6px 0 0 8px; padding:7px 12px; border:1px solid var(--brass); border-radius:10px; color:var(--deep); font:700 12.5px system-ui,Helvetica,Arial,sans-serif; text-decoration:none; background:#fff;}
+  @media (max-width:600px), (max-height:500px) and (pointer:coarse){ .jump-tests{display:inline-block; float:right;} html{scroll-behavior:smooth;} }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto !important;} }
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1138,7 +1163,7 @@
       </div>
 
       <div class="search-row">
-        <input type="text" id="searchInput" placeholder="Kelime ara... (Tisch, Haus, kitap...)" oninput="renderWords()">
+        <input type="text" id="searchInput" placeholder="Kelime ara... (Tisch, Haus, kitap...)" oninput="debouncedSearch('renderWords')">
         <button class="btn-ghost" onclick="clearSearch('artikel')">Temizle</button>
       </div>
       <div class="filter-row" id="filterRow">
@@ -1152,7 +1177,7 @@
           <option value="all">🔎 Tüm Konular</option>
         </select>
       </div>
-      <div class="hint-line">Kelimeye tıkla → Türkçesini gör</div>
+      <div class="hint-line">Kelimeye tıkla → Türkçesini gör <a href="#rightPanel" class="jump-tests">⬇ Testlere git</a></div>
 
       <div class="wordlist-scroll">
         <table id="wordTable" class="mob-rows">
@@ -1187,7 +1212,7 @@
       </div>
 
       <div class="search-row">
-        <input type="text" id="verbSearchInput" placeholder="Fiil ara... (gehen, yapmak...)" oninput="renderVerbs()">
+        <input type="text" id="verbSearchInput" placeholder="Fiil ara... (gehen, yapmak...)" oninput="debouncedSearch('renderVerbs')">
         <button class="btn-ghost" onclick="clearSearch('verben')">Temizle</button>
       </div>
       <div style="margin:8px 0;">
@@ -1195,7 +1220,7 @@
           <option value="all">🔎 Tüm Konular</option>
         </select>
       </div>
-      <div class="hint-line">Fiile tıkla → Türkçesini gör</div>
+      <div class="hint-line">Fiile tıkla → Türkçesini gör <a href="#rightPanel" class="jump-tests">⬇ Testlere git</a></div>
 
       <div class="wordlist-scroll">
         <table id="verbTable" class="mob-rows">
@@ -1226,7 +1251,7 @@
       </div>
 
       <div class="search-row">
-        <input type="text" id="adjSearchInput" placeholder="Sıfat ara... (groß, güzel...)" oninput="renderAdjectives()">
+        <input type="text" id="adjSearchInput" placeholder="Sıfat ara... (groß, güzel...)" oninput="debouncedSearch('renderAdjectives')">
         <button class="btn-ghost" onclick="clearSearch('adj')">Temizle</button>
       </div>
       <div style="margin:8px 0;">
@@ -1234,7 +1259,7 @@
           <option value="all">🔎 Tüm Konular</option>
         </select>
       </div>
-      <div class="hint-line">Sıfata tıkla → Türkçesini gör. Zıt anlamlılar karşılıklı gösterilir.</div>
+      <div class="hint-line">Sıfata tıkla → Türkçesini gör. Zıt anlamlılar karşılıklı gösterilir. <a href="#rightPanel" class="jump-tests">⬇ Testlere git</a></div>
 
       <div class="wordlist-scroll" style="max-height:680px;">
         <div id="adjPairGrid" class="adj-split-wrap">
@@ -1258,7 +1283,7 @@
         <button class="btn-add" onclick="openAddSaatModal()">+ İfade Ekle</button>
       </div>
       <div class="search-row">
-        <input type="text" id="saatSearchInput" placeholder="Ara... (Uhr, Montag, Januar...)" oninput="renderSaat()">
+        <input type="text" id="saatSearchInput" placeholder="Ara... (Uhr, Montag, Januar...)" oninput="debouncedSearch('renderSaat')">
         <button class="btn-ghost" onclick="clearSearch('saat')">Temizle</button>
       </div>
       <div class="hint-line">İfadeye tıkla → Türkçesini gör</div>
@@ -1286,7 +1311,7 @@
         <button class="btn-add" onclick="openAddKonjModal()">+ Bağlaç Ekle</button>
       </div>
       <div class="search-row">
-        <input type="text" id="konjSearchInput" placeholder="Ara... (und, weil, bağlaç...)" oninput="renderKonj()">
+        <input type="text" id="konjSearchInput" placeholder="Ara... (und, weil, bağlaç...)" oninput="debouncedSearch('renderKonj')">
         <button class="btn-ghost" onclick="clearSearch('konj')">Temizle</button>
       </div>
       <div class="hint-line">Bağlaca tıkla → Türkçesini gör</div>
@@ -1306,7 +1331,7 @@
         <button class="btn-add" onclick="openAddFrageModal()">+ Soru Kelimesi Ekle</button>
       </div>
       <div class="search-row">
-        <input type="text" id="frageSearchInput" placeholder="Ara... (wer, wann, soru...)" oninput="renderFrage()">
+        <input type="text" id="frageSearchInput" placeholder="Ara... (wer, wann, soru...)" oninput="debouncedSearch('renderFrage')">
         <button class="btn-ghost" onclick="clearSearch('frage')">Temizle</button>
       </div>
       <div class="hint-line">Kelimeye tıkla → Türkçesini gör</div>
@@ -1328,7 +1353,7 @@
         <button class="btn-add" onclick="openAddPraepModal()">+ Edat Ekle</button>
       </div>
       <div class="search-row">
-        <input type="text" id="praepSearchInput" placeholder="Ara... (mit, für, edat...)" oninput="renderPraep()">
+        <input type="text" id="praepSearchInput" placeholder="Ara... (mit, für, edat...)" oninput="debouncedSearch('renderPraep')">
         <button class="btn-ghost" onclick="clearSearch('praep')">Temizle</button>
       </div>
       <div class="hint-line">Edata tıkla → Türkçesini gör</div>
@@ -1347,7 +1372,7 @@
 
   <div id="referansSection" style="display:none;">
     <div class="search-row">
-      <input type="text" id="refSearch" placeholder="Tüm kartlarda ara… (ör. Dativ, weil, man, edat)" oninput="applyRefSearch()">
+      <input type="text" id="refSearch" placeholder="Tüm kartlarda ara… (ör. Dativ, weil, man, edat)" oninput="debouncedSearch('applyRefSearch')">
       <button class="btn-ghost" onclick="clearRefSearch()">Temizle</button>
     </div>
     <div class="ref-tools">
@@ -4380,9 +4405,10 @@ function populateVerbAdjTopicSelects(){
   fillTopicSelect("verbTopicSelect", verbs, KAT_FIIL_LABELS, 30, "Tüm Konular");
   fillTopicSelect("adjTopicSelect", adjectives, KAT_SIFAT_LABELS, 30, "Tüm Konular");
 }
-function setVerbTopicFilter(v){ verbTopicFilter = v; renderVerbs(); }
-function setAdjTopicFilter(v){ adjTopicFilter = v; renderAdjectives(); }
+function setVerbTopicFilter(v){ resetListLimit("verbs"); verbTopicFilter = v; renderVerbs(); }
+function setAdjTopicFilter(v){ resetListLimit("adj"); adjTopicFilter = v; renderAdjectives(); }
 function setTopicFilter(value){
+  resetListLimit("words");
   topicFilter = value;
   renderWords();
 }
@@ -4670,6 +4696,7 @@ function switchTestGroup(group){
 }
 
 function clearSearch(which){
+  resetListLimit({artikel:"words", verben:"verbs", adj:"adj"}[which] || "words");
   if(which === "artikel"){
     document.getElementById("searchInput").value = "";
     renderWords();
@@ -4695,6 +4722,7 @@ function clearSearch(which){
 }
 
 function setFilter(filter){
+  resetListLimit("words");
   categoryFilter = filter;
   document.querySelectorAll("#filterRow .filter-btn").forEach(b=>{
     b.classList.toggle("active", b.dataset.filter === filter);
@@ -4703,6 +4731,31 @@ function setFilter(filter){
 }
 
 /* ---------- İSİMLER (ARTIKEL) ---------- */
+
+
+/* ---------- Telefonda sayfalı liste (iç kaydırma yok) ---------- */
+const LIST_FIRST = 15;
+const LIST_STEP = 25;
+const listLimits = {words: LIST_FIRST, verbs: LIST_FIRST, adj: LIST_FIRST};
+const PHONE_MQ = window.matchMedia("(max-width:600px), (max-height:500px) and (pointer:coarse)");
+function isPhoneLayout(){ return PHONE_MQ.matches; }
+function resetListLimit(key){ listLimits[key] = LIST_FIRST; }
+function showMoreList(key){
+  listLimits[key] += LIST_STEP;
+  ({words: renderWords, verbs: renderVerbs, adj: renderAdjectives})[key]();
+}
+function moreRowHtml(key, n, colspan, label){
+  return `<tr class="more-row"><td colspan="${colspan}" class="more-cell"><button class="btn-ghost" onclick="showMoreList('${key}')">Daha fazla göster (${n} ${label} daha)</button> <a href="#rightPanel" class="jump-tests-btn">⬇ Testlere git</a></td></tr>`;
+}
+function setAdjMore(n){
+  let mw = document.getElementById("adjMore");
+  if(!mw){
+    mw = document.createElement("div"); mw.id = "adjMore"; mw.style.cssText = "text-align:center; margin:12px 0;";
+    document.getElementById("adjPairGrid").insertAdjacentElement("afterend", mw);
+  }
+  mw.innerHTML = n > 0 ? `<button class="btn-ghost" onclick="showMoreList('adj')">Daha fazla göster (${n} sıfat daha)</button> <a href="#rightPanel" class="jump-tests-btn">⬇ Testlere git</a>` : "";
+}
+PHONE_MQ.addEventListener("change", () => { try{ renderWords(); renderVerbs(); renderAdjectives(); }catch(e){} });
 
 function renderWords(){
   const tbody = document.getElementById("wordTableBody");
@@ -4732,6 +4785,8 @@ function renderWords(){
     return;
   }
 
+  let moreCount = 0;
+  if(isPhoneLayout() && filtered.length > listLimits.words){ moreCount = filtered.length - listLimits.words; filtered = filtered.slice(0, listLimits.words); }
   filtered.forEach((w) => {
     const realIdx = words.indexOf(w);
     const revealed = revealedWords.has(realIdx);
@@ -4755,6 +4810,7 @@ function renderWords(){
     `;
     tbody.appendChild(tr);
   });
+  if(moreCount > 0) tbody.insertAdjacentHTML("beforeend", moreRowHtml("words", moreCount, 8, "kelime"));
 }
 
 // Event delegation — kelime/fiil metinleri hiçbir zaman onclick string'ine gömülmez
@@ -4864,7 +4920,7 @@ function renderVerbs(){
   tbody.innerHTML = "";
 
   const baseV = applyTopicFilter(verbs, verbTopicFilter, "verb", STARTER_VERBS, 30);
-  const filtered = query
+  let filtered = query
     ? baseV.filter(v => v.verb.toLowerCase().includes(query) || (v.tr||"").toLowerCase().includes(query))
     : baseV;
 
@@ -4873,6 +4929,8 @@ function renderVerbs(){
     return;
   }
 
+  let moreCount = 0;
+  if(isPhoneLayout() && filtered.length > listLimits.verbs){ moreCount = filtered.length - listLimits.verbs; filtered = filtered.slice(0, listLimits.verbs); }
   filtered.forEach((v) => {
     const realIdx = verbs.indexOf(v);
     const revealed = revealedVerbs.has(realIdx);
@@ -4890,6 +4948,7 @@ function renderVerbs(){
     `;
     tbody.appendChild(tr);
   });
+  if(moreCount > 0) tbody.insertAdjacentHTML("beforeend", moreRowHtml("verbs", moreCount, 6, "fiil"));
 }
 
 document.getElementById("verbTableBody").addEventListener("click", (e)=>{
@@ -5152,16 +5211,19 @@ function renderAdjectives(){
   const query = document.getElementById("adjSearchInput").value.trim().toLowerCase();
 
   const baseA = applyTopicFilter(adjectives, adjTopicFilter, "adj", STARTER_ADJEKTIVE, 30);
-  const filtered = query
+  let filtered = query
     ? baseA.filter(a => a.adj.toLowerCase().includes(query) || (a.tr||"").toLowerCase().includes(query))
     : baseA;
 
   if(filtered.length === 0){
     pairsCol.innerHTML = `<div class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</div>`;
     solosCol.innerHTML = "";
+    setAdjMore(0);
     return;
   }
 
+  let moreCount = 0;
+  if(isPhoneLayout() && filtered.length > listLimits.adj){ moreCount = filtered.length - listLimits.adj; filtered = filtered.slice(0, listLimits.adj); }
   const shown = new Set();
   let pairsHtml = "";
   let solosHtml = "";
@@ -5184,6 +5246,7 @@ function renderAdjectives(){
 
   pairsCol.innerHTML = pairsHtml || '<div class="no-match">Çift bulunamadı.</div>';
   solosCol.innerHTML = solosHtml || '<div class="no-match">Sonuç yok.</div>';
+  setAdjMore(moreCount);
 }
 
 document.getElementById("adjPairGrid").addEventListener("click", (e)=>{
@@ -5710,16 +5773,46 @@ function updateCountdownText(){
 
 function pickRandom(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 
+try{ window.speechSynthesis && window.speechSynthesis.addEventListener && window.speechSynthesis.addEventListener("voiceschanged", function(){ pickGermanVoice(); }); }catch(e){}
+/* ---------- SES: Almanca ses seçimi + ses yoksa açıklayıcı uyarı ---------- */
+let __voiceWarned = false;
+function appToast(msg, ms){
+  let t = document.getElementById("appToast");
+  if(!t){ t = document.createElement("div"); t.id = "appToast"; t.className = "app-toast"; t.setAttribute("role","status"); document.body.appendChild(t); }
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(appToast.h); appToast.h = setTimeout(() => t.classList.remove("show"), ms || 2600);
+}
+function pickGermanVoice(){
+  try{
+    const vs = (window.speechSynthesis.getVoices && window.speechSynthesis.getVoices()) || [];
+    if(!vs.length) return {voice:null, loaded:false};
+    const de = vs.filter(v => v.lang && v.lang.toLowerCase().replace("_","-").startsWith("de"));
+    const best = de.find(v => /^de-de$/i.test(v.lang.replace("_","-")) && v.localService) || de.find(v => /^de-de$/i.test(v.lang.replace("_","-"))) || de[0] || null;
+    return {voice:best, loaded:true};
+  }catch(e){ return {voice:null, loaded:false}; }
+}
+function makeGermanUtter(text, rate){
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "de-DE"; u.rate = rate || 0.9;
+  const r = pickGermanVoice();
+  if(r.voice){ try{ u.voice = r.voice; }catch(e){} }   // atama başarısız olsa bile konuşma sürsün
+  else if(r.loaded && !__voiceWarned){
+    __voiceWarned = true;
+    appToast("Cihazında Almanca ses bulunamadı. Ayarlar → Dil → Metinden konuşmaya bölümünden Almanca ses paketini yükle.", 7000);
+  }
+  return u;
+}
 function speak(text){
-  if(!('speechSynthesis' in window)){
-    alert("Tarayıcın sesli okumayı desteklemiyor.");
+  if(!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined"){
+    appToast("Bu tarayıcı sesli okumayı desteklemiyor.");
     return;
   }
-  window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = "de-DE";
-  utter.rate = 0.9;
-  window.speechSynthesis.speak(utter);
+  try{
+    window.speechSynthesis.cancel();
+    const utter = makeGermanUtter(text, 0.9);
+    window.__lastUtter = utter;   // çöp toplayıcı konuşmayı yarıda kesmesin
+    window.speechSynthesis.speak(utter);
+  }catch(e){ appToast("Ses çalınamadı."); }
 }
 
 function speakCurrentWord(){
@@ -7401,7 +7494,7 @@ Object.assign(GQ_BANK, {
  ["Wir ___ hier nicht rauchen.","dürfen",["darf","dürft"],"Burada sigara içemeyiz (yasak)."],
  ["Ihr ___ mehr Wasser trinken.","sollt",["sollen","sollst"],"Daha çok su içmelisiniz."],
  ["Ich ___ nicht schwimmen.","kann",["können","kannst"],"Yüzemiyorum."],
- ["Sie ___ morgen früh aufstehen.","muss",["müssen","musst"],"O (kadın) yarın erken kalkmak zorunda."],
+ ["Meine Mutter ___ morgen früh aufstehen.","muss",["müssen","musst"],"Annem yarın erken kalkmak zorunda."],
  ["___ ich hier sitzen?","Darf",["Dürfen","Darfst"],"Burada oturabilir miyim?"],
  ["Was ___ du essen?","willst",["wollen","will"],"Ne yemek istiyorsun?"],
  ["Ihr ___ pünktlich sein.","müsst",["muss","müssen"],"Dakik olmalısınız."],
@@ -8617,7 +8710,37 @@ function refToggleAll(open){
     });
   });
 }
+
+/* ---------- Arama kutusu: yazma durunca ara (yavaş telefonlarda takılmayı önler) ---------- */
+const __searchTimers = {};
+function debouncedSearch(fnName){
+  const lk = {renderWords:"words", renderVerbs:"verbs", renderAdjectives:"adj"}[fnName]; if(lk) resetListLimit(lk);
+  clearTimeout(__searchTimers[fnName]);
+  __searchTimers[fnName] = setTimeout(() => { try{ window[fnName](); }catch(e){ console.error(e); } }, 140);
+}
 initRefAccordion();
+
+/* ---------- Pencere açıkken arka sayfa kaymasın ---------- */
+(function(){
+  const sync = () => {
+    const any = !!document.querySelector(".overlay.show");
+    document.documentElement.classList.toggle("no-scroll", any);
+  };
+  const mo = new MutationObserver(sync);
+  document.querySelectorAll(".overlay").forEach(o => mo.observe(o, {attributes:true, attributeFilter:["class"]}));
+  sync();
+})();
+/* ---------- Akıllı 🐞: kaydırırken ve klavye açıkken gizlen ---------- */
+(function(){
+  const fab = document.getElementById("reportFab"); if(!fab) return;
+  let t = null;
+  const hide = () => fab.classList.add("fab-hide");
+  const show = () => fab.classList.remove("fab-hide");
+  window.addEventListener("scroll", () => { hide(); clearTimeout(t); t = setTimeout(show, 1100); }, {passive:true});
+  const isField = el => el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName);
+  document.addEventListener("focusin", e => { if(isField(e.target)) hide(); });
+  document.addEventListener("focusout", () => { setTimeout(() => { if(!isField(document.activeElement)) show(); }, 250); });
+})();
 switchTestGroup(savedTestGroup);
 </script>
 
@@ -9349,8 +9472,11 @@ function toast(m){const t=$('#kgToast');if(!t)return;t.textContent=m;t.classList
 
 /* ---------- speech (izole — ana uygulamanın speak()'ine dokunmaz) ---------- */
 function kgCanSpeak(){if(!('speechSynthesis' in window)){toast('Bu tarayıcı sesli okumayı desteklemiyor');return false;}return true;}
-function kgUtter(text,rate){const u=new SpeechSynthesisUtterance(text);u.lang='de-DE';u.rate=rate||.85;
-  try{const v=speechSynthesis.getVoices().find(v=>v.lang&&v.lang.toLowerCase().startsWith('de'));if(v)u.voice=v;}catch(e){}return u;}
+function kgUtter(text,rate){
+  let u;
+  if(typeof makeGermanUtter==='function'){u=makeGermanUtter(text,rate||.85);}
+  else{u=new SpeechSynthesisUtterance(text);u.lang='de-DE';u.rate=rate||.85;}
+  (kgUtter.keep=kgUtter.keep||[]).push(u);if(kgUtter.keep.length>60)kgUtter.keep.shift();return u;}
 function kgSpeak(text){if(!kgCanSpeak())return;kgStopReading();speechSynthesis.speak(kgUtter(text));}
 function kgStopReading(){try{speechSynthesis.cancel();}catch(e){}reading=false;document.querySelectorAll('.kg-sent.kg-now').forEach(e=>e.classList.remove('kg-now'));const b=$('#kgReadall');if(b){b.textContent='Hepsini dinle';b.setAttribute('aria-pressed','false');}}
 function kgReadAll(){
