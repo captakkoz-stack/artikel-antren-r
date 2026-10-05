@@ -3,6 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0F2A3D">
+<script>
+(function(){try{
+  var p=localStorage.getItem('artikel_theme')||'auto';
+  var d=(p==='dark')||(p==='auto'&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);
+  var e=document.documentElement; e.setAttribute('data-theme',d?'dark':'light'); e.setAttribute('data-theme-pref',p);
+  var m=document.querySelector('meta[name=theme-color]'); if(m) m.setAttribute('content',d?'#0A1118':'#0F2A3D');
+}catch(err){}})();
+</script>
 <title>Almanca Kişisel Çalışma Antrenörü</title>
 <style>
   :root{
@@ -22,7 +32,162 @@
     --das: #3F7A4E;
     --das-bg: #DFF0E4;
   }
-  *{box-sizing:border-box;}
+  
+/* =============== TEMA DEĞİŞKENLERİ (açık = eski renkler, birebir) =============== */
+:root{
+  color-scheme: light;
+  --tx-deep:#0F2A3D; --tx-teal:#1C4B5C;
+  --x-bd-2c7a2c:#2c7a2c;
+  --x-bd-3a7d3a:#3a7d3a;
+  --x-bd-7fa8d9:#7fa8d9;
+  --x-bd-7fb8d9:#7fb8d9;
+  --x-bd-8fc28f:#8fc28f;
+  --x-bd-999999:#999999;
+  --x-bd-b8d2e0:#b8d2e0;
+  --x-bd-b98fd1:#b98fd1;
+  --x-bd-bfd4c1:#bfd4c1;
+  --x-bd-c9a8de:#c9a8de;
+  --x-bd-d9a15f:#d9a15f;
+  --x-bd-e8b87a:#e8b87a;
+  --x-bd-eeeeee:#eeeeee;
+  --x-bg-0f2a3d:#0f2a3d;
+  --x-bg-163a47:#163a47;
+  --x-bg-1a3d52:#1a3d52;
+  --x-bg-1c4b5c:#1c4b5c;
+  --x-bg-9a4023:#9a4023;
+  --x-bg-b08d4f:#b08d4f;
+  --x-bg-b8925a:#b8925a;
+  --x-bg-cfe8f5:#cfe8f5;
+  --x-bg-dceedc:#dceedc;
+  --x-bg-dfeadf:#dfeadf;
+  --x-bg-dff5df:#dff5df;
+  --x-bg-e2e2e2:#e2e2e2;
+  --x-bg-e4d3f0:#e4d3f0;
+  --x-bg-e6f0f7:#e6f0f7;
+  --x-bg-e8daf0:#e8daf0;
+  --x-bg-eaf2f6:#eaf2f6;
+  --x-bg-ede0f5:#ede0f5;
+  --x-bg-edf3ed:#edf3ed;
+  --x-bg-eee0c5:#eee0c5;
+  --x-bg-eeeeee:#eeeeee;
+  --x-bg-eef4f2:#eef4f2;
+  --x-bg-f0dfb0:#f0dfb0;
+  --x-bg-f0e4d4:#f0e4d4;
+  --x-bg-f0e6f7:#f0e6f7;
+  --x-bg-f5dfc8:#f5dfc8;
+  --x-bg-f5efe0:#f5efe0;
+  --x-bg-fbf7ee:#fbf7ee;
+  --x-bg-fceedd:#fceedd;
+  --x-bg-fde3da:#fde3da;
+  --x-bg-fdfcf9:#fdfcf9;
+  --x-bg-ffffff:#ffffff;
+  --x-tx-12232e:#12232e;
+  --x-tx-1c5877:#1c5877;
+  --x-tx-2c5a3c:#2c5a3c;
+  --x-tx-2c5c2c:#2c5c2c;
+  --x-tx-2c7a2c:#2c7a2c;
+  --x-tx-444444:#444444;
+  --x-tx-555555:#555555;
+  --x-tx-5b3a75:#5b3a75;
+  --x-tx-666666:#666666;
+  --x-tx-6a3f94:#6a3f94;
+  --x-tx-6b4e1e:#6b4e1e;
+  --x-tx-777777:#777777;
+  --x-tx-888888:#888888;
+  --x-tx-8a5a1e:#8a5a1e;
+  --x-tx-8a5a2a:#8a5a2a;
+  --x-tx-8a8a8a:#8a8a8a;
+  --x-tx-8b3a20:#8b3a20;
+  --x-tx-999999:#999999;
+  --x-tx-b5502f:#b5502f;
+  --x-tx-cccccc:#cccccc;
+  --x-tx-cdbf9f:#cdbf9f;
+  --x-tx-d9cdb0:#d9cdb0;
+  --x-tx-e0a800:#e0a800;
+  --x-tx-f5f0e6:#f5f0e6;
+  --x-tx-f7f1e3:#f7f1e3;
+}
+/* =============== GECE TEMASI =============== */
+html[data-theme="dark"]{
+  color-scheme: dark;
+  --cream:#0E161D; --ink:#E8E2D4; --line:#2B3944;
+  --tx-deep:#F0E8D6; --tx-teal:#8EC5D6;
+  --sea:#6CC49A; --coral:#E58E6E;
+  --der:#86B8EA; --der-bg:#1B2E42; --die:#EE8FA5; --die-bg:#3B202B; --das:#82CF98; --das-bg:#1B3426;
+  --x-bd-2c7a2c:#2e6b2e;
+  --x-bd-3a7d3a:#346334;
+  --x-bd-7fa8d9:#2c3e53;
+  --x-bd-7fb8d9:#2c4553;
+  --x-bd-8fc28f:#354b35;
+  --x-bd-999999:#424242;
+  --x-bd-b8d2e0:#313d44;
+  --x-bd-b98fd1:#43304d;
+  --x-bd-bfd4c1:#364037;
+  --x-bd-c9a8de:#3f3048;
+  --x-bd-d9a15f:#5c4427;
+  --x-bd-e8b87a:#574226;
+  --x-bd-eeeeee:#2b3740;
+  --x-bg-0f2a3d:#0f2a3d;
+  --x-bg-163a47:#163a47;
+  --x-bg-1a3d52:#1a3d52;
+  --x-bg-1c4b5c:#1c4b5c;
+  --x-bg-9a4023:#612e1d;
+  --x-bg-b08d4f:#493d27;
+  --x-bg-b8925a:#463926;
+  --x-bg-cfe8f5:#1b242a;
+  --x-bg-dceedc:#1a2329;
+  --x-bg-dfeadf:#1a2329;
+  --x-bg-dff5df:#192228;
+  --x-bg-e2e2e2:#1b242a;
+  --x-bg-e4d3f0:#1b242a;
+  --x-bg-e6f0f7:#192127;
+  --x-bg-e8daf0:#1a2329;
+  --x-bg-eaf2f6:#182026;
+  --x-bg-ede0f5:#192228;
+  --x-bg-edf3ed:#182026;
+  --x-bg-eee0c5:#2b261e;
+  --x-bg-eeeeee:#192127;
+  --x-bg-eef4f2:#182026;
+  --x-bg-f0dfb0:#312b1c;
+  --x-bg-f0e4d4:#1b242a;
+  --x-bg-f0e6f7:#192127;
+  --x-bg-f5dfc8:#2b231c;
+  --x-bg-f5efe0:#192228;
+  --x-bg-fbf7ee:#181f25;
+  --x-bg-fceedd:#192127;
+  --x-bg-fde3da:#192227;
+  --x-bg-fdfcf9:#171e23;
+  --x-bg-ffffff:#161d22;
+  --x-tx-12232e:#d8e5ee;
+  --x-tx-1c5877:#99cae3;
+  --x-tx-2c5a3c:#b1d7be;
+  --x-tx-2c5c2c:#b0d7b0;
+  --x-tx-2c7a2c:#96d696;
+  --x-tx-444444:#c3c3c3;
+  --x-tx-555555:#b4b4b4;
+  --x-tx-5b3a75:#b59aca;
+  --x-tx-666666:#a5a5a5;
+  --x-tx-6a3f94:#a481c5;
+  --x-tx-6b4e1e:#e2caa4;
+  --x-tx-777777:#a3a3a3;
+  --x-tx-888888:#a3a3a3;
+  --x-tx-8a5a1e:#e1ba89;
+  --x-tx-8a5a2a:#d7b089;
+  --x-tx-8a8a8a:#a3a3a3;
+  --x-tx-8b3a20:#df9d88;
+  --x-tx-999999:#a3a3a3;
+  --x-tx-b5502f:#d58a72;
+  --x-tx-cccccc:#cccccc;
+  --x-tx-cdbf9f:#beae89;
+  --x-tx-d9cdb0:#d9cdb0;
+  --x-tx-e0a800:#f8cd4f;
+  --x-tx-f5f0e6:#f5f0e6;
+  --x-tx-f7f1e3:#f7f1e3;
+}
+html[data-theme="dark"] .kg-wrap{
+  --kg-surface:#16222C; --kg-muted:#A0A9B0; --kg-teal:#8EC5D6; --kg-teal-ink:#0E161D;
+}
+*{box-sizing:border-box;}
   html{overflow-x:hidden;}
   body{
     margin:0;
@@ -34,7 +199,7 @@
   }
   header{
     background:var(--deep);
-    color:var(--cream);
+    color:var(--tx-cream);
     padding:28px 32px 22px;
     border-bottom:4px solid var(--brass);
   }
@@ -64,9 +229,9 @@
     gap:8px;
   }
   .side-tab{
-    background:#EDF3ED;
-    border:1px solid #BFD4C1;
-    color:var(--deep);
+    background:var(--x-bg-edf3ed);
+    border:1px solid var(--x-bd-bfd4c1);
+    color:var(--tx-deep);
     padding:16px 18px;
     font-family: Georgia, serif;
     font-size:14px;
@@ -78,13 +243,13 @@
     white-space:normal;
     word-wrap:break-word;
     transition:background 0.15s;
-    border-left:4px solid #BFD4C1;
+    border-left:4px solid var(--x-bd-bfd4c1);
   }
   .side-tab:hover:not(.active){
-    background:#dfeadf;
+    background:var(--x-bg-dfeadf);
   }
   .side-tab.active{
-    background:linear-gradient(135deg, var(--deep), #1a3d52);
+    background:linear-gradient(135deg, var(--deep), var(--x-bg-1a3d52));
     color:#fff;
     border-color:var(--brass);
     border-left:4px solid var(--brass);
@@ -102,11 +267,11 @@
   @media (max-width:900px){
     main{grid-template-columns:1fr;}
     .sidebar{flex-direction:row;flex-wrap:wrap;}
-    .side-tab{flex:1 1 45%;min-width:0;font-size:13px;border-left:1px solid #BFD4C1;border-bottom:4px solid #BFD4C1;}
+    .side-tab{flex:1 1 45%;min-width:0;font-size:13px;border-left:1px solid var(--x-bd-bfd4c1);border-bottom:4px solid var(--x-bd-bfd4c1);}
     .side-tab.active{border-left-color:var(--brass);border-bottom-color:var(--brass);}
   }
   .panel{
-    background:#fff;
+    background:var(--x-bg-ffffff);
     border:1px solid var(--line);
     border-radius:2px;
     padding:24px 28px;
@@ -114,17 +279,17 @@
     margin-top:24px;
   }
   main > div:last-child .panel{
-    background:#EAF2F6;
-    border-color:#B8D2E0;
+    background:var(--x-bg-eaf2f6);
+    border-color:var(--x-bd-b8d2e0);
   }
   #mistakePanel{
-    background:#FCEEDD;
-    border-color:#E8B87A;
+    background:var(--x-bg-fceedd);
+    border-color:var(--x-bd-e8b87a);
   }
   .panel h2{
     font-size:15px;
     margin:0 0 14px;
-    color:var(--teal);
+    color:var(--tx-teal);
     font-weight:700;
     border-bottom:1px solid var(--line);
     padding-bottom:8px;
@@ -132,8 +297,8 @@
   .referans-group-title{
     font-size:19px;
     font-weight:700;
-    color:var(--deep);
-    background:var(--sage-bg, #EDF3ED);
+    color:var(--tx-deep);
+    background:var(--sage-bg, var(--x-bg-edf3ed));
     border-left:4px solid var(--brass);
     padding:10px 16px;
     margin:0 0 14px;
@@ -146,9 +311,9 @@
     margin-bottom:20px;
   }
   .ref-subtab{
-    background:#fff;
+    background:var(--x-bg-ffffff);
     border:1px solid var(--brass);
-    color:var(--deep);
+    color:var(--tx-deep);
     padding:9px 16px;
     border-radius:20px;
     font-size:13.5px;
@@ -158,7 +323,7 @@
     transition:background 0.15s, color 0.15s;
   }
   .ref-subtab{max-width:100%; white-space:normal; text-align:center; line-height:1.25;}
-  .ref-subtab:hover{background:#F5EFE0;}
+  .ref-subtab:hover{background:var(--x-bg-f5efe0);}
   @media (max-width:480px){
     .rule-grid[style*="1fr 1fr 1fr"]{grid-template-columns:1fr !important;}
     .btn-add{white-space:normal; max-width:100%;}
@@ -172,21 +337,21 @@
   }
   main.no-right{grid-template-columns:200px 1fr;}
   @media (max-width:900px){ main.no-right{grid-template-columns:1fr;} }
-  .test-details{border:1px solid var(--line); border-radius:10px; margin:8px 0; background:#fff; overflow:hidden;}
-  .test-details > summary{cursor:pointer; padding:11px 14px; font-weight:700; font-size:13.5px; color:var(--deep); list-style:none; display:flex; justify-content:space-between; align-items:center; gap:8px; font-family: system-ui, Helvetica, Arial, sans-serif;}
+  .test-details{border:1px solid var(--line); border-radius:10px; margin:8px 0; background:var(--x-bg-ffffff); overflow:hidden;}
+  .test-details > summary{cursor:pointer; padding:11px 14px; font-weight:700; font-size:13.5px; color:var(--tx-deep); list-style:none; display:flex; justify-content:space-between; align-items:center; gap:8px; font-family: system-ui, Helvetica, Arial, sans-serif;}
   .test-details > summary::-webkit-details-marker{display:none;}
   .test-details > summary::after{content:"▾"; color:var(--brass); transition:transform .15s;}
-  .test-details[open] > summary{border-bottom:1px solid var(--line); background:#FBF7EE;}
+  .test-details[open] > summary{border-bottom:1px solid var(--line); background:var(--x-bg-fbf7ee);}
   .test-details[open] > summary::after{transform:rotate(180deg);}
-  .test-details .gcount{font-weight:400; color:#8a8a8a; font-size:12px; margin-left:4px;}
+  .test-details .gcount{font-weight:400; color:var(--x-tx-8a8a8a); font-size:12px; margin-left:4px;}
   .test-details .inner{padding:10px;}
-  .report-fab{position:fixed;right:14px;bottom:14px;width:42px;height:42px;border-radius:50%;border:1px solid var(--brass);background:#fff;font-size:20px;line-height:1;box-shadow:0 2px 8px rgba(0,0,0,.22);cursor:pointer;z-index:40;opacity:.92;display:flex;align-items:center;justify-content:center;padding:0;}
+  .report-fab{position:fixed;right:14px;bottom:14px;width:42px;height:42px;border-radius:50%;border:1px solid var(--brass);background:var(--x-bg-ffffff);font-size:20px;line-height:1;box-shadow:0 2px 8px rgba(0,0,0,.22);cursor:pointer;z-index:40;opacity:.92;display:flex;align-items:center;justify-content:center;padding:0;}
   .report-fab:hover{opacity:1;transform:scale(1.06);}
   #reportOverlay .add-card{max-height:92vh;overflow-y:auto;}
-  #reportOverlay select, #reportOverlay textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:6px;padding:9px 10px;font-family:system-ui,Helvetica,Arial,sans-serif;font-size:14px;background:#fff;margin-bottom:10px;}
+  #reportOverlay select, #reportOverlay textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:6px;padding:9px 10px;font-family:system-ui,Helvetica,Arial,sans-serif;font-size:14px;background:var(--x-bg-ffffff);margin-bottom:10px;}
   #reportOverlay textarea{resize:vertical;min-height:84px;}
-  .rp-context{background:#F5EFE0;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:12.5px;color:#555;margin-bottom:10px;font-family:system-ui,Helvetica,Arial,sans-serif;word-break:break-word;line-height:1.4;}
-  .rp-note{font-size:11.5px;color:#8a8a8a;margin:-4px 0 10px;font-family:system-ui,Helvetica,Arial,sans-serif;}
+  .rp-context{background:var(--x-bg-f5efe0);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--x-tx-555555);margin-bottom:10px;font-family:system-ui,Helvetica,Arial,sans-serif;word-break:break-word;line-height:1.4;}
+  .rp-note{font-size:11.5px;color:var(--x-tx-8a8a8a);margin:-4px 0 10px;font-family:system-ui,Helvetica,Arial,sans-serif;}
   .rp-actions{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 8px;}
   .rp-actions button{flex:1 1 40%;white-space:normal;}
   .rp-status{min-height:18px;font-size:12.5px;margin-bottom:6px;font-family:system-ui,Helvetica,Arial,sans-serif;}
@@ -197,7 +362,7 @@
   .ref-sec > h2.ref-toggle{cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:10px; user-select:none;}
   .ref-sec > h2.ref-toggle::after{content:"▾"; color:var(--brass); font-size:16px; flex-shrink:0; transition:transform .15s;}
   .ref-sec.open > h2.ref-toggle::after{transform:rotate(180deg);}
-  .ref-sec > h2.ref-toggle:hover{color:var(--deep);}
+  .ref-sec > h2.ref-toggle:hover{color:var(--tx-deep);}
   .ref-sec > h2.ref-toggle:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
   .ref-sec .ref-body{display:none;}
   .ref-sec.open .ref-body{display:block;}
@@ -212,9 +377,9 @@
   .test-subtab{
     flex:1;
     min-width:0;
-    background:#fff;
+    background:var(--x-bg-ffffff);
     border:1px solid var(--brass);
-    color:var(--deep);
+    color:var(--tx-deep);
     padding:8px 6px;
     border-radius:16px;
     font-size:12px;
@@ -224,7 +389,7 @@
     transition:background 0.15s, color 0.15s;
     white-space:normal;
   }
-  .test-subtab:hover{background:#F5EFE0;}
+  .test-subtab:hover{background:var(--x-bg-f5efe0);}
   @media (max-width:420px){
     .test-subtab{font-size:11px; padding:8px 2px;}
   }
@@ -254,7 +419,7 @@
     display:block;
     font-family: system-ui, Helvetica, Arial, sans-serif;
     font-size:12.5px;
-    color:#555;
+    color:var(--x-tx-555555);
     margin-bottom:4px;
   }
   input[type=text], select{
@@ -265,7 +430,7 @@
     border-radius:2px;
     margin-bottom:12px;
     font-family: system-ui, Helvetica, Arial, sans-serif;
-    background:#fdfcf9;
+    background:var(--x-bg-fdfcf9);
   }
   .search-row{
     display:flex;
@@ -288,12 +453,12 @@
   }
   .btn-main{background:var(--teal);color:#fff;}
   .btn-main:hover{background:var(--deep);}
-  .btn-ghost{background:transparent;color:var(--teal);border:1px solid var(--teal);}
-  .btn-ghost:hover{background:#eef4f2;}
-  .btn-test{background:#F0E6F7;border:1px solid #C9A8DE;color:var(--deep);white-space:normal;line-height:1.3;}
-  .btn-test:hover{background:#E4D3F0;}
-  .btn-add{background:var(--brass);color:var(--deep);}
-  .btn-add:hover{background:#b8925a;}
+  .btn-ghost{background:transparent;color:var(--tx-teal);border:1px solid var(--teal);}
+  .btn-ghost:hover{background:var(--x-bg-eef4f2);}
+  .btn-test{background:var(--x-bg-f0e6f7);border:1px solid var(--x-bd-c9a8de);color:var(--tx-deep);white-space:normal;line-height:1.3;}
+  .btn-test:hover{background:var(--x-bg-e4d3f0);}
+  .btn-add{background:var(--brass);color:var(--tx-deep);}
+  .btn-add:hover{background:var(--x-bg-b8925a);}
   table{
     width:100%;
     border-collapse:collapse;
@@ -303,7 +468,7 @@
   }
   th{
     text-align:left;
-    color:#777;
+    color:var(--x-tx-777777);
     font-weight:600;
     font-size:11.5px;
     padding:4px 6px;
@@ -311,7 +476,7 @@
   }
   td{
     padding:6px 6px;
-    border-bottom:1px solid #eee;
+    border-bottom:1px solid var(--x-bd-eeeeee);
   }
   tr.row-der{background:var(--der-bg);}
   tr.row-die{background:var(--die-bg);}
@@ -322,7 +487,7 @@
   .emoji-cell{font-size:17px;text-align:center;}
   .word-cell{
     cursor:pointer;
-    border-bottom:1px dotted #999;
+    border-bottom:1px dotted var(--x-bd-999999);
   }
   .word-cell .tr-part{
     color:var(--brass);
@@ -339,9 +504,9 @@
     font-family: system-ui, Helvetica, Arial, sans-serif;
   }
   .filter-btn{
-    background:#fdfcf9;
+    background:var(--x-bg-fdfcf9);
     border:1px solid var(--line);
-    color:#777;
+    color:var(--x-tx-777777);
     font-size:12.5px;
     font-weight:600;
     padding:6px 14px;
@@ -349,9 +514,9 @@
   }
   .filter-btn.active{color:#fff;border-color:transparent;}
   .filter-btn[data-filter="all"].active{background:var(--teal);}
-  .filter-btn[data-filter="der"].active{background:var(--der);}
-  .filter-btn[data-filter="die"].active{background:var(--die);}
-  .filter-btn[data-filter="das"].active{background:var(--das);}
+  .filter-btn[data-filter="der"].active{background:var(--bg-der);}
+  .filter-btn[data-filter="die"].active{background:var(--bg-die);}
+  .filter-btn[data-filter="das"].active{background:var(--bg-das);}
   .filter-btn[data-filter="der"]:not(.active){color:var(--der);border-color:var(--der-bg);}
   .filter-btn[data-filter="die"]:not(.active){color:var(--die);border-color:var(--die-bg);}
   .filter-btn[data-filter="das"]:not(.active){color:var(--das);border-color:var(--das-bg);}
@@ -361,9 +526,9 @@
     margin:2px 0 12px;
   }
   .interval-btn{
-    background:#fdfcf9;
+    background:var(--x-bg-fdfcf9);
     border:1px solid var(--line);
-    color:#777;
+    color:var(--x-tx-777777);
     font-size:12.5px;
     font-weight:600;
     padding:6px 14px;
@@ -377,12 +542,12 @@
     cursor:pointer;
     font-size:14px;
     padding:2px 5px;
-    color:var(--teal);
+    color:var(--tx-teal);
     display:inline-flex;
     align-items:center;
     justify-content:center;
   }
-  .speak-btn:hover{color:var(--deep);}
+  .speak-btn:hover{color:var(--tx-deep);}
   .speak-cell{
     width:30px;
     text-align:center;
@@ -408,7 +573,7 @@
     height:34px;
     font-size:15px;
     cursor:pointer;
-    color:var(--teal);
+    color:var(--tx-teal);
     display:flex;
     align-items:center;
     justify-content:center;
@@ -451,7 +616,7 @@
   .progress-text{
     font-family: system-ui, Helvetica, Arial, sans-serif;
     font-size:12px;
-    color:#888;
+    color:var(--x-tx-888888);
     min-width:50px;
     text-align:center;
   }
@@ -462,7 +627,7 @@
   .del{
     background:none;
     border:none;
-    color:#B5502F;
+    color:var(--x-tx-b5502f);
     font-size:12px;
     cursor:pointer;
     padding:2px 6px;
@@ -470,13 +635,13 @@
   .no-match{
     font-family: system-ui, Helvetica, Arial, sans-serif;
     font-size:13px;
-    color:#888;
+    color:var(--x-tx-888888);
     padding:14px 4px;
   }
   .hint-line{
     font-family: system-ui, Helvetica, Arial, sans-serif;
     font-size:11.5px;
-    color:#999;
+    color:var(--x-tx-999999);
     margin:-6px 0 10px;
   }
   .wordlist-scroll{
@@ -499,10 +664,10 @@
     padding:12px;
     text-align:center;
   }
-  .stat-box .num{font-family: Georgia, serif;font-size:26px;color:var(--deep);}
-  .stat-box .num#statCorrect{color:#2c7a2c;}
+  .stat-box .num{font-family: Georgia, serif;font-size:26px;color:var(--tx-deep);}
+  .stat-box .num#statCorrect{color:var(--x-tx-2c7a2c);}
   .stat-box .num#statWrong{color:var(--coral);}
-  .stat-box .lbl{font-size:11px;color:#777;margin-top:2px;}
+  .stat-box .lbl{font-size:11px;color:var(--x-tx-777777);margin-top:2px;}
   .toggle-row{
     display:flex;
     align-items:center;
@@ -514,7 +679,7 @@
   .countdown{
     font-family: system-ui, Helvetica, Arial, sans-serif;
     font-size:12px;
-    color:#888;
+    color:var(--x-tx-888888);
     margin-bottom:14px;
   }
   .footer-tools{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
@@ -522,7 +687,7 @@
   .group-label{
     font-family: system-ui, Helvetica, Arial, sans-serif;
     font-size:11px;
-    color:#888;
+    color:var(--x-tx-888888);
     text-transform:uppercase;
     letter-spacing:0.5px;
     font-weight:700;
@@ -539,7 +704,7 @@
     .btn-grid.grid-2{grid-template-columns: 1fr;}
   }
   .btn-review{
-    background:var(--coral);
+    background:var(--bg-coral);
     color:#fff;
     border:none;
     border-radius:2px;
@@ -549,7 +714,7 @@
     padding:9px 16px;
     cursor:pointer;
   }
-  .btn-review:hover{background:#9a4023;}
+  .btn-review:hover{background:var(--x-bg-9a4023);}
   .rule-grid{
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -563,19 +728,19 @@
   .rule-card.der{background:var(--der-bg);border-left:4px solid var(--der);}
   .rule-card.die{background:var(--die-bg);border-left:4px solid var(--die);}
   .rule-card.das{background:var(--das-bg);border-left:4px solid var(--das);}
-  .rule-card.konj-extra{background:#F0E6F7;border-left:4px solid #B98FD1;}
-  .rule-card.konj-extra2{background:#E6F0F7;border-left:4px solid #7FA8D9;}
+  .rule-card.konj-extra{background:var(--x-bg-f0e6f7);border-left:4px solid var(--x-bd-b98fd1);}
+  .rule-card.konj-extra2{background:var(--x-bg-e6f0f7);border-left:4px solid var(--x-bd-7fa8d9);}
   .rule-card .title{font-weight:700;font-size:14px;margin-bottom:6px;}
   .rule-card.der .title{color:var(--der);}
   .rule-card.die .title{color:var(--die);}
   .rule-card.das .title{color:var(--das);}
-  .rule-card .sfx{font-size:12px;color:#444;line-height:1.7;}
-  .rule-card .ex{font-size:11.5px;color:#666;margin-top:6px;font-style:italic;}
+  .rule-card .sfx{font-size:12px;color:var(--x-tx-444444);line-height:1.7;}
+  .rule-card .ex{font-size:11.5px;color:var(--x-tx-666666);margin-top:6px;font-style:italic;}
   .plural-note{
     margin-top:10px;
     font-family: system-ui, Helvetica, Arial, sans-serif;
     font-size:12.5px;
-    color:#555;
+    color:var(--x-tx-555555);
     background:var(--cream);
     padding:8px 10px;
     border-radius:2px;
@@ -586,7 +751,7 @@
   }
   .overlay.show{display:flex;}
   .quiz-card{
-    background:#fdfcf9;max-width:440px;width:100%;padding:30px 28px 26px;
+    background:var(--x-bg-fdfcf9);max-width:440px;width:100%;padding:30px 28px 26px;
     border-top:4px solid var(--brass);text-align:center;
   }
   .quiz-card .qtype{
@@ -609,12 +774,12 @@
     font-size:22px;
     line-height:1;
     cursor:pointer;
-    color:#ccc;
+    color:var(--x-tx-cccccc);
     padding:0;
     transition:color 0.15s, transform 0.1s;
   }
   .fav-star-btn:hover{transform:scale(1.15);}
-  .fav-star-btn.active{color:#e0a800;}
+  .fav-star-btn.active{color:var(--x-tx-e0a800);}
   .result-icon{
     font-size:34px;
     font-weight:900;
@@ -641,9 +806,9 @@
     gap:8px;
     align-items:center;
     margin-bottom:14px;
-    background:#fff;
+    background:var(--x-bg-ffffff);
   }
-  .order-placeholder{color:#999;font-size:13px;font-style:italic;}
+  .order-placeholder{color:var(--x-tx-999999);font-size:13px;font-style:italic;}
   .order-pool{
     display:flex;
     flex-wrap:wrap;
@@ -654,13 +819,13 @@
     min-height:18px;
     text-align:center;
     font-size:13px;
-    color:var(--teal);
+    color:var(--tx-teal);
     font-style:italic;
     margin-top:8px;
   }
   .reading-word{
     cursor:pointer;
-    border-bottom:1px dotted #999;
+    border-bottom:1px dotted var(--x-bd-999999);
     transition:background 0.15s;
   }
   .reading-word:hover{background:var(--cream);}
@@ -675,22 +840,22 @@
     cursor:pointer;
     font-weight:600;
   }
-  .order-tile:hover{background:#eee0c5;}
+  .order-tile:hover{background:var(--x-bg-eee0c5);}
   .order-tile.placed{
     background:var(--teal);
     color:#fff;
     border-color:var(--teal);
   }
-  .order-tile.placed:hover{background:#163a47;}
+  .order-tile.placed:hover{background:var(--x-bg-163a47);}
   .order-tile.locked{cursor:not-allowed;opacity:0.6;}
-  .order-tile.correct-order{background:var(--das-bg);border-color:#3a7d3a;color:#2c5c2c;}
-  .order-tile.wrong-order{background:#fde3da;border-color:var(--coral);color:var(--coral);}
-  .order-tile.role-subj{background:#E2E2E2;border-color:#999;color:#444;}
-  .order-tile.role-verb{background:#F0DFB0;border-color:var(--brass);color:#6b4e1e;}
-  .order-tile.role-zeit{background:#CFE8F5;border-color:#7FB8D9;color:#1c5877;}
-  .order-tile.role-modal{background:#E8DAF0;border-color:#B98FD1;color:#5b3a75;}
-  .order-tile.role-lokal{background:#DCEEDC;border-color:#8FC28F;color:#2c5c2c;}
-  .order-tile.role-obj{background:#F5DFC8;border-color:#D9A15F;color:#8a5a1e;}
+  .order-tile.correct-order{background:var(--das-bg);border-color:var(--x-bd-3a7d3a);color:var(--x-tx-2c5c2c);}
+  .order-tile.wrong-order{background:var(--x-bg-fde3da);border-color:var(--coral);color:var(--coral);}
+  .order-tile.role-subj{background:var(--x-bg-e2e2e2);border-color:var(--x-bd-999999);color:var(--x-tx-444444);}
+  .order-tile.role-verb{background:var(--x-bg-f0dfb0);border-color:var(--brass);color:var(--x-tx-6b4e1e);}
+  .order-tile.role-zeit{background:var(--x-bg-cfe8f5);border-color:var(--x-bd-7fb8d9);color:var(--x-tx-1c5877);}
+  .order-tile.role-modal{background:var(--x-bg-e8daf0);border-color:var(--x-bd-b98fd1);color:var(--x-tx-5b3a75);}
+  .order-tile.role-lokal{background:var(--x-bg-dceedc);border-color:var(--x-bd-8fc28f);color:var(--x-tx-2c5c2c);}
+  .order-tile.role-obj{background:var(--x-bg-f5dfc8);border-color:var(--x-bd-d9a15f);color:var(--x-tx-8a5a1e);}
   .role-legend{
     width:100%;
     display:flex;
@@ -707,12 +872,12 @@
     border-radius:10px;
     font-family: system-ui, Helvetica, Arial, sans-serif;
   }
-  .role-chip.role-subj{background:#E2E2E2;color:#444;}
-  .role-chip.role-verb{background:#F0DFB0;color:#6b4e1e;}
-  .role-chip.role-zeit{background:#CFE8F5;color:#1c5877;}
-  .role-chip.role-modal{background:#E8DAF0;color:#5b3a75;}
-  .role-chip.role-lokal{background:#DCEEDC;color:#2c5c2c;}
-  .role-chip.role-obj{background:#F5DFC8;color:#8a5a1e;}
+  .role-chip.role-subj{background:var(--x-bg-e2e2e2);color:var(--x-tx-444444);}
+  .role-chip.role-verb{background:var(--x-bg-f0dfb0);color:var(--x-tx-6b4e1e);}
+  .role-chip.role-zeit{background:var(--x-bg-cfe8f5);color:var(--x-tx-1c5877);}
+  .role-chip.role-modal{background:var(--x-bg-e8daf0);color:var(--x-tx-5b3a75);}
+  .role-chip.role-lokal{background:var(--x-bg-dceedc);color:var(--x-tx-2c5c2c);}
+  .role-chip.role-obj{background:var(--x-bg-f5dfc8);color:var(--x-tx-8a5a1e);}
 
   .adj-split-wrap{
     display:grid;
@@ -743,7 +908,7 @@
     align-items:center;
     border:1px solid var(--line);
     border-radius:4px;
-    background:#fff;
+    background:var(--x-bg-ffffff);
     padding:10px;
     gap:6px;
   }
@@ -764,7 +929,7 @@
     font-family: Georgia, serif;
     font-weight:700;
     font-size:14px;
-    color:var(--deep);
+    color:var(--tx-deep);
     cursor:pointer;
     line-height:1.3;
   }
@@ -784,7 +949,7 @@
   }
   .adj-side-btns button{min-width:22px;min-height:22px;flex-shrink:0;}
   .adj-side-btns .speak-btn{width:24px;height:24px;border:1px solid var(--line);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;padding:0;}
-  .adj-side-btns .conj-btn, .adj-side-btns .del{border:1px solid var(--line);background:none;border-radius:10px;padding:3px 8px;cursor:pointer;color:var(--teal);}
+  .adj-side-btns .conj-btn, .adj-side-btns .del{border:1px solid var(--line);background:none;border-radius:10px;padding:3px 8px;cursor:pointer;color:var(--tx-teal);}
   .adj-side-btns .del{color:var(--coral);}
   .adj-vs{
     font-size:18px;
@@ -796,8 +961,8 @@
   .opt-btn.correct{border-color:var(--sea);}
   .opt-btn.wrong{border-color:var(--coral);}
   .match-btn.selected{background:var(--brass); color:#fff; border-color:var(--brass);}
-  .match-btn.correct{background:#dff5df; border-color:#2c7a2c; color:#2c7a2c; cursor:default;}
-  .match-btn.wrong-flash{background:#fde3da; border-color:var(--coral);}
+  .match-btn.correct{background:var(--x-bg-dff5df); border-color:var(--x-bd-2c7a2c); color:var(--x-tx-2c7a2c); cursor:default;}
+  .match-btn.wrong-flash{background:var(--x-bg-fde3da); border-color:var(--coral);}
   .feedback{font-family: system-ui, Helvetica, Arial, sans-serif;font-size:13.5px;min-height:20px;margin-bottom:10px;}
   .plural-input{display:flex;gap:8px;margin-bottom:8px;}
   .plural-input input{margin-bottom:0;flex:1;}
@@ -810,19 +975,19 @@
   .umlaut-btn{
     background:var(--cream);
     border:1px solid var(--line);
-    color:var(--deep);
+    color:var(--tx-deep);
     font-family: Georgia, serif;
     font-size:14px;
     padding:5px 10px;
     border-radius:2px;
   }
   .umlaut-btn:hover{background:var(--der-bg);}
-  .empty-note{font-family: system-ui, Helvetica, Arial, sans-serif;font-size:13px;color:#888;line-height:1.6;}
+  .empty-note{font-family: system-ui, Helvetica, Arial, sans-serif;font-size:13px;color:var(--x-tx-888888);line-height:1.6;}
   .add-card{
-    background:#fdfcf9;max-width:420px;width:100%;padding:26px 26px 22px;
+    background:var(--x-bg-fdfcf9);max-width:420px;width:100%;padding:26px 26px 22px;
     border-top:4px solid var(--teal);
   }
-  .add-card h3{margin:0 0 16px;font-size:17px;color:var(--deep);font-weight:400;}
+  .add-card h3{margin:0 0 16px;font-size:17px;color:var(--tx-deep);font-weight:400;}
   .add-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:6px;}
   .conj-input-grid{
     display:grid;
@@ -835,7 +1000,7 @@
   .conj-btn{
     background:var(--cream);
     border:1px solid var(--line);
-    color:var(--teal);
+    color:var(--tx-teal);
     font-size:11.5px;
     font-weight:600;
     padding:5px 10px;
@@ -922,7 +1087,7 @@
     font-style:italic;
     font-size:13px;
     font-weight:600;
-    color:var(--cream);
+    color:var(--tx-cream);
     letter-spacing:0.2px;
   }
 
@@ -970,9 +1135,9 @@
 .kg-bk-meta{font-size:13px;color:var(--kg-muted);display:flex;flex-wrap:wrap;align-items:center;gap:4px;}
 .kg-lvl{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px;border:1.5px solid var(--kg-teal);color:var(--kg-teal);margin-right:6px;}
 .kg-badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--kg-good-bg);color:var(--kg-good);margin-left:4px;}
-.kg-perf{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:#F0E4D4;color:#8A5A2A;margin-left:4px;}
+.kg-perf{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--x-bg-f0e4d4);color:var(--x-tx-8a5a2a);margin-left:4px;}
 .kg-prat{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--der-bg);color:var(--der);margin-left:4px;}
-.kg-mix{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:#EDE0F5;color:#6A3F94;margin-left:4px;}
+.kg-mix{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--x-bg-ede0f5);color:var(--x-tx-6a3f94);margin-left:4px;}
 
 .kg-topbar{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
 .kg-back{padding:8px 10px 8px 0;font-weight:600;color:var(--kg-teal);}
@@ -986,7 +1151,7 @@
 .kg-play svg{width:14px;height:14px;}
 .kg-de{font-family:var(--kg-serif);font-size:19px;line-height:1.6;margin:0;}
 .kg-w{padding:0;margin:0;font:inherit;color:inherit;text-decoration:underline dotted color-mix(in srgb,var(--kg-muted) 70%,transparent);text-underline-offset:4px;text-decoration-thickness:1.5px;border-radius:3px;}
-.kg-w.kg-sel{background:var(--kg-mark);color:#12232E;text-decoration:none;}
+.kg-w.kg-sel{background:var(--kg-mark);color:var(--x-tx-12232e);text-decoration:none;}
 .kg-tr-line{margin:2px 0 0;color:var(--kg-muted);font-size:14.5px;}
 .kg-cta{display:block;width:100%;margin-top:22px;padding:14px;border:0;border-radius:8px;background:var(--kg-teal);color:var(--kg-teal-ink);font-weight:700;font-size:16px;}
 .kg-cta.kg-alt{background:var(--kg-surface);color:var(--kg-ink);border:1px solid var(--kg-line);margin-top:10px;}
@@ -1036,7 +1201,7 @@
     table.mob-rows td.more-cell{grid-area:auto !important; grid-column:1 / -1 !important; text-align:center; padding:12px 0;}
     table.mob-rows, table.mob-rows tbody{display:block;}
     table.mob-rows thead{display:none;}
-    table.mob-rows tr{display:grid; align-items:center; border-bottom:1px solid #eee; padding:2px 0;}
+    table.mob-rows tr{display:grid; align-items:center; border-bottom:1px solid var(--x-bd-eeeeee); padding:2px 0;}
     table.mob-rows td{border-bottom:none; padding:4px 3px; min-width:0; overflow-wrap:anywhere;}
     table.mob-rows td.no-match{grid-area:auto !important; grid-column:1 / -1 !important;}
     #wordTable tr{grid-template-columns:44px 30px 1fr 34px 34px 34px;}
@@ -1046,8 +1211,8 @@
     #wordTable td:nth-child(4){grid-area:1 / 4;}
     #wordTable td:nth-child(7){grid-area:1 / 5;}
     #wordTable td:nth-child(8){grid-area:1 / 6;}
-    #wordTable td:nth-child(5){grid-area:2 / 1 / 3 / 4; color:#555;}
-    #wordTable td:nth-child(5)::before{content:"Çoğul: "; color:#999; font-size:11px;}
+    #wordTable td:nth-child(5){grid-area:2 / 1 / 3 / 4; color:var(--x-tx-555555);}
+    #wordTable td:nth-child(5)::before{content:"Çoğul: "; color:var(--x-tx-999999); font-size:11px;}
     #wordTable td:nth-child(6){grid-area:2 / 4;}
     #verbTable tr{grid-template-columns:30px 1fr 34px 34px;}
     #verbTable td:nth-child(1){grid-area:1 / 1;}
@@ -1079,20 +1244,20 @@
   }
 
 /* --- Hikâyeler: başlık bandı --- */
-.kg-hero{position:relative;text-align:center;padding:30px 20px 22px;margin:0 0 20px;color:#F5F0E6;
-  background:radial-gradient(120% 140% at 50% 0%, #1C4B5C 0%, #0F2A3D 62%);
+.kg-hero{position:relative;text-align:center;padding:30px 20px 22px;margin:0 0 20px;color:var(--x-tx-f5f0e6);
+  background:radial-gradient(120% 140% at 50% 0%, var(--x-bg-1c4b5c) 0%, var(--x-bg-0f2a3d) 62%);
   border:1px solid var(--brass);border-radius:3px;
   box-shadow:inset 0 0 0 5px #0F2A3D, inset 0 0 0 6px rgba(201,166,107,.55), 0 6px 18px rgba(15,42,61,.22);}
 .kg-hero .kg-eyebrow{font-family:system-ui,Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--brass);margin:0 0 10px;}
-.kg-hero .kg-brand{font-family:var(--kg-serif);font-weight:400;font-size:clamp(30px,5vw,46px);letter-spacing:.015em;line-height:1.1;color:#F7F1E3;margin:0;text-shadow:0 1px 0 rgba(0,0,0,.35);}
+.kg-hero .kg-brand{font-family:var(--kg-serif);font-weight:400;font-size:clamp(30px,5vw,46px);letter-spacing:.015em;line-height:1.1;color:var(--x-tx-f7f1e3);margin:0;text-shadow:0 1px 0 rgba(0,0,0,.35);}
 .kg-orn{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px auto 12px;max-width:260px;color:var(--brass);}
 .kg-orn span{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--brass));}
 .kg-orn span:last-child{background:linear-gradient(270deg,transparent,var(--brass));}
 .kg-orn i{font-style:normal;font-size:14px;line-height:1;}
-.kg-hero .kg-tagline{font-family:var(--kg-serif);font-style:italic;font-size:15px;color:#D9CDB0;margin:0 0 16px;text-wrap:balance;}
-.kg-prog{display:flex;flex-direction:column;align-items:center;gap:7px;font-family:system-ui,Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:.04em;color:#CDBF9F;}
+.kg-hero .kg-tagline{font-family:var(--kg-serif);font-style:italic;font-size:15px;color:var(--x-tx-d9cdb0);margin:0 0 16px;text-wrap:balance;}
+.kg-prog{display:flex;flex-direction:column;align-items:center;gap:7px;font-family:system-ui,Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:.04em;color:var(--x-tx-cdbf9f);}
 .kg-prog-bar{width:min(220px,70%);height:4px;border-radius:3px;background:rgba(245,240,230,.18);overflow:hidden;}
-.kg-prog-bar i{display:block;height:100%;background:linear-gradient(90deg,#B08D4F,var(--brass));border-radius:3px;transition:width .5s;}
+.kg-prog-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--x-bg-b08d4f),var(--brass));border-radius:3px;transition:width .5s;}
 @media (max-width:480px){
   .kg-hero{padding:24px 12px 18px;}
   .kg-hero .kg-brand{font-size:28px;}
@@ -1114,15 +1279,49 @@
     transition:opacity .2s, transform .2s;}
   .report-fab:hover, .report-fab:focus-visible, .report-fab:active{opacity:1;}
   .report-fab.fab-hide{opacity:0; transform:scale(.6); pointer-events:none;}
-  .app-toast{position:fixed; left:50%; bottom:64px; transform:translateX(-50%) translateY(12px); background:#0F2A3D; color:#F5F0E6;
+  .app-toast{position:fixed; left:50%; bottom:64px; transform:translateX(-50%) translateY(12px); background:var(--x-bg-0f2a3d); color:var(--x-tx-f5f0e6);
     padding:10px 16px; border-radius:8px; font:600 13px/1.4 system-ui,Helvetica,Arial,sans-serif; z-index:1300; max-width:88vw; text-align:center;
     box-shadow:0 6px 18px rgba(0,0,0,.3); opacity:0; pointer-events:none; transition:opacity .2s, transform .2s;}
   .app-toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
 
-  .jump-tests{display:none; font-weight:700; color:var(--teal); text-decoration:none; white-space:nowrap;}
-  .jump-tests-btn{display:inline-block; margin:6px 0 0 8px; padding:7px 12px; border:1px solid var(--brass); border-radius:10px; color:var(--deep); font:700 12.5px system-ui,Helvetica,Arial,sans-serif; text-decoration:none; background:#fff;}
+  .jump-tests{display:none; font-weight:700; color:var(--tx-teal); text-decoration:none; white-space:nowrap;}
+  .jump-tests-btn{display:inline-block; margin:6px 0 0 8px; padding:7px 12px; border:1px solid var(--brass); border-radius:10px; color:var(--tx-deep); font:700 12.5px system-ui,Helvetica,Arial,sans-serif; text-decoration:none; background:var(--x-bg-ffffff);}
   @media (max-width:600px), (max-height:500px) and (pointer:coarse){ .jump-tests{display:inline-block; float:right;} html{scroll-behavior:smooth;} }
   @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto !important;} }
+
+  /* --- Tema düğmesi + gece temasına özel ince ayarlar --- */
+  .header-right{display:flex; flex-direction:column; align-items:flex-end; gap:8px;}
+  .theme-btn{display:inline-flex; align-items:center; gap:6px; background:rgba(245,240,230,.08); color:#F5F0E6; border:1px solid rgba(201,166,107,.65);
+    padding:5px 12px; border-radius:16px; font:600 12px/1 system-ui,Helvetica,Arial,sans-serif; cursor:pointer; white-space:nowrap; min-height:30px;}
+  .theme-btn:hover{background:rgba(245,240,230,.16);}
+  .theme-btn:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+  @media (max-width:600px){ .header-right{align-items:flex-start;} }
+  html[data-theme="dark"] header{background:#0B1822;}
+  html[data-theme="dark"] input::placeholder, html[data-theme="dark"] textarea::placeholder{color:#7F8A92;}
+  html[data-theme="dark"] .overlay{background:rgba(2,6,10,.78);}
+  html[data-theme="dark"] .report-fab{box-shadow:0 2px 8px rgba(0,0,0,.6);}
+
+:root{ --tx-cream:#F5F0E6; --bg-coral:#B5502F; --bg-sea:#4C8C6B; --bg-der:#2B5B8A; --bg-die:#A5334D; --bg-das:#3F7A4E; }
+/* --- gece: pirinç zeminli düğmelerde koyu yazı kalsın --- */
+html[data-theme="dark"] .btn-add{color:#0F2A3D;}
+html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
+
+  /* --- Soru havuzu --- */
+  .pool-help{font-size:13px; color:var(--x-tx-777777); line-height:1.5; margin:0 0 12px; font-family:system-ui,Helvetica,Arial,sans-serif;}
+  .pool-link-row{text-align:center; margin-top:6px;}
+  .pool-link{background:none; border:none; color:var(--tx-teal); font:600 12px system-ui,Helvetica,Arial,sans-serif; text-decoration:underline; cursor:pointer; padding:6px 8px; min-height:30px;}
+  #poolOverlay .add-card{max-height:92vh; overflow-y:auto;}
+  @supports (height:100dvh){ #poolOverlay .add-card{max-height:92dvh;} }
+  .pool-group{font:700 11px system-ui,Helvetica,Arial,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--brass); margin:12px 0 4px;}
+  .pool-row{display:flex; align-items:center; gap:10px; padding:8px 4px; border-bottom:1px solid var(--line); cursor:pointer; font-family:system-ui,Helvetica,Arial,sans-serif; font-size:14px;}
+  .pool-row input{width:18px; height:18px; flex:0 0 auto; accent-color:var(--teal);}
+  .pool-row .pool-name{flex:1; min-width:0; color:var(--ink);}
+  .pool-row .pool-count{font-size:12px; color:var(--x-tx-777777); white-space:nowrap;}
+  .pool-bar{height:4px; border-radius:3px; background:var(--line); margin:2px 0 0; overflow:hidden;}
+  .pool-bar i{display:block; height:100%; background:var(--sea); border-radius:3px;}
+  .pool-bar.full i{background:var(--coral);}
+  @media (pointer:coarse){ .pool-link{min-height:38px; padding:10px 12px;} .pool-row{padding:11px 4px;} }
+  .pool-empty{font-size:13px; color:var(--x-tx-777777); padding:14px 4px; font-family:system-ui,Helvetica,Arial,sans-serif;}
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1135,9 +1334,10 @@
       <h1>Almanca Kişisel Çalışma Antrenörü</h1>
       <p>Persönlicher Deutsch-Lerntrainer</p>
     </div>
-    <div>
+    <div class="header-right">
+      <button id="themeBtn" class="theme-btn" onclick="cycleTheme()" type="button" aria-label="Tema değiştir" title="Tema: Otomatik"><span id="themeIcon">🌓</span><span id="themeLabel">Otomatik</span></button>
       <div class="signature"><span class="sig-note">Persönliche Lernnotizen</span><span class="sig-divider"></span><span class="sig-name">⚓ Erstellt von Capt. Aykut Akkoz</span></div>
-      <div class="last-updated">Zuletzt aktualisiert: 04.10.2026</div>
+      <div class="last-updated">Zuletzt aktualisiert: 05.10.2026</div>
     </div>
   </div>
 </header>
@@ -1173,7 +1373,7 @@
         <button class="filter-btn" data-filter="das" onclick="setFilter('das')">das</button>
       </div>
       <div style="margin:8px 0;">
-        <select id="topicFilterSelect" onchange="setTopicFilter(this.value)" style="width:100%; padding:8px; border-radius:8px; border:1px solid var(--line); font-family:inherit; font-size:13px; background:#fff;">
+        <select id="topicFilterSelect" onchange="setTopicFilter(this.value)" style="width:100%; padding:8px; border-radius:8px; border:1px solid var(--line); font-family:inherit; font-size:13px; background:var(--x-bg-ffffff);">
           <option value="all">🔎 Tüm Konular</option>
         </select>
       </div>
@@ -1216,7 +1416,7 @@
         <button class="btn-ghost" onclick="clearSearch('verben')">Temizle</button>
       </div>
       <div style="margin:8px 0;">
-        <select id="verbTopicSelect" onchange="setVerbTopicFilter(this.value)" style="width:100%; padding:8px; border-radius:8px; border:1px solid var(--line); font-family:inherit; font-size:13px; background:#fff;">
+        <select id="verbTopicSelect" onchange="setVerbTopicFilter(this.value)" style="width:100%; padding:8px; border-radius:8px; border:1px solid var(--line); font-family:inherit; font-size:13px; background:var(--x-bg-ffffff);">
           <option value="all">🔎 Tüm Konular</option>
         </select>
       </div>
@@ -1255,7 +1455,7 @@
         <button class="btn-ghost" onclick="clearSearch('adj')">Temizle</button>
       </div>
       <div style="margin:8px 0;">
-        <select id="adjTopicSelect" onchange="setAdjTopicFilter(this.value)" style="width:100%; padding:8px; border-radius:8px; border:1px solid var(--line); font-family:inherit; font-size:13px; background:#fff;">
+        <select id="adjTopicSelect" onchange="setAdjTopicFilter(this.value)" style="width:100%; padding:8px; border-radius:8px; border:1px solid var(--line); font-family:inherit; font-size:13px; background:var(--x-bg-ffffff);">
           <option value="all">🔎 Tüm Konular</option>
         </select>
       </div>
@@ -1436,12 +1636,12 @@
         <div class="rule-card der">
           <div class="title">Normal Sıra</div>
           <div class="sfx">Özne 1. sırada, fiil 2. sırada</div>
-          <div class="ex">Ich gehe heute ins Kino.<br><span style="color:#999;">(1=Ich, 2=gehe)</span></div>
+          <div class="ex">Ich gehe heute ins Kino.<br><span style="color:var(--x-tx-999999);">(1=Ich, 2=gehe)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">"Devrik" Görünen Sıra</div>
           <div class="sfx">Başka bir şey 1. sırada olunca özne fiilden SONRAYA kayar — fiil yine 2.!</div>
-          <div class="ex">Heute gehe ich ins Kino.<br><span style="color:#999;">(1=Heute, 2=gehe, 3=ich)</span></div>
+          <div class="ex">Heute gehe ich ins Kino.<br><span style="color:var(--x-tx-999999);">(1=Heute, 2=gehe, 3=ich)</span></div>
         </div>
         <div class="rule-card das">
           <div class="title">Soru Cümlesi</div>
@@ -1460,12 +1660,12 @@
         <div class="rule-card der">
           <div class="title">Zaman + Yer</div>
           <div class="sfx">Zaman önce, Yer sonra gelir.</div>
-          <div class="ex">Ich fahre <strong>morgen</strong> <strong>nach Berlin</strong>.<br><span style="color:#999;">(zaman → yer)</span></div>
+          <div class="ex">Ich fahre <strong>morgen</strong> <strong>nach Berlin</strong>.<br><span style="color:var(--x-tx-999999);">(zaman → yer)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">Zaman + Nesne</div>
           <div class="sfx">Zaman önce, Nesne sonra gelir.</div>
-          <div class="ex">Ich kaufe <strong>heute</strong> <strong>ein Buch</strong>.<br><span style="color:#999;">(zaman → nesne)</span></div>
+          <div class="ex">Ich kaufe <strong>heute</strong> <strong>ein Buch</strong>.<br><span style="color:var(--x-tx-999999);">(zaman → nesne)</span></div>
         </div>
         <div class="rule-card das">
           <div class="title">TeKaMoLo (genel sıra)</div>
@@ -1536,17 +1736,17 @@
         <div class="rule-card der">
           <div class="title">Normal: özel isim + -s</div>
           <div class="sfx">Çoğu özel isme direkt -s eklenir, kesme işareti YOK.</div>
-          <div class="ex"><strong>Carolines</strong> Kamera<br><span style="color:#999;">(Caroline'ın kamerası)</span></div>
+          <div class="ex"><strong>Carolines</strong> Kamera<br><span style="color:var(--x-tx-999999);">(Caroline'ın kamerası)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">İstisna: -s/-tz/-x/-z ile bitiyorsa</div>
           <div class="sfx">Ekstra -s eklenmez, sadece kesme işareti (') konur.</div>
-          <div class="ex"><strong>Max'</strong> Kamera<br><span style="color:#999;">(Max'ın kamerası)</span></div>
+          <div class="ex"><strong>Max'</strong> Kamera<br><span style="color:var(--x-tx-999999);">(Max'ın kamerası)</span></div>
         </div>
         <div class="rule-card das">
           <div class="title">Konuşma dilinde: von + isim</div>
           <div class="sfx">Günlük konuşmada Genitiv-s yerine "von" tercih edilir.</div>
-          <div class="ex">Die Kamera <strong>von Max</strong>.<br><span style="color:#999;">(Max'ın kamerası)</span></div>
+          <div class="ex">Die Kamera <strong>von Max</strong>.<br><span style="color:var(--x-tx-999999);">(Max'ın kamerası)</span></div>
         </div>
       </div>
       <div class="plural-note">
@@ -1563,19 +1763,19 @@
       <div class="rule-grid" style="grid-template-columns:1fr 1fr;">
         <div class="rule-card der">
           <div class="title">Genel kural / talimat</div>
-          <div class="ex"><strong>Man</strong> muss hier ruhig sein.<br><span style="color:#999;">(Burada sessiz olmak gerekir.)</span></div>
+          <div class="ex"><strong>Man</strong> muss hier ruhig sein.<br><span style="color:var(--x-tx-999999);">(Burada sessiz olmak gerekir.)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">Yasak</div>
-          <div class="ex">Hier darf <strong>man</strong> nicht fotografieren.<br><span style="color:#999;">(Burada fotoğraf çekilmez.)</span></div>
+          <div class="ex">Hier darf <strong>man</strong> nicht fotografieren.<br><span style="color:var(--x-tx-999999);">(Burada fotoğraf çekilmez.)</span></div>
         </div>
         <div class="rule-card das">
           <div class="title">Genel bilgi sorma</div>
-          <div class="ex">Wie schreibt <strong>man</strong> das Wort?<br><span style="color:#999;">(Bu kelime nasıl yazılır?)</span></div>
+          <div class="ex">Wie schreibt <strong>man</strong> das Wort?<br><span style="color:var(--x-tx-999999);">(Bu kelime nasıl yazılır?)</span></div>
         </div>
         <div class="rule-card der">
           <div class="title">"İnsan" / belirsiz özne</div>
-          <div class="ex">In diesem Restaurant isst <strong>man</strong> gut.<br><span style="color:#999;">(Bu restoranda güzel yenir.)</span></div>
+          <div class="ex">In diesem Restaurant isst <strong>man</strong> gut.<br><span style="color:var(--x-tx-999999);">(Bu restoranda güzel yenir.)</span></div>
         </div>
       </div>
       <div class="plural-note">
@@ -1591,7 +1791,7 @@
           <tr style="border-bottom:2px solid var(--brass);">
             <th style="text-align:left; padding:8px;"></th>
             <th style="text-align:left; padding:8px; color:var(--der);">der Flur</th>
-            <th style="text-align:left; padding:8px; color:#2c7a2c;">das Zimmer</th>
+            <th style="text-align:left; padding:8px; color:var(--x-tx-2c7a2c);">das Zimmer</th>
             <th style="text-align:left; padding:8px; color:var(--die);">die Wohnung</th>
             <th style="text-align:left; padding:8px;">die Nachbarn (Pl.)</th>
           </tr>
@@ -1620,12 +1820,12 @@
         <div class="rule-card der">
           <div class="title">sein (onun — erkek sahip)</div>
           <div class="sfx">Sahip <strong>Herr Schmidt</strong> (erkek) ise → <strong>sein</strong></div>
-          <div class="ex">Das ist Herr Schmidt. <strong>Sein</strong> Computer ist neu.<br><span style="color:#999;">(Onun bilgisayarı — sahip erkek)</span></div>
+          <div class="ex">Das ist Herr Schmidt. <strong>Sein</strong> Computer ist neu.<br><span style="color:var(--x-tx-999999);">(Onun bilgisayarı — sahip erkek)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">ihr (onun — kadın sahip)</div>
           <div class="sfx">Sahip <strong>Frau Schmidt</strong> (kadın) ise → <strong>ihr</strong></div>
-          <div class="ex">Das ist Frau Schmidt. <strong>Ihre</strong> Wohnung ist klein.<br><span style="color:#999;">(Onun evi — sahip kadın)</span></div>
+          <div class="ex">Das ist Frau Schmidt. <strong>Ihre</strong> Wohnung ist klein.<br><span style="color:var(--x-tx-999999);">(Onun evi — sahip kadın)</span></div>
         </div>
       </div>
       <div class="plural-note">
@@ -1718,17 +1918,17 @@
         <div class="rule-card der">
           <div class="title">Nominativ — kim / ne?</div>
           <div class="sfx">Özne — eylemi YAPAN</div>
-          <div class="ex"><strong>Ich</strong> gebe meiner Mutter meinen Stift.<br><span style="color:#999;">(Anneme kalemimi veriyorum.)</span></div>
+          <div class="ex"><strong>Ich</strong> gebe meiner Mutter meinen Stift.<br><span style="color:var(--x-tx-999999);">(Anneme kalemimi veriyorum.)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">Dativ — kime?</div>
           <div class="sfx">Dolaylı nesne — eylemin YÖNELDİĞİ kişi</div>
-          <div class="ex">Ich gebe <strong>meiner Mutter</strong> meinen Stift.<br><span style="color:#999;">(Anneme kalemimi veriyorum.)</span></div>
+          <div class="ex">Ich gebe <strong>meiner Mutter</strong> meinen Stift.<br><span style="color:var(--x-tx-999999);">(Anneme kalemimi veriyorum.)</span></div>
         </div>
         <div class="rule-card das">
           <div class="title">Akkusativ — kimi / neyi?</div>
           <div class="sfx">Doğrudan nesne — eylemden doğrudan ETKİLENEN</div>
-          <div class="ex">Ich gebe meiner Mutter <strong>meinen Stift</strong>.<br><span style="color:#999;">(Anneme kalemimi veriyorum.)</span></div>
+          <div class="ex">Ich gebe meiner Mutter <strong>meinen Stift</strong>.<br><span style="color:var(--x-tx-999999);">(Anneme kalemimi veriyorum.)</span></div>
         </div>
       </div>
       <div class="plural-note">
@@ -1773,12 +1973,12 @@
         <div class="rule-card der">
           <div class="title">Dativ — wem? (kime?)</div>
           <div class="sfx">Türkçe: -e / -a hâli</div>
-          <div class="ex">Ich schenke <strong>meiner Mutter</strong> eine Tasche.<br><span style="color:#999;">(Anneme bir çanta hediye ediyorum.)</span></div>
+          <div class="ex">Ich schenke <strong>meiner Mutter</strong> eine Tasche.<br><span style="color:var(--x-tx-999999);">(Anneme bir çanta hediye ediyorum.)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">Akkusativ — wen / was? (kimi / neyi?)</div>
           <div class="sfx">Türkçe: -i / -ı hâli</div>
-          <div class="ex">Ich schenke meiner Mutter <strong>eine Tasche</strong>.<br><span style="color:#999;">(Anneme bir çantayı hediye ediyorum.)</span></div>
+          <div class="ex">Ich schenke meiner Mutter <strong>eine Tasche</strong>.<br><span style="color:var(--x-tx-999999);">(Anneme bir çantayı hediye ediyorum.)</span></div>
         </div>
       </div>
     </section>
@@ -1837,9 +2037,9 @@
           <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">zu dem Lehrer</td><td style="padding:8px; vertical-align:top;">die Lehrer</td><td style="padding:8px; vertical-align:top;">zu den Lehrer<span style="color:var(--coral); font-weight:700;">n</span></td></tr>
           <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">mit dem Buch</td><td style="padding:8px; vertical-align:top;">die Bücher</td><td style="padding:8px; vertical-align:top;">mit den Büch<span style="color:var(--coral); font-weight:700;">ern</span></td></tr>
           <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">bei dem Tisch</td><td style="padding:8px; vertical-align:top;">die Tische</td><td style="padding:8px; vertical-align:top;">bei den Tisch<span style="color:var(--coral); font-weight:700;">en</span></td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">bei der Frau</td><td style="padding:8px; vertical-align:top;">die Frauen</td><td style="padding:8px; vertical-align:top;">bei den Frauen <span style="color:#999;">(zaten -n var)</span></td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">mit der Tasche</td><td style="padding:8px; vertical-align:top;">die Taschen</td><td style="padding:8px; vertical-align:top;">mit den Taschen <span style="color:#999;">(zaten -n var)</span></td></tr>
-          <tr><td style="padding:8px; vertical-align:top;">mit dem Handy</td><td style="padding:8px; vertical-align:top;">die Handys</td><td style="padding:8px; vertical-align:top;">mit den Handys <span style="color:#999;">(-s ile biter, ek yok)</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">bei der Frau</td><td style="padding:8px; vertical-align:top;">die Frauen</td><td style="padding:8px; vertical-align:top;">bei den Frauen <span style="color:var(--x-tx-999999);">(zaten -n var)</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">mit der Tasche</td><td style="padding:8px; vertical-align:top;">die Taschen</td><td style="padding:8px; vertical-align:top;">mit den Taschen <span style="color:var(--x-tx-999999);">(zaten -n var)</span></td></tr>
+          <tr><td style="padding:8px; vertical-align:top;">mit dem Handy</td><td style="padding:8px; vertical-align:top;">die Handys</td><td style="padding:8px; vertical-align:top;">mit den Handys <span style="color:var(--x-tx-999999);">(-s ile biter, ek yok)</span></td></tr>
         </tbody>
       </table>
       </div>
@@ -1951,12 +2151,12 @@
         <div class="rule-card der">
           <div class="title">Normal sıra</div>
           <div class="sfx">1: özne · 2: fiil · 3: zaman · 4: nesne</div>
-          <div class="ex"><strong>Ich spüle</strong> zuerst das Geschirr.<br><span style="color:#999;">(Önce bulaşıkları yıkıyorum.)</span></div>
+          <div class="ex"><strong>Ich spüle</strong> zuerst das Geschirr.<br><span style="color:var(--x-tx-999999);">(Önce bulaşıkları yıkıyorum.)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">Ters sıra (zaman başta)</div>
           <div class="sfx">1: zaman · 2: fiil · 3: özne · 4: nesne</div>
-          <div class="ex"><strong>Zuerst spüle ich</strong> das Geschirr.<br><span style="color:#999;">(Önce bulaşıkları yıkıyorum.)</span></div>
+          <div class="ex"><strong>Zuerst spüle ich</strong> das Geschirr.<br><span style="color:var(--x-tx-999999);">(Önce bulaşıkları yıkıyorum.)</span></div>
         </div>
       </div>
       <div style="overflow-x:auto;">
@@ -1998,11 +2198,11 @@
       <div class="rule-grid" style="grid-template-columns:1fr 1fr; margin-top:14px;">
         <div class="rule-card der">
           <div class="title">Şimdiki zaman</div>
-          <div class="ex">Ich <strong>bin</strong> müde.<br>Er <strong>hat</strong> Hunger.<br><span style="color:#999;">(Yorgunum. / Onun karnı aç.)</span></div>
+          <div class="ex">Ich <strong>bin</strong> müde.<br>Er <strong>hat</strong> Hunger.<br><span style="color:var(--x-tx-999999);">(Yorgunum. / Onun karnı aç.)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">Geçmiş zaman</div>
-          <div class="ex">Gestern <strong>war</strong> ich müde.<br>Er <strong>hatte</strong> Hunger.<br><span style="color:#999;">(Dün yorgundum. / Onun karnı açtı.)</span></div>
+          <div class="ex">Gestern <strong>war</strong> ich müde.<br>Er <strong>hatte</strong> Hunger.<br><span style="color:var(--x-tx-999999);">(Dün yorgundum. / Onun karnı açtı.)</span></div>
         </div>
       </div>
       <div class="plural-note">
@@ -2122,27 +2322,27 @@
         <div class="rule-card der">
           <div class="title">können</div>
           <div class="sfx">yapabilmek (yetenek / imkân)<br>ich kann, du kannst, er kann<br>wir können, ihr könnt, sie können</div>
-          <div class="ex">Ich kann gut Deutsch sprechen.<br><strong>+ nicht:</strong> Ich kann nicht schwimmen. <span style="color:#999;">(beceremiyorum)</span></div>
+          <div class="ex">Ich kann gut Deutsch sprechen.<br><strong>+ nicht:</strong> Ich kann nicht schwimmen. <span style="color:var(--x-tx-999999);">(beceremiyorum)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">wollen</div>
           <div class="sfx">istemek (irade / niyet)<br>ich will, du willst, er will<br>wir wollen, ihr wollt, sie wollen</div>
-          <div class="ex">Ich will ins Kino gehen.<br><strong>+ nicht:</strong> Ich will nicht gehen. <span style="color:#999;">(istemiyorum)</span></div>
+          <div class="ex">Ich will ins Kino gehen.<br><strong>+ nicht:</strong> Ich will nicht gehen. <span style="color:var(--x-tx-999999);">(istemiyorum)</span></div>
         </div>
         <div class="rule-card das">
           <div class="title">müssen</div>
           <div class="sfx">mecbur olmak (zorunluluk)<br>ich muss, du musst, er muss<br>wir müssen, ihr müsst, sie müssen</div>
-          <div class="ex">Ich muss heute arbeiten.<br><strong>+ nicht:</strong> Ich muss nicht arbeiten. <span style="color:#999;">(zorunlu değilim, istersem yaparım)</span></div>
+          <div class="ex">Ich muss heute arbeiten.<br><strong>+ nicht:</strong> Ich muss nicht arbeiten. <span style="color:var(--x-tx-999999);">(zorunlu değilim, istersem yaparım)</span></div>
         </div>
         <div class="rule-card konj-extra">
           <div class="title">dürfen</div>
           <div class="sfx">izinli olmak (izin)<br>ich darf, du darfst, er darf<br>wir dürfen, ihr dürft, sie dürfen</div>
-          <div class="ex">Hier darf man nicht rauchen.<br><strong>+ nicht:</strong> Ich darf nicht rauchen. <span style="color:#999;">(yasak!)</span></div>
+          <div class="ex">Hier darf man nicht rauchen.<br><strong>+ nicht:</strong> Ich darf nicht rauchen. <span style="color:var(--x-tx-999999);">(yasak!)</span></div>
         </div>
         <div class="rule-card konj-extra2">
           <div class="title">sollen</div>
           <div class="sfx">tavsiye edilmek / -meli (başkasının isteği)<br>ich soll, du sollst, er soll<br>wir sollen, ihr sollt, sie sollen</div>
-          <div class="ex">Du sollst mehr Wasser trinken.<br><strong>+ nicht:</strong> Du sollst nicht so viel arbeiten. <span style="color:#999;">(tavsiye edilmiyor)</span></div>
+          <div class="ex">Du sollst mehr Wasser trinken.<br><strong>+ nicht:</strong> Du sollst nicht so viel arbeiten. <span style="color:var(--x-tx-999999);">(tavsiye edilmiyor)</span></div>
         </div>
       </div>
       <div class="plural-note">
@@ -2185,12 +2385,12 @@
         <div class="rule-card die">
           <div class="title">gefallen (+ Dativ)</div>
           <div class="sfx"><strong>Şey (Nominativ — özne) + gefällt/gefallen + Kişi (Dativ)</strong><br>Fiil, beğenilen ŞEYİN tekil/çoğul olmasına göre çekilir (gefällt / gefallen).</div>
-          <div class="ex">Der Film <strong>gefällt mir</strong>.<br><span style="color:#999;">(Film bana hoş geliyor → Filmi beğeniyorum.)</span><br>Die Schuhe <strong>gefallen mir</strong> nicht.<br><span style="color:#999;">(Ayakkabılar hoşuma gitmiyor.)</span></div>
+          <div class="ex">Der Film <strong>gefällt mir</strong>.<br><span style="color:var(--x-tx-999999);">(Film bana hoş geliyor → Filmi beğeniyorum.)</span><br>Die Schuhe <strong>gefallen mir</strong> nicht.<br><span style="color:var(--x-tx-999999);">(Ayakkabılar hoşuma gitmiyor.)</span></div>
         </div>
         <div class="rule-card das">
           <div class="title">finden (+ Akkusativ + Sıfat)</div>
           <div class="sfx"><strong>Kişi (Nominativ — özne) + findet + Şey (Akkusativ) + Sıfat</strong><br>Fiil her zaman kişiye göre çekilir (ich finde, du findest...), yanına mutlaka bir sıfat gerekir.</div>
-          <div class="ex">Ich <strong>finde den Film gut</strong>.<br><span style="color:#999;">(Filmi iyi buluyorum — aynı anlam!)</span><br>Ich <strong>finde die Schuhe</strong> nicht <strong>schön</strong>.<br><span style="color:#999;">(Ayakkabıları güzel bulmuyorum.)</span></div>
+          <div class="ex">Ich <strong>finde den Film gut</strong>.<br><span style="color:var(--x-tx-999999);">(Filmi iyi buluyorum — aynı anlam!)</span><br>Ich <strong>finde die Schuhe</strong> nicht <strong>schön</strong>.<br><span style="color:var(--x-tx-999999);">(Ayakkabıları güzel bulmuyorum.)</span></div>
         </div>
       </div>
       <div class="plural-note">
@@ -2301,17 +2501,17 @@
         <div class="rule-card der">
           <div class="title">am + gün</div>
           <div class="sfx">Hangi gün?</div>
-          <div class="ex">am Montag · am Freitag<br><span style="color:#999;">(pazartesi, cuma)</span></div>
+          <div class="ex">am Montag · am Freitag<br><span style="color:var(--x-tx-999999);">(pazartesi, cuma)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">um + saat</div>
           <div class="sfx">Saat kaçta?</div>
-          <div class="ex">um 10 Uhr · um 14 Uhr<br><span style="color:#999;">(10'da, 14'te)</span></div>
+          <div class="ex">um 10 Uhr · um 14 Uhr<br><span style="color:var(--x-tx-999999);">(10'da, 14'te)</span></div>
         </div>
         <div class="rule-card das">
           <div class="title">Geht es …?</div>
           <div class="sfx">Olur mu?</div>
-          <div class="ex">Geht es am Mittwoch um 9 Uhr?<br><span style="color:#999;">(Çarşamba 9'da olur mu?)</span></div>
+          <div class="ex">Geht es am Mittwoch um 9 Uhr?<br><span style="color:var(--x-tx-999999);">(Çarşamba 9'da olur mu?)</span></div>
         </div>
       </div>
       <div style="overflow-x:auto;">
@@ -2408,17 +2608,17 @@
         <div class="rule-card der">
           <div class="title">und · oder · aber · denn · sondern</div>
           <div class="sfx">Sıra DEĞİŞMEZ: özne + fiil</div>
-          <div class="ex">Ich bleibe zu Hause, <strong>denn ich bin</strong> krank.<br><span style="color:#999;">(Evde kalıyorum çünkü hastayım.)</span></div>
+          <div class="ex">Ich bleibe zu Hause, <strong>denn ich bin</strong> krank.<br><span style="color:var(--x-tx-999999);">(Evde kalıyorum çünkü hastayım.)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">deshalb · dann · danach · später · zuerst · zuletzt</div>
           <div class="sfx">Fiil HEMEN ardından gelir (özne fiilden sonra)</div>
-          <div class="ex">Es regnet, <strong>deshalb bleibe ich</strong> zu Hause.<br><span style="color:#999;">(Yağmur yağıyor, bu yüzden evde kalıyorum.)</span></div>
+          <div class="ex">Es regnet, <strong>deshalb bleibe ich</strong> zu Hause.<br><span style="color:var(--x-tx-999999);">(Yağmur yağıyor, bu yüzden evde kalıyorum.)</span></div>
         </div>
         <div class="rule-card das">
           <div class="title">weil · dass · wenn · als</div>
           <div class="sfx">Yan cümle: fiil cümlenin SONUNDA</div>
-          <div class="ex">Ich lerne Deutsch, <strong>weil ich</strong> in Deutschland <strong>arbeite</strong>.<br><span style="color:#999;">(Almanya'da çalıştığım için Almanca öğreniyorum.)</span></div>
+          <div class="ex">Ich lerne Deutsch, <strong>weil ich</strong> in Deutschland <strong>arbeite</strong>.<br><span style="color:var(--x-tx-999999);">(Almanya'da çalıştığım için Almanca öğreniyorum.)</span></div>
         </div>
       </div>
       <div style="overflow-x:auto;">
@@ -2495,37 +2695,37 @@
         <div class="rule-card der">
           <div class="title">aus — içinden · köken · madde</div>
           <div class="sfx">① İçinden dışarı: -den/-dan<br>② Köken, memleket: -li, -den gelmek<br>③ Yapıldığı madde: -den yapılmış</div>
-          <div class="ex">Er nimmt die Geldbörse <strong>aus</strong> der Tasche.<br><span style="color:#999;">(Cüzdanı çantadan çıkarıyor.)</span><br>Ich komme <strong>aus</strong> Izmir. <span style="color:#999;">(İzmir'liyim.)</span><br>Der Tisch ist <strong>aus</strong> Holz. <span style="color:#999;">(Masa tahtadan.)</span></div>
+          <div class="ex">Er nimmt die Geldbörse <strong>aus</strong> der Tasche.<br><span style="color:var(--x-tx-999999);">(Cüzdanı çantadan çıkarıyor.)</span><br>Ich komme <strong>aus</strong> Izmir. <span style="color:var(--x-tx-999999);">(İzmir'liyim.)</span><br>Der Tisch ist <strong>aus</strong> Holz. <span style="color:var(--x-tx-999999);">(Masa tahtadan.)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">bei — yanında · -de · -da</div>
           <div class="sfx">① Birinin yanında/evinde BULUNMAK (hareket yok)<br>② Çalıştığı yer: bei einer Firma<br>③ Durum/koşul: bei Regen (yağmurda)</div>
-          <div class="ex">Er wohnt <strong>bei</strong> seinen Eltern. <span style="color:#999;">(Ailesinin yanında oturuyor.)</span><br>Sie arbeitet <strong>bei</strong> einer großen Firma. <span style="color:#999;">(Büyük bir şirkette çalışıyor.)</span><br><strong>Bei</strong> Regen nehmen wir den Bus. <span style="color:#999;">(Yağmurda otobüse biniyoruz.)</span></div>
+          <div class="ex">Er wohnt <strong>bei</strong> seinen Eltern. <span style="color:var(--x-tx-999999);">(Ailesinin yanında oturuyor.)</span><br>Sie arbeitet <strong>bei</strong> einer großen Firma. <span style="color:var(--x-tx-999999);">(Büyük bir şirkette çalışıyor.)</span><br><strong>Bei</strong> Regen nehmen wir den Bus. <span style="color:var(--x-tx-999999);">(Yağmurda otobüse biniyoruz.)</span></div>
         </div>
         <div class="rule-card das">
           <div class="title">mit — ile (birlikte · araç · alet · içerik)</div>
           <div class="sfx">① Birlikte: kişiyle<br>② Araç: mit dem Zug, mit dem Fahrrad<br>③ Alet: mit einem Bleistift<br>④ İçerik: Kaffee mit Milch</div>
-          <div class="ex">Ich spiele <strong>mit</strong> meinem Bruder Fußball. <span style="color:#999;">(Kardeşimle futbol oynuyorum.)</span><br>Wir fahren <strong>mit</strong> dem Fahrrad zur Schule. <span style="color:#999;">(Okula bisikletle gidiyoruz.)</span><br>Sie schreibt <strong>mit</strong> einem Bleistift. <span style="color:#999;">(Kurşun kalemle yazıyor.)</span></div>
+          <div class="ex">Ich spiele <strong>mit</strong> meinem Bruder Fußball. <span style="color:var(--x-tx-999999);">(Kardeşimle futbol oynuyorum.)</span><br>Wir fahren <strong>mit</strong> dem Fahrrad zur Schule. <span style="color:var(--x-tx-999999);">(Okula bisikletle gidiyoruz.)</span><br>Sie schreibt <strong>mit</strong> einem Bleistift. <span style="color:var(--x-tx-999999);">(Kurşun kalemle yazıyor.)</span></div>
         </div>
         <div class="rule-card der">
           <div class="title">nach — sonra · -e doğru · yön</div>
           <div class="sfx">① Zaman: sonra (nach der Arbeit)<br>② Şehir/ülke, ARTİKELSİZ: nach Berlin, nach Italien<br>③ Yön: nach links / nach rechts<br>④ nach Hause = eve (yön)</div>
-          <div class="ex"><strong>Nach</strong> dem Essen trinken wir Tee. <span style="color:#999;">(Yemekten sonra çay içiyoruz.)</span><br>Ich fliege morgen <strong>nach</strong> Berlin. <span style="color:#999;">(Yarın Berlin'e uçuyorum.)</span><br>Er geht <strong>nach</strong> Hause. <span style="color:#999;">(Eve gidiyor.)</span></div>
+          <div class="ex"><strong>Nach</strong> dem Essen trinken wir Tee. <span style="color:var(--x-tx-999999);">(Yemekten sonra çay içiyoruz.)</span><br>Ich fliege morgen <strong>nach</strong> Berlin. <span style="color:var(--x-tx-999999);">(Yarın Berlin'e uçuyorum.)</span><br>Er geht <strong>nach</strong> Hause. <span style="color:var(--x-tx-999999);">(Eve gidiyor.)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">seit — -den beri · -dır</div>
           <div class="sfx">① Geçmişte başlayıp HÂLÂ süren şey<br>② Süre: seit einem Jahr (bir yıldır)<br>③ Başlangıç: seit Montag, seit gestern<br>Fiil ŞİMDİKİ zamanda kalır!</div>
-          <div class="ex">Ich lerne <strong>seit</strong> einem Jahr Deutsch. <span style="color:#999;">(Bir yıldır Almanca öğreniyorum.)</span><br>Sie ist <strong>seit</strong> gestern krank. <span style="color:#999;">(Dünden beri hasta.)</span></div>
+          <div class="ex">Ich lerne <strong>seit</strong> einem Jahr Deutsch. <span style="color:var(--x-tx-999999);">(Bir yıldır Almanca öğreniyorum.)</span><br>Sie ist <strong>seit</strong> gestern krank. <span style="color:var(--x-tx-999999);">(Dünden beri hasta.)</span></div>
         </div>
         <div class="rule-card das">
           <div class="title">von — -den · -ın · tarafından</div>
           <div class="sfx">① Kişiden gelen: ein Brief von ...<br>② Sahiplik: das Auto von meinem Vater<br>③ von … bis …: -den … -e kadar<br>④ Bahsetmek: von etwas erzählen<br>⑤ Bir yerden ayrılıp gelmek: von der Arbeit</div>
-          <div class="ex">Der Brief ist <strong>von</strong> meiner Freundin. <span style="color:#999;">(Mektup arkadaşımdan.)</span><br>Ich arbeite <strong>von</strong> Montag bis Freitag. <span style="color:#999;">(Pazartesiden cumaya çalışıyorum.)</span><br>Ich komme gerade <strong>von</strong> der Arbeit. <span style="color:#999;">(Şimdi işten geliyorum.)</span></div>
+          <div class="ex">Der Brief ist <strong>von</strong> meiner Freundin. <span style="color:var(--x-tx-999999);">(Mektup arkadaşımdan.)</span><br>Ich arbeite <strong>von</strong> Montag bis Freitag. <span style="color:var(--x-tx-999999);">(Pazartesiden cumaya çalışıyorum.)</span><br>Ich komme gerade <strong>von</strong> der Arbeit. <span style="color:var(--x-tx-999999);">(Şimdi işten geliyorum.)</span></div>
         </div>
         <div class="rule-card der">
           <div class="title">zu — -e/-a gitmek · sabit kalıplar</div>
           <div class="sfx">① Kişiye/yere gitmek: zu meinem Freund<br>② Sabit: zu Hause (evde), zu Fuß (yürüyerek)<br>③ Davet/etkinlik: zu meiner Party</div>
-          <div class="ex">Ich gehe <strong>zu</strong> meinem Freund. <span style="color:#999;">(Arkadaşıma gidiyorum.)</span><br>Wir gehen <strong>zu</strong> Fuß. <span style="color:#999;">(Yürüyerek gidiyoruz.)</span><br>Ich bin heute <strong>zu</strong> Hause. <span style="color:#999;">(Bugün evdeyim.)</span></div>
+          <div class="ex">Ich gehe <strong>zu</strong> meinem Freund. <span style="color:var(--x-tx-999999);">(Arkadaşıma gidiyorum.)</span><br>Wir gehen <strong>zu</strong> Fuß. <span style="color:var(--x-tx-999999);">(Yürüyerek gidiyoruz.)</span><br>Ich bin heute <strong>zu</strong> Hause. <span style="color:var(--x-tx-999999);">(Bugün evdeyim.)</span></div>
         </div>
       </div>
     </section>
@@ -2570,27 +2770,27 @@
         <div class="rule-card der">
           <div class="title">für — için (kime/neye)</div>
           <div class="sfx">① Kimin için: bir kişiye yönelik<br>② Ne için: amaç/sebep<br>③ Süre: bir zaman aralığı boyunca</div>
-          <div class="ex">Das Geschenk ist <strong>für</strong> meine Mutter.<br><span style="color:#999;">(Hediye annem için.)</span><br>Vielen Dank <strong>für</strong> die Einladung.<br><span style="color:#999;">(Davet için çok teşekkürler.)</span></div>
+          <div class="ex">Das Geschenk ist <strong>für</strong> meine Mutter.<br><span style="color:var(--x-tx-999999);">(Hediye annem için.)</span><br>Vielen Dank <strong>für</strong> die Einladung.<br><span style="color:var(--x-tx-999999);">(Davet için çok teşekkürler.)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">durch — içinden · aracılığıyla</div>
           <div class="sfx">① Bir şeyin İÇİNDEN geçerek<br>② Bir ARAÇ/YÖNTEM sayesinde (bir kursla, biri sayesinde)</div>
-          <div class="ex">Ich gehe <strong>durch</strong> den Park.<br><span style="color:#999;">(Parkın içinden geçiyorum.)</span><br>Er lernt Deutsch <strong>durch</strong> einen Kurs.<br><span style="color:#999;">(Bir kurs sayesinde Almanca öğreniyor.)</span></div>
+          <div class="ex">Ich gehe <strong>durch</strong> den Park.<br><span style="color:var(--x-tx-999999);">(Parkın içinden geçiyorum.)</span><br>Er lernt Deutsch <strong>durch</strong> einen Kurs.<br><span style="color:var(--x-tx-999999);">(Bir kurs sayesinde Almanca öğreniyor.)</span></div>
         </div>
         <div class="rule-card das">
           <div class="title">ohne — -sız / -siz</div>
           <div class="sfx">Bir şey OLMADAN, bir şey/biri EKSİK iken</div>
-          <div class="ex">Ich trinke Kaffee <strong>ohne</strong> Zucker.<br><span style="color:#999;">(Şekersiz kahve içerim.)</span><br>Er kommt <strong>ohne</strong> seinen Bruder.<br><span style="color:#999;">(Kardeşi olmadan geliyor.)</span></div>
+          <div class="ex">Ich trinke Kaffee <strong>ohne</strong> Zucker.<br><span style="color:var(--x-tx-999999);">(Şekersiz kahve içerim.)</span><br>Er kommt <strong>ohne</strong> seinen Bruder.<br><span style="color:var(--x-tx-999999);">(Kardeşi olmadan geliyor.)</span></div>
         </div>
         <div class="rule-card der">
           <div class="title">gegen — -e karşı · yaklaşık</div>
           <div class="sfx">① Karşı taraf: bir rakibe/duvara karşı<br>② Yaklaşık zaman: "-e doğru, civarında"</div>
-          <div class="ex">Er spielt <strong>gegen</strong> seinen Freund.<br><span style="color:#999;">(Arkadaşına karşı oynuyor.)</span><br>Ich komme <strong>gegen</strong> acht Uhr.<br><span style="color:#999;">(Saat sekiz civarında geliyorum.)</span></div>
+          <div class="ex">Er spielt <strong>gegen</strong> seinen Freund.<br><span style="color:var(--x-tx-999999);">(Arkadaşına karşı oynuyor.)</span><br>Ich komme <strong>gegen</strong> acht Uhr.<br><span style="color:var(--x-tx-999999);">(Saat sekiz civarında geliyorum.)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">um — etrafında · saat</div>
           <div class="sfx">① Bir şeyin ETRAFINDA (çember gibi)<br>② Saat söylerken: um + saat (kesin saat)</div>
-          <div class="ex">Die Kinder sitzen <strong>um</strong> den Tisch.<br><span style="color:#999;">(Çocuklar masanın etrafında oturuyor.)</span><br>Der Film beginnt <strong>um</strong> sieben Uhr.<br><span style="color:#999;">(Film saat yedide başlıyor.)</span></div>
+          <div class="ex">Die Kinder sitzen <strong>um</strong> den Tisch.<br><span style="color:var(--x-tx-999999);">(Çocuklar masanın etrafında oturuyor.)</span><br>Der Film beginnt <strong>um</strong> sieben Uhr.<br><span style="color:var(--x-tx-999999);">(Film saat yedide başlıyor.)</span></div>
         </div>
       </div>
     </section>
@@ -2664,9 +2864,9 @@
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
         <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Soru</th><th style="text-align:left; padding:8px;">Edat</th><th style="text-align:left; padding:8px;">Örnek cevap</th></tr></thead>
         <tbody>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Wo ist das Plakat?</td><td style="padding:8px; vertical-align:top;"><strong>an</strong> <span style="color:#999;">(an dem = am)</span></td><td style="padding:8px; vertical-align:top;">An der Wand. / Am Fenster.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Wo ist das Plakat?</td><td style="padding:8px; vertical-align:top;"><strong>an</strong> <span style="color:var(--x-tx-999999);">(an dem = am)</span></td><td style="padding:8px; vertical-align:top;">An der Wand. / Am Fenster.</td></tr>
           <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Wo ist das Geschirr?</td><td style="padding:8px; vertical-align:top;"><strong>auf</strong></td><td style="padding:8px; vertical-align:top;">Auf dem Tisch. / Auf dem Regal.</td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Wo ist der Ordner?</td><td style="padding:8px; vertical-align:top;"><strong>in</strong> <span style="color:#999;">(in dem = im)</span></td><td style="padding:8px; vertical-align:top;">Im Schrank. / In der Tasche.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Wo ist der Ordner?</td><td style="padding:8px; vertical-align:top;"><strong>in</strong> <span style="color:var(--x-tx-999999);">(in dem = im)</span></td><td style="padding:8px; vertical-align:top;">Im Schrank. / In der Tasche.</td></tr>
           <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Wo ist die Pflanze?</td><td style="padding:8px; vertical-align:top;"><strong>neben</strong></td><td style="padding:8px; vertical-align:top;">Neben dem Fenster. / Neben der Tür.</td></tr>
           <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Wo ist der Drucker?</td><td style="padding:8px; vertical-align:top;"><strong>zwischen</strong></td><td style="padding:8px; vertical-align:top;">Zwischen dem Schrank und der Tür. / Zwischen den Stühlen.</td></tr>
           <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Wo sind die Schlüssel?</td><td style="padding:8px; vertical-align:top;"><strong>vor / hinter</strong></td><td style="padding:8px; vertical-align:top;">Vor der Tür. / Hinter dem Sofa.</td></tr>
@@ -2699,9 +2899,9 @@
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
         <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Edat + das</th><th style="text-align:left; padding:8px;">Kısaltma</th><th style="text-align:left; padding:8px;">Örnek</th></tr></thead>
         <tbody>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">in + das</td><td style="padding:8px; vertical-align:top;"><strong>ins</strong></td><td style="padding:8px; vertical-align:top;">Ich gehe <strong>ins</strong> Kino. <span style="color:#999;">(sinemaya)</span></td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">an + das</td><td style="padding:8px; vertical-align:top;"><strong>ans</strong></td><td style="padding:8px; vertical-align:top;">Ich gehe <strong>ans</strong> Fenster. <span style="color:#999;">(pencereye)</span></td></tr>
-          <tr><td style="padding:8px; vertical-align:top;">auf + das</td><td style="padding:8px; vertical-align:top;"><strong>aufs</strong></td><td style="padding:8px; vertical-align:top;">Ich lege es <strong>aufs</strong> Bett. <span style="color:#999;">(yatağın üstüne)</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">in + das</td><td style="padding:8px; vertical-align:top;"><strong>ins</strong></td><td style="padding:8px; vertical-align:top;">Ich gehe <strong>ins</strong> Kino. <span style="color:var(--x-tx-999999);">(sinemaya)</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">an + das</td><td style="padding:8px; vertical-align:top;"><strong>ans</strong></td><td style="padding:8px; vertical-align:top;">Ich gehe <strong>ans</strong> Fenster. <span style="color:var(--x-tx-999999);">(pencereye)</span></td></tr>
+          <tr><td style="padding:8px; vertical-align:top;">auf + das</td><td style="padding:8px; vertical-align:top;"><strong>aufs</strong></td><td style="padding:8px; vertical-align:top;">Ich lege es <strong>aufs</strong> Bett. <span style="color:var(--x-tx-999999);">(yatağın üstüne)</span></td></tr>
         </tbody>
       </table>
       </div>
@@ -2718,17 +2918,17 @@
         <div class="rule-card der">
           <div class="title">sehr (çok)</div>
           <div class="sfx">Olumlu/nötr güçlendirme — "gayet, oldukça"</div>
-          <div class="ex">Das ist <strong>sehr gut</strong>.<br><span style="color:#999;">(Bu çok iyi — memnuniyet var)</span></div>
+          <div class="ex">Das ist <strong>sehr gut</strong>.<br><span style="color:var(--x-tx-999999);">(Bu çok iyi — memnuniyet var)</span></div>
         </div>
         <div class="rule-card die">
           <div class="title">zu (fazla)</div>
           <div class="sfx">Olumsuz çağrışım — "gereğinden fazla, aşırı" (bir sorun var demektir)</div>
-          <div class="ex">Das ist <strong>zu teuer</strong>.<br><span style="color:#999;">(Bu çok pahalı — almayacağım kadar!)</span></div>
+          <div class="ex">Das ist <strong>zu teuer</strong>.<br><span style="color:var(--x-tx-999999);">(Bu çok pahalı — almayacağım kadar!)</span></div>
         </div>
         <div class="rule-card das">
           <div class="title">nicht (değil)</div>
           <div class="sfx">Doğrudan olumsuzlama — sıfatın tam tersini söyler</div>
-          <div class="ex">Das ist <strong>nicht gut</strong>.<br><span style="color:#999;">(Bu iyi değil.)</span></div>
+          <div class="ex">Das ist <strong>nicht gut</strong>.<br><span style="color:var(--x-tx-999999);">(Bu iyi değil.)</span></div>
         </div>
       </div>
       <div class="plural-note">
@@ -2782,11 +2982,11 @@
         <div class="stat-box"><div class="num" id="statWrong">0</div><div class="lbl">Yanlış</div></div>
       </div>
 
-      <div style="margin:10px 0 4px; font-size:12px; color:#8a8a8a; display:flex; justify-content:space-between;">
+      <div style="margin:10px 0 4px; font-size:12px; color:var(--x-tx-8a8a8a); display:flex; justify-content:space-between;">
         <span>📊 İlerleme</span>
         <span id="progressText">0 / 0 kelime ustalaşıldı</span>
       </div>
-      <div style="background:#eee; border-radius:8px; height:8px; overflow:hidden; margin-bottom:10px;">
+      <div style="background:var(--x-bg-eeeeee); border-radius:8px; height:8px; overflow:hidden; margin-bottom:10px;">
         <div id="progressBar" style="background:var(--brass); height:100%; width:0%; transition:width 0.3s;"></div>
       </div>
 
@@ -2909,6 +3109,7 @@
 
       <div class="group-label">Tekrar</div>
       <button class="btn-review" onclick="askQuestion('review-mistakes')" style="width:100%;">🔁 Yanlışlarımı Tekrar Et</button>
+      <button class="btn-ghost" onclick="openPoolManager()" style="width:100%; margin-top:8px;">♻️ Soru Havuzunu Sıfırla…</button>
 
       <div class="group-label">Geri bildirim</div>
       <button class="btn-ghost" onclick="openReport('oneri')" style="width:100%;">💡 Tavsiye / Öneri Gönder</button>
@@ -2962,6 +3163,32 @@
   </div>
 </div>
 
+<!-- Soru havuzu: bitince sor -->
+<div class="overlay" id="poolPromptOverlay" style="z-index:1100;">
+  <div class="add-card">
+    <h3>♻️ Soru havuzu bitti</h3>
+    <p id="poolPromptText" class="pool-help"></p>
+    <div class="rp-actions" style="flex-direction:column;">
+      <button class="btn-main" onclick="poolPromptReset()">♻️ Sıfırla ve baştan başla</button>
+      <button class="btn-ghost" onclick="poolPromptContinue()">Sıfırlamadan devam et (sorular tekrar eder)</button>
+    </div>
+    <div class="add-actions"><button class="btn-ghost" onclick="poolPromptCancel()">Vazgeç</button></div>
+  </div>
+</div>
+<!-- Soru havuzu: seçmeli sıfırlama -->
+<div class="overlay" id="poolOverlay" style="z-index:1100;">
+  <div class="add-card">
+    <h3>♻️ Soru Havuzu</h3>
+    <p class="pool-help">Her test, sorduğu soruları hatırlar ve havuz bitene kadar aynı soruyu tekrar sormaz. Havuz <strong>kendiliğinden sıfırlanmaz</strong>; hangi testlerin ne zaman sıfırlanacağına sen karar verirsin.</p>
+    <div id="poolList"></div>
+    <div class="rp-actions">
+      <button class="btn-ghost" id="poolSelAllBtn" onclick="poolSelectAll()">Tümünü seç</button>
+      <button class="btn-main" id="poolResetBtn" onclick="poolResetSelected()">Seçilenleri sıfırla</button>
+    </div>
+    <div id="poolStatus" class="rp-status"></div>
+    <div class="add-actions"><button class="btn-ghost" onclick="closePoolManager()">Kapat</button></div>
+  </div>
+</div>
 <!-- Hata Bildir penceresi -->
 <div class="overlay" id="reportOverlay" style="z-index:1100;">
   <div class="add-card">
@@ -3149,7 +3376,7 @@
 <div class="overlay" id="matchOverlay">
   <div class="quiz-card" style="max-width:600px;">
     <div class="qtype">🔗 KELİME EŞLEŞTİRME</div>
-    <div id="matchDone" style="display:none; text-align:center; font-size:18px; color:#2c7a2c; margin:16px 0; font-weight:700;">🎉 Tebrikler! Hepsini eşleştirdin!</div>
+    <div id="matchDone" style="display:none; text-align:center; font-size:18px; color:var(--x-tx-2c7a2c); margin:16px 0; font-weight:700;">🎉 Tebrikler! Hepsini eşleştirdin!</div>
     <div style="display:flex; gap:16px; justify-content:center; margin:16px 0;">
       <div id="matchLeftCol" style="display:flex; flex-direction:column; gap:8px; flex:1;"></div>
       <div id="matchRightCol" style="display:flex; flex-direction:column; gap:8px; flex:1;"></div>
@@ -3166,15 +3393,15 @@
 <div class="overlay" id="readingOverlay">
   <div class="quiz-card" style="max-width:600px;">
     <div class="qtype">📖 OKUMA PARÇASI</div>
-    <h3 id="readingTitle" style="text-align:center; margin:6px 0 14px; color:var(--deep);"></h3>
+    <h3 id="readingTitle" style="text-align:center; margin:6px 0 14px; color:var(--tx-deep);"></h3>
     <div id="readingText" style="line-height:1.9; font-size:16px; margin-bottom:8px;"></div>
-    <div id="readingMeaningHint" style="min-height:20px; text-align:center; font-style:italic; color:var(--teal); margin-bottom:10px;"></div>
+    <div id="readingMeaningHint" style="min-height:20px; text-align:center; font-style:italic; color:var(--tx-teal); margin-bottom:10px;"></div>
     <button class="btn-ghost" onclick="toggleReadingTranslation()" style="width:100%;">🇹🇷 Türkçe Çeviriyi Göster / Gizle</button>
     <div id="readingTranslation" style="display:none; margin-top:10px; padding:10px; background:var(--cream); border-radius:4px; font-style:italic;"></div>
     <div id="readingQuestions" style="margin-top:18px;"></div>
     <div style="display:flex; justify-content:space-between; align-items:center; margin-top:18px;">
       <button class="btn-ghost" id="readingPrevBtn" onclick="prevReadingText()">◀ Önceki</button>
-      <span id="readingProgress" style="font-size:13px; color:#777;"></span>
+      <span id="readingProgress" style="font-size:13px; color:var(--x-tx-777777);"></span>
       <button class="btn-ghost" id="readingNextBtn" onclick="nextReadingText()">Sonraki ▶</button>
     </div>
     <button class="btn-ghost" onclick="closeReadingModal()" style="margin-top:12px; width:100%;">Kapat</button>
@@ -3226,6 +3453,7 @@
       <button class="btn-ghost" id="nextBtn" onclick="nextQuestion()">Sonraki ▶</button>
     </div>
     <button class="btn-ghost" onclick="closeQuiz()">Bitir</button>
+    <div class="pool-link-row"><button class="pool-link" id="qPoolBtn" type="button" onclick="openPoolManager(currentTestMode)" style="display:none;"></button></div>
   </div>
 </div>
 
@@ -5753,7 +5981,7 @@ function startAuto(){
     if(secondsLeft <= 0){
       secondsLeft = autoIntervalSeconds;
       notifyIfHidden();
-      askQuestion();
+      askQuestion("artikel-only", {auto:true});
     }
     updateCountdownText();
   }, 1000);
@@ -5973,7 +6201,7 @@ function buildBlankOptions(target, category, fullPool){
   return shuffleArray([target, ...distractors]);
 }
 
-const RECENT_CYCLE_MS = 24 * 60 * 60 * 1000; // 24 saat (günlük)
+// Soru havuzu artık kendiliğinden sıfırlanmaz: kullanıcı "Soru Havuzu" penceresinden kendisi karar verir.
 let recentAsked = {};
 let currentTestMode = null;
 
@@ -5990,17 +6218,17 @@ function saveRecentAsked(){
 }
 
 function getUnseenPool(cycleKey, fullList, keyFn){
-  const now = Date.now();
   let entry = recentAsked[cycleKey];
-  if(!entry || (now - entry.ts) > RECENT_CYCLE_MS){
-    entry = { ts: now, seen: [] };
+  if(!entry){
+    entry = { ts: Date.now(), seen: [] };
     recentAsked[cycleKey] = entry;
   }
+  entry.total = fullList.length;
   const seenSet = new Set(entry.seen);
   let pool = fullList.filter(item => !seenSet.has(keyFn(item)));
   if(pool.length === 0){
-    entry.ts = now;
-    entry.seen = [];
+    // Havuz bitti. Otomatik sıfırlama YOK: askQuestion kullanıcıya sorar; bu arada test tüm sorularla sürebilsin.
+    (window.__poolExhausted = window.__poolExhausted || []).push(cycleKey);
     pool = fullList.slice();
   }
   return applyMasteryThinning(pool, keyFn);
@@ -7780,7 +8008,7 @@ function buildSession(testMode){
   return shuffleArray(session);
 }
 
-function askQuestion(testMode){
+function askQuestion(testMode, opts){
   testMode = testMode || "artikel-only";
   if(testMode === "review-mistakes"){
     const hasWrong = Object.values(wordStats).some(s => s.wrong > 0);
@@ -7821,7 +8049,27 @@ function askQuestion(testMode){
     alert("Cümle kurma testi için uygun cümle bulunamadı.");
     return;
   }
-  sessionQuestions = buildSession(testMode);
+  window.__poolExhausted = [];
+  const built = buildSession(testMode);
+  const exhausted = [...new Set(window.__poolExhausted || [])];
+  window.__poolExhausted = [];
+  if(exhausted.length){
+    if(opts && opts.auto){
+      // otomatik test: kullanıcıyı pencereyle bölme, sadece bir kez hatırlat
+      if(!window.__autoPoolWarned){
+        window.__autoPoolWarned = true;
+        appToast("Artikel sorularının tamamı soruldu. Havuzu Antrenman Modu'ndaki ♻️ düğmesinden sıfırlayabilirsin.", 6000);
+      }
+    } else {
+      showPoolPrompt(testMode, built, exhausted);
+      return;
+    }
+  } else { window.__autoPoolWarned = false; }
+  startSession(testMode, built);
+}
+
+function startSession(testMode, built){
+  sessionQuestions = built;
   sessionIndex = 0;
   currentTestMode = testMode;
   document.getElementById("quizOverlay").classList.add("show");
@@ -7833,6 +8081,7 @@ function showSessionQuestion(){
   const w = currentQ.word;
   const category = currentQ.category || "noun";
   markShownWord(w, category);
+  updatePoolLink();
   updateFavoriteStarUI();
 
   document.getElementById("qFeedback").textContent = "";
@@ -7937,7 +8186,7 @@ function showSessionQuestion(){
     document.getElementById("qType").textContent = "DİNLE VE ANLA";
     const qw = document.getElementById("qWord");
     qw.textContent = "🔊 Dinlemek için tıkla";
-    qw.style.color = "var(--teal)";
+    qw.style.color = "var(--tx-teal)";
     qw.style.cursor = "pointer";
     qw.style.fontSize = "20px";
     qw.onclick = () => speak(currentQ.sentence);
@@ -7996,7 +8245,7 @@ function showSessionQuestion(){
     } else {
       document.getElementById("qType").textContent = "ARTİKEL NE?";
       const hasPlural = w.plural && w.plural !== "—" && w.plural !== w.word;
-      qw.innerHTML = w.word + (hasPlural ? ` <span style="font-size:0.45em; color:#999; font-weight:400;">(${w.plural})</span>` : "");
+      qw.innerHTML = w.word + (hasPlural ? ` <span style="font-size:0.45em; color:var(--x-tx-999999); font-weight:400;">(${w.plural})</span>` : "");
     }
     qw.style.color = "var(--ink)";
     document.getElementById("qPluralInput").style.display = "none";
@@ -8425,10 +8674,10 @@ function checkPluralAnswer(){
   showResultIcon(isCorrect);
   if(isCorrect){
     fb.textContent = "Doğru! die " + currentQ.word.plural;
-    fb.style.color = "#2C5A3C";
+    fb.style.color = "var(--x-tx-2c5a3c)";
   } else {
     fb.textContent = "Doğrusu: die " + currentQ.word.plural;
-    fb.style.color = "#8B3A20";
+    fb.style.color = "var(--x-tx-8b3a20)";
   }
   if(!currentQ.answered){
     currentQ.answered = true;
@@ -8553,7 +8802,7 @@ function collectReportContext(){
 
 function reportMeta(){
   const v = (document.querySelector(".last-updated")||{}).textContent || "";
-  return "Sürüm: " + v.trim() + "\nCihaz: " + window.innerWidth + "x" + window.innerHeight + " · " + (navigator.userAgent||"").slice(0, 90);
+  return "Sürüm: " + v.trim() + "\nCihaz: " + window.innerWidth + "x" + window.innerHeight + " · tema: " + (document.documentElement.getAttribute("data-theme")||"?") + " · " + (navigator.userAgent||"").slice(0, 90);
 }
 
 const RP_DEFAULT_PLACEHOLDER = "Örn: 'der Tisch' yazıyor ama Türkçesi 'sandalye' çıkmış, doğrusu 'masa'.";
@@ -8719,6 +8968,125 @@ function debouncedSearch(fnName){
   __searchTimers[fnName] = setTimeout(() => { try{ window[fnName](); }catch(e){ console.error(e); } }, 140);
 }
 initRefAccordion();
+
+/* ---------- SORU HAVUZU: seçmeli sıfırlama ---------- */
+const POOL_GROUPS = [
+  ["Artikel", ["artikel-only","plural-only","nomakk-quiz","plural-guess-quiz"]],
+  ["Kelime", ["noun-quiz","verb-quiz","adj-quiz","irregular-verb-quiz"]],
+  ["Gramer", ["gq-akkprep","gq-wechsel","gq-praet","gq-doch","gq-man","gq-genitiv","gq-geht","gq-verbpos","gq-konj","gq-quant","gq-gefallen","gq-seinihr","gq-modal","gq-imperativ","gq-nicht","gq-trennbar","gq-kasus"]],
+  ["Dativ", ["dativ-artikel-quiz","dativ-plural-quiz","dativ-prep-quiz","dativ-pronoun-quiz"]],
+  ["Pratik", ["order-quiz","sentence-fill","listening-quiz","prep-quiz","zeitort-quiz"]]
+];
+function poolName(key){ return (typeof TEST_NAMES !== "undefined" && TEST_NAMES[key]) || key; }
+function poolSeen(key){ const e = recentAsked[key]; return e && Array.isArray(e.seen) ? e.seen.length : 0; }
+function updatePoolLink(){
+  const b = document.getElementById("qPoolBtn"); if(!b) return;
+  const e = recentAsked[currentTestMode];
+  if(e && e.total){
+    const seen = Math.min(e.seen.length, e.total);
+    b.style.display = "";
+    b.textContent = "♻️ Havuz: " + seen + " / " + e.total + " soruldu · yönet";
+  } else { b.style.display = "none"; }
+}
+function openPoolManager(preselect){
+  const list = document.getElementById("poolList");
+  const known = new Set(); let html = ""; let any = false;
+  const rowHtml = key => {
+    const e = recentAsked[key]; const seen = poolSeen(key); const total = e && e.total ? e.total : 0;
+    const pct = total ? Math.min(100, Math.round(seen / total * 100)) : 0;
+    const checked = key === preselect ? " checked" : "";
+    return '<label class="pool-row"><input type="checkbox" data-pool="' + key + '"' + checked + '>' +
+      '<span class="pool-name">' + escapeHtml(poolName(key)) + '<div class="pool-bar' + (total && seen >= total ? " full" : "") + '"><i style="width:' + pct + '%"></i></div></span>' +
+      '<span class="pool-count">' + seen + (total ? " / " + total : "") + '</span></label>';
+  };
+  POOL_GROUPS.forEach(([g, keys]) => {
+    const rows = keys.filter(k => poolSeen(k) > 0);
+    rows.forEach(k => known.add(k));
+    if(rows.length){ any = true; html += '<div class="pool-group">' + g + '</div>' + rows.map(rowHtml).join(""); }
+  });
+  const others = Object.keys(recentAsked).filter(k => !known.has(k) && poolSeen(k) > 0);
+  if(others.length){ any = true; html += '<div class="pool-group">Diğer</div>' + others.map(rowHtml).join(""); }
+  list.innerHTML = any ? html : '<div class="pool-empty">Henüz ilerleme kaydı yok. Bir test çözdükçe burada görünür.</div>';
+  document.getElementById("poolResetBtn").style.display = any ? "" : "none";
+  document.getElementById("poolSelAllBtn").style.display = any ? "" : "none";
+  document.getElementById("poolStatus").textContent = "";
+  document.getElementById("poolSelAllBtn").textContent = "Tümünü seç";
+  document.getElementById("poolOverlay").classList.add("show");
+}
+function closePoolManager(){ document.getElementById("poolOverlay").classList.remove("show"); }
+function poolSelectAll(){
+  const boxes = [...document.querySelectorAll("#poolList input[data-pool]")];
+  const all = boxes.every(b => b.checked);
+  boxes.forEach(b => { b.checked = !all; });
+  document.getElementById("poolSelAllBtn").textContent = all ? "Tümünü seç" : "Seçimi kaldır";
+}
+function poolResetSelected(){
+  const keys = [...document.querySelectorAll("#poolList input[data-pool]:checked")].map(b => b.getAttribute("data-pool"));
+  const st = document.getElementById("poolStatus");
+  if(!keys.length){ st.textContent = "Önce sıfırlanacak testleri seç."; st.className = "rp-status err"; return; }
+  keys.forEach(k => { delete recentAsked[k]; });
+  saveRecentAsked();
+  window.__autoPoolWarned = false;
+  updatePoolLink();
+  appToast("Sıfırlandı: " + keys.map(poolName).join(", "), 3200);
+  openPoolManager();
+}
+let __poolPending = null;
+function showPoolPrompt(testMode, built, exhaustedKeys){
+  __poolPending = {testMode, built, exhaustedKeys};
+  const names = exhaustedKeys.map(poolName).join(", ");
+  document.getElementById("poolPromptText").textContent = "«" + names + "» için tüm sorular en az bir kez soruldu. Havuzu sıfırlayıp baştan başlayabilir ya da sıfırlamadan devam edebilirsin (bu durumda sorular tekrar eder).";
+  document.getElementById("poolPromptOverlay").classList.add("show");
+}
+function poolPromptReset(){
+  const pend = __poolPending; if(!pend) return;
+  document.getElementById("poolPromptOverlay").classList.remove("show"); __poolPending = null;
+  pend.exhaustedKeys.forEach(k => { delete recentAsked[k]; });
+  saveRecentAsked();
+  window.__poolExhausted = [];
+  startSession(pend.testMode, buildSession(pend.testMode));
+  window.__poolExhausted = [];
+}
+function poolPromptContinue(){
+  const pend = __poolPending; if(!pend) return;
+  document.getElementById("poolPromptOverlay").classList.remove("show"); __poolPending = null;
+  startSession(pend.testMode, pend.built);
+}
+function poolPromptCancel(){
+  document.getElementById("poolPromptOverlay").classList.remove("show"); __poolPending = null;
+}
+document.addEventListener("keydown", (e) => {
+  if(e.key === "Escape"){
+    if(document.getElementById("poolPromptOverlay").classList.contains("show")) poolPromptCancel();
+    else if(document.getElementById("poolOverlay").classList.contains("show")) closePoolManager();
+  }
+});
+
+/* ---------- TEMA: Otomatik (sistem) → Gece → Gündüz ---------- */
+const THEME_ORDER = ["auto", "dark", "light"];
+const THEME_LABEL = {auto:"Otomatik", dark:"Gece", light:"Gündüz"};
+const THEME_ICON = {auto:"🌓", dark:"🌙", light:"☀️"};
+function currentThemePref(){ return document.documentElement.getAttribute("data-theme-pref") || "auto"; }
+function applyTheme(pref, announce){
+  if(THEME_ORDER.indexOf(pref) < 0) pref = "auto";
+  const sysDark = !!(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  const eff = pref === "auto" ? (sysDark ? "dark" : "light") : pref;
+  const root = document.documentElement;
+  root.setAttribute("data-theme", eff); root.setAttribute("data-theme-pref", pref);
+  const m = document.querySelector("meta[name=theme-color]"); if(m) m.setAttribute("content", eff === "dark" ? "#0A1118" : "#0F2A3D");
+  const ic = document.getElementById("themeIcon"), lb = document.getElementById("themeLabel"), bt = document.getElementById("themeBtn");
+  if(ic) ic.textContent = THEME_ICON[pref]; if(lb) lb.textContent = THEME_LABEL[pref];
+  if(bt) bt.title = "Tema: " + THEME_LABEL[pref] + (pref === "auto" ? " (şu an " + (eff === "dark" ? "gece" : "gündüz") + ")" : "");
+  try{ localStorage.setItem("artikel_theme", pref); }catch(e){}
+  if(announce && typeof appToast === "function") appToast("Tema: " + THEME_LABEL[pref] + (pref === "auto" ? " (sistem ayarına uyar)" : ""), 1800);
+}
+function cycleTheme(){ applyTheme(THEME_ORDER[(THEME_ORDER.indexOf(currentThemePref()) + 1) % THEME_ORDER.length], true); }
+try{
+  const __mq = window.matchMedia("(prefers-color-scheme: dark)");
+  const __onSys = () => { if(currentThemePref() === "auto") applyTheme("auto"); };
+  if(__mq.addEventListener) __mq.addEventListener("change", __onSys); else if(__mq.addListener) __mq.addListener(__onSys);
+}catch(e){}
+applyTheme(currentThemePref(), false);
 
 /* ---------- Pencere açıkken arka sayfa kaymasın ---------- */
 (function(){
