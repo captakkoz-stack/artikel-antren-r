@@ -1322,6 +1322,18 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
   .pool-bar.full i{background:var(--coral);}
   @media (pointer:coarse){ .pool-link{min-height:38px; padding:10px 12px;} .pool-row{padding:11px 4px;} }
   .pool-empty{font-size:13px; color:var(--x-tx-777777); padding:14px 4px; font-family:system-ui,Helvetica,Arial,sans-serif;}
+
+  .mistake-table th:first-child, .mistake-table td.mistake-rank{width:28px; text-align:center;}
+  #mistakePanel .mistake-table th, #mistakePanel .mistake-table td.mistake-rank{color:var(--x-tx-555555);}
+  .mistake-table td.mistake-wrong{color:var(--x-tx-8b3a20); font-weight:700;}
+  @media (max-width:420px){ .mistake-table th, .mistake-table td{padding:7px 4px; font-size:13px;} }
+  @media (max-width:340px){ .mistake-table th, .mistake-table td{padding:7px 2px; font-size:12px;} .mistake-table th:first-child, .mistake-table td.mistake-rank{width:18px;} }
+  .mistake-table td, .mistake-table th{white-space:nowrap;}
+  .mistake-table td.word-cell{white-space:normal; cursor:pointer; overflow-wrap:anywhere; word-break:break-word; min-width:0;}
+  .mistake-table{table-layout:auto; width:100%;}
+  #mistakePanel .hint-line{margin-top:8px;}
+  @media (max-width:560px){ .kein-card .rule-grid{grid-template-columns:1fr !important;} }
+  @media (max-width:340px){ .kein-card td, .kein-card th{padding:6px 5px !important; overflow-wrap:anywhere;} .kein-card table{font-size:12px !important;} }
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -2292,6 +2304,80 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
       </div>
       <div class="plural-note">Kural: Bir <strong>fiili/eylemi</strong> olumsuzluyorsan nicht sona gider; bir <strong>sıfatı/özelliği</strong> olumsuzluyorsan nicht o sıfatın hemen önüne gelir.</div>
     </section>
+    <section class="panel kein-card">
+      <h2>kein mi, nicht mi? — Olumsuzlaştırma rehberi</h2>
+      <div class="plural-note" style="margin-top:0;">
+        Almancada iki olumsuzlama kelimesi var: <strong>kein</strong> (isimler için) ve <strong>nicht</strong> (geri kalan her şey için). Karar tek soruya iner:<br>
+        <strong>Olumsuzladığım şey "ein" ile gelen ya da artikelsiz bir isim mi? → kein.</strong> Değilse (fiil, sıfat, zarf, yer, zaman, belirli artikelli isim) → <strong>nicht</strong>.
+      </div>
+      <div class="rule-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="rule-card der">
+          <div class="title">kein + isim</div>
+          <div class="sfx">"hiç … yok" · ein / artikelsiz ismin olumsuzu</div>
+          <div class="ex">
+            Ich habe <strong>einen</strong> Hund. → Ich habe <strong>keinen</strong> Hund.<br><span style="color:var(--x-tx-555555);">(Köpeğim yok.)</span><br>
+            Ich habe Zeit. → Ich habe <strong>keine</strong> Zeit.<br><span style="color:var(--x-tx-555555);">(Vaktim yok. — artikelsiz isim)</span><br>
+            Er ist Lehrer. → Er ist <strong>kein</strong> Lehrer.<br><span style="color:var(--x-tx-555555);">(O öğretmen değil. — meslek)</span>
+          </div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">nicht + diğer her şey</div>
+          <div class="sfx">fiil · sıfat · zarf · yer · zaman · belirli isim</div>
+          <div class="ex">
+            Er kommt <strong>nicht</strong>.<br><span style="color:var(--x-tx-555555);">(Gelmiyor. — fiil)</span><br>
+            Das Wasser ist <strong>nicht</strong> kalt.<br><span style="color:var(--x-tx-555555);">(Su soğuk değil. — sıfat)</span><br>
+            Ich kenne den Mann <strong>nicht</strong>.<br><span style="color:var(--x-tx-555555);">(Adamı tanımıyorum. — belirli artikelli isim)</span>
+          </div>
+        </div>
+      </div>
+      <div style="overflow-x:auto;">
+      <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
+        <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Neyi olumsuzluyorum?</th><th style="text-align:left; padding:8px;">Kullan</th><th style="text-align:left; padding:8px;">Örnek (Türkçesi)</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">ein-isim<br><span style="color:var(--x-tx-555555);">(ein/eine/einen)</span></td><td style="padding:8px; vertical-align:top;"><strong>kein</strong></td><td style="padding:8px; vertical-align:top;">Das ist <strong>kein</strong> Tisch.<br><span style="color:var(--x-tx-555555); font-size:12.5px;">Bu masa değil.</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">artikelsiz isim<br><span style="color:var(--x-tx-555555);">(Zeit, Geld, Hunger…)</span></td><td style="padding:8px; vertical-align:top;"><strong>kein</strong></td><td style="padding:8px; vertical-align:top;">Ich habe <strong>kein</strong> Geld.<br><span style="color:var(--x-tx-555555); font-size:12.5px;">Param yok.</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">meslek / uyruk<br><span style="color:var(--x-tx-555555);">(ist + …)</span></td><td style="padding:8px; vertical-align:top;"><strong>kein</strong></td><td style="padding:8px; vertical-align:top;">Sie ist <strong>keine</strong> Ärztin.<br><span style="color:var(--x-tx-555555); font-size:12.5px;">O (kadın) doktor değil.</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">belirli artikelli isim<br><span style="color:var(--x-tx-555555);">(der/die/das, dieser)</span></td><td style="padding:8px; vertical-align:top;"><strong>nicht</strong><br><span style="color:var(--x-tx-555555);">isimden SONRA</span></td><td style="padding:8px; vertical-align:top;">Ich sehe den Film <strong>nicht</strong>.<br><span style="color:var(--x-tx-555555); font-size:12.5px;">Filmi görmüyorum.</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">iyelikli isim<br><span style="color:var(--x-tx-555555);">(mein, dein, sein…)</span></td><td style="padding:8px; vertical-align:top;"><strong>nicht</strong><br><span style="color:var(--x-tx-555555);">önünde</span></td><td style="padding:8px; vertical-align:top;">Das ist <strong>nicht</strong> mein Auto.<br><span style="color:var(--x-tx-555555); font-size:12.5px;">Bu benim arabam değil.</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">fiil</td><td style="padding:8px; vertical-align:top;"><strong>nicht</strong><br><span style="color:var(--x-tx-555555);">genelde sonda</span></td><td style="padding:8px; vertical-align:top;">Wir arbeiten heute <strong>nicht</strong>.<br><span style="color:var(--x-tx-555555); font-size:12.5px;">Bugün çalışmıyoruz.</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">sıfat</td><td style="padding:8px; vertical-align:top;"><strong>nicht</strong><br><span style="color:var(--x-tx-555555);">sıfatın önünde</span></td><td style="padding:8px; vertical-align:top;">Das Essen ist <strong>nicht</strong> warm.<br><span style="color:var(--x-tx-555555); font-size:12.5px;">Yemek sıcak değil.</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">zarf</td><td style="padding:8px; vertical-align:top;"><strong>nicht</strong><br><span style="color:var(--x-tx-555555);">zarfın önünde</span></td><td style="padding:8px; vertical-align:top;">Er läuft <strong>nicht</strong> schnell.<br><span style="color:var(--x-tx-555555); font-size:12.5px;">Hızlı koşmuyor.</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">yer / yön</td><td style="padding:8px; vertical-align:top;"><strong>nicht</strong><br><span style="color:var(--x-tx-555555);">önünde</span></td><td style="padding:8px; vertical-align:top;">Wir fahren <strong>nicht</strong> nach Berlin.<br>Ich bin <strong>nicht</strong> zu Hause.<br><span style="color:var(--x-tx-555555); font-size:12.5px;">Berlin'e gitmiyoruz. · Evde değilim.</span></td></tr>
+          <tr><td style="padding:8px; vertical-align:top;">zaman</td><td style="padding:8px; vertical-align:top;"><strong>nicht</strong><br><span style="color:var(--x-tx-555555);">önünde</span></td><td style="padding:8px; vertical-align:top;">Wir kommen <strong>nicht</strong> am Montag.<br><span style="color:var(--x-tx-555555); font-size:12.5px;">Pazartesi gelmiyoruz.</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="plural-note">
+        <strong>kein, ein gibi çekimlenir:</strong>
+      </div>
+      <div style="overflow-x:auto;">
+      <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
+        <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Artikel</th><th style="text-align:left; padding:8px;">Nominativ</th><th style="text-align:left; padding:8px;">Akkusativ</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong style="color:var(--der);">der</strong> Hund</td><td style="padding:8px; vertical-align:top;">Das ist <strong>kein</strong> Hund.</td><td style="padding:8px; vertical-align:top;">Ich habe <strong>keinen</strong> Hund.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong style="color:var(--die);">die</strong> Katze</td><td style="padding:8px; vertical-align:top;">Das ist <strong>keine</strong> Katze.</td><td style="padding:8px; vertical-align:top;">Ich habe <strong>keine</strong> Katze.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong style="color:var(--das);">das</strong> Auto</td><td style="padding:8px; vertical-align:top;">Das ist <strong>kein</strong> Auto.</td><td style="padding:8px; vertical-align:top;">Ich habe <strong>kein</strong> Auto.</td></tr>
+          <tr><td style="padding:8px; vertical-align:top;">Plural (die Kinder)</td><td style="padding:8px; vertical-align:top;">Das sind <strong>keine</strong> Kinder.</td><td style="padding:8px; vertical-align:top;">Ich habe <strong>keine</strong> Kinder.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="plural-note">
+        <strong>Sık yapılan hatalar:</strong><br>
+        <span style="color:var(--coral); font-weight:700;">✗</span> Ich habe nicht Zeit. → <span style="color:var(--sea); font-weight:700;">✓</span> Ich habe <strong>keine</strong> Zeit.<br>
+        <span style="color:var(--coral); font-weight:700;">✗</span> Ich habe nicht ein Auto. → <span style="color:var(--sea); font-weight:700;">✓</span> Ich habe <strong>kein</strong> Auto.<br>
+        <span style="color:var(--coral); font-weight:700;">✗</span> Ich bin kein müde. → <span style="color:var(--sea); font-weight:700;">✓</span> Ich bin <strong>nicht</strong> müde. <span style="color:var(--x-tx-555555);">(sıfatla kein olmaz)</span><br>
+        <span style="color:var(--coral); font-weight:700;">✗</span> Er kommt kein. → <span style="color:var(--sea); font-weight:700;">✓</span> Er kommt <strong>nicht</strong>. <span style="color:var(--x-tx-555555);">(fiille kein olmaz)</span><br>
+        <span style="color:var(--coral); font-weight:700;">✗</span> Das ist kein mein Buch. → <span style="color:var(--sea); font-weight:700;">✓</span> Das ist <strong>nicht</strong> mein Buch. <span style="color:var(--x-tx-555555);">(iyelikle kein olmaz)</span><br>
+        <span style="color:var(--coral); font-weight:700;">✗</span> Ich kenne keinen den Mann. → <span style="color:var(--sea); font-weight:700;">✓</span> Ich kenne den Mann <strong>nicht</strong>. <span style="color:var(--x-tx-555555);">(belirli artikelle kein olmaz)</span>
+      </div>
+      <div class="plural-note">
+        <strong>nicht nereye gelir?</strong> Cümlenin tamamını/fiili olumsuzluyorsan <strong>sona</strong> (Ich kenne ihn nicht.). Sadece bir parçayı olumsuzluyorsan o parçanın <strong>hemen önüne</strong> (Ich fahre nicht heute, sondern morgen.).<br>
+        <strong>Düzeltme için:</strong> nicht/kein … <strong>sondern</strong> (aksine): Das ist <strong>kein</strong> Tee, <strong>sondern</strong> Kaffee. · Er kommt <strong>nicht</strong> heute, <strong>sondern</strong> morgen.<br>
+        <strong>Olumsuz soruya olumlu cevap:</strong> Hast du kein Geld? — <strong>Doch</strong>, ich habe Geld. <span style="color:var(--x-tx-555555);">(Soru-cevap kartına bak: ja / nein / doch)</span><br>
+        <strong>Pratik:</strong> Test → Gramer → Fiil &amp; Cümle Kuruluşu → <strong>nicht / kein</strong>.
+      </div>
+    </section>
+
     <section class="panel">
       <h2>Imperativ (Emir Kipi) — hızlı referans</h2>
       <div class="rule-grid">
@@ -3127,13 +3213,14 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
     </section>
 
     <section class="panel" id="mistakePanel">
-      <h2>En Çok Hata Yapılan Kelimeler</h2>
-      <div class="wordlist-scroll" style="max-height:220px;">
-        <table>
-          <thead><tr><th>Kelime</th><th>Doğru</th><th>Yanlış</th><th>Başarı</th></tr></thead>
+      <h2>En Çok Hata Yapılan 10 Kelime</h2>
+      <div class="wordlist-scroll" style="max-height:none;">
+        <table class="mistake-table">
+          <thead><tr><th>#</th><th>Kelime</th><th>Yanlış</th><th>Doğru</th><th>Başarı</th></tr></thead>
           <tbody id="mistakeTableBody"></tbody>
         </table>
       </div>
+      <div class="hint-line" id="mistakeHint">Kelimeye dokun → örnek cümleyi gör. Sıralama: en çok hata, eşitse başarı oranı en düşük olan.</div>
     </section>
   </div>
 </main>
@@ -5836,25 +5923,46 @@ function recordWordStat(word, isCorrect){
   renderMistakeStats();
 }
 
+const MISTAKE_TOP_N = 10;
+function mistakeBaseWord(key){
+  return String(key).replace(/ \((Dativ|Dativ çoğul)\)$/, "");
+}
+function topMistakeWords(){
+  // anahtar → kelime türü (yalnızca gerçek kelimeler; gramer sorusu cümleleri sayılmaz)
+  const kind = {};
+  words.forEach(w => { kind[w.word] = {type:"noun", artikel:w.artikel}; });
+  verbs.forEach(v => { if(!kind[v.verb]) kind[v.verb] = {type:"verb"}; });
+  adjectives.forEach(a => { if(!kind[a.adj]) kind[a.adj] = {type:"adj"}; });
+  const agg = {};
+  Object.entries(wordStats).forEach(([key, s]) => {
+    const base = kind[key] ? key : mistakeBaseWord(key);
+    if(!kind[base]) return;
+    const a = agg[base] || (agg[base] = {word: base, correct: 0, wrong: 0, kind: kind[base]});
+    a.correct += s.correct || 0; a.wrong += s.wrong || 0;
+  });
+  return Object.values(agg)
+    .filter(e => e.wrong > 0)
+    .map(e => ({...e, total: e.correct + e.wrong, pct: Math.round(e.correct / (e.correct + e.wrong) * 100)}))
+    .sort((a, b) => b.wrong - a.wrong || a.pct - b.pct || b.total - a.total || a.word.localeCompare(b.word, "de"))
+    .slice(0, MISTAKE_TOP_N);
+}
 function renderMistakeStats(){
   const tbody = document.getElementById("mistakeTableBody");
-  const entries = Object.entries(wordStats)
-    .map(([word, s]) => ({word, ...s, total: s.correct + s.wrong}))
-    .filter(e => e.total > 0)
-    .sort((a,b) => b.wrong - a.wrong || b.total - a.total);
-
-  if(entries.length === 0){
-    tbody.innerHTML = `<tr><td colspan="4" class="no-match">Henüz test verisi yok.</td></tr>`;
+  if(!tbody) return;
+  const top = topMistakeWords();
+  if(top.length === 0){
+    const any = Object.keys(wordStats).length > 0;
+    tbody.innerHTML = `<tr><td colspan="5" class="no-match">${any ? "Henüz hata yaptığın kelime yok 🎉" : "Henüz test verisi yok."}</td></tr>`;
     return;
   }
-
-  tbody.innerHTML = entries.map(e => {
-    const pct = Math.round((e.correct / e.total) * 100);
-    return `<tr><td class="word-cell" data-word="${escapeHtml(e.word)}">${escapeHtml(e.word)}</td><td>${e.correct}</td><td>${e.wrong}</td><td>%${pct}</td></tr>`;
+  tbody.innerHTML = top.map((e, i) => {
+    const art = e.kind.type === "noun" && e.kind.artikel ? `<span style="color:var(--${escapeHtml(e.kind.artikel)}); font-weight:700;">${escapeHtml(e.kind.artikel)}</span> ` : "";
+    return `<tr><td class="mistake-rank">${i + 1}</td><td class="word-cell" data-word="${escapeHtml(e.word)}">${art}${escapeHtml(e.word)}</td><td class="mistake-wrong">${e.wrong}</td><td>${e.correct}</td><td>%${e.pct}</td></tr>`;
   }).join("");
 }
 
 function reviewMistakeWord(wordText){
+  wordText = mistakeBaseWord(wordText);
   let idx = words.findIndex(w => w.word === wordText);
   if(idx !== -1){ openExampleModal("word", idx); return; }
   idx = verbs.findIndex(v => v.verb === wordText);
@@ -7770,7 +7878,15 @@ Object.assign(GQ_BANK, {
  ["Wir arbeiten heute ___.","nicht",["kein","keine"],"Bugün çalışmıyoruz."],
  ["Ich habe ___ Hunger.","keinen",["nicht","keine"],"Karnım aç değil."],
  ["Das Essen ist ___ teuer.","nicht",["kein","keine"],"Yemek pahalı değil."],
- ["Hast du ___ Geschwister?","keine",["nicht","kein"],"Kardeşin yok mu?"]
+ ["Hast du ___ Geschwister?","keine",["nicht","kein"],"Kardeşin yok mu?"],
+ ["Er ist ___ Lehrer.","kein",["keine","keinen"],"O öğretmen değil."],
+ ["Ich wohne ___ in Berlin.","nicht",["kein","keine"],"Berlin'de oturmuyorum."],
+ ["Ich kenne den Mann ___.","nicht",["kein","keinen"],"Adamı tanımıyorum."],
+ ["Wir fahren heute ___ nach Berlin.","nicht",["kein","keine"],"Bugün Berlin'e gitmiyoruz."],
+ ["Das ist ___ Katze, das ist ein Hund.","keine",["nicht","kein"],"Bu kedi değil, köpek."],
+ ["Ich habe ___ Auto, aber ein Fahrrad.","kein",["keine","nicht"],"Arabam yok ama bisikletim var."],
+ ["Er spricht ___ schnell.","nicht",["kein","keine"],"Hızlı konuşmuyor."],
+ ["Das ist ___ meine Tasche.","nicht",["keine","kein"],"Bu benim çantam değil."]
  ]},
 "gq-trennbar": {emoji:"🪢", qtype:"BÖLÜNEN FİİL — DOĞRU CÜMLE?", choose:true,
  hint:"Normal cümlede fiil kökü 2. sırada, ön ek (an, ein, ab, mit, auf…) en sonda. Modal fiil varsa fiil bölünmez: mastar olarak en sonda (Ich möchte dich anrufen.).",
