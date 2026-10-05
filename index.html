@@ -1334,6 +1334,36 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
   #mistakePanel .hint-line{margin-top:8px;}
   @media (max-width:560px){ .kein-card .rule-grid{grid-template-columns:1fr !important;} }
   @media (max-width:340px){ .kein-card td, .kein-card th{padding:6px 5px !important; overflow-wrap:anywhere;} .kein-card table{font-size:12px !important;} }
+
+  /* --- Paragraf alıştırması --- */
+  .par-card{max-width:780px;}
+  .par-title{font-family:Georgia,'Times New Roman',serif; margin:4px 0 2px; color:var(--tx-deep); font-size:22px;}
+  .par-info{font:12.5px/1.4 system-ui,Helvetica,Arial,sans-serif; color:var(--x-tx-555555); margin:0 0 8px;}
+  .par-body{font-family:Georgia,'Times New Roman',serif; font-size:18px; line-height:2.55; text-align:left; margin:6px 0 4px; color:var(--ink);}
+  .par-sel{font:inherit; font-size:16px; padding:3px 6px; margin:0 2px; border:1.5px dashed var(--brass); border-radius:8px; background:var(--x-bg-ffffff); color:var(--ink); max-width:100%;}
+  .par-sel:focus-visible{outline:2px solid var(--brass); outline-offset:1px;}
+  .par-body select.par-sel{display:inline-block !important; width:auto !important; min-width:0; margin:0 3px; vertical-align:baseline; line-height:1.4;}
+  .par-sel:disabled{opacity:1; color:var(--ink); -webkit-text-fill-color:var(--ink); cursor:default;}
+  .par-card .qtype{color:var(--x-tx-6b4e1e);}
+  html[data-theme="dark"] .par-card .qtype{color:var(--brass);}
+  .par-sel.par-ok{border-style:solid; border-color:var(--das); background:var(--das-bg);}
+  .par-sel.par-bad{border-style:solid; border-color:var(--coral); background:var(--die-bg);}
+  .par-fix{font:700 14px system-ui,Helvetica,Arial,sans-serif; color:var(--das); margin:0 4px 0 2px; white-space:nowrap;}
+  .par-trans{margin:10px 0; font:14px/1.6 system-ui,Helvetica,Arial,sans-serif; text-align:left; color:var(--ink);}
+  .par-trans summary{cursor:pointer; color:var(--tx-teal); font-weight:700; padding:6px 0;}
+  .par-actions{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:10px 0;}
+  .par-actions button{white-space:normal;}
+  .par-result{font-family:system-ui,Helvetica,Arial,sans-serif; text-align:left;}
+  .par-score{font-size:22px; font-weight:700; text-align:center; margin:8px 0 4px; color:var(--tx-deep);}
+  .par-list{padding:0; list-style:none; margin:8px 0; font-size:14px; line-height:1.5;}
+  .par-list li{padding:8px 10px; border-bottom:1px solid var(--line); border-left:4px solid transparent;}
+  .par-list li.ok{border-left-color:var(--das);}
+  .par-list li.bad{border-left-color:var(--coral); background:var(--die-bg);}
+  .par-why{display:block; color:var(--x-tx-555555); font-size:12.5px;}
+  .par-mine{color:var(--x-tx-8b3a20); font-weight:700;}
+  .par-foot{display:flex; justify-content:center; align-items:center; gap:10px; margin-top:6px;}
+  @media (pointer:coarse){ .par-body select.par-sel{min-height:36px; padding:4px 8px;} }
+  @media (max-width:480px){ .par-body{font-size:17px; line-height:2.3;} .par-title{font-size:20px;} .par-sel{padding:2px 4px;} }
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -3124,6 +3154,13 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
         <div class="btn-grid" style="margin-bottom:6px;">
           <button class="btn-ghost btn-test" onclick="askQuestion('gq-mix')">🎯 Yeni Konular Karışık Tur</button>
         </div>
+        <details class="test-details" data-gkey="paragraf">
+          <summary><span>📄 Paragraf Alıştırması<span class="gcount">(2)</span></span></summary>
+          <div class="inner"><div class="btn-grid grid-2">
+            <button class="btn-ghost btn-test" onclick="askQuestion('par-akkdat')">📄 Akkusativ &amp; Dativ<br><span class="par-btn-sub" data-kind="akkdat" style="font-size:11px; font-weight:400;">10 boşluk · karışık</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('par-prep')">📄 Edat paragrafı<br><span class="par-btn-sub" data-kind="prep" style="font-size:11px; font-weight:400;">10 boşluk · Präpositionen</span></button>
+          </div></div>
+        </details>
         <details class="test-details" data-gkey="zaman">
           <summary><span>⏰ Zaman & Sayılar<span class="gcount">(4)</span></span></summary>
           <div class="inner"><div class="btn-grid grid-2">
@@ -3250,6 +3287,26 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
   </div>
 </div>
 
+<!-- Paragraf alıştırması (10 boşluk) -->
+<div class="overlay" id="parOverlay">
+  <div class="quiz-card par-card">
+    <div class="qtype" id="parKind">📄 PARAGRAF</div>
+    <h3 class="par-title" id="parTitle"></h3>
+    <div class="par-info" id="parInfo"></div>
+    <div class="par-body" id="parBody"></div>
+    <details class="par-trans" id="parTrans"><summary>Türkçe çeviri</summary><div id="parTransText"></div></details>
+    <div class="par-actions">
+      <button class="btn-main" id="parCheck" type="button" onclick="parCheck()">Kontrol et</button>
+      <button class="btn-ghost" id="parRetry" type="button" onclick="parRetry()" style="display:none;">↺ Aynı paragrafı tekrar dene</button>
+      <button class="btn-ghost" id="parNext" type="button" onclick="parNext()" style="display:none;">Sonraki paragraf ▶</button>
+    </div>
+    <div class="par-result" id="parResult"></div>
+    <div class="par-foot">
+      <button class="qspeak-btn" type="button" onclick="openReport()" title="Bu paragrafta hata var" aria-label="Hata bildir" style="font-size:14px;">🐞</button>
+      <button class="btn-ghost" type="button" onclick="closeParagraph()">Bitir</button>
+    </div>
+  </div>
+</div>
 <!-- Soru havuzu: bitince sor -->
 <div class="overlay" id="poolPromptOverlay" style="z-index:1100;">
   <div class="add-card">
@@ -7957,7 +8014,7 @@ function buildGqSession(mode){
   return shuffleArray(pool).map(it => gqQuestion(bank, it));
 }
 function gqFindByKey(key){
-  for(const m of GQ_ORDER){
+  for(const m of GQ_ORDER.concat(["gq-par"])){
     const b = GQ_BANK[m];
     const it = b.items.find(x => gqFull(b, x) === key);
     if(it) return gqQuestion(b, it);
@@ -8129,6 +8186,7 @@ function buildSession(testMode){
 
 function askQuestion(testMode, opts){
   testMode = testMode || "artikel-only";
+  if(typeof testMode === "string" && testMode.indexOf("par-") === 0){ startParagraph(testMode); return; }
   if(testMode === "review-mistakes"){
     const hasWrong = Object.values(wordStats).some(s => s.wrong > 0);
     if(!hasWrong){
@@ -8851,6 +8909,7 @@ try{
   const KEY = "artikel_gramer_open";
   let stored = null;
   try{ stored = JSON.parse(localStorage.getItem(KEY)); }catch(e){}
+  try{ if(Array.isArray(stored) && stored.indexOf("paragraf") < 0 && !localStorage.getItem("artikel_par_seen")){ stored.push("paragraf"); localStorage.setItem("artikel_par_seen", "1"); } }catch(e){}
   const ds = [...document.querySelectorAll("#testGroupGramer details.test-details")];
   ds.forEach((d, i) => {
     d.open = Array.isArray(stored) ? stored.includes(d.dataset.gkey) : (i === 0);
@@ -8873,7 +8932,7 @@ const TEST_NAMES = {
   "dativ-prep-quiz":"Dativ Edatı Seç","dativ-artikel-quiz":"Dativ Artikel","dativ-plural-quiz":"Dativ Çoğul","dativ-pronoun-quiz":"Dativ Zamir","dativ-mix-quiz":"Dativ Karışık",
   "gq-akkprep":"Akkusativ Edatı","gq-wechsel":"Wechsel Edat","gq-praet":"war / hatte","gq-doch":"ja / nein / doch","gq-man":"man","gq-genitiv":"Genitiv-s",
   "gq-geht":"Geht es …?","gq-verbpos":"Fiilin yeri","gq-konj":"Bağlaç seç","gq-quant":"Miktar & Fiyat","gq-gefallen":"gefallen / finden","gq-seinihr":"sein / ihr",
-  "gq-modal":"Modalverben","gq-imperativ":"Imperativ","gq-nicht":"nicht / kein","gq-trennbar":"Bölünen fiiller","gq-kasus":"Fiil hangi hâli istiyor?","gq-mix":"Yeni Konular Karışık"
+  "gq-modal":"Modalverben","gq-imperativ":"Imperativ","gq-nicht":"nicht / kein","gq-trennbar":"Bölünen fiiller","gq-kasus":"Fiil hangi hâli istiyor?","gq-mix":"Yeni Konular Karışık","par-akkdat":"Paragraf: Akkusativ & Dativ","par-prep":"Paragraf: Edatlar","gq-par":"Paragraf boşluğu"
 };
 
 function collectReportContext(){
@@ -8882,6 +8941,14 @@ function collectReportContext(){
   const sel = id => { const e = document.getElementById(id); return (e && e.selectedIndex >= 0) ? e.options[e.selectedIndex].text : ""; };
   const ctx = {place:"", lines:[]};
   try{
+    const parOpen = document.getElementById("parOverlay").classList.contains("show") && window.__par;
+    if(parOpen){
+      const P = window.__par;
+      const sels = [...document.querySelectorAll("#parBody .par-sel")].map((s, i) => (i + 1) + ":" + (s.value || "—") + (P.done ? (s.value === P.parsed.blanks[i].correct ? " ✓" : " ✗(" + P.parsed.blanks[i].correct + ")") : ""));
+      ctx.place = "Paragraf: " + P.p.title + " (" + P.kind + ")";
+      ctx.lines.push("Cevaplar: " + sels.join(" | "));
+      return ctx;
+    }
     const quizOpen = document.getElementById("quizOverlay").classList.contains("show") && typeof currentQ !== "undefined" && currentQ;
     if(quizOpen){
       const q = currentQ;
@@ -9088,11 +9155,467 @@ function debouncedSearch(fnName){
 }
 initRefAccordion();
 
+/* ---------- PARAGRAF ALIŞTIRMALARI (10 boşluk) ----------
+   Boşluk sözdizimi: {doğru|çeldirici1|çeldirici2#kısa açıklama}  — her cümlede tam 1 boşluk */
+const PARAGRAPHS = [
+/* ===== AKKUSATIV & DATIV (karışık) ===== */
+{id:"ad1", kind:"akkdat", title:"Lenas Geburtstag", tr:"Lena'nın doğum günü", sents:[
+ ["Heute hat Lena Geburtstag, und die ganze Familie kommt zu {ihr|sie|ihren#zu + Dativ: zu ihr}.","Bugün Lena'nın doğum günü ve bütün aile onun yanına geliyor."],
+ ["Ihre Mutter backt {einen|einem|ein#backen + Akkusativ: der Kuchen → einen Kuchen} Kuchen für ihre Tochter.","Annesi kızı için bir pasta pişiriyor."],
+ ["Der Vater schenkt {ihr|sie|ihre#schenken: kime → Dativ (ihr)} ein neues Fahrrad.","Baba ona yeni bir bisiklet hediye ediyor."],
+ ["Ihre Freunde bringen {ihr|ihn|sie#mitbringen: kime → Dativ (ihr)} Blumen und Schokolade mit.","Arkadaşları ona çiçek ve çikolata getiriyor."],
+ ["Lena freut sich und dankt {ihren|ihre|ihrem#danken + Dativ; Eltern çoğul → ihren} Eltern.","Lena seviniyor ve ailesine teşekkür ediyor."],
+ ["Sie zeigt {ihrem|ihren|ihre#zeigen: kime → Dativ; der Bruder → ihrem Bruder} Bruder ihr neues Handy.","Erkek kardeşine yeni telefonunu gösteriyor."],
+ ["Dann sieht sie {den|dem|der#sehen + Akkusativ: der Kuchen → den Kuchen} Kuchen auf dem Tisch.","Sonra masanın üstündeki pastayı görüyor."],
+ ["Alle singen für {sie|ihr|ihren#für + Akkusativ: sie}.","Herkes onun için şarkı söylüyor."],
+ ["Der Opa hilft {ihr|sie|ihren#helfen + Dativ: ihr} beim Aufräumen.","Büyükbaba toplama işinde ona yardım ediyor."],
+ ["Am Abend gibt Lena {ihrer|ihre|ihren#geben: kime → Dativ; die Mutter → ihrer Mutter} Mutter einen Kuss.","Akşam Lena annesine bir öpücük veriyor."]]},
+{id:"ad2", kind:"akkdat", title:"Ein Tag in der Stadt", tr:"Şehirde bir gün", sents:[
+ ["Am Morgen fahre ich mit {dem|den|der#mit + Dativ: der Bus → dem Bus} Bus in die Stadt.","Sabah otobüsle şehre gidiyorum."],
+ ["Zuerst gehe ich in {den|dem|der#in + Akkusativ (wohin?): der Supermarkt → den Supermarkt} Supermarkt.","Önce markete gidiyorum."],
+ ["Dort kaufe ich {einen|einem|einer#kaufen + Akkusativ: der Apfel → einen Apfel} Apfel und eine Flasche Wasser.","Orada bir elma ve bir şişe su alıyorum."],
+ ["Danach treffe ich {meinen|meinem|meiner#treffen + Akkusativ: der Freund → meinen Freund} Freund vor dem Kino.","Ondan sonra sinemanın önünde arkadaşımla buluşuyorum."],
+ ["Wir sitzen in {einem|einen|einer#in + Dativ (wo?): das Café → einem Café} Café und trinken Kaffee.","Bir kafede oturup kahve içiyoruz."],
+ ["Der Kellner bringt {uns|unser|unsere#bringen: kime → Dativ: uns} zwei Stück Kuchen.","Garson bize iki dilim pasta getiriyor."],
+ ["Ich bezahle die Rechnung mit {meiner|meine|meinem#mit + Dativ: die Karte → meiner Karte} Karte.","Hesabı kartımla ödüyorum."],
+ ["Später laufe ich durch {den|dem|der#durch + Akkusativ: der Park → den Park} Park.","Daha sonra parkın içinden yürüyorum."],
+ ["Auf {der|die|den#Wechselpräposition, wo? → Dativ: die Bank → der Bank} Bank neben dem See lese ich ein Buch.","Gölün yanındaki bankta kitap okuyorum."],
+ ["Am Abend fahre ich mit {der|die|dem#mit + Dativ: die Straßenbahn → der Straßenbahn} Straßenbahn nach Hause.","Akşam tramvayla eve gidiyorum."]]},
+{id:"ad3", kind:"akkdat", title:"Im Büro", tr:"Ofiste", sents:[
+ ["Heute hilft Anna {ihrem|ihren|ihre#helfen + Dativ: der Kollege → ihrem Kollegen} Kollegen bei der Arbeit.","Bugün Anna meslektaşına işinde yardım ediyor."],
+ ["Er zeigt {ihr|sie|ihre#zeigen: kime → Dativ: ihr} den neuen Drucker.","O ona yeni yazıcıyı gösteriyor."],
+ ["Anna schreibt {einen|einem|einer#schreiben + Akkusativ: der Brief → einen Brief} Brief an den Chef.","Anna şefe bir mektup yazıyor."],
+ ["Dann ruft sie {ihren|ihrem|ihre#anrufen + Akkusativ: der Chef → ihren Chef} Chef an.","Sonra şefini arıyor."],
+ ["Der Chef dankt {ihr|sie|ihren#danken + Dativ: ihr} für die gute Arbeit.","Şef ona iyi işi için teşekkür ediyor."],
+ ["Er gibt {ihr|sie|ihren#geben: kime → Dativ: ihr} eine neue Aufgabe.","Ona yeni bir görev veriyor."],
+ ["Anna braucht {einen|einem|einer#brauchen + Akkusativ: der Computer → einen Computer} neuen Computer.","Anna'nın yeni bir bilgisayara ihtiyacı var."],
+ ["Sie fragt {den|dem|der#fragen + Akkusativ: der Kollege → den Kollegen} Kollegen nach Hilfe.","Meslektaşından yardım istiyor."],
+ ["Er erklärt {ihr|sie|ihren#erklären: kime → Dativ: ihr} das Programm.","O ona programı açıklıyor."],
+ ["Am Abend verlässt sie {das|dem|der#verlassen + Akkusativ: das Büro → das Büro} Büro und geht nach Hause.","Akşam ofisten çıkıp eve gidiyor."]]},
+{id:"ad4", kind:"akkdat", title:"Der Umzug", tr:"Taşınma", sents:[
+ ["Am Samstag zieht Peter in {eine|einer|einen#in + Akkusativ (wohin?): die Wohnung → eine Wohnung} neue Wohnung.","Cumartesi Peter yeni bir daireye taşınıyor."],
+ ["Seine Freunde helfen {ihm|ihn|sein#helfen + Dativ: ihm} beim Umzug.","Arkadaşları taşınmada ona yardım ediyor."],
+ ["Sie tragen {den|dem|der#tragen + Akkusativ: der Schrank → den Schrank} Schrank ins Wohnzimmer.","Dolabı oturma odasına taşıyorlar."],
+ ["Peters Mutter bringt {ihnen|sie|ihre#bringen: kime → Dativ (çoğul): ihnen} Pizza.","Peter'in annesi onlara pizza getiriyor."],
+ ["Peter dankt {seinen|seine|seinem#danken + Dativ; çoğul → seinen} Freunden für die Hilfe.","Peter arkadaşlarına yardım için teşekkür ediyor."],
+ ["Er stellt {die|der|dem#stellen + Akkusativ: die Lampe → die Lampe} Lampe neben das Bett.","Lambayı yatağın yanına koyuyor."],
+ ["Das Sofa steht schon an {der|die|den#Wechselpräposition, wo? → Dativ: die Wand → der Wand} Wand.","Kanepe zaten duvarın yanında duruyor."],
+ ["Auf {dem|den|der#Wechselpräposition, wo? → Dativ: der Tisch → dem Tisch} Tisch liegen viele Kartons.","Masanın üstünde çok koli duruyor."],
+ ["Peter packt {die|der|dem#auspacken + Akkusativ (çoğul): die Kartons} Kartons aus.","Peter kolileri açıyor."],
+ ["Am Abend schenkt er {seiner|seine|seinen#schenken: kime → Dativ; die Mutter → seiner Mutter} Mutter eine Blume.","Akşam annesine bir çiçek hediye ediyor."]]},
+{id:"ad5", kind:"akkdat", title:"Beim Arzt", tr:"Doktorda", sents:[
+ ["Herr Weber hat Schmerzen und ruft {die|der|das#anrufen + Akkusativ: die Praxis → die Praxis} Praxis an.","Bay Weber'in ağrısı var ve muayenehaneyi arıyor."],
+ ["Er bekommt {einen|einem|einer#bekommen + Akkusativ: der Termin → einen Termin} Termin für Freitag.","Cuma için bir randevu alıyor."],
+ ["Im Wartezimmer sieht er {seinen|seinem|seine#sehen + Akkusativ (n-Deklination): der Nachbar → seinen Nachbarn} Nachbarn.","Bekleme odasında komşusunu görüyor."],
+ ["Die Ärztin fragt {ihn|ihm|er#fragen + Akkusativ: ihn} nach den Beschwerden.","Doktor ona şikâyetlerini soruyor."],
+ ["Sie erklärt {ihm|ihn|sein#erklären: kime → Dativ: ihm} die Untersuchung.","Muayeneyi ona açıklıyor."],
+ ["Sie gibt {ihm|ihn|er#geben: kime → Dativ: ihm} ein Rezept.","Ona bir reçete veriyor."],
+ ["Herr Weber dankt {der|die|den#danken + Dativ: die Ärztin → der Ärztin} Ärztin.","Bay Weber doktora teşekkür ediyor."],
+ ["In der Apotheke kauft er {die|der|dem#kaufen + Akkusativ (çoğul): die Tabletten} Tabletten.","Eczanede hapları satın alıyor."],
+ ["Der Apotheker hilft {ihm|ihn|er#helfen + Dativ: ihm} bei der Auswahl.","Eczacı ona seçimde yardım ediyor."],
+ ["Zu Hause nimmt er {die|der|dem#nehmen + Akkusativ: die Tablette → die Tablette} Tablette.","Evde hapı alıyor."]]},
+{id:"ad6", kind:"akkdat", title:"Das Wochenende", tr:"Hafta sonu", sents:[
+ ["Am Samstag besucht Max {seine|seiner|seinem#besuchen + Akkusativ: die Oma → seine Oma} Oma.","Cumartesi Max büyükannesini ziyaret ediyor."],
+ ["Er bringt {ihr|sie|ihre#mitbringen: kime → Dativ: ihr} einen Blumenstrauß mit.","Ona bir çiçek buketi getiriyor."],
+ ["Die Oma kocht {einen|einem|einer#kochen + Akkusativ: der Tee → einen Tee} Tee.","Büyükanne çay demliyor."],
+ ["Sie sitzen auf {dem|den|der#Wechselpräposition, wo? → Dativ: das Sofa → dem Sofa} Sofa und sehen einen Film.","Kanepede oturup film izliyorlar."],
+ ["Max zeigt {ihr|sie|ihren#zeigen: kime → Dativ: ihr} Fotos von seiner Reise.","Max ona yolculuğundan fotoğraflar gösteriyor."],
+ ["Am Nachmittag gehen sie in {den|dem|der#in + Akkusativ (wohin?): der Park → den Park} Park.","Öğleden sonra parka gidiyorlar."],
+ ["Dort treffen sie {ihren|ihrem|ihrer#treffen + Akkusativ (n-Deklination): der Nachbar → ihren Nachbarn} Nachbarn.","Orada komşusuyla karşılaşıyorlar."],
+ ["Der Nachbar erzählt {ihnen|sie|ihre#erzählen: kime → Dativ (çoğul): ihnen} eine lustige Geschichte.","Komşu onlara komik bir hikâye anlatıyor."],
+ ["Max kauft {der|die|dem#kaufen: kime → Dativ; die Oma → der Oma} Oma ein Eis.","Max büyükanneye bir dondurma alıyor."],
+ ["Am Abend fährt er mit {dem|den|der#mit + Dativ: der Zug → dem Zug} Zug zurück.","Akşam trenle geri dönüyor."]]},
+/* ===== EDATLAR (Präpositionen) ===== */
+{id:"pr1", kind:"prep", title:"Mein Weg zur Arbeit", tr:"İşe giden yolum", sents:[
+ ["Ich stehe jeden Morgen {um|für|mit#um + saat: um sechs Uhr} sechs Uhr auf.","Her sabah saat altıda kalkıyorum."],
+ ["Ich frühstücke {mit|ohne|durch#mit + Dativ: mit meiner Frau (= ile)} meiner Frau.","Eşimle kahvaltı ediyorum."],
+ ["Dann gehe ich {zu|nach|aus#sabit kalıp: zu Fuß (= yürüyerek)} Fuß zur Haltestelle.","Sonra durağa yürüyerek gidiyorum."],
+ ["Der Bus fährt {durch|gegen|ohne#durch + Akkusativ: içinden (durch die Stadt)} die ganze Stadt.","Otobüs bütün şehrin içinden geçiyor."],
+ ["Ich sitze {am|im|zum#an + Dativ (wo?): am Fenster (= pencerenin yanında)} Fenster und lese die Zeitung.","Pencerenin yanında oturup gazete okuyorum."],
+ ["{Nach|Seit|Für#nach + Dativ: nach der Arbeit (= işten sonra)} der Arbeit gehe ich einkaufen.","İşten sonra alışverişe gidiyorum."],
+ ["Im Supermarkt kaufe ich Brot {für|ohne|gegen#für + Akkusativ: für meine Kinder (= için)} meine Kinder.","Markette çocuklarım için ekmek alıyorum."],
+ ["Ich komme {gegen|seit|bei#gegen + saat: yaklaşık (gegen sieben Uhr)} sieben Uhr nach Hause.","Saat yedi civarı eve geliyorum."],
+ ["Meine Frau kocht das Essen {mit|zu|nach#mit + Dativ: mit frischem Gemüse (= ile)} frischem Gemüse.","Eşim yemeği taze sebzeyle pişiriyor."],
+ ["Am Abend spiele ich {mit|für|gegen#spielen mit + Dativ: mit meinem Sohn (= ile)} meinem Sohn Fußball.","Akşam oğlumla futbol oynuyorum."]]},
+{id:"pr2", kind:"prep", title:"Ein Ausflug nach Heidelberg", tr:"Heidelberg'e bir gezi", sents:[
+ ["Im Sommer fahren wir {nach|zu|in#nach + şehir adı: nach Heidelberg (= -e)} Heidelberg.","Yazın Heidelberg'e gidiyoruz."],
+ ["Wir fahren {mit|aus|bei#mit + Dativ: araçla (mit dem Zug)} dem Zug.","Trenle gidiyoruz."],
+ ["Der Zug kommt {aus|zu|bei#aus + şehir/ülke: nereden? (aus München)} München.","Tren Münih'ten geliyor."],
+ ["Wir gehen {durch|ohne|für#durch + Akkusativ: içinden (durch die Altstadt)} die Altstadt.","Eski şehrin içinden yürüyoruz."],
+ ["Wir laufen {über|ohne|gegen#über + Akkusativ (wohin?): üzerinden (über die Brücke)} die Alte Brücke.","Eski Köprü'nün üzerinden yürüyoruz."],
+ ["Das Schloss liegt {über|durch|um#über + Dativ (wo?): şehrin yukarısında} der Stadt.","Şato şehrin yukarısında duruyor."],
+ ["Die Führung beginnt {um|seit|von#um + saat: saat 14'te} 14 Uhr.","Rehberli tur saat 14'te başlıyor."],
+ ["Der Eintritt ist {für|ohne|durch#für + Akkusativ: çocuklar için} Kinder frei.","Giriş çocuklar için ücretsiz."],
+ ["Wir sitzen {auf|in|über#auf + Dativ (wo?): bir bankın üstünde} einer Bank und essen Eis.","Bir bankta oturup dondurma yiyoruz."],
+ ["Am Abend fahren wir {ohne|für|um#ohne + Akkusativ: sorunsuz} Probleme nach Hause.","Akşam sorunsuz eve dönüyoruz."]]},
+{id:"pr3", kind:"prep", title:"Im Supermarkt", tr:"Markette", sents:[
+ ["Ich gehe {in|zu|bei#in + Akkusativ (wohin?): in den Supermarkt} den Supermarkt.","Markete gidiyorum."],
+ ["Ich kaufe Gemüse {für|ohne|gegen#für + Akkusativ: akşam yemeği için} das Abendessen.","Akşam yemeği için sebze alıyorum."],
+ ["Das Obst kommt {aus|zu|bei#aus + ülke: nereden? (aus Spanien)} Spanien.","Meyve İspanya'dan geliyor."],
+ ["Die Milch steht {im|zum|vom#in + Dativ (wo?): im Kühlregal (= içinde)} Kühlregal.","Süt soğutma rafında duruyor."],
+ ["Ich stehe {an|auf|in#an + Dativ: an der Kasse (sabit kalıp)} der Kasse.","Kasada bekliyorum."],
+ ["Ich bezahle {mit|von|bei#mit + Dativ: mit Karte (= ile)} Karte.","Kartla ödüyorum."],
+ ["Das Geschenk ist {für|von|bei#für + Akkusativ: für meine Mutter} meine Mutter.","Hediye annem için."],
+ ["Wir gehen {durch|gegen|zu#durch + Akkusativ: durch die Tür (= içinden)} die Tür hinaus.","Kapıdan dışarı çıkıyoruz."],
+ ["Der Bus hält {vor|aus|seit#vor + Dativ (wo?): vor dem Supermarkt (= önünde)} dem Supermarkt.","Otobüs marketin önünde duruyor."],
+ ["{Nach|Für|Gegen#nach + Dativ: nach dem Einkauf (= -den sonra)} dem Einkauf gehe ich nach Hause.","Alışverişten sonra eve gidiyorum."]]},
+{id:"pr4", kind:"prep", title:"Mein Zimmer", tr:"Odam", sents:[
+ ["Mein Bett steht {neben|über|zwischen#neben + Dativ (wo?): yanında} dem Fenster.","Yatağım pencerenin yanında duruyor."],
+ ["{Über|Unter|Hinter#über + Dativ (wo?): üstünde} dem Bett hängt ein Poster.","Yatağın üstünde bir poster asılı."],
+ ["Der Schreibtisch steht {vor|über|zwischen#vor + Dativ (wo?): önünde} dem Fenster.","Çalışma masası pencerenin önünde duruyor."],
+ ["Auf dem Schreibtisch liegen Bücher, und {unter|über|an#unter + Dativ (wo?): altında} dem Schreibtisch liegt ein Ball.","Masanın üstünde kitaplar, masanın altında bir top var."],
+ ["Die Lampe steht {zwischen|auf|vor#zwischen + Dativ: iki şeyin arasında} dem Bett und dem Schrank.","Lamba yatakla dolabın arasında duruyor."],
+ ["Meine Jacke hängt {an|auf|in#an + Dativ (wo?): an der Tür (= kapıda asılı)} der Tür.","Ceketim kapıda asılı."],
+ ["{In|Auf|Über#in + Dativ (wo?): içinde} dem Schrank liegen meine Pullover.","Dolabın içinde kazaklarım duruyor."],
+ ["Der Papierkorb steht {hinter|über|auf#hinter + Dativ (wo?): arkasında} der Tür.","Çöp kutusu kapının arkasında duruyor."],
+ ["Die Katze schläft {auf|an|über#auf + Dativ (wo?): üstünde} dem Teppich.","Kedi halının üstünde uyuyor."],
+ ["Ich lege den Ball {in|an|über#in + Akkusativ (wohin?): içine} die Kiste.","Topu kutunun içine koyuyorum."]]},
+{id:"pr5", kind:"prep", title:"Ein Tag am Meer", tr:"Denizde bir gün", sents:[
+ ["Wir fahren {ans|im|vom#an + Akkusativ (wohin?): ans Meer (= an das Meer)} Meer.","Denize gidiyoruz."],
+ ["Wir kommen {gegen|seit|bei#gegen + saat: yaklaşık (gegen zehn Uhr)} zehn Uhr an.","Saat on civarı varıyoruz."],
+ ["Die Kinder spielen {am|im|zum#an + Dativ (wo?): am Strand (= kumsalda)} Strand.","Çocuklar kumsalda oynuyor."],
+ ["Mein Mann schwimmt {im|vom|zum#in + Dativ (wo?): im Meer (= denizde)} Meer.","Eşim denizde yüzüyor."],
+ ["Ich lese {unter|durch|ohne#unter + Dativ (wo?): bir şemsiyenin altında} einem Sonnenschirm.","Bir güneş şemsiyesinin altında kitap okuyorum."],
+ ["Wir essen {mit|bei|zu#mit + Dativ: mit Appetit (= iştahla)} Appetit Brötchen.","İştahla küçük ekmek yiyoruz."],
+ ["{Nach|Seit|Von#nach + Dativ: nach dem Essen (= yemekten sonra)} dem Essen ruhen wir uns aus.","Yemekten sonra dinleniyoruz."],
+ ["Die Sonne scheint {durch|gegen|ohne#durch + Akkusativ: bulutların arasından} die Wolken.","Güneş bulutların arasından parlıyor."],
+ ["Am Nachmittag gehen wir {ohne|für|gegen#ohne + Akkusativ: ayakkabısız} Schuhe am Wasser entlang.","Öğleden sonra ayakkabısız su kenarında yürüyoruz."],
+ ["Am Abend fahren wir {nach|zu|bei#sabit kalıp: nach Hause (= eve)} Hause.","Akşam eve gidiyoruz."]]},
+{id:"pr6", kind:"prep", title:"Meine Familie", tr:"Ailem", sents:[
+ ["Ich komme {aus|zu|bei#aus + ülke: aus der Türkei (= -den)} der Türkei.","Türkiye'denim."],
+ ["Meine Eltern wohnen {in|nach|zu#in + Dativ (wo?): in Izmir (= -de)} Izmir.","Annem babam İzmir'de oturuyor."],
+ ["Ich wohne {bei|nach|zu#bei + Dativ: bei meinen Eltern (= -in yanında)} meinen Eltern.","Annemle babamın yanında oturuyorum."],
+ ["Mein Bruder lebt {seit|für|durch#seit + Dativ: seit drei Jahren (= -dir)} drei Jahren in Berlin.","Erkek kardeşim üç yıldır Berlin'de yaşıyor."],
+ ["Er arbeitet {bei|zu|nach#bei + Dativ: bei einer Firma (= bir şirkette)} einer großen Firma.","Büyük bir şirkette çalışıyor."],
+ ["Am Wochenende telefoniere ich {mit|ohne|gegen#telefonieren mit + Dativ: mit meiner Mutter} meiner Mutter.","Hafta sonu annemle telefonda konuşuyorum."],
+ ["Mein Vater spielt Schach {gegen|ohne|für#gegen + Akkusativ: -e karşı (gegen seinen Freund)} seinen Freund.","Babam arkadaşına karşı satranç oynuyor."],
+ ["Ich danke meinen Eltern {für|mit|zu#danken für + Akkusativ: für die Hilfe (= için)} die Hilfe.","Yardım için annemle babama teşekkür ediyorum."],
+ ["Meine Mutter geht oft {zu|nach|bei#zu + Dativ: bir kişiye gitmek (zu ihrer Freundin)} ihrer Freundin.","Annem sık sık arkadaşının yanına gidiyor."],
+ ["Das Foto ist {von|ohne|gegen#von + Dativ: -in (von meiner Familie)} meiner Familie.","Bu fotoğraf ailemin fotoğrafı."]]},
+/* ===== AKKUSATIV & DATIV — yeni 9 ===== */
+{id:"ad7", kind:"akkdat", title:"Im Restaurant", tr:"Restoranda", sents:[
+ ["Am Samstag gehen wir in {ein|einem|einer#in + Akkusativ (wohin?): das Restaurant → ein Restaurant} Restaurant.","Cumartesi bir restorana gidiyoruz."],
+ ["Der Kellner bringt {uns|unser|unsere#bringen: kime → Dativ: uns} die Speisekarte.","Garson bize menüyü getiriyor."],
+ ["Ich bestelle {einen|einem|einer#bestellen + Akkusativ: der Salat → einen Salat} Salat und ein Wasser.","Bir salata ve bir su sipariş ediyorum."],
+ ["Meine Frau nimmt {die|der|dem#nehmen + Akkusativ: die Suppe → die Suppe} Suppe.","Eşim çorbayı alıyor."],
+ ["Der Kellner erklärt {ihr|sie|ihren#erklären: kime → Dativ: ihr} das Gericht.","Garson ona yemeği açıklıyor."],
+ ["Wir danken {dem|den|der#danken + Dativ: der Kellner → dem Kellner} Kellner für den guten Service.","Garsona güzel servis için teşekkür ediyoruz."],
+ ["Das Essen schmeckt {mir|mich|ich#schmecken + Dativ: mir} sehr gut.","Yemek çok lezzetli, hoşuma gidiyor."],
+ ["Mein Sohn isst {den|dem|der#essen + Akkusativ: der Kuchen → den Kuchen} Kuchen.","Oğlum pastayı yiyor."],
+ ["Ich zahle {die|der|dem#zahlen + Akkusativ: die Rechnung → die Rechnung} Rechnung.","Hesabı ödüyorum."],
+ ["Zum Schluss schenkt mir der Kellner {einen|einem|einer#schenken + Akkusativ: der Kaffee → einen Kaffee} Kaffee.","Sonunda garson bana bir kahve ikram ediyor."]]},
+{id:"ad8", kind:"akkdat", title:"Der neue Nachbar", tr:"Yeni komşu", sents:[
+ ["Seit gestern wohnt ein neuer Nachbar in {unserem|unseren|unserer#in + Dativ (wo?): das Haus → unserem Haus} Haus.","Dün beri yeni bir komşu evimizde oturuyor."],
+ ["Ich begrüße {den|dem|der#begrüßen + Akkusativ (n-Deklination): der Nachbar → den Nachbarn} Nachbarn freundlich.","Komşuyu güler yüzle selamlıyorum."],
+ ["Ich helfe {ihm|ihn|er#helfen + Dativ: ihm} beim Umzug.","Taşınmada ona yardım ediyorum."],
+ ["Meine Frau bringt {ihm|ihn|sein#bringen: kime → Dativ: ihm} einen Kuchen.","Eşim ona bir pasta getiriyor."],
+ ["Er dankt {uns|unser|unsere#danken + Dativ: uns} für die Hilfe.","Bize yardım için teşekkür ediyor."],
+ ["Der Nachbar hat {einen|einem|einer#haben + Akkusativ: der Hund → einen Hund} Hund.","Komşunun bir köpeği var."],
+ ["Der Hund spielt gern mit {unserem|unseren|unserer#mit + Dativ: der Sohn → unserem Sohn} Sohn.","Köpek oğlumuzla oynamayı seviyor."],
+ ["Wir laden {ihn|ihm|er#einladen + Akkusativ: ihn} zum Essen ein.","Onu yemeğe davet ediyoruz."],
+ ["Am Abend sitzen wir bei {ihm|ihn|er#bei + Dativ: ihm} im Garten.","Akşam onun yanında bahçede oturuyoruz."],
+ ["Er zeigt {uns|ihn|sie#zeigen: kime → Dativ: uns} seine Fotos.","Bize fotoğraflarını gösteriyor."]]},
+{id:"ad9", kind:"akkdat", title:"Auf der Reise", tr:"Yolculukta", sents:[
+ ["Wir fahren mit {dem|den|der#mit + Dativ: der Zug → dem Zug} Zug nach Hamburg.","Trenle Hamburg'a gidiyoruz."],
+ ["Am Bahnhof kaufe ich {eine|einer|einen#kaufen + Akkusativ: die Fahrkarte → eine Fahrkarte} Fahrkarte.","İstasyonda bir bilet alıyorum."],
+ ["Der Mann am Schalter gibt {mir|mich|ich#geben: kime → Dativ: mir} die Karte.","Gişedeki adam bana bileti veriyor."],
+ ["Wir steigen in {den|dem|der#in + Akkusativ (wohin?): der Zug → den Zug} Zug ein.","Trene biniyoruz."],
+ ["Mein Koffer steht neben {dem|den|der#Wechselpräposition, wo? → Dativ: der Sitz → dem Sitz} Sitz.","Valizim koltuğun yanında duruyor."],
+ ["Im Hotel fragt die Frau {den|dem|der#fragen + Akkusativ: der Mann → den Mann} Mann nach einem Zimmer.","Otelde kadın adama bir oda soruyor."],
+ ["Der Mann zeigt {ihr|sie|ihre#zeigen: kime → Dativ: ihr} das Zimmer.","Adam ona odayı gösteriyor."],
+ ["Sie stellt {die|der|dem#stellen + Akkusativ: die Tasche → die Tasche} Tasche auf das Bett.","Çantayı yatağın üstüne koyuyor."],
+ ["Am Abend isst sie in {einem|einen|einer#in + Dativ (wo?): das Restaurant → einem Restaurant} kleinen Restaurant.","Akşam küçük bir restoranda yemek yiyor."],
+ ["Sie schickt {ihrem|ihren|ihre#schicken: kime → Dativ; der Mann → ihrem Mann} Mann eine Postkarte.","Kocasına bir kartpostal gönderiyor."]]},
+{id:"ad10", kind:"akkdat", title:"In der Schule", tr:"Okulda", sents:[
+ ["Die Lehrerin erklärt {den|die|der#erklären: kime → Dativ; çoğul: den Kindern} Kindern die Aufgabe.","Öğretmen çocuklara görevi açıklıyor."],
+ ["Die Kinder hören {der|die|den#zuhören + Dativ: die Lehrerin → der Lehrerin} Lehrerin zu.","Çocuklar öğretmeni dinliyor."],
+ ["Ein Schüler fragt {den|dem|der#fragen + Akkusativ: der Lehrer → den Lehrer} Lehrer etwas.","Bir öğrenci öğretmene bir şey soruyor."],
+ ["Der Lehrer antwortet {ihm|ihn|er#antworten + Dativ: ihm} freundlich.","Öğretmen ona nazikçe cevap veriyor."],
+ ["Die Schüler schreiben {einen|einem|einer#schreiben + Akkusativ: der Test → einen Test} Test.","Öğrenciler bir sınav yazıyor."],
+ ["Anna hilft {ihrer|ihre|ihren#helfen + Dativ: die Freundin → ihrer Freundin} Freundin bei den Hausaufgaben.","Anna arkadaşına ödevlerinde yardım ediyor."],
+ ["In der Pause trinkt Max {den|dem|der#trinken + Akkusativ: der Tee → den Tee} Tee.","Teneffüste Max çayı içiyor."],
+ ["Der Direktor gratuliert {dem|den|der#gratulieren + Dativ: der Schüler → dem Schüler} Schüler.","Müdür öğrenciyi tebrik ediyor."],
+ ["Nach der Schule trifft Max {seine|seiner|seinem#treffen + Akkusativ: die Freundin → seine Freundin} Freundin.","Okuldan sonra Max kız arkadaşıyla buluşuyor."],
+ ["Er gibt {ihr|sie|ihre#geben: kime → Dativ: ihr} ein Buch.","Ona bir kitap veriyor."]]},
+{id:"ad11", kind:"akkdat", title:"Ein Geschenk für Opa", tr:"Büyükbaba için bir hediye", sents:[
+ ["Morgen hat Opa Geburtstag, und wir kaufen {ihm|ihn|er#kaufen: kime → Dativ: ihm} ein Geschenk.","Yarın büyükbabanın doğum günü ve ona bir hediye alıyoruz."],
+ ["Meine Schwester möchte {einen|einem|einer#möchten + Akkusativ: der Schal → einen Schal} Schal kaufen.","Kız kardeşim bir atkı almak istiyor."],
+ ["Ich finde {den|dem|der#finden + Akkusativ: der Hut → den Hut} Hut sehr schön.","Şapkayı çok güzel buluyorum."],
+ ["Wir fragen {die|der|dem#fragen + Akkusativ: die Verkäuferin → die Verkäuferin} Verkäuferin nach dem Preis.","Satıcıya fiyatı soruyoruz."],
+ ["Sie zeigt {uns|wir|unser#zeigen: kime → Dativ: uns} verschiedene Hüte.","Bize çeşitli şapkalar gösteriyor."],
+ ["Mein Vater bezahlt {die|der|dem#bezahlen + Akkusativ: die Rechnung → die Rechnung} Rechnung.","Babam hesabı ödüyor."],
+ ["Zu Hause packt meine Mutter {das|dem|der#einpacken + Akkusativ: das Geschenk → das Geschenk} Geschenk ein.","Evde annem hediyeyi paketliyor."],
+ ["Wir schreiben {dem|den|der#schreiben: kime → Dativ: der Opa → dem Opa} Opa eine Karte.","Büyükbabaya bir kart yazıyoruz."],
+ ["Am Abend geben wir {ihm|ihn|er#geben: kime → Dativ: ihm} das Geschenk.","Akşam ona hediyeyi veriyoruz."],
+ ["Opa dankt {uns|wir|unser#danken + Dativ: uns} herzlich.","Büyükbaba bize içtenlikle teşekkür ediyor."]]},
+{id:"ad12", kind:"akkdat", title:"Im Park", tr:"Parkta", sents:[
+ ["Am Sonntag gehen wir in {den|dem|der#in + Akkusativ (wohin?): der Park → den Park} Park.","Pazar günü parka gidiyoruz."],
+ ["Die Kinder spielen mit {dem|den|der#mit + Dativ: der Ball → dem Ball} Ball.","Çocuklar topla oynuyor."],
+ ["Der Vater kauft {ein|einem|einen#kaufen + Akkusativ: das Eis → ein Eis} Eis.","Baba bir dondurma alıyor."],
+ ["Er gibt {seiner|seine|seinen#geben: kime → Dativ; die Tochter → seiner Tochter} Tochter das Eis.","Dondurmayı kızına veriyor."],
+ ["Die Mutter liest {ihrem|ihren|ihre#vorlesen: kime → Dativ; der Sohn → ihrem Sohn} Sohn eine Geschichte vor.","Anne oğluna bir hikâye okuyor."],
+ ["Wir sitzen unter {dem|den|der#unter + Dativ (wo?): der Baum → dem Baum} Baum.","Ağacın altında oturuyoruz."],
+ ["Ein Hund läuft um {den|dem|der#um + Akkusativ: der Teich → den Teich} Teich.","Bir köpek gölcüğün etrafında koşuyor."],
+ ["Ein Mann ruft {seinen|seinem|seine#rufen + Akkusativ: der Hund → seinen Hund} Hund.","Bir adam köpeğini çağırıyor."],
+ ["Der Hund folgt {ihm|ihn|er#folgen + Dativ: ihm} sofort.","Köpek hemen onu takip ediyor."],
+ ["Am Abend fahren wir mit {der|die|dem#mit + Dativ: die U-Bahn → der U-Bahn} U-Bahn nach Hause.","Akşam metroyla eve gidiyoruz."]]},
+{id:"ad13", kind:"akkdat", title:"Beim Friseur", tr:"Kuaförde", sents:[
+ ["Ich rufe {den|dem|der#anrufen + Akkusativ: der Friseur → den Friseur} Friseur an.","Kuaförü arıyorum."],
+ ["Der Friseur gibt {mir|mich|ich#geben: kime → Dativ: mir} einen Termin.","Kuaför bana bir randevu veriyor."],
+ ["Am Dienstag gehe ich in {einen|einem|einer#in + Akkusativ (wohin?): der Salon → einen Salon} Salon.","Salı günü bir salona gidiyorum."],
+ ["Der Friseur fragt {mich|mir|ich#fragen + Akkusativ: mich} nach meinem Wunsch.","Kuaför bana isteğimi soruyor."],
+ ["Er zeigt {mir|mich|ich#zeigen: kime → Dativ: mir} ein Foto von einer Frisur.","Bana bir saç modeli fotoğrafı gösteriyor."],
+ ["Dann schneidet er {die|der|dem#schneiden + Akkusativ (çoğul): die Haare → die Haare} Haare.","Sonra saçları kesiyor."],
+ ["Ich danke {dem|den|der#danken + Dativ: der Friseur → dem Friseur} Friseur für die Arbeit.","Kuaföre işi için teşekkür ediyorum."],
+ ["Ich bezahle {den|dem|der#bezahlen + Akkusativ: der Preis → den Preis} Preis.","Fiyatı ödüyorum."],
+ ["Meine Frau sagt {mir|mich|ich#sagen: kime → Dativ: mir}: „Das sieht gut aus!“","Eşim bana: “Güzel görünüyor!” diyor."],
+ ["Ich schenke {ihr|sie|ihre#schenken: kime → Dativ: ihr} eine Blume.","Ona bir çiçek hediye ediyorum."]]},
+{id:"ad14", kind:"akkdat", title:"Ein Abend mit Freunden", tr:"Arkadaşlarla bir akşam", sents:[
+ ["Heute Abend besuche ich {meine|meiner|meinem#besuchen + Akkusativ (çoğul): die Freunde → meine Freunde} Freunde.","Bu akşam arkadaşlarımı ziyaret ediyorum."],
+ ["Ich bringe {ihnen|sie|ihre#mitbringen: kime → Dativ (çoğul): ihnen} Getränke mit.","Onlara içecek getiriyorum."],
+ ["Wir sitzen auf {dem|den|der#Wechselpräposition, wo? → Dativ: das Sofa → dem Sofa} Sofa.","Kanepede oturuyoruz."],
+ ["Mein Freund macht {einen|einem|einer#machen + Akkusativ: der Salat → einen Salat} Salat.","Arkadaşım bir salata yapıyor."],
+ ["Seine Frau hilft {ihm|ihn|sein#helfen + Dativ: ihm} dabei.","Karısı bu işte ona yardım ediyor."],
+ ["Wir sehen {einen|einem|einer#sehen + Akkusativ: der Film → einen Film} Film.","Bir film izliyoruz."],
+ ["Der Film gefällt {mir|mich|ich#gefallen + Dativ: mir} gut.","Film çok hoşuma gidiyor."],
+ ["Danach spielen wir mit {den|dem|der#mit + Dativ (çoğul): die Karten → den Karten} Karten.","Sonra kartlarla oynuyoruz."],
+ ["Ich erzähle {meinem|meinen|meine#erzählen: kime → Dativ; der Freund → meinem Freund} Freund einen Witz.","Arkadaşıma bir fıkra anlatıyorum."],
+ ["Spät in der Nacht fahre ich mit {dem|den|der#mit + Dativ: das Taxi → dem Taxi} Taxi nach Hause.","Gece geç saatte taksiyle eve gidiyorum."]]},
+{id:"ad15", kind:"akkdat", title:"Ein Abend zu Hause", tr:"Evde bir akşam", sents:[
+ ["Am Abend koche ich {die|der|dem#kochen + Akkusativ: die Suppe → die Suppe} Suppe.","Akşam çorbayı pişiriyorum."],
+ ["Meine Tochter hilft {mir|mich|ich#helfen + Dativ: mir} dabei.","Kızım bu işte bana yardım ediyor."],
+ ["Mein Sohn deckt {den|dem|der#decken + Akkusativ: der Tisch → den Tisch} Tisch.","Oğlum sofrayı kuruyor."],
+ ["Wir sitzen alle an {dem|den|der#an + Dativ (wo?): der Tisch → dem Tisch} Tisch.","Hepimiz masada oturuyoruz."],
+ ["Nach dem Essen wäscht mein Mann {die|der|dem#abwaschen + Akkusativ (çoğul): die Teller → die Teller} Teller ab.","Yemekten sonra eşim tabakları yıkıyor."],
+ ["Ich schicke {meinem|meinen|meine#schicken: kime → Dativ; der Bruder → meinem Bruder} Bruder eine Nachricht.","Kardeşime bir mesaj gönderiyorum."],
+ ["Er antwortet {mir|mich|ich#antworten + Dativ: mir} schnell.","O bana hızlıca cevap veriyor."],
+ ["Dann lese ich {ein|einem|einer#lesen + Akkusativ: das Buch → ein Buch} Buch.","Sonra bir kitap okuyorum."],
+ ["Meine Frau sitzt neben {mir|mich|ich#neben + Dativ (wo?): mir} auf dem Sofa.","Eşim yanımda kanepede oturuyor."],
+ ["Um zehn Uhr gehen wir in {das|dem|der#in + Akkusativ (wohin?): das Bett → das Bett} Bett.","Saat onda yatağa giriyoruz."]]},
+/* ===== EDATLAR — yeni 9 ===== */
+{id:"pr7", kind:"prep", title:"Am Bahnhof", tr:"İstasyonda", sents:[
+ ["Der Zug fährt {um|bei|mit#um + saat: um 8 Uhr (= saat 8'de)} 8 Uhr ab.","Tren saat 8'de kalkıyor."],
+ ["Ich warte {auf|für|bei#warten auf + Akkusativ: auf den Zug (= -i beklemek)} den Zug.","Treni bekliyorum."],
+ ["Ich kaufe die Karte {für|ohne|durch#für + Akkusativ: für meinen Sohn (= için)} meinen Sohn.","Bileti oğlum için alıyorum."],
+ ["Der Zug kommt {aus|zu|bei#aus + şehir: aus Köln (= -den)} Köln.","Tren Köln'den geliyor."],
+ ["Der Kiosk ist {neben|über|durch#neben + Dativ: neben dem Eingang (= yanında)} dem Eingang.","Büfe girişin yanında."],
+ ["Ich fahre {nach|zu|in#nach + şehir adı: nach Berlin (= -e)} Berlin.","Berlin'e gidiyorum."],
+ ["{Seit|Für|Von#seit + Dativ: seit einer Stunde (= bir saattir)} einer Stunde warte ich schon.","Bir saattir bekliyorum."],
+ ["Ich schreibe eine Nachricht {an|auf|mit#schreiben an + Akkusativ: an meinen Chef (= -e)} meinen Chef.","Şefime bir mesaj yazıyorum."],
+ ["Der Zug fährt {durch|gegen|ohne#durch + Akkusativ: durch einen Tunnel (= içinden)} einen Tunnel.","Tren bir tünelin içinden geçiyor."],
+ ["Ich steige {aus|in|an#aussteigen: aus dem Zug (= -den inmek)} dem Zug aus.","Trenden iniyorum."]]},
+{id:"pr8", kind:"prep", title:"In der Küche", tr:"Mutfakta", sents:[
+ ["Ich koche {mit|ohne|durch#mit + Dativ: mit einem Topf (= bir tencereyle)} einem Topf.","Bir tencerede yemek pişiriyorum."],
+ ["Die Pfanne steht {auf|an|über#auf + Dativ (wo?): auf dem Herd (= ocağın üstünde)} dem Herd.","Tava ocağın üstünde duruyor."],
+ ["Das Brot liegt {in|an|zu#in + Dativ (wo?): in der Dose (= kutunun içinde)} der Dose.","Ekmek kutunun içinde duruyor."],
+ ["Ich schneide das Gemüse {mit|von|aus#schneiden mit + Dativ: mit einem Messer (= bıçakla)} einem Messer.","Sebzeyi bir bıçakla kesiyorum."],
+ ["Meine Tochter hilft mir {beim|zum|vom#helfen bei + Dativ: beim Kochen (= pişirirken)} Kochen.","Kızım pişirmede bana yardım ediyor."],
+ ["Wir stellen die Teller {auf|in|durch#stellen auf + Akkusativ (wohin?): auf den Tisch (= masanın üstüne)} den Tisch.","Tabakları masanın üstüne koyuyoruz."],
+ ["Die Gläser kommen {in|durch|bei#in + Akkusativ (wohin?): in den Schrank (= dolabın içine)} den Schrank.","Bardaklar dolaba konuluyor."],
+ ["Ich gieße Wasser {in|auf|an#in + Akkusativ: in das Glas (= bardağa)} das Glas.","Bardağa su dolduruyorum."],
+ ["Wir essen {mit|ohne|gegen#mit + Dativ: mit der Familie (= ile)} der Familie.","Ailemizle yemek yiyoruz."],
+ ["{Vor|Seit|Von#vor + Dativ: vor dem Essen (= yemekten önce)} dem Essen wasche ich die Hände.","Yemekten önce ellerimi yıkıyorum."]]},
+{id:"pr9", kind:"prep", title:"Mein Urlaub", tr:"Tatilim", sents:[
+ ["Im Sommer fahre ich {in|nach|zu#in + Akkusativ: in den Urlaub (= tatile)} den Urlaub.","Yazın tatile gidiyorum."],
+ ["Wir fliegen {nach|zu|bei#nach + ülke: nach Spanien (= -e)} Spanien.","İspanya'ya uçuyoruz."],
+ ["Das Flugzeug startet {um|bei|für#um + saat: um zehn Uhr (= saat 10'da)} zehn Uhr.","Uçak saat onda kalkıyor."],
+ ["Wir wohnen {in|auf|bei#in + Dativ (wo?): in einem Hotel (= bir otelde)} einem Hotel.","Bir otelde kalıyoruz."],
+ ["Das Hotel liegt {an|auf|in#an + Dativ (wo?): an einem See (= bir gölün kıyısında)} einem See.","Otel bir gölün kenarında."],
+ ["Wir frühstücken {auf|in|über#auf + Dativ (wo?): auf der Terrasse (= terasta)} der Terrasse.","Terasta kahvaltı ediyoruz."],
+ ["Mittags schwimmen wir {in|auf|an#in + Dativ (wo?): in dem Pool (= havuzda)} dem Pool.","Öğlen havuzda yüzüyoruz."],
+ ["Abends gehen wir {durch|gegen|für#durch + Akkusativ: durch die Stadt (= şehrin içinden)} die Stadt.","Akşamları şehrin içinde geziyoruz."],
+ ["Ich schicke Fotos {an|auf|bei#schicken an + Akkusativ: an meine Eltern (= -e)} meine Eltern.","Annemle babama fotoğraf gönderiyorum."],
+ ["{Nach|Seit|Von#nach + Dativ: nach zwei Wochen (= iki hafta sonra)} zwei Wochen fliegen wir zurück.","İki hafta sonra geri uçuyoruz."]]},
+{id:"pr10", kind:"prep", title:"Auf dem Land", tr:"Kırsalda", sents:[
+ ["Meine Oma wohnt {auf|zu|bei#auf + Dativ: auf dem Land (= kırda)} dem Land.","Büyükannem kırsalda oturuyor."],
+ ["Sie hat ein Haus {mit|ohne|für#mit + Dativ: mit einem Garten (= bahçeli)} einem Garten.","Bahçeli bir evi var."],
+ ["Ein Bach fließt {hinter|ohne|durch#hinter + Dativ (wo?): hinter dem Haus (= evin arkasında)} dem Haus.","Evin arkasından bir dere akıyor."],
+ ["Wir fahren {zu|nach|bei#zu + Dativ: bir kişinin yanına (zu meiner Oma)} meiner Oma.","Büyükannemin yanına gidiyoruz."],
+ ["Die Kühe stehen {auf|bei|zu#auf + Dativ (wo?): auf der Wiese (= çayırda)} der Wiese.","İnekler çayırda duruyor."],
+ ["Der Hund läuft {durch|gegen|ohne#durch + Akkusativ: durch das Feld (= tarlanın içinden)} das Feld.","Köpek tarlanın içinden koşuyor."],
+ ["Wir essen frisches Gemüse {aus|zu|bei#aus + Dativ: aus dem Garten (= bahçeden)} dem Garten.","Bahçeden taze sebze yiyoruz."],
+ ["Am Abend sitzen wir {vor|nach|seit#vor + Dativ (wo?): vor dem Haus (= evin önünde)} dem Haus.","Akşam evin önünde oturuyoruz."],
+ ["Ich bin gern {bei|zu|nach#bei + Dativ: bei meiner Oma (= -in yanında)} meiner Oma.","Büyükannemin yanında olmayı seviyorum."],
+ ["Wir fahren {ohne|gegen|für#ohne + Akkusativ: ohne Stress (= stressiz)} Stress zurück.","Stressiz geri dönüyoruz."]]},
+{id:"pr11", kind:"prep", title:"In der Stadt", tr:"Şehirde", sents:[
+ ["Das Rathaus steht {am|im|zum#an + Dativ (wo?): am Marktplatz (= pazar meydanında)} Marktplatz.","Belediye binası pazar meydanında duruyor."],
+ ["Die Bank ist {neben|über|durch#neben + Dativ: neben dem Rathaus (= yanında)} dem Rathaus.","Banka belediye binasının yanında."],
+ ["Ich gehe {zur|zum|vom#zu + Dativ: zur Bank (= bankaya)} Bank.","Bankaya gidiyorum."],
+ ["Dort hole ich Geld {aus|zu|bei#aus + Dativ: aus dem Automaten (= -den)} dem Automaten.","Orada otomattan para çekiyorum."],
+ ["Danach gehe ich {über|ohne|zu#über + Akkusativ: über die Straße (= caddeden karşıya)} die Straße.","Sonra caddeden karşıya geçiyorum."],
+ ["Das Café liegt {an|auf|zu#an + Dativ (wo?): an der Ecke (= köşede)} der Ecke.","Kafe köşede."],
+ ["Ich warte {auf|an|für#warten auf + Akkusativ: auf meinen Freund (= -i beklemek)} meinen Freund.","Arkadaşımı bekliyorum."],
+ ["Wir gehen {ins|im|vom#in + Akkusativ (wohin?): ins Kino (= sinemaya)} Kino.","Sinemaya gidiyoruz."],
+ ["Wir sitzen {in|auf|an#in + Dativ (wo?): in der dritten Reihe (= üçüncü sırada)} der dritten Reihe.","Üçüncü sırada oturuyoruz."],
+ ["{Nach|Seit|Für#nach + Dativ: nach dem Film (= filmden sonra)} dem Film gehen wir nach Hause.","Filmden sonra eve gidiyoruz."]]},
+{id:"pr12", kind:"prep", title:"Meine Arbeitswoche", tr:"Çalışma haftam", sents:[
+ ["{Von|Seit|Nach#von … bis: von Montag bis Freitag (= …'dan …'a kadar)} Montag bis Freitag arbeite ich.","Pazartesiden cumaya kadar çalışıyorum."],
+ ["Ich arbeite {bei|zu|nach#arbeiten bei + Dativ: bei einer Bank (= bir bankada)} einer Bank.","Bir bankada çalışıyorum."],
+ ["Mein Büro ist {im|am|zum#in + Dativ (wo?): im dritten Stock (= üçüncü katta)} dritten Stock.","Ofisim üçüncü katta."],
+ ["Ich fahre {mit|ohne|durch#mit + Dativ: mit dem Fahrrad (= bisikletle)} dem Fahrrad.","Bisikletle gidiyorum."],
+ ["Mittags esse ich {mit|ohne|für#mit + Dativ: mit meinem Kollegen (= ile)} meinem Kollegen.","Öğlen meslektaşımla yemek yiyorum."],
+ ["Am Freitag schreibe ich eine E-Mail {an|auf|mit#schreiben an + Akkusativ: an meine Chefin (= -e)} meine Chefin.","Cuma günü şefime bir e-posta yazıyorum."],
+ ["Wir sprechen {über|an|auf#sprechen über + Akkusativ: über das Projekt (= hakkında)} das Projekt.","Proje hakkında konuşuyoruz."],
+ ["Nach der Arbeit gehe ich {ins|im|vom#in + Akkusativ (wohin?): ins Fitnessstudio (= spor salonuna)} Fitnessstudio.","İşten sonra spor salonuna gidiyorum."],
+ ["Am Abend bin ich {zu|nach|bei#sabit kalıp: zu Hause (= evde)} Hause.","Akşam evdeyim."],
+ ["Ich freue mich {auf|an|zu#sich freuen auf + Akkusativ: auf das Wochenende (= -i dört gözle beklemek)} das Wochenende.","Hafta sonunu dört gözle bekliyorum."]]},
+{id:"pr13", kind:"prep", title:"Im Haus", tr:"Evde", sents:[
+ ["Ich gehe {in|an|auf#in + Akkusativ (wohin?): in die Küche (= mutfağa)} die Küche.","Mutfağa gidiyorum."],
+ ["Ich stelle den Topf {auf|in|neben#auf + Akkusativ (wohin?): auf den Herd (= ocağın üstüne)} den Herd.","Tencereyi ocağın üstüne koyuyorum."],
+ ["Der Topf steht jetzt {auf|zu|durch#auf + Dativ (wo?): auf dem Herd (= ocağın üstünde)} dem Herd.","Tencere şimdi ocağın üstünde duruyor."],
+ ["Ich hänge das Bild {an|auf|in#an + Akkusativ (wohin?): an die Wand (= duvara)} die Wand.","Resmi duvara asıyorum."],
+ ["Jetzt hängt das Bild {an|auf|durch#an + Dativ (wo?): an der Wand (= duvarda)} der Wand.","Şimdi resim duvarda asılı."],
+ ["Ich lege die Schlüssel {in|an|über#in + Akkusativ (wohin?): in die Schublade (= çekmeceye)} die Schublade.","Anahtarları çekmeceye koyuyorum."],
+ ["Die Schlüssel liegen {in|vor|über#in + Dativ (wo?): in der Schublade (= çekmecede)} der Schublade.","Anahtarlar çekmecede duruyor."],
+ ["Die Kinder laufen {in|an|zu#in + Akkusativ (wohin?): in das Wohnzimmer (= oturma odasına)} das Wohnzimmer.","Çocuklar oturma odasına koşuyor."],
+ ["Sie spielen {im|ins|zum#in + Dativ (wo?): im Wohnzimmer (= oturma odasında)} Wohnzimmer.","Oturma odasında oynuyorlar."],
+ ["Am Abend gehen alle {in|an|auf#in + Akkusativ (wohin?): in ihre Zimmer (= odalarına)} ihre Zimmer.","Akşam herkes odasına gidiyor."]]},
+{id:"pr14", kind:"prep", title:"Der Weg zur Schule", tr:"Okula giden yol", sents:[
+ ["Der Junge geht {zur|zum|ins#zu + Dativ: zur Schule (= okula)} Schule.","Çocuk okula gidiyor."],
+ ["Zuerst geht er {durch|ohne|gegen#durch + Akkusativ: durch den Garten (= bahçeden)} den Garten.","Önce bahçeden geçiyor."],
+ ["Dann geht er {über|ohne|zu#über + Akkusativ: über die Brücke (= köprüden)} die Brücke.","Sonra köprüden geçiyor."],
+ ["{An|Auf|In#an + Dativ: an der Ampel (= trafik ışığında)} der Ampel bleibt er stehen.","Trafik ışığında duruyor."],
+ ["Er wartet {auf|an|für#warten auf + Akkusativ: auf das grüne Licht (= -i beklemek)} das grüne Licht.","Yeşil ışığı bekliyor."],
+ ["Ein Freund geht {mit|ohne|für#gehen mit + Dativ: mit ihm (= onunla)} ihm.","Bir arkadaşı onunla birlikte yürüyor."],
+ ["Sie sprechen {über|an|zu#sprechen über + Akkusativ: über den Test (= hakkında)} den Test.","Sınav hakkında konuşuyorlar."],
+ ["Sie kommen {vor|nach|seit#vor + Dativ: vor dem Unterricht (= dersten önce)} dem Unterricht an.","Dersten önce varıyorlar."],
+ ["Im Unterricht sitzt er {neben|über|durch#neben + Dativ: neben seinem Freund (= yanında)} seinem Freund.","Derste arkadaşının yanında oturuyor."],
+ ["{Nach|Seit|Von#nach + Dativ: nach der Schule (= okuldan sonra)} der Schule spielt er Fußball.","Okuldan sonra futbol oynuyor."]]},
+{id:"pr15", kind:"prep", title:"Ein Abend in der Stadt", tr:"Şehirde bir akşam", sents:[
+ ["Am Freitagabend gehe ich {mit|ohne|durch#mit + Dativ: mit meinen Freunden (= ile)} meinen Freunden aus.","Cuma akşamı arkadaşlarımla dışarı çıkıyorum."],
+ ["Wir treffen uns {vor|seit|zu#vor + Dativ (wo?): vor dem Kino (= sinemanın önünde)} dem Kino.","Sinemanın önünde buluşuyoruz."],
+ ["Dann gehen wir {durch|gegen|ohne#durch + Akkusativ: durch den Park (= parkın içinden)} den Park.","Sonra parkın içinden yürüyoruz."],
+ ["Wir essen {in|auf|an#in + Dativ (wo?): in einem Restaurant (= bir restoranda)} einem Restaurant.","Bir restoranda yemek yiyoruz."],
+ ["Die Pizza ist {für|von|bei#für + Akkusativ: für zwei Personen (= iki kişilik)} zwei Personen.","Pizza iki kişilik."],
+ ["Wir sprechen {über|an|zu#sprechen über + Akkusativ: über die Arbeit (= hakkında)} die Arbeit.","İş hakkında konuşuyoruz."],
+ ["Später gehen wir {ins|im|am#in + Akkusativ (wohin?): ins Café (= kafeye)} Café.","Daha sonra kafeye gidiyoruz."],
+ ["Dort sitzen wir {an|auf|bei#an + Dativ (wo?): an einem Tisch (= bir masada)} einem Tisch.","Orada bir masada oturuyoruz."],
+ ["Ich bezahle {für|mit|bei#bezahlen für + Akkusativ: für alle (= herkes için)} alle.","Herkes için ödüyorum."],
+ ["Um Mitternacht liege ich {in|zu|durch#in + Dativ (wo?): in dem Bett (= yatakta)} dem Bett.","Gece yarısı yatağımdayım."]]}
+];
+
+const PAR_SRC = "\\{([^{}|#]+)\\|([^{}|#]+)\\|([^{}|#]+)#([^{}]+)\\}";
+function parseParagraph(p){
+  const blanks = [];
+  const segs = p.sents.map(function(pair, si){
+    const de = pair[0], tr = pair[1];
+    const parts = []; let last = 0; let m;
+    const re = new RegExp(PAR_SRC, "g");
+    while((m = re.exec(de)) !== null){
+      parts.push({t: de.slice(last, m.index)});
+      parts.push({b: blanks.length});
+      blanks.push({si: si, correct: m[1], opts: [m[1], m[2], m[3]], why: m[4].trim()});
+      last = m.index + m[0].length;
+    }
+    parts.push({t: de.slice(last)});
+    return {parts: parts, tr: tr,
+            filled: de.replace(new RegExp(PAR_SRC, "g"), function(x, a){ return a; }),
+            withBlank: de.replace(new RegExp(PAR_SRC, "g"), "___")};
+  });
+  return {blanks: blanks, segs: segs};
+}
+// "Yanlışlarımı Tekrar Et" için her boşluk tek soru olarak da kayıtlı
+GQ_BANK["gq-par"] = {emoji:"📄", qtype:"PARAGRAF BOŞLUĞU",
+  hint:"Paragraf alıştırmasından bir boşluk: fiilin ya da edatın hangi hâli / hangi edatı istediğini düşün.",
+  items: (function(){ let out = []; PARAGRAPHS.forEach(function(p){ const pp = parseParagraph(p); pp.blanks.forEach(function(b){ out.push([pp.segs[b.si].withBlank, b.correct, [b.opts[1], b.opts[2]], pp.segs[b.si].tr]); }); }); return out; })()};
+
+let __par = null;
+window.__par = null;
+function parCount(kind){ return PARAGRAPHS.filter(function(x){ return x.kind === kind; }).length; }
+document.querySelectorAll(".par-btn-sub").forEach(function(el){
+  const k = el.getAttribute("data-kind");
+  el.textContent = "10 boşluk · " + parCount(k) + " paragraf" + (k === "akkdat" ? " · karışık" : "");
+});
+function startParagraph(kind, afterReset){
+  const want = kind === "par-akkdat" ? "akkdat" : "prep";
+  const list = PARAGRAPHS.filter(function(x){ return x.kind === want; });
+  window.__poolExhausted = [];
+  const pool = getUnseenPool(kind, list, function(x){ return x.id; });
+  const ex = Array.from(new Set(window.__poolExhausted || []));
+  window.__poolExhausted = [];
+  const pick = shuffleArray(pool)[0];
+  const go = function(){ openParagraph(kind, pick); };
+  if(ex.length && !afterReset){ showPoolPrompt(kind, go, ex, function(){ startParagraph(kind, true); }); return; }
+  go();
+}
+function parSelectHtml(i, blank){
+  const opts = shuffleArray(blank.opts.slice());
+  return '<select class="par-sel" data-i="' + i + '" aria-label="Boşluk ' + (i + 1) + '" onchange="parUpdate()"><option value="">…</option>' +
+    opts.map(function(o){ return '<option value="' + escapeHtml(o) + '">' + escapeHtml(o) + '</option>'; }).join("") + '</select>';
+}
+function openParagraph(kind, p){
+  const parsed = parseParagraph(p);
+  __par = {kind: kind, p: p, parsed: parsed, done: false};
+  window.__par = __par;
+  markAsked(kind, [p], function(x){ return x.id; });
+  const kk = kind === "par-akkdat" ? "akkdat" : "prep";
+  const seenN = Math.min(poolSeen(kind), parCount(kk));
+  document.getElementById("parKind").textContent = (kind === "par-akkdat" ? "📄 PARAGRAF — AKKUSATIV & DATIV" : "📄 PARAGRAF — EDATLAR") + " · " + seenN + " / " + parCount(kk);
+  document.getElementById("parTitle").textContent = p.title + " · " + p.tr;
+  document.getElementById("parBody").innerHTML = parsed.segs.map(function(seg){
+    return seg.parts.map(function(pt){ return pt.b !== undefined ? parSelectHtml(pt.b, parsed.blanks[pt.b]) : escapeHtml(pt.t); }).join("");
+  }).join(" ");
+  document.getElementById("parTransText").textContent = parsed.segs.map(function(s){ return s.tr; }).join(" ");
+  document.getElementById("parTrans").open = (kind === "par-prep");   // edatlarda anlam ipucu açık, hâl alıştırmasında kapalı
+  document.getElementById("parResult").innerHTML = "";
+  document.getElementById("parCheck").style.display = "";
+  document.getElementById("parRetry").style.display = "none";
+  document.getElementById("parNext").style.display = "none";
+  parUpdate();
+  const ov = document.getElementById("parOverlay"); ov.classList.add("show"); ov.scrollTo(0, 0);
+}
+function parUpdate(){
+  if(!__par) return;
+  const filled = [...document.querySelectorAll("#parBody .par-sel")].filter(function(s){ return s.value; }).length;
+  document.getElementById("parInfo").textContent = (__par.done ? "" : "Her boşlukta doğru seçeneği seç. ") + "Dolu: " + filled + " / " + __par.parsed.blanks.length;
+}
+function parCheck(){
+  if(!__par || __par.done) return;
+  __par.done = true;
+  const sels = [...document.querySelectorAll("#parBody .par-sel")];
+  let ok = 0; let items = "";
+  sels.forEach(function(s, i){
+    const b = __par.parsed.blanks[i];
+    const good = s.value === b.correct;
+    if(good) ok++;
+    s.disabled = true; s.classList.add(good ? "par-ok" : "par-bad");
+    if(!good){ const fix = document.createElement("span"); fix.className = "par-fix"; fix.textContent = "→ " + b.correct; s.insertAdjacentElement("afterend", fix); }
+    const seg = __par.parsed.segs[b.si];
+    if(!stats) stats = {correct:0, wrong:0};
+    if(good) stats.correct++; else stats.wrong++;
+    recordWordStat(seg.filled, good);
+    items += '<li class="' + (good ? "ok" : "bad") + '"><strong>' + (i + 1) + ". " + (good ? "✓ " : "✗ ") + escapeHtml(b.correct) + '</strong>' +
+      (good ? "" : ' <span class="par-mine">(senin cevabın: ' + escapeHtml(s.value || "boş") + ')</span>') +
+      '<span class="par-why">' + escapeHtml(b.why) + '</span></li>';
+  });
+  saveStats(); updateStatDisplay();
+  const total = __par.parsed.blanks.length;
+  const msg = ok === total ? "Mükemmel! 🎉" : (ok >= total * 0.7 ? "Güzel gidiyor 👍" : "Biraz daha pratik yapalım 💪");
+  document.getElementById("parResult").innerHTML = '<div class="par-score">' + ok + ' / ' + total + ' doğru</div><div style="text-align:center;">' + msg + '</div><ol class="par-list">' + items + '</ol>';
+  document.getElementById("parCheck").style.display = "none";
+  document.getElementById("parRetry").style.display = "";
+  document.getElementById("parNext").style.display = "";
+  document.getElementById("parTrans").open = true;
+  parUpdate();
+  document.getElementById("parResult").scrollIntoView({block:"start", behavior:"smooth"});
+}
+function parRetry(){ if(__par) openParagraph(__par.kind, __par.p); }
+function parNext(){ if(__par) startParagraph(__par.kind); }
+function closeParagraph(){
+  document.getElementById("parOverlay").classList.remove("show");
+  __par = null; window.__par = null;
+}
+document.addEventListener("keydown", function(e){
+  if(e.key === "Escape" && document.getElementById("parOverlay").classList.contains("show")
+     && !document.getElementById("reportOverlay").classList.contains("show")
+     && !document.getElementById("poolPromptOverlay").classList.contains("show")) closeParagraph();
+});
+
 /* ---------- SORU HAVUZU: seçmeli sıfırlama ---------- */
 const POOL_GROUPS = [
   ["Artikel", ["artikel-only","plural-only","nomakk-quiz","plural-guess-quiz"]],
   ["Kelime", ["noun-quiz","verb-quiz","adj-quiz","irregular-verb-quiz"]],
-  ["Gramer", ["gq-akkprep","gq-wechsel","gq-praet","gq-doch","gq-man","gq-genitiv","gq-geht","gq-verbpos","gq-konj","gq-quant","gq-gefallen","gq-seinihr","gq-modal","gq-imperativ","gq-nicht","gq-trennbar","gq-kasus"]],
+  ["Gramer", ["par-akkdat","par-prep","gq-akkprep","gq-wechsel","gq-praet","gq-doch","gq-man","gq-genitiv","gq-geht","gq-verbpos","gq-konj","gq-quant","gq-gefallen","gq-seinihr","gq-modal","gq-imperativ","gq-nicht","gq-trennbar","gq-kasus"]],
   ["Dativ", ["dativ-artikel-quiz","dativ-plural-quiz","dativ-prep-quiz","dativ-pronoun-quiz"]],
   ["Pratik", ["order-quiz","sentence-fill","listening-quiz","prep-quiz","zeitort-quiz"]]
 ];
@@ -9151,8 +9674,8 @@ function poolResetSelected(){
   openPoolManager();
 }
 let __poolPending = null;
-function showPoolPrompt(testMode, built, exhaustedKeys){
-  __poolPending = {testMode, built, exhaustedKeys};
+function showPoolPrompt(testMode, built, exhaustedKeys, rebuild){
+  __poolPending = {testMode, built, exhaustedKeys, rebuild};
   const names = exhaustedKeys.map(poolName).join(", ");
   document.getElementById("poolPromptText").textContent = "«" + names + "» için tüm sorular en az bir kez soruldu. Havuzu sıfırlayıp baştan başlayabilir ya da sıfırlamadan devam edebilirsin (bu durumda sorular tekrar eder).";
   document.getElementById("poolPromptOverlay").classList.add("show");
@@ -9163,13 +9686,14 @@ function poolPromptReset(){
   pend.exhaustedKeys.forEach(k => { delete recentAsked[k]; });
   saveRecentAsked();
   window.__poolExhausted = [];
-  startSession(pend.testMode, buildSession(pend.testMode));
+  if(typeof pend.rebuild === "function"){ pend.rebuild(); }
+  else { startSession(pend.testMode, buildSession(pend.testMode)); }
   window.__poolExhausted = [];
 }
 function poolPromptContinue(){
   const pend = __poolPending; if(!pend) return;
   document.getElementById("poolPromptOverlay").classList.remove("show"); __poolPending = null;
-  startSession(pend.testMode, pend.built);
+  if(typeof pend.built === "function"){ pend.built(); } else { startSession(pend.testMode, pend.built); }
 }
 function poolPromptCancel(){
   document.getElementById("poolPromptOverlay").classList.remove("show"); __poolPending = null;
@@ -9717,7 +10241,127 @@ const STORIES=[
  {q:"Wann beginnt die Führung?",o:["Um 14 Uhr","Um 12 Uhr","Um 16 Uhr"]},
  {q:"Was kostet der Eintritt für Erwachsene?",o:["Zehn Euro fünfzig","Sieben Euro","Fünf Euro fünfzig"]},
  {q:"Warum zahlt Lena weniger?",o:["Sie ist Studentin.","Sie ist Lehrerin.","Sie ist ein Kind."]},
- {q:"Was darf man im Schloss nicht?",o:["Fotografieren","Sprechen","Gehen"]}]}
+ {q:"Was darf man im Schloss nicht?",o:["Fotografieren","Sprechen","Gehen"]}]},
+
+{id:"fitness",lvl:"A2",icon:"🏋️",color:"#5B4B8A",title:"Im Fitnessstudio",tr:"Spor salonunda",tense:"mix",
+ s:[
+ ["Lena geht dreimal pro Woche ins Fitnessstudio.","Lena haftada üç kez spor salonuna gidiyor."],
+ ["Sie kommt immer um 18 Uhr dorthin.","Oraya her zaman saat 18'de geliyor."],
+ ["Zuerst begrüßt sie den Trainer an der Tür.","Önce kapıda antrenörü selamlıyor."],
+ ["Der Trainer sagt: „Komm schnell, wir haben nicht viel Zeit!“","Antrenör diyor ki: “Çabuk gel, fazla vaktimiz yok!”"],
+ ["Lena zieht ihre Schuhe an und nimmt eine Flasche Wasser mit.","Lena ayakkabılarını giyiyor ve bir şişe su alıyor."],
+ ["Der Trainer ruft: „Lauf zehn Minuten und trink danach Wasser!“","Antrenör sesleniyor: “On dakika koş ve sonra su iç!”"],
+ ["Sie kann heute nicht lange trainieren, denn sie ist müde.","Bugün uzun süre antrenman yapamıyor çünkü yorgun."],
+ ["Ihr Freund Tom hat keine Lust auf Sport.","Arkadaşı Tom'un spora hiç isteği yok."],
+ ["Lena fragt ihn: „Willst du nicht mitkommen?“","Lena ona soruyor: “Gelmek istemiyor musun?”"],
+ ["Tom antwortet: „Doch, aber ich muss zuerst arbeiten.“","Tom cevap veriyor: “İstiyorum aslında, ama önce çalışmam gerekiyor.”"],
+ ["Später sah Lena Toms Tasche vor dem Eingang.","Daha sonra Lena, Tom'un çantasını girişin önünde gördü."],
+ ["Er war schon im Studio und trainierte an den Geräten.","O çoktan salondaydı ve aletlerde antrenman yapıyordu."],
+ ["Beide trainierten eine Stunde lang zusammen.","İkisi birlikte bir saat boyunca antrenman yaptı."],
+ ["Der Monatsbeitrag kostet neunundzwanzig Euro neunzig.","Aylık üyelik ücreti yirmi dokuz euro doksan."],
+ ["Lena findet das nicht teuer, weil sie so gern trainiert.","Lena bunu pahalı bulmuyor çünkü antrenman yapmayı çok seviyor."]],
+ q:[
+ {q:"Wie oft geht Lena ins Fitnessstudio?",o:["Dreimal pro Woche","Jeden Tag","Einmal im Monat"]},
+ {q:"Was soll Lena zuerst zehn Minuten machen?",o:["Laufen","Schwimmen","Schlafen"]},
+ {q:"Warum kann Lena heute nicht lange trainieren?",o:["Sie ist müde.","Sie hat Hunger.","Sie hat keinen Trainer."]},
+ {q:"Was kostet der Monatsbeitrag?",o:["Neunundzwanzig Euro neunzig","Neunzehn Euro neunzig","Neununddreißig Euro neunzig"]},
+ {q:"Wo sah Lena Toms Tasche?",o:["Vor dem Eingang","Auf dem Tisch","Im Auto"]}]},
+
+{id:"flohmarkt",lvl:"A2",icon:"🛍️",color:"#B5702F",title:"Auf dem Flohmarkt",tr:"Bit pazarında",tense:"mix",
+ s:[
+ ["Jeden Sonntag gibt es einen Flohmarkt in der Stadt.","Her pazar şehirde bir bit pazarı oluyor."],
+ ["Anna geht gern dorthin, weil man dort günstig einkaufen kann.","Anna oraya gitmeyi seviyor çünkü orada ucuza alışveriş yapılabiliyor."],
+ ["Letzten Sonntag fand sie eine schöne Lampe.","Geçen pazar güzel bir lamba buldu."],
+ ["Sie findet die Lampe wunderschön.","Lambayı harika buluyor."],
+ ["Der Verkäufer sagt: „Das macht zwölf Euro fünfzig.“","Satıcı diyor ki: “Bu on iki euro elli tutar.”"],
+ ["Anna fragt: „Geht es auch für zehn Euro?“","Anna soruyor: “On euroya olur mu?”"],
+ ["Der Mann lacht und antwortet: „Nein, das geht leider nicht.“","Adam gülüyor ve cevap veriyor: “Hayır, maalesef olmaz.”"],
+ ["Sie hatte aber nur elf Euro in der Tasche.","Ama çantasında sadece on bir euro vardı."],
+ ["Also gab sie ihm elf Euro.","Bu yüzden ona on bir euro verdi."],
+ ["Der Verkäufer sagte: „Ja, das ist in Ordnung!“","Satıcı dedi ki: “Evet, tamam!”"],
+ ["Danach kaufte sie noch zwei Bücher und ein Kilo Äpfel.","Ondan sonra iki kitap ve bir kilo elma daha aldı."],
+ ["Annas Bruder hat keine Zeit für den Flohmarkt.","Anna'nın erkek kardeşinin bit pazarı için vakti yok."],
+ ["Er sagt: „Ich mag alte Sachen nicht.“","O diyor ki: “Eski eşyaları sevmem.”"],
+ ["Zu Hause stellt Anna die Lampe neben das Sofa.","Evde Anna lambayı kanepenin yanına koyuyor."],
+ ["Jetzt steht die Lampe neben dem Sofa, und das Zimmer sieht schön aus.","Şimdi lamba kanepenin yanında duruyor ve oda güzel görünüyor."]],
+ q:[
+ {q:"Wann gibt es den Flohmarkt?",o:["Jeden Sonntag","Jeden Samstag","Jeden Tag"]},
+ {q:"Was fand Anna letzten Sonntag?",o:["Eine Lampe","Ein Bild","Ein Sofa"]},
+ {q:"Wie viel Geld hatte Anna?",o:["Elf Euro","Zehn Euro","Zwölf Euro"]},
+ {q:"Was kaufte sie danach noch?",o:["Zwei Bücher und ein Kilo Äpfel","Ein Buch und Brot","Nur Äpfel"]},
+ {q:"Wohin stellt Anna die Lampe zu Hause?",o:["Neben das Sofa","Auf den Tisch","Unter den Tisch"]}]},
+
+{id:"picknick",lvl:"A2",icon:"🧺",color:"#4E8B4A",title:"Ein Picknick am Fluss",tr:"Nehir kenarında piknik",tense:"prat",
+ s:[
+ ["Am Samstag war das Wetter wunderschön.","Cumartesi hava harikaydı."],
+ ["Familie Kaya hatte Lust auf ein Picknick.","Kaya ailesinin piknik yapmaya isteği vardı."],
+ ["Zuerst backte die Mutter einen Kuchen.","Önce anne bir pasta pişirdi."],
+ ["Danach packte sie alles in einen großen Korb.","Ondan sonra her şeyi büyük bir sepete koydu."],
+ ["Der Vater nahm eine Decke und drei Flaschen Wasser mit.","Baba bir battaniye ve üç şişe su aldı."],
+ ["Sie fuhren mit dem Fahrrad zum Fluss.","Nehre bisikletle gittiler."],
+ ["Die Kinder liefen sofort ans Wasser.","Çocuklar hemen suya koştu."],
+ ["Der Vater breitete die Decke unter einem Baum aus.","Baba battaniyeyi bir ağacın altına serdi."],
+ ["Die Mutter stellte den Korb neben die Decke.","Anne sepeti battaniyenin yanına koydu."],
+ ["Alle aßen Brot, Käse und Äpfel.","Herkes ekmek, peynir ve elma yedi."],
+ ["Dann aßen sie den Kuchen.","Sonra pastayı yediler."],
+ ["Später spielten die Kinder Fußball auf der Wiese.","Daha sonra çocuklar çayırda futbol oynadı."],
+ ["Der Vater hatte keine Lust zu spielen, denn er war müde.","Babanın oynamaya isteği yoktu çünkü yorgundu."],
+ ["Zuletzt packten alle den Müll in eine Tüte.","En son herkes çöpü bir poşete koydu."],
+ ["Am Abend fuhren sie zufrieden nach Hause.","Akşam memnun bir şekilde eve gittiler."]],
+ q:[
+ {q:"Wie war das Wetter am Samstag?",o:["Wunderschön","Schlecht","Kalt"]},
+ {q:"Was backte die Mutter?",o:["Einen Kuchen","Ein Brot","Eine Pizza"]},
+ {q:"Womit fuhren sie zum Fluss?",o:["Mit dem Fahrrad","Mit dem Bus","Mit dem Auto"]},
+ {q:"Wohin stellte die Mutter den Korb?",o:["Neben die Decke","Unter den Baum","Auf den Tisch"]},
+ {q:"Warum hatte der Vater keine Lust zu spielen?",o:["Er war müde.","Er hatte Hunger.","Er war krank."]}]},
+
+{id:"wochenplan",lvl:"A1",icon:"📅",color:"#2F6F8F",title:"Mein Wochenplan",tr:"Haftalık planım",tense:"pres",
+ s:[
+ ["Am Montag stehe ich um sieben Uhr auf.","Pazartesi saat yedide kalkıyorum."],
+ ["Ich frühstücke und fahre dann zur Arbeit.","Kahvaltı yapıyorum ve sonra işe gidiyorum."],
+ ["Um halb zwölf rufe ich meine Mutter an.","Saat on bir buçukta annemi arıyorum."],
+ ["Am Dienstag habe ich einen Deutschkurs.","Salı günü Almanca kursum var."],
+ ["Der Kurs beginnt um Viertel nach sechs.","Kurs altıyı çeyrek geçe başlıyor."],
+ ["Danach kaufe ich im Supermarkt ein.","Ondan sonra markette alışveriş yapıyorum."],
+ ["Am Mittwoch muss ich nicht arbeiten.","Çarşamba günü çalışmak zorunda değilim."],
+ ["Ich räume die Wohnung auf und wasche die Wäsche.","Daireyi topluyorum ve çamaşırları yıkıyorum."],
+ ["Am Donnerstag treffe ich meine Freunde im Café.","Perşembe günü arkadaşlarımla kafede buluşuyorum."],
+ ["Wir wollen um acht Uhr ins Kino gehen.","Saat sekizde sinemaya gitmek istiyoruz."],
+ ["Am Freitag ist mein Chef nicht im Büro.","Cuma günü şefim ofiste değil."],
+ ["Deshalb darf ich früher nach Hause gehen.","Bu yüzden eve daha erken gidebilirim."],
+ ["Am Samstag schlafe ich lange und koche für meine Familie.","Cumartesi uzun uyuyorum ve ailem için yemek yapıyorum."],
+ ["Am Sonntag besuchen wir meine Oma.","Pazar günü büyükannemi ziyaret ediyoruz."],
+ ["Wenn das Wetter schön ist, gehen wir im Park spazieren.","Hava güzelse parkta yürüyüşe çıkıyoruz."]],
+ q:[
+ {q:"Um wie viel Uhr steht die Person am Montag auf?",o:["Um sieben Uhr","Um sechs Uhr","Um acht Uhr"]},
+ {q:"Wann beginnt der Deutschkurs?",o:["Um Viertel nach sechs","Um halb sechs","Um sechs Uhr"]},
+ {q:"Was muss die Person am Mittwoch nicht?",o:["Arbeiten","Kochen","Schlafen"]},
+ {q:"Warum darf sie am Freitag früher nach Hause gehen?",o:["Der Chef ist nicht im Büro.","Sie ist krank.","Es regnet."]},
+ {q:"Was machen sie am Sonntag?",o:["Sie besuchen die Oma.","Sie gehen ins Kino.","Sie arbeiten."]}]},
+
+{id:"mitbewohnerin",lvl:"A2",icon:"🛋️",color:"#8A4F7D",title:"Die neue Mitbewohnerin",tr:"Yeni ev arkadaşı",tense:"mix",
+ s:[
+ ["Seit einer Woche wohnt Selin in einer Wohngemeinschaft.","Selin bir haftadır bir ev paylaşımında yaşıyor."],
+ ["Ihre Mitbewohner heißen Jan und Mia.","Ev arkadaşlarının adı Jan ve Mia."],
+ ["Jan zeigt ihr das Zimmer und die Küche.","Jan ona odayı ve mutfağı gösteriyor."],
+ ["Mia sagt: „Bei uns muss man den Müll trennen.“","Mia diyor ki: “Bizde çöpü ayırmak gerekir.”"],
+ ["Selin fragt: „Habt ihr keinen Staubsauger?“","Selin soruyor: “Elektrikli süpürgeniz yok mu?”"],
+ ["Jan antwortet: „Doch, er steht im Flur.“","Jan cevap veriyor: “Var, koridorda duruyor.”"],
+ ["Selin hängt ihre Jacke an die Tür und stellt die Schuhe neben die Tür.","Selin ceketini kapıya asıyor ve ayakkabılarını kapının yanına koyuyor."],
+ ["Am Abend kocht Mia für alle, weil sie heute Geburtstag hat.","Akşam Mia herkes için yemek yapıyor çünkü bugün onun doğum günü."],
+ ["Selin schenkt ihr eine Pflanze.","Selin ona bir bitki hediye ediyor."],
+ ["Mia freut sich und dankt ihr herzlich.","Mia seviniyor ve ona içtenlikle teşekkür ediyor."],
+ ["Danach sitzen sie zusammen am Tisch und erzählen.","Ondan sonra masada birlikte oturup sohbet ediyorlar."],
+ ["Jan sagt, dass er Selins Zimmer sehr schön findet.","Jan, Selin'in odasını çok güzel bulduğunu söylüyor."],
+ ["Früher hatte Selin ein kleines Zimmer ohne Fenster.","Eskiden Selin'in penceresiz küçük bir odası vardı."],
+ ["Das war nicht schön, aber sie hatte keine andere Wohnung.","Bu güzel değildi ama başka bir dairesi yoktu."],
+ ["Jetzt ist sie sehr glücklich, denn ihre neuen Freunde sind nett.","Şimdi çok mutlu çünkü yeni arkadaşları nazik."]],
+ q:[
+ {q:"Seit wann wohnt Selin in der Wohngemeinschaft?",o:["Seit einer Woche","Seit einem Jahr","Seit einem Monat"]},
+ {q:"Was muss man bei Jan und Mia?",o:["Den Müll trennen","Leise sein","Nicht kochen"]},
+ {q:"Wo steht der Staubsauger?",o:["Im Flur","In der Küche","Im Bad"]},
+ {q:"Warum kocht Mia für alle?",o:["Sie hat Geburtstag.","Sie hat Hunger.","Sie ist krank."]},
+ {q:"Was schenkt Selin Mia?",o:["Eine Pflanze","Ein Buch","Blumen"]}]}
 ];
 
 const DICT={
@@ -9940,10 +10584,11 @@ unter:"altında (Wechselpräposition)",urlaub:"der Urlaub — tatil",wand:"die W
 webers:"Weber'in",weniger:"daha az",wenn:"eğer, -dığında",wohnen:"oturmak (wohnen: sie wohnen)",
 wohnte:"oturuyordu (wohnen: er/sie wohnte)",zahlt:"öder (zahlen: er/sie zahlt)",zuletzt:"en son, sonunda",zusage:"die Zusage — olumlu yanıt, kabul",
 zwischen:"arasında (Wechselpräposition)"
+,andere:"başka, diğer (sıfat)",baum:"der Baum — ağaç",begrüßt:"selamlıyor (begrüßen: er/sie begrüßt)",besuchen:"ziyaret etmek; wir besuchen: ziyaret ediyoruz",bild:"das Bild — resim, tablo",blumen:"die Blumen — çiçekler (Blume: çiçek)",breitete:"serdi (ausbreiten: Prät. er breitete … aus)",dankt:"teşekkür ediyor (danken + Dativ: er dankt ihr)",dass:"ki (dass-Satz: fiil cümlenin sonuna gider)",decke:"die Decke — battaniye; tavan",donnerstag:"Perşembe",eingang:"der Eingang — giriş",elf:"on bir (11)",erzählen:"anlatmak, sohbet etmek; sie erzählen: sohbet ediyorlar",fitnessstudio:"das Fitnessstudio — spor salonu",flasche:"die Flasche — şişe",flohmarkt:"der Flohmarkt — bit pazarı",fluss:"der Fluss — nehir",freut:"seviniyor (sich freuen: sie freut sich)",früher:"eskiden; daha erken",gab:"verdi (geben: Prät. sie gab; geben + Dativ + Akkusativ)",geld:"das Geld — para",geräten:"die Geräte — aletler, cihazlar (an den Geräten: aletlerde)",günstig:"uygun fiyatlı, ucuz",habt:"sahipsiniz (haben: ihr habt)",halb:"buçuk (halb zwölf = 11:30)",heißen:"adı … olmak; sie heißen: adları …",herzlich:"içten, samimi",jan:"Jan (isim)",kann:"-ebilir (können: ich/er/sie kann)",kaufe:"alıyorum (kaufen); kaufe … ein: alışveriş yapıyorum (einkaufen)",komm:"gel! (kommen, Imperativ du)",korb:"der Korb — sepet",lacht:"gülüyor (lachen)",lauf:"koş! (laufen, Imperativ du)",lust:"die Lust — istek, heves (Lust haben auf …)",mia:"Mia (isim)",mitbewohner:"die Mitbewohner — ev arkadaşları",mitkommen:"birlikte gelmek (trennbar: mitkommen)",mittwoch:"Çarşamba",monatsbeitrag:"der Monatsbeitrag — aylık ücret",müll:"der Müll — çöp",nahm:"aldı (nehmen: Prät. er nahm; nahm … mit: yanına aldı)",nett:"nazik, hoş",neuen:"yeni (neu; sıfat sonu -en)",neununddreißig:"otuz dokuz (39)",neunundzwanzig:"yirmi dokuz (29)",neunzehn:"on dokuz (19)",neunzig:"doksan (90)",packten:"koydular, paketlediler (packen: Prät. sie packten)",picknick:"das Picknick — piknik",pro:"başına (pro Woche: haftada)",regnet:"yağmur yağıyor (regnen)",räume:"topluyorum (aufräumen: ich räume … auf)",sachen:"die Sachen — eşyalar",sah:"gördü (sehen: Prät. er/sie sah)",schenkt:"hediye ediyor (schenken + Dativ)",schlafe:"uyuyorum (schlafen: ich schlafe)",schwimmen:"yüzmek",schöne:"güzel (schön; dişil sıfat sonu -e)",selin:"Selin (isim)",selins:"Selin'in (Genitiv -s: Selins Zimmer)",sitzen:"oturmak; sie sitzen: oturuyorlar",sofort:"hemen, derhal",staubsauger:"der Staubsauger — elektrikli süpürge",stellte:"koydu (stellen: Prät. sie stellte; wohin? + Akkusativ)",studio:"das Studio — salon, stüdyo",toms:"Tom'un (Genitiv -s: Toms Tasche)",trainer:"der Trainer — antrenör",trainieren:"antrenman yapmak, çalışmak",trainiert:"antrenman yapıyor (trainieren)",trainierte:"antrenman yaptı (trainieren: Prät. er trainierte)",trainierten:"antrenman yaptılar (trainieren: Prät. sie trainierten)",treffe:"buluşuyorum (treffen: ich treffe)",trennen:"ayırmak (den Müll trennen: çöpü ayırmak)",trink:"iç! (trinken, Imperativ du)",tüte:"die Tüte — poşet, torba",verkäufer:"der Verkäufer — satıcı",viertel:"çeyrek (Viertel nach sechs = 6:15)",wasche:"yıkıyorum (waschen: ich wasche)",wiese:"die Wiese — çayır",willst:"istiyorsun (wollen: du willst)",wohngemeinschaft:"die Wohngemeinschaft (WG) — ev paylaşımı",wollen:"istemek; wir wollen: istiyoruz",womit:"neyle? (womit = mit was)",zeigt:"gösteriyor (zeigen + Dativ)",zufrieden:"memnun, tatmin olmuş"
 });
 const PERFEKT_STORIES = new Set([]); // İleride Perfekt işlenince buraya eklenecek
-const PRATERITUM_STORIES = new Set(["geburtstag","ferien_meer","schluessel","schultag","gaeste"]);
-const MIXED_STORIES = new Set(["zoo","telefonanruf","fussballspiel","regentag","bewerbung","umzug","heidelberg"]);
+const PRATERITUM_STORIES = new Set(["geburtstag","ferien_meer","schluessel","schultag","gaeste","picknick"]);
+const MIXED_STORIES = new Set(["zoo","telefonanruf","fussballspiel","regentag","bewerbung","umzug","heidelberg","fitness","flohmarkt","mitbewohnerin"]);
 
 let S={done:{},saved:[]};
 try{const r=localStorage.getItem('kg_state');if(r){const p=JSON.parse(r);S.done=p.done||{};S.saved=p.saved||[];}}catch(e){}
