@@ -4983,7 +4983,10 @@ function setAdjMore(n){
   }
   mw.innerHTML = n > 0 ? `<button class="btn-ghost" onclick="showMoreList('adj')">Daha fazla göster (${n} sıfat daha)</button> <a href="#rightPanel" class="jump-tests-btn">⬇ Testlere git</a>` : "";
 }
-PHONE_MQ.addEventListener("change", () => { try{ renderWords(); renderVerbs(); renderAdjectives(); }catch(e){} });
+(function(){
+  const onChange = () => { try{ renderWords(); renderVerbs(); renderAdjectives(); }catch(e){} };
+  try{ if(PHONE_MQ.addEventListener) PHONE_MQ.addEventListener("change", onChange); else if(PHONE_MQ.addListener) PHONE_MQ.addListener(onChange); }catch(e){}
+})();
 
 function renderWords(){
   const tbody = document.getElementById("wordTableBody");
@@ -6062,8 +6065,8 @@ function speakCurrentWord(){
 
 function insertChar(ch){
   const input = document.getElementById("qPluralAnswer");
-  const start = input.selectionStart ?? input.value.length;
-  const end = input.selectionEnd ?? input.value.length;
+  const start = (input.selectionStart != null) ? input.selectionStart : input.value.length;
+  const end = (input.selectionEnd != null) ? input.selectionEnd : input.value.length;
   input.value = input.value.slice(0, start) + ch + input.value.slice(end);
   input.focus();
   input.setSelectionRange(start + 1, start + 1);
