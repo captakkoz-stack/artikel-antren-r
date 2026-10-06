@@ -326,7 +326,6 @@ html[data-theme="dark"] .kg-wrap{
   .ref-subtab:hover{background:var(--x-bg-f5efe0);}
   @media (max-width:480px){
     .rule-grid[style*="1fr 1fr 1fr"]{grid-template-columns:1fr !important;}
-    .btn-add{white-space:normal; max-width:100%;}
   }
   .ref-subtab.active{background:var(--deep); color:#fff; border-color:var(--deep);}
   @media (max-width:600px){
@@ -457,8 +456,6 @@ html[data-theme="dark"] .kg-wrap{
   .btn-ghost:hover{background:var(--x-bg-eef4f2);}
   .btn-test{background:var(--x-bg-f0e6f7);border:1px solid var(--x-bd-c9a8de);color:var(--tx-deep);white-space:normal;line-height:1.3;}
   .btn-test:hover{background:var(--x-bg-e4d3f0);}
-  .btn-add{background:var(--brass);color:var(--tx-deep);}
-  .btn-add:hover{background:var(--x-bg-b8925a);}
   table{
     width:100%;
     border-collapse:collapse;
@@ -623,14 +620,6 @@ html[data-theme="dark"] .kg-wrap{
   .nav-row button:disabled{
     opacity:0.35;
     cursor:default;
-  }
-  .del{
-    background:none;
-    border:none;
-    color:var(--x-tx-b5502f);
-    font-size:12px;
-    cursor:pointer;
-    padding:2px 6px;
   }
   .no-match{
     font-family: system-ui, Helvetica, Arial, sans-serif;
@@ -949,8 +938,7 @@ html[data-theme="dark"] .kg-wrap{
   }
   .adj-side-btns button{min-width:22px;min-height:22px;flex-shrink:0;}
   .adj-side-btns .speak-btn{width:24px;height:24px;border:1px solid var(--line);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;padding:0;}
-  .adj-side-btns .conj-btn, .adj-side-btns .del{border:1px solid var(--line);background:none;border-radius:10px;padding:3px 8px;cursor:pointer;color:var(--tx-teal);}
-  .adj-side-btns .del{color:var(--coral);}
+  .adj-side-btns .conj-btn{border:1px solid var(--line);background:none;border-radius:10px;padding:3px 8px;cursor:pointer;color:var(--tx-teal);}
   .adj-vs{
     font-size:18px;
     color:var(--brass);
@@ -1204,13 +1192,12 @@ html[data-theme="dark"] .kg-wrap{
     table.mob-rows tr{display:grid; align-items:center; border-bottom:1px solid var(--x-bd-eeeeee); padding:2px 0;}
     table.mob-rows td{border-bottom:none; padding:4px 3px; min-width:0; overflow-wrap:anywhere;}
     table.mob-rows td.no-match{grid-area:auto !important; grid-column:1 / -1 !important;}
-    #wordTable tr{grid-template-columns:44px 30px 1fr 34px 34px 34px;}
+    #wordTable tr{grid-template-columns:44px 30px 1fr 34px 34px;}
     #wordTable td:nth-child(1){grid-area:1 / 1;}
     #wordTable td:nth-child(2){grid-area:1 / 2;}
     #wordTable td:nth-child(3){grid-area:1 / 3;}
     #wordTable td:nth-child(4){grid-area:1 / 4;}
     #wordTable td:nth-child(7){grid-area:1 / 5;}
-    #wordTable td:nth-child(8){grid-area:1 / 6;}
     #wordTable td:nth-child(5){grid-area:2 / 1 / 3 / 4; color:var(--x-tx-555555);}
     #wordTable td:nth-child(5)::before{content:"Çoğul: "; color:var(--x-tx-999999); font-size:11px;}
     #wordTable td:nth-child(6){grid-area:2 / 4;}
@@ -1220,27 +1207,22 @@ html[data-theme="dark"] .kg-wrap{
     #verbTable td:nth-child(3){grid-area:1 / 4;}
     #verbTable td:nth-child(4){grid-area:2 / 1 / 3 / 3;}
     #verbTable td:nth-child(5){grid-area:2 / 3;}
-    #verbTable td:nth-child(6){grid-area:2 / 4;}
-    table.mob-rows5 tr{grid-template-columns:30px 1fr 34px 34px 34px;}
-    table.mob-rows .del{padding:9px 4px; font-size:13px;}
+    table.mob-rows5 tr{grid-template-columns:30px 1fr 34px 34px;}
   }
   /* --- Dokunmatik cihazlar: iOS yakınlaşmasını önle + parmak dostu hedefler (kuralların EN SONUNDA olmalı) --- */
   @media (pointer:coarse){
     input:not([type=checkbox]):not([type=radio]):not([type=range]), textarea, select{font-size:16px !important;}
     .speak-btn{padding:9px 9px;}
     .beispiel-btn{padding:8px 8px;}
-    .del{padding:9px 10px; font-size:14px;}
     .adj-side-btns .speak-btn{width:34px; height:34px;}
-    .adj-side-btns .conj-btn, .adj-side-btns .del{padding:8px 10px;}
+    .adj-side-btns .conj-btn{padding:8px 10px;}
     .filter-btn, .interval-btn{min-height:36px;}
     .test-subtab{min-height:38px;}
     .btn-ghost{min-height:36px;}
     .conj-btn, .adj-side-btns .conj-btn{padding:8px 12px !important;}
-    .adj-side-btns .del{padding:8px 12px !important;}
     .kg-close{min-width:40px; min-height:40px;}
   }
   @media (max-width:600px) and (pointer:coarse){
-    table.mob-rows .del{padding:9px 7px; font-size:13px;}
   }
 
 /* --- Hikâyeler: başlık bandı --- */
@@ -1303,7 +1285,6 @@ html[data-theme="dark"] .kg-wrap{
 
 :root{ --tx-cream:#F5F0E6; --bg-coral:#B5502F; --bg-sea:#4C8C6B; --bg-der:#2B5B8A; --bg-die:#A5334D; --bg-das:#3F7A4E; }
 /* --- gece: pirinç zeminli düğmelerde koyu yazı kalsın --- */
-html[data-theme="dark"] .btn-add{color:#0F2A3D;}
 html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
 
   /* --- Soru havuzu --- */
@@ -1379,7 +1360,7 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
     <div class="header-right">
       <button id="themeBtn" class="theme-btn" onclick="cycleTheme()" type="button" aria-label="Tema değiştir" title="Tema: Otomatik"><span id="themeIcon">🌓</span><span id="themeLabel">Otomatik</span></button>
       <div class="signature"><span class="sig-note">Persönliche Lernnotizen</span><span class="sig-divider"></span><span class="sig-name">⚓ Erstellt von Capt. Aykut Akkoz</span></div>
-      <div class="last-updated">Zuletzt aktualisiert: 05.10.2026</div>
+      <div class="last-updated">Zuletzt aktualisiert: 06.10.2026</div>
     </div>
   </div>
 </header>
@@ -1401,7 +1382,6 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
     <section class="panel" style="margin-top:0;">
       <div class="list-header">
         <h2>Kelime Listem (Wörterbuch)</h2>
-        <button class="btn-add" onclick="openAddModal()">+ Kelime Ekle</button>
       </div>
 
       <div class="search-row">
@@ -1423,7 +1403,7 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
 
       <div class="wordlist-scroll">
         <table id="wordTable" class="mob-rows">
-          <thead><tr><th>Art.</th><th></th><th>Kelime</th><th></th><th>Çoğul</th><th></th><th>Örnek Cümle</th><th></th></tr></thead>
+          <thead><tr><th>Art.</th><th></th><th>Kelime</th><th></th><th>Çoğul</th><th></th><th>Örnek Cümle</th></tr></thead>
           <tbody id="wordTableBody"></tbody>
         </table>
       </div>
@@ -1450,7 +1430,6 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
     <section class="panel" style="margin-top:0;">
       <div class="list-header">
         <h2>Fiil Listem (Wörterbuch)</h2>
-        <button class="btn-add" onclick="openAddVerbModal()">+ Fiil Ekle</button>
       </div>
 
       <div class="search-row">
@@ -1466,7 +1445,7 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
 
       <div class="wordlist-scroll">
         <table id="verbTable" class="mob-rows">
-          <thead><tr><th></th><th>Fiil (Infinitiv)</th><th></th><th></th><th>Örnek Cümle</th><th></th></tr></thead>
+          <thead><tr><th></th><th>Fiil (Infinitiv)</th><th></th><th></th><th>Örnek Cümle</th></tr></thead>
           <tbody id="verbTableBody"></tbody>
         </table>
       </div>
@@ -1489,7 +1468,6 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
     <section class="panel" style="margin-top:0;">
       <div class="list-header">
         <h2>Sıfat Listem (Wörterbuch)</h2>
-        <button class="btn-add" onclick="openAddAdjModal()">+ Sıfat Ekle</button>
       </div>
 
       <div class="search-row">
@@ -1522,7 +1500,6 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
     <section class="panel" style="margin-top:0;">
       <div class="list-header">
         <h2>Saat &amp; Takvim Listem (Wörterbuch)</h2>
-        <button class="btn-add" onclick="openAddSaatModal()">+ İfade Ekle</button>
       </div>
       <div class="search-row">
         <input type="text" id="saatSearchInput" placeholder="Ara... (Uhr, Montag, Januar...)" oninput="debouncedSearch('renderSaat')">
@@ -1531,7 +1508,7 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
       <div class="hint-line">İfadeye tıkla → Türkçesini gör</div>
       <div class="wordlist-scroll">
         <table class="mob-rows mob-rows5">
-          <thead><tr><th></th><th>İfade</th><th></th><th>Örnek Cümle</th><th></th></tr></thead>
+          <thead><tr><th></th><th>İfade</th><th></th><th>Örnek Cümle</th></tr></thead>
           <tbody id="saatTableBody"></tbody>
         </table>
       </div>
@@ -1550,7 +1527,6 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
     <section class="panel" style="margin-top:0;">
       <div class="list-header">
         <h2>Bağlaç Listem (Wörterbuch)</h2>
-        <button class="btn-add" onclick="openAddKonjModal()">+ Bağlaç Ekle</button>
       </div>
       <div class="search-row">
         <input type="text" id="konjSearchInput" placeholder="Ara... (und, weil, bağlaç...)" oninput="debouncedSearch('renderKonj')">
@@ -1559,7 +1535,7 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
       <div class="hint-line">Bağlaca tıkla → Türkçesini gör</div>
       <div class="wordlist-scroll">
         <table class="mob-rows mob-rows5">
-          <thead><tr><th></th><th>Bağlaç</th><th></th><th>Örnek Cümle</th><th></th></tr></thead>
+          <thead><tr><th></th><th>Bağlaç</th><th></th><th>Örnek Cümle</th></tr></thead>
           <tbody id="konjTableBody"></tbody>
         </table>
       </div>
@@ -1570,7 +1546,6 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
     <section class="panel" style="margin-top:0;">
       <div class="list-header">
         <h2>Soru Kelimesi Listem (Wörterbuch)</h2>
-        <button class="btn-add" onclick="openAddFrageModal()">+ Soru Kelimesi Ekle</button>
       </div>
       <div class="search-row">
         <input type="text" id="frageSearchInput" placeholder="Ara... (wer, wann, soru...)" oninput="debouncedSearch('renderFrage')">
@@ -1579,7 +1554,7 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
       <div class="hint-line">Kelimeye tıkla → Türkçesini gör</div>
       <div class="wordlist-scroll">
         <table class="mob-rows mob-rows5">
-          <thead><tr><th></th><th>Soru Kelimesi</th><th></th><th>Örnek Cümle</th><th></th></tr></thead>
+          <thead><tr><th></th><th>Soru Kelimesi</th><th></th><th>Örnek Cümle</th></tr></thead>
           <tbody id="frageTableBody"></tbody>
         </table>
       </div>
@@ -1592,7 +1567,6 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
     <section class="panel" style="margin-top:0;">
       <div class="list-header">
         <h2>Edat Listem (Wörterbuch)</h2>
-        <button class="btn-add" onclick="openAddPraepModal()">+ Edat Ekle</button>
       </div>
       <div class="search-row">
         <input type="text" id="praepSearchInput" placeholder="Ara... (mit, für, edat...)" oninput="debouncedSearch('renderPraep')">
@@ -1601,7 +1575,7 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
       <div class="hint-line">Edata tıkla → Türkçesini gör</div>
       <div class="wordlist-scroll">
         <table class="mob-rows mob-rows5">
-          <thead><tr><th></th><th>Edat</th><th></th><th>Örnek Cümle</th><th></th></tr></thead>
+          <thead><tr><th></th><th>Edat</th><th></th><th>Örnek Cümle</th></tr></thead>
           <tbody id="praepTableBody"></tbody>
         </table>
       </div>
@@ -3171,13 +3145,18 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
           </div></div>
         </details>
         <details class="test-details" data-gkey="hal">
-          <summary><span>📍 Edatlar & Hâller<span class="gcount">(5)</span></span></summary>
+          <summary><span>📍 Edatlar & Hâller<span class="gcount">(3)</span></span></summary>
           <div class="inner"><div class="btn-grid grid-2">
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-akkprep')">📍 Akkusativ Edatı<br><span style="font-size:11px; font-weight:400;">für · durch · ohne · gegen · um</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-wechsel')">🔀 Wechsel Edat<br><span style="font-size:11px; font-weight:400;">wo? / wohin?</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-kasus')">🎯 Fiil hangi hâli istiyor?<br><span style="font-size:11px; font-weight:400;">helfen → Dativ · sehen → Akkusativ</span></button>
+          </div></div>
+        </details>
+        <details class="test-details" data-gkey="iyelik">
+          <summary><span>👤 İyelik & Sahiplik<span class="gcount">(2)</span></span></summary>
+          <div class="inner"><div class="btn-grid grid-2">
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-poss')">👤 İyelikler<br><span style="font-size:11px; font-weight:400;">mein · dein · sein · ihr · unser · euer · Ihr</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-genitiv')">🔑 Genitiv-s<br><span style="font-size:11px; font-weight:400;">Peters · Max'</span></button>
-            <button class="btn-ghost btn-test" onclick="askQuestion('gq-seinihr')">👤 sein / ihr<br><span style="font-size:11px; font-weight:400;">iyelik</span></button>
           </div></div>
         </details>
         <details class="test-details" data-gkey="fiil">
@@ -3221,7 +3200,7 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
         <div class="btn-grid grid-3">
           <button class="btn-ghost btn-test" onclick="askQuestion('sentence-fill')">📝 Cümle Tamamlama</button>
           <button class="btn-ghost btn-test" onclick="askQuestion('order-quiz')">🧩 Cümle Kurma</button>
-          <button class="btn-ghost btn-test" onclick="askQuestion('prep-quiz')">im / am / zu / sehr / nicht Testi</button>
+          <button class="btn-ghost btn-test" onclick="askQuestion('prep-quiz')">🔤 Küçük Kelimeler<br><span style="font-size:11px; font-weight:400;">im · am · zu · sehr · nicht</span></button>
         </div>
         <div class="btn-grid grid-3" style="margin-top:8px;">
           <button class="btn-ghost btn-test" onclick="openReadingModal()">📖 Basit Okuma</button>
@@ -3261,31 +3240,6 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
     </section>
   </div>
 </main>
-
-<!-- Kelime Ekle penceresi (İsim) -->
-<div class="overlay" id="addOverlay">
-  <div class="add-card">
-    <h3>Yeni Kelime Ekle</h3>
-    <label>Artikel</label>
-    <select id="inpArtikel">
-      <option value="der">der</option>
-      <option value="die">die</option>
-      <option value="das">das</option>
-    </select>
-    <label>Simge (opsiyonel emoji)</label>
-    <input type="text" id="inpEmoji" placeholder="🪑" maxlength="4">
-    <label>Kelime</label>
-    <input type="text" id="inpWord" placeholder="Tisch" maxlength="80">
-    <label>Çoğul (die ...)</label>
-    <input type="text" id="inpPlural" placeholder="Tische" maxlength="80">
-    <label>Türkçesi</label>
-    <input type="text" id="inpTr" placeholder="masa" maxlength="120">
-    <div class="add-actions">
-      <button class="btn-ghost" onclick="closeAddModal()">İptal</button>
-      <button class="btn-main" onclick="addWord()">Kaydet</button>
-    </div>
-  </div>
-</div>
 
 <!-- Paragraf alıştırması (10 boşluk) -->
 <div class="overlay" id="parOverlay">
@@ -3367,31 +3321,6 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
 </div>
 <button class="report-fab" id="reportFab" onclick="openReport()" title="Hata bildir" aria-label="Hata bildir">🐞</button>
 
-<!-- Fiil Ekle penceresi -->
-<div class="overlay" id="addVerbOverlay">
-  <div class="add-card">
-    <h3>Yeni Fiil Ekle</h3>
-    <label>Simge (opsiyonel emoji)</label>
-    <input type="text" id="inpVerbEmoji" placeholder="🚶" maxlength="4">
-    <label>Fiil (Infinitiv)</label>
-    <input type="text" id="inpVerb" placeholder="gehen" maxlength="80">
-    <label>Türkçesi</label>
-    <input type="text" id="inpVerbTr" placeholder="gitmek" maxlength="120">
-    <div class="conj-input-grid">
-      <div><label>ich</label><input type="text" id="inpConjIch" maxlength="40"></div>
-      <div><label>du</label><input type="text" id="inpConjDu" maxlength="40"></div>
-      <div><label>er/sie/es</label><input type="text" id="inpConjEr" maxlength="40"></div>
-      <div><label>wir</label><input type="text" id="inpConjWir" maxlength="40"></div>
-      <div><label>ihr</label><input type="text" id="inpConjIhr" maxlength="40"></div>
-      <div><label>sie/Sie</label><input type="text" id="inpConjSie" maxlength="40"></div>
-    </div>
-    <div class="add-actions">
-      <button class="btn-ghost" onclick="closeAddVerbModal()">İptal</button>
-      <button class="btn-main" onclick="addVerb()">Kaydet</button>
-    </div>
-  </div>
-</div>
-
 <!-- Çekim penceresi -->
 <div class="overlay" id="conjOverlay" style="z-index:60;">
   <div class="add-card">
@@ -3429,89 +3358,6 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
     <p class="example-tr" id="exampleTranslation"></p>
     <div class="add-actions">
       <button class="btn-ghost" onclick="closeExampleModal()">Kapat</button>
-    </div>
-  </div>
-</div>
-
-<!-- Sıfat Ekle penceresi -->
-<div class="overlay" id="addAdjOverlay">
-  <div class="add-card">
-    <h3>Yeni Sıfat Ekle</h3>
-    <label>Simge (opsiyonel emoji)</label>
-    <input type="text" id="inpAdjEmoji" placeholder="📏" maxlength="4">
-    <label>Sıfat</label>
-    <input type="text" id="inpAdj" placeholder="groß" maxlength="80">
-    <label>Türkçesi</label>
-    <input type="text" id="inpAdjTr" placeholder="büyük" maxlength="120">
-    <label>Zıt Anlamlısı (opsiyonel — listede zaten varsa yan yana gösterilir)</label>
-    <input type="text" id="inpAdjOpposite" placeholder="klein" maxlength="80">
-    <div class="add-actions">
-      <button class="btn-ghost" onclick="closeAddAdjModal()">İptal</button>
-      <button class="btn-main" onclick="addAdjective()">Kaydet</button>
-    </div>
-  </div>
-</div>
-
-<div class="overlay" id="addSaatOverlay">
-  <div class="add-card">
-    <h3>Yeni Saat / Takvim İfadesi Ekle</h3>
-    <label>Simge (opsiyonel emoji)</label>
-    <input type="text" id="inpSaatEmoji" placeholder="🕐" maxlength="4">
-    <label>İfade</label>
-    <input type="text" id="inpSaat" placeholder="halb" maxlength="80">
-    <label>Türkçesi</label>
-    <input type="text" id="inpSaatTr" placeholder="buçuk" maxlength="120">
-    <div class="add-actions">
-      <button class="btn-ghost" onclick="closeAddSaatModal()">İptal</button>
-      <button class="btn-main" onclick="addSaat()">Kaydet</button>
-    </div>
-  </div>
-</div>
-
-<div class="overlay" id="addKonjOverlay">
-  <div class="add-card">
-    <h3>Yeni Bağlaç Ekle</h3>
-    <label>Simge (opsiyonel emoji)</label>
-    <input type="text" id="inpKonjEmoji" placeholder="🔗" maxlength="4">
-    <label>Bağlaç</label>
-    <input type="text" id="inpKonj" placeholder="und" maxlength="80">
-    <label>Türkçesi</label>
-    <input type="text" id="inpKonjTr" placeholder="ve" maxlength="120">
-    <div class="add-actions">
-      <button class="btn-ghost" onclick="closeAddKonjModal()">İptal</button>
-      <button class="btn-main" onclick="addKonj()">Kaydet</button>
-    </div>
-  </div>
-</div>
-
-<div class="overlay" id="addFrageOverlay">
-  <div class="add-card">
-    <h3>Yeni Soru Kelimesi Ekle</h3>
-    <label>Simge (opsiyonel emoji)</label>
-    <input type="text" id="inpFrageEmoji" placeholder="❓" maxlength="4">
-    <label>Soru Kelimesi</label>
-    <input type="text" id="inpFrage" placeholder="wer" maxlength="80">
-    <label>Türkçesi</label>
-    <input type="text" id="inpFrageTr" placeholder="kim" maxlength="120">
-    <div class="add-actions">
-      <button class="btn-ghost" onclick="closeAddFrageModal()">İptal</button>
-      <button class="btn-main" onclick="addFrage()">Kaydet</button>
-    </div>
-  </div>
-</div>
-
-<div class="overlay" id="addPraepOverlay">
-  <div class="add-card">
-    <h3>Yeni Edat Ekle</h3>
-    <label>Simge (opsiyonel emoji)</label>
-    <input type="text" id="inpPraepEmoji" placeholder="📍" maxlength="4">
-    <label>Edat</label>
-    <input type="text" id="inpPraep" placeholder="mit" maxlength="80">
-    <label>Türkçesi</label>
-    <input type="text" id="inpPraepTr" placeholder="ile" maxlength="120">
-    <div class="add-actions">
-      <button class="btn-ghost" onclick="closeAddPraepModal()">İptal</button>
-      <button class="btn-main" onclick="addPraep()">Kaydet</button>
     </div>
   </div>
 </div>
@@ -4896,7 +4742,7 @@ function loadData(){
 
   try{
     const ws = localStorage.getItem("artikel_word_stats");
-    wordStats = ws ? JSON.parse(ws) : {};
+    wordStats = ws ? JSON.parse(ws.split("gq-seinihr").join("gq-poss")) : {};
   }catch(e){ wordStats = {}; }
 
   let savedInterval = 120;
@@ -5181,11 +5027,10 @@ function renderWords(){
       <td>${pluralSpan}</td>
       <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" data-speak="plural" title="Çoğulu dinle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button></td>
       <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
-      <td><button class="del" data-idx="${realIdx}" data-del="word">sil</button></td>
     `;
     tbody.appendChild(tr);
   });
-  if(moreCount > 0) tbody.insertAdjacentHTML("beforeend", moreRowHtml("words", moreCount, 8, "kelime"));
+  if(moreCount > 0) tbody.insertAdjacentHTML("beforeend", moreRowHtml("words", moreCount, 7, "kelime"));
 }
 
 // Event delegation — kelime/fiil metinleri hiçbir zaman onclick string'ine gömülmez
@@ -5201,8 +5046,6 @@ document.getElementById("wordTableBody").addEventListener("click", (e)=>{
   }
   const beispielBtn = e.target.closest(".beispiel-btn");
   if(beispielBtn){ openExampleModal("word", parseInt(beispielBtn.dataset.idx, 10)); return; }
-  const delBtn = e.target.closest(".del");
-  if(delBtn){ deleteWord(parseInt(delBtn.dataset.idx, 10)); return; }
 });
 
 function toggleReveal(which, idx){
@@ -5211,39 +5054,6 @@ function toggleReveal(which, idx){
   if(set.has(idx)) set.delete(idx); else set.add(idx);
   const renderers = {artikel:renderWords, verben:renderVerbs, adj:renderAdjectives, saat:renderSaat, konj:renderKonj, frage:renderFrage, praep:renderPraep};
   (renderers[which] || renderWords)();
-}
-
-function openAddModal(){
-  ["inpWord","inpPlural","inpEmoji","inpTr"].forEach(id => document.getElementById(id).value = "");
-  document.getElementById("inpArtikel").value = "der";
-  document.getElementById("addOverlay").classList.add("show");
-  setTimeout(()=>document.getElementById("inpWord").focus(), 50);
-}
-function closeAddModal(){ document.getElementById("addOverlay").classList.remove("show"); }
-
-function addWord(){
-  const artikel = document.getElementById("inpArtikel").value;
-  const emoji = document.getElementById("inpEmoji").value.trim();
-  const word = document.getElementById("inpWord").value.trim();
-  const plural = document.getElementById("inpPlural").value.trim();
-  const tr = document.getElementById("inpTr").value.trim();
-  if(!word || !plural){
-    alert("Kelime ve çoğul alanlarını doldur.");
-    return;
-  }
-  words.push({artikel, word, plural, emoji, tr});
-  sortByField(words, "word");
-  saveWords();
-  renderWords();
-  closeAddModal();
-}
-
-function deleteWord(idx){
-  if(!confirm("\"" + (words[idx] ? words[idx].word : "") + "\" listeden silinsin mi?")) return;
-  words.splice(idx,1);
-  revealedWords.delete(idx);
-  saveWords();
-  renderWords();
 }
 
 function exportList(){
@@ -5319,11 +5129,10 @@ function renderVerbs(){
       <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button></td>
       <td><button class="conj-btn" data-idx="${realIdx}">çekim</button></td>
       <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
-      <td><button class="del" data-idx="${realIdx}">sil</button></td>
     `;
     tbody.appendChild(tr);
   });
-  if(moreCount > 0) tbody.insertAdjacentHTML("beforeend", moreRowHtml("verbs", moreCount, 6, "fiil"));
+  if(moreCount > 0) tbody.insertAdjacentHTML("beforeend", moreRowHtml("verbs", moreCount, 5, "fiil"));
 }
 
 document.getElementById("verbTableBody").addEventListener("click", (e)=>{
@@ -5339,8 +5148,6 @@ document.getElementById("verbTableBody").addEventListener("click", (e)=>{
   if(conjBtn){ openConjModal(parseInt(conjBtn.dataset.idx, 10)); return; }
   const beispielBtn = e.target.closest(".beispiel-btn");
   if(beispielBtn){ openExampleModal("verb", parseInt(beispielBtn.dataset.idx, 10)); return; }
-  const delBtn = e.target.closest(".del");
-  if(delBtn){ deleteVerb(parseInt(delBtn.dataset.idx, 10)); return; }
 });
 
 function openExampleModal(type, idx){
@@ -5464,44 +5271,6 @@ document.getElementById("conjTableBody").addEventListener("click", (e)=>{
   if(btn && btn.dataset.phrase){ speak(btn.dataset.phrase); }
 });
 
-function openAddVerbModal(){
-  ["inpVerb","inpVerbTr","inpVerbEmoji","inpConjIch","inpConjDu","inpConjEr","inpConjWir","inpConjIhr","inpConjSie"].forEach(id => document.getElementById(id).value = "");
-  document.getElementById("addVerbOverlay").classList.add("show");
-  setTimeout(()=>document.getElementById("inpVerb").focus(), 50);
-}
-function closeAddVerbModal(){ document.getElementById("addVerbOverlay").classList.remove("show"); }
-
-function addVerb(){
-  const emoji = document.getElementById("inpVerbEmoji").value.trim();
-  const verb = document.getElementById("inpVerb").value.trim();
-  const tr = document.getElementById("inpVerbTr").value.trim();
-  if(!verb){
-    alert("Fiil alanını doldur.");
-    return;
-  }
-  const conj = {
-    ich: document.getElementById("inpConjIch").value.trim(),
-    du: document.getElementById("inpConjDu").value.trim(),
-    er: document.getElementById("inpConjEr").value.trim(),
-    wir: document.getElementById("inpConjWir").value.trim(),
-    ihr: document.getElementById("inpConjIhr").value.trim(),
-    sie: document.getElementById("inpConjSie").value.trim()
-  };
-  verbs.push({verb, emoji, tr, conj});
-  sortByField(verbs, "verb");
-  saveVerbs();
-  renderVerbs();
-  closeAddVerbModal();
-}
-
-function deleteVerb(idx){
-  if(!confirm("\"" + (verbs[idx] ? verbs[idx].verb : "") + "\" listeden silinsin mi?")) return;
-  verbs.splice(idx,1);
-  revealedVerbs.delete(idx);
-  saveVerbs();
-  renderVerbs();
-}
-
 function exportVerbs(){
   const blob = new Blob([JSON.stringify(verbs, null, 2)], {type:"application/json"});
   const url = URL.createObjectURL(blob);
@@ -5567,7 +5336,6 @@ function renderAdjSide(a, realIdx){
         <button class="speak-btn" data-idx="${realIdx}" title="Dinle">${SPEAK_SVG}</button>
         <button class="conj-btn" data-idx="${realIdx}" style="font-size:11px;padding:4px 8px;">derece</button>
         <button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle" style="font-size:14px;">📘</button>
-        <button class="del" data-idx="${realIdx}" style="font-size:11px;">sil</button>
       </div>
     </div>`;
 }
@@ -5637,48 +5405,7 @@ document.getElementById("adjPairGrid").addEventListener("click", (e)=>{
   if(conjBtn){ openSteigerungModal(parseInt(conjBtn.dataset.idx, 10)); return; }
   const beispielBtn = e.target.closest(".beispiel-btn");
   if(beispielBtn){ openExampleModal("adj", parseInt(beispielBtn.dataset.idx, 10)); return; }
-  const delBtn = e.target.closest(".del");
-  if(delBtn){ deleteAdjective(parseInt(delBtn.dataset.idx, 10)); return; }
 });
-
-function openAddAdjModal(){
-  ["inpAdj","inpAdjTr","inpAdjEmoji","inpAdjOpposite"].forEach(id => document.getElementById(id).value = "");
-  document.getElementById("addAdjOverlay").classList.add("show");
-  setTimeout(()=>document.getElementById("inpAdj").focus(), 50);
-}
-function closeAddAdjModal(){ document.getElementById("addAdjOverlay").classList.remove("show"); }
-
-function addAdjective(){
-  const emoji = document.getElementById("inpAdjEmoji").value.trim();
-  const adj = document.getElementById("inpAdj").value.trim();
-  const tr = document.getElementById("inpAdjTr").value.trim();
-  const opposite = document.getElementById("inpAdjOpposite").value.trim();
-  if(!adj){
-    alert("Sıfat alanını doldur.");
-    return;
-  }
-  const newAdj = {adj, emoji, tr};
-  if(opposite) newAdj.opposite = opposite;
-  adjectives.push(newAdj);
-  if(opposite){
-    const oppIdx = adjectives.findIndex(x => x.adj === opposite);
-    if(oppIdx !== -1 && !adjectives[oppIdx].opposite){
-      adjectives[oppIdx].opposite = adj;
-    }
-  }
-  sortByField(adjectives, "adj");
-  saveAdjectives();
-  renderAdjectives();
-  closeAddAdjModal();
-}
-
-function deleteAdjective(idx){
-  if(!confirm("\"" + (adjectives[idx] ? adjectives[idx].adj : "") + "\" listeden silinsin mi?")) return;
-  adjectives.splice(idx,1);
-  revealedAdj.delete(idx);
-  saveAdjectives();
-  renderAdjectives();
-}
 
 const SPEAK_SVG = '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg>';
 
@@ -5704,7 +5431,6 @@ function renderSaat(){
       <td class="word-cell" data-idx="${realIdx}">${disp}</td>
       <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle">${SPEAK_SVG}</button></td>
       <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
-      <td><button class="del" data-idx="${realIdx}">sil</button></td>
     `;
     tbody.appendChild(tr);
   });
@@ -5716,33 +5442,7 @@ document.getElementById("saatTableBody").addEventListener("click", (e)=>{
   if(speakBtn){ const a = saatWords[parseInt(speakBtn.dataset.idx, 10)]; if(a) speak(a.zeit); return; }
   const beispielBtn = e.target.closest(".beispiel-btn");
   if(beispielBtn){ openExampleModal("saat", parseInt(beispielBtn.dataset.idx, 10)); return; }
-  const delBtn = e.target.closest(".del");
-  if(delBtn){ deleteSaat(parseInt(delBtn.dataset.idx, 10)); return; }
 });
-function openAddSaatModal(){
-  ["inpSaat","inpSaatTr","inpSaatEmoji"].forEach(id => document.getElementById(id).value = "");
-  document.getElementById("addSaatOverlay").classList.add("show");
-  setTimeout(()=>document.getElementById("inpSaat").focus(), 50);
-}
-function closeAddSaatModal(){ document.getElementById("addSaatOverlay").classList.remove("show"); }
-function addSaat(){
-  const emoji = document.getElementById("inpSaatEmoji").value.trim();
-  const zeit = document.getElementById("inpSaat").value.trim();
-  const tr = document.getElementById("inpSaatTr").value.trim();
-  if(!zeit){ alert("İfade alanını doldur."); return; }
-  saatWords.push({zeit, emoji, tr});
-  sortByField(saatWords, "zeit");
-  saveSaat();
-  renderSaat();
-  closeAddSaatModal();
-}
-function deleteSaat(idx){
-  saatWords.splice(idx,1);
-  revealedSaat.delete(idx);
-  saveSaat();
-  renderSaat();
-}
-
 /* ---------- BAĞLAÇLAR ---------- */
 function renderKonj(){
   const tbody = document.getElementById("konjTableBody");
@@ -5765,7 +5465,6 @@ function renderKonj(){
       <td class="word-cell" data-idx="${realIdx}">${disp}</td>
       <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle">${SPEAK_SVG}</button></td>
       <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
-      <td><button class="del" data-idx="${realIdx}">sil</button></td>
     `;
     tbody.appendChild(tr);
   });
@@ -5777,33 +5476,7 @@ document.getElementById("konjTableBody").addEventListener("click", (e)=>{
   if(speakBtn){ const a = konjWords[parseInt(speakBtn.dataset.idx, 10)]; if(a) speak(a.konj); return; }
   const beispielBtn = e.target.closest(".beispiel-btn");
   if(beispielBtn){ openExampleModal("konj", parseInt(beispielBtn.dataset.idx, 10)); return; }
-  const delBtn = e.target.closest(".del");
-  if(delBtn){ deleteKonj(parseInt(delBtn.dataset.idx, 10)); return; }
 });
-function openAddKonjModal(){
-  ["inpKonj","inpKonjTr","inpKonjEmoji"].forEach(id => document.getElementById(id).value = "");
-  document.getElementById("addKonjOverlay").classList.add("show");
-  setTimeout(()=>document.getElementById("inpKonj").focus(), 50);
-}
-function closeAddKonjModal(){ document.getElementById("addKonjOverlay").classList.remove("show"); }
-function addKonj(){
-  const emoji = document.getElementById("inpKonjEmoji").value.trim();
-  const konj = document.getElementById("inpKonj").value.trim();
-  const tr = document.getElementById("inpKonjTr").value.trim();
-  if(!konj){ alert("Bağlaç alanını doldur."); return; }
-  konjWords.push({konj, emoji, tr});
-  sortByField(konjWords, "konj");
-  saveKonj();
-  renderKonj();
-  closeAddKonjModal();
-}
-function deleteKonj(idx){
-  konjWords.splice(idx,1);
-  revealedKonj.delete(idx);
-  saveKonj();
-  renderKonj();
-}
-
 /* ---------- SORU KELİMELERİ (W-FRAGEN) ---------- */
 function renderFrage(){
   const tbody = document.getElementById("frageTableBody");
@@ -5826,7 +5499,6 @@ function renderFrage(){
       <td class="word-cell" data-idx="${realIdx}">${disp}</td>
       <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle">${SPEAK_SVG}</button></td>
       <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
-      <td><button class="del" data-idx="${realIdx}">sil</button></td>
     `;
     tbody.appendChild(tr);
   });
@@ -5838,33 +5510,7 @@ document.getElementById("frageTableBody").addEventListener("click", (e)=>{
   if(speakBtn){ const a = frageWords[parseInt(speakBtn.dataset.idx, 10)]; if(a) speak(a.frage); return; }
   const beispielBtn = e.target.closest(".beispiel-btn");
   if(beispielBtn){ openExampleModal("frage", parseInt(beispielBtn.dataset.idx, 10)); return; }
-  const delBtn = e.target.closest(".del");
-  if(delBtn){ deleteFrage(parseInt(delBtn.dataset.idx, 10)); return; }
 });
-function openAddFrageModal(){
-  ["inpFrage","inpFrageTr","inpFrageEmoji"].forEach(id => document.getElementById(id).value = "");
-  document.getElementById("addFrageOverlay").classList.add("show");
-  setTimeout(()=>document.getElementById("inpFrage").focus(), 50);
-}
-function closeAddFrageModal(){ document.getElementById("addFrageOverlay").classList.remove("show"); }
-function addFrage(){
-  const emoji = document.getElementById("inpFrageEmoji").value.trim();
-  const frage = document.getElementById("inpFrage").value.trim();
-  const tr = document.getElementById("inpFrageTr").value.trim();
-  if(!frage){ alert("Soru kelimesi alanını doldur."); return; }
-  frageWords.push({frage, emoji, tr});
-  sortByField(frageWords, "frage");
-  saveFrage();
-  renderFrage();
-  closeAddFrageModal();
-}
-function deleteFrage(idx){
-  frageWords.splice(idx,1);
-  revealedFrage.delete(idx);
-  saveFrage();
-  renderFrage();
-}
-
 /* ---------- EDATLAR (PRÄPOSITIONEN) ---------- */
 function renderPraep(){
   const tbody = document.getElementById("praepTableBody");
@@ -5887,7 +5533,6 @@ function renderPraep(){
       <td class="word-cell" data-idx="${realIdx}">${disp}</td>
       <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle">${SPEAK_SVG}</button></td>
       <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
-      <td><button class="del" data-idx="${realIdx}">sil</button></td>
     `;
     tbody.appendChild(tr);
   });
@@ -5899,33 +5544,7 @@ document.getElementById("praepTableBody").addEventListener("click", (e)=>{
   if(speakBtn){ const a = praepWords[parseInt(speakBtn.dataset.idx, 10)]; if(a) speak(a.praep); return; }
   const beispielBtn = e.target.closest(".beispiel-btn");
   if(beispielBtn){ openExampleModal("praep", parseInt(beispielBtn.dataset.idx, 10)); return; }
-  const delBtn = e.target.closest(".del");
-  if(delBtn){ deletePraep(parseInt(delBtn.dataset.idx, 10)); return; }
 });
-function openAddPraepModal(){
-  ["inpPraep","inpPraepTr","inpPraepEmoji"].forEach(id => document.getElementById(id).value = "");
-  document.getElementById("addPraepOverlay").classList.add("show");
-  setTimeout(()=>document.getElementById("inpPraep").focus(), 50);
-}
-function closeAddPraepModal(){ document.getElementById("addPraepOverlay").classList.remove("show"); }
-function addPraep(){
-  const emoji = document.getElementById("inpPraepEmoji").value.trim();
-  const praep = document.getElementById("inpPraep").value.trim();
-  const tr = document.getElementById("inpPraepTr").value.trim();
-  if(!praep){ alert("Edat alanını doldur."); return; }
-  praepWords.push({praep, emoji, tr});
-  sortByField(praepWords, "praep");
-  savePraep();
-  renderPraep();
-  closeAddPraepModal();
-}
-function deletePraep(idx){
-  praepWords.splice(idx,1);
-  revealedPraep.delete(idx);
-  savePraep();
-  renderPraep();
-}
-
 function exportAdjectives(){
   const blob = new Blob([JSON.stringify(adjectives, null, 2)], {type:"application/json"});
   const url = URL.createObjectURL(blob);
@@ -6376,7 +5995,7 @@ let currentTestMode = null;
 function loadRecentAsked(){
   try{
     const raw = localStorage.getItem("artikel_recent_asked");
-    recentAsked = raw ? JSON.parse(raw) : {};
+    recentAsked = raw ? JSON.parse(raw.split("gq-seinihr").join("gq-poss")) : {};
   }catch(e){ recentAsked = {}; }
 }
 
@@ -7862,24 +7481,82 @@ const GQ_BANK = {
  ["Die Blumen ___ mir.","gefallen",["gefällt","findet"],"Çiçekler hoşuma gidiyor."],
  ["Findest du ___ Lehrer nett?","den",["dem","der"],"Öğretmeni nazik buluyor musun?"]
  ]},
-"gq-seinihr": {emoji:"👤", qtype:"SEIN MI, IHR MI?",
- hint:"sein = erkek sahip (Tom'un), ihr = kadın sahip (Lisa'nın). Sonuna nesnenin artikeline göre -e / -en / -em / -er eklenir (kein/mein gibi).",
+"gq-poss": {emoji:"👤", qtype:"İYELİK — HANGİ FORM?",
+ hint:"Önce <b>sahibi</b> seç: ich→mein, du→dein, er/es→sein, sie (o, kadın)→ihr, wir→unser, ihr (siz)→euer, sie (onlar)→ihr, Sie (resmî)→<b>Ihr</b> (hep büyük). Sonra sahip olunan ismin artikeline/hâline göre sona ekle — Nominativ: der –, die –e, das –, çoğul –e · Akkusativ: der –en, die –e, das –, çoğul –e · Dativ: der –em, die –er, das –em, çoğul –en. euer → eure / euren / eurem / eurer (e düşer).",
  items:[
- ["Tom hat ein Auto. ___ Auto ist neu.","Sein",["Ihr","Seine"],"Tom'un bir arabası var. Arabası yeni."],
- ["Lisa hat ein Fahrrad. ___ Fahrrad ist alt.","Ihr",["Sein","Ihre"],"Lisa'nın bir bisikleti var. Bisikleti eski."],
- ["Tom hat eine Schwester. ___ Schwester heißt Anna.","Seine",["Sein","Ihre"],"Tom'un bir kız kardeşi var. Kız kardeşinin adı Anna."],
- ["Lisa hat einen Bruder. ___ Bruder wohnt in Köln.","Ihr",["Seine","Ihre"],"Lisa'nın bir erkek kardeşi var. Kardeşi Köln'de oturuyor."],
- ["Ich besuche Tom und ___ Eltern.","seine",["ihre","sein"],"Tom'u ve ailesini ziyaret ediyorum."],
- ["Lisa kocht für ___ Mann.","ihren",["seinen","ihre"],"Lisa kocası için yemek yapıyor."],
- ["Max liebt ___ Frau.","seine",["ihre","sein"],"Max karısını seviyor."],
- ["Das ist Anna. ___ Kinder sind klein.","Ihre",["Seine","Sein"],"Bu Anna. Çocukları küçük."],
- ["Ali spielt mit ___ Hund.","seinem",["seinen","ihrem"],"Ali köpeğiyle oynuyor."],
- ["Sara wohnt bei ___ Tante.","ihrer",["seiner","ihre"],"Sara teyzesinin (halasının) yanında oturuyor."],
- ["Peter schreibt ___ Freund eine SMS.","seinem",["seinen","ihrem"],"Peter arkadaşına bir SMS yazıyor."],
- ["Maria zeigt ___ Mutter das Foto.","ihrer",["seiner","ihre"],"Maria annesine fotoğrafı gösteriyor."]
+ ["Tom hat ein Auto. ___ Auto ist neu.", "Sein", ["Ihr", "Seine"], "Tom'un bir arabası var. Arabası yeni."],
+ ["Lisa hat ein Fahrrad. ___ Fahrrad ist alt.", "Ihr", ["Sein", "Ihre"], "Lisa'nın bir bisikleti var. Bisikleti eski."],
+ ["Tom hat eine Schwester. ___ Schwester heißt Anna.", "Seine", ["Sein", "Ihre"], "Tom'un bir kız kardeşi var. Kız kardeşinin adı Anna."],
+ ["Lisa hat einen Bruder. ___ Bruder wohnt in Köln.", "Ihr", ["Seine", "Ihre"], "Lisa'nın bir erkek kardeşi var. Kardeşi Köln'de oturuyor."],
+ ["Ich besuche Tom und ___ Eltern.", "seine", ["ihre", "sein"], "Tom'u ve ailesini ziyaret ediyorum."],
+ ["Lisa kocht für ___ Mann.", "ihren", ["seinen", "ihre"], "Lisa kocası için yemek yapıyor."],
+ ["Max liebt ___ Frau.", "seine", ["ihre", "sein"], "Max karısını seviyor."],
+ ["Das ist Anna. ___ Kinder sind klein.", "Ihre", ["Seine", "Sein"], "Bu Anna. Çocukları küçük."],
+ ["Ali spielt mit ___ Hund.", "seinem", ["seinen", "ihrem"], "Ali köpeğiyle oynuyor."],
+ ["Sara wohnt bei ___ Tante.", "ihrer", ["seiner", "ihre"], "Sara teyzesinin (halasının) yanında oturuyor."],
+ ["Peter schreibt ___ Freund eine SMS.", "seinem", ["seinen", "ihrem"], "Peter arkadaşına bir SMS yazıyor."],
+ ["Maria zeigt ___ Mutter das Foto.", "ihrer", ["seiner", "ihre"], "Maria annesine fotoğrafı gösteriyor."],
+ ["Das ist ___ Bruder.", "mein", ["meine", "meinen"], "Bu benim erkek kardeşim."],
+ ["___ Schwester wohnt in Berlin.", "Meine", ["Mein", "Meinen"], "Kız kardeşim Berlin'de oturuyor."],
+ ["Ich liebe ___ Familie.", "meine", ["mein", "meinem"], "Ailemi seviyorum."],
+ ["Ich suche ___ Schlüssel.", "meinen", ["mein", "meinem"], "Anahtarımı arıyorum."],
+ ["Ich wohne bei ___ Eltern.", "meinen", ["meine", "meiner"], "Ebeveynlerimin yanında oturuyorum."],
+ ["Ich helfe ___ Mutter.", "meiner", ["meine", "meinem"], "Annem'e yardım ediyorum."],
+ ["Ich sehe ___ Freund im Park.", "meinen", ["meinem", "mein"], "Arkadaşımı parkta görüyorum."],
+ ["Ich helfe ___ Freund im Park.", "meinem", ["meinen", "mein"], "Arkadaşıma parkta yardım ediyorum."],
+ ["Das Buch gehört ___ Bruder.", "meinem", ["meinen", "mein"], "Kitap erkek kardeşime ait."],
+ ["___ Kinder spielen im Garten.", "Meine", ["Mein", "Meinen"], "Çocuklarım bahçede oynuyor."],
+ ["Ich telefoniere mit ___ Chef.", "meinem", ["meinen", "mein"], "Patronumla telefonda konuşuyorum."],
+ ["Ich habe ___ Handy verloren.", "mein", ["meine", "meinen"], "Telefonumu kaybettim."],
+ ["Hast du ___ Tasche?", "deine", ["dein", "deinen"], "Çantan yanında mı?"],
+ ["Wo ist ___ Auto, Lukas?", "dein", ["deine", "deinen"], "Arabanın nerede, Lukas?"],
+ ["Kann ich ___ Telefonnummer haben?", "deine", ["dein", "deinen"], "Telefon numaranı alabilir miyim?"],
+ ["Du besuchst ___ Oma.", "deine", ["dein", "deiner"], "Büyükannene gidiyorsun."],
+ ["Ich gebe ___ Schwester das Buch.", "deiner", ["deine", "deinem"], "Kitabı kız kardeşine veriyorum."],
+ ["Was machst du mit ___ Hund?", "deinem", ["deinen", "dein"], "Köpeğinle ne yapıyorsun?"],
+ ["Ich kenne ___ Lehrer nicht.", "deinen", ["deinem", "dein"], "Öğretmenini tanımıyorum."],
+ ["Wo sind ___ Schlüssel?", "deine", ["dein", "deinen"], "Anahtarların nerede?"],
+ ["Du hilfst ___ Bruder.", "deinem", ["deinen", "dein"], "Erkek kardeşine yardım ediyorsun."],
+ ["___ Haus ist groß.", "Unser", ["Unsere", "Unseren"], "Bizim evimiz büyük."],
+ ["Wir lieben ___ Stadt.", "unsere", ["unser", "unserem"], "Şehrimizi seviyoruz."],
+ ["Wir besuchen ___ Großeltern.", "unsere", ["unseren", "unser"], "Büyükanne ve büyükbabamızı ziyaret ediyoruz."],
+ ["Wir sprechen mit ___ Lehrerin.", "unserer", ["unsere", "unserem"], "Öğretmenimizle konuşuyoruz."],
+ ["Wir feiern mit ___ Freunden.", "unseren", ["unsere", "unserem"], "Arkadaşlarımızla kutluyoruz."],
+ ["Das ist ___ Garten.", "unser", ["unsere", "unseren"], "Bu bizim bahçemiz."],
+ ["Wir fahren mit ___ Auto.", "unserem", ["unseren", "unser"], "Arabamızla gidiyoruz."],
+ ["Wir kennen ___ Nachbarn gut.", "unseren", ["unserem", "unser"], "Komşumuzu iyi tanıyoruz."],
+ ["Wo ist ___ Lehrer?", "euer", ["eure", "euren"], "Öğretmeniniz nerede?"],
+ ["Ist das ___ Wohnung?", "eure", ["euer", "euren"], "Bu sizin daireniz mi?"],
+ ["Ich sehe ___ Kinder.", "eure", ["euer", "euren"], "Çocuklarınızı görüyorum."],
+ ["Wir helfen ___ Eltern.", "euren", ["eure", "eurer"], "Ebeveynlerinize yardım ediyoruz."],
+ ["Ich besuche ___ Onkel.", "euren", ["eurem", "euer"], "Amcanızı ziyaret ediyorum."],
+ ["Wir gratulieren ___ Tochter.", "eurer", ["eure", "eurem"], "Kızınızı tebrik ediyoruz."],
+ ["Ihr habt ___ Hausaufgaben gemacht.", "eure", ["euer", "euren"], "Ödevlerinizi yaptınız."],
+ ["Die Kinder spielen mit ___ Ball.", "ihrem", ["ihren", "ihr"], "Çocuklar toplarıyla oynuyor."],
+ ["Meine Eltern haben ein Haus. ___ Haus ist alt.", "Ihr", ["Ihre", "Sein"], "Ailemin bir evi var. Evleri eski."],
+ ["Die Studenten lernen für ___ Prüfung.", "ihre", ["ihr", "ihren"], "Öğrenciler sınavları için çalışıyor."],
+ ["Die Frauen besuchen ___ Kinder.", "ihre", ["ihr", "ihren"], "Kadınlar çocuklarını ziyaret ediyor."],
+ ["Meine Eltern wohnen mit ___ Hund in Köln.", "ihrem", ["ihren", "ihr"], "Ebeveynlerim köpekleriyle Köln'de yaşıyor."],
+ ["Die Lehrer helfen ___ Schülern.", "ihren", ["ihre", "ihrer"], "Öğretmenler öğrencilerine yardım ediyor."],
+ ["Sie hilft ___ Kindern.", "ihren", ["ihrem", "ihre"], "O, çocuklarına yardım ediyor."],
+ ["Der Student liest ___ Buch.", "sein", ["seine", "seinen"], "Öğrenci kitabını okuyor."],
+ ["Peter hat einen Hund. ___ Hund ist groß.", "Sein", ["Seine", "Ihr"], "Peter'in bir köpeği var. Köpeği büyük."],
+ ["Er wartet auf ___ Freundin.", "seine", ["sein", "seiner"], "Kız arkadaşını bekliyor."],
+ ["Er arbeitet mit ___ Vater.", "seinem", ["seinen", "sein"], "Babasıyla çalışıyor."],
+ ["Das Kind sucht ___ Mutter.", "seine", ["ihre", "sein"], "Çocuk annesini arıyor."],
+ ["Guten Tag, Herr Müller! Wie geht es ___ Frau?", "Ihrer", ["Ihre", "Ihrem"], "İyi günler Bay Müller! Eşiniz nasıl?"],
+ ["Frau Schmidt, ist das ___ Tasche?", "Ihre", ["Ihr", "Ihren"], "Bayan Schmidt, bu sizin çantanız mı?"],
+ ["Herr Meier, wie ist ___ Name?", "Ihr", ["Ihre", "Ihren"], "Bay Meier, adınız nedir?"],
+ ["Entschuldigung, wo ist ___ Büro?", "Ihr", ["Ihre", "Ihrem"], "Affedersiniz, ofisiniz nerede?"],
+ ["Kann ich ___ Telefonnummer haben, Frau Weber?", "Ihre", ["Ihr", "Ihren"], "Telefon numaranızı alabilir miyim, Bayan Weber?"],
+ ["Wie ist ___ Adresse, bitte?", "Ihre", ["Ihr", "Ihrem"], "Adresiniz nedir, lütfen?"],
+ ["Ich besuche ___ Firma morgen, Herr Klein.", "Ihre", ["Ihr", "Ihren"], "Yarın firmanızı ziyaret edeceğim, Bay Klein."],
+ ["Herr Braun, ich rufe ___ Chef an.", "Ihren", ["Ihrem", "Ihr"], "Bay Braun, patronunuzu arıyorum."],
+ ["Darf ich mit ___ Mann sprechen, Frau Roth?", "Ihrem", ["Ihren", "Ihr"], "Eşinizle konuşabilir miyim, Bayan Roth?"],
+ ["Ich liebe ___ Eltern.", "meine", ["meinen", "mein"], "Ebeveynlerimi seviyorum."]
  ]}
 };
-const GQ_ORDER = ["gq-akkprep","gq-wechsel","gq-praet","gq-doch","gq-man","gq-genitiv","gq-geht","gq-verbpos","gq-konj","gq-quant","gq-gefallen","gq-seinihr"];
+const GQ_ORDER = ["gq-akkprep","gq-wechsel","gq-praet","gq-doch","gq-man","gq-genitiv","gq-geht","gq-verbpos","gq-konj","gq-quant","gq-gefallen","gq-poss"];
 Object.assign(GQ_BANK, {
 "gq-modal": {emoji:"🧰", qtype:"MODALVERB — DOĞRU FORM?",
  hint:"können: kann · kannst · kann · können · könnt · können. wollen: will · willst. müssen: muss · musst. dürfen: darf · darfst. sollen: soll · sollst. ich ve er/sie/es aynıdır. Modal fiil 2. sırada, ana fiil (mastar) en sonda.",
@@ -8195,19 +7872,19 @@ function askQuestion(testMode, opts){
     }
   }
   if(testMode === "verb-quiz" && verbs.length === 0){
-    alert("Önce fiil listesine birkaç fiil ekle.");
+    alert("Fiil listesi boş.");
     return;
   }
   if(testMode === "adj-quiz" && adjectives.length === 0){
-    alert("Önce sıfat listesine birkaç sıfat ekle.");
+    alert("Sıfat listesi boş.");
     return;
   }
   if(testMode === "frage-quiz" && frageWords.length === 0){
-    alert("Önce soru kelimesi listesine birkaç kelime ekle.");
+    alert("Soru kelimesi listesi boş.");
     return;
   }
   if(testMode === "nomakk-quiz" && words.length === 0){
-    alert("Önce isim listesine birkaç 'der' ismi ekle.");
+    alert("İsim listesi boş.");
     return;
   }
   if(testMode === "favorites-quiz" && favoriteWords.size === 0){
@@ -8215,7 +7892,7 @@ function askQuestion(testMode, opts){
     return;
   }
   if((testMode === "mixed" || testMode === "artikel-only" || testMode === "noun-quiz" || testMode === "plural-only") && words.length === 0){
-    alert("Önce isim listesine birkaç kelime ekle.");
+    alert("İsim listesi boş.");
     return;
   }
   if(testMode === "sentence-fill" && buildSentenceFillPool().length === 0){
@@ -8928,10 +8605,10 @@ const TEST_NAMES = {
   "artikel-only":"Artikel Testi","plural-only":"Çoğul Artikel Testi","nomakk-quiz":"Nominativ/Akkusativ Testi","plural-guess-quiz":"Çoğul Tahmin Testi",
   "favorites-quiz":"Favori Kelimeler Testi","noun-quiz":"İsim Testi","verb-quiz":"Fiil Testi","adj-quiz":"Sıfat Testi","irregular-verb-quiz":"Düzensiz Fiil Çekim Testi",
   "uhrzeit-quiz":"Saat Okuma Testi","frage-quiz":"W-Frage Testi","ordinal-quiz":"Sıra Sayıları Testi","sentence-fill":"Cümle Tamamlama","order-quiz":"Cümle Kurma",
-  "prep-quiz":"im/am/zu/sehr/nicht Testi","listening-quiz":"Basit Dinleme","review-mistakes":"Yanlışlarımı Tekrar Et",
+  "prep-quiz":"Küçük Kelimeler (im/am/zu/sehr/nicht)","listening-quiz":"Basit Dinleme","review-mistakes":"Yanlışlarımı Tekrar Et",
   "dativ-prep-quiz":"Dativ Edatı Seç","dativ-artikel-quiz":"Dativ Artikel","dativ-plural-quiz":"Dativ Çoğul","dativ-pronoun-quiz":"Dativ Zamir","dativ-mix-quiz":"Dativ Karışık",
   "gq-akkprep":"Akkusativ Edatı","gq-wechsel":"Wechsel Edat","gq-praet":"war / hatte","gq-doch":"ja / nein / doch","gq-man":"man","gq-genitiv":"Genitiv-s",
-  "gq-geht":"Geht es …?","gq-verbpos":"Fiilin yeri","gq-konj":"Bağlaç seç","gq-quant":"Miktar & Fiyat","gq-gefallen":"gefallen / finden","gq-seinihr":"sein / ihr",
+  "gq-geht":"Geht es …?","gq-verbpos":"Fiilin yeri","gq-konj":"Bağlaç seç","gq-quant":"Miktar & Fiyat","gq-gefallen":"gefallen / finden","gq-poss":"İyelikler (mein · dein · sein · ihr …)",
   "gq-modal":"Modalverben","gq-imperativ":"Imperativ","gq-nicht":"nicht / kein","gq-trennbar":"Bölünen fiiller","gq-kasus":"Fiil hangi hâli istiyor?","gq-mix":"Yeni Konular Karışık","par-akkdat":"Paragraf: Akkusativ & Dativ","par-prep":"Paragraf: Edatlar","gq-par":"Paragraf boşluğu"
 };
 
@@ -9615,7 +9292,7 @@ document.addEventListener("keydown", function(e){
 const POOL_GROUPS = [
   ["Artikel", ["artikel-only","plural-only","nomakk-quiz","plural-guess-quiz"]],
   ["Kelime", ["noun-quiz","verb-quiz","adj-quiz","irregular-verb-quiz"]],
-  ["Gramer", ["par-akkdat","par-prep","gq-akkprep","gq-wechsel","gq-praet","gq-doch","gq-man","gq-genitiv","gq-geht","gq-verbpos","gq-konj","gq-quant","gq-gefallen","gq-seinihr","gq-modal","gq-imperativ","gq-nicht","gq-trennbar","gq-kasus"]],
+  ["Gramer", ["par-akkdat","par-prep","gq-akkprep","gq-wechsel","gq-praet","gq-doch","gq-man","gq-genitiv","gq-geht","gq-verbpos","gq-konj","gq-quant","gq-gefallen","gq-poss","gq-modal","gq-imperativ","gq-nicht","gq-trennbar","gq-kasus"]],
   ["Dativ", ["dativ-artikel-quiz","dativ-plural-quiz","dativ-prep-quiz","dativ-pronoun-quiz"]],
   ["Pratik", ["order-quiz","sentence-fill","listening-quiz","prep-quiz","zeitort-quiz"]]
 ];
