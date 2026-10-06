@@ -1345,6 +1345,28 @@ html[data-theme="dark"] .kg-w.kg-sel{color:#0E161D;}
   .par-foot{display:flex; justify-content:center; align-items:center; gap:10px; margin-top:6px;}
   @media (pointer:coarse){ .par-body select.par-sel{min-height:36px; padding:4px 8px;} }
   @media (max-width:480px){ .par-body{font-size:17px; line-height:2.3;} .par-title{font-size:20px;} .par-sel{padding:2px 4px;} }
+
+/* ---- Gece modu: yumuşak renkli sekmeler ---- */
+html[data-theme="dark"] .side-tab{background:#18262e;border-color:#2b3b44;color:#d9d3c4;border-left-width:4px;border-left-color:var(--tc,#5f8f9e);}
+html[data-theme="dark"] .side-tab:hover:not(.active){background:#1f3039;}
+html[data-theme="dark"] .side-tab.active{background:linear-gradient(135deg,var(--tcbg,#27495a),#1d3541);color:#f3ecd9;border-color:var(--tc,#d3b27a);border-left-color:var(--tc,#d3b27a);box-shadow:inset 0 0 0 1px var(--tc,#d3b27a);}
+html[data-theme="dark"] .side-tab:nth-child(1){--tc:#86b8ea;--tcbg:#25405a;}
+html[data-theme="dark"] .side-tab:nth-child(2){--tc:#7fcf9a;--tcbg:#23473a;}
+html[data-theme="dark"] .side-tab:nth-child(3){--tc:#e8b27a;--tcbg:#4c3a27;}
+html[data-theme="dark"] .side-tab:nth-child(4){--tc:#c9a3e0;--tcbg:#40304f;}
+html[data-theme="dark"] .side-tab:nth-child(5){--tc:#ee8fa5;--tcbg:#4b2a36;}
+html[data-theme="dark"] .side-tab:nth-child(6){--tc:#7cc7cf;--tcbg:#21464b;}
+html[data-theme="dark"] .side-tab:nth-child(7){--tc:#e5d27a;--tcbg:#463f22;}
+html[data-theme="dark"] .side-tab:nth-child(8){--tc:#e58e6e;--tcbg:#4a3027;}
+html[data-theme="dark"] .side-tab:nth-child(9){--tc:#a9b8f0;--tcbg:#2f3857;}
+html[data-theme="dark"] .test-subtab,html[data-theme="dark"] .ref-subtab{background:#18262e;border-color:#3a4c56;color:#d9d3c4;}
+html[data-theme="dark"] .test-subtab:hover,html[data-theme="dark"] .ref-subtab:hover{background:#1f3039;}
+html[data-theme="dark"] .test-subtab.active,html[data-theme="dark"] .ref-subtab.active{background:#2a5568;border-color:#d3b27a;color:#f6efdc;box-shadow:inset 0 0 0 1px #d3b27a;}
+html[data-theme="dark"] .test-subtab:nth-child(1){border-color:#86b8ea;}
+html[data-theme="dark"] .test-subtab:nth-child(2){border-color:#7fcf9a;}
+html[data-theme="dark"] .test-subtab:nth-child(3){border-color:#c9a3e0;}
+html[data-theme="dark"] .test-subtab:nth-child(4){border-color:#e8b27a;}
+html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
