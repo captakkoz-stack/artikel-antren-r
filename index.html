@@ -337,7 +337,9 @@ html[data-theme="dark"] .kg-wrap{
     .mtbl th, .mtbl td{font-size:10px !important;}
   }
   main.no-right{grid-template-columns:200px 1fr;}
-  @media (max-width:900px){ main.no-right{grid-template-columns:1fr;} }
+  main.tests-only{grid-template-columns:200px minmax(0,820px); justify-content:start;}
+  main.tests-only #rightPanel .panel{margin-top:0;}
+  @media (max-width:900px){ main.no-right, main.tests-only{grid-template-columns:1fr;} }
   .test-details{border:1px solid var(--line); border-radius:10px; margin:8px 0; background:var(--x-bg-ffffff); overflow:hidden;}
   .test-details > summary{cursor:pointer; padding:11px 14px; font-weight:700; font-size:13.5px; color:var(--tx-deep); list-style:none; display:flex; justify-content:space-between; align-items:center; gap:8px; font-family: system-ui, Helvetica, Arial, sans-serif;}
   .test-details > summary::-webkit-details-marker{display:none;}
@@ -1361,6 +1363,7 @@ html[data-theme="dark"] .side-tab:nth-child(6){--tc:#7cc7cf;--tcbg:#21464b;}
 html[data-theme="dark"] .side-tab:nth-child(7){--tc:#e5d27a;--tcbg:#463f22;}
 html[data-theme="dark"] .side-tab:nth-child(8){--tc:#e58e6e;--tcbg:#4a3027;}
 html[data-theme="dark"] .side-tab:nth-child(9){--tc:#a9b8f0;--tcbg:#2f3857;}
+html[data-theme="dark"] .side-tab:nth-child(10){--tc:#d3b27a;--tcbg:#463a25;}
 html[data-theme="dark"] .test-subtab,html[data-theme="dark"] .ref-subtab{background:#18262e;border-color:#3a4c56;color:#d9d3c4;}
 html[data-theme="dark"] .test-subtab:hover,html[data-theme="dark"] .ref-subtab:hover{background:#1f3039;}
 html[data-theme="dark"] .test-subtab.active,html[data-theme="dark"] .ref-subtab.active{background:#2a5568;border-color:#d3b27a;color:#f6efdc;box-shadow:inset 0 0 0 1px #d3b27a;}
@@ -1400,6 +1403,7 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
     <button class="side-tab" id="tabBtnFrage" onclick="switchTab('frage')">Soru Kelimeleri (W-Fragen)</button>
     <button class="side-tab" id="tabBtnReferans" onclick="switchTab('referans')">📌 Hızlı Referans (Gramer Kuralları)</button>
     <button class="side-tab" id="tabBtnHikayeler" onclick="switchTab('hikayeler')">📖 Hikâyeler (Kleine Geschichten)</button>
+    <button class="side-tab" id="tabBtnTestler" onclick="switchTab('testler')">🎯 Testler (Antrenman Modu)</button>
   </nav>
   <div class="left-col">
   <div id="artikelSection">
@@ -1423,7 +1427,7 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
           <option value="all">🔎 Tüm Konular</option>
         </select>
       </div>
-      <div class="hint-line">Kelimeye tıkla → Türkçesini gör <a href="#rightPanel" class="jump-tests">⬇ Testlere git</a></div>
+      <div class="hint-line">Kelimeye tıkla → Türkçesini gör <a href="#" onclick="switchTab('testler');return false;" class="jump-tests">🎯 Testlere git</a></div>
 
       <div class="wordlist-scroll">
         <table id="wordTable" class="mob-rows">
@@ -1465,7 +1469,7 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
           <option value="all">🔎 Tüm Konular</option>
         </select>
       </div>
-      <div class="hint-line">Fiile tıkla → Türkçesini gör <a href="#rightPanel" class="jump-tests">⬇ Testlere git</a></div>
+      <div class="hint-line">Fiile tıkla → Türkçesini gör <a href="#" onclick="switchTab('testler');return false;" class="jump-tests">🎯 Testlere git</a></div>
 
       <div class="wordlist-scroll">
         <table id="verbTable" class="mob-rows">
@@ -1503,7 +1507,7 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
           <option value="all">🔎 Tüm Konular</option>
         </select>
       </div>
-      <div class="hint-line">Sıfata tıkla → Türkçesini gör. Zıt anlamlılar karşılıklı gösterilir. <a href="#rightPanel" class="jump-tests">⬇ Testlere git</a></div>
+      <div class="hint-line">Sıfata tıkla → Türkçesini gör. Zıt anlamlılar karşılıklı gösterilir. <a href="#" onclick="switchTab('testler');return false;" class="jump-tests">🎯 Testlere git</a></div>
 
       <div class="wordlist-scroll" style="max-height:680px;">
         <div id="adjPairGrid" class="adj-split-wrap">
@@ -4997,10 +5001,14 @@ function switchTab(tab){
   if(tab === "referans" && !document.querySelector("#referansSection .ref-group[style*='block']")){
     switchReferansGroup("nomen");
   }
+  const tb = document.getElementById("tabBtnTestler"); if(tb) tb.classList.toggle("active", tab === "testler");
   const rightPanel = document.getElementById("rightPanel");
-  if(rightPanel) rightPanel.style.display = (tab === "hikayeler" || tab === "referans") ? "none" : "";
+  if(rightPanel) rightPanel.style.display = (tab === "testler") ? "" : "none";
+  const leftCol = document.querySelector("main > .left-col");
+  if(leftCol) leftCol.style.display = (tab === "testler") ? "none" : "";
   const mainEl = document.querySelector("main");
-  if(mainEl) mainEl.classList.toggle("no-right", tab === "hikayeler" || tab === "referans");
+  if(mainEl){ mainEl.classList.toggle("no-right", tab !== "testler"); mainEl.classList.toggle("tests-only", tab === "testler"); }
+  try{ window.scrollTo(0, 0); }catch(e){}
   if(tab === "hikayeler" && window.KG){
     window.KG.init();
   }
@@ -5075,7 +5083,7 @@ function showMoreList(key){
   ({words: renderWords, verbs: renderVerbs, adj: renderAdjectives})[key]();
 }
 function moreRowHtml(key, n, colspan, label){
-  return `<tr class="more-row"><td colspan="${colspan}" class="more-cell"><button class="btn-ghost" onclick="showMoreList('${key}')">Daha fazla göster (${n} ${label} daha)</button> <a href="#rightPanel" class="jump-tests-btn">⬇ Testlere git</a></td></tr>`;
+  return `<tr class="more-row"><td colspan="${colspan}" class="more-cell"><button class="btn-ghost" onclick="showMoreList('${key}')">Daha fazla göster (${n} ${label} daha)</button> <a href="#" onclick="switchTab('testler');return false;" class="jump-tests-btn">🎯 Testlere git</a></td></tr>`;
 }
 function setAdjMore(n){
   let mw = document.getElementById("adjMore");
@@ -5083,7 +5091,7 @@ function setAdjMore(n){
     mw = document.createElement("div"); mw.id = "adjMore"; mw.style.cssText = "text-align:center; margin:12px 0;";
     document.getElementById("adjPairGrid").insertAdjacentElement("afterend", mw);
   }
-  mw.innerHTML = n > 0 ? `<button class="btn-ghost" onclick="showMoreList('adj')">Daha fazla göster (${n} sıfat daha)</button> <a href="#rightPanel" class="jump-tests-btn">⬇ Testlere git</a>` : "";
+  mw.innerHTML = n > 0 ? `<button class="btn-ghost" onclick="showMoreList('adj')">Daha fazla göster (${n} sıfat daha)</button> <a href="#" onclick="switchTab('testler');return false;" class="jump-tests-btn">🎯 Testlere git</a>` : "";
 }
 (function(){
   const onChange = () => { try{ renderWords(); renderVerbs(); renderAdjectives(); }catch(e){} };
@@ -8801,7 +8809,7 @@ const TEST_NAMES = {
 };
 
 function collectReportContext(){
-  const tabNames = {artikel:"İsimler", verben:"Fiiller", adj:"Sıfatlar", konj:"Bağlaçlar", praep:"Edatlar", saat:"Saatler & Takvim", frage:"Soru Kelimeleri", referans:"Hızlı Referans", hikayeler:"Hikâyeler"};
+  const tabNames = {artikel:"İsimler", verben:"Fiiller", adj:"Sıfatlar", konj:"Bağlaçlar", praep:"Edatlar", saat:"Saatler & Takvim", frage:"Soru Kelimeleri", referans:"Hızlı Referans", hikayeler:"Hikâyeler", testler:"Testler"};
   const txt = id => { const e = document.getElementById(id); return e ? (e.innerText || e.textContent || "").replace(/\s+/g," ").trim() : ""; };
   const sel = id => { const e = document.getElementById(id); return (e && e.selectedIndex >= 0) ? e.options[e.selectedIndex].text : ""; };
   const ctx = {place:"", lines:[]};
@@ -9618,6 +9626,7 @@ applyTheme(currentThemePref(), false);
   document.addEventListener("focusout", () => { setTimeout(() => { if(!isField(document.activeElement)) show(); }, 250); });
 })();
 switchTestGroup(savedTestGroup);
+switchTab("artikel");
 </script>
 
 <script>
