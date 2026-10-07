@@ -1387,7 +1387,7 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
     </div>
     <div class="header-right">
       <div class="signature"><span class="sig-note">Persönliche Lernnotizen</span><span class="sig-divider"></span><span class="sig-name">⚓ Erstellt von Capt. Aykut Akkoz</span></div>
-      <div class="last-updated">Zuletzt aktualisiert: 07.10.2026</div>
+      <div class="last-updated">Zuletzt aktualisiert: 08.10.2026</div>
     </div>
   </div>
 </header>
@@ -1635,6 +1635,7 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
       <button class="ref-subtab" id="refTabSaatler" onclick="switchReferansGroup('saatler')">⏰ Saatler & Takvim</button>
       <button class="ref-subtab" id="refTabFrage" onclick="switchReferansGroup('frage')">❓ Soru Kelimeleri (W-Fragen)</button>
       <button class="ref-subtab" id="refTabPraep" onclick="switchReferansGroup('praep')">🧭 Edatlar (Präpositionen)</button>
+      <button class="ref-subtab" id="refTabWechsel" onclick="switchReferansGroup('wechsel')">🔀 Wechsel & Kısaltmalar</button>
     </div>
     <div id="refGroupNomen" class="ref-group" style="display:none;">
       <h2 class="referans-group-title">📌 İsimler (Nomen) — Gramer Kuralları</h2>
@@ -3034,6 +3035,36 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
       </div>
     </section>
     <section class="panel">
+      <h2>zu, sehr oder nicht? — hızlı referans</h2>
+      <div class="plural-note" style="margin-top:0;">
+        Üçü de bir sıfatın önüne gelip onu güçlendirir/değiştirir ama <strong>anlamları taban tabana zıttır</strong> — bu yüzden karıştırmak ciddi anlam hatalarına yol açar.
+      </div>
+      <div class="rule-grid">
+        <div class="rule-card der">
+          <div class="title">sehr (çok)</div>
+          <div class="sfx">Olumlu/nötr güçlendirme — "gayet, oldukça"</div>
+          <div class="ex">Das ist <strong>sehr gut</strong>.<br><span style="color:var(--x-tx-999999);">(Bu çok iyi — memnuniyet var)</span></div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">zu (fazla)</div>
+          <div class="sfx">Olumsuz çağrışım — "gereğinden fazla, aşırı" (bir sorun var demektir)</div>
+          <div class="ex">Das ist <strong>zu teuer</strong>.<br><span style="color:var(--x-tx-999999);">(Bu çok pahalı — almayacağım kadar!)</span></div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">nicht (değil)</div>
+          <div class="sfx">Doğrudan olumsuzlama — sıfatın tam tersini söyler</div>
+          <div class="ex">Das ist <strong>nicht gut</strong>.<br><span style="color:var(--x-tx-999999);">(Bu iyi değil.)</span></div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>Aradaki fark net görülsün:</strong> "sehr teuer" (çok pahalı ama alınabilir, sadece bilgi veriyor) ile "zu teuer" (o kadar pahalı ki almam/alamam, bir ENGEL var) tamamen farklı anlam taşır. "nicht teuer" ise "pahalı değil, ucuz" demektir — sıfatın anlamını 180 derece çevirir.<br>
+        <strong>Dikkat:</strong> "zu" burada gördüğün "zu" edatından (-e/-ye, Dativ) <strong>farklı bir kullanımdır</strong> — aynı kelime, sıfattan önce gelince "fazla/aşırı" anlamına geçer.
+      </div>
+    </section>
+    </div>
+    <div id="refGroupWechsel" class="ref-group" style="display:none;">
+      <h2 class="referans-group-title">📌 Wechselpräpositionen & Kısaltmalar — Gramer Kuralları</h2>
+    <section class="panel">
       <h2>Wechselpräpositionen (9 tanesi tek tek): in · an · auf · über · unter · vor · hinter · neben · zwischen</h2>
       <div class="plural-note" style="margin-top:0;">
         Bu 9 edat DURUMA göre hem Dativ hem Akkusativ alır — <strong>tek soruyla</strong> karar ver: <strong>"Wo?" (nerede? — hareket yok) → Dativ</strong>, <strong>"Wohin?" (nereye? — hareket var) → Akkusativ</strong>. Her edatın anlamı ve iki hâldeki örneği aşağıda:
@@ -3148,33 +3179,6 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
         Bu kısaltmalar SADECE Akkusativ + <strong>das</strong> (nötr) ile olur. der/die ile kısaltma yapılmaz — "in die Schule" kısalmaz, öyle kalır.
       </div>
     </section>
-    <section class="panel">
-      <h2>zu, sehr oder nicht? — hızlı referans</h2>
-      <div class="plural-note" style="margin-top:0;">
-        Üçü de bir sıfatın önüne gelip onu güçlendirir/değiştirir ama <strong>anlamları taban tabana zıttır</strong> — bu yüzden karıştırmak ciddi anlam hatalarına yol açar.
-      </div>
-      <div class="rule-grid">
-        <div class="rule-card der">
-          <div class="title">sehr (çok)</div>
-          <div class="sfx">Olumlu/nötr güçlendirme — "gayet, oldukça"</div>
-          <div class="ex">Das ist <strong>sehr gut</strong>.<br><span style="color:var(--x-tx-999999);">(Bu çok iyi — memnuniyet var)</span></div>
-        </div>
-        <div class="rule-card die">
-          <div class="title">zu (fazla)</div>
-          <div class="sfx">Olumsuz çağrışım — "gereğinden fazla, aşırı" (bir sorun var demektir)</div>
-          <div class="ex">Das ist <strong>zu teuer</strong>.<br><span style="color:var(--x-tx-999999);">(Bu çok pahalı — almayacağım kadar!)</span></div>
-        </div>
-        <div class="rule-card das">
-          <div class="title">nicht (değil)</div>
-          <div class="sfx">Doğrudan olumsuzlama — sıfatın tam tersini söyler</div>
-          <div class="ex">Das ist <strong>nicht gut</strong>.<br><span style="color:var(--x-tx-999999);">(Bu iyi değil.)</span></div>
-        </div>
-      </div>
-      <div class="plural-note">
-        <strong>Aradaki fark net görülsün:</strong> "sehr teuer" (çok pahalı ama alınabilir, sadece bilgi veriyor) ile "zu teuer" (o kadar pahalı ki almam/alamam, bir ENGEL var) tamamen farklı anlam taşır. "nicht teuer" ise "pahalı değil, ucuz" demektir — sıfatın anlamını 180 derece çevirir.<br>
-        <strong>Dikkat:</strong> "zu" burada gördüğün "zu" edatından (-e/-ye, Dativ) <strong>farklı bir kullanımdır</strong> — aynı kelime, sıfattan önce gelince "fazla/aşırı" anlamına geçer.
-      </div>
-    </section>
     </div>
 
   </div>
@@ -3283,40 +3287,39 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
           </div></div>
         </details>
         <details class="test-details" data-gkey="hal">
-          <summary><span>📍 Edatlar & Hâller<span class="gcount">(3)</span></span></summary>
+          <summary><span>📍 Edatlar (Akkusativ & Wechsel)<span class="gcount">(2)</span></span></summary>
           <div class="inner"><div class="btn-grid grid-2">
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-akkprep')">📍 Akkusativ Edatı<br><span style="font-size:11px; font-weight:400;">für · durch · ohne · gegen · um</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-wechsel')">🔀 Wechsel Edat<br><span style="font-size:11px; font-weight:400;">wo? / wohin?</span></button>
-            <button class="btn-ghost btn-test" onclick="askQuestion('gq-kasus')">🎯 Fiil hangi hâli istiyor?<br><span style="font-size:11px; font-weight:400;">helfen → Dativ · sehen → Akkusativ</span></button>
           </div></div>
         </details>
         <details class="test-details" data-gkey="iyelik">
-          <summary><span>👤 İyelik & İşaret<span class="gcount">(3)</span></span></summary>
+          <summary><span>👤 Zamirler & İyelik<span class="gcount">(4)</span></span></summary>
           <div class="inner"><div class="btn-grid grid-2">
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-poss')">👤 İyelikler<br><span style="font-size:11px; font-weight:400;">mein · dein · sein · ihr · unser · euer · Ihr</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-dieser')">👆 dieser / diese / dieses<br><span style="font-size:11px; font-weight:400;">işaret zamiri</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-genitiv')">🔑 Genitiv-s<br><span style="font-size:11px; font-weight:400;">Peters · Max'</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-man')">👥 man<br><span style="font-size:11px; font-weight:400;">3. tekil şahıs fiil</span></button>
           </div></div>
         </details>
         <details class="test-details" data-gkey="fiil">
-          <summary><span>🧱 Fiil & Cümle Kuruluşu<span class="gcount">(8)</span></span></summary>
+          <summary><span>🧱 Fiil & Cümle Kuruluşu<span class="gcount">(6)</span></span></summary>
           <div class="inner"><div class="btn-grid grid-2">
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-verbpos')">🧱 Fiilin yeri<br><span style="font-size:11px; font-weight:400;">zuerst · dann · danach</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-trennbar')">🪢 Bölünen fiiller<br><span style="font-size:11px; font-weight:400;">ich rufe … an</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-modal')">🧰 Modalverben<br><span style="font-size:11px; font-weight:400;">kann · muss · will · darf · soll</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-imperativ')">📣 Imperativ<br><span style="font-size:11px; font-weight:400;">Komm! · Kommt! · Kommen Sie!</span></button>
-            <button class="btn-ghost btn-test" onclick="askQuestion('gq-praet')">🕰️ war / hatte<br><span style="font-size:11px; font-weight:400;">Präteritum</span></button>
-            <button class="btn-ghost btn-test" onclick="askQuestion('gq-man')">👥 man<br><span style="font-size:11px; font-weight:400;">3. tekil şahıs fiil</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-nicht')">🚫 nicht / kein<br><span style="font-size:11px; font-weight:400;">olumsuzluk</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-gefallen')">👍 gefallen / finden<br><span style="font-size:11px; font-weight:400;">Dativ ↔ Akkusativ</span></button>
           </div></div>
         </details>
         <details class="test-details" data-gkey="perfekt">
-          <summary><span>⏪ Perfekt (Konuşma Geçmişi)<span class="gcount">(3)</span></span></summary>
+          <summary><span>⏪ Geçmiş Zaman (Präteritum & Perfekt)<span class="gcount">(4)</span></span></summary>
           <div class="inner"><div class="btn-grid grid-2">
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-hs')">⏪ haben mı, sein mı?<br><span style="font-size:11px; font-weight:400;">yardımcı fiil + özne</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-partizip')">🔧 Partizip II<br><span style="font-size:11px; font-weight:400;">gemacht · gegangen · besucht</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-perfekt')">🧩 Perfekt tam kalıp<br><span style="font-size:11px; font-weight:400;">habe gegessen · bin gefahren</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-praet')">🕰️ war / hatte<br><span style="font-size:11px; font-weight:400;">Präteritum</span></button>
           </div></div>
         </details>
         <details class="test-details" data-gkey="baglac">
@@ -3340,6 +3343,7 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
           <button class="btn-ghost btn-test" onclick="askQuestion('dativ-pronoun-quiz')">👤 Dativ Zamir<br><span style="font-size:11px; font-weight:400;">mir · dir · ihm · ihr</span></button>
         </div>
         <div class="btn-grid" style="margin-top:8px;">
+          <button class="btn-ghost btn-test" onclick="askQuestion('gq-kasus')">🎯 Fiil hangi hâli istiyor?<br><span style="font-size:11px; font-weight:400;">helfen → Dativ · sehen → Akkusativ</span></button>
           <button class="btn-ghost btn-test" onclick="askQuestion('dativ-mix-quiz')">🎯 Dativ Karışık Tur</button>
         </div>
       </div>
@@ -5094,7 +5098,7 @@ function switchTab(tab){
 function switchReferansGroup(group){
   const rsb = document.getElementById("refSearch");
   if(rsb && rsb.value){ rsb.value = ""; applyRefSearch(); }
-  ["nomen","satz","zamir","verben","perfekt","dativ","saatler","frage","praep"].forEach(g => {
+  ["nomen","satz","zamir","verben","perfekt","dativ","saatler","frage","praep","wechsel"].forEach(g => {
     const capitalized = g.charAt(0).toUpperCase() + g.slice(1);
     document.getElementById("refGroup" + capitalized).style.display = (g === group) ? "block" : "none";
     document.getElementById("refTab" + capitalized).classList.toggle("active", g === group);
@@ -9034,7 +9038,7 @@ const TEST_NAMES = {
   "artikel-only":"Artikel Testi","plural-only":"Çoğul Artikel Testi","nomakk-quiz":"Nominativ/Akkusativ Testi","plural-guess-quiz":"Çoğul Tahmin Testi",
   "favorites-quiz":"Favori Kelimeler Testi","noun-quiz":"İsim Testi","verb-quiz":"Fiil Testi","adj-quiz":"Sıfat Testi","irregular-verb-quiz":"Düzensiz Fiil Çekim Testi",
   "uhrzeit-quiz":"Saat Okuma Testi","frage-quiz":"W-Frage Testi","ordinal-quiz":"Sıra Sayıları Testi","sentence-fill":"Cümle Tamamlama","order-quiz":"Cümle Kurma",
-  "prep-quiz":"Küçük Kelimeler (im/am/zu/sehr/nicht)","listening-quiz":"Basit Dinleme","review-mistakes":"Yanlışlarımı Tekrar Et",
+  "prep-quiz":"Küçük Kelimeler (im/am/zu/sehr/nicht)","zeitort-quiz":"Küçük Kelimeler: zaman & yer","listening-quiz":"Basit Dinleme","review-mistakes":"Yanlışlarımı Tekrar Et",
   "dativ-prep-quiz":"Dativ Edatı Seç","dativ-artikel-quiz":"Dativ Artikel","dativ-plural-quiz":"Dativ Çoğul","dativ-pronoun-quiz":"Dativ Zamir","dativ-mix-quiz":"Dativ Karışık",
   "gq-akkprep":"Akkusativ Edatı","gq-wechsel":"Wechsel Edat","gq-praet":"war / hatte","gq-doch":"ja / nein / doch","gq-man":"man","gq-genitiv":"Genitiv-s",
   "gq-geht":"Geht es …?","gq-verbpos":"Fiilin yeri","gq-konj":"Bağlaç seç","gq-quant":"Miktar & Fiyat","gq-gefallen":"gefallen / finden","gq-hs":"Perfekt: haben / sein","gq-partizip":"Partizip II","gq-perfekt":"Perfekt: tam kalıp","gq-wer":"Wer / Wen / Wem","gq-dieser":"dieser / diese / dieses","gq-poss":"İyelikler (mein · dein · sein · ihr …)",
@@ -9721,8 +9725,8 @@ document.addEventListener("keydown", function(e){
 const POOL_GROUPS = [
   ["Artikel", ["artikel-only","plural-only","nomakk-quiz","plural-guess-quiz"]],
   ["Kelime", ["noun-quiz","verb-quiz","adj-quiz","irregular-verb-quiz"]],
-  ["Gramer", ["par-akkdat","par-prep","gq-akkprep","gq-wechsel","gq-praet","gq-doch","gq-man","gq-genitiv","gq-geht","gq-verbpos","gq-konj","gq-quant","gq-gefallen","gq-poss","gq-wer","gq-dieser","gq-hs","gq-partizip","gq-perfekt","gq-modal","gq-imperativ","gq-nicht","gq-trennbar","gq-kasus"]],
-  ["Dativ", ["dativ-artikel-quiz","dativ-plural-quiz","dativ-prep-quiz","dativ-pronoun-quiz"]],
+  ["Gramer", ["par-akkdat","par-prep","gq-akkprep","gq-wechsel","gq-praet","gq-doch","gq-man","gq-genitiv","gq-geht","gq-verbpos","gq-konj","gq-quant","gq-gefallen","gq-poss","gq-wer","gq-dieser","gq-hs","gq-partizip","gq-perfekt","gq-modal","gq-imperativ","gq-nicht","gq-trennbar"]],
+  ["Dativ", ["gq-kasus","dativ-artikel-quiz","dativ-plural-quiz","dativ-prep-quiz","dativ-pronoun-quiz"]],
   ["Pratik", ["order-quiz","sentence-fill","listening-quiz","prep-quiz","zeitort-quiz"]]
 ];
 function poolName(key){ return (typeof TEST_NAMES !== "undefined" && TEST_NAMES[key]) || key; }
@@ -10468,7 +10472,117 @@ const STORIES=[
  {q:"Was muss man bei Jan und Mia?",o:["Den Müll trennen","Leise sein","Nicht kochen"]},
  {q:"Wo steht der Staubsauger?",o:["Im Flur","In der Küche","Im Bad"]},
  {q:"Warum kocht Mia für alle?",o:["Sie hat Geburtstag.","Sie hat Hunger.","Sie ist krank."]},
- {q:"Was schenkt Selin Mia?",o:["Eine Pflanze","Ein Buch","Blumen"]}]}
+ {q:"Was schenkt Selin Mia?",o:["Eine Pflanze","Ein Buch","Blumen"]}]},
+{id:"wochenende",lvl:"A2",icon:"🏖️",color:"#2F7A8C",title:"Ein Wochenende in Hamburg",tr:"Hamburg'da bir hafta sonu",tense:"perfekt",
+ s:[
+ ["Am Freitag bin ich mit dem Zug nach Hamburg gefahren.", "Cuma günü trenle Hamburg'a gittim."],
+ ["Meine Freundin Lena hat mich am Bahnhof abgeholt.", "Arkadaşım Lena beni istasyondan aldı."],
+ ["Wir sind zusammen in ihre Wohnung gegangen.", "Birlikte onun dairesine gittik."],
+ ["Dort habe ich meine Tasche ins Zimmer gestellt.", "Orada çantamı odaya koydum."],
+ ["Am Abend haben wir Fisch gegessen und Tee getrunken.", "Akşam balık yedik ve çay içtik."],
+ ["Am Samstag sind wir früh aufgestanden.", "Cumartesi erken kalktık."],
+ ["Wir haben im Hafen viele Schiffe gesehen.", "Limanda birçok gemi gördük."],
+ ["Danach sind wir mit dem Bus in die Stadt gefahren.", "Sonra otobüsle şehre gittik."],
+ ["Ich habe ein Buch und eine Postkarte gekauft.", "Bir kitap ve bir kartpostal aldım."],
+ ["Am Nachmittag hat es geregnet, und wir sind im Café geblieben.", "Öğleden sonra yağmur yağdı ve kafede kaldık."],
+ ["Dort haben wir lange gesprochen und viel gelacht.", "Orada uzun konuştuk ve çok güldük."],
+ ["Am Sonntag habe ich lange geschlafen.", "Pazar günü uzun uyudum."],
+ ["Um fünf Uhr bin ich wieder nach Hause gefahren.", "Saat beşte tekrar eve gittim."],
+ ["Es war ein schönes Wochenende.", "Güzel bir hafta sonuydu."]],
+ q:[
+ {q:"Wie ist die Person nach Hamburg gefahren?",o:["Mit dem Zug", "Mit dem Auto", "Mit dem Flugzeug"]},
+ {q:"Wer hat sie am Bahnhof abgeholt?",o:["Lena", "Anna", "Ihre Mutter"]},
+ {q:"Was haben sie am Abend gegessen?",o:["Fisch", "Pizza", "Suppe"]},
+ {q:"Warum sind sie im Café geblieben?",o:["Es hat geregnet.", "Sie waren müde.", "Das Café war billig."]},
+ {q:"Was hat die Person am Sonntag gemacht?",o:["Sie hat lange geschlafen.", "Sie hat Fußball gespielt.", "Sie ist ins Kino gegangen."]}]},
+{id:"hausputz",lvl:"A2",icon:"🧹",color:"#6B7F3A",title:"Der große Hausputz",tr:"Büyük ev temizliği",tense:"perfekt",
+ s:[
+ ["Am Samstag hat Familie Weber das ganze Haus geputzt.", "Cumartesi Weber ailesi bütün evi temizledi."],
+ ["Der Vater hat die Fenster geputzt und den Müll rausgebracht.", "Baba pencereleri temizledi ve çöpü dışarı çıkardı."],
+ ["Die Mutter hat die Wäsche aufgehängt.", "Anne çamaşırları astı."],
+ ["Der Sohn hat Staub gesaugt.", "Oğul elektrikli süpürge yaptı."],
+ ["Die Tochter hat den Boden gewischt.", "Kız zemini sildi."],
+ ["Danach hat sie die Spülmaschine eingeräumt und eingeschaltet.", "Sonra bulaşık makinesini yerleştirdi ve çalıştırdı."],
+ ["Die Mutter hat die Hemden gebügelt.", "Anne gömlekleri ütüledi."],
+ ["Der Vater hat alle Kissen auf die Couch gelegt.", "Baba bütün yastıkları kanepeye koydu."],
+ ["Um zwölf Uhr hat der Sohn den Tisch gedeckt.", "Saat on ikide oğul sofrayı kurdu."],
+ ["Sie haben zusammen Suppe gegessen.", "Birlikte çorba yediler."],
+ ["Nach dem Essen hat die Tochter eine Vase mit Blumen auf den Tisch gestellt.", "Yemekten sonra kız masaya çiçekli bir vazo koydu."],
+ ["Alle waren müde, aber sehr zufrieden.", "Herkes yorgundu ama çok memnundu."],
+ ["Am Abend hat niemand mehr gearbeitet.", "Akşam artık kimse çalışmadı."],
+ ["Sie haben einen Film gesehen.", "Bir film izlediler."]],
+ q:[
+ {q:"Wer hat die Wäsche aufgehängt?",o:["Die Mutter", "Der Vater", "Der Sohn"]},
+ {q:"Was hat der Sohn gemacht?",o:["Er hat Staub gesaugt.", "Er hat gekocht.", "Er hat die Fenster geputzt."]},
+ {q:"Wer hat den Boden gewischt?",o:["Die Tochter", "Die Mutter", "Der Vater"]},
+ {q:"Was hat die Tochter auf den Tisch gestellt?",o:["Eine Vase mit Blumen", "Einen Kuchen", "Eine Lampe"]},
+ {q:"Was hat die Familie am Abend gemacht?",o:["Sie hat einen Film gesehen.", "Sie hat weiter geputzt.", "Sie ist ins Restaurant gegangen."]}]},
+{id:"silberhochzeit",lvl:"A2",icon:"💍",color:"#8A6A2F",title:"Die Silberhochzeit",tr:"Gümüş evlilik yıldönümü",tense:"perfekt",
+ s:[
+ ["Gestern haben meine Eltern ihre Silberhochzeit gefeiert.", "Dün ailem gümüş evlilik yıldönümünü kutladı."],
+ ["Sie sind seit 25 Jahren verheiratet.", "25 yıldır evliler."],
+ ["Meine Schwester und ich haben das Fest organisiert.", "Kız kardeşim ve ben kutlamayı organize ettik."],
+ ["Wir haben viele Gäste eingeladen.", "Çok misafir davet ettik."],
+ ["Am Morgen habe ich den Kuchen abgeholt.", "Sabah pastayı aldım."],
+ ["Meine Schwester hat die Tische gedeckt und Kerzen angezündet.", "Kız kardeşim masaları kurdu ve mumları yaktı."],
+ ["Um sechs Uhr sind die Gäste angekommen.", "Saat altıda misafirler geldi."],
+ ["Meine Großeltern sind mit dem Taxi gekommen.", "Büyükanne ve büyükbabam taksiyle geldi."],
+ ["Mein Opa hat erzählt: „Letztes Jahr haben wir unsere Goldene Hochzeit gefeiert.“", "Dedem anlattı: “Geçen yıl altın evlilik yıldönümümüzü kutladık.”"],
+ ["Dann hat mein Vater eine Rede gehalten.", "Sonra babam bir konuşma yaptı."],
+ ["Meine Mutter hat geweint, weil sie so glücklich war.", "Annem ağladı çünkü çok mutluydu."],
+ ["Wir haben gegessen, getanzt und gelacht.", "Yedik, dans ettik ve güldük."],
+ ["Spät in der Nacht sind die letzten Gäste nach Hause gegangen.", "Gece geç saatte son misafirler eve gitti."],
+ ["Es war ein perfekter Abend.", "Mükemmel bir akşamdı."]],
+ q:[
+ {q:"Was haben die Eltern gefeiert?",o:["Ihre Silberhochzeit", "Ihren Geburtstag", "Ihre Goldene Hochzeit"]},
+ {q:"Seit wann sind die Eltern verheiratet?",o:["Seit 25 Jahren", "Seit 10 Jahren", "Seit 50 Jahren"]},
+ {q:"Wer hat den Kuchen abgeholt?",o:["Die Erzählerin / der Erzähler", "Die Schwester", "Der Vater"]},
+ {q:"Wie sind die Großeltern gekommen?",o:["Mit dem Taxi", "Mit dem Bus", "Zu Fuß"]},
+ {q:"Warum hat die Mutter geweint?",o:["Weil sie so glücklich war.", "Weil sie müde war.", "Weil das Essen schlecht war."]}]},
+{id:"verschlafen",lvl:"A2",icon:"⏰",color:"#B5533C",title:"Heute habe ich verschlafen",tr:"Bugün uyuyakaldım",tense:"perfekt",
+ s:[
+ ["Heute Morgen habe ich verschlafen.", "Bu sabah uyuyakaldım."],
+ ["Mein Wecker hat nicht geklingelt.", "Çalar saatim çalmadı."],
+ ["Um acht Uhr bin ich aufgewacht.", "Saat sekizde uyandım."],
+ ["Ich bin schnell aufgestanden und habe nicht gefrühstückt.", "Hızlıca kalktım ve kahvaltı yapmadım."],
+ ["Dann habe ich meinen Schlüssel gesucht, aber nicht gefunden.", "Sonra anahtarımı aradım ama bulamadım."],
+ ["Endlich habe ich ihn in der Jacke gefunden.", "Sonunda onu ceketin içinde buldum."],
+ ["Ich bin zur Haltestelle gelaufen, aber der Bus ist schon abgefahren.", "Durağa koştum ama otobüs zaten kalkmıştı."],
+ ["Ich habe den Bus verpasst.", "Otobüsü kaçırdım."],
+ ["Deshalb habe ich ein Taxi genommen.", "Bu yüzden bir taksiye bindim."],
+ ["Im Büro hat mein Chef schon auf mich gewartet.", "Ofiste patronum çoktan beni bekliyordu."],
+ ["Ich habe mich entschuldigt.", "Özür diledim."],
+ ["Er hat gelächelt und gesagt: „Kein Problem!“", "O gülümsedi ve dedi ki: “Sorun değil!”"],
+ ["Am Abend habe ich meinen Wecker repariert.", "Akşam çalar saatimi tamir ettim."],
+ ["Morgen stehe ich pünktlich auf.", "Yarın tam zamanında kalkacağım."]],
+ q:[
+ {q:"Warum hat die Person verschlafen?",o:["Der Wecker hat nicht geklingelt.", "Sie war krank.", "Sie ist spät ins Bett gegangen."]},
+ {q:"Wo hat sie den Schlüssel gefunden?",o:["In der Jacke", "In der Tasche", "Auf dem Tisch"]},
+ {q:"Was ist mit dem Bus passiert?",o:["Er ist schon abgefahren.", "Er hat Verspätung gehabt.", "Er ist kaputt gegangen."]},
+ {q:"Wie ist die Person ins Büro gekommen?",o:["Mit dem Taxi", "Zu Fuß", "Mit dem Fahrrad"]},
+ {q:"Was hat der Chef gesagt?",o:["Kein Problem!", "Das ist zu spät!", "Du musst gehen!"]}]},
+{id:"spanienreise",lvl:"A2",icon:"✈️",color:"#C77D2E",title:"Meine Reise nach Spanien",tr:"İspanya seyahatim",tense:"perfekt",
+ s:[
+ ["Letzten Sommer sind wir nach Spanien geflogen.", "Geçen yaz İspanya'ya uçtuk."],
+ ["Der Flug hat zwei Stunden gedauert.", "Uçuş iki saat sürdü."],
+ ["Am Flughafen haben wir ein Taxi genommen.", "Havalimanında bir taksiye bindik."],
+ ["Das Hotel hat direkt am Meer gelegen.", "Otel doğrudan denizin kenarındaydı."],
+ ["Jeden Morgen haben wir auf dem Balkon gefrühstückt.", "Her sabah balkonda kahvaltı yaptık."],
+ ["Wir sind jeden Tag im Meer geschwommen.", "Her gün denizde yüzdük."],
+ ["Einmal sind wir mit dem Bus nach Barcelona gefahren.", "Bir kez otobüsle Barselona'ya gittik."],
+ ["Dort haben wir die Kirche gesehen und Fotos gemacht.", "Orada kiliseyi gördük ve fotoğraf çektik."],
+ ["Abends haben wir Paella gegessen.", "Akşamları paella yedik."],
+ ["Mein Mann hat mit der Kellnerin Spanisch gesprochen.", "Kocam garsonla İspanyolca konuştu."],
+ ["Ich habe nur wenig verstanden, aber wir haben viel gelacht.", "Çok az anladım ama çok güldük."],
+ ["Am letzten Tag habe ich Postkarten geschrieben.", "Son gün kartpostallar yazdım."],
+ ["Leider ist die Woche so schnell vergangen.", "Maalesef hafta çok çabuk geçti."],
+ ["Nächstes Jahr fliegen wir wieder hin.", "Gelecek yıl yine oraya uçacağız."]],
+ q:[
+ {q:"Wie sind sie nach Spanien gekommen?",o:["Sie sind geflogen.", "Sie sind gefahren.", "Sie sind mit dem Schiff gereist."]},
+ {q:"Wo hat das Hotel gelegen?",o:["Direkt am Meer", "In den Bergen", "Im Zentrum von Barcelona"]},
+ {q:"Wo haben sie gefrühstückt?",o:["Auf dem Balkon", "Im Restaurant", "Im Zimmer"]},
+ {q:"Was haben sie in Barcelona gemacht?",o:["Sie haben die Kirche gesehen und Fotos gemacht.", "Sie haben Fußball gespielt.", "Sie haben eingekauft."]},
+ {q:"Was machen sie nächstes Jahr?",o:["Sie fliegen wieder hin.", "Sie bleiben zu Hause.", "Sie fahren nach Italien."]}]}
 ];
 
 const DICT={
@@ -10693,7 +10807,10 @@ wohnte:"oturuyordu (wohnen: er/sie wohnte)",zahlt:"öder (zahlen: er/sie zahlt)"
 zwischen:"arasında (Wechselpräposition)"
 ,andere:"başka, diğer (sıfat)",baum:"der Baum — ağaç",begrüßt:"selamlıyor (begrüßen: er/sie begrüßt)",besuchen:"ziyaret etmek; wir besuchen: ziyaret ediyoruz",bild:"das Bild — resim, tablo",blumen:"die Blumen — çiçekler (Blume: çiçek)",breitete:"serdi (ausbreiten: Prät. er breitete … aus)",dankt:"teşekkür ediyor (danken + Dativ: er dankt ihr)",dass:"ki (dass-Satz: fiil cümlenin sonuna gider)",decke:"die Decke — battaniye; tavan",donnerstag:"Perşembe",eingang:"der Eingang — giriş",elf:"on bir (11)",erzählen:"anlatmak, sohbet etmek; sie erzählen: sohbet ediyorlar",fitnessstudio:"das Fitnessstudio — spor salonu",flasche:"die Flasche — şişe",flohmarkt:"der Flohmarkt — bit pazarı",fluss:"der Fluss — nehir",freut:"seviniyor (sich freuen: sie freut sich)",früher:"eskiden; daha erken",gab:"verdi (geben: Prät. sie gab; geben + Dativ + Akkusativ)",geld:"das Geld — para",geräten:"die Geräte — aletler, cihazlar (an den Geräten: aletlerde)",günstig:"uygun fiyatlı, ucuz",habt:"sahipsiniz (haben: ihr habt)",halb:"buçuk (halb zwölf = 11:30)",heißen:"adı … olmak; sie heißen: adları …",herzlich:"içten, samimi",jan:"Jan (isim)",kann:"-ebilir (können: ich/er/sie kann)",kaufe:"alıyorum (kaufen); kaufe … ein: alışveriş yapıyorum (einkaufen)",komm:"gel! (kommen, Imperativ du)",korb:"der Korb — sepet",lacht:"gülüyor (lachen)",lauf:"koş! (laufen, Imperativ du)",lust:"die Lust — istek, heves (Lust haben auf …)",mia:"Mia (isim)",mitbewohner:"die Mitbewohner — ev arkadaşları",mitkommen:"birlikte gelmek (trennbar: mitkommen)",mittwoch:"Çarşamba",monatsbeitrag:"der Monatsbeitrag — aylık ücret",müll:"der Müll — çöp",nahm:"aldı (nehmen: Prät. er nahm; nahm … mit: yanına aldı)",nett:"nazik, hoş",neuen:"yeni (neu; sıfat sonu -en)",neununddreißig:"otuz dokuz (39)",neunundzwanzig:"yirmi dokuz (29)",neunzehn:"on dokuz (19)",neunzig:"doksan (90)",packten:"koydular, paketlediler (packen: Prät. sie packten)",picknick:"das Picknick — piknik",pro:"başına (pro Woche: haftada)",regnet:"yağmur yağıyor (regnen)",räume:"topluyorum (aufräumen: ich räume … auf)",sachen:"die Sachen — eşyalar",sah:"gördü (sehen: Prät. er/sie sah)",schenkt:"hediye ediyor (schenken + Dativ)",schlafe:"uyuyorum (schlafen: ich schlafe)",schwimmen:"yüzmek",schöne:"güzel (schön; dişil sıfat sonu -e)",selin:"Selin (isim)",selins:"Selin'in (Genitiv -s: Selins Zimmer)",sitzen:"oturmak; sie sitzen: oturuyorlar",sofort:"hemen, derhal",staubsauger:"der Staubsauger — elektrikli süpürge",stellte:"koydu (stellen: Prät. sie stellte; wohin? + Akkusativ)",studio:"das Studio — salon, stüdyo",toms:"Tom'un (Genitiv -s: Toms Tasche)",trainer:"der Trainer — antrenör",trainieren:"antrenman yapmak, çalışmak",trainiert:"antrenman yapıyor (trainieren)",trainierte:"antrenman yaptı (trainieren: Prät. er trainierte)",trainierten:"antrenman yaptılar (trainieren: Prät. sie trainierten)",treffe:"buluşuyorum (treffen: ich treffe)",trennen:"ayırmak (den Müll trennen: çöpü ayırmak)",trink:"iç! (trinken, Imperativ du)",tüte:"die Tüte — poşet, torba",verkäufer:"der Verkäufer — satıcı",viertel:"çeyrek (Viertel nach sechs = 6:15)",wasche:"yıkıyorum (waschen: ich wasche)",wiese:"die Wiese — çayır",willst:"istiyorsun (wollen: du willst)",wohngemeinschaft:"die Wohngemeinschaft (WG) — ev paylaşımı",wollen:"istemek; wir wollen: istiyoruz",womit:"neyle? (womit = mit was)",zeigt:"gösteriyor (zeigen + Dativ)",zufrieden:"memnun, tatmin olmuş"
 });
-const PERFEKT_STORIES = new Set([]); // İleride Perfekt işlenince buraya eklenecek
+Object.assign(DICT,{
+abgefahren:"kalktı, yola çıktı (abfahren: ist abgefahren)",abgeholt:"aldı, karşıladı (abholen: hat abgeholt)",angekommen:"vardı, geldi (ankommen: ist angekommen)",angezündet:"yaktı (anzünden: hat angezündet)",aufgehängt:"astı (aufhängen: hat aufgehängt)",aufgestanden:"kalktı (aufstehen: ist aufgestanden)",aufgewacht:"uyandı (aufwachen: ist aufgewacht)",barcelona:"Barselona",boden:"der Boden — zemin, yer",couch:"die Couch — kanepe",eingeladen:"davet etti (einladen: hat eingeladen)",eingeräumt:"yerleştirdi (einräumen: hat eingeräumt)",eingeschaltet:"açtı, çalıştırdı (einschalten: hat eingeschaltet)",entschuldigt:"özür diledi (sich entschuldigen: hat sich entschuldigt)",erzählt:"anlattı (erzählen: hat erzählt)",fest:"das Fest — kutlama, şenlik",flug:"der Flug — uçuş",gearbeitet:"çalıştı (arbeiten: hat gearbeitet)",gebügelt:"ütüledi (bügeln: hat gebügelt)",gedeckt:"kurdu (den Tisch decken: hat gedeckt)",gefeiert:"kutladı (feiern: hat gefeiert)",geflogen:"uçtu (fliegen: ist geflogen)",gefunden:"buldu (finden: hat gefunden)",gehalten:"yaptı, tuttu (halten: hat gehalten; eine Rede halten = konuşma yapmak)",gekauft:"satın aldı (kaufen: hat gekauft)",gekommen:"geldi (kommen: ist gekommen)",gelaufen:"koştu, yürüdü (laufen: ist gelaufen)",gelegen:"bulundu, uzanıyordu (liegen: hat gelegen)",gelegt:"koydu, yatırdı (legen: hat gelegt)",gelächelt:"gülümsedi (lächeln: hat gelächelt)",genommen:"aldı, bindi (nehmen: hat genommen)",gesaugt:"süpürdü (saugen: hat gesaugt; Staub saugen)",geschlafen:"uyudu (schlafen: hat geschlafen)",geschrieben:"yazdı (schreiben: hat geschrieben)",geschwommen:"yüzdü (schwimmen: ist geschwommen)",gesehen:"gördü (sehen: hat gesehen)",gestellt:"koydu, dikti (stellen: hat gestellt)",gesucht:"aradı (suchen: hat gesucht)",getanzt:"dans etti (tanzen: hat getanzt)",getrunken:"içti (trinken: hat getrunken)",gewartet:"bekledi (warten: hat gewartet)",geweint:"ağladı (weinen: hat geweint)",gewischt:"sildi (wischen: hat gewischt)",goldene:"altın (Goldene Hochzeit — altın evlilik yıldönümü)",großeltern:"die Großeltern — büyükanne ve büyükbaba",hemden:"die Hemden — gömlekler",hin:"oraya (Richtung: fliegen wir hin = oraya uçuyoruz)",hochzeit:"die Hochzeit — düğün; evlilik yıldönümü",kein:"hiç / yok (isim olumsuzu: kein Problem)",kirche:"die Kirche — kilise",kissen:"das Kissen — yastık",mehr:"daha fazla; niemand mehr: artık kimse",nacht:"die Nacht — gece",opa:"der Opa — dede",organisiert:"organize etti (organisieren: hat organisiert)",paella:"die Paella — İspanyol pilav yemeği",perfekter:"mükemmel (perfekt sıfatı: ein perfekter Abend)",postkarte:"die Postkarte — kartpostal",postkarten:"die Postkarten — kartpostallar",problem:"das Problem — sorun",rausgebracht:"dışarı çıkardı (rausbringen: hat rausgebracht)",rede:"die Rede — konuşma",repariert:"tamir etti (reparieren: hat repariert)",schiffe:"die Schiffe — gemiler",schwester:"die Schwester — kız kardeş",schönes:"güzel (das Wochenende için: ein schönes Wochenende)",silberhochzeit:"die Silberhochzeit — gümüş evlilik yıldönümü (25. yıl)",sohn:"der Sohn — oğul",spanisch:"İspanyolca",spülmaschine:"die Spülmaschine — bulaşık makinesi",staub:"der Staub — toz",taxi:"das Taxi — taksi",tische:"die Tische — masalar",vase:"die Vase — vazo",vergangen:"geçti (vergehen: ist vergangen)",verheiratet:"evli",verpasst:"kaçırdı (verpassen: hat verpasst)",verschlafen:"uyuyakalmak (verschlafen: hat verschlafen)",verstanden:"anladı (verstehen: hat verstanden)",wecker:"der Wecker — çalar saat",wenig:"az, biraz"
+});
+const PERFEKT_STORIES = new Set(["wochenende","hausputz","silberhochzeit","verschlafen","spanienreise"]);
 const PRATERITUM_STORIES = new Set(["geburtstag","ferien_meer","schluessel","schultag","gaeste","picknick"]);
 const MIXED_STORIES = new Set(["zoo","telefonanruf","fussballspiel","regentag","bewerbung","umzug","heidelberg","fitness","flohmarkt","mitbewohnerin"]);
 
