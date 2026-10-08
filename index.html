@@ -1441,6 +1441,9 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
   .home-tile{white-space:normal;min-width:0;overflow:hidden;}
   .home-tile .ht-t,.home-tile .ht-de{overflow-wrap:anywhere;}
   @media (max-width:520px){ #subBar.in-group #subBarTitle{display:none;} }
+  .filter-btn[data-adv].active{background:var(--teal);}
+  .adv-filters{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 12px;}
+  html[data-theme="dark"] .filter-btn[data-adv].active{background:#2a5568;border-color:#d3b27a;}
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1468,6 +1471,7 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
     <button class="side-tab active" id="tabBtnArtikel" onclick="switchTab('artikel')">İsimler (Nomen mit Artikel)</button>
     <button class="side-tab" id="tabBtnVerben" onclick="switchTab('verben')">Fiiller (Verben)</button>
     <button class="side-tab" id="tabBtnAdj" onclick="switchTab('adj')">Sıfatlar (Adjektive)</button>
+    <button class="side-tab" id="tabBtnAdv" onclick="switchTab('adv')">Zarflar (Adverbien)</button>
     <button class="side-tab" id="tabBtnKonj" onclick="switchTab('konj')">Bağlaçlar (Konjunktionen)</button>
     <button class="side-tab" id="tabBtnPraep" onclick="switchTab('praep')">Edatlar (Präpositionen)</button>
     <button class="side-tab" id="tabBtnSaat" onclick="switchTab('saat')">Saatler & Takvim (Uhrzeit & Kalender)</button>
@@ -1636,6 +1640,26 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
         <table class="mob-rows mob-rows5">
           <thead><tr><th></th><th>Bağlaç</th><th></th><th>Örnek Cümle</th></tr></thead>
           <tbody id="konjTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div id="advSection" style="display:none;">
+    <section class="panel" style="margin-top:0;">
+      <div class="list-header">
+        <h2>Zarf Listem (Adverbien)</h2>
+      </div>
+      <div class="search-row">
+        <input type="text" id="advSearchInput" placeholder="Ara... (heute, immer, hier, zarf...)" oninput="debouncedSearch('renderAdv')">
+        <button class="btn-ghost" onclick="clearSearch('adv')">Temizle</button>
+      </div>
+      <div class="adv-filters" id="advFilters"></div>
+      <div class="hint-line">Zarfa tıkla → Türkçesini gör</div>
+      <div class="wordlist-scroll">
+        <table class="mob-rows mob-rows5">
+          <thead><tr><th></th><th>Zarf</th><th></th><th>Örnek Cümle</th></tr></thead>
+          <tbody id="advTableBody"></tbody>
         </table>
       </div>
     </section>
@@ -4806,6 +4830,119 @@ let words = [];
 let verbs = [];
 let adjectives = [];
 let saatWords = [];
+const STARTER_ADV = [
+  {"adv": "heute", "cat": "zaman", "emoji": "📅", "tr": "bugün", "beispiel": "Heute habe ich frei.", "beispielTr": "Bugün izinliyim."},
+  {"adv": "morgen", "cat": "zaman", "emoji": "🌅", "tr": "yarın", "beispiel": "Morgen fahre ich nach Berlin.", "beispielTr": "Yarın Berlin'e gidiyorum."},
+  {"adv": "gestern", "cat": "zaman", "emoji": "🔙", "tr": "dün", "beispiel": "Gestern war ich im Kino.", "beispielTr": "Dün sinemadaydım."},
+  {"adv": "übermorgen", "cat": "zaman", "emoji": "📆", "tr": "öbür gün", "beispiel": "Übermorgen habe ich einen Termin.", "beispielTr": "Öbür gün randevum var."},
+  {"adv": "vorgestern", "cat": "zaman", "emoji": "⏪", "tr": "evvelsi gün", "beispiel": "Vorgestern habe ich Oma besucht.", "beispielTr": "Evvelsi gün büyükanneyi ziyaret ettim."},
+  {"adv": "jetzt", "cat": "zaman", "emoji": "⏱️", "tr": "şimdi", "beispiel": "Ich muss jetzt gehen.", "beispielTr": "Şimdi gitmem gerekiyor."},
+  {"adv": "gleich", "cat": "zaman", "emoji": "🕐", "tr": "hemen / birazdan", "beispiel": "Ich komme gleich.", "beispielTr": "Hemen geliyorum."},
+  {"adv": "sofort", "cat": "zaman", "emoji": "⚡", "tr": "derhal", "beispiel": "Bitte komm sofort her!", "beispielTr": "Lütfen hemen buraya gel!"},
+  {"adv": "bald", "cat": "zaman", "emoji": "🔜", "tr": "yakında", "beispiel": "Wir sehen uns bald.", "beispielTr": "Yakında görüşürüz."},
+  {"adv": "später", "cat": "zaman", "emoji": "⏭️", "tr": "daha sonra", "beispiel": "Ich rufe dich später an.", "beispielTr": "Seni daha sonra ararım."},
+  {"adv": "früher", "cat": "zaman", "emoji": "🕰️", "tr": "eskiden", "beispiel": "Früher habe ich in Izmir gewohnt.", "beispielTr": "Eskiden İzmir'de oturuyordum."},
+  {"adv": "schon", "cat": "zaman", "emoji": "✅", "tr": "çoktan / zaten", "beispiel": "Ich habe schon gegessen.", "beispielTr": "Ben zaten yedim."},
+  {"adv": "noch", "cat": "zaman", "emoji": "⏳", "tr": "hâlâ / daha", "beispiel": "Ich bin noch müde.", "beispielTr": "Hâlâ yorgunum."},
+  {"adv": "noch nicht", "cat": "zaman", "emoji": "🚫", "tr": "henüz değil", "beispiel": "Ich habe noch nicht gefrühstückt.", "beispielTr": "Henüz kahvaltı yapmadım."},
+  {"adv": "noch nie", "cat": "zaman", "emoji": "❌", "tr": "daha önce hiç", "beispiel": "Ich war noch nie in Wien.", "beispielTr": "Daha önce hiç Viyana'da bulunmadım."},
+  {"adv": "wieder", "cat": "zaman", "emoji": "🔁", "tr": "tekrar", "beispiel": "Kommst du morgen wieder?", "beispielTr": "Yarın tekrar gelecek misin?"},
+  {"adv": "dann", "cat": "zaman", "emoji": "➡️", "tr": "sonra / o zaman", "beispiel": "Erst esse ich, dann lerne ich.", "beispielTr": "Önce yerim, sonra çalışırım."},
+  {"adv": "danach", "cat": "zaman", "emoji": "⏩", "tr": "ondan sonra", "beispiel": "Danach gehen wir nach Hause.", "beispielTr": "Ondan sonra eve gideriz."},
+  {"adv": "vorher", "cat": "zaman", "emoji": "◀️", "tr": "öncesinde", "beispiel": "Vorher habe ich Kaffee getrunken.", "beispielTr": "Öncesinde kahve içtim."},
+  {"adv": "nachher", "cat": "zaman", "emoji": "▶️", "tr": "sonrasında", "beispiel": "Wir essen nachher zusammen.", "beispielTr": "Sonrasında birlikte yeriz."},
+  {"adv": "zuerst", "cat": "zaman", "emoji": "1️⃣", "tr": "önce / ilk olarak", "beispiel": "Zuerst mache ich Hausaufgaben.", "beispielTr": "Önce ödev yaparım."},
+  {"adv": "zuletzt", "cat": "zaman", "emoji": "🏁", "tr": "en son", "beispiel": "Zuletzt habe ich ihn im Mai gesehen.", "beispielTr": "Onu en son Mayıs'ta gördüm."},
+  {"adv": "endlich", "cat": "zaman", "emoji": "🎉", "tr": "nihayet", "beispiel": "Endlich ist Wochenende!", "beispielTr": "Nihayet hafta sonu!"},
+  {"adv": "plötzlich", "cat": "zaman", "emoji": "💥", "tr": "birdenbire", "beispiel": "Plötzlich klingelt das Telefon.", "beispielTr": "Birdenbire telefon çalıyor."},
+  {"adv": "lange", "cat": "zaman", "emoji": "⌛", "tr": "uzun süre", "beispiel": "Ich warte schon lange.", "beispielTr": "Uzun zamandır bekliyorum."},
+  {"adv": "morgens", "cat": "zaman", "emoji": "🌄", "tr": "sabahları", "beispiel": "Morgens trinke ich Tee.", "beispielTr": "Sabahları çay içerim."},
+  {"adv": "mittags", "cat": "zaman", "emoji": "🌞", "tr": "öğlenleri", "beispiel": "Mittags esse ich in der Kantine.", "beispielTr": "Öğlenleri kantinde yerim."},
+  {"adv": "abends", "cat": "zaman", "emoji": "🌆", "tr": "akşamları", "beispiel": "Abends sehe ich fern.", "beispielTr": "Akşamları televizyon izlerim."},
+  {"adv": "nachts", "cat": "zaman", "emoji": "🌙", "tr": "geceleri", "beispiel": "Nachts schlafe ich tief.", "beispielTr": "Geceleri derin uyurum."},
+  {"adv": "täglich", "cat": "zaman", "emoji": "🗓️", "tr": "her gün", "beispiel": "Ich lerne täglich Deutsch.", "beispielTr": "Her gün Almanca çalışıyorum."},
+  {"adv": "immer", "cat": "sikl", "emoji": "♾️", "tr": "her zaman", "beispiel": "Ich trinke immer Tee.", "beispielTr": "Her zaman çay içerim."},
+  {"adv": "meistens", "cat": "sikl", "emoji": "📊", "tr": "çoğunlukla", "beispiel": "Meistens fahre ich mit dem Bus.", "beispielTr": "Çoğunlukla otobüsle giderim."},
+  {"adv": "normalerweise", "cat": "sikl", "emoji": "📏", "tr": "normalde", "beispiel": "Normalerweise stehe ich um sieben auf.", "beispielTr": "Normalde yediye kalkarım."},
+  {"adv": "oft", "cat": "sikl", "emoji": "🔂", "tr": "sık sık", "beispiel": "Wir gehen oft spazieren.", "beispielTr": "Sık sık yürüyüşe çıkarız."},
+  {"adv": "manchmal", "cat": "sikl", "emoji": "🎲", "tr": "bazen", "beispiel": "Manchmal koche ich selbst.", "beispielTr": "Bazen kendim yemek pişiririm."},
+  {"adv": "selten", "cat": "sikl", "emoji": "🌫️", "tr": "nadiren", "beispiel": "Ich sehe selten fern.", "beispielTr": "Nadiren televizyon izlerim."},
+  {"adv": "nie", "cat": "sikl", "emoji": "⛔", "tr": "asla", "beispiel": "Ich rauche nie.", "beispielTr": "Asla sigara içmem."},
+  {"adv": "einmal", "cat": "sikl", "emoji": "☝️", "tr": "bir kez", "beispiel": "Ich war einmal in Rom.", "beispielTr": "Bir kez Roma'da bulundum."},
+  {"adv": "hier", "cat": "yer", "emoji": "📍", "tr": "burada", "beispiel": "Hier ist mein Platz.", "beispielTr": "Burası benim yerim."},
+  {"adv": "da", "cat": "yer", "emoji": "👈", "tr": "orada / burada", "beispiel": "Ist Herr Müller da?", "beispielTr": "Bay Müller burada mı?"},
+  {"adv": "dort", "cat": "yer", "emoji": "👉", "tr": "orada", "beispiel": "Dort steht mein Auto.", "beispielTr": "Arabam orada duruyor."},
+  {"adv": "links", "cat": "yer", "emoji": "⬅️", "tr": "solda / sola", "beispiel": "Das Bad ist links.", "beispielTr": "Banyo solda."},
+  {"adv": "rechts", "cat": "yer", "emoji": "➡️", "tr": "sağda / sağa", "beispiel": "Rechts ist die Bäckerei.", "beispielTr": "Sağda fırın var."},
+  {"adv": "geradeaus", "cat": "yer", "emoji": "⬆️", "tr": "dosdoğru", "beispiel": "Gehen Sie geradeaus.", "beispielTr": "Dümdüz gidin."},
+  {"adv": "oben", "cat": "yer", "emoji": "🔝", "tr": "yukarıda", "beispiel": "Das Schlafzimmer ist oben.", "beispielTr": "Yatak odası yukarıda."},
+  {"adv": "unten", "cat": "yer", "emoji": "⬇️", "tr": "aşağıda", "beispiel": "Der Keller ist unten.", "beispielTr": "Kiler aşağıda."},
+  {"adv": "vorne", "cat": "yer", "emoji": "⏫", "tr": "önde", "beispiel": "Ich sitze gern vorne.", "beispielTr": "Önde oturmayı severim."},
+  {"adv": "hinten", "cat": "yer", "emoji": "⏬", "tr": "arkada", "beispiel": "Hinten ist noch ein Platz frei.", "beispielTr": "Arkada hâlâ boş bir yer var."},
+  {"adv": "drinnen", "cat": "yer", "emoji": "🏠", "tr": "içeride", "beispiel": "Es regnet, bleib drinnen.", "beispielTr": "Yağmur yağıyor, içeride kal."},
+  {"adv": "draußen", "cat": "yer", "emoji": "🌳", "tr": "dışarıda", "beispiel": "Die Kinder spielen draußen.", "beispielTr": "Çocuklar dışarıda oynuyor."},
+  {"adv": "überall", "cat": "yer", "emoji": "🌍", "tr": "her yerde", "beispiel": "Überall liegen Bücher.", "beispielTr": "Her yerde kitaplar var."},
+  {"adv": "nirgends", "cat": "yer", "emoji": "🕳️", "tr": "hiçbir yerde", "beispiel": "Ich finde meinen Schlüssel nirgends.", "beispielTr": "Anahtarımı hiçbir yerde bulamıyorum."},
+  {"adv": "irgendwo", "cat": "yer", "emoji": "🧭", "tr": "bir yerde", "beispiel": "Er wohnt irgendwo in Köln.", "beispielTr": "O Köln'de bir yerde oturuyor."},
+  {"adv": "weit", "cat": "yer", "emoji": "🛣️", "tr": "uzak", "beispiel": "Die Schule ist nicht weit.", "beispielTr": "Okul uzak değil."},
+  {"adv": "in der Nähe", "cat": "yer", "emoji": "📌", "tr": "yakında / civarda", "beispiel": "Gibt es hier ein Café in der Nähe?", "beispielTr": "Burada yakınlarda bir kafe var mı?"},
+  {"adv": "zu Hause", "cat": "yer", "emoji": "🏡", "tr": "evde", "beispiel": "Ich bin heute zu Hause.", "beispielTr": "Bugün evdeyim."},
+  {"adv": "nach Hause", "cat": "yer", "emoji": "🚶", "tr": "eve (doğru)", "beispiel": "Ich gehe jetzt nach Hause.", "beispielTr": "Şimdi eve gidiyorum."},
+  {"adv": "zurück", "cat": "yer", "emoji": "↩️", "tr": "geri", "beispiel": "Ich komme gleich zurück.", "beispielTr": "Hemen geri geliyorum."},
+  {"adv": "sehr", "cat": "derece", "emoji": "💯", "tr": "çok", "beispiel": "Das Essen ist sehr gut.", "beispielTr": "Yemek çok güzel."},
+  {"adv": "zu", "cat": "derece", "emoji": "🔺", "tr": "fazla / aşırı", "beispiel": "Der Kaffee ist zu heiß.", "beispielTr": "Kahve fazla sıcak."},
+  {"adv": "ziemlich", "cat": "derece", "emoji": "📈", "tr": "oldukça", "beispiel": "Es ist ziemlich kalt.", "beispielTr": "Hava oldukça soğuk."},
+  {"adv": "ganz", "cat": "derece", "emoji": "🔵", "tr": "tamamen / oldukça", "beispiel": "Das ist ganz einfach.", "beispielTr": "Bu çok basit."},
+  {"adv": "besonders", "cat": "derece", "emoji": "⭐", "tr": "özellikle", "beispiel": "Ich mag besonders Pizza.", "beispielTr": "Özellikle pizzayı severim."},
+  {"adv": "wirklich", "cat": "derece", "emoji": "👌", "tr": "gerçekten", "beispiel": "Das ist wirklich schön.", "beispielTr": "Bu gerçekten güzel."},
+  {"adv": "echt", "cat": "derece", "emoji": "🤩", "tr": "gerçekten (günlük)", "beispiel": "Das war echt lecker.", "beispielTr": "Bu gerçekten lezzetliydi."},
+  {"adv": "total", "cat": "derece", "emoji": "🔥", "tr": "tamamen (günlük)", "beispiel": "Das ist total interessant.", "beispielTr": "Bu tamamen ilginç."},
+  {"adv": "fast", "cat": "derece", "emoji": "🤏", "tr": "neredeyse", "beispiel": "Ich bin fast fertig.", "beispielTr": "Neredeyse bitirdim."},
+  {"adv": "kaum", "cat": "derece", "emoji": "🪫", "tr": "zar zor / neredeyse hiç", "beispiel": "Ich habe kaum Zeit.", "beispielTr": "Neredeyse hiç vaktim yok."},
+  {"adv": "etwas", "cat": "derece", "emoji": "🥄", "tr": "biraz", "beispiel": "Ich bin etwas müde.", "beispielTr": "Biraz yorgunum."},
+  {"adv": "ein bisschen", "cat": "derece", "emoji": "🔹", "tr": "biraz", "beispiel": "Ich spreche ein bisschen Deutsch.", "beispielTr": "Biraz Almanca konuşuyorum."},
+  {"adv": "genug", "cat": "derece", "emoji": "🆗", "tr": "yeterince", "beispiel": "Ich habe genug gegessen.", "beispielTr": "Yeterince yedim."},
+  {"adv": "viel", "cat": "derece", "emoji": "➕", "tr": "çok (miktar)", "beispiel": "Er arbeitet viel.", "beispielTr": "O çok çalışıyor."},
+  {"adv": "wenig", "cat": "derece", "emoji": "➖", "tr": "az", "beispiel": "Sie schläft wenig.", "beispielTr": "O az uyuyor."},
+  {"adv": "mehr", "cat": "derece", "emoji": "⏫", "tr": "daha fazla", "beispiel": "Ich möchte mehr Wasser.", "beispielTr": "Daha fazla su istiyorum."},
+  {"adv": "weniger", "cat": "derece", "emoji": "⏬", "tr": "daha az", "beispiel": "Ich esse weniger Fleisch.", "beispielTr": "Daha az et yiyorum."},
+  {"adv": "nur", "cat": "derece", "emoji": "☝️", "tr": "sadece", "beispiel": "Ich habe nur zehn Euro.", "beispielTr": "Sadece on avroum var."},
+  {"adv": "auch", "cat": "derece", "emoji": "➕", "tr": "de / da, ayrıca", "beispiel": "Ich komme auch mit.", "beispielTr": "Ben de geliyorum."},
+  {"adv": "sogar", "cat": "derece", "emoji": "😲", "tr": "hatta", "beispiel": "Er spricht sogar drei Sprachen.", "beispielTr": "O hatta üç dil konuşuyor."},
+  {"adv": "ungefähr", "cat": "derece", "emoji": "〰️", "tr": "yaklaşık", "beispiel": "Es dauert ungefähr eine Stunde.", "beispielTr": "Yaklaşık bir saat sürer."},
+  {"adv": "so", "cat": "derece", "emoji": "🤷", "tr": "böyle / o kadar", "beispiel": "Das ist so schön!", "beispielTr": "Bu çok güzel!"},
+  {"adv": "gern", "cat": "tutum", "emoji": "❤️", "tr": "severek / memnuniyetle", "beispiel": "Ich lese gern Bücher.", "beispielTr": "Kitap okumayı severim."},
+  {"adv": "lieber", "cat": "tutum", "emoji": "💞", "tr": "tercihen", "beispiel": "Ich trinke lieber Tee.", "beispielTr": "Çay içmeyi tercih ederim."},
+  {"adv": "am liebsten", "cat": "tutum", "emoji": "😍", "tr": "en çok tercihen", "beispiel": "Am liebsten schlafe ich lange.", "beispielTr": "En çok uzun uyumayı severim."},
+  {"adv": "leider", "cat": "tutum", "emoji": "😔", "tr": "maalesef", "beispiel": "Leider habe ich keine Zeit.", "beispielTr": "Maalesef vaktim yok."},
+  {"adv": "vielleicht", "cat": "tutum", "emoji": "🤔", "tr": "belki", "beispiel": "Vielleicht komme ich morgen.", "beispielTr": "Belki yarın gelirim."},
+  {"adv": "natürlich", "cat": "tutum", "emoji": "👍", "tr": "tabii ki", "beispiel": "Natürlich helfe ich dir.", "beispielTr": "Tabii ki sana yardım ederim."},
+  {"adv": "sicher", "cat": "tutum", "emoji": "🔒", "tr": "kesin / elbette", "beispiel": "Sicher hast du recht.", "beispielTr": "Elbette haklısın."},
+  {"adv": "wahrscheinlich", "cat": "tutum", "emoji": "🌦️", "tr": "muhtemelen", "beispiel": "Es regnet wahrscheinlich morgen.", "beispielTr": "Muhtemelen yarın yağmur yağacak."},
+  {"adv": "hoffentlich", "cat": "tutum", "emoji": "🤞", "tr": "umarım", "beispiel": "Hoffentlich ist das Wetter schön.", "beispielTr": "Umarım hava güzel olur."},
+  {"adv": "eigentlich", "cat": "tutum", "emoji": "💡", "tr": "aslında", "beispiel": "Eigentlich bin ich Lehrer.", "beispielTr": "Aslında öğretmenim."},
+  {"adv": "genau", "cat": "tutum", "emoji": "🎯", "tr": "tam olarak / aynen", "beispiel": "Genau, das ist richtig!", "beispielTr": "Aynen, bu doğru!"},
+  {"adv": "allein", "cat": "tutum", "emoji": "🧍", "tr": "yalnız", "beispiel": "Ich wohne allein.", "beispielTr": "Yalnız yaşıyorum."},
+  {"adv": "zusammen", "cat": "tutum", "emoji": "🤝", "tr": "birlikte", "beispiel": "Wir lernen zusammen.", "beispielTr": "Birlikte çalışıyoruz."},
+  {"adv": "anders", "cat": "tutum", "emoji": "🔀", "tr": "farklı / başka türlü", "beispiel": "Das sieht anders aus.", "beispielTr": "Bu farklı görünüyor."},
+  {"adv": "umsonst", "cat": "tutum", "emoji": "🆓", "tr": "bedava / boşuna", "beispiel": "Der Eintritt ist umsonst.", "beispielTr": "Giriş ücretsiz."},
+  {"adv": "zufällig", "cat": "tutum", "emoji": "🎰", "tr": "tesadüfen", "beispiel": "Ich habe ihn zufällig getroffen.", "beispielTr": "Onunla tesadüfen karşılaştım."},
+  {"adv": "ebenfalls", "cat": "tutum", "emoji": "🙏", "tr": "aynı şekilde / size de", "beispiel": "Danke, ebenfalls!", "beispielTr": "Teşekkürler, size de!"},
+  {"adv": "gar nicht", "cat": "tutum", "emoji": "🙅", "tr": "hiç (değil)", "beispiel": "Das ist gar nicht schwer.", "beispielTr": "Bu hiç de zor değil."},
+  {"adv": "deshalb", "cat": "baglanti", "emoji": "🔗", "tr": "bu yüzden", "beispiel": "Ich bin krank, deshalb bleibe ich zu Hause.", "beispielTr": "Hastayım, bu yüzden evde kalıyorum."},
+  {"adv": "deswegen", "cat": "baglanti", "emoji": "🔗", "tr": "bu nedenle", "beispiel": "Es regnet, deswegen nehme ich einen Schirm.", "beispielTr": "Yağmur yağıyor, bu nedenle şemsiye alıyorum."},
+  {"adv": "darum", "cat": "baglanti", "emoji": "🔗", "tr": "bu yüzden (konuşma dili)", "beispiel": "Darum lerne ich Deutsch.", "beispielTr": "Bu yüzden Almanca öğreniyorum."},
+  {"adv": "trotzdem", "cat": "baglanti", "emoji": "🛡️", "tr": "yine de", "beispiel": "Es ist kalt, trotzdem gehen wir raus.", "beispielTr": "Hava soğuk, yine de dışarı çıkıyoruz."},
+  {"adv": "außerdem", "cat": "baglanti", "emoji": "➕", "tr": "ayrıca", "beispiel": "Er ist nett, außerdem ist er klug.", "beispielTr": "O nazik, ayrıca zeki."},
+  {"adv": "also", "cat": "baglanti", "emoji": "🧩", "tr": "yani / öyleyse", "beispiel": "Also, bis morgen!", "beispielTr": "Öyleyse, yarına kadar!"},
+  {"adv": "sonst", "cat": "baglanti", "emoji": "⚠️", "tr": "yoksa / başka türlü", "beispiel": "Beeil dich, sonst kommst du zu spät.", "beispielTr": "Acele et, yoksa geç kalırsın."},
+  {"adv": "zum Beispiel", "cat": "baglanti", "emoji": "📝", "tr": "örneğin", "beispiel": "Ich mag Obst, zum Beispiel Äpfel.", "beispielTr": "Meyveyi severim, örneğin elma."},
+  {"adv": "übrigens", "cat": "baglanti", "emoji": "💬", "tr": "bu arada", "beispiel": "Übrigens, morgen ist frei.", "beispielTr": "Bu arada, yarın tatil."}
+];
+const ADV_CATS = [["all","Tümü"],["zaman","⏰ Zaman"],["sikl","🔁 Sıklık"],["yer","📍 Yer & Yön"],["derece","📊 Derece"],["tutum","💭 Tutum & Tarz"],["baglanti","🔗 Bağlantı"]];
+let advWords = [];
+let revealedAdv = new Set();
+let advFilter = "all";
 let konjWords = [];
 let frageWords = [];
 let praepWords = [];
@@ -4990,6 +5127,9 @@ function loadData(){
   }catch(e){ konjWords = STARTER_KONJ.slice(); }
   sortByField(konjWords, "konj");
 
+  advWords = STARTER_ADV.slice();
+  sortByField(advWords, "adv");
+
   try{
     const fr = localStorage.getItem("artikel_frage");
     const localArr = fr ? JSON.parse(fr) : [];
@@ -5136,7 +5276,8 @@ const HOME_TILES = [
   {g:"Kelime · Wortschatz", items:[
     {t:"artikel", ic:"🏷️", n:"İsimler", de:"Nomen mit Artikel", s:()=>(typeof words!=="undefined"?words.length:"")+" kelime", c:"#2B5B8A"},
     {t:"verben", ic:"🏃", n:"Fiiller", de:"Verben", s:()=>(typeof verbs!=="undefined"?verbs.length:"")+" fiil", c:"#3F7A4E"},
-    {t:"adj", ic:"🎨", n:"Sıfatlar", de:"Adjektive", s:()=>(typeof adjectives!=="undefined"?adjectives.length:"")+" sıfat", c:"#C27A2C"}]},
+    {t:"adj", ic:"🎨", n:"Sıfatlar", de:"Adjektive", s:()=>(typeof adjectives!=="undefined"?adjectives.length:"")+" sıfat", c:"#C27A2C"},
+    {t:"adv", ic:"⏱️", n:"Zarflar", de:"Adverbien", s:()=>(typeof advWords!=="undefined"?advWords.length:"")+" zarf", c:"#D1568F"}]},
   {g:"Gramer · Grammatik", items:[
     {t:"konj", ic:"🔗", n:"Bağlaçlar", de:"Konjunktionen", s:()=>(typeof konjWords!=="undefined"?konjWords.length:"")+" bağlaç", c:"#8A5BB0"},
     {t:"praep", ic:"📍", n:"Edatlar", de:"Präpositionen", s:()=>(typeof praepWords!=="undefined"?praepWords.length:"")+" edat", c:"#A5334D"},
@@ -5211,6 +5352,7 @@ function switchTabInner(tab){
   document.getElementById("adjSection").style.display = tab === "adj" ? "block" : "none";
   document.getElementById("saatSection").style.display = tab === "saat" ? "block" : "none";
   document.getElementById("konjSection").style.display = tab === "konj" ? "block" : "none";
+  document.getElementById("advSection").style.display = tab === "adv" ? "block" : "none";
   document.getElementById("frageSection").style.display = tab === "frage" ? "block" : "none";
   document.getElementById("praepSection").style.display = tab === "praep" ? "block" : "none";
   document.getElementById("referansSection").style.display = tab === "referans" ? "block" : "none";
@@ -5219,6 +5361,7 @@ function switchTabInner(tab){
   document.getElementById("tabBtnAdj").classList.toggle("active", tab === "adj");
   document.getElementById("tabBtnSaat").classList.toggle("active", tab === "saat");
   document.getElementById("tabBtnKonj").classList.toggle("active", tab === "konj");
+  document.getElementById("tabBtnAdv").classList.toggle("active", tab === "adv");
   document.getElementById("tabBtnFrage").classList.toggle("active", tab === "frage");
   document.getElementById("tabBtnPraep").classList.toggle("active", tab === "praep");
   document.getElementById("tabBtnReferans").classList.toggle("active", tab === "referans");
@@ -5342,6 +5485,10 @@ function clearSearch(which){
   } else if(which === "saat"){
     document.getElementById("saatSearchInput").value = "";
     renderSaat();
+  } else if(which === "adv"){
+    document.getElementById("advSearchInput").value = "";
+    advFilter = "all";
+    renderAdv();
   } else if(which === "konj"){
     document.getElementById("konjSearchInput").value = "";
     renderKonj();
@@ -5464,10 +5611,10 @@ document.getElementById("wordTableBody").addEventListener("click", (e)=>{
 });
 
 function toggleReveal(which, idx){
-  const sets = {artikel:revealedWords, verben:revealedVerbs, adj:revealedAdj, saat:revealedSaat, konj:revealedKonj, frage:revealedFrage, praep:revealedPraep};
+  const sets = {artikel:revealedWords, verben:revealedVerbs, adj:revealedAdj, saat:revealedSaat, konj:revealedKonj, adv:revealedAdv, frage:revealedFrage, praep:revealedPraep};
   const set = sets[which] || revealedWords;
   if(set.has(idx)) set.delete(idx); else set.add(idx);
-  const renderers = {artikel:renderWords, verben:renderVerbs, adj:renderAdjectives, saat:renderSaat, konj:renderKonj, frage:renderFrage, praep:renderPraep};
+  const renderers = {artikel:renderWords, verben:renderVerbs, adj:renderAdjectives, saat:renderSaat, konj:renderKonj, adv:renderAdv, frage:renderFrage, praep:renderPraep};
   (renderers[which] || renderWords)();
 }
 
@@ -5572,6 +5719,7 @@ function openExampleModal(type, idx){
   else if(type === "adj"){ item = adjectives[idx]; title = item ? item.adj : ""; }
   else if(type === "saat"){ item = saatWords[idx]; title = item ? item.zeit : ""; }
   else if(type === "konj"){ item = konjWords[idx]; title = item ? item.konj : ""; }
+  else if(type === "adv"){ item = advWords[idx]; title = item ? item.adv : ""; }
   else if(type === "frage"){ item = frageWords[idx]; title = item ? item.frage : ""; }
   else if(type === "praep"){ item = praepWords[idx]; title = item ? item.praep : ""; }
   else { item = adjectives[idx]; title = item ? item.adj : ""; }
@@ -5891,6 +6039,43 @@ document.getElementById("konjTableBody").addEventListener("click", (e)=>{
   if(speakBtn){ const a = konjWords[parseInt(speakBtn.dataset.idx, 10)]; if(a) speak(a.konj); return; }
   const beispielBtn = e.target.closest(".beispiel-btn");
   if(beispielBtn){ openExampleModal("konj", parseInt(beispielBtn.dataset.idx, 10)); return; }
+});
+function setAdvFilter(c){ advFilter = c; renderAdv(); }
+function renderAdv(){
+  const tbody = document.getElementById("advTableBody");
+  const query = document.getElementById("advSearchInput").value.trim().toLowerCase();
+  const fb = document.getElementById("advFilters");
+  if(fb){
+    fb.innerHTML = ADV_CATS.map(c => '<button type="button" class="filter-btn'+(advFilter===c[0]?' active':'')+'" data-adv="'+c[0]+'" onclick="setAdvFilter(\''+c[0]+'\')">'+c[1]+'</button>').join("");
+  }
+  tbody.innerHTML = "";
+  const filtered = advWords.filter(a => (query || advFilter === "all" || a.cat === advFilter) &&
+    (!query || a.adv.toLowerCase().includes(query) || (a.tr||"").toLowerCase().includes(query)));
+  if(filtered.length === 0){
+    tbody.innerHTML = `<tr><td colspan="5" class="no-match">"${escapeHtml(query)}" için sonuç bulunamadı.</td></tr>`;
+    return;
+  }
+  filtered.forEach((a) => {
+    const realIdx = advWords.indexOf(a);
+    const revealed = revealedAdv.has(realIdx);
+    const tr = document.createElement("tr");
+    const disp = revealed ? `${escapeHtml(a.adv)} <span class="tr-part">— ${escapeHtml(a.tr) || "?"}</span>` : escapeHtml(a.adv);
+    tr.innerHTML = `
+      <td class="emoji-cell">${escapeHtml(a.emoji)}</td>
+      <td class="word-cell" data-idx="${realIdx}">${disp}</td>
+      <td class="speak-cell"><button class="speak-btn" data-idx="${realIdx}" title="Dinle">${SPEAK_SVG}</button></td>
+      <td><button class="beispiel-btn" data-idx="${realIdx}" title="Örnek cümle">📘</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+document.getElementById("advTableBody").addEventListener("click", (e)=>{
+  const wcell = e.target.closest(".word-cell");
+  if(wcell){ toggleReveal("adv", parseInt(wcell.dataset.idx, 10)); return; }
+  const speakBtn = e.target.closest(".speak-btn");
+  if(speakBtn){ const a = advWords[parseInt(speakBtn.dataset.idx, 10)]; if(a) speak(a.adv); return; }
+  const beispielBtn = e.target.closest(".beispiel-btn");
+  if(beispielBtn){ openExampleModal("adv", parseInt(beispielBtn.dataset.idx, 10)); return; }
 });
 /* ---------- SORU KELİMELERİ (W-FRAGEN) ---------- */
 function renderFrage(){
@@ -7582,6 +7767,7 @@ function buildOrderPool(){
   adjectives.forEach(a => { if(a.beispiel) pool.push({sentence:a.beispiel, translation:a.beispielTr, emoji:a.emoji}); });
   saatWords.forEach(s => { if(s.beispiel) pool.push({sentence:s.beispiel, translation:s.beispielTr, emoji:s.emoji}); });
   konjWords.forEach(k => { if(k.beispiel) pool.push({sentence:k.beispiel, translation:k.beispielTr, emoji:k.emoji}); });
+  advWords.forEach(k => { if(k.beispiel) pool.push({sentence:k.beispiel, translation:k.beispielTr, emoji:k.emoji}); });
   frageWords.forEach(f => { if(f.beispiel) pool.push({sentence:f.beispiel, translation:f.beispielTr, emoji:f.emoji}); });
   WORTSTELLUNG_PRACTICE.forEach(w => pool.push(w));
   MODAL_IMPERATIV_PRACTICE.forEach(w => pool.push(w));
@@ -8851,6 +9037,8 @@ function lookupWordMeaning(rawToken){
   if(hit) return hit.tr;
   hit = konjWords.find(k => k.konj.toLowerCase() === cleanLower);
   if(hit) return hit.tr;
+  hit = advWords.find(a => a.adv.toLowerCase() === cleanLower);
+  if(hit) return hit.tr;
   hit = frageWords.find(f => f.frage.toLowerCase() === cleanLower);
   if(hit) return hit.tr;
   hit = saatWords.find(s => s.zeit.toLowerCase() === cleanLower);
@@ -9220,6 +9408,7 @@ renderVerbs();
 renderAdjectives();
 renderSaat();
 renderKonj();
+renderAdv();
 renderFrage();
 renderPraep();
 updateStatDisplay();
@@ -9289,7 +9478,7 @@ const TEST_NAMES = {
 };
 
 function collectReportContext(){
-  const tabNames = {artikel:"İsimler", verben:"Fiiller", adj:"Sıfatlar", konj:"Bağlaçlar", praep:"Edatlar", saat:"Saatler & Takvim", frage:"Soru Kelimeleri", referans:"Hızlı Referans", hikayeler:"Hikâyeler", testler:"Testler", home:"Ana Sayfa"};
+  const tabNames = {artikel:"İsimler", verben:"Fiiller", adj:"Sıfatlar", konj:"Bağlaçlar", praep:"Edatlar", saat:"Saatler & Takvim", frage:"Soru Kelimeleri", referans:"Hızlı Referans", hikayeler:"Hikâyeler", testler:"Testler", adv:"Zarflar", home:"Ana Sayfa"};
   const txt = id => { const e = document.getElementById(id); return e ? (e.innerText || e.textContent || "").replace(/\s+/g," ").trim() : ""; };
   const sel = id => { const e = document.getElementById(id); return (e && e.selectedIndex >= 0) ? e.options[e.selectedIndex].text : ""; };
   const ctx = {place:"", lines:[]};
