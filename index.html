@@ -1372,13 +1372,46 @@ html[data-theme="dark"] .test-subtab:nth-child(2){border-color:#7fcf9a;}
 html[data-theme="dark"] .test-subtab:nth-child(3){border-color:#c9a3e0;}
 html[data-theme="dark"] .test-subtab:nth-child(4){border-color:#e8b27a;}
 html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
+
+  /* ===== ANA SAYFA (kart ızgarası) ===== */
+  .sidebar{display:none !important;}
+  main, main.no-right{grid-template-columns:minmax(0,1fr);}
+  main.tests-only{grid-template-columns:minmax(0,820px);justify-content:start;}
+  #homeScreen{max-width:1100px;margin:22px auto 0;padding:0 20px 60px;}
+  .home-resume{display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;font-family:inherit;
+    background:linear-gradient(135deg,var(--teal),var(--deep));color:var(--tx-cream);border:0;border-left:5px solid var(--brass);
+    border-radius:6px;padding:14px 16px;margin-bottom:6px;font-size:15px;}
+  .home-resume small{display:block;opacity:.8;font-size:12px;margin-bottom:2px;}
+  .home-resume .go{margin-left:auto;font-size:22px;}
+  .home-group-title{margin:22px 2px 10px;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--brass);
+    font-family:system-ui,Helvetica,Arial,sans-serif;font-weight:700;}
+  .home-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+  .home-tile{display:flex;flex-direction:column;gap:6px;text-align:left;cursor:pointer;font-family:inherit;color:var(--ink);
+    background:var(--x-bg-ffffff);border:1px solid var(--line);border-top:5px solid var(--tc,#C9A66B);border-radius:8px;
+    padding:16px 14px 14px;min-height:118px;transition:transform .12s,box-shadow .12s;}
+  .home-tile:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(15,42,61,.14);}
+  .home-tile:active{transform:scale(.98);}
+  .home-tile .ht-ic{font-size:30px;line-height:1;}
+  .home-tile .ht-t{font-size:16px;font-weight:700;line-height:1.2;}
+  .home-tile .ht-s{overflow-wrap:anywhere;font-size:12.5px;color:var(--x-tx-555555,#555);font-family:system-ui,Helvetica,Arial,sans-serif;}
+  #subBar{display:none;position:sticky;top:0;z-index:60;align-items:center;gap:12px;padding:8px 16px;
+    background:var(--deep);color:var(--tx-cream);border-bottom:3px solid var(--brass);}
+  #subBar button{cursor:pointer;font-family:system-ui,Helvetica,Arial,sans-serif;font-size:14px;font-weight:700;
+    background:var(--brass);color:#0F2A3D;border:0;border-radius:999px;padding:8px 14px;white-space:nowrap;}
+  #subBar span{font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  html[data-theme="dark"] .home-tile{background:#18262e;border-color:#2b3b44;color:#e6e0d0;border-top-color:var(--tc);}
+  html[data-theme="dark"] .home-tile .ht-s{color:#b9b3a3;}
+  html[data-theme="dark"] .home-tile:hover{box-shadow:0 6px 16px rgba(0,0,0,.5);}
+  html[data-theme="dark"] .home-group-title{color:#d3b27a;}
+  @media (max-width:900px){ .home-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;} #homeScreen{padding:0 14px 60px;} .home-grid .home-tile:last-child:nth-child(odd){grid-column:1/-1;min-height:92px;} }
+  @media (max-width:340px){ .home-tile{padding:12px 10px;min-height:104px;} .home-tile .ht-t{font-size:14.5px;} }
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 
-<header>
+<header id="appHeader">
   <div class="header-top">
     <div>
       <h1>Almanca Kişisel Çalışma Antrenörü</h1>
@@ -1391,6 +1424,8 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
     </div>
   </div>
 </header>
+<div id="subBar"><button type="button" onclick="switchTab('home')" aria-label="Ana sayfaya dön">← Ana Sayfa</button><span id="subBarTitle"></span></div>
+<div id="homeScreen" aria-label="Ana sayfa"></div>
 
 <main>
   <nav class="sidebar">
@@ -5059,7 +5094,75 @@ function saveWordStats(){
   catch(e){ /* istatistik kaydı kritik değil, sessiz geç */ }
 }
 
+/* ===== ANA SAYFA ===== */
+const HOME_TILES = [
+  {g:"Kelime", items:[
+    {t:"artikel", ic:"🏷️", n:"İsimler", s:()=>(typeof words!=="undefined"?words.length:"")+" kelime · artikel", c:"#2B5B8A"},
+    {t:"verben", ic:"🏃", n:"Fiiller", s:()=>(typeof verbs!=="undefined"?verbs.length:"")+" fiil · çekimler", c:"#3F7A4E"},
+    {t:"adj", ic:"🎨", n:"Sıfatlar", s:()=>(typeof adjectives!=="undefined"?adjectives.length:"")+" sıfat · zıtlar", c:"#C27A2C"}]},
+  {g:"Gramer", items:[
+    {t:"konj", ic:"🔗", n:"Bağlaçlar", s:()=>"Konjunktionen", c:"#8A5BB0"},
+    {t:"praep", ic:"📍", n:"Edatlar", s:()=>"Präpositionen", c:"#A5334D"},
+    {t:"frage", ic:"❓", n:"Soru Kelimeleri", s:()=>"W-Fragen", c:"#2C8C99"},
+    {t:"saat", ic:"🕒", n:"Saatler & Takvim", s:()=>"Uhrzeit & Kalender", c:"#B59A1F"},
+    {t:"referans", ic:"📌", n:"Hızlı Referans", s:()=>"Gramer kuralları", c:"#B5502F"}]},
+  {g:"Pratik", items:[
+    {t:"hikayeler", ic:"📖", n:"Hikâyeler", s:()=>(typeof STORIES!=="undefined"?STORIES.length:"")+" kısa hikâye", c:"#5B6FBF"},
+    {t:"testler", ic:"🎯", n:"Testler", s:()=>"Antrenman modu", c:"#C9A66B"}]}
+];
+const TAB_TITLES = {};
+HOME_TILES.forEach(g=>g.items.forEach(i=>{TAB_TITLES[i.t]=i.ic+" "+i.n;}));
+function renderHome(){
+  const el = document.getElementById("homeScreen"); if(!el) return;
+  let last = null;
+  try{ last = localStorage.getItem("artikel_last_tab"); }catch(e){}
+  let h = "";
+  if(last && TAB_TITLES[last]){
+    h += '<button type="button" class="home-resume" onclick="switchTab(\''+last+'\')"><span><small>Kaldığın yerden devam et</small>'+TAB_TITLES[last]+'</span><span class="go">▶</span></button>';
+  }
+  HOME_TILES.forEach(g=>{
+    h += '<div class="home-group-title">'+g.g+'</div><div class="home-grid">';
+    g.items.forEach(i=>{
+      h += '<button type="button" class="home-tile" style="--tc:'+i.c+'" onclick="switchTab(\''+i.t+'\')"><span class="ht-ic">'+i.ic+'</span><span class="ht-t">'+i.n+'</span><span class="ht-s">'+i.s()+'</span></button>';
+    });
+    h += '</div>';
+  });
+  el.innerHTML = h;
+}
+window.__popping = false;
+window.addEventListener("popstate", function(e){
+  window.__popping = true;
+  try{ switchTab((e.state && e.state.tab) || "home"); }finally{ window.__popping = false; }
+});
+
 function switchTab(tab){
+  const hs = document.getElementById("homeScreen"), hdr = document.getElementById("appHeader"),
+        sb = document.getElementById("subBar"), mn = document.querySelector("main");
+  activeTab = tab;
+  try{
+    if(!window.__popping){
+      const cur = history.state && history.state.tab;
+      if(cur !== tab) history.pushState({tab:tab}, "", location.pathname + location.search);
+    }
+  }catch(e){}
+  if(tab === "home"){
+    renderHome();
+    if(hs) hs.style.display = "block";
+    if(hdr) hdr.style.display = "";
+    if(sb) sb.style.display = "none";
+    if(mn) mn.style.display = "none";
+    try{ window.scrollTo(0, 0); }catch(e){}
+    return;
+  }
+  if(hs) hs.style.display = "none";
+  if(hdr) hdr.style.display = "none";
+  if(sb){ sb.style.display = "flex"; const st = document.getElementById("subBarTitle"); if(st) st.textContent = TAB_TITLES[tab] || ""; }
+  if(mn) mn.style.display = "";
+  try{ localStorage.setItem("artikel_last_tab", tab); }catch(e){}
+  switchTabInner(tab);
+}
+
+function switchTabInner(tab){
   activeTab = tab;
   document.getElementById("artikelSection").style.display = tab === "artikel" ? "block" : "none";
   document.getElementById("verbenSection").style.display = tab === "verben" ? "block" : "none";
@@ -9075,7 +9178,7 @@ const TEST_NAMES = {
 };
 
 function collectReportContext(){
-  const tabNames = {artikel:"İsimler", verben:"Fiiller", adj:"Sıfatlar", konj:"Bağlaçlar", praep:"Edatlar", saat:"Saatler & Takvim", frage:"Soru Kelimeleri", referans:"Hızlı Referans", hikayeler:"Hikâyeler", testler:"Testler"};
+  const tabNames = {artikel:"İsimler", verben:"Fiiller", adj:"Sıfatlar", konj:"Bağlaçlar", praep:"Edatlar", saat:"Saatler & Takvim", frage:"Soru Kelimeleri", referans:"Hızlı Referans", hikayeler:"Hikâyeler", testler:"Testler", home:"Ana Sayfa"};
   const txt = id => { const e = document.getElementById(id); return e ? (e.innerText || e.textContent || "").replace(/\s+/g," ").trim() : ""; };
   const sel = id => { const e = document.getElementById(id); return (e && e.selectedIndex >= 0) ? e.options[e.selectedIndex].text : ""; };
   const ctx = {place:"", lines:[]};
@@ -9892,7 +9995,8 @@ applyTheme(currentThemePref(), false);
   document.addEventListener("focusout", () => { setTimeout(() => { if(!isField(document.activeElement)) show(); }, 250); });
 })();
 switchTestGroup(savedTestGroup);
-switchTab("artikel");
+try{ history.replaceState({tab:"home"}, "", location.pathname + location.search); }catch(e){}
+switchTab("home");
 </script>
 
 <script>
