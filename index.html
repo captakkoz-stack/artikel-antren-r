@@ -1431,6 +1431,16 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
   html[data-theme="dark"] .home-tile .ht-de{color:#d3b27a;}
   .home-tile .ht-t{font-size:17px;}
   #subBarTitle{min-width:0;}
+  /* ===== Referans menüsü ===== */
+  #refMenu{margin-top:6px;}
+  #refMenu .home-grid{margin-top:4px;}
+  #refMenu .home-tile{--tc:#1E7B5A;}
+  .ref-subtabs{flex-wrap:nowrap !important;overflow-x:auto;gap:8px;padding:2px 2px 8px;margin:10px 0 4px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;}
+  .ref-subtab{flex:none;white-space:nowrap !important;max-width:none !important;}
+  #subBarBack2{display:none;background:transparent !important;color:var(--tx-cream) !important;border:1px solid var(--brass) !important;}
+  .home-tile{white-space:normal;min-width:0;overflow:hidden;}
+  .home-tile .ht-t,.home-tile .ht-de{overflow-wrap:anywhere;}
+  @media (max-width:520px){ #subBar.in-group #subBarTitle{display:none;} }
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1450,7 +1460,7 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
     </div>
   </div>
 </header>
-<div id="subBar"><button type="button" onclick="switchTab('home')" aria-label="Ana sayfaya dön">← Ana Sayfa</button><span id="subBarTitle"></span></div>
+<div id="subBar"><button type="button" onclick="switchTab('home')" aria-label="Ana sayfaya dön">← Ana Sayfa</button><button type="button" id="subBarBack2" onclick="refBackToMenu()">← Referans</button><span id="subBarTitle"></span></div>
 <div id="homeScreen" aria-label="Ana sayfa"></div>
 
 <main>
@@ -1680,7 +1690,8 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
       <input type="text" id="refSearch" placeholder="Tüm kartlarda ara… (ör. Dativ, weil, man, edat)" oninput="debouncedSearch('applyRefSearch')">
       <button class="btn-ghost" onclick="clearRefSearch()">Temizle</button>
     </div>
-    <div class="ref-tools">
+    <div id="refMenu"></div>
+    <div class="ref-tools" id="refTools">
       <button class="btn-ghost" onclick="refToggleAll(true)">Hepsini aç</button>
       <button class="btn-ghost" onclick="refToggleAll(false)">Hepsini kapat</button>
     </div>
@@ -5160,6 +5171,7 @@ function renderHome(){
 window.__popping = false;
 window.addEventListener("popstate", function(e){
   window.__popping = true;
+  window.__refGroup = (e.state && e.state.g) || null;
   try{ switchTab((e.state && e.state.tab) || "home"); }finally{ window.__popping = false; }
 });
 
@@ -5169,8 +5181,9 @@ function switchTab(tab){
   activeTab = tab;
   try{
     if(!window.__popping){
+      window.__refGroup = null;
       const cur = history.state && history.state.tab;
-      if(cur !== tab) history.pushState({tab:tab}, "", location.pathname + location.search);
+      if(cur !== tab) history.pushState({tab:tab, g:null}, "", location.pathname + location.search);
     }
   }catch(e){}
   if(tab === "home"){
@@ -5211,9 +5224,9 @@ function switchTabInner(tab){
   document.getElementById("tabBtnReferans").classList.toggle("active", tab === "referans");
   document.getElementById("hikayelerSection").style.display = tab === "hikayeler" ? "block" : "none";
   document.getElementById("tabBtnHikayeler").classList.toggle("active", tab === "hikayeler");
-  if(tab === "referans" && !document.querySelector("#referansSection .ref-group[style*='block']")){
-    switchReferansGroup("nomen");
-  }
+  if(tab === "referans"){
+    if(window.__refGroup){ switchReferansGroup(window.__refGroup); } else { refShowMenu(); }
+  } else { const b2 = document.getElementById("subBarBack2"); if(b2) b2.style.display = "none"; }
   const tb = document.getElementById("tabBtnTestler"); if(tb) tb.classList.toggle("active", tab === "testler");
   const rightPanel = document.getElementById("rightPanel");
   if(rightPanel) rightPanel.style.display = (tab === "testler") ? "" : "none";
@@ -5227,7 +5240,74 @@ function switchTabInner(tab){
   }
 }
 
+const REF_GROUPS = [
+  {id:"nomen", ic:"🏷️", n:"İsimler", de:"Nomen"},
+  {id:"satz", ic:"📐", n:"Cümle Yapısı & Olumsuzluk", de:"Satzbau & Verneinung"},
+  {id:"zamir", ic:"🔤", n:"Zamirler & İyelik", de:"Pronomen & Possessiv"},
+  {id:"verben", ic:"🧱", n:"Fiiller", de:"Verben"},
+  {id:"perfekt", ic:"⏪", n:"Geçmiş Zaman", de:"Perfekt & Präteritum"},
+  {id:"dativ", ic:"📍", n:"Akkusativ & Dativ", de:"Kasus · Hâller"},
+  {id:"saatler", ic:"⏰", n:"Saatler & Takvim", de:"Uhrzeit & Kalender"},
+  {id:"frage", ic:"❓", n:"Soru Kelimeleri", de:"W-Fragen"},
+  {id:"praep", ic:"🧭", n:"Edatlar", de:"Präpositionen"},
+  {id:"wechsel", ic:"🔀", n:"Wechsel & Kısaltmalar", de:"Wechsel & Abkürzungen"}
+];
+window.__refGroup = null;
+function refCap(g){ return g.charAt(0).toUpperCase() + g.slice(1); }
+function renderRefMenu(){
+  const el = document.getElementById("refMenu"); if(!el) return;
+  let h = '<div class="home-grid">';
+  REF_GROUPS.forEach(g => {
+    const gel = document.getElementById("refGroup" + refCap(g.id));
+    const n = gel ? gel.querySelectorAll("section.ref-sec").length : 0;
+    h += '<button type="button" class="home-tile" onclick="switchReferansGroup(\''+g.id+'\')"><span class="ht-ic">'+g.ic+'</span><span class="ht-t">'+g.n+'</span><span class="ht-de">'+g.de+'</span><span class="ht-s">'+n+' kart</span></button>';
+  });
+  el.innerHTML = h + '</div>';
+}
+function refUpdateView(){
+  const rs = document.getElementById("refSearch");
+  const q = rs ? rs.value.trim() : "";
+  const inMenu = !window.__refGroup && !q;
+  const show = (id, on) => { const e = document.getElementById(id); if(e) e.style.display = on ? "" : "none"; };
+  show("refMenu", inMenu);
+  show("refTools", !inMenu);
+  const tabs = document.querySelector("#referansSection .ref-subtabs"); if(tabs) tabs.style.display = (window.__refGroup && !q) ? "flex" : "none";
+  const b2 = document.getElementById("subBarBack2");
+  const onRef = (typeof activeTab !== "undefined" && activeTab === "referans");
+  if(b2) b2.style.display = (onRef && window.__refGroup) ? "inline-block" : "none";
+  const sbar = document.getElementById("subBar"); if(sbar) sbar.classList.toggle("in-group", !!(onRef && window.__refGroup));
+  const st = document.getElementById("subBarTitle");
+  if(st && onRef){
+    const g = REF_GROUPS.filter(x => x.id === window.__refGroup)[0];
+    st.textContent = g ? g.ic + " " + g.n : TAB_TITLES.referans;
+  }
+  const hint = document.getElementById("refHint"); if(hint && inMenu) hint.style.display = "none";
+  if(window.__refGroup && !q){
+    const act = document.querySelector("#referansSection .ref-subtab.active");
+    if(act && tabs){ try{ tabs.scrollLeft = act.offsetLeft - (tabs.clientWidth - act.offsetWidth)/2; }catch(e){} }
+  }
+}
+function refShowMenu(){
+  window.__refGroup = null;
+  REF_GROUPS.forEach(g => {
+    const e = document.getElementById("refGroup" + refCap(g.id)); if(e) e.style.display = "none";
+    const t = document.getElementById("refTab" + refCap(g.id)); if(t) t.classList.remove("active");
+  });
+  const rs = document.getElementById("refSearch"); if(rs && rs.value){ rs.value = ""; applyRefSearch(); }
+  renderRefMenu(); refUpdateView();
+}
+function refBackToMenu(){
+  if(history.state && history.state.g){ try{ history.back(); return; }catch(e){} }
+  refShowMenu(); try{ window.scrollTo(0,0); }catch(e){}
+}
 function switchReferansGroup(group){
+  window.__refGroup = group;
+  try{
+    if(!window.__popping && !(history.state && history.state.g === group)){
+      if(history.state && history.state.g) history.replaceState({tab:"referans", g:group}, "", location.pathname + location.search);
+      else history.pushState({tab:"referans", g:group}, "", location.pathname + location.search);
+    }
+  }catch(e){}
   const rsb = document.getElementById("refSearch");
   if(rsb && rsb.value){ rsb.value = ""; applyRefSearch(); }
   ["nomen","satz","zamir","verben","perfekt","dativ","saatler","frage","praep","wechsel"].forEach(g => {
@@ -5235,6 +5315,8 @@ function switchReferansGroup(group){
     document.getElementById("refGroup" + capitalized).style.display = (g === group) ? "block" : "none";
     document.getElementById("refTab" + capitalized).classList.toggle("active", g === group);
   });
+  refUpdateView();
+  if(!window.__popping){ try{ window.scrollTo(0, 0); }catch(e){} }
 }
 
 function switchTestGroup(group){
@@ -9402,6 +9484,7 @@ function applyRefSearch(){
   info.style.display = q ? "" : "none";
   hint.style.display = q ? "none" : "";
   info.textContent = q ? (hits ? hits + " kart bulundu (tüm sekmelerde)" : "Sonuç yok. Başka bir kelime dene.") : "";
+  if(typeof refUpdateView === "function") refUpdateView();
 }
 function clearRefSearch(){
   document.getElementById("refSearch").value = "";
