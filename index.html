@@ -9030,6 +9030,35 @@ try{
   });
 })();
 
+/* ---------- KULLANIM SÜRESİ (GoatCounter olayları) ----------
+   Sayfa görünürken ve kullanıcı etkileşimdeyken (son 2 dk içinde dokunma/tıklama/kaydırma/tuş) geçen süre sayılır.
+   Eşikler aşılınca "sure-05dk" gibi bir olay gönderilir: GoatCounter'da "Events" bölümünde kaç kişinin
+   en az X dakika kullandığı görünür. Kişisel veri gönderilmez. */
+(function(){
+  var MARKS = [1,2,3,5,10,15,20,30,45,60];
+  var IDLE_MS = 120000, TICK_MS = 5000;
+  var active = 0, last = Date.now(), lastAct = Date.now(), sent = {};
+  function pad(n){ return n < 10 ? "0" + n : "" + n; }
+  function act(){ lastAct = Date.now(); }
+  ["pointerdown","keydown","touchstart","scroll","click"].forEach(function(ev){
+    try{ window.addEventListener(ev, act, {passive:true, capture:true}); }catch(e){}
+  });
+  function tick(){
+    var now = Date.now(), d = now - last; last = now;
+    if(document.hidden || d > 30000) return;
+    if(now - lastAct <= IDLE_MS) active += d;
+    var mins = active / 60000;
+    MARKS.forEach(function(m){
+      if(mins >= m && !sent[m] && window.goatcounter && typeof window.goatcounter.count === "function"){
+        sent[m] = 1;
+        try{ window.goatcounter.count({path: "sure-" + pad(m) + "dk", title: "Aktif süre en az " + m + " dk", event: true}); }catch(e){}
+      }
+    });
+  }
+  setInterval(tick, TICK_MS);
+  document.addEventListener("visibilitychange", function(){ if(document.hidden){ tick(); } else { last = Date.now(); } });
+})();
+
 /* ---------- HATA BİLDİR SİSTEMİ ---------- */
 // İstersen doldur: whatsapp: "905551112233" (ülke kodlu, + ve boşluk yok), email: "ad@ornek.com"
 const REPORT_CONFIG = { whatsapp: "", email: "" };
