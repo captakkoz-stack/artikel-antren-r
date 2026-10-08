@@ -1376,7 +1376,7 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
   /* ===== ANA SAYFA (kart ızgarası) ===== */
   .sidebar{display:none !important;}
   main, main.no-right{grid-template-columns:minmax(0,1fr);}
-  main.tests-only{grid-template-columns:minmax(0,820px);justify-content:start;}
+  main.tests-only{grid-template-columns:minmax(0,1fr);justify-content:stretch;}
   #homeScreen{max-width:1100px;margin:22px auto 0;padding:0 20px 60px;}
   .home-resume{display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;font-family:inherit;
     background:linear-gradient(135deg,var(--teal),var(--deep));color:var(--tx-cream);border:0;border-left:5px solid var(--brass);
@@ -1405,6 +1405,32 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
   html[data-theme="dark"] .home-group-title{color:#d3b27a;}
   @media (max-width:900px){ .home-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;} #homeScreen{padding:0 14px 60px;} .home-grid .home-tile:last-child:nth-child(odd){grid-column:1/-1;min-height:92px;} }
   @media (max-width:340px){ .home-tile{padding:12px 10px;min-height:104px;} .home-tile .ht-t{font-size:14.5px;} }
+
+  /* ===== düzen cilası ===== */
+  main{max-width:1040px;}
+  main.tests-only{margin-left:auto;margin-right:auto;}
+  #homeScreen{max-width:1040px;}
+  #subBar{padding-left:max(16px,calc((100% - 1040px)/2 + 20px));padding-right:16px;border-bottom-color:var(--tabc,#C9A66B);}
+  #subBarTitle{font-size:16px;letter-spacing:.2px;}
+  main .panel{border-top:4px solid var(--tabc,var(--line));border-radius:6px;box-shadow:0 1px 3px rgba(15,42,61,.06);}
+  main .panel h2{letter-spacing:.2px;}
+  html[data-theme="dark"] main .panel{box-shadow:none;}
+  .home-tile.wide{flex-direction:row;align-items:center;gap:14px;min-height:0;padding:16px 18px;grid-column:1/-1;
+    background:linear-gradient(135deg,#17624A,#0E3D2E);color:#F2EBD9;border:1px solid #0E3D2E;border-left:6px solid #D3B27A;border-top-width:1px;}
+  .home-tile.wide .ht-ic{font-size:34px;}
+  .home-tile.wide .ht-s{color:#CFE3D8;}
+  .home-tile.wide .ht-txt{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 auto;} .home-tile.wide .ht-ic,.home-tile.wide .ht-go{flex:none;}
+  .home-tile.wide .ht-go{margin-left:auto;font-size:22px;color:#D3B27A;}
+  html[data-theme="dark"] .home-tile.wide{background:linear-gradient(135deg,#1C5A46,#123528);border-color:#2b4a3d;color:#F2EBD9;border-left-color:#D3B27A;}
+  html[data-theme="dark"] .home-tile.wide .ht-s{color:#B9D3C6;}
+  @media (min-width:901px){ .home-grid{grid-template-columns:repeat(4,minmax(0,1fr));} .home-grid.g3{grid-template-columns:repeat(3,minmax(0,1fr));} }
+  .home-tile .ht-de{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:13.5px;color:var(--teal);margin-top:-2px;overflow-wrap:anywhere;}
+  .home-tile .ht-s{margin-top:auto;font-size:11.5px;letter-spacing:.3px;text-transform:uppercase;opacity:.85;}
+  .home-tile.wide .ht-de{color:#D3B27A;}
+  .home-tile.wide .ht-s{margin-top:0;text-transform:none;font-size:12.5px;}
+  html[data-theme="dark"] .home-tile .ht-de{color:#d3b27a;}
+  .home-tile .ht-t{font-size:17px;}
+  #subBarTitle{min-width:0;}
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -5096,22 +5122,23 @@ function saveWordStats(){
 
 /* ===== ANA SAYFA ===== */
 const HOME_TILES = [
-  {g:"Kelime", items:[
-    {t:"artikel", ic:"🏷️", n:"İsimler", s:()=>(typeof words!=="undefined"?words.length:"")+" kelime · artikel", c:"#2B5B8A"},
-    {t:"verben", ic:"🏃", n:"Fiiller", s:()=>(typeof verbs!=="undefined"?verbs.length:"")+" fiil · çekimler", c:"#3F7A4E"},
-    {t:"adj", ic:"🎨", n:"Sıfatlar", s:()=>(typeof adjectives!=="undefined"?adjectives.length:"")+" sıfat · zıtlar", c:"#C27A2C"}]},
-  {g:"Gramer", items:[
-    {t:"konj", ic:"🔗", n:"Bağlaçlar", s:()=>"Konjunktionen", c:"#8A5BB0"},
-    {t:"praep", ic:"📍", n:"Edatlar", s:()=>"Präpositionen", c:"#A5334D"},
-    {t:"frage", ic:"❓", n:"Soru Kelimeleri", s:()=>"W-Fragen", c:"#2C8C99"},
-    {t:"saat", ic:"🕒", n:"Saatler & Takvim", s:()=>"Uhrzeit & Kalender", c:"#B59A1F"},
-    {t:"referans", ic:"📌", n:"Hızlı Referans", s:()=>"Gramer kuralları", c:"#B5502F"}]},
-  {g:"Pratik", items:[
-    {t:"hikayeler", ic:"📖", n:"Hikâyeler", s:()=>(typeof STORIES!=="undefined"?STORIES.length:"")+" kısa hikâye", c:"#5B6FBF"},
-    {t:"testler", ic:"🎯", n:"Testler", s:()=>"Antrenman modu", c:"#C9A66B"}]}
+  {g:"Kelime · Wortschatz", items:[
+    {t:"artikel", ic:"🏷️", n:"İsimler", de:"Nomen mit Artikel", s:()=>(typeof words!=="undefined"?words.length:"")+" kelime", c:"#2B5B8A"},
+    {t:"verben", ic:"🏃", n:"Fiiller", de:"Verben", s:()=>(typeof verbs!=="undefined"?verbs.length:"")+" fiil", c:"#3F7A4E"},
+    {t:"adj", ic:"🎨", n:"Sıfatlar", de:"Adjektive", s:()=>(typeof adjectives!=="undefined"?adjectives.length:"")+" sıfat", c:"#C27A2C"}]},
+  {g:"Gramer · Grammatik", items:[
+    {t:"konj", ic:"🔗", n:"Bağlaçlar", de:"Konjunktionen", s:()=>(typeof konjWords!=="undefined"?konjWords.length:"")+" bağlaç", c:"#8A5BB0"},
+    {t:"praep", ic:"📍", n:"Edatlar", de:"Präpositionen", s:()=>(typeof praepWords!=="undefined"?praepWords.length:"")+" edat", c:"#A5334D"},
+    {t:"frage", ic:"❓", n:"Soru Kelimeleri", de:"W-Fragen", s:()=>(typeof frageWords!=="undefined"?frageWords.length:"")+" soru kelimesi", c:"#2C8C99"},
+    {t:"saat", ic:"🕒", n:"Saatler & Takvim", de:"Uhrzeit & Kalender", s:()=>(typeof saatWords!=="undefined"?saatWords.length:"")+" kelime", c:"#B59A1F"}]},
+  {g:"Referans · Nachschlagen", wide:true, items:[
+    {t:"referans", ic:"📌", n:"Hızlı Referans", de:"Grammatik-Kurzübersicht", s:()=>"Kurallar · tablolar · örnekler", c:"#1E7B5A"}]},
+  {g:"Pratik · Üben", items:[
+    {t:"hikayeler", ic:"📖", n:"Hikâyeler", de:"Kleine Geschichten", s:()=>(typeof STORIES!=="undefined"?STORIES.length:"")+" kısa hikâye", c:"#5B6FBF"},
+    {t:"testler", ic:"🎯", n:"Testler", de:"Tests & Übungen", s:()=>"Antrenman modu", c:"#C9A66B"}]}
 ];
-const TAB_TITLES = {};
-HOME_TILES.forEach(g=>g.items.forEach(i=>{TAB_TITLES[i.t]=i.ic+" "+i.n;}));
+const TAB_TITLES = {}, TAB_COLORS = {};
+HOME_TILES.forEach(g=>g.items.forEach(i=>{TAB_TITLES[i.t]=i.ic+" "+i.n+" · "+i.de; TAB_COLORS[i.t]=i.c;}));
 function renderHome(){
   const el = document.getElementById("homeScreen"); if(!el) return;
   let last = null;
@@ -5121,9 +5148,10 @@ function renderHome(){
     h += '<button type="button" class="home-resume" onclick="switchTab(\''+last+'\')"><span><small>Kaldığın yerden devam et</small>'+TAB_TITLES[last]+'</span><span class="go">▶</span></button>';
   }
   HOME_TILES.forEach(g=>{
-    h += '<div class="home-group-title">'+g.g+'</div><div class="home-grid">';
+    h += '<div class="home-group-title">'+g.g+'</div><div class="home-grid'+(g.items.length===3?' g3':'')+'">';
     g.items.forEach(i=>{
-      h += '<button type="button" class="home-tile" style="--tc:'+i.c+'" onclick="switchTab(\''+i.t+'\')"><span class="ht-ic">'+i.ic+'</span><span class="ht-t">'+i.n+'</span><span class="ht-s">'+i.s()+'</span></button>';
+      if(g.wide) h += '<button type="button" class="home-tile wide" style="--tc:'+i.c+'" onclick="switchTab(\''+i.t+'\')"><span class="ht-ic">'+i.ic+'</span><span class="ht-txt"><span class="ht-t">'+i.n+'</span><span class="ht-de">'+i.de+'</span><span class="ht-s">'+i.s()+'</span></span><span class="ht-go">▶</span></button>';
+      else h += '<button type="button" class="home-tile" style="--tc:'+i.c+'" onclick="switchTab(\''+i.t+'\')"><span class="ht-ic">'+i.ic+'</span><span class="ht-t">'+i.n+'</span><span class="ht-de">'+i.de+'</span><span class="ht-s">'+i.s()+'</span></button>';
     });
     h += '</div>';
   });
@@ -5158,6 +5186,7 @@ function switchTab(tab){
   if(hdr) hdr.style.display = "none";
   if(sb){ sb.style.display = "flex"; const st = document.getElementById("subBarTitle"); if(st) st.textContent = TAB_TITLES[tab] || ""; }
   if(mn) mn.style.display = "";
+  try{ document.documentElement.style.setProperty("--tabc", TAB_COLORS[tab] || "#C9A66B"); }catch(e){}
   try{ localStorage.setItem("artikel_last_tab", tab); }catch(e){}
   switchTabInner(tab);
 }
