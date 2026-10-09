@@ -221,7 +221,7 @@ html[data-theme="dark"] .kg-wrap{
   header h1.brand-logo{display:flex; align-items:flex-start; gap:0; font-family:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-weight:800; font-size:34px; line-height:1.1; letter-spacing:-0.5px; color:#fff;}
   .brand-logo .bl-f{color:#FF7A33;}
   .brand-logo .bl-sp{position:relative; display:inline-block; width:0; height:0;}
-  .brand-logo .bl-spark{position:absolute; width:0.58em; height:0.58em; left:-0.28em; top:-1.18em;}
+  .brand-logo .bl-spark{position:absolute; width:0.58em; height:0.58em; left:-0.36em; top:-1.18em;}
   .bl-bar{display:flex; width:min(240px,100%); height:5px; border-radius:3px; overflow:hidden; margin-top:8px; background:#000; box-shadow:0 0 0 1px rgba(255,255,255,.35);}
   .bl-bar i{display:block; height:100%; flex:1;} .bl-bar i:nth-child(1){background:#000;} .bl-bar i:nth-child(2){background:#DD0000;} .bl-bar i:nth-child(3){background:#FFCE00;}
   header p.bl-sub{margin-top:8px; font-size:12px; letter-spacing:1.2px; text-transform:uppercase; color:var(--brass);}
@@ -1429,7 +1429,7 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
   .home-tile.wide .ht-ic{font-size:34px;}
   .home-tile.wide .ht-s{color:#CFE3D8;}
   .home-tile.wide .ht-txt{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 auto;} .home-tile.wide .ht-ic,.home-tile.wide .ht-go{flex:none;}
-  .home-tile.wide .ht-go{margin-left:auto;font-size:22px;color:#D3B27A;}
+  .home-tile.wide .ht-go{margin-left:auto;font-size:34px;line-height:1;color:#D3B27A;}
   html[data-theme="dark"] .home-tile.wide{background:linear-gradient(135deg,#1C5A46,#123528);border-color:#2b4a3d;color:#F2EBD9;border-left-color:#D3B27A;}
   html[data-theme="dark"] .home-tile.wide .ht-s{color:#B9D3C6;}
   @media (min-width:901px){ .home-grid{grid-template-columns:repeat(4,minmax(0,1fr));} .home-grid.g3{grid-template-columns:repeat(3,minmax(0,1fr));} }
@@ -1493,6 +1493,57 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
   td.perf-cell.pf-hidden .pf-chip{background:#8a8f94 !important;color:transparent !important;border-color:#8a8f94 !important;}
   .perf-ex{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);}
   .perf-ex .pe-label{font-family:system-ui,Helvetica,Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.5px;color:var(--brass);margin-bottom:4px;}
+
+  /* ===== ZARİF ANA SAYFA (v2) ===== */
+  #homeScreen{margin-top:26px;}
+  .home-group-title{display:flex;align-items:center;gap:12px;margin:30px 4px 12px;font-size:11.5px;letter-spacing:2.2px;font-weight:600;}
+  .home-group-title::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--brass),transparent);opacity:.55;}
+  .home-grid{gap:16px;}
+  .home-tile{position:relative;border:1px solid var(--line);border-top:5px solid var(--tc,#C9A66B);border-radius:14px;padding:16px 16px 15px;min-height:132px;gap:5px;
+    background:var(--x-bg-ffffff);box-shadow:0 1px 2px rgba(15,42,61,.05),0 6px 18px -10px rgba(15,42,61,.18);
+    transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;}
+  .home-tile:hover{transform:translateY(-3px);border-color:var(--tc);box-shadow:0 2px 4px rgba(15,42,61,.06),0 14px 26px -12px rgba(15,42,61,.28);}
+  .home-tile .ht-ic{font-size:30px;line-height:1;margin-bottom:4px;}
+  .home-tile .ht-t{font-size:17px;font-weight:700;letter-spacing:.1px;}
+  .home-tile .ht-de{margin-top:3px;font-size:13px;}
+  .home-tile .ht-s{font-size:10.5px;letter-spacing:1.1px;opacity:.7;}
+  .home-tile.wide{border-radius:14px;padding:20px 22px;border:1px solid #0E3D2E;border-top-width:1px;
+    background:linear-gradient(120deg,#1B6A50 0%,#0E3D2E 100%);box-shadow:0 10px 24px -14px rgba(14,61,46,.7);}
+  .home-tile.wide .ht-ic{font-size:34px;margin-bottom:0;}
+  .home-tile.wide:hover{border-color:#D3B27A;}
+  .home-resume{border-radius:14px;border-left-width:1px;box-shadow:0 10px 24px -14px rgba(15,42,61,.6);}
+  html[data-theme="dark"] .home-tile{background:#17242c;border-color:#2b3b44;box-shadow:0 1px 2px rgba(0,0,0,.4);}
+  html[data-theme="dark"] .home-tile:hover{border-color:var(--tc);box-shadow:0 12px 26px -12px rgba(0,0,0,.7);}
+  html[data-theme="dark"] .home-tile{border-top-color:var(--tc);}
+  html[data-theme="dark"] .home-tile.wide{border-color:#2b4a3d;}
+  @media (max-width:900px){ .home-grid{gap:12px;} .home-tile{min-height:124px;padding:15px 13px 13px;border-radius:13px;} .home-group-title{margin:24px 4px 10px;} }
+  @media (prefers-reduced-motion:reduce){ .home-tile{transition:none;} .home-tile:hover{transform:none;} }
+
+  /* ===== ZARİF İÇ SAYFALAR (v2) ===== */
+  main .panel{border-radius:14px;padding:26px 30px;box-shadow:0 1px 2px rgba(15,42,61,.05),0 10px 26px -16px rgba(15,42,61,.22);}
+  .panel h2{font-family:Georgia,"Times New Roman",serif;font-size:19px;font-weight:700;letter-spacing:.1px;margin:0 0 16px;padding-bottom:12px;border-bottom:0;position:relative;}
+  .panel h2::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,var(--tabc,var(--brass)),var(--line) 45%,transparent);}
+  .list-header{border-bottom:0;padding-bottom:12px;margin-bottom:16px;position:relative;}
+  .list-header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,var(--tabc,var(--brass)),var(--line) 45%,transparent);}
+  .list-header h2{padding:0;margin:0;} .list-header h2::after{display:none;}
+  input[type=text], select{border-radius:10px;padding:10px 12px;transition:border-color .15s,box-shadow .15s;}
+  input[type=text]:focus, select:focus{outline:none;border-color:var(--tabc,var(--teal));box-shadow:0 0 0 3px rgba(28,75,92,.14);box-shadow:0 0 0 3px color-mix(in srgb,var(--tabc,var(--teal)) 22%,transparent);}
+  button{border-radius:10px;transition:background .15s,border-color .15s,box-shadow .15s,transform .12s;}
+  button:active{transform:scale(.98);}
+  .btn-ghost,.btn-main{border-radius:10px;}
+  .btn-test{border-radius:12px;padding:12px 14px;}
+  .btn-test:hover{box-shadow:0 6px 14px -8px rgba(15,42,61,.35);}
+  th{text-transform:uppercase;letter-spacing:.9px;font-size:10.5px;font-weight:700;padding:8px 6px;color:var(--x-tx-777777);}
+  td{border-bottom-color:rgba(15,42,61,.06);}
+  .test-details{border-radius:12px;box-shadow:0 1px 2px rgba(15,42,61,.04);}
+  .test-details > summary{padding:13px 16px;}
+  .test-subtab{border-radius:999px;}
+  #subBar{box-shadow:0 4px 14px -8px rgba(0,0,0,.45);}
+  @media (max-width:640px){ main .panel{padding:20px 16px;border-radius:12px;} .panel h2{font-size:17px;} }
+  html[data-theme="dark"] main .panel{box-shadow:0 1px 2px rgba(0,0,0,.4);}
+  html[data-theme="dark"] td{border-bottom-color:rgba(255,255,255,.07);}
+  html[data-theme="dark"] input[type=text]:focus, html[data-theme="dark"] select:focus{box-shadow:0 0 0 3px color-mix(in srgb,var(--tabc,var(--brass)) 30%,transparent);}
+  @media (prefers-reduced-motion:reduce){ button{transition:none;} button:active{transform:none;} }
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -5425,7 +5476,7 @@ function renderHome(){
   HOME_TILES.forEach(g=>{
     h += '<div class="home-group-title">'+g.g+'</div><div class="home-grid'+(g.items.length===3?' g3':'')+'">';
     g.items.forEach(i=>{
-      if(g.wide) h += '<button type="button" class="home-tile wide" style="--tc:'+i.c+'" onclick="switchTab(\''+i.t+'\')"><span class="ht-ic">'+i.ic+'</span><span class="ht-txt"><span class="ht-t">'+i.n+'</span><span class="ht-de">'+i.de+'</span><span class="ht-s">'+i.s()+'</span></span><span class="ht-go">▶</span></button>';
+      if(g.wide) h += '<button type="button" class="home-tile wide" style="--tc:'+i.c+'" onclick="switchTab(\''+i.t+'\')"><span class="ht-ic">'+i.ic+'</span><span class="ht-txt"><span class="ht-t">'+i.n+'</span><span class="ht-de">'+i.de+'</span><span class="ht-s">'+i.s()+'</span></span><span class="ht-go">›</span></button>';
       else h += '<button type="button" class="home-tile" style="--tc:'+i.c+'" onclick="switchTab(\''+i.t+'\')"><span class="ht-ic">'+i.ic+'</span><span class="ht-t">'+i.n+'</span><span class="ht-de">'+i.de+'</span><span class="ht-s">'+i.s()+'</span></button>';
     });
     h += '</div>';
