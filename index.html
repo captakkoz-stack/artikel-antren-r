@@ -3901,6 +3901,7 @@ html[data-font="sans"] body :not(svg):not(svg *):not(.brand-logo *):not(.bl-word
     <div class="par-actions">
       <button class="btn-main" id="parCheck" type="button" onclick="parCheck()">Kontrol et</button>
       <button class="btn-ghost" id="parRetry" type="button" onclick="parRetry()" style="display:none;">↺ Aynı paragrafı tekrar dene</button>
+      <button class="btn-ghost" id="parSkip" type="button" onclick="parNext()">Geç ▶</button>
       <button class="btn-ghost" id="parNext" type="button" onclick="parNext()" style="display:none;">Sonraki paragraf ▶</button>
     </div>
     <div class="par-result" id="parResult"></div>
@@ -4068,6 +4069,7 @@ html[data-font="sans"] body :not(svg):not(svg *):not(.brand-logo *):not(.bl-word
       <button class="qspeak-btn" id="qSpeakBtn" onclick="speakCurrentWord()" title="Dinle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/><path d="M14.5 3.23v2.06c2.89 1.06 5 3.84 5 7.11s-2.11 6.05-5 7.11v2.06c4.01-1.09 7-4.86 7-9.17s-2.99-8.08-7-9.17z"/></svg></button>
       <button class="hint-btn" id="qHintBtn" onclick="toggleHint()">💡 İpucu</button>
       <button class="hint-btn" id="qTrBtn" onclick="toggleTurkishMeaning()" style="display:none;">🇹🇷 Türkçesi</button>
+      <button class="hint-btn" id="qRevealBtn" onclick="revealAnswer()">👁 Cevabı göster</button>
       <button class="hint-btn" id="qExampleBtn" onclick="openExampleForCurrentQuestion()">📘 Örnek</button>
       <button class="hint-btn" id="qConjBtn" onclick="openConjForCurrentQuestion()" style="display:none;">🔤 Çekim</button>
       <button class="qspeak-btn" id="qReportBtn" onclick="openReport()" title="Bu soruda hata var" aria-label="Hata bildir" style="font-size:14px;">🐞</button>
@@ -9762,6 +9764,35 @@ function finalizeIfUnanswered(){
   }
 }
 
+function revealAnswer(){
+  const q = currentQ; if(!q) return;
+  const fb = document.getElementById("qFeedback");
+  if(q.mode === "order"){
+    if(!q.answered){ finalizeIfUnanswered(); }
+    q.answer = q.correctTokens.slice(); q.pool = []; q.locked = true; q.solved = true;
+    renderOrderUI(); showResultIcon(false);
+    fb.textContent = "Doğrusu: " + q.correctTokens.join(" ");
+    document.getElementById("qSpeakBtn").style.display = "inline-flex";
+    return;
+  }
+  const pl = document.getElementById("qPluralInput");
+  if(pl && pl.style.display !== "none"){
+    finalizeIfUnanswered(); showResultIcon(false);
+    fb.textContent = "Doğrusu: die " + q.word.plural; fb.style.color = "var(--x-tx-8b3a20)";
+    return;
+  }
+  const btns = document.querySelectorAll("#qOptions .opt-btn");
+  if(!btns.length) return;
+  const was = q.answered;
+  finalizeIfUnanswered();
+  if(was){ const c = document.querySelector("#qOptions .opt-btn.correct"); if(c){ fb.textContent = "Doğrusu: " + c.textContent; } return; }
+  try{ btns[0].click(); }catch(e){}
+  const c = document.querySelector("#qOptions .opt-btn.correct");
+  btns.forEach(b => { if(b !== c) b.classList.remove("wrong"); });
+  showResultIcon(false);
+  if(c){ fb.textContent = "Doğrusu: " + c.textContent; fb.style.color = "var(--x-tx-8b3a20)"; }
+}
+
 function nextQuestion(){
   finalizeIfUnanswered();
   if(sessionIndex < sessionQuestions.length - 1){
@@ -10807,6 +10838,7 @@ function openParagraph(kind, p){
   document.getElementById("parCheck").style.display = "";
   document.getElementById("parRetry").style.display = "none";
   document.getElementById("parNext").style.display = "none";
+  document.getElementById("parSkip").style.display = "";
   parUpdate();
   const ov = document.getElementById("parOverlay"); ov.classList.add("show"); ov.scrollTo(0, 0);
 }
@@ -10841,6 +10873,7 @@ function parCheck(){
   document.getElementById("parCheck").style.display = "none";
   document.getElementById("parRetry").style.display = "";
   document.getElementById("parNext").style.display = "";
+  document.getElementById("parSkip").style.display = "none";
   document.getElementById("parTrans").open = true;
   parUpdate();
   document.getElementById("parResult").scrollIntoView({block:"start", behavior:"smooth"});
@@ -12714,11 +12747,12 @@ function ensureTypeOverlay(){
     '<input type="text" id="tyInput" class="ty-input" placeholder="Almanca cümleyi yaz…" autocomplete="off" autocapitalize="sentences" spellcheck="false" lang="de">'+
     '<div class="ty-um" id="tyUm"><button type="button" class="umlaut-btn" data-c="ä">ä</button><button type="button" class="umlaut-btn" data-c="ö">ö</button><button type="button" class="umlaut-btn" data-c="ü">ü</button><button type="button" class="umlaut-btn" data-c="ß">ß</button></div>'+
     '<div class="ty-hint" id="tyHint"></div><div class="ty-res" id="tyRes" aria-live="polite"></div>'+
-    '<div class="par-actions"><button type="button" class="btn-main" id="tyGo">Kontrol et</button><button type="button" class="btn-ghost" id="tyHintBtn">💡 İpucu</button><button type="button" class="btn-ghost" id="tyEnd">Bitir</button></div></div>';
+    '<div class="par-actions"><button type="button" class="btn-main" id="tyGo">Kontrol et</button><button type="button" class="btn-ghost" id="tyHintBtn">💡 İpucu</button><button type="button" class="btn-ghost" id="tySkip">Geç ⏭</button><button type="button" class="btn-ghost" id="tyEnd">Bitir</button></div></div>';
   document.body.appendChild(o);
   o.querySelector("#tyUm").addEventListener("click",function(e){ var c=e.target.getAttribute&&e.target.getAttribute("data-c"); if(!c) return; var inp=document.getElementById("tyInput"); if(inp.readOnly) return; var s=inp.selectionStart||inp.value.length, v=inp.value; inp.value=v.slice(0,s)+c+v.slice(inp.selectionEnd||s); inp.focus(); inp.setSelectionRange(s+1,s+1); });
   o.querySelector("#tyGo").addEventListener("click",tyAction);
   o.querySelector("#tyHintBtn").addEventListener("click",tyHint);
+  o.querySelector("#tySkip").addEventListener("click",function(){ tyAction(true); });
   o.querySelector("#tyEnd").addEventListener("click",tyClose);
   o.querySelector("#tyInput").addEventListener("keydown",function(e){ if(e.key==="Enter"){ e.preventDefault(); tyAction(); } });
 }
@@ -12740,7 +12774,7 @@ function tyShow(){
   var inp=document.getElementById("tyInput"); inp.value=""; inp.readOnly=false; inp.className="ty-input";
   document.getElementById("tyHint").textContent=""; document.getElementById("tyRes").innerHTML="";
   document.getElementById("tyGo").textContent="Kontrol et";
-  document.getElementById("tyHintBtn").style.display="";
+  document.getElementById("tyHintBtn").style.display=""; document.getElementById("tySkip").style.display="";
   try{ inp.focus(); }catch(e){}
 }
 function norm(s){ return String(s).replace(/[.!?]+\s*$/,"").replace(/\s+/g," ").trim(); }
@@ -12754,13 +12788,14 @@ function tyHint(){
   var h=ws.map(function(w,i){ var core=w.replace(/[.!?,]/g,""); if(T.hint===1) return core.charAt(0)+"·".repeat(Math.max(0,core.length-1)); return i<2?core:core.charAt(0)+"·".repeat(Math.max(0,core.length-1)); }).join(" ");
   document.getElementById("tyHint").textContent=h;
 }
-function tyAction(){
+function tyAction(skip){
   if(T.done){ T.done=false; document.getElementById("tyInput").style.display=""; document.getElementById("tyUm").style.display=""; return startTypeQuiz(); }
   if(T.pending){ commit(T.pending); T.pending=null; T.i++; return tyShow(); }
   var q=T.list[T.i], inp=document.getElementById("tyInput"), u=norm(inp.value), c=norm(q.de);
-  if(!u){ inp.focus(); return; }
+  if(skip===true){ u=""; } else if(!u){ inp.focus(); return; }
   var level, ok=true, rec=true, msg;
-  if(u===c){ level="exact"; msg="Tam doğru."; }
+  if(skip===true){ level="wrong"; ok=false; msg="Geçildi. Doğrusu:"; }
+  else if(u===c){ level="exact"; msg="Tam doğru."; }
   else if(u.toLowerCase()===c.toLowerCase()){ level="case"; msg="Doğru. Sadece büyük/küçük harf farkı var."; }
   else if(asciiUm(u).toLowerCase()===asciiUm(c).toLowerCase()){ level="um"; msg="Doğru. Ama ä/ö/ü/ß harflerini kullanmaya çalış."; }
   else if(lev(u.toLowerCase(),c.toLowerCase())<=2){ level="near"; ok=false; rec=false; msg="Çok yakın, küçük bir yazım farkı var."; }
@@ -12769,11 +12804,11 @@ function tyAction(){
   var shown=q.de.split(" ").map(function(w){ var core=w.replace(/[.!?,]/g,"").toLowerCase(); return (!ok && !us[core])?"<mark>"+esc(w)+"</mark>":esc(w); }).join(" ");
   var res=document.getElementById("tyRes");
   res.innerHTML='<div class="ty-msg '+(ok?"ok":(level==="near"?"near":"bad"))+'">'+msg+'</div><div class="ty-ans">'+shown+' <button type="button" class="qspeak-btn" id="tySpk" aria-label="Dinle">🔊</button></div>'+
-    (!ok?'<button type="button" class="ty-over" id="tyOver">Benimki de doğru</button>':'');
+    (!ok&&skip!==true?'<button type="button" class="ty-over" id="tyOver">Benimki de doğru</button>':'');
   res.querySelector("#tySpk").onclick=function(){ try{ speak(q.de); }catch(e){} };
   var ov=res.querySelector("#tyOver"); if(ov) ov.onclick=function(){ if(!T.pending) return; T.pending.ok=true; T.pending.rec=true; ov.remove(); res.querySelector(".ty-msg").className="ty-msg ok"; res.querySelector(".ty-msg").textContent="Tamam, doğru sayıldı."; };
   inp.readOnly=true; inp.classList.add(ok?"ok":"bad");
-  document.getElementById("tyHintBtn").style.display="none";
+  document.getElementById("tyHintBtn").style.display="none"; document.getElementById("tySkip").style.display="none";
   document.getElementById("tyGo").textContent=(T.i+1>=T.list.length)?"Sonucu gör":"Sonraki ▶";
   T.pending={ok:ok,rec:rec,de:q.de};
   if(T.seen.indexOf(q.de)<0) T.seen.push(q.de);
@@ -12799,7 +12834,7 @@ function tyFinish(){
   document.getElementById("tyUm").style.display="none"; document.getElementById("tyHint").textContent="";
   var res=document.getElementById("tyRes"); res.innerHTML='<div class="ty-msg '+(pct>=80?"ok":"near")+'" style="position:relative">'+(pct>=80?"Çok iyi. Yazma işi oturuyor.":"Devam et, yazdıkça oturur.")+'</div>';
   if(pct>=80 && FX.burst) FX.burst(res.firstChild);
-  T.done=true; document.getElementById("tyGo").textContent="Yeni tur";
+  T.done=true; document.getElementById("tyGo").textContent="Yeni tur"; document.getElementById("tySkip").style.display="none";
   document.getElementById("tyHintBtn").style.display="none";
   checkBadges();
 }
