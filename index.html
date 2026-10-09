@@ -3476,9 +3476,10 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
           </div></div>
         </details>
         <details class="test-details" data-gkey="hal">
-          <summary><span>📍 Edatlar (Akkusativ & Wechsel)<span class="gcount">(2)</span></span></summary>
+          <summary><span>📍 Edatlar (Akkusativ · Dativ · Wechsel)<span class="gcount">(3)</span></span></summary>
           <div class="inner"><div class="btn-grid grid-2">
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-akkprep')">📍 Akkusativ Edatı<br><span style="font-size:11px; font-weight:400;">für · durch · ohne · gegen · um</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('gq-datprep')">📌 Dativ Edatı<br><span style="font-size:11px; font-weight:400;">aus · bei · mit · nach · seit · von · zu</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-wechsel')">🔀 Wechsel Edat<br><span style="font-size:11px; font-weight:400;">wo? / wohin?</span></button>
           </div></div>
         </details>
@@ -4463,6 +4464,11 @@ const STARTER_WORDS = [
   {artikel:"die", word:"Konditorin", plural:"Konditorinnen", emoji:"🧁", tr:"pasta şefi / pastacı (kadın)", beispiel:"Meine Schwester ist Konditorin.", beispielTr:"Kız kardeşim pastacı.", kat:"is"},
   {artikel:"die", word:"Welt", plural:"Welten", emoji:"🌍", tr:"dünya", beispiel:"Die Welt ist groß.", beispielTr:"Dünya büyük.", kat:"doga"},
   {artikel:"das", word:"Abitur", plural:"—", emoji:"🎓", tr:"Abitur (Alman lise bitirme sınavı/diploması)", beispiel:"Sie macht nächstes Jahr Abitur.", beispielTr:"O gelecek yıl Abitur sınavına giriyor.", kat:"okul"},
+  {artikel:"die", word:"Brust", plural:"Brüste", emoji:"🫁", tr:"göğüs", beispiel:"Meine Brust tut weh.", beispielTr:"Göğsüm ağrıyor.", kat:"saglik"},
+  {artikel:"das", word:"Körperteil", plural:"Körperteile", emoji:"🦵", tr:"vücut bölümü / uzuv", beispiel:"Welches Körperteil tut weh?", beispielTr:"Hangi vücut bölümün ağrıyor?", kat:"saglik"},
+  {artikel:"der", word:"Skiort", plural:"Skiorte", emoji:"⛷️", tr:"kayak merkezi / kayak yeri", beispiel:"Wir fahren in einen Skiort in Österreich.", beispielTr:"Avusturya'da bir kayak merkezine gidiyoruz.", kat:"seyahat"},
+  {artikel:"der", word:"Unfall", plural:"Unfälle", emoji:"💥", tr:"kaza", beispiel:"Er hatte einen Unfall auf der Straße.", beispielTr:"Yolda kaza yaptı.", kat:"saglik"},
+  {artikel:"die", word:"Notaufnahme", plural:"Notaufnahmen", emoji:"🚑", tr:"acil servis", beispiel:"Sie bringen ihn in die Notaufnahme.", beispielTr:"Onu acil servise götürüyorlar.", kat:"saglik"}
 ];
 
 const STARTER_VERBS = [
@@ -4649,7 +4655,12 @@ const STARTER_VERBS = [
   {verb:"weiterfahren", perf:"ist weitergefahren", pg:"trn", perfEx:"Wir sind nach der Pause weitergefahren.", perfExTr:"Moladan sonra yola devam ettik.", emoji:"🚗", tr:"yola devam etmek", beispiel:"Wir fahren morgen weiter.", beispielTr:"Yarın yola devam ediyoruz.", conj:{"ich": "fahre weiter", "du": "fährst weiter", "er": "fährt weiter", "wir": "fahren weiter", "ihr": "fahrt weiter", "sie": "fahren weiter"}, kat:"hareket"},
   {verb:"ausblasen", perf:"hat ausgeblasen", pg:"trn", perfEx:"Er hat die Kerzen ausgeblasen.", perfExTr:"O mumları üfleyip söndürdü.", emoji:"🎂", tr:"üfleyerek söndürmek", beispiel:"Sie bläst die Kerzen aus.", beispielTr:"O mumları üfleyip söndürüyor.", conj:{"ich": "blase aus", "du": "bläst aus", "er": "bläst aus", "wir": "blasen aus", "ihr": "blast aus", "sie": "blasen aus"}, kat:"hobi"},
   {verb:"checken", perf:"hat gecheckt", pg:"duz", perfEx:"Ich habe meine E-Mails gecheckt.", perfExTr:"E-postalarımı kontrol ettim.", emoji:"✅", tr:"kontrol etmek", beispiel:"Ich checke meine E-Mails.", beispielTr:"E-postalarımı kontrol ediyorum.", conj:{"ich": "checke", "du": "checkst", "er": "checkt", "wir": "checken", "ihr": "checkt", "sie": "checken"}, kat:"is"},
-  {verb:"beraten", perf:"hat beraten", pg:"gsz", perfEx:"Die Bank hat mich gut beraten.", perfExTr:"Banka bana iyi danışmanlık yaptı.", emoji:"💬", tr:"danışmanlık yapmak / tavsiye vermek", beispiel:"Der Verkäufer berät den Kunden.", beispielTr:"Satıcı müşteriye danışmanlık yapıyor.", conj:{ich:"berate", du:"berätst", er:"berät", wir:"beraten", ihr:"beratet", sie:"beraten"}, imperativ:{du:"Berate!", ihr:"Beratet!", sie:"Beraten Sie!"}, kat:"is"}
+  {verb:"beraten", perf:"hat beraten", pg:"gsz", perfEx:"Die Bank hat mich gut beraten.", perfExTr:"Banka bana iyi danışmanlık yaptı.", emoji:"💬", tr:"danışmanlık yapmak / tavsiye vermek", beispiel:"Der Verkäufer berät den Kunden.", beispielTr:"Satıcı müşteriye danışmanlık yapıyor.", conj:{ich:"berate", du:"berätst", er:"berät", wir:"beraten", ihr:"beratet", sie:"beraten"}, imperativ:{du:"Berate!", ihr:"Beratet!", sie:"Beraten Sie!"}, kat:"is"},
+  {verb:"bewegen", perf:"hat bewegt", pg:"gsz", perfEx:"Ich habe den Arm kaum bewegt.", perfExTr:"Kolumu neredeyse hiç oynatmadım.", emoji:"🔄", tr:"hareket ettirmek / kımıldatmak", beispiel:"Er bewegt den Fuß.", beispielTr:"O ayağını kımıldatıyor.", conj:{ich:"bewege",du:"bewegst",er:"bewegt",wir:"bewegen",ihr:"bewegt",sie:"bewegen"}, imperativ:{du:"Beweg!",ihr:"Bewegt!",sie:"Bewegen Sie!"}, kat:"hareket"},
+  {verb:"passieren", perf:"ist passiert", pg:"gsz", perfEx:"Gestern ist ein Unfall passiert.", perfExTr:"Dün bir kaza oldu.", emoji:"❗", tr:"olmak / meydana gelmek", beispiel:"Was passiert hier?", beispielTr:"Burada ne oluyor?", conj:{ich:"passiere",du:"passierst",er:"passiert",wir:"passieren",ihr:"passiert",sie:"passieren"}, imperativ:{du:"Passier!",ihr:"Passiert!",sie:"Passieren Sie!"}, kat:"durum"},
+  {verb:"reparieren", perf:"hat repariert", pg:"gsz", perfEx:"Der Mechaniker hat das Auto repariert.", perfExTr:"Tamirci arabayı tamir etti.", emoji:"🔧", tr:"tamir etmek", beispiel:"Er repariert das Fahrrad.", beispielTr:"O bisikleti tamir ediyor.", conj:{ich:"repariere",du:"reparierst",er:"repariert",wir:"reparieren",ihr:"repariert",sie:"reparieren"}, imperativ:{du:"Repariere!",ihr:"Repariert!",sie:"Reparieren Sie!"}, kat:"ev"},
+  {verb:"erwarten", perf:"hat erwartet", pg:"gsz", perfEx:"Wir haben dich früher erwartet.", perfExTr:"Seni daha erken bekliyorduk.", emoji:"⏳", tr:"beklemek / ummak", beispiel:"Sie erwartet einen Anruf.", beispielTr:"Bir telefon bekliyor.", conj:{ich:"erwarte",du:"erwartest",er:"erwartet",wir:"erwarten",ihr:"erwartet",sie:"erwarten"}, imperativ:{du:"Erwarte!",ihr:"Erwartet!",sie:"Erwarten Sie!"}, kat:"durum"},
+  {verb:"stürzen", perf:"ist gestürzt", pg:"duz", perfEx:"Er ist auf dem Eis gestürzt.", perfExTr:"Buzda düştü.", emoji:"🤕", tr:"düşmek / yıkılmak", beispiel:"Sie stürzt vom Fahrrad.", beispielTr:"O bisikletten düşüyor.", conj:{ich:"stürze",du:"stürzt",er:"stürzt",wir:"stürzen",ihr:"stürzt",sie:"stürzen"}, imperativ:{du:"Stürz!",ihr:"Stürzt!",sie:"Stürzen Sie!"}, kat:"hareket"}
 ];
 
 const STARTER_ADJEKTIVE = [
@@ -8664,6 +8675,43 @@ Object.assign(GQ_BANK, {
 });
 GQ_ORDER.push("gq-modal","gq-imperativ","gq-nicht","gq-trennbar","gq-kasus");
 
+Object.assign(GQ_BANK, {
+"gq-datprep": {emoji:"📌", qtype:"DATIV EDATI HANGİSİ?",
+ hint:"aus = -den (çıkış, malzeme, ülke) · bei = yanında / iş yerinde · mit = ile (araç) · nach = sonra / şehir-ülke / nach Hause · seit = -den beri · von = -den (kişi, -in) · zu = -e (kişiye, yere). Bu 7 edat her zaman Dativ ister.",
+ items:[
+ ["Ich komme ___ der Türkei.","aus",["von","bei"],"Türkiye'denim."],
+ ["Er kommt ___ dem Haus.","aus",["zu","nach"],"Evden çıkıyor."],
+ ["Der Tisch ist ___ Holz.","aus",["mit","von"],"Masa ahşaptan."],
+ ["Sie nimmt ein Buch ___ der Tasche.","aus",["bei","von"],"Çantadan bir kitap alıyor."],
+ ["Ich wohne ___ meinen Eltern.","bei",["mit","zu"],"Anne babamın yanında oturuyorum."],
+ ["Er arbeitet ___ einer Bank.","bei",["von","aus"],"Bir bankada çalışıyor."],
+ ["Wir sind ___ Oma.","bei",["nach","von"],"Anneannemin/babaannemin yanındayız."],
+ ["Ich war ___ dem Arzt.","bei",["zu","nach"],"Doktorun yanındaydım (muayenehanesinde)."],
+ ["Ich fahre ___ dem Bus.","mit",["bei","zu"],"Otobüsle gidiyorum."],
+ ["Sie kommt ___ ihrer Freundin.","mit",["aus","von"],"Arkadaşıyla geliyor."],
+ ["Ich schreibe ___ einem Stift.","mit",["bei","nach"],"Kalemle yazıyorum."],
+ ["Kaffee ___ Milch, bitte.","mit",["von","aus"],"Sütlü kahve lütfen."],
+ ["Wir fliegen ___ Berlin.","nach",["zu","aus"],"Berlin'e uçuyoruz."],
+ ["___ dem Essen gehe ich spazieren.","Nach",["Mit","Von"],"Yemekten sonra yürüyüşe çıkıyorum."],
+ ["Ich gehe ___ Hause.","nach",["zu","bei"],"Eve gidiyorum."],
+ ["Er fährt ___ Italien.","nach",["zu","von"],"İtalya'ya gidiyor."],
+ ["Ich lerne Deutsch ___ einem Jahr.","seit",["vor","nach"],"Bir yıldır Almanca öğreniyorum."],
+ ["Er wohnt ___ 2020 hier.","seit",["von","bei"],"2020'den beri burada oturuyor."],
+ ["___ wann bist du hier?","Seit",["Von","Aus"],"Ne zamandır buradasın?"],
+ ["Wir sind ___ Montag in Wien.","seit",["nach","mit"],"Pazartesiden beri Viyana'dayız."],
+ ["Das Buch ist ___ meinem Bruder.","von",["aus","bei"],"Kitap kardeşimin."],
+ ["Ich arbeite ___ 9 bis 17 Uhr.","von",["aus","seit"],"9'dan 17'ye kadar çalışıyorum."],
+ ["Das ist ein Geschenk ___ meiner Mutter.","von",["zu","mit"],"Bu annemden bir hediye."],
+ ["Er erzählt ___ seiner Reise.","von",["aus","bei"],"Seyahatinden bahsediyor."],
+ ["Ich gehe ___ dem Arzt.","zu",["bei","nach"],"Doktora gidiyorum."],
+ ["Wir gehen ___ Fuß.","zu",["mit","bei"],"Yürüyerek gidiyoruz."],
+ ["Sie fährt ___ ihrer Oma.","zu",["bei","aus"],"Büyükannesine gidiyor."],
+ ["Kommst du ___ mir?","zu",["bei","von"],"Bana geliyor musun?"],
+ ["Ich gehe ___ Bahnhof.","zum",["nach","beim"],"İstasyona gidiyorum (zum = zu dem)."]
+ ]}
+});
+GQ_ORDER.push("gq-datprep");
+
 function gqFull(bank, it){ return bank.choose ? it[1] : it[0].replace("___", it[1]); }
 function gqQuestion(bank, it){
   const full = gqFull(bank, it);
@@ -9641,7 +9689,7 @@ const TEST_NAMES = {
   "uhrzeit-quiz":"Saat Okuma Testi","frage-quiz":"W-Frage Testi","ordinal-quiz":"Sıra Sayıları Testi","sentence-fill":"Cümle Tamamlama","order-quiz":"Cümle Kurma",
   "prep-quiz":"Küçük Kelimeler (im/am/zu/sehr/nicht)","zeitort-quiz":"Küçük Kelimeler: zaman & yer","listening-quiz":"Basit Dinleme","review-mistakes":"Yanlışlarımı Tekrar Et",
   "dativ-prep-quiz":"Dativ Edatı Seç","dativ-artikel-quiz":"Dativ Artikel","dativ-plural-quiz":"Dativ Çoğul","dativ-pronoun-quiz":"Dativ Zamir","dativ-mix-quiz":"Dativ Karışık",
-  "gq-akkprep":"Akkusativ Edatı","gq-wechsel":"Wechsel Edat","gq-praet":"war / hatte","gq-doch":"ja / nein / doch","gq-man":"man","gq-genitiv":"Genitiv-s",
+  "gq-akkprep":"Akkusativ Edatı","gq-datprep":"Dativ Edatı","gq-wechsel":"Wechsel Edat","gq-praet":"war / hatte","gq-doch":"ja / nein / doch","gq-man":"man","gq-genitiv":"Genitiv-s",
   "gq-geht":"Geht es …?","gq-verbpos":"Fiilin yeri","gq-konj":"Bağlaç seç","gq-quant":"Miktar & Fiyat","gq-gefallen":"gefallen / finden","gq-hs":"Perfekt: haben / sein","gq-partizip":"Partizip II","gq-perfekt":"Perfekt: tam kalıp","gq-wer":"Wer / Wen / Wem","gq-dieser":"dieser / diese / dieses","gq-poss":"İyelikler (mein · dein · sein · ihr …)",
   "gq-modal":"Modalverben","gq-imperativ":"Imperativ","gq-nicht":"nicht / kein","gq-trennbar":"Bölünen fiiller","gq-kasus":"Fiil hangi hâli istiyor?","gq-mix":"Yeni Konular Karışık","par-akkdat":"Paragraf: Akkusativ & Dativ","par-prep":"Paragraf: Edatlar","par-perfekt":"Paragraf: Perfekt","gq-par":"Paragraf boşluğu"
 };
@@ -10493,7 +10541,7 @@ document.addEventListener("keydown", function(e){
 const POOL_GROUPS = [
   ["Artikel", ["artikel-only","plural-only","nomakk-quiz","plural-guess-quiz"]],
   ["Kelime", ["noun-quiz","verb-quiz","adj-quiz","irregular-verb-quiz"]],
-  ["Gramer", ["par-akkdat","par-prep","par-perfekt","gq-akkprep","gq-wechsel","gq-praet","gq-doch","gq-man","gq-genitiv","gq-geht","gq-verbpos","gq-konj","gq-quant","gq-gefallen","gq-poss","gq-wer","gq-dieser","gq-hs","gq-partizip","gq-perfekt","gq-modal","gq-imperativ","gq-nicht","gq-trennbar"]],
+  ["Gramer", ["par-akkdat","par-prep","par-perfekt","gq-akkprep","gq-datprep","gq-wechsel","gq-praet","gq-doch","gq-man","gq-genitiv","gq-geht","gq-verbpos","gq-konj","gq-quant","gq-gefallen","gq-poss","gq-wer","gq-dieser","gq-hs","gq-partizip","gq-perfekt","gq-modal","gq-imperativ","gq-nicht","gq-trennbar"]],
   ["Dativ", ["gq-kasus","dativ-artikel-quiz","dativ-plural-quiz","dativ-prep-quiz","dativ-pronoun-quiz"]],
   ["Pratik", ["order-quiz","sentence-fill","listening-quiz","prep-quiz","zeitort-quiz"]]
 ];
@@ -11585,6 +11633,16 @@ konditorin:"die Konditorin — pasta şefi / pastacı (kadın)",konditorinnen:"d
 welt:"die Welt — dünya",welten:"die Welten — dünyalar",abitur:"das Abitur — Alman lise bitirme sınavı / diploması",
 beraten:"danışmanlık yapmak, tavsiye vermek (beraten)",berate:"danışmanlık yapıyorum (beraten)",berätst:"danışmanlık yapıyorsun (beraten)",
 berät:"danışmanlık yapıyor (beraten)",beratet:"danışmanlık yapıyorsunuz (beraten)"
+});
+Object.assign(DICT,{
+brust:"die Brust — göğüs",brüste:"die Brüste — göğüsler",körperteil:"das Körperteil — vücut bölümü",körperteile:"die Körperteile — vücut bölümleri",
+skiort:"der Skiort — kayak merkezi",skiorte:"die Skiorte — kayak merkezleri",unfall:"der Unfall — kaza",unfälle:"die Unfälle — kazalar",
+notaufnahme:"die Notaufnahme — acil servis",notaufnahmen:"die Notaufnahmen — acil servisler",
+bewegen:"hareket ettirmek, kımıldatmak (bewegen)",bewege:"hareket ettiriyorum (bewegen)",bewegst:"hareket ettiriyorsun (bewegen)",bewegt:"hareket ettiriyor / hareket ettirdi (bewegen: hat bewegt)",
+passieren:"olmak, meydana gelmek (passieren)",passiere:"oluyorum, geçiyorum (passieren)",passiert:"oldu, oluyor (passieren: ist passiert)",
+reparieren:"tamir etmek (reparieren)",repariere:"tamir ediyorum (reparieren)",reparierst:"tamir ediyorsun (reparieren)",repariert:"tamir ediyor / tamir etti (reparieren: hat repariert)",
+erwarten:"beklemek, ummak (erwarten)",erwarte:"bekliyorum (erwarten)",erwartest:"bekliyorsun (erwarten)",erwartet:"bekliyor / bekledi (erwarten: hat erwartet)",
+stürzen:"düşmek, yıkılmak (stürzen)",stürze:"düşüyorum (stürzen)",stürzt:"düşüyor / düştü (stürzen)",gestürzt:"düştü (stürzen: ist gestürzt)"
 });
 const PERFEKT_STORIES = new Set(["wochenende","hausputz","silberhochzeit","verschlafen","spanienreise"]);
 const PRATERITUM_STORIES = new Set(["geburtstag","ferien_meer","schluessel","schultag","gaeste","picknick"]);
