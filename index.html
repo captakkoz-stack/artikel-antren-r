@@ -1789,6 +1789,32 @@ html[data-font="sans"] body :not(svg):not(svg *):not(.brand-logo *):not(.bl-word
 .dl-row{min-width:0;box-sizing:border-box;} .dl-b{min-width:0;max-width:100%;box-sizing:border-box;} .dl-de,.dl-tr{overflow-wrap:anywhere;}
 #subBar .rs-wrap.bar{flex:0 0 auto;margin-left:auto;}
 @media (max-width:520px){ #subBar .rs-ctl button:last-child{display:none;} #subBar{gap:8px;} }
+
+/* ===== AYARLAR ÇARKI + ALT İMZA ===== */
+#appHeader .header-top{position:relative;}
+#appHeader .header-right{display:none !important;}
+.gear-btn{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--brass);background:rgba(255,255,255,.06);color:var(--brass);cursor:pointer;padding:0;flex:0 0 auto;transition:background .2s,transform .3s;}
+.gear-btn:hover{background:rgba(201,166,107,.2);} .gear-btn[aria-expanded="true"]{transform:rotate(60deg);background:rgba(201,166,107,.25);}
+#gearHome{position:absolute;top:2px;right:0;}
+#subBar .gear-btn{margin-left:auto;width:34px;height:34px;padding:0 !important;color:var(--brass) !important;border:1px solid var(--brass) !important;background:transparent !important;border-radius:50% !important;}
+#setPanel{position:fixed;z-index:400;width:250px;max-width:calc(100vw - 16px);box-sizing:border-box;background:var(--x-bg-fdfcf9);color:var(--ink);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 40px -14px rgba(0,0,0,.5);padding:12px 14px 14px;font-family:system-ui,Helvetica,Arial,sans-serif;}
+#setPanel[hidden]{display:none;}
+html[data-theme="dark"] #setPanel{color:#E8E2D4;}
+#setPanel .sp-t{font-weight:800;font-size:13px;letter-spacing:.5px;text-transform:uppercase;opacity:.65;margin-bottom:10px;}
+#setPanel .sp-r{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 0;border-top:1px solid var(--line);}
+#setPanel .sp-r>span{font-size:14px;font-weight:600;} #setPanel .sp-r>i{font-style:normal;display:inline-flex;}
+#setPanel .theme-btn{margin:0 !important;color:inherit !important;border-color:var(--brass) !important;background:transparent !important;font-size:13px;padding:5px 10px;}
+#setPanel .rs-ctl{border-color:var(--brass);} #setPanel .rs-ctl button{color:inherit !important;}
+.home-foot{display:flex;flex-direction:column;align-items:center;gap:6px;margin:26px 0 8px;text-align:center;}
+.home-foot .signature{position:static;}
+
+.home-foot .signature{background:transparent;text-align:center;}
+.home-foot .signature .sig-note{color:#9A7B3F;}
+.home-foot .signature .sig-name{color:var(--tx-deep);}
+html[data-theme="dark"] .home-foot .signature .sig-note{color:var(--brass);}
+html[data-theme="dark"] .home-foot .signature .sig-name{color:#E8E2D4;}
+.home-foot .last-updated{text-align:center;margin-top:0;color:#9A7B3F;}
+html[data-theme="dark"] .home-foot .last-updated{color:var(--brass);}
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -12968,6 +12994,42 @@ window.renderIlerleme=function(){
   checkBadges();
 };
 checkBadges();
+})();
+
+</script>
+<script>
+(function(){
+"use strict";
+var GEAR='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>';
+function mk(id){ var b=document.createElement("button"); b.type="button"; b.className="gear-btn"; b.id=id; b.setAttribute("aria-label","Ayarlar"); b.setAttribute("aria-haspopup","true"); b.setAttribute("aria-expanded","false"); b.innerHTML=GEAR; b.addEventListener("click",function(e){ e.stopPropagation(); toggle(b); }); return b; }
+var panel=document.createElement("div"); panel.id="setPanel"; panel.setAttribute("role","dialog"); panel.setAttribute("aria-label","Ayarlar"); panel.hidden=true;
+panel.innerHTML='<div class="sp-t">Ayarlar</div><div class="sp-r"><span>Tema</span><i id="spTheme"></i></div><div class="sp-r"><span>İkonlar</span><i id="spIcon"></i></div><div class="sp-r"><span>Yazı</span><i id="spRead"></i></div>';
+document.body.appendChild(panel);
+function put(id,node){ var h=document.getElementById(id); if(h&&node) h.appendChild(node); }
+put("spTheme",document.getElementById("themeBtn"));
+put("spIcon",document.getElementById("iconBtn"));
+var rh=document.getElementById("rsHome"); if(rh){ put("spRead",rh.firstElementChild); rh.remove(); }
+var rb=document.getElementById("rsBar"); if(rb) rb.remove();
+var hb=mk("gearHome"), top=document.querySelector("#appHeader .header-top"); if(top) top.appendChild(hb);
+var sb=document.getElementById("subBar"), sg=mk("gearBar"); if(sb) sb.appendChild(sg);
+var cur=null;
+function toggle(b){
+  if(!panel.hidden && cur===b){ close(); return; }
+  cur=b; panel.hidden=false; b.setAttribute("aria-expanded","true");
+  var z=parseFloat(getComputedStyle(document.body).zoom)||1, r=b.getBoundingClientRect(), w=(panel.offsetWidth||250)*z;
+  panel.style.top=Math.round((r.bottom+8)/z)+"px";
+  panel.style.left=Math.round(Math.max(8,Math.min(window.innerWidth-w-8,r.right-w))/z)+"px";
+}
+function close(){ panel.hidden=true; if(cur) cur.setAttribute("aria-expanded","false"); cur=null; }
+document.addEventListener("click",function(e){ if(!panel.hidden && !panel.contains(e.target)) close(); });
+document.addEventListener("keydown",function(e){ if(e.key==="Escape") close(); });
+window.addEventListener("resize",close);
+var oST=window.switchTab; if(typeof oST==="function"){ window.switchTab=function(){ close(); return oST.apply(this,arguments); }; }
+/* imza + güncelleme: ana sayfanın en altına */
+var sig=document.querySelector("#appHeader .signature"), lu=document.querySelector("#appHeader .last-updated");
+var sigH=sig?sig.outerHTML:"", luH=lu?lu.outerHTML:"";
+var oRH=window.renderHome;
+if(typeof oRH==="function"){ window.renderHome=function(){ var r=oRH.apply(this,arguments); var el=document.getElementById("homeScreen"); if(el && !el.querySelector(".home-foot")) el.insertAdjacentHTML("beforeend",'<div class="home-foot">'+sigH+luH+'</div>'); return r; }; window.renderHome(); }
 })();
 
 </script>
