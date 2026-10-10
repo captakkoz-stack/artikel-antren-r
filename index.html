@@ -1832,6 +1832,9 @@ html[data-theme="dark"] .hs-input{background:#1D3A2B !important;color:#E4F2E8 !i
 html[data-theme="dark"] .hs-input::placeholder{color:rgba(228,242,232,.65);}
 html[data-theme="dark"] .hs-ic{stroke:#8CD0A5;}
 html[data-theme="dark"] .hs-input::-webkit-search-cancel-button{filter:none;}
+
+@keyframes hsFlash{0%,60%{background:rgba(201,166,107,.45);box-shadow:0 0 0 2px rgba(201,166,107,.8);}100%{background:transparent;box-shadow:0 0 0 0 transparent;}}
+tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hsFlash 2.6s ease-out;border-radius:10px;}
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -12621,7 +12624,7 @@ window.__hsOpen=function(i){
   var d=document.getElementById("hsd"+i); if(!d) return;
   if(d.innerHTML){ d.innerHTML=""; return; }
   d.innerHTML=(e.extra?'<div class="hs-x">'+esc(e.extra)+'</div>':'')+(e.ex?'<div class="hs-ex">'+esc(e.ex)+'<small>'+esc(e.exTr||"")+'</small></div>':'')+
-    '<div class="hs-act"><button type="button" onclick="event.stopPropagation();speak('+JSON.stringify(e.de).replace(/"/g,"&quot;")+')">Dinle</button><button type="button" onclick="event.stopPropagation();switchTab(\''+e.tab+'\')">Listede aç</button></div>';
+    '<div class="hs-act"><button type="button" onclick="event.stopPropagation();speak('+JSON.stringify(e.de).replace(/"/g,"&quot;")+')">Dinle</button><button type="button" onclick="event.stopPropagation();window.__hsGoto('+i+')">Listede aç</button></div>';
 };
 var baseToday=window.__todayCard;
 window.__todayCard=function(){ return (baseToday?baseToday():"")+wotdHtml()+searchHtml(); };
@@ -13049,6 +13052,33 @@ var oRH=window.renderHome;
 if(typeof oRH==="function"){ window.renderHome=function(){ var r=oRH.apply(this,arguments); var el=document.getElementById("homeScreen"); if(el && !el.querySelector(".home-foot")) el.insertAdjacentHTML("beforeend",'<div class="home-foot">'+sigH+luH+'</div>'); return r; }; window.renderHome(); }
 })();
 
+</script>
+<script>
+(function(){
+"use strict";
+window.__hsGoto=function(i){
+  var e=(window.__hsHits||[])[i]; if(!e) return;
+  var C={
+   n:{sec:"artikelSection",inp:"searchInput",arr:function(){return words;},key:"word",set:function(){return revealedWords;},rend:function(){ setFilter("all"); setTopicFilter("all"); renderWords(); }},
+   v:{sec:"verbenSection",inp:"verbSearchInput",arr:function(){return verbs;},key:"verb",set:function(){return revealedVerbs;},rend:function(){ perfFilter="all"; setVerbTopicFilter("all"); renderVerbs(); }},
+   a:{sec:"adjSection",inp:"adjSearchInput",arr:function(){return adjectives;},key:"adj",set:function(){return revealedAdj;},rend:function(){ setAdjTopicFilter("all"); renderAdjectives(); }},
+   z:{sec:"advSection",inp:"advSearchInput",arr:function(){return advWords;},key:"adv",set:function(){return revealedAdv;},rend:function(){ setAdvFilter("all"); renderAdv(); }}
+  }[e.k];
+  if(!C){ switchTab(e.tab); return; }
+  switchTab(e.tab);
+  var inp=document.getElementById(C.inp); if(inp) inp.value=e.w;
+  var idx=-1, arr=C.arr(); for(var j=0;j<arr.length;j++){ if(arr[j][C.key]===e.key){ idx=j; break; } }
+  try{ if(idx>=0) C.set().add(idx); C.rend(); }catch(x){}
+  setTimeout(function(){
+    var sec=document.getElementById(C.sec); if(!sec||idx<0) return;
+    var el=sec.querySelector('[data-idx="'+idx+'"]'); if(!el) return;
+    var row=el.closest("tr")||el.closest(".adj-side")||el;
+    try{ row.scrollIntoView({block:"center",behavior:"smooth"}); }catch(x){}
+    row.classList.remove("hs-flash"); void row.offsetWidth; row.classList.add("hs-flash");
+    setTimeout(function(){ row.classList.remove("hs-flash"); },2600);
+  },80);
+};
+})();
 </script>
 <script>
 if("serviceWorker" in navigator && /^https?:$/.test(location.protocol)){ window.addEventListener("load", function(){ navigator.serviceWorker.register("sw.js").catch(function(){}); }); }
