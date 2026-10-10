@@ -708,7 +708,11 @@ html[data-theme="dark"] .kg-wrap{
   @media (max-width:600px){
     .btn-grid.grid-3{grid-template-columns: 1fr;}
     .btn-grid.grid-2{grid-template-columns: 1fr;}
+    .test-group .btn-grid.grid-2{grid-template-columns: repeat(2, minmax(0,1fr));}
   }
+  .test-group .btn-grid.grid-2 > button:last-child:nth-child(odd){grid-column:1/-1;}
+  .test-group .btn-test{font-size:13px;padding-left:8px;padding-right:8px;line-height:1.25;overflow-wrap:anywhere;}
+  .test-group .btn-test span{font-size:10.5px !important;}
   .btn-review{
     background:var(--bg-coral);
     color:#fff;
@@ -3812,12 +3816,10 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <div class="btn-grid grid-2">
           <button class="btn-ghost btn-test" onclick="askQuestion('artikel-only')">Artikel Testi</button>
           <button class="btn-ghost btn-test" onclick="askQuestion('plural-only')">Çoğul Artikel Testi</button>
-        </div>
-        <div class="btn-grid grid-2" style="margin-top:8px;">
+        
           <button class="btn-ghost btn-test" onclick="askQuestion('nomakk-quiz')">Nominativ / Akkusativ Ayrım Testi</button>
           <button class="btn-ghost btn-test" onclick="askQuestion('favorites-quiz')">⭐ Favori Kelimeler Testi</button>
-        </div>
-        <div class="btn-grid" style="margin-top:8px;">
+        
           <button class="btn-ghost btn-test" onclick="askQuestion('plural-guess-quiz')">🔢 Çoğul Tahmin Testi</button>
         </div>
         <div class="group-label">Otomatik soru</div>
@@ -3834,15 +3836,13 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       </div>
 
       <div id="testGroupKelime" class="test-group" style="display:none;">
-        <div class="btn-grid grid-3">
+        <div class="btn-grid grid-2">
           <button class="btn-ghost btn-test" onclick="askQuestion('noun-quiz')">İsim Testi</button>
           <button class="btn-ghost btn-test" onclick="askQuestion('verb-quiz')">Fiil Testi</button>
           <button class="btn-ghost btn-test" onclick="askQuestion('adj-quiz')">Sıfat Testi</button>
-        </div>
-        <div class="btn-grid" style="margin-top:8px;">
+        
           <button class="btn-ghost btn-test" onclick="askQuestion('irregular-verb-quiz')">🔁 Düzensiz Fiil Çekim Testi</button>
-        </div>
-        <div class="btn-grid grid-2" style="margin-top:8px;">
+        
           <button class="btn-ghost btn-test" onclick="askQuestion('gq-adv')">⏱️ Zarf Testi<br><span style="font-size:11px; font-weight:400;">cümlede boşluğu doldur</span></button>
           <button class="btn-ghost btn-test" onclick="askQuestion('gq-advtr')">🔤 Zarf Anlamı<br><span style="font-size:11px; font-weight:400;">Almanca → Türkçe</span></button>
         </div>
@@ -3912,29 +3912,25 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <div class="btn-grid grid-2">
           <button class="btn-ghost btn-test" onclick="askQuestion('dativ-prep-quiz')">📍 Dativ Edatı Seç<br><span style="font-size:11px; font-weight:400;">aus · bei · mit · nach · seit · von · zu</span></button>
           <button class="btn-ghost btn-test" onclick="askQuestion('dativ-artikel-quiz')">🔡 Dativ Artikel<br><span style="font-size:11px; font-weight:400;">dem / der / den</span></button>
-        </div>
-        <div class="btn-grid grid-2" style="margin-top:8px;">
+        
           <button class="btn-ghost btn-test" onclick="askQuestion('dativ-plural-quiz')">🔢 Dativ Çoğul<br><span style="font-size:11px; font-weight:400;">den + isme -n</span></button>
           <button class="btn-ghost btn-test" onclick="askQuestion('dativ-pronoun-quiz')">👤 Dativ Zamir<br><span style="font-size:11px; font-weight:400;">mir · dir · ihm · ihr</span></button>
-        </div>
-        <div class="btn-grid" style="margin-top:8px;">
+        
           <button class="btn-ghost btn-test" onclick="askQuestion('gq-kasus')">🎯 Fiil hangi hâli istiyor?<br><span style="font-size:11px; font-weight:400;">helfen → Dativ · sehen → Akkusativ</span></button>
           <button class="btn-ghost btn-test" onclick="askQuestion('dativ-mix-quiz')">🎯 Dativ Karışık Tur</button>
         </div>
       </div>
 
       <div id="testGroupPratik" class="test-group" style="display:none;">
-        <div class="btn-grid grid-3">
+        <div class="btn-grid grid-2">
           <button class="btn-ghost btn-test" onclick="askQuestion('sentence-fill')">📝 Cümle Tamamlama</button>
           <button class="btn-ghost btn-test" onclick="askQuestion('order-quiz')">🧩 Cümle Kurma</button>
           <button class="btn-ghost btn-test" onclick="askQuestion('prep-quiz')">🔤 Küçük Kelimeler<br><span style="font-size:11px; font-weight:400;">im · am · zu · sehr · nicht</span></button>
-        </div>
-        <div class="btn-grid grid-3" style="margin-top:8px;">
+        
           <button class="btn-ghost btn-test" onclick="openReadingModal()">📖 Basit Okuma</button>
           <button class="btn-ghost btn-test" onclick="askQuestion('listening-quiz')">🎧 Basit Dinleme</button>
           <button class="btn-ghost btn-test" onclick="openMatchModal()">🔗 Kelime Eşleştirme</button>
-        </div>
-        <div class="btn-grid grid-3" style="margin-top:8px;">
+        
           <button class="btn-ghost btn-test" onclick="startTypeQuiz()">✍️ Yazarak Çeviri<br><span style="font-size:11px; font-weight:400;">Türkçe → Almanca yaz</span></button>
         </div>
         <div class="group-label" style="margin-top:12px;">Paragraf</div>
