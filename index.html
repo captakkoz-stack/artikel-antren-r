@@ -1835,6 +1835,17 @@ html[data-theme="dark"] .hs-input::-webkit-search-cancel-button{filter:none;}
 
 @keyframes hsFlash{0%,60%{background:rgba(201,166,107,.45);box-shadow:0 0 0 2px rgba(201,166,107,.8);}100%{background:transparent;box-shadow:0 0 0 0 transparent;}}
 tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hsFlash 2.6s ease-out;border-radius:10px;}
+
+.wotd.wd3{display:block;padding:12px 14px 6px;}
+.wd3 .wd-lbl{display:block;margin-bottom:6px;}
+.wd3 .wd-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:0 8px;padding:8px 0;border-top:1px solid var(--line);}
+.wd3 .wd-main{display:flex;align-items:center;gap:12px;background:transparent;border:0;padding:0;text-align:left;color:inherit;cursor:pointer;font-family:inherit;min-width:0;}
+.wd3 .wd-em{font-size:30px;width:36px;text-align:center;flex:none;}
+.wd3 .wd-txt{display:flex;flex-direction:column;min-width:0;}
+.wd3 .wd-k{font:600 9.5px system-ui,sans-serif;letter-spacing:1.2px;text-transform:uppercase;color:var(--brass);}
+.wd3 .wd-w{font-size:18px;}
+.wd3 .wd-spk{width:36px;height:36px;}
+.wd3 .wd-ex{grid-column:1/-1;display:none;margin:6px 0 2px 48px;} .wd3 .wd-ex.open{display:block;}
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -3819,11 +3830,12 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
           <button class="btn-ghost btn-test" onclick="askQuestion('gq-mix')">🎯 Yeni Konular Karışık Tur</button>
         </div>
         <details class="test-details" data-gkey="paragraf">
-          <summary><span>📄 Paragraf Alıştırması<span class="gcount">(3)</span></span></summary>
+          <summary><span>📄 Paragraf Alıştırması<span class="gcount">(4)</span></span></summary>
           <div class="inner"><div class="btn-grid grid-2">
             <button class="btn-ghost btn-test" onclick="askQuestion('par-akkdat')">📄 Akkusativ &amp; Dativ<br><span class="par-btn-sub" data-kind="akkdat" style="font-size:11px; font-weight:400;">10 boşluk · karışık</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('par-prep')">📄 Edat paragrafı<br><span class="par-btn-sub" data-kind="prep" style="font-size:11px; font-weight:400;">10 boşluk · Präpositionen</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('par-perfekt')">📄 Perfekt paragrafı<br><span class="par-btn-sub" data-kind="perfekt" style="font-size:11px; font-weight:400;">10 boşluk · Perfekt</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('par-imperativ')">📄 Imperativ paragrafı<br><span class="par-btn-sub" data-kind="imperativ" style="font-size:11px; font-weight:400;">10 boşluk · du · ihr · Sie</span></button>
           </div></div>
         </details>
         <details class="test-details" data-gkey="zaman">
@@ -4829,7 +4841,14 @@ const STARTER_WORDS = [
   {artikel:"das", word:"Fieber", plural:"—", emoji:"🌡️", tr:"ateş (hastalık belirtisi)", beispiel:"Das Kind hat Fieber.", beispielTr:"Çocuğun ateşi var.", kat:"saglik"},
   {artikel:"der", word:"Husten", plural:"—", emoji:"😷", tr:"öksürük", beispiel:"Ich habe starken Husten.", beispielTr:"Şiddetli öksürüğüm var.", kat:"saglik"},
   {artikel:"der", word:"Schnupfen", plural:"—", emoji:"👃", tr:"nezle / burun akıntısı", beispiel:"Ich habe Schnupfen.", beispielTr:"Burnum akıyor, nezleyim.", kat:"saglik"},
-  {artikel:"die", word:"Luft", plural:"—", emoji:"🌬️", tr:"hava", beispiel:"Die Luft ist hier sehr frisch.", beispielTr:"Buranın havası çok temiz.", kat:"doga"}
+  {artikel:"die", word:"Luft", plural:"—", emoji:"🌬️", tr:"hava", beispiel:"Die Luft ist hier sehr frisch.", beispielTr:"Buranın havası çok temiz.", kat:"doga"},
+  {artikel:"die", word:"Besserung", plural:"—", emoji:"💐", tr:"iyileşme (Gute Besserung! = Geçmiş olsun!)", beispiel:"Gute Besserung!", beispielTr:"Geçmiş olsun!", kat:"saglik"},
+  {artikel:"die", word:"Packungsbeilage", plural:"Packungsbeilagen", emoji:"📄", tr:"ilaç prospektüsü", beispiel:"Lies bitte die Packungsbeilage.", beispielTr:"Lütfen ilaç prospektüsünü oku.", kat:"saglik"},
+  {artikel:"die", word:"Einnahme", plural:"—", emoji:"💊", tr:"(ilacı) alma / kullanım", beispiel:"Die Einnahme ist dreimal täglich.", beispielTr:"İlaç günde üç kez alınır.", kat:"saglik"},
+  {artikel:"die", word:"Flüssigkeit", plural:"Flüssigkeiten", emoji:"💧", tr:"sıvı", beispiel:"Trink viel Flüssigkeit.", beispielTr:"Bol sıvı iç.", kat:"saglik"},
+  {artikel:"die", word:"Tablette", plural:"Tabletten", emoji:"💊", tr:"hap / tablet", beispiel:"Ich nehme eine Tablette.", beispielTr:"Bir hap alıyorum.", kat:"saglik"},
+  {artikel:"das", word:"Antibiotikum", plural:"Antibiotika", emoji:"🧪", tr:"antibiyotik", beispiel:"Der Arzt gibt mir ein Antibiotikum.", beispielTr:"Doktor bana antibiyotik veriyor.", kat:"saglik"},
+  {artikel:"die", word:"Ausstellung", plural:"Ausstellungen", emoji:"🖼️", tr:"sergi", beispiel:"Wir besuchen eine Ausstellung.", beispielTr:"Bir sergiyi geziyoruz.", kat:"hobi"}
 ];
 
 const STARTER_VERBS = [
@@ -5023,7 +5042,14 @@ const STARTER_VERBS = [
   {verb:"erwarten", perf:"hat erwartet", pg:"gsz", perfEx:"Wir haben dich früher erwartet.", perfExTr:"Seni daha erken bekliyorduk.", emoji:"⏳", tr:"beklemek / ummak", beispiel:"Sie erwartet einen Anruf.", beispielTr:"Bir telefon bekliyor.", conj:{ich:"erwarte",du:"erwartest",er:"erwartet",wir:"erwarten",ihr:"erwartet",sie:"erwarten"}, imperativ:{du:"Erwarte!",ihr:"Erwartet!",sie:"Erwarten Sie!"}, kat:"durum"},
   {verb:"stürzen", perf:"ist gestürzt", pg:"duz", perfEx:"Er ist auf dem Eis gestürzt.", perfExTr:"Buzda düştü.", emoji:"🤕", tr:"düşmek / yıkılmak", beispiel:"Sie stürzt vom Fahrrad.", beispielTr:"O bisikletten düşüyor.", conj:{ich:"stürze",du:"stürzt",er:"stürzt",wir:"stürzen",ihr:"stürzt",sie:"stürzen"}, imperativ:{du:"Stürz!",ihr:"Stürzt!",sie:"Stürzen Sie!"}, kat:"hareket"},
   {verb:"werden", perf:"ist geworden", pg:"dzs", perfEx:"Er ist Arzt geworden.", perfExTr:"O doktor oldu.", emoji:"🌱", tr:"olmak / -laşmak (değişim)", beispiel:"Es wird kalt.", beispielTr:"Hava soğuyor.", conj:{ich:"werde",du:"wirst",er:"wird",wir:"werden",ihr:"werdet",sie:"werden"}, imperativ:{du:"Werde!",ihr:"Werdet!",sie:"Werden Sie!"}, kat:"temel"},
-  {verb:"atmen", perf:"hat geatmet", pg:"duz", perfEx:"Ich habe tief geatmet.", perfExTr:"Derin nefes aldım.", emoji:"🫁", tr:"nefes almak", beispiel:"Ich atme tief ein.", beispielTr:"Derin nefes alıyorum.", conj:{ich:"atme",du:"atmest",er:"atmet",wir:"atmen",ihr:"atmet",sie:"atmen"}, imperativ:{du:"Atme!",ihr:"Atmet!",sie:"Atmen Sie!"}, kat:"saglik"}
+  {verb:"atmen", perf:"hat geatmet", pg:"duz", perfEx:"Ich habe tief geatmet.", perfExTr:"Derin nefes aldım.", emoji:"🫁", tr:"nefes almak", beispiel:"Ich atme tief ein.", beispielTr:"Derin nefes alıyorum.", conj:{ich:"atme",du:"atmest",er:"atmet",wir:"atmen",ihr:"atmet",sie:"atmen"}, imperativ:{du:"Atme!",ihr:"Atmet!",sie:"Atmen Sie!"}, kat:"saglik"},
+  {verb:"melden", perf:"hat gemeldet", pg:"duz", perfEx:"Ich habe mich bei der Firma gemeldet.", perfExTr:"Şirkete başvurdum / haber verdim.", emoji:"🙋", tr:"bildirmek / haber vermek (sich melden: ses vermek, başvurmak)", beispiel:"Ich melde mich morgen.", beispielTr:"Yarın haber veririm.", conj:{ich:"melde",du:"meldest",er:"meldet",wir:"melden",ihr:"meldet",sie:"melden"}, imperativ:{du:"Melde!",ihr:"Meldet!",sie:"Melden Sie!"}, kat:"iletisim"},
+  {verb:"klappen", perf:"hat geklappt", pg:"duz", perfEx:"Es hat alles gut geklappt.", perfExTr:"Her şey yolunda gitti.", emoji:"👌", tr:"yolunda gitmek / olmak", beispiel:"Das klappt gut.", beispielTr:"Bu iyi gidiyor.", conj:{ich:"klappe",du:"klappst",er:"klappt",wir:"klappen",ihr:"klappt",sie:"klappen"}, imperativ:{du:"Klapp!",ihr:"Klappt!",sie:"Klappen Sie!"}, kat:"durum"},
+  {verb:"klettern", perf:"ist geklettert", pg:"duz", perfEx:"Wir sind auf den Berg geklettert.", perfExTr:"Dağa tırmandık.", emoji:"🧗", tr:"tırmanmak", beispiel:"Er klettert gern.", beispielTr:"O tırmanmayı sever.", conj:{ich:"klettere",du:"kletterst",er:"klettert",wir:"klettern",ihr:"klettert",sie:"klettern"}, imperativ:{du:"Klettere!",ihr:"Klettert!",sie:"Klettern Sie!"}, kat:"hobi"},
+  {verb:"ziehen", perf:"hat gezogen", pg:"dzs", perfEx:"Er hat an der Tür gezogen.", perfExTr:"O kapıyı çekti.", emoji:"🪢", tr:"çekmek", beispiel:"Ziehen Sie bitte die Tür.", beispielTr:"Lütfen kapıyı çekin.", conj:{ich:"ziehe",du:"ziehst",er:"zieht",wir:"ziehen",ihr:"zieht",sie:"ziehen"}, imperativ:{du:"Zieh!",ihr:"Zieht!",sie:"Ziehen Sie!"}, kat:"hareket"},
+  {verb:"anziehen", perf:"hat angezogen", pg:"trn", perfEx:"Ich habe eine Jacke angezogen.", perfExTr:"Bir ceket giydim.", emoji:"🧥", tr:"giymek (giysi)", beispiel:"Ich ziehe die Schuhe an.", beispielTr:"Ayakkabılarımı giyiyorum.", conj:{ich:"ziehe an",du:"ziehst an",er:"zieht an",wir:"ziehen an",ihr:"zieht an",sie:"ziehen an"}, imperativ:{du:"Zieh an!",ihr:"Zieht an!",sie:"Ziehen Sie an!"}, kat:"giyim"},
+  {verb:"heben", perf:"hat gehoben", pg:"dzs", perfEx:"Er hat den Koffer gehoben.", perfExTr:"O bavulu kaldırdı.", emoji:"🏋️", tr:"kaldırmak", beispiel:"Bitte heb den Arm.", beispielTr:"Lütfen kolunu kaldır.", conj:{ich:"hebe",du:"hebst",er:"hebt",wir:"heben",ihr:"hebt",sie:"heben"}, imperativ:{du:"Heb!",ihr:"Hebt!",sie:"Heben Sie!"}, kat:"hareket"},
+  {verb:"beugen", perf:"hat gebeugt", pg:"duz", perfEx:"Er hat das Knie gebeugt.", perfExTr:"O dizini büktü.", emoji:"🦵", tr:"bükmek / eğmek", beispiel:"Beug bitte das Knie.", beispielTr:"Lütfen dizini bük.", conj:{ich:"beuge",du:"beugst",er:"beugt",wir:"beugen",ihr:"beugt",sie:"beugen"}, imperativ:{du:"Beug!",ihr:"Beugt!",sie:"Beugen Sie!"}, kat:"hareket"}
 ];
 
 const STARTER_ADJEKTIVE = [
@@ -5416,7 +5442,8 @@ const STARTER_ADV = [
   {"adv": "sonst", "cat": "baglanti", "emoji": "⚠️", "tr": "yoksa / başka türlü", "beispiel": "Beeil dich, sonst kommst du zu spät.", "beispielTr": "Acele et, yoksa geç kalırsın."},
   {"adv": "zum Beispiel", "cat": "baglanti", "emoji": "📝", "tr": "örneğin", "beispiel": "Ich mag Obst, zum Beispiel Äpfel.", "beispielTr": "Meyveyi severim, örneğin elma."},
   {"adv": "übrigens", "cat": "baglanti", "emoji": "💬", "tr": "bu arada", "beispiel": "Übrigens, morgen ist frei.", "beispielTr": "Bu arada, yarın tatil."},
-  {"adv": "eigentlich", "cat": "tutum", "emoji": "🤔", "tr": "aslında", "beispiel": "Eigentlich habe ich keine Zeit.", "beispielTr": "Aslında vaktim yok."}
+  {"adv": "eigentlich", "cat": "tutum", "emoji": "🤔", "tr": "aslında", "beispiel": "Eigentlich habe ich keine Zeit.", "beispielTr": "Aslında vaktim yok."},
+  {"adv": "regelmäßig", "cat": "sikl", "emoji": "🔁", "tr": "düzenli olarak", "beispiel": "Ich gehe regelmäßig zum Sport.", "beispielTr": "Düzenli olarak spora giderim."}
 ];
 const ADV_CATS = [["all","Tümü"],["zaman","⏰ Zaman"],["sikl","🔁 Sıklık"],["yer","📍 Yer & Yön"],["derece","📊 Derece"],["tutum","💭 Tutum & Tarz"],["baglanti","🔗 Bağlantı"]];
 let advWords = [];
@@ -10097,7 +10124,7 @@ const TEST_NAMES = {
   "dativ-prep-quiz":"Dativ Edatı Seç","dativ-artikel-quiz":"Dativ Artikel","dativ-plural-quiz":"Dativ Çoğul","dativ-pronoun-quiz":"Dativ Zamir","dativ-mix-quiz":"Dativ Karışık",
   "gq-akkprep":"Akkusativ Edatı","gq-datprep":"Dativ Edatı","gq-wechsel":"Wechsel Edat","gq-praet":"war / hatte","gq-doch":"ja / nein / doch","gq-man":"man","gq-genitiv":"Genitiv-s",
   "gq-geht":"Geht es …?","gq-verbpos":"Fiilin yeri","gq-konj":"Bağlaç seç","gq-quant":"Miktar & Fiyat","gq-gefallen":"gefallen / finden","gq-hs":"Perfekt: haben / sein","gq-partizip":"Partizip II","gq-perfekt":"Perfekt: tam kalıp","gq-wer":"Wer / Wen / Wem","gq-dieser":"dieser / diese / dieses","gq-poss":"İyelikler (mein · dein · sein · ihr …)",
-  "gq-modal":"Modalverben","gq-imperativ":"Imperativ","gq-nicht":"nicht / kein","gq-trennbar":"Bölünen fiiller","gq-kasus":"Fiil hangi hâli istiyor?","gq-mix":"Yeni Konular Karışık","par-akkdat":"Paragraf: Akkusativ & Dativ","par-prep":"Paragraf: Edatlar","par-perfekt":"Paragraf: Perfekt","gq-par":"Paragraf boşluğu"
+  "gq-modal":"Modalverben","gq-imperativ":"Imperativ","gq-nicht":"nicht / kein","gq-trennbar":"Bölünen fiiller","gq-kasus":"Fiil hangi hâli istiyor?","gq-mix":"Yeni Konular Karışık","par-akkdat":"Paragraf: Akkusativ & Dativ","par-prep":"Paragraf: Edatlar","par-perfekt":"Paragraf: Perfekt","par-imperativ":"Paragraf: Imperativ","gq-par":"Paragraf boşluğu"
 };
 
 function collectReportContext(){
@@ -10823,7 +10850,62 @@ const PARAGRAPHS = [
  ["Das Wetter {ist|hat|bin#werden (değişim) → sein: ist geworden} plötzlich kalt geworden.","Hava birdenbire soğudu."],
  ["Am Mittwoch habe ich zum Zahnarzt {gemusst|gemüsst|gemuss#müssen (modal) yalnız kullanılınca: gemusst}.","Çarşamba günü diş hekimine gitmem gerekti."],
  ["Ich habe leider nicht ins Kino {gekonnt|gekönnt|gekonnen#können (modal) yalnız kullanılınca: gekonnt}.","Maalesef sinemaya gidemedim."],
- ["Aber am Wochenende {sind|haben|seid#wegfahren → sein: weg·ge·fahren} wir endlich zusammen weggefahren.","Ama hafta sonu nihayet birlikte yola çıktık."]]}
+ ["Aber am Wochenende {sind|haben|seid#wegfahren → sein: weg·ge·fahren} wir endlich zusammen weggefahren.","Ama hafta sonu nihayet birlikte yola çıktık."]]},
+{id:"im1", kind:"imperativ", title:"Im Deutschkurs", tr:"Almanca kursunda", sents:[
+ ["Guten Morgen, Kinder! {Setzt|Setz|Setzen#Kinder = ihr → fiil kökü + t: setzt} euch bitte.","Günaydın çocuklar! Lütfen oturun."],
+ ["Tim, {öffne|öffnet|öffnen#du → kök (-ffn ile bitince -e eklenir): öffne} bitte dein Buch.","Tim, lütfen kitabını aç."],
+ ["Anna, {lies|liest|lest#du + e→ie fiili: lesen → lies (sonda -e yok)} den ersten Satz laut.","Anna, ilk cümleyi yüksek sesle oku."],
+ ["Kinder, {hört|hör|hören#ihr → hört (zuhören ayrılır: hört … zu)} gut zu.","Çocuklar, iyi dinleyin."],
+ ["Herr Yilmaz, {schreiben|schreibt|schreib#Sie → fiil mastarı + Sie: Schreiben Sie} Sie bitte Ihren Namen an die Tafel.","Bay Yılmaz, lütfen adınızı tahtaya yazın."],
+ ["Lena und Paul, {sprecht|sprich|sprechen#ihr → sprecht (e→i değişimi yalnız du'da: sprich)} bitte langsamer.","Lena ve Paul, lütfen daha yavaş konuşun."],
+ ["Mehmet, {sei|seid|seien#du → sein düzensiz: Sei!} bitte leise.","Mehmet, lütfen sessiz ol."],
+ ["Kinder, {seid|sei|seien#ihr → seid} bitte pünktlich!","Çocuklar, lütfen dakik olun!"],
+ ["Frau Kaya, {nehmen|nimm|nehmt#Sie → Nehmen Sie (Platz nehmen = oturmak)} Sie bitte Platz.","Bayan Kaya, lütfen yerinizi alın."],
+ ["Bis morgen, Kinder, {macht|mach|machen#ihr → macht} bitte die Hausaufgaben!","Yarına kadar çocuklar, lütfen ödevlerinizi yapın!"]]},
+{id:"im2", kind:"imperativ", title:"Beim Arzt", tr:"Doktorda", sents:[
+ ["Guten Tag, Frau Özdemir! {Kommen|Komm|Kommt#Sie → Kommen Sie} Sie bitte herein.","İyi günler Bayan Özdemir! Lütfen içeri buyurun."],
+ ["Mia, {setz|setzt|setzen#du → kök: setz (dich ile)} dich bitte auf die Liege.","Mia, lütfen muayene yatağına otur."],
+ ["Leo, {mach|macht|machen#du → mach … auf (aufmachen ayrılır)} bitte den Mund weit auf.","Leo, lütfen ağzını iyice aç."],
+ ["Mia und Leo, {atmet|atme|atmen#ihr → atmet … ein (einatmen)} bitte tief ein.","Mia ve Leo, lütfen derin nefes alın."],
+ ["Frau Özdemir, {halten|halte|haltet#Sie → Halten Sie} Sie bitte Leos Hand.","Bayan Özdemir, lütfen Leo'nun elini tutun."],
+ ["Leo, {zeig|zeigt|zeigen#du → zeig (zeigen düzenli: kök)} mir bitte deine Zunge.","Leo, lütfen bana dilini göster."],
+ ["Kinder, {hebt|heb|heben#ihr → hebt} bitte den Arm.","Çocuklar, lütfen kolunuzu kaldırın."],
+ ["Mia, {beug|beugt|beugen#du → beug (beugen = bükmek)} bitte das Knie.","Mia, lütfen dizini bük."],
+ ["Herr Özdemir, {nehmen|nimm|nehmt#Sie → Nehmen Sie} Sie die Tablette dreimal am Tag.","Bay Özdemir, hapı günde üç kez alın."],
+ ["Und ihr zwei, {trinkt|trink|trinken#ihr → trinkt} bitte viel Flüssigkeit.","Ve siz ikiniz, lütfen bol sıvı için."]]},
+{id:"im3", kind:"imperativ", title:"Im Sportclub", tr:"Spor kulübünde", sents:[
+ ["Hallo zusammen! {Zieht|Zieh|Ziehen#ihr → zieht … an (anziehen ayrılır)} bitte eure Sportschuhe an.","Herkese merhaba! Lütfen spor ayakkabılarınızı giyin."],
+ ["Jonas, {klettere|klettert|klettern#du + -ern fiili → klettere} bitte langsam an der Wand hoch.","Jonas, lütfen duvara yavaşça tırman."],
+ ["Frau Schmidt, {klettern|klettere|klettert#Sie → Klettern Sie} Sie bitte nicht ohne Seil.","Bayan Schmidt, lütfen halatsız tırmanmayın."],
+ ["Ihr zwei, {haltet|halt|halten#ihr → haltet … fest (festhalten)} das Seil fest.","Siz ikiniz, halatı sıkı tutun."],
+ ["Sara, {zieh|zieht|ziehen#du → zieh (ziehen)} den Gurt fester.","Sara, kemeri daha sıkı çek."],
+ ["Kinder, {lauft|lauf|laufen#ihr → lauft} bitte nicht so schnell.","Çocuklar, lütfen o kadar hızlı koşmayın."],
+ ["Herr Koch, {trinken|trink|trinkt#Sie → Trinken Sie} Sie bitte viel Wasser.","Bay Koch, lütfen bol su için."],
+ ["Tom, {streck|streckt|strecken#du → streck} deine Arme nach oben.","Tom, kollarını yukarı uzat."],
+ ["Alle zusammen, {macht|mach|machen#ihr → macht} die Übung zehnmal.","Hep birlikte, egzersizi on kez yapın."],
+ ["Frau Schmidt, {kommen|komm|kommt#Sie → Kommen Sie} Sie bitte regelmäßig zum Training.","Bayan Schmidt, lütfen antrenmana düzenli gelin."]]},
+{id:"im4", kind:"imperativ", title:"Zu Hause", tr:"Evde", sents:[
+ ["Emma, {steh|steht|stehen#du → steh … auf (aufstehen ayrılır)} bitte auf!","Emma, lütfen kalk!"],
+ ["Emma, {wasch|wascht|waschen#du → wasch} dir die Hände.","Emma, ellerini yıka."],
+ ["Kinder, {esst|iss|essen#ihr → esst} euer Frühstück.","Çocuklar, kahvaltınızı yapın."],
+ ["Oma, {nimm|nehm|nimmt#du + e→i fiili: nehmen → nimm} bitte noch ein Stück Kuchen.","Babaanne, lütfen bir dilim daha pasta al."],
+ ["Kinder, {räumt|räum|räumen#ihr → räumt … auf (aufräumen)} bitte euer Zimmer auf.","Çocuklar, lütfen odanızı toplayın."],
+ ["Tim, {sei|seid|bist#du → sei} nicht so laut!","Tim, o kadar gürültü yapma!"],
+ ["Opa, {warte|wartet|warten#du + -t ile biten kök → warte (-e eklenir)} bitte kurz, ich komme gleich.","Dede, lütfen biraz bekle, hemen geliyorum."],
+ ["Kinder, {geht|geh|gehen#ihr → geht} jetzt bitte ins Bett.","Çocuklar, şimdi lütfen yatağa gidin."],
+ ["Frau Berger, {rufen|ruf|ruft#Sie → Rufen Sie … an} Sie mich bitte morgen an.","Bayan Berger, lütfen beni yarın arayın."],
+ ["Mama, {gib|gebt|geben#du + e→i fiili: geben → gib} mir bitte das Salz.","Anne, lütfen bana tuzu ver."]]},
+{id:"im5", kind:"imperativ", title:"Auf Reisen", tr:"Seyahatte", sents:[
+ ["Liebe Gäste, {steigen|steigt|steig#Sie → Steigen Sie … aus (aussteigen)} Sie bitte hier aus.","Sevgili misafirler, lütfen burada inin."],
+ ["Kinder, {vergesst|vergiss|vergessen#ihr → vergesst} eure Rucksäcke nicht!","Çocuklar, sırt çantalarınızı unutmayın!"],
+ ["Lukas, {vergiss|vergisst|vergesst#du + e→i fiili: vergessen → vergiss} deinen Pass nicht!","Lukas, pasaportunu unutma!"],
+ ["Frau Roth, {besuchen|besuche|besucht#Sie → Besuchen Sie} Sie unbedingt das Museum.","Bayan Roth, müzeyi mutlaka ziyaret edin."],
+ ["Jana, {fahr|fahrt|fahren#du → fahr (a→ä değişmez)} bitte vorsichtig.","Jana, lütfen dikkatli sür."],
+ ["Max und Ella, {meldet|melde|melden#ihr → meldet} euch bitte am Hotel.","Max ve Ella, lütfen otelde kayıt yaptırın."],
+ ["Herr Aksoy, {zeigen|zeig|zeigt#Sie → Zeigen Sie} Sie bitte Ihren Ausweis.","Bay Aksoy, lütfen kimliğinizi gösterin."],
+ ["Nina, {bring|bringt|bringen#du → bring … mit (mitbringen)} bitte die Fotos mit.","Nina, lütfen fotoğrafları getir."],
+ ["Leute, {nehmt|nimm|nehmen#ihr → nehmt … mit (mitnehmen)} warme Jacken mit, es wird kalt.","Arkadaşlar, sıcak ceketler alın, hava soğuyor."],
+ ["Frau Roth, {bleiben|bleib|bleibt#Sie → Bleiben Sie} Sie bitte hier, ich bin gleich zurück.","Bayan Roth, lütfen burada kalın, hemen dönerim."]]}
 ];
 
 const PAR_SRC = "\\{([^{}|#]+)\\|([^{}|#]+)\\|([^{}|#]+)#([^{}]+)\\}";
@@ -10859,7 +10941,7 @@ document.querySelectorAll(".par-btn-sub").forEach(function(el){
   el.textContent = "10 boşluk · " + parCount(k) + " paragraf" + (k === "akkdat" ? " · karışık" : "");
 });
 function startParagraph(kind, afterReset){
-  const want = kind === "par-akkdat" ? "akkdat" : (kind === "par-perfekt" ? "perfekt" : "prep");
+  const want = {"par-akkdat":"akkdat","par-perfekt":"perfekt","par-imperativ":"imperativ"}[kind] || "prep";
   const list = PARAGRAPHS.filter(function(x){ return x.kind === want; });
   window.__poolExhausted = [];
   const pool = getUnseenPool(kind, list, function(x){ return x.id; });
@@ -10880,9 +10962,9 @@ function openParagraph(kind, p){
   __par = {kind: kind, p: p, parsed: parsed, done: false};
   window.__par = __par;
   markAsked(kind, [p], function(x){ return x.id; });
-  const kk = kind === "par-akkdat" ? "akkdat" : (kind === "par-perfekt" ? "perfekt" : "prep");
+  const kk = {"par-akkdat":"akkdat","par-perfekt":"perfekt","par-imperativ":"imperativ"}[kind] || "prep";
   const seenN = Math.min(poolSeen(kind), parCount(kk));
-  document.getElementById("parKind").textContent = (kind === "par-akkdat" ? "📄 PARAGRAF — AKKUSATIV & DATIV" : kind === "par-perfekt" ? "📄 PARAGRAF — PERFEKT" : "📄 PARAGRAF — EDATLAR") + " · " + seenN + " / " + parCount(kk);
+  document.getElementById("parKind").textContent = (kind === "par-akkdat" ? "📄 PARAGRAF — AKKUSATIV & DATIV" : kind === "par-perfekt" ? "📄 PARAGRAF — PERFEKT" : kind === "par-imperativ" ? "📄 PARAGRAF — IMPERATIV" : "📄 PARAGRAF — EDATLAR") + " · " + seenN + " / " + parCount(kk);
   document.getElementById("parTitle").textContent = p.title + " · " + p.tr;
   document.getElementById("parBody").innerHTML = parsed.segs.map(function(seg){
     return seg.parts.map(function(pt){ return pt.b !== undefined ? parSelectHtml(pt.b, parsed.blanks[pt.b]) : escapeHtml(pt.t); }).join("");
@@ -10949,7 +11031,7 @@ document.addEventListener("keydown", function(e){
 const POOL_GROUPS = [
   ["Artikel", ["artikel-only","plural-only","nomakk-quiz","plural-guess-quiz"]],
   ["Kelime", ["noun-quiz","verb-quiz","adj-quiz","irregular-verb-quiz"]],
-  ["Gramer", ["par-akkdat","par-prep","par-perfekt","gq-akkprep","gq-datprep","gq-wechsel","gq-praet","gq-doch","gq-man","gq-genitiv","gq-geht","gq-verbpos","gq-konj","gq-quant","gq-gefallen","gq-poss","gq-wer","gq-dieser","gq-hs","gq-partizip","gq-perfekt","gq-modal","gq-imperativ","gq-nicht","gq-trennbar"]],
+  ["Gramer", ["par-akkdat","par-prep","par-perfekt","par-imperativ","gq-akkprep","gq-datprep","gq-wechsel","gq-praet","gq-doch","gq-man","gq-genitiv","gq-geht","gq-verbpos","gq-konj","gq-quant","gq-gefallen","gq-poss","gq-wer","gq-dieser","gq-hs","gq-partizip","gq-perfekt","gq-modal","gq-imperativ","gq-nicht","gq-trennbar"]],
   ["Dativ", ["gq-kasus","dativ-artikel-quiz","dativ-plural-quiz","dativ-prep-quiz","dativ-pronoun-quiz"]],
   ["Pratik", ["order-quiz","sentence-fill","listening-quiz","prep-quiz","zeitort-quiz"]]
 ];
@@ -12589,23 +12671,30 @@ function fold(s){
   return String(s||"").toLocaleLowerCase("tr").replace(/ß/g,"ss").replace(/ı/g,"i").normalize("NFD").replace(/[̀-ͯ]/g,"");
 }
 function hash(str){ var h=0; for(var i=0;i<str.length;i++){ h=(h*31+str.charCodeAt(i))|0; } return Math.abs(h); }
-function wotd(){
-  var all=allEntries(); if(!all.length) return null;
-  var d=new Date(), seed=hash(d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()), start=seed%all.length;
+function wotdPick(kind){
+  var all=allEntries().filter(function(e){ return e.k===kind; }); if(!all.length) return null;
+  var d=new Date(), seed=hash(d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+"-"+kind), start=seed%all.length;
   for(var i=0;i<all.length;i++){
     var e=all[(start+i)%all.length], st=null; try{ st=wordStats[e.key]; }catch(x){}
     if(!(st && (st.streak||0)>=3)) return e;
   }
   return all[start];
 }
-window.__wotdSpeak=function(){ var e=wotd(); if(e && typeof speak==="function") speak(e.de); };
+function wotd(){ return wotdPick("n"); }
+function wotds(){ return [wotdPick("n"),wotdPick("v"),wotdPick("a")].filter(Boolean); }
+window.__wotdSpeak=function(i){ var e=wotds()[i||0]; if(e && typeof speak==="function") speak(e.de); };
+window.__wotdToggle=function(i){ var el=document.getElementById("wdx"+i); if(el) el.classList.toggle("open"); };
+var WD_KIND={n:"İsim",v:"Fiil",a:"Sıfat"};
 function wotdHtml(){
-  var e=wotd(); if(!e) return "";
-  return '<div class="wotd"><div class="wd-em">'+esc(e.em||"")+'</div><div class="wd-txt">'+
-    '<span class="wd-lbl">Günün kelimesi · Wort des Tages</span>'+
-    '<span class="wd-w">'+esc(e.de)+'</span><span class="wd-tr">'+esc(e.tr)+'</span>'+
-    (e.ex?'<span class="wd-ex">'+esc(e.ex)+(e.exTr?'<small>'+esc(e.exTr)+'</small>':'')+'</span>':'')+
-    '</div><button type="button" class="wd-spk" onclick="window.__wotdSpeak()" aria-label="Dinle"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/></svg></button></div>';
+  var l=wotds(); if(!l.length) return "";
+  var h='<div class="wotd wd3"><span class="wd-lbl">Günün kelimeleri · Wörter des Tages</span>';
+  l.forEach(function(e,i){
+    h+='<div class="wd-row"><button type="button" class="wd-main" onclick="window.__wotdToggle('+i+')" aria-label="Örneği göster"><span class="wd-em">'+esc(e.em||"")+'</span>'+
+      '<span class="wd-txt"><span class="wd-k">'+WD_KIND[e.k]+'</span><span class="wd-w">'+esc(e.de)+'</span><span class="wd-tr">'+esc(e.tr)+'</span></span></button>'+
+      '<button type="button" class="wd-spk" onclick="window.__wotdSpeak('+i+')" aria-label="Dinle"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/></svg></button>'+
+      (e.ex?'<div class="wd-ex" id="wdx'+i+'">'+esc(e.ex)+(e.exTr?'<small>'+esc(e.exTr)+'</small>':'')+'</div>':'')+'</div>';
+  });
+  return h+'</div>';
 }
 function searchHtml(){
   return '<div class="hs-box"><svg class="hs-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>'+
