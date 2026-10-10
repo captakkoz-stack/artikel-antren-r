@@ -1846,6 +1846,20 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
 .wd3 .wd-w{font-size:18px;}
 .wd3 .wd-spk{width:36px;height:36px;}
 .wd3 .wd-ex{grid-column:1/-1;display:none;margin:6px 0 2px 48px;} .wd3 .wd-ex.open{display:block;}
+
+.wd3 .wd-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+.wd3 .wd-card{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--x-bg-fdfcf9);border:1px solid var(--line);border-radius:12px;padding:10px 6px 8px;}
+.wd3 .wd-card.on{border-color:var(--brass);box-shadow:0 0 0 2px rgba(201,166,107,.35);}
+.wd3 .wd-main{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%;padding:0;border:0;background:transparent;color:inherit;font-family:inherit;cursor:pointer;min-width:0;}
+.wd3 .wd-em{font-size:30px;width:auto;line-height:1.1;margin-bottom:2px;}
+.wd3 .wd-w{font-size:15.5px;line-height:1.2;overflow-wrap:anywhere;}
+.wd3 .wd-tr{font-size:12.5px;line-height:1.3;overflow-wrap:anywhere;}
+.wd3 .wd-spk{width:30px;height:30px;margin-top:6px;}
+.wd3 .wd-row{display:none;}
+.wd3 .wd-ex,.wd3 .wd-ex.open{display:none;margin:8px 2px 4px;padding:8px 10px;border-left:3px solid var(--brass);} .wd3 .wd-ex.open{display:block;}
+.wd3 .wd-ex small{display:block;}
+.wd3 .wd-main,.wd3 .wd-main span{white-space:normal;max-width:100%;word-break:normal;overflow-wrap:anywhere;}
+.wd3 .wd-main,.wd3 .wd-main span{text-align:center;}
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -12683,18 +12697,24 @@ function wotdPick(kind){
 function wotd(){ return wotdPick("n"); }
 function wotds(){ return [wotdPick("n"),wotdPick("v"),wotdPick("a")].filter(Boolean); }
 window.__wotdSpeak=function(i){ var e=wotds()[i||0]; if(e && typeof speak==="function") speak(e.de); };
-window.__wotdToggle=function(i){ var el=document.getElementById("wdx"+i); if(el) el.classList.toggle("open"); };
+window.__wotdToggle=function(i){
+  var box=document.getElementById("wdEx"), l=wotds(), e=l[i]; if(!box||!e) return;
+  var cards=document.querySelectorAll(".wd-card");
+  if(box.getAttribute("data-i")===String(i) && box.classList.contains("open")){ box.classList.remove("open"); box.removeAttribute("data-i"); cards.forEach(function(c){ c.classList.remove("on"); }); return; }
+  box.setAttribute("data-i",String(i)); box.classList.add("open");
+  box.innerHTML=(e.ex?esc(e.ex)+(e.exTr?'<small>'+esc(e.exTr)+'</small>':''):'Örnek yok');
+  cards.forEach(function(c,j){ c.classList.toggle("on",j===i); });
+};
 var WD_KIND={n:"İsim",v:"Fiil",a:"Sıfat"};
 function wotdHtml(){
   var l=wotds(); if(!l.length) return "";
-  var h='<div class="wotd wd3"><span class="wd-lbl">Günün kelimeleri · Wörter des Tages</span>';
+  var h='<div class="wotd wd3"><span class="wd-lbl">Günün kelimeleri · Wörter des Tages</span><div class="wd-grid">';
   l.forEach(function(e,i){
-    h+='<div class="wd-row"><button type="button" class="wd-main" onclick="window.__wotdToggle('+i+')" aria-label="Örneği göster"><span class="wd-em">'+esc(e.em||"")+'</span>'+
-      '<span class="wd-txt"><span class="wd-k">'+WD_KIND[e.k]+'</span><span class="wd-w">'+esc(e.de)+'</span><span class="wd-tr">'+esc(e.tr)+'</span></span></button>'+
-      '<button type="button" class="wd-spk" onclick="window.__wotdSpeak('+i+')" aria-label="Dinle"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/></svg></button>'+
-      (e.ex?'<div class="wd-ex" id="wdx'+i+'">'+esc(e.ex)+(e.exTr?'<small>'+esc(e.exTr)+'</small>':'')+'</div>':'')+'</div>';
+    h+='<div class="wd-card"><button type="button" class="wd-main" onclick="window.__wotdToggle('+i+')" aria-label="Örneği göster"><span class="wd-em">'+esc(e.em||"")+'</span>'+
+      '<span class="wd-k">'+WD_KIND[e.k]+'</span><span class="wd-w">'+esc(e.de)+'</span><span class="wd-tr">'+esc(e.tr)+'</span></button>'+
+      '<button type="button" class="wd-spk" onclick="window.__wotdSpeak('+i+')" aria-label="Dinle"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/></svg></button></div>';
   });
-  return h+'</div>';
+  return h+'</div><div class="wd-ex" id="wdEx"></div></div>';
 }
 function searchHtml(){
   return '<div class="hs-box"><svg class="hs-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>'+
