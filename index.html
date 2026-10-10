@@ -1815,6 +1815,13 @@ html[data-theme="dark"] .home-foot .signature .sig-note{color:var(--brass);}
 html[data-theme="dark"] .home-foot .signature .sig-name{color:#E8E2D4;}
 .home-foot .last-updated{text-align:center;margin-top:0;color:#9A7B3F;}
 html[data-theme="dark"] .home-foot .last-updated{color:var(--brass);}
+
+.hs-input{background:#1C4B5C !important;color:#F5F0E6 !important;border:1.5px solid var(--brass) !important;box-shadow:0 6px 16px -8px rgba(15,42,61,.55);}
+.hs-input::placeholder{color:rgba(245,240,230,.72);opacity:1;}
+.hs-input:focus{box-shadow:0 0 0 3px rgba(201,166,107,.35),0 6px 16px -8px rgba(15,42,61,.55);}
+.hs-ic{stroke:#E3C58C;}
+html[data-theme="dark"] .hs-input{background:#23566A !important;}
+.hs-input::-webkit-search-cancel-button{filter:invert(1) brightness(1.4);cursor:pointer;}
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1826,7 +1833,7 @@ html[data-theme="dark"] .home-foot .last-updated{color:var(--brass);}
     <div>
       <h1 class="brand-logo" aria-label="Deutschfunke"><span class="bl-word">Deutsch<span class="bl-f">fun<span class="bl-sp"><svg class="bl-spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0l3 8 8 4-8 4-3 8-3-8-8-4 8-4z" fill="#FFB400"/></svg></span>ke</span></span></h1>
       <div class="bl-bar" aria-hidden="true"><i></i><i></i><i></i></div>
-      <p class="bl-sub">Almanca Kişisel Çalışma Antrenörü · Persönlicher Deutsch-Lerntrainer</p>
+      <p class="bl-sub">Almanca Kişisel Çalışma Antrenörü<br>Persönlicher Deutsch-Lerntrainer</p>
       <button id="themeBtn" class="theme-btn" style="margin-top:10px;" onclick="cycleTheme()" type="button" aria-label="Tema değiştir" title="Tema: Otomatik"><span id="themeIcon">🌓</span><span id="themeLabel">Otomatik</span></button>
       <button id="iconBtn" class="theme-btn" style="margin-top:10px;margin-left:8px;" onclick="window.__toggleIcons()" type="button" aria-label="İkon türünü değiştir" title="Ana sayfa ikonları: çizgi / emoji"><span>İkon:</span> <span class="ib-l">Çizgi</span></button>
     </div>
@@ -12939,7 +12946,7 @@ if(typeof origST==="function"){ window.switchTab=function(tab){ if(tab!=="diyalo
 var FS=parseFloat((function(){ try{ return localStorage.getItem("artikel_fs"); }catch(e){ return null; } })())||1;
 var FONT=(function(){ try{ return localStorage.getItem("artikel_font")||"serif"; }catch(e){ return "serif"; } })();
 function applyFS(){
-  FS=Math.max(0.9,Math.min(1.3,Math.round(FS*10)/10));
+  FS=Math.max(0.7,Math.min(1.3,Math.round(FS*10)/10));
   document.documentElement.style.setProperty("--fs",String(FS));
   document.documentElement.setAttribute("data-fs",String(FS));
   document.documentElement.setAttribute("data-font",FONT);
