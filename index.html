@@ -1860,6 +1860,11 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
 .wd3 .wd-ex small{display:block;}
 .wd3 .wd-main,.wd3 .wd-main span{white-space:normal;max-width:100%;word-break:normal;overflow-wrap:anywhere;}
 .wd3 .wd-main,.wd3 .wd-main span{text-align:center;}
+
+.review-card{margin:2px 0 12px;}
+.review-card .btn-review{width:100%;display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 14px;border-radius:12px;}
+.review-card .rv-t{font-weight:800;font-size:15px;} .review-card .rv-s{font:500 12px system-ui,Helvetica,Arial,sans-serif;opacity:.85;}
+.test-group .toggle-row{margin-top:2px;}
 </style>
 <!-- CSS custom property fallback note: --cream/--deep/--brass already defined in :root above -->
 <script data-goatcounter="https://captakkoz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -3791,16 +3796,9 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <div id="progressBar" style="background:var(--brass); height:100%; width:0%; transition:width 0.3s;"></div>
       </div>
 
-      <div class="toggle-row">
-        <input type="checkbox" id="autoToggle" onchange="toggleAuto()">
-        <label style="margin:0" for="autoToggle">Otomatik Artikel Testi</label>
+      <div class="review-card">
+        <button class="btn-review" onclick="askQuestion('review-mistakes')" type="button"><span class="rv-t">🔁 Yanlışlarımı Tekrar Et</span><span class="rv-s" id="reviewSub">Zayıf kelimelerini çalış</span></button>
       </div>
-      <div class="interval-row" id="intervalRow">
-        <button class="interval-btn" data-sec="30" onclick="setAutoInterval(30)">30 sn</button>
-        <button class="interval-btn" data-sec="60" onclick="setAutoInterval(60)">1 dk</button>
-        <button class="interval-btn active" data-sec="120" onclick="setAutoInterval(120)">2 dk</button>
-      </div>
-      <div class="countdown" id="countdownText"></div>
 
       <div class="test-subtabs">
         <button class="test-subtab" id="testTabArtikel" onclick="switchTestGroup('artikel')">Artikel</button>
@@ -3822,6 +3820,17 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <div class="btn-grid" style="margin-top:8px;">
           <button class="btn-ghost btn-test" onclick="askQuestion('plural-guess-quiz')">🔢 Çoğul Tahmin Testi</button>
         </div>
+        <div class="group-label">Otomatik soru</div>
+        <div class="toggle-row">
+          <input type="checkbox" id="autoToggle" onchange="toggleAuto()">
+          <label style="margin:0" for="autoToggle">Otomatik Artikel Testi</label>
+        </div>
+        <div class="interval-row" id="intervalRow">
+          <button class="interval-btn" data-sec="30" onclick="setAutoInterval(30)">30 sn</button>
+          <button class="interval-btn" data-sec="60" onclick="setAutoInterval(60)">1 dk</button>
+          <button class="interval-btn active" data-sec="120" onclick="setAutoInterval(120)">2 dk</button>
+        </div>
+        <div class="countdown" id="countdownText"></div>
       </div>
 
       <div id="testGroupKelime" class="test-group" style="display:none;">
@@ -3843,15 +3852,6 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <div class="btn-grid" style="margin-bottom:6px;">
           <button class="btn-ghost btn-test" onclick="askQuestion('gq-mix')">🎯 Yeni Konular Karışık Tur</button>
         </div>
-        <details class="test-details" data-gkey="paragraf">
-          <summary><span>📄 Paragraf Alıştırması<span class="gcount">(4)</span></span></summary>
-          <div class="inner"><div class="btn-grid grid-2">
-            <button class="btn-ghost btn-test" onclick="askQuestion('par-akkdat')">📄 Akkusativ &amp; Dativ<br><span class="par-btn-sub" data-kind="akkdat" style="font-size:11px; font-weight:400;">10 boşluk · karışık</span></button>
-            <button class="btn-ghost btn-test" onclick="askQuestion('par-prep')">📄 Edat paragrafı<br><span class="par-btn-sub" data-kind="prep" style="font-size:11px; font-weight:400;">10 boşluk · Präpositionen</span></button>
-            <button class="btn-ghost btn-test" onclick="askQuestion('par-perfekt')">📄 Perfekt paragrafı<br><span class="par-btn-sub" data-kind="perfekt" style="font-size:11px; font-weight:400;">10 boşluk · Perfekt</span></button>
-            <button class="btn-ghost btn-test" onclick="askQuestion('par-imperativ')">📄 Imperativ paragrafı<br><span class="par-btn-sub" data-kind="imperativ" style="font-size:11px; font-weight:400;">10 boşluk · du · ihr · Sie</span></button>
-          </div></div>
-        </details>
         <details class="test-details" data-gkey="zaman">
           <summary><span>⏰ Zaman & Sayılar<span class="gcount">(4)</span></span></summary>
           <div class="inner"><div class="btn-grid grid-2">
@@ -3862,10 +3862,9 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
           </div></div>
         </details>
         <details class="test-details" data-gkey="hal">
-          <summary><span>📍 Edatlar (Akkusativ · Dativ · Wechsel)<span class="gcount">(3)</span></span></summary>
+          <summary><span>📍 Edatlar (Akkusativ · Wechsel)<span class="gcount">(2)</span></span></summary>
           <div class="inner"><div class="btn-grid grid-2">
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-akkprep')">📍 Akkusativ Edatı<br><span style="font-size:11px; font-weight:400;">für · durch · ohne · gegen · um</span></button>
-            <button class="btn-ghost btn-test" onclick="askQuestion('gq-datprep')">📌 Dativ Edatı<br><span style="font-size:11px; font-weight:400;">aus · bei · mit · nach · seit · von · zu</span></button>
             <button class="btn-ghost btn-test" onclick="askQuestion('gq-wechsel')">🔀 Wechsel Edat<br><span style="font-size:11px; font-weight:400;">wo? / wohin?</span></button>
           </div></div>
         </details>
@@ -3938,11 +3937,20 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <div class="btn-grid grid-3" style="margin-top:8px;">
           <button class="btn-ghost btn-test" onclick="startTypeQuiz()">✍️ Yazarak Çeviri<br><span style="font-size:11px; font-weight:400;">Türkçe → Almanca yaz</span></button>
         </div>
+        <div class="group-label" style="margin-top:12px;">Paragraf</div>
+        <details class="test-details" data-gkey="paragraf">
+          <summary><span>📄 Paragraf Alıştırması<span class="gcount">(4)</span></span></summary>
+          <div class="inner"><div class="btn-grid grid-2">
+            <button class="btn-ghost btn-test" onclick="askQuestion('par-akkdat')">📄 Akkusativ &amp; Dativ<br><span class="par-btn-sub" data-kind="akkdat" style="font-size:11px; font-weight:400;">10 boşluk · karışık</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('par-prep')">📄 Edat paragrafı<br><span class="par-btn-sub" data-kind="prep" style="font-size:11px; font-weight:400;">10 boşluk · Präpositionen</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('par-perfekt')">📄 Perfekt paragrafı<br><span class="par-btn-sub" data-kind="perfekt" style="font-size:11px; font-weight:400;">10 boşluk · Perfekt</span></button>
+            <button class="btn-ghost btn-test" onclick="askQuestion('par-imperativ')">📄 Imperativ paragrafı<br><span class="par-btn-sub" data-kind="imperativ" style="font-size:11px; font-weight:400;">10 boşluk · du · ihr · Sie</span></button>
+          </div></div>
+        </details>
       </div>
 
-      <div class="group-label">Tekrar</div>
-      <button class="btn-review" onclick="askQuestion('review-mistakes')" style="width:100%;">🔁 Yanlışlarımı Tekrar Et</button>
-      <button class="btn-ghost" onclick="openPoolManager()" style="width:100%; margin-top:8px;">♻️ Soru Havuzunu Sıfırla…</button>
+      <div class="group-label">Diğer</div>
+      <button class="btn-ghost" onclick="openPoolManager()" style="width:100%;">♻️ Soru Havuzunu Sıfırla…</button>
 
       <div class="group-label">Geri bildirim</div>
       <button class="btn-ghost" onclick="openReport('oneri')" style="width:100%;">💡 Tavsiye / Öneri Gönder</button>
@@ -4083,6 +4091,12 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       <p class="example-de" id="examplePerfSentence" style="margin:0 0 4px;"></p>
       <p class="example-tr" id="examplePerfTranslation" style="margin:0 0 6px;"></p>
       <button class="qspeak-btn" id="examplePerfSpeakBtn" type="button" title="Dinle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/></svg></button>
+    </div>
+    <div class="perf-ex imp-ex" id="exampleImpBlock" style="display:none;">
+      <div class="pe-label" id="exampleImpLabel">📣 IMPERATIV ÖRNEĞİ</div>
+      <p class="example-de" id="exampleImpSentence" style="margin:0 0 4px;"></p>
+      <p class="example-tr" id="exampleImpTranslation" style="margin:0 0 6px;"></p>
+      <button class="qspeak-btn" id="exampleImpSpeakBtn" type="button" title="Dinle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/></svg></button>
     </div>
     <div class="add-actions">
       <button class="btn-ghost" onclick="closeExampleModal()">Kapat</button>
@@ -6335,6 +6349,17 @@ function openExampleModal(type, idx){
       document.getElementById("examplePerfSpeakBtn").onclick = () => speak(item.perfEx);
       pb.style.display = "block";
     } else { pb.style.display = "none"; }
+  }
+  const ib = document.getElementById("exampleImpBlock");
+  if(ib){
+    const ie = (type === "verb" && window.IMP_EX) ? window.IMP_EX[item.verb] : null;
+    if(ie){
+      document.getElementById("exampleImpLabel").textContent = "📣 IMPERATIV ÖRNEĞİ · " + ie[0];
+      document.getElementById("exampleImpSentence").textContent = ie[1];
+      document.getElementById("exampleImpTranslation").textContent = ie[2];
+      document.getElementById("exampleImpSpeakBtn").onclick = () => speak(ie[1]);
+      ib.style.display = "block";
+    } else { ib.style.display = "none"; }
   }
   document.getElementById("exampleOverlay").classList.add("show");
 }
@@ -13196,6 +13221,25 @@ window.__hsGoto=function(i){
     setTimeout(function(){ row.classList.remove("hs-flash"); },2600);
   },80);
 };
+})();
+</script>
+<script>
+/* Imperativ örnek cümleleri: fiil → [kişi, cümle, çeviri] */
+window.IMP_EX={"sein": ["du", "Sei bitte pünktlich!", "Lütfen dakik ol!"], "haben": ["Sie", "Haben Sie bitte etwas Geduld!", "Lütfen biraz sabırlı olun!"], "gehen": ["ihr", "Geht bitte nach Hause!", "Lütfen eve gidin!"], "kommen": ["du", "Komm bitte schnell!", "Lütfen çabuk gel!"], "machen": ["Sie", "Machen Sie bitte das Fenster zu!", "Lütfen pencereyi kapatın!"], "sagen": ["du", "Sag mir bitte deinen Namen!", "Lütfen bana adını söyle!"], "sehen": ["ihr", "Seht mal, der Schnee!", "Bakın, kar!"], "sprechen": ["Sie", "Sprechen Sie bitte langsamer!", "Lütfen daha yavaş konuşun!"], "arbeiten": ["ihr", "Arbeitet bitte leise!", "Lütfen sessiz çalışın!"], "essen": ["du", "Iss bitte dein Gemüse!", "Lütfen sebzeni ye!"], "trinken": ["ihr", "Trinkt viel Wasser!", "Bol su için!"], "schlafen": ["du", "Schlaf gut!", "İyi uykular!"], "lernen": ["ihr", "Lernt jeden Tag zehn Wörter!", "Her gün on kelime öğrenin!"], "wohnen": ["du", "Wohn doch bei uns!", "Hadi bizde otur!"], "fahren": ["du", "Fahr bitte vorsichtig!", "Lütfen dikkatli sür!"], "lesen": ["Sie", "Lesen Sie bitte den Text!", "Lütfen metni okuyun!"], "kaufen": ["du", "Kauf bitte Brot und Milch!", "Lütfen ekmek ve süt al!"], "spielen": ["ihr", "Spielt bitte draußen!", "Lütfen dışarıda oynayın!"], "lieben": ["du", "Liebe dich selbst!", "Kendini sev!"], "helfen": ["du", "Hilf mir bitte!", "Lütfen bana yardım et!"], "kochen": ["du", "Koch bitte Kaffee!", "Lütfen kahve yap!"], "fotografieren": ["Sie", "Fotografieren Sie bitte nicht!", "Lütfen fotoğraf çekmeyin!"], "bleiben": ["ihr", "Bleibt bitte zu Hause!", "Lütfen evde kalın!"], "beginnen": ["Sie", "Beginnen Sie bitte jetzt!", "Lütfen şimdi başlayın!"], "feiern": ["ihr", "Feiert schön!", "İyi kutlamalar!"], "sich verabreden": ["du", "Verabrede dich mit Anna!", "Anna ile sözleş!"], "fliegen": ["Sie", "Fliegen Sie lieber morgen!", "Daha iyisi yarın uçun!"], "telefonieren": ["du", "Telefonier bitte nicht im Zug!", "Lütfen trende telefonla konuşma!"], "aufräumen": ["ihr", "Räumt bitte euer Zimmer auf!", "Lütfen odanızı toplayın!"], "fernsehen": ["du", "Sieh nicht so viel fern!", "O kadar çok televizyon izleme!"], "reisen": ["ihr", "Reist nicht allein!", "Yalnız seyahat etmeyin!"], "vergleichen": ["Sie", "Vergleichen Sie bitte die Preise!", "Lütfen fiyatları karşılaştırın!"], "glauben": ["du", "Glaub mir bitte!", "Lütfen bana inan!"], "wünschen": ["du", "Wünsch dir was!", "Bir dilek tut!"], "bestellen": ["Sie", "Bestellen Sie bitte einen Kaffee!", "Lütfen bir kahve sipariş edin!"], "bringen": ["du", "Bring bitte Wasser!", "Lütfen su getir!"], "nehmen": ["ihr", "Nehmt bitte Platz!", "Lütfen oturun!"], "finden": ["du", "Finde den Fehler!", "Hatayı bul!"], "zustimmen": ["Sie", "Stimmen Sie bitte zu!", "Lütfen onaylayın!"], "ablehnen": ["du", "Lehn das Angebot nicht ab!", "Teklifi reddetme!"], "präsentieren": ["ihr", "Präsentiert bitte euer Projekt!", "Lütfen projenizi sunun!"], "vorschlagen": ["du", "Schlag bitte etwas vor!", "Lütfen bir şey öner!"], "übernehmen": ["Sie", "Übernehmen Sie bitte die Kosten!", "Lütfen masrafları üstlenin!"], "schließen": ["du", "Schließ bitte die Tür!", "Lütfen kapıyı kapat!"], "geben": ["du", "Gib mir bitte das Buch!", "Lütfen bana kitabı ver!"], "studieren": ["du", "Studiere fleißig!", "Çalışkanca oku!"], "zeigen": ["ihr", "Zeigt mir eure Fotos!", "Bana fotoğraflarınızı gösterin!"], "schreiben": ["du", "Schreib mir bald!", "Bana yakında yaz!"], "warten": ["Sie", "Warten Sie bitte hier!", "Lütfen burada bekleyin!"], "fragen": ["ihr", "Fragt den Lehrer!", "Öğretmene sorun!"], "schneiden": ["du", "Schneid den Apfel!", "Elmayı kes!"], "holen": ["du", "Hol bitte die Zeitung!", "Lütfen gazeteyi getir!"], "öffnen": ["Sie", "Öffnen Sie bitte das Fenster!", "Lütfen pencereyi açın!"], "treffen": ["ihr", "Trefft euch um acht Uhr!", "Saat sekizde buluşun!"], "picknicken": ["ihr", "Picknickt im Park!", "Parkta piknik yapın!"], "fischen": ["du", "Fisch nicht hier!", "Burada balık tutma!"], "üben": ["ihr", "Übt jeden Tag!", "Her gün pratik yapın!"], "bauen": ["du", "Bau einen Turm!", "Bir kule yap!"], "organisieren": ["Sie", "Organisieren Sie bitte das Treffen!", "Lütfen toplantıyı organize edin!"], "schauen": ["du", "Schau mal!", "Bak hele!"], "bezahlen": ["Sie", "Bezahlen Sie bitte an der Kasse!", "Lütfen kasada ödeyin!"], "verstehen": ["du", "Versteh mich bitte!", "Lütfen beni anla!"], "hören": ["ihr", "Hört diese Musik!", "Bu müziği dinleyin!"], "suchen": ["du", "Such deinen Schlüssel!", "Anahtarını ara!"], "antworten": ["Sie", "Antworten Sie bitte schnell!", "Lütfen hızlıca cevap verin!"], "denken": ["du", "Denk bitte daran!", "Lütfen bunu aklında tut!"], "aufstehen": ["du", "Steh früh auf!", "Erken kalk!"], "anrufen": ["du", "Ruf mich bitte an!", "Lütfen beni ara!"], "singen": ["ihr", "Singt ein Lied!", "Bir şarkı söyleyin!"], "laufen": ["du", "Lauf nicht so schnell!", "O kadar hızlı koşma!"], "waschen": ["du", "Wasch dir die Hände!", "Ellerini yıka!"], "sich freuen": ["du", "Freu dich!", "Sevin!"], "besuchen": ["ihr", "Besucht uns bald!", "Bizi yakında ziyaret edin!"], "verkaufen": ["Sie", "Verkaufen Sie nicht zu billig!", "Çok ucuza satmayın!"], "anfangen": ["ihr", "Fangt bitte an!", "Lütfen başlayın!"], "legen": ["du", "Leg das Buch auf den Tisch!", "Kitabı masanın üstüne koy!"], "stellen": ["du", "Stell die Flasche auf den Tisch!", "Şişeyi masaya koy!"], "setzen": ["ihr", "Setzt euch an den Tisch!", "Masaya oturun!"], "tragen": ["du", "Trag bitte die Tasche!", "Lütfen çantayı taşı!"], "fallen": ["du", "Fall nicht!", "Düşme!"], "steigen": ["Sie", "Steigen Sie bitte hier ein!", "Lütfen buradan binin!"], "einladen": ["du", "Lade Anna ein!", "Anna'yı davet et!"], "abholen": ["Sie", "Holen Sie mich bitte ab!", "Lütfen beni almaya gelin!"], "mitbringen": ["du", "Bring bitte Brot mit!", "Lütfen ekmek getir!"], "mitkommen": ["ihr", "Kommt doch mit!", "Hadi siz de gelin!"], "zurückkommen": ["du", "Komm bald zurück!", "Yakında geri gel!"], "aufschreiben": ["du", "Schreib die Nummer auf!", "Numarayı yaz!"], "schwimmen": ["ihr", "Schwimmt nicht zu weit!", "Çok uzağa yüzmeyin!"], "einkaufen": ["du", "Kauf bitte Brot ein!", "Lütfen ekmek al!"], "tanzen": ["ihr", "Tanzt mit uns!", "Bizimle dans edin!"], "spazieren gehen": ["ihr", "Geht im Park spazieren!", "Parkta yürüyüşe çıkın!"], "Rad fahren": ["du", "Fahr nicht ohne Helm Rad!", "Kasksız bisiklet sürme!"], "Ski fahren": ["ihr", "Fahrt vorsichtig Ski!", "Dikkatli kayın!"], "Picknick machen": ["ihr", "Macht ein Picknick im Park!", "Parkta piknik yapın!"], "Gitarre spielen": ["du", "Spiel bitte Gitarre!", "Lütfen gitar çal!"], "reinkommen": ["Sie", "Kommen Sie bitte rein!", "Lütfen içeri girin!"], "vorbeikommen": ["du", "Komm morgen vorbei!", "Yarın uğra!"], "ansehen": ["du", "Sieh dir das Bild an!", "Resme bak!"], "joggen": ["ihr", "Joggt jeden Morgen!", "Her sabah koşun!"], "wandern": ["ihr", "Wandert nicht allein!", "Yalnız yürüyüşe çıkmayın!"], "mitnehmen": ["ihr", "Nehmt Wasser mit!", "Yanınıza su alın!"], "tun": ["du", "Tu das nicht!", "Bunu yapma!"], "klingeln": ["du", "Klingel bitte zweimal!", "Lütfen iki kez zil çal!"], "besprechen": ["Sie", "Besprechen Sie das bitte mit Ihrem Chef!", "Lütfen bunu patronunuzla görüşün!"], "mitgehen": ["du", "Geh doch mit uns!", "Hadi bizimle gel!"], "planen": ["ihr", "Plant die Reise früh!", "Seyahati erken planlayın!"], "unterrichten": ["Sie", "Unterrichten Sie bitte die Kinder!", "Lütfen çocuklara ders verin!"], "backen": ["du", "Back bitte einen Kuchen!", "Lütfen bir pasta yap!"], "kennenlernen": ["ihr", "Lernt euch kennen!", "Birbirinizle tanışın!"], "ankommen": ["du", "Komm gut an!", "Sağ salim var!"], "annehmen": ["Sie", "Nehmen Sie das Geschenk an!", "Hediyeyi kabul edin!"], "absagen": ["du", "Sag den Termin nicht ab!", "Randevuyu iptal etme!"], "reservieren": ["Sie", "Reservieren Sie bitte einen Tisch!", "Lütfen bir masa ayırtın!"], "leben": ["du", "Leb gesund!", "Sağlıklı yaşa!"], "sich vorstellen": ["du", "Stell dich bitte vor!", "Lütfen kendini tanıt!"], "entschuldigen": ["du", "Entschuldige bitte!", "Affedersin!"], "wiederholen": ["Sie", "Wiederholen Sie bitte!", "Lütfen tekrar edin!"], "zeichnen": ["ihr", "Zeichnet ein Haus!", "Bir ev çizin!"], "anbieten": ["du", "Biete ihr einen Kaffee an!", "Ona bir kahve ikram et!"], "nutzen": ["Sie", "Nutzen Sie die Zeit!", "Zamanı değerlendirin!"], "verschicken": ["du", "Verschick die Einladungen!", "Davetiyeleri gönder!"], "chatten": ["ihr", "Chattet nicht im Unterricht!", "Derste sohbet etmeyin!"], "surfen": ["du", "Surf nicht die ganze Nacht!", "Bütün gece internette gezinme!"], "riechen": ["du", "Riech mal!", "Bir kokla!"], "kopieren": ["Sie", "Kopieren Sie bitte den Text!", "Lütfen metni kopyalayın!"], "klicken": ["du", "Klick hier!", "Buraya tıkla!"], "erklären": ["Sie", "Erklären Sie bitte das Wort!", "Lütfen kelimeyi açıklayın!"], "wählen": ["ihr", "Wählt eine Antwort!", "Bir cevap seçin!"], "eingeben": ["Sie", "Geben Sie bitte Ihr Passwort ein!", "Lütfen şifrenizi girin!"], "hochladen": ["du", "Lade das Foto hoch!", "Fotoğrafı yükle!"], "ausdrucken": ["Sie", "Drucken Sie bitte das Ticket aus!", "Lütfen bileti yazdırın!"], "schenken": ["du", "Schenk ihr Blumen!", "Ona çiçek hediye et!"], "empfehlen": ["Sie", "Empfehlen Sie mir bitte ein Hotel!", "Lütfen bana bir otel önerin!"], "spülen": ["du", "Spül bitte das Geschirr!", "Lütfen bulaşıkları yıka!"], "berichten": ["Sie", "Berichten Sie bitte schnell!", "Lütfen hemen haber verin!"], "begrüßen": ["ihr", "Begrüßt die Gäste!", "Misafirleri karşılayın!"], "vorstellen": ["Sie", "Stellen Sie sich bitte vor!", "Lütfen kendinizi tanıtın!"], "bitten": ["du", "Bitte ihn um Hilfe!", "Ondan yardım iste!"], "aufhängen": ["du", "Häng die Wäsche auf!", "Çamaşırları as!"], "einräumen": ["ihr", "Räumt die Spülmaschine ein!", "Bulaşık makinesini doldurun!"], "einschalten": ["du", "Schalte das Licht ein!", "Işığı aç!"], "ausschalten": ["du", "Schalte den Fernseher aus!", "Televizyonu kapat!"], "rausbringen": ["du", "Bring den Müll raus!", "Çöpü çıkar!"], "bügeln": ["du", "Bügle das Hemd!", "Gömleği ütüle!"], "staubsaugen": ["du", "Sauge bitte Staub!", "Lütfen elektrikli süpürge çek!"], "decken": ["du", "Deck bitte den Tisch!", "Lütfen sofrayı kur!"], "wischen": ["ihr", "Wischt den Boden!", "Yeri silin!"], "verschlafen": ["du", "Verschlaf morgen nicht!", "Yarın uyuyakalma!"], "verpassen": ["du", "Verpass den Bus nicht!", "Otobüsü kaçırma!"], "vergessen": ["du", "Vergiss die Tickets nicht!", "Biletleri unutma!"], "versprechen": ["du", "Versprich mir das!", "Bana bunun sözünü ver!"], "stören": ["ihr", "Stört mich bitte nicht!", "Lütfen beni rahatsız etmeyin!"], "benutzen": ["Sie", "Benutzen Sie bitte den Eingang links!", "Lütfen soldaki girişi kullanın!"], "weiterfahren": ["du", "Fahr bitte weiter!", "Lütfen yola devam et!"], "ausblasen": ["du", "Blas die Kerzen aus!", "Mumları üfle!"], "checken": ["du", "Check bitte die E-Mails!", "Lütfen e-postaları kontrol et!"], "beraten": ["Sie", "Beraten Sie mich bitte!", "Lütfen bana danışmanlık edin!"], "bewegen": ["ihr", "Bewegt euch mehr!", "Daha çok hareket edin!"], "reparieren": ["du", "Repariere bitte das Fahrrad!", "Lütfen bisikleti tamir et!"], "werden": ["du", "Werde bald gesund!", "Çabuk iyileş!"], "atmen": ["du", "Atme bitte tief ein!", "Lütfen derin nefes al!"], "melden": ["ihr", "Meldet euch bei mir!", "Bana haber verin!"], "klettern": ["du", "Klettere nicht ohne Seil!", "Halatsız tırmanma!"], "ziehen": ["du", "Zieh bitte die Tür!", "Lütfen kapıyı çek!"], "anziehen": ["ihr", "Zieht eure Jacken an!", "Ceketlerinizi giyin!"], "heben": ["du", "Heb bitte den Arm!", "Lütfen kolunu kaldır!"], "beugen": ["du", "Beug die Knie!", "Dizlerini bük!"], "liegen": ["du", "Lieg bitte still!", "Lütfen kıpırdamadan yat!"], "erwarten": ["du", "Erwarte nicht zu viel!", "Fazla bir şey bekleme!"]};
+</script>
+<script>
+(function(){
+function upd(){
+  var el=document.getElementById("reviewSub"); if(!el) return;
+  var n=0, due=0;
+  try{ n=topMistakeWords().length; }catch(e){}
+  try{ due=window.__srsDueCount?window.__srsDueCount():0; }catch(e){}
+  var parts=[]; if(n) parts.push(n+" zayıf kelime"); if(due) parts.push(due+" kelime tekrar zamanı");
+  el.textContent=parts.length?parts.join(" · "):"Henüz yanlış yok, harika";
+}
+var o=window.switchTab; if(typeof o==="function"){ window.switchTab=function(t){ var r=o.apply(this,arguments); if(t==="testler") upd(); return r; }; }
+var c=window.closeQuiz; if(typeof c==="function"){ window.closeQuiz=function(){ var r=c.apply(this,arguments); upd(); return r; }; }
+upd();
 })();
 </script>
 <script>
