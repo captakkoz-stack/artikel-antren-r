@@ -714,6 +714,33 @@ html[data-theme="dark"] .kg-wrap{
   .test-group .btn-test{font-size:13px;padding-left:8px;padding-right:8px;line-height:1.25;overflow-wrap:anywhere;}
   .test-group .btn-test span{font-size:10.5px !important;}
 
+
+  /* welcher/dieser örnek kartları */
+  :root{--h-nom:#4B5FBF;--h-nom-bg:#E4E8F8;--h-akk:#C2611D;--h-akk-bg:#FBE9DA;--h-dat:#1F8577;--h-dat-bg:#DAF0EC;}
+  html[data-theme="dark"]{--h-nom:#9AA8F0;--h-nom-bg:#262C4A;--h-akk:#F0A56B;--h-akk-bg:#47301C;--h-dat:#6FD3C4;--h-dat-bg:#17403A;}
+  .wx-pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:800;letter-spacing:.02em;font-family:system-ui,Helvetica,Arial,sans-serif;}
+  .wx-pill.nom{background:var(--h-nom-bg);color:var(--h-nom);}
+  .wx-pill.akk{background:var(--h-akk-bg);color:var(--h-akk);}
+  .wx-pill.dat{background:var(--h-dat-bg);color:var(--h-dat);}
+  .wx-card{margin-top:12px;border-radius:12px;border:1px solid var(--g-line);border-left:6px solid var(--g);background:var(--g-bg);padding:10px 12px 4px;}
+  .wx-card.m{--g:var(--der);--g-bg:var(--der-bg);--g-line:var(--der-bg);}
+  .wx-card.n{--g:var(--das);--g-bg:var(--das-bg);--g-line:var(--das-bg);}
+  .wx-card.f{--g:var(--die);--g-bg:var(--die-bg);--g-line:var(--die-bg);}
+  .wx-card.p{--g:#7B4FB0;--g-bg:#EDE3F8;--g-line:#EDE3F8;}
+  html[data-theme="dark"] .wx-card.p{--g:#C3A1EB;--g-bg:#2E2340;--g-line:#2E2340;}
+  .wx-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-family:system-ui,Helvetica,Arial,sans-serif;}
+  .wx-head b{font-size:15px;color:var(--g);}
+  .wx-head span{font-size:11.5px;font-weight:700;color:var(--g);opacity:.85;}
+  .wx-row{padding:9px 0 10px;border-top:1px dashed color-mix(in srgb,var(--g) 35%,transparent);margin-top:8px;}
+  .wx-qa{font-size:13.5px;margin:5px 0 3px;color:var(--ink);}
+  .wx-de{font-size:15px;line-height:1.4;color:var(--ink);}
+  .wx-hl{padding:0 3px;border-radius:4px;font-weight:800;}
+  .wx-row.nom .wx-hl{background:var(--h-nom-bg);color:var(--h-nom);}
+  .wx-row.akk .wx-hl{background:var(--h-akk-bg);color:var(--h-akk);}
+  .wx-row.dat .wx-hl{background:var(--h-dat-bg);color:var(--h-dat);}
+  .wx-tr{font-size:13px;color:var(--x-tx-8a8a8a);font-style:italic;margin-top:1px;}
+  .wx-why{font-size:12.5px;line-height:1.45;margin-top:5px;font-family:system-ui,Helvetica,Arial,sans-serif;color:var(--ink);opacity:.9;}
+  .wx-legend{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 2px;align-items:center;font-size:12px;font-family:system-ui,Helvetica,Arial,sans-serif;}
   .btn-review{
     background:var(--bg-coral);
     color:#fff;
@@ -2642,44 +2669,117 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
         <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Hâl</th><th style="text-align:left; padding:8px;">der (eril)</th><th style="text-align:left; padding:8px;">das (nötr)</th><th style="text-align:left; padding:8px;">die (dişil)</th><th style="text-align:left; padding:8px;">die (çoğul)</th></tr></thead>
         <tbody>
-<tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Nominativ</td><td style="padding:8px; vertical-align:top;">welcher / dieser</td><td style="padding:8px; vertical-align:top;">welches / dieses</td><td style="padding:8px; vertical-align:top;">welche / diese</td><td style="padding:8px; vertical-align:top;">welche / diese</td></tr>
-<tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Akkusativ</td><td style="padding:8px; vertical-align:top;"><strong>welchen / diesen</strong></td><td style="padding:8px; vertical-align:top;">welches / dieses</td><td style="padding:8px; vertical-align:top;">welche / diese</td><td style="padding:8px; vertical-align:top;">welche / diese</td></tr>
-<tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;">Dativ</td><td style="padding:8px; vertical-align:top;"><strong>welchem / diesem</strong></td><td style="padding:8px; vertical-align:top;"><strong>welchem / diesem</strong></td><td style="padding:8px; vertical-align:top;"><strong>welcher / dieser</strong></td><td style="padding:8px; vertical-align:top;"><strong>welchen / diesen</strong> (+n)</td></tr>
+<tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><span class="wx-pill nom">Nominativ</span></td><td style="padding:8px; vertical-align:top;">welcher / dieser</td><td style="padding:8px; vertical-align:top;">welches / dieses</td><td style="padding:8px; vertical-align:top;">welche / diese</td><td style="padding:8px; vertical-align:top;">welche / diese</td></tr>
+<tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><span class="wx-pill akk">Akkusativ</span></td><td style="padding:8px; vertical-align:top;"><strong>welchen / diesen</strong></td><td style="padding:8px; vertical-align:top;">welches / dieses</td><td style="padding:8px; vertical-align:top;">welche / diese</td><td style="padding:8px; vertical-align:top;">welche / diese</td></tr>
+<tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><span class="wx-pill dat">Dativ</span></td><td style="padding:8px; vertical-align:top;"><strong>welchem / diesem</strong></td><td style="padding:8px; vertical-align:top;"><strong>welchem / diesem</strong></td><td style="padding:8px; vertical-align:top;"><strong>welcher / dieser</strong></td><td style="padding:8px; vertical-align:top;"><strong>welchen / diesen</strong> (+n)</td></tr>
         </tbody>
       </table>
       </div>
       <div class="plural-note">
         <strong>Kural:</strong> Akkusativ'de sadece <strong>eril</strong> değişir (-en). Dativ'de hepsi değişir: <strong>-em / -em / -er / -en</strong>. Çoğul Dativ'de isme de <strong>-n</strong> eklenir: mit diesen Schuhe<strong>n</strong>.
       </div>
-      <h3 style="margin:16px 0 4px; font-size:15px;">Örnekler: soru → cevap</h3>
-      <div class="plural-note" style="margin-top:10px;">
-        <strong>👔 der Rock (eril)</strong><br>
-        <strong>Nominativ:</strong> Welcher Rock? – Dieser. · <em>Dieser Rock ist schön.</em> (Bu etek güzel.)<br>
-        <strong>Akkusativ:</strong> Welchen Rock? – Diesen da. · <em>Ich finde diesen Rock schön.</em> (Bu eteği güzel buluyorum.)<br>
-        <strong>Dativ:</strong> Welchem Rock? – Diesem. · <em>Zu diesem Rock passt der Gürtel.</em> (Bu etekle kemer uyuyor.)
+      <h3 style="margin:16px 0 4px; font-size:15px;">Örnekler: soru → cevap → neden?</h3>
+      <div class="wx-legend">Hâl rengi: <span class="wx-pill nom">Nominativ</span><span class="wx-pill akk">Akkusativ</span><span class="wx-pill dat">Dativ</span> · kart rengi: <b style="color:var(--der)">der</b> <b style="color:var(--das)">das</b> <b style="color:var(--die)">die</b> <b style="color:#7B4FB0">çoğul</b></div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>👔 der Rock</b><span>eril · der</span></div>
+        <div class="wx-row nom">
+          <span class="wx-pill nom">Nominativ</span>
+          <div class="wx-qa">❓ Welcher Rock? – Dieser.</div>
+          <div class="wx-de"><b class="wx-hl">Dieser</b> Rock ist schön.</div>
+          <div class="wx-tr">Bu etek güzel.</div>
+          <div class="wx-why">💡 Rock cümlenin <b>öznesi</b> (ne güzel? → etek). Özne = Nominativ, eril → <b>-er</b>.</div>
+        </div>
+        <div class="wx-row akk">
+          <span class="wx-pill akk">Akkusativ</span>
+          <div class="wx-qa">❓ Welchen Rock? – Diesen da.</div>
+          <div class="wx-de">Ich finde <b class="wx-hl">diesen</b> Rock schön.</div>
+          <div class="wx-tr">Bu eteği güzel buluyorum.</div>
+          <div class="wx-why">💡 <i>finden</i> fiilinin nesnesi (neyi? → eteği, <b>-i hâli</b>) → Akkusativ. Eril olduğu için <b>-er → -en</b>.</div>
+        </div>
+        <div class="wx-row dat">
+          <span class="wx-pill dat">Dativ</span>
+          <div class="wx-qa">❓ Welchem Rock? – Diesem.</div>
+          <div class="wx-de">Zu <b class="wx-hl">diesem</b> Rock passt der Gürtel.</div>
+          <div class="wx-tr">Bu etekle kemer uyuyor.</div>
+          <div class="wx-why">💡 <b>zu</b> edatı her zaman Dativ ister. Eril Dativ → <b>-em</b>.</div>
+        </div>
       </div>
-      <div class="plural-note" style="margin-top:10px;">
-        <strong>👕 das T-Shirt / das Hemd (nötr)</strong><br>
-        <strong>Nominativ:</strong> Das Hemd gefällt mir. – Welches Hemd? – Dieses. · <em>Dieses T-Shirt ist neu.</em> (Bu tişört yeni.)<br>
-        <strong>Akkusativ:</strong> Welches T-Shirt? – Dieses. · <em>Ich nehme dieses T-Shirt.</em> (Bu tişörtü alıyorum.)<br>
-        <strong>Dativ:</strong> Welchem T-Shirt? – Diesem. · <em>Ich bin mit diesem T-Shirt zufrieden.</em> (Bu tişörtten memnunum.)
+      <div class="wx-card n">
+        <div class="wx-head"><b>👕 das T-Shirt / das Hemd</b><span>nötr · das</span></div>
+        <div class="wx-row nom">
+          <span class="wx-pill nom">Nominativ</span>
+          <div class="wx-qa">❓ Das Hemd gefällt mir. – Welches Hemd? – Dieses.</div>
+          <div class="wx-de"><b class="wx-hl">Dieses</b> T-Shirt ist neu.</div>
+          <div class="wx-tr">Bu tişört yeni.</div>
+          <div class="wx-why">💡 T-Shirt özne → Nominativ. Nötr → <b>-es</b>.</div>
+        </div>
+        <div class="wx-row akk">
+          <span class="wx-pill akk">Akkusativ</span>
+          <div class="wx-qa">❓ Welches T-Shirt? – Dieses.</div>
+          <div class="wx-de">Ich nehme <b class="wx-hl">dieses</b> T-Shirt.</div>
+          <div class="wx-tr">Bu tişörtü alıyorum.</div>
+          <div class="wx-why">💡 Nesne (neyi? → tişörtü, -i hâli) → Akkusativ. <b>Nötr olduğu için Nominativ ile aynı</b> kalır: -es.</div>
+        </div>
+        <div class="wx-row dat">
+          <span class="wx-pill dat">Dativ</span>
+          <div class="wx-qa">❓ Welchem T-Shirt? – Diesem.</div>
+          <div class="wx-de">Ich bin mit <b class="wx-hl">diesem</b> T-Shirt zufrieden.</div>
+          <div class="wx-tr">Bu tişörtten memnunum.</div>
+          <div class="wx-why">💡 <b>mit</b> edatı Dativ ister. Nötr Dativ → <b>-em</b> (erille aynı).</div>
+        </div>
       </div>
-      <div class="plural-note" style="margin-top:10px;">
-        <strong>👖 die Jeans (dişil)</strong><br>
-        <strong>Nominativ:</strong> Welche Jeans? – Diese. · <em>Diese Jeans ist teuer.</em> (Bu kot pahalı.)<br>
-        <strong>Akkusativ:</strong> Welche Jeans? – Diese hier. · <em>Ich kaufe diese Jeans.</em> (Bu kotu alıyorum.)<br>
-        <strong>Dativ:</strong> Welcher Jeans? – Dieser. · <em>Zu dieser Jeans passt der Pullover.</em> (Bu kota kazak uyuyor.)
+      <div class="wx-card f">
+        <div class="wx-head"><b>👖 die Jeans</b><span>dişil · die</span></div>
+        <div class="wx-row nom">
+          <span class="wx-pill nom">Nominativ</span>
+          <div class="wx-qa">❓ Welche Jeans? – Diese.</div>
+          <div class="wx-de"><b class="wx-hl">Diese</b> Jeans ist teuer.</div>
+          <div class="wx-tr">Bu kot pahalı.</div>
+          <div class="wx-why">💡 Jeans özne → Nominativ. Dişil → <b>-e</b>.</div>
+        </div>
+        <div class="wx-row akk">
+          <span class="wx-pill akk">Akkusativ</span>
+          <div class="wx-qa">❓ Welche Jeans? – Diese hier.</div>
+          <div class="wx-de">Ich kaufe <b class="wx-hl">diese</b> Jeans.</div>
+          <div class="wx-tr">Bu kotu alıyorum.</div>
+          <div class="wx-why">💡 Nesne (neyi? → kotu) → Akkusativ. <b>Dişilde Nominativ ile aynı</b>: -e.</div>
+        </div>
+        <div class="wx-row dat">
+          <span class="wx-pill dat">Dativ</span>
+          <div class="wx-qa">❓ Welcher Jeans? – Dieser.</div>
+          <div class="wx-de">Zu <b class="wx-hl">dieser</b> Jeans passt der Pullover.</div>
+          <div class="wx-tr">Bu kota kazak uyuyor.</div>
+          <div class="wx-why">💡 <b>zu</b> → Dativ. Dişil Dativ → <b>-er</b> (dikkat: "diese" yazma!).</div>
+        </div>
       </div>
-      <div class="plural-note" style="margin-top:10px;">
-        <strong>👟 die Schuhe (çoğul)</strong><br>
-        <strong>Nominativ:</strong> Welche Schuhe? – Diese. · <em>Diese Schuhe sind bequem.</em> (Bu ayakkabılar rahat.)<br>
-        <strong>Akkusativ:</strong> Welche Schuhe? – Diese da. · <em>Sie kauft diese Schuhe.</em> (O bu ayakkabıları alıyor.)<br>
-        <strong>Dativ:</strong> Welchen Schuhen? – Diesen. · <em>Mit diesen Schuhen laufe ich gern.</em> (Bu ayakkabılarla koşmayı severim.)
+      <div class="wx-card p">
+        <div class="wx-head"><b>👟 die Schuhe</b><span>çoğul · die</span></div>
+        <div class="wx-row nom">
+          <span class="wx-pill nom">Nominativ</span>
+          <div class="wx-qa">❓ Welche Schuhe? – Diese.</div>
+          <div class="wx-de"><b class="wx-hl">Diese</b> Schuhe sind bequem.</div>
+          <div class="wx-tr">Bu ayakkabılar rahat.</div>
+          <div class="wx-why">💡 Schuhe özne → Nominativ. Çoğul → <b>-e</b>.</div>
+        </div>
+        <div class="wx-row akk">
+          <span class="wx-pill akk">Akkusativ</span>
+          <div class="wx-qa">❓ Welche Schuhe? – Diese da.</div>
+          <div class="wx-de">Sie kauft <b class="wx-hl">diese</b> Schuhe.</div>
+          <div class="wx-tr">O bu ayakkabıları alıyor.</div>
+          <div class="wx-why">💡 Nesne (neyi? → ayakkabıları) → Akkusativ. <b>Çoğulda Nominativ ile aynı</b>: -e.</div>
+        </div>
+        <div class="wx-row dat">
+          <span class="wx-pill dat">Dativ</span>
+          <div class="wx-qa">❓ Welchen Schuhen? – Diesen.</div>
+          <div class="wx-de">Mit <b class="wx-hl">diesen</b> Schuhen laufe ich gern.</div>
+          <div class="wx-tr">Bu ayakkabılarla koşmayı severim.</div>
+          <div class="wx-why">💡 <b>mit</b> → Dativ. Çoğul Dativ → <b>-en</b> ve isme de <b>-n</b>: Schuhe<b>n</b>.</div>
+        </div>
       </div>
       <h3 style="margin:16px 0 4px; font-size:15px;">Hangi hâl? Nasıl bulurum?</h3>
       <div class="plural-note" style="margin-top:6px;">
-        <strong>1.</strong> Önce <strong>özneyi</strong> bul (Wer? kim?) → Nominativ. <em>Dieser Rock gefällt mir</em> → Rock özne.<br>
-        <strong>2.</strong> Kalan ismi Türkçede düşün: <strong>-i hâli</strong> (kimi/neyi) → Akkusativ · <strong>-e hâli</strong> (kime) → Dativ.<br>
+        <strong>1.</strong> Önce <strong>özneyi</strong> bul (Wer? kim?) → <span class="wx-pill nom">Nominativ</span>. <em>Dieser Rock gefällt mir</em> → Rock özne.<br>
+        <strong>2.</strong> Kalan ismi Türkçede düşün: <strong>-i hâli</strong> (kimi/neyi) → <span class="wx-pill akk">Akkusativ</span> · <strong>-e hâli</strong> (kime) → <span class="wx-pill dat">Dativ</span>.<br>
         <strong>3.</strong> <strong>Edat</strong> var mı? für · um · durch · ohne · gegen → Akkusativ. mit · zu · bei · von · aus · nach · seit → Dativ.<br>
         <strong>4.</strong> <strong>Fiil</strong> Dativ'li mi? gefallen · helfen · gehören · danken · antworten → kişi Dativ. <em>Der Rock gefällt <strong>mir</strong>.</em><br>
         <strong>5.</strong> Sonra cinse bak: sadece eril Akkusativ'de değişir. das / die / çoğulda Nominativ = Akkusativ.
@@ -8831,7 +8931,7 @@ const GQ_BANK = {
  ["Mit welcher Jeans gehst du? – Mit ___.", "dieser", ["diese", "diesem"], "Hangi kotla gidiyorsun? – Bununla."],
  ["Mit welchen Schuhen läufst du? – Mit ___.", "diesen", ["diese", "diesem"], "Hangi ayakkabılarla koşuyorsun? – Bunlarla."],
  ["Dieser Rock gefällt mir. Ich gehe mit ___ Rock zur Party.", "diesem", ["diesen", "dieser"], "Bu etek hoşuma gidiyor. Bu etekle partiye gidiyorum."],
- ["Ich kaufe ___ Jeans. Ich gehe mit ___ Jeans aus.", "dieser", ["diese", "diesem"], "Bu kotu alıyorum. Bu kotla dışarı çıkıyorum."],
+ ["Ich gehe mit ___ Jeans ins Kino.", "dieser", ["diese", "diesem"], "Bu kotla sinemaya gidiyorum."],
  ["Bei ___ Hemd fehlt ein Knopf.", "diesem", ["dieses", "diesen"], "Bu gömlekte bir düğme eksik."],
  ["Nach ___ Schuhen suche ich lange.", "diesen", ["diese", "diesem"], "Bu ayakkabıları uzun süre arıyorum."],
  ["Von ___ Mantel träume ich.", "diesem", ["diesen", "dieser"], "Bu palto hayalini kuruyorum."]
