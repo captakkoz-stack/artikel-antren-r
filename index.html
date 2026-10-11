@@ -383,6 +383,9 @@ html[data-theme="dark"] .kg-wrap{
   .ref-sec .ref-body{display:grid;grid-template-rows:0fr;opacity:0;visibility:hidden;transition:grid-template-rows .45s cubic-bezier(.22,.8,.3,1), opacity .35s ease, visibility 0s linear .45s;}
   .ref-sec.open .ref-body{grid-template-rows:1fr;opacity:1;visibility:visible;transition:grid-template-rows .45s cubic-bezier(.22,.8,.3,1), opacity .4s ease .08s, visibility 0s;}
   .ref-sec .ref-inner{min-height:0;overflow:hidden;}
+  @keyframes refZoom{0%{transform:scale(.5);opacity:.35;}55%{transform:scale(1.025);opacity:1;}100%{transform:scale(1);opacity:1;}}
+  .ref-sec.open{transform-origin:50% 0;animation:refZoom .55s cubic-bezier(.2,.8,.3,1) both;}
+  @media (prefers-reduced-motion:reduce){ .ref-sec.open{animation:none;} }
   .ref-sec > h2.ref-toggle::after{transition:transform .4s cubic-bezier(.22,.8,.3,1);}
   @media (prefers-reduced-motion:reduce){ .ref-sec .ref-body,.ref-sec.open .ref-body,.ref-sec > h2.ref-toggle::after{transition:none;} }
   .ref-sec:not(.open){padding:13px 22px; margin-bottom:0; margin-top:8px;}
