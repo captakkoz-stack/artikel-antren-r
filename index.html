@@ -763,6 +763,26 @@ html[data-theme="dark"] .kg-wrap{
   .ref-group > .ref-sec.ref-sec:nth-of-type(5n+3):not(.open){border-left-color:var(--die);}
   .ref-group > .ref-sec.ref-sec:nth-of-type(5n+4):not(.open){border-left-color:var(--h-akk);}
   .ref-group > .ref-sec.ref-sec:nth-of-type(5n):not(.open){border-left-color:var(--h-dat);}
+
+  .wd3{padding:10px 8px 4px;}
+  .wd3 .wd-card{padding:7px 2px 6px;border-radius:10px;}
+  .wd3 .wd-em{font-size:22px;}
+  .wd3 .wd-k{font-size:8px;letter-spacing:.6px;}
+  .wd3 .wd-w{font-size:11.5px;line-height:1.15;hyphens:auto;overflow-wrap:anywhere;}
+  .wd3 .wd-tr{font-size:10.5px;line-height:1.2;padding:0 2px;}
+  .wd3 .wd-spk{width:24px;height:24px;margin-top:4px;}
+  .wd3 .wd-spk svg{width:12px;height:12px;}
+  .wd3 .wd-lbl{margin-left:4px;}
+  .tc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 0 8px;}
+  .tcg-tile{display:flex;align-items:center;gap:10px;text-align:left;cursor:pointer;font-family:inherit;color:inherit;background:var(--x-bg-ffffff);border:1px solid var(--line);border-left:5px solid var(--tc,var(--brass));border-radius:12px;padding:10px 10px 10px 12px;min-width:0;box-shadow:0 1px 2px rgba(15,42,61,.05);}
+  .tcg-tile:active{transform:scale(.98);}
+  .tcg-ic{font-size:24px;flex:none;line-height:1;}
+  .tcg-t{display:flex;flex-direction:column;min-width:0;flex:1;}
+  .tcg-t small{font:600 10.5px system-ui,Helvetica,Arial,sans-serif;opacity:.7;line-height:1.25;white-space:normal;}
+  .tcg-t b{font-size:14.5px;line-height:1.2;overflow-wrap:anywhere;}
+  .tcg-go{flex:none;color:var(--tc,var(--brass));font-size:14px;}
+  @media (max-width:360px){ .tcg-go{display:none;} .tcg-ic{font-size:20px;} .tcg-tile{gap:6px;padding:8px 8px 8px 10px;} .tcg-t b{font-size:12.5px;} .tcg-t small{font-size:10px;} }
+  html[data-theme="dark"] .tcg-tile{background:#17242c;border-color:#2b3b44;border-left-color:var(--tc);box-shadow:none;}
   .btn-review{
     background:var(--bg-coral);
     color:#fff;
@@ -1901,7 +1921,7 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
 .wd3 .wd-spk{width:36px;height:36px;}
 .wd3 .wd-ex{grid-column:1/-1;display:none;margin:6px 0 2px 48px;} .wd3 .wd-ex.open{display:block;}
 
-.wd3 .wd-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+.wd3 .wd-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;}
 .wd3 .wd-card{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--x-bg-fdfcf9);border:1px solid var(--line);border-radius:12px;padding:10px 6px 8px;}
 .wd3 .wd-card.on{border-color:var(--brass);box-shadow:0 0 0 2px rgba(201,166,107,.35);}
 .wd3 .wd-main{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%;padding:0;border:0;background:transparent;color:inherit;font-family:inherit;cursor:pointer;min-width:0;}
@@ -2417,17 +2437,17 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       </div>
       <div class="rule-grid">
         <div class="rule-card der">
-          <div class="title">und · oder · aber · denn · sondern</div>
+          <div class="title">und · oder · aber · denn · sondern · entweder…oder · sowohl…als auch · weder…noch · zwar…aber</div>
           <div class="sfx">Sıra DEĞİŞMEZ: özne + fiil</div>
           <div class="ex">Ich bleibe zu Hause, <strong>denn ich bin</strong> krank.<br><span style="color:var(--x-tx-999999);">(Evde kalıyorum çünkü hastayım.)</span></div>
         </div>
         <div class="rule-card die">
-          <div class="title">deshalb · dann · danach · später · zuerst · zuletzt</div>
+          <div class="title">deshalb · deswegen · darum · trotzdem · also · sonst · außerdem · dann · danach · später · zuerst · zuletzt</div>
           <div class="sfx">Fiil HEMEN ardından gelir (özne fiilden sonra)</div>
           <div class="ex">Es regnet, <strong>deshalb bleibe ich</strong> zu Hause.<br><span style="color:var(--x-tx-999999);">(Yağmur yağıyor, bu yüzden evde kalıyorum.)</span></div>
         </div>
         <div class="rule-card das">
-          <div class="title">weil · dass · wenn · als</div>
+          <div class="title">weil · dass · wenn · als · ob · obwohl · damit · bevor · nachdem · während · falls · sobald · solange · seitdem · bis</div>
           <div class="sfx">Yan cümle: fiil cümlenin SONUNDA</div>
           <div class="ex">Ich lerne Deutsch, <strong>weil ich</strong> in Deutschland <strong>arbeite</strong>.<br><span style="color:var(--x-tx-999999);">(Almanya'da çalıştığım için Almanca öğreniyorum.)</span></div>
         </div>
@@ -2443,6 +2463,13 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
           <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>zuerst · dann · danach · später · zuletzt</strong></td><td style="padding:8px; vertical-align:top;">önce · sonra · ondan sonra · daha sonra · en son</td><td style="padding:8px; vertical-align:top;">hemen arkasında</td></tr>
           <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>weil</strong></td><td style="padding:8px; vertical-align:top;">çünkü (yan cümle)</td><td style="padding:8px; vertical-align:top;">cümle sonunda</td></tr>
           <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>dass</strong></td><td style="padding:8px; vertical-align:top;">ki</td><td style="padding:8px; vertical-align:top;">cümle sonunda</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>trotzdem · deswegen · darum · also · sonst · außerdem · anschließend</strong></td><td style="padding:8px; vertical-align:top;">yine de · bu yüzden · bu yüzden · yani · yoksa · ayrıca · ardından</td><td style="padding:8px; vertical-align:top;">hemen arkasında (Es regnet, trotzdem <strong>gehen wir</strong> …)</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>obwohl</strong> · <strong>damit</strong></td><td style="padding:8px; vertical-align:top;">-diği halde · -sin diye</td><td style="padding:8px; vertical-align:top;">cümle sonunda</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>ob</strong> · <strong>falls</strong></td><td style="padding:8px; vertical-align:top;">-ip -mediğini · -ecek olursa</td><td style="padding:8px; vertical-align:top;">cümle sonunda</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>bevor · nachdem · während</strong></td><td style="padding:8px; vertical-align:top;">-meden önce · -dikten sonra · -erken</td><td style="padding:8px; vertical-align:top;">cümle sonunda</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>sobald · solange · seitdem · bis</strong></td><td style="padding:8px; vertical-align:top;">-er etmez · -dığı sürece · -dığından beri · -e kadar</td><td style="padding:8px; vertical-align:top;">cümle sonunda</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>entweder … oder · sowohl … als auch · weder … noch · zwar … aber · nicht nur … sondern auch</strong></td><td style="padding:8px; vertical-align:top;">ya … ya da · hem … hem de · ne … ne de · gerçi … ama · sadece … değil, … da</td><td style="padding:8px; vertical-align:top;">ana cümle sırası (fiil 2.)</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px; vertical-align:top;"><strong>um … zu</strong></td><td style="padding:8px; vertical-align:top;">-mek için</td><td style="padding:8px; vertical-align:top;">zu + mastar cümle sonunda (Ich lerne, um Geld <strong>zu verdienen</strong>)</td></tr>
           <tr><td style="padding:8px; vertical-align:top;"><strong>wenn</strong> · <strong>als</strong></td><td style="padding:8px; vertical-align:top;">eğer / -dığında</td><td style="padding:8px; vertical-align:top;">cümle sonunda</td></tr>
         </tbody>
       </table>
@@ -2452,7 +2479,11 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>aber ↔ sondern:</strong> "nicht … sondern" (olumsuzdan sonra aksini söylerken): Er trinkt keinen Tee, <strong>sondern</strong> Kaffee. Diğer durumlarda "ama" = aber.<br>
         <strong>als ↔ wenn:</strong> <strong>als</strong> = geçmişte tek seferlik ("Als ich acht war, …"), <strong>wenn</strong> = tekrar eden / şimdiki / gelecek ("Wenn es regnet, …").<br>
         <strong>Yan cümle başa geçerse:</strong> ana cümlenin fiili hemen virgülden sonra gelir: "<strong>Wenn</strong> es regnet, <strong>bleibe</strong> ich zu Hause."<br>
-        <strong>Virgül:</strong> weil / dass / wenn / als'ten önce her zaman virgül konur.
+        <strong>obwohl ↔ trotzdem:</strong> ikisi de "-diği halde / yine de" ama <strong>obwohl</strong> yan cümledir (fiil sona): "Ich gehe, <strong>obwohl</strong> ich krank <strong>bin</strong>." <strong>trotzdem</strong>'de fiil hemen arkasında: "Ich bin krank, <strong>trotzdem gehe ich</strong>."<br>
+        <strong>damit ↔ um … zu:</strong> ikisi de "-mek için". Öznen aynıysa <strong>um … zu</strong> (Ich lerne, <strong>um</strong> besser <strong>zu</strong> sprechen). Özneler farklıysa <strong>damit</strong> (Ich spreche langsam, <strong>damit du</strong> mich <strong>verstehst</strong>).<br>
+        <strong>bevor ↔ nachdem:</strong> bevor = -meden önce, nachdem = -dikten sonra (nachdem'li yan cümlede genelde Perfekt kullanılır: Nachdem ich gegessen <strong>habe</strong>, …).<br>
+        <strong>deshalb / deswegen / darum:</strong> üçü de "bu yüzden", aynı kullanılır, fiil hemen arkasında.<br>
+        <strong>Virgül:</strong> weil / dass / wenn / als / ob / obwohl / damit / bevor / nachdem / während'den önce her zaman virgül konur.
       </div>
     </section>
     <section class="panel">
@@ -5486,7 +5517,32 @@ const STARTER_KONJ = [
   {konj:"zuerst", emoji:"1️⃣", tr:"önce / ilk olarak", beispiel:"Zuerst trinke ich einen Kaffee.", beispielTr:"Önce bir kahve içiyorum."},
   {konj:"danach", emoji:"2️⃣", tr:"ondan sonra", beispiel:"Danach lese ich die Zeitung.", beispielTr:"Ondan sonra gazeteyi okuyorum."},
   {konj:"später", emoji:"3️⃣", tr:"daha sonra", beispiel:"Später rufe ich meine Mutter an.", beispielTr:"Daha sonra annemi arıyorum."},
-  {konj:"zuletzt", emoji:"🏁", tr:"en son / sonunda", beispiel:"Zuletzt trinken wir Tee.", beispielTr:"En son çay içiyoruz."}
+  {konj:"zuletzt", emoji:"🏁", tr:"en son / sonunda", beispiel:"Zuletzt trinken wir Tee.", beispielTr:"En son çay içiyoruz."},
+  {konj:"ob", emoji:"🤔", tr:"(…) mi / -ip -mediğini", beispiel:"Ich weiß nicht, ob er kommt.", beispielTr:"Gelip gelmeyeceğini bilmiyorum."},
+  {konj:"obwohl", emoji:"🙄", tr:"-diği halde", beispiel:"Ich gehe zur Arbeit, obwohl ich krank bin.", beispielTr:"Hasta olduğum halde işe gidiyorum."},
+  {konj:"damit", emoji:"🎯", tr:"-sin diye / amacıyla", beispiel:"Ich spreche langsam, damit du mich verstehst.", beispielTr:"Beni anlaman için yavaş konuşuyorum."},
+  {konj:"bevor", emoji:"⏮️", tr:"-meden önce", beispiel:"Bevor ich schlafe, lese ich ein Buch.", beispielTr:"Uyumadan önce kitap okurum."},
+  {konj:"nachdem", emoji:"⏭️", tr:"-dikten sonra", beispiel:"Nachdem ich gegessen habe, gehe ich spazieren.", beispielTr:"Yemek yedikten sonra yürüyüşe çıkıyorum."},
+  {konj:"während", emoji:"⏳", tr:"-erken / boyunca", beispiel:"Während ich koche, hört er Musik.", beispielTr:"Ben yemek yaparken o müzik dinliyor."},
+  {konj:"falls", emoji:"☂️", tr:"-ecek olursa / ihtimale karşı", beispiel:"Nimm einen Schirm mit, falls es regnet.", beispielTr:"Yağmur yağarsa diye şemsiye al."},
+  {konj:"sobald", emoji:"⚡", tr:"-er etmez / -ir -mez", beispiel:"Ich rufe dich an, sobald ich zu Hause bin.", beispielTr:"Eve varır varmaz seni arayacağım."},
+  {konj:"solange", emoji:"♾️", tr:"-dığı sürece", beispiel:"Ich bleibe hier, solange du willst.", beispielTr:"Sen istediğin sürece burada kalırım."},
+  {konj:"seitdem", emoji:"📆", tr:"-dığından beri", beispiel:"Seitdem ich hier wohne, lerne ich Deutsch.", beispielTr:"Burada yaşadığımdan beri Almanca öğreniyorum."},
+  {konj:"bis", emoji:"🛑", tr:"-e kadar (bağlaç)", beispiel:"Warte hier, bis ich zurückkomme.", beispielTr:"Ben dönene kadar burada bekle."},
+  {konj:"trotzdem", emoji:"💪", tr:"yine de", beispiel:"Es regnet, trotzdem gehen wir spazieren.", beispielTr:"Yağmur yağıyor, yine de yürüyüşe çıkıyoruz."},
+  {konj:"deswegen", emoji:"➡️", tr:"bu yüzden / bu nedenle", beispiel:"Ich bin krank, deswegen bleibe ich zu Hause.", beispielTr:"Hastayım, bu yüzden evde kalıyorum."},
+  {konj:"darum", emoji:"↪️", tr:"bu yüzden / onun için", beispiel:"Er lernt viel, darum besteht er die Prüfung.", beispielTr:"Çok çalışıyor, bu yüzden sınavı geçiyor."},
+  {konj:"also", emoji:"🧮", tr:"yani / öyleyse", beispiel:"Es ist spät, also gehen wir nach Hause.", beispielTr:"Geç oldu, yani eve gidiyoruz."},
+  {konj:"sonst", emoji:"⚠️", tr:"yoksa / aksi halde", beispiel:"Beeil dich, sonst verpasst du den Bus.", beispielTr:"Acele et, yoksa otobüsü kaçırırsın."},
+  {konj:"außerdem", emoji:"➕", tr:"ayrıca / bunun yanında", beispiel:"Ich lerne Deutsch. Außerdem lerne ich Englisch.", beispielTr:"Almanca öğreniyorum. Ayrıca İngilizce öğreniyorum."},
+  {konj:"anschließend", emoji:"🔜", tr:"ardından / sonrasında", beispiel:"Wir essen, anschließend gehen wir ins Kino.", beispielTr:"Yemek yiyoruz, ardından sinemaya gidiyoruz."},
+  {konj:"schließlich", emoji:"🏁", tr:"sonunda / nihayet", beispiel:"Schließlich haben wir den Weg gefunden.", beispielTr:"Sonunda yolu bulduk."},
+  {konj:"entweder … oder", emoji:"⚖️", tr:"ya … ya da", beispiel:"Entweder trinke ich Tee oder Kaffee.", beispielTr:"Ya çay içerim ya kahve."},
+  {konj:"sowohl … als auch", emoji:"🤝", tr:"hem … hem de", beispiel:"Er spricht sowohl Deutsch als auch Englisch.", beispielTr:"O hem Almanca hem İngilizce konuşuyor."},
+  {konj:"weder … noch", emoji:"🚫", tr:"ne … ne de", beispiel:"Ich trinke weder Tee noch Kaffee.", beispielTr:"Ne çay içerim ne kahve."},
+  {konj:"zwar … aber", emoji:"↔️", tr:"gerçi … ama", beispiel:"Es ist zwar kalt, aber die Sonne scheint.", beispielTr:"Gerçi soğuk, ama güneş açıyor."},
+  {konj:"nicht nur … sondern auch", emoji:"➕", tr:"sadece … değil, … da", beispiel:"Sie ist nicht nur klug, sondern auch nett.", beispielTr:"O sadece zeki değil, aynı zamanda nazik."},
+  {konj:"um … zu", emoji:"🎯", tr:"-mek için", beispiel:"Ich lerne Deutsch, um in Deutschland zu arbeiten.", beispielTr:"Almanya'da çalışmak için Almanca öğreniyorum."}
 ];
 
 const STARTER_FRAGE = [
@@ -6002,14 +6058,21 @@ const HOME_TILES = [
 ];
 const TAB_TITLES = {}, TAB_COLORS = {};
 HOME_TILES.forEach(g=>g.items.forEach(i=>{TAB_TITLES[i.t]=i.ic+" "+i.n+" · "+i.de; TAB_COLORS[i.t]=i.c;}));
+window.__resumeGrid=function(){
+  var last=null; try{ last=localStorage.getItem("artikel_last_tab"); }catch(e){}
+  var it=null; HOME_TILES.forEach(function(g){ g.items.forEach(function(i){ if(i.t===last) it=i; }); });
+  var weak=0; try{ Object.keys(wordStats).forEach(function(k){ if((wordStats[k].wrong||0)>0 && (wordStats[k].streak||0)<3) weak++; }); }catch(e){}
+  var h='<div class="tc-grid">';
+  if(it) h+='<button type="button" class="tcg-tile" style="--tc:'+it.c+'" onclick="switchTab(\''+it.t+'\')"><span class="tcg-ic">'+(window.__ico?window.__ico(it.t,it.ic):it.ic)+'</span><span class="tcg-t"><small>Kaldığın yerden devam et</small><b>'+it.n+'</b></span><span class="tcg-go">▶</span></button>';
+  else h+='<button type="button" class="tcg-tile" style="--tc:#2C8C99" onclick="switchTab(\'testler\')"><span class="tcg-ic">🎯</span><span class="tcg-t"><small>Hadi başlayalım</small><b>Testler</b></span><span class="tcg-go">▶</span></button>';
+  h+='<button type="button" class="tcg-tile" style="--tc:#B5503A" onclick="askQuestion(\'review-mistakes\')"><span class="tcg-ic">🔁</span><span class="tcg-t"><small>'+(weak?weak+' zayıf kelime':'Yanlış yok, harika')+'</small><b>Yanlışlarım</b></span><span class="tcg-go">▶</span></button>';
+  return h+'</div>';
+};
 function renderHome(){
   const el = document.getElementById("homeScreen"); if(!el) return;
   let last = null;
   try{ last = localStorage.getItem("artikel_last_tab"); }catch(e){}
   let h = (window.__todayCard ? window.__todayCard() : "");
-  if(last && TAB_TITLES[last]){
-    h += '<button type="button" class="home-resume" onclick="switchTab(\''+last+'\')"><span><small>Kaldığın yerden devam et</small>'+TAB_TITLES[last]+'</span><span class="go">▶</span></button>';
-  }
   HOME_TILES.forEach(g=>{
     h += '<div class="home-group-title">'+g.g+'</div><div class="home-grid'+(g.items.length===3?' g3':'')+'">';
     g.items.forEach(i=>{
@@ -8822,7 +8885,7 @@ const GQ_BANK = {
  ["En son hesabı ödüyorum.","Zuletzt bezahle ich die Rechnung.",["Zuletzt ich bezahle die Rechnung.","Ich zuletzt bezahle die Rechnung."]]
  ]},
 "gq-konj": {emoji:"🔗", qtype:"HANGİ BAĞLAÇ? (fiil nerede?)",
- hint:"und/oder/aber/denn/sondern: sıra değişmez (özne + fiil). deshalb: hemen ardından fiil. weil/dass/wenn/als: fiil cümlenin sonunda.",
+ hint:"und/oder/aber/denn/sondern: sıra değişmez (özne + fiil). deshalb: hemen ardından fiil. weil/dass/wenn/als/ob/obwohl/damit/bevor/nachdem/während/falls/sobald/solange/bis: fiil cümlenin sonunda. deshalb/deswegen/trotzdem/sonst: fiil hemen arkasında. sowohl…als auch / weder…noch: sıra değişmez.",
  items:[
  ["Ich lerne Deutsch, ___ ich in Deutschland arbeite.","weil",["denn","deshalb"],"Almanya'da çalıştığım için Almanca öğreniyorum."],
  ["Ich bleibe zu Hause, ___ ich bin krank.","denn",["weil","dass"],"Evde kalıyorum çünkü hastayım."],
@@ -8840,7 +8903,25 @@ const GQ_BANK = {
  ["Ich habe keine Zeit, ___ gehe ich nicht ins Kino.","deshalb",["weil","dass"],"Vaktim yok, bu yüzden sinemaya gitmiyorum."],
  ["Wir gehen ins Kino, ___ wir Zeit haben.","wenn",["denn","sondern"],"Vaktimiz olursa sinemaya gideriz."],
  ["Sie kommt nicht, ___ sie ist krank.","denn",["weil","dass"],"O gelmiyor çünkü hasta."],
- ["Das ist nicht mein Buch, ___ dein Buch.","sondern",["aber","denn"],"Bu benim kitabım değil, senin kitabın."]
+ ["Das ist nicht mein Buch, ___ dein Buch.","sondern",["aber","denn"],"Bu benim kitabım değil, senin kitabın."],
+ ["Ich gehe zur Arbeit, ___ ich krank bin.", "obwohl", ["trotzdem", "deshalb"], "Hasta olduğum halde işe gidiyorum."],
+ ["Ich bin krank, ___ gehe ich zur Arbeit.", "trotzdem", ["obwohl", "weil"], "Hastayım, yine de işe gidiyorum."],
+ ["Ich weiß nicht, ___ er kommt.", "ob", ["dass", "wenn"], "Gelip gelmeyeceğini bilmiyorum."],
+ ["Ich spreche langsam, ___ du mich verstehst.", "damit", ["weil", "bevor"], "Beni anlaman için yavaş konuşuyorum."],
+ ["___ ich schlafe, lese ich ein Buch.", "Bevor", ["Nachdem", "Obwohl"], "Uyumadan önce kitap okurum."],
+ ["___ ich gegessen habe, gehe ich spazieren.", "Nachdem", ["Bevor", "Damit"], "Yemek yedikten sonra yürüyüşe çıkıyorum."],
+ ["___ ich koche, hört er Musik.", "Während", ["Falls", "Sobald"], "Ben yemek yaparken o müzik dinliyor."],
+ ["Nimm einen Schirm mit, ___ es regnet.", "falls", ["bevor", "obwohl"], "Yağmur yağarsa diye şemsiye al."],
+ ["Ich rufe dich an, ___ ich zu Hause bin.", "sobald", ["obwohl", "denn"], "Eve varır varmaz seni arayacağım."],
+ ["Ich bleibe hier, ___ du willst.", "solange", ["bevor", "obwohl"], "Sen istediğin sürece burada kalırım."],
+ ["Warte hier, ___ ich zurückkomme.", "bis", ["bevor", "damit"], "Ben dönene kadar burada bekle."],
+ ["Beeil dich, ___ verpasst du den Bus.", "sonst", ["denn", "weil"], "Acele et, yoksa otobüsü kaçırırsın."],
+ ["Ich bin müde, ___ gehe ich früh ins Bett.", "deswegen", ["weil", "obwohl"], "Yorgunum, bu yüzden erken yatıyorum."],
+ ["Er spricht ___ Deutsch ___ Englisch.", "sowohl … als auch", ["entweder … oder", "weder … noch"], "O hem Almanca hem İngilizce konuşuyor."],
+ ["Ich trinke ___ Tee ___ Kaffee.", "weder … noch", ["sowohl … als auch", "entweder … oder"], "Ne çay içerim ne kahve."],
+ ["___ trinke ich Tee ___ Kaffee.", "Entweder … oder", ["Weder … noch", "Sowohl … als auch"], "Ya çay içerim ya kahve."],
+ ["Ich lerne Deutsch, ___ in Deutschland ___ arbeiten.", "um … zu", ["damit … zu", "weil … zu"], "Almanya'da çalışmak için Almanca öğreniyorum."],
+ ["Wir essen, ___ gehen wir ins Kino.", "anschließend", ["obwohl", "bevor"], "Yemek yiyoruz, ardından sinemaya gidiyoruz."]
  ]},
 "gq-quant": {emoji:"⚖️", qtype:"MİKTAR VE FİYAT",
  hint:"Miktar: ein Kilo / ein Liter · eine Flasche / Dose / Packung · ein Glas / Becher + isim. Fiyat: 2,50 € = zwei Euro fünfzig; 0,30 € = dreißig Cent.",
@@ -12673,7 +12754,7 @@ window.__todayCard=function(){
       '<button type="button" class="tc-goal" onclick="window.__cycleGoal()" title="Günlük hedefi değiştir">Hedef '+g+' ✎</button>'+
       (window.__installEvt?'<button type="button" class="tc-goal tc-install" onclick="window.__installApp()">Uygulamayı yükle</button>':'')+
     '</div></div>';
-  return h;
+  return h+(window.__resumeGrid?window.__resumeGrid():"");
 };
 window.__cycleGoal=function(){
   var opts=[10,20,30,50,100], g=getGoal(), i=opts.indexOf(g); lsSet(GK,opts[(i+1)%opts.length]);
@@ -12928,8 +13009,17 @@ function fold(s){
   return String(s||"").toLocaleLowerCase("tr").replace(/ß/g,"ss").replace(/ı/g,"i").normalize("NFD").replace(/[̀-ͯ]/g,"");
 }
 function hash(str){ var h=0; for(var i=0;i<str.length;i++){ h=(h*31+str.charCodeAt(i))|0; } return Math.abs(h); }
+function xPool(){
+  var d=new Date(), t=hash(d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+"-x")%3, out=[];
+  try{
+    if(t===0) advWords.forEach(function(a){ out.push({k:"x",key:a.adv,de:a.adv,w:a.adv,tr:a.tr,em:a.emoji,ex:a.beispiel,exTr:a.beispielTr,extra:"",tab:"adv",cat:"Zarf"}); });
+    else if(t===1) praepWords.forEach(function(a){ out.push({k:"x",key:a.praep,de:a.praep,w:a.praep,tr:a.tr,em:a.emoji,ex:a.beispiel,exTr:a.beispielTr,extra:"",tab:"praep",cat:"Edat"}); });
+    else konjWords.forEach(function(a){ out.push({k:"x",key:a.konj,de:a.konj,w:a.konj,tr:a.tr,em:a.emoji,ex:a.beispiel,exTr:a.beispielTr,extra:"",tab:"konj",cat:"Bağlaç"}); });
+  }catch(e){}
+  return out;
+}
 function wotdPick(kind){
-  var all=allEntries().filter(function(e){ return e.k===kind; }); if(!all.length) return null;
+  var all=kind==="x"?xPool():allEntries().filter(function(e){ return e.k===kind; }); if(!all.length) return null;
   var d=new Date(), seed=hash(d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+"-"+kind), start=seed%all.length;
   for(var i=0;i<all.length;i++){
     var e=all[(start+i)%all.length], st=null; try{ st=wordStats[e.key]; }catch(x){}
@@ -12938,7 +13028,7 @@ function wotdPick(kind){
   return all[start];
 }
 function wotd(){ return wotdPick("n"); }
-function wotds(){ return [wotdPick("n"),wotdPick("v"),wotdPick("a")].filter(Boolean); }
+function wotds(){ return [wotdPick("n"),wotdPick("v"),wotdPick("a"),wotdPick("x")].filter(Boolean); }
 window.__wotdSpeak=function(i){ var e=wotds()[i||0]; if(e && typeof speak==="function") speak(e.de); };
 window.__wotdToggle=function(i){
   var box=document.getElementById("wdEx"), l=wotds(), e=l[i]; if(!box||!e) return;
@@ -12948,13 +13038,14 @@ window.__wotdToggle=function(i){
   box.innerHTML=(e.ex?esc(e.ex)+(e.exTr?'<small>'+esc(e.exTr)+'</small>':''):'Örnek yok');
   cards.forEach(function(c,j){ c.classList.toggle("on",j===i); });
 };
+function wdFs(t){ var m=0; String(t).split(/\s+/).forEach(function(x){ if(x.length>m) m=x.length; }); return m>=14?'font-size:8.5px':m>=11?'font-size:9.5px':m>=9?'font-size:10.5px':m>=7?'font-size:11px':''; }
 var WD_KIND={n:"İsim",v:"Fiil",a:"Sıfat"};
 function wotdHtml(){
   var l=wotds(); if(!l.length) return "";
   var h='<div class="wotd wd3"><span class="wd-lbl">Günün kelimeleri · Wörter des Tages</span><div class="wd-grid">';
   l.forEach(function(e,i){
     h+='<div class="wd-card"><button type="button" class="wd-main" onclick="window.__wotdToggle('+i+')" aria-label="Örneği göster"><span class="wd-em">'+esc(e.em||"")+'</span>'+
-      '<span class="wd-k">'+WD_KIND[e.k]+'</span><span class="wd-w">'+esc(e.de)+'</span><span class="wd-tr">'+esc(e.tr)+'</span></button>'+
+      '<span class="wd-k">'+(e.cat||WD_KIND[e.k])+'</span><span class="wd-w" style="'+wdFs(e.de)+'">'+esc(e.de)+'</span><span class="wd-tr">'+esc(e.tr)+'</span></button>'+
       '<button type="button" class="wd-spk" onclick="window.__wotdSpeak('+i+')" aria-label="Dinle"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/></svg></button></div>';
   });
   return h+'</div><div class="wd-ex" id="wdEx"></div></div>';
