@@ -383,7 +383,7 @@ html[data-theme="dark"] .kg-wrap{
   .ref-sec .ref-body{display:grid;grid-template-rows:0fr;opacity:0;visibility:hidden;transition:grid-template-rows .45s cubic-bezier(.22,.8,.3,1), opacity .35s ease, visibility 0s linear .45s;}
   .ref-sec.open .ref-body{grid-template-rows:1fr;opacity:1;visibility:visible;transition:grid-template-rows .45s cubic-bezier(.22,.8,.3,1), opacity .4s ease .08s, visibility 0s;}
   .ref-sec .ref-inner{min-height:0;overflow:hidden;}
-  @keyframes refZoom{0%{transform:scale(.5);opacity:.35;}55%{transform:scale(1.025);opacity:1;}100%{transform:scale(1);opacity:1;}}
+  @keyframes refZoom{0%{transform:scale(.82);opacity:.4;}55%{transform:scale(1.01);opacity:1;}100%{transform:scale(1);opacity:1;}}
   .ref-sec.open{transform-origin:50% 0;animation:refZoom .55s cubic-bezier(.2,.8,.3,1) both;}
   @media (prefers-reduced-motion:reduce){ .ref-sec.open{animation:none;} }
   .ref-sec > h2.ref-toggle::after{transition:transform .4s cubic-bezier(.22,.8,.3,1);}
@@ -2237,9 +2237,9 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       <button class="ref-subtab" id="refTabKonjunktiv" onclick="switchReferansGroup('konjunktiv')">🎭 Konjunktiv I & II</button>
     </div>
     <div id="refGroupNomen" class="ref-group" style="display:none;">
-      <h2 class="referans-group-title">📌 İsimler (Nomen) — Gramer Kuralları</h2>
+      <h2 class="referans-group-title">🏷️ İsimler · Nomen</h2>
     <section class="panel">
-      <h2>Sonek Kuralları — hızlı referans</h2>
+      <h2>🧩 Sonek kuralları · artikeli tahmin et</h2>
       <div class="rule-grid">
         <div class="rule-card der">
           <div class="title">der</div>
@@ -2258,9 +2258,45 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         </div>
       </div>
       <div class="plural-note">Kural: bütün çoğullar (Plural) her zaman <strong>die</strong> alır — die Tische, die Kinder, die Autos.</div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>👔 der · eril sonekler</b><span>-er · -ig · -ling · -ismus</span></div>
+        <div class="wx-row nom">
+          <div class="wx-qa">Hangi sonek?</div>
+          <div class="wx-de">der Leh<span class="wx-hl">rer</span></div>
+          <div class="wx-tr">öğretmen</div>
+          <div class="wx-why">-er ile biten meslek/kişi → çoğunlukla der.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">der Kö<span class="wx-hl">nig</span></div>
+          <div class="wx-tr">kral</div>
+          <div class="wx-why">-ig → der.</div>
+        </div>
+      </div>
+      <div class="wx-card f">
+        <div class="wx-head"><b>🌸 die · dişil sonekler</b><span>-ung · -heit · -keit · -schaft · -ion</span></div>
+        <div class="wx-row akk">
+          <div class="wx-de">die Zeit<span class="wx-hl">ung</span></div>
+          <div class="wx-tr">gazete</div>
+          <div class="wx-why">-ung → her zaman die.</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-de">die Frei<span class="wx-hl">heit</span></div>
+          <div class="wx-tr">özgürlük</div>
+          <div class="wx-why">-heit / -keit → her zaman die.</div>
+        </div>
+      </div>
+      <div class="wx-card n">
+        <div class="wx-head"><b>🧸 das · nötr sonekler</b><span>-chen · -lein · -ment · -um</span></div>
+        <div class="wx-row dat">
+          <div class="wx-de">das Mäd<span class="wx-hl">chen</span></div>
+          <div class="wx-tr">kız çocuğu</div>
+          <div class="wx-why">-chen küçültme eki → daima das (kız olsa da!).</div>
+        </div>
+      </div>
+      <div class="plural-note"><strong>💡 İpucu:</strong> Sonek artikeli verir, anlama bakma: "Mädchen" kız ama das.</div>
     </section>
     <section class="panel">
-      <h2>der / ein / kein — Nominativ &amp; Akkusativ</h2>
+      <h2>🔡 der · ein · kein · Nominativ &amp; Akkusativ</h2>
       <table>
         <thead><tr><th></th><th>Nominativ</th><th>Akkusativ</th></tr></thead>
         <tbody>
@@ -2275,9 +2311,39 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         Örnek cümle: "<strong>Der</strong> Mann ist hier." (Nominativ — özne) / "Ich sehe <strong>den</strong> Mann." (Akkusativ — nesne)<br>
         Ayrıca: <strong>ein/eine</strong> sadece tekilde vardır, çoğulda hiç kullanılmaz ("Ich habe Bücher"). <strong>kein/keine(n)</strong> ise hem tekilde hem çoğulda kullanılır.
       </div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>Nominativ → Akkusativ</b><span>sadece eril değişir</span></div>
+        <div class="wx-row nom">
+          <div class="wx-qa">Özne</div>
+          <div class="wx-de"><span class="wx-hl">Der</span> Mann ist nett.</div>
+          <div class="wx-tr">Adam iyi.</div>
+          <div class="wx-why">Nominativ: der Mann.</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-qa">Nesne</div>
+          <div class="wx-de">Ich sehe <span class="wx-hl">den</span> Mann.</div>
+          <div class="wx-tr">Adamı görüyorum.</div>
+          <div class="wx-why">Akkusativ: der → den.</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-qa">Belirsiz</div>
+          <div class="wx-de">Ich habe <span class="wx-hl">einen</span> Hund.</div>
+          <div class="wx-tr">Bir köpeğim var.</div>
+          <div class="wx-why">ein → einen (sadece eril).</div>
+        </div>
+      </div>
+      <div class="wx-card f">
+        <div class="wx-head"><b>Dişil, nötr, çoğul değişmez</b><span></span></div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ich kaufe <span class="wx-hl">die</span> Lampe, <span class="wx-hl">das</span> Buch, <span class="wx-hl">die</span> Stühle.</div>
+          <div class="wx-tr">Lambayı, kitabı, sandalyeleri alıyorum.</div>
+          <div class="wx-why">die / das / die Akkusativ'da aynı kalır.</div>
+        </div>
+      </div>
+      <div class="plural-note"><strong>💡 İpucu:</strong> Akkusativ'da sadece <b>der → den</b> ve <b>ein → einen</b> değişir.</div>
     </section>
     <section class="panel">
-      <h2>Çoğul Ekleri (Pluralformen) — hızlı referans</h2>
+      <h2>🔢 Çoğul ekleri · Pluralformen</h2>
       <div class="plural-note" style="margin-top:0;">
         Almancada çoğul eki tahmin edilemez — her isim sözlükte kendi çoğul biçimiyle birlikte ezberlenmelidir. Ama 5 ana kalıbı tanımak işini kolaylaştırır.
       </div>
@@ -2303,9 +2369,34 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       <div class="plural-note">
         <strong>İpucu:</strong> -in ile biten dişil meslek isimleri her zaman -nen çoğul eki alır (die Lehrerin → Lehrerinnen). -chen/-lein ile biten küçültme isimleri (das Mädchen gibi) hiç ek almaz.
       </div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>Sık çoğul tipleri</b><span>-e · -er · -n/-en · -s · ¨</span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">der Tag → die Tag<span class="wx-hl">e</span></div>
+          <div class="wx-tr">gün → günler</div>
+          <div class="wx-why">-e eki.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">das Kind → die Kind<span class="wx-hl">er</span></div>
+          <div class="wx-tr">çocuk → çocuklar</div>
+          <div class="wx-why">-er eki.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">die Frau → die Frau<span class="wx-hl">en</span></div>
+          <div class="wx-tr">kadın → kadınlar</div>
+          <div class="wx-why">dişil isimler çoğunlukla -n/-en.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">das Auto → die Auto<span class="wx-hl">s</span></div>
+          <div class="wx-tr">araba → arabalar</div>
+          <div class="wx-why">yabancı sözcükler genelde -s.</div>
+        </div>
+      </div>
+      <div class="plural-note"><strong>💡 İpucu:</strong> Çoğulda artikel her zaman <b>die</b>. Sözlükte çoğulu da ezberle.</div>
     </section>
     <section class="panel">
-      <h2>Miktar Belirteçleri (Mengenangaben) — hızlı referans</h2>
+      <h2>⚖️ Miktar &amp; fiyat · Mengenangaben, Preise</h2>
+      <h3 style="margin:4px 0 6px; font-size:15px;">Miktar belirteçleri (Mengenangaben)</h3>
       <div class="rule-grid">
         <div class="rule-card der">
           <div class="title">Ağırlık / Hacim</div>
@@ -2326,9 +2417,8 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       <div class="plural-note">
         <strong>Kural:</strong> Miktar belirteci + isim arasında hiçbir bağlaç ya da ek gerekmez — direkt yan yana gelirler: "ein Kilo <strong>Äpfel</strong>", "eine Flasche <strong>Öl</strong>". Miktar belirteci de kendi sıfat/isim gibi Akkusativ'e göre değişebilir (einen Becher, eine Flasche gibi).
       </div>
-    </section>
-    <section class="panel">
-      <h2>Fiyat Söyleme (Preise) — hızlı referans</h2>
+    
+      <h3 style="margin:20px 0 6px; font-size:15px;">Fiyat söyleme (Preise)</h3>
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:14px;">
         <thead>
           <tr style="border-bottom:2px solid var(--brass);">
@@ -2345,12 +2435,33 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       <div class="plural-note">
         <strong>Kural:</strong> 1 euro altı (< 1,00 €) sadece Cent olarak söylenir. 1 euro üstü için iki yol var: "X Euro Y" (tam söyleniş) ya da kısaca "X Y" (Euro kelimesi düşürülüp sadece iki sayı art arda söylenir — "zwei vierzig" gibi).
       </div>
+    
+      <div class="wx-card p">
+        <div class="wx-head"><b>Miktar sözcüğünden sonra çoğul gelmez</b><span></span></div>
+        <div class="wx-row akk">
+          <div class="wx-qa">Ne kadar?</div>
+          <div class="wx-de">Ich möchte ein <span class="wx-hl">Kilo</span> Äpfel.</div>
+          <div class="wx-tr">Bir kilo elma istiyorum.</div>
+          <div class="wx-why">Kilo / Glas / Flasche tekil kalır, ardından isim çıplak gelir.</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ein <span class="wx-hl">Glas</span> Wasser, bitte.</div>
+          <div class="wx-tr">Bir bardak su lütfen.</div>
+          <div class="wx-why">Glas Wasser: "von" gerekmez.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-qa">Fiyat</div>
+          <div class="wx-de">Das kostet <span class="wx-hl">zwei Euro</span> fünfzig.</div>
+          <div class="wx-tr">Bu 2,50 euro.</div>
+          <div class="wx-why">Euro tekil kalır.</div>
+        </div>
+      </div>
     </section>
     </div>
     <div id="refGroupSatz" class="ref-group" style="display:none;">
-      <h2 class="referans-group-title">📌 Cümle Yapısı & Olumsuzluk — Gramer Kuralları</h2>
+      <h2 class="referans-group-title">📐 Cümle yapısı &amp; olumsuzluk · Satzbau</h2>
     <section class="panel">
-      <h2>Cümle Kelime Sırası (Wortstellung) — hızlı referans</h2>
+      <h2>🧱 Kelime sırası · Wortstellung</h2>
       <div class="rule-grid">
         <div class="rule-card der">
           <div class="title">Normal Sıra</div>
@@ -2372,9 +2483,24 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>ALTIN KURAL (V2 kuralı):</strong> Düz cümlede çekimli fiil <strong>her zaman 2. sıradadır</strong> — cümleye özne, zaman (heute), yer, ya da nesne ile başlaman fiilin yerini değiştirmez, sadece özne kayar. Yani "bazen devrik bazen normal" diye bir şey yok — tek bir kural var, değişen sadece 1. sırayı kimin doldurduğu.<br>
         <strong>İstisna:</strong> weil / dass / wenn / als gibi bağlaçlı yan cümlelerde fiil cümlenin <strong>en sonuna</strong> gider (bkz. Bağlaçlar sekmesi).
       </div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>Fiil 2. sırada</b><span>Verb-Zweit</span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Ich <span class="wx-hl">trinke</span> Kaffee.</div>
+          <div class="wx-tr">Kahve içiyorum.</div>
+          <div class="wx-why">Özne başta, fiil 2. yerde.</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-qa">Başa zaman gelirse</div>
+          <div class="wx-de">Heute <span class="wx-hl">trinke</span> ich Tee.</div>
+          <div class="wx-tr">Bugün çay içiyorum.</div>
+          <div class="wx-why">Fiil yine 2. yerde, özne fiilin arkasına geçer.</div>
+        </div>
+      </div>
+      <div class="plural-note"><strong>💡 İpucu:</strong> İlk yer ne olursa olsun fiil <b>ikinci</b> sırada kalır.</div>
     </section>
     <section class="panel">
-      <h2>Cümle Ortasında Sıralama (Zaman / Yer / Nesne) — hızlı referans</h2>
+      <h2>⏱️ Cümle içi sıra · zaman, yer, nesne</h2>
       <div class="rule-grid">
         <div class="rule-card der">
           <div class="title">Zaman + Yer</div>
@@ -2395,9 +2521,22 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       <div class="plural-note">
         <strong>Pratik kural:</strong> Almancada <strong>"Zeit vor Ort"</strong> (zaman, yerden önce) ezberlemeye değer bir kısayoldur — Türkçede sıra ters olabildiği için ("Berlin'e yarın gidiyorum" gibi) bu noktada hata yapmak kolaydır. Cümlenin ortasında (fiilden sonra) sıra genelde şöyledir: <strong>Özne → Zaman → Nesne/Nasıl → Yer</strong>.
       </div>
+      <div class="wx-card n">
+        <div class="wx-head"><b>Zaman → Yer → Nesne</b><span>TeKaMoLo kısa hali</span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Ich gehe <span class="wx-hl">heute</span> <span class="wx-hl">ins Kino</span>.</div>
+          <div class="wx-tr">Bugün sinemaya gidiyorum.</div>
+          <div class="wx-why">Önce zaman (heute), sonra yer (ins Kino).</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ich treffe <span class="wx-hl">morgen</span> <span class="wx-hl">meinen Freund</span>.</div>
+          <div class="wx-tr">Yarın arkadaşımla buluşuyorum.</div>
+          <div class="wx-why">Zaman nesneden önce gelir.</div>
+        </div>
+      </div>
     </section>
     <section class="panel" style="margin-top:0;">
-      <h2>Fiilin yeri: zuerst · dann · danach · später · zuletzt</h2>
+      <h2>🔀 Fiilin yeri · zuerst, dann, danach…</h2>
       <div class="plural-note" style="margin-top:0;">
         Almanca düz cümlede <strong>fiil her zaman 2. sıradadır</strong>. 1. sıraya ne koyarsan koy (özne ya da bir zaman kelimesi), fiil 2. sırada kalır. Zaman kelimesi başa geçerse <strong>özne fiilden sonraya</strong> gelir.
       </div>
@@ -2430,9 +2569,27 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Ayrılabilir fiillerde:</strong> fiil 2. sırada, ön ek en sonda: "Danach <strong>hole</strong> ich meine Tochter <strong>ab</strong>." (abholen)<br>
         <strong>İpucu:</strong> Bu 5 kelime Bağlaçlar sekmesinde de var. Sıralı anlatırken ("önce… sonra… daha sonra…") hepsini art arda kullanabilirsin.
       </div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>zuerst · dann · danach</b><span>fiil 2. yerde kalır</span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Zuerst <span class="wx-hl">trinke</span> ich Kaffee.</div>
+          <div class="wx-tr">Önce kahve içiyorum.</div>
+          <div class="wx-why">zuerst başta → fiil ondan hemen sonra.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">Dann <span class="wx-hl">gehe</span> ich zur Arbeit.</div>
+          <div class="wx-tr">Sonra işe gidiyorum.</div>
+          <div class="wx-why">dann başta → ich fiilin arkasına geçer.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">Danach <span class="wx-hl">esse</span> ich Brot.</div>
+          <div class="wx-tr">Ardından ekmek yiyorum.</div>
+          <div class="wx-why">aynı kural.</div>
+        </div>
+      </div>
     </section>
     <section class="panel" style="margin-top:0;">
-      <h2>Bağlaçlar: fiil nerede?</h2>
+      <h2>🔗 Bağlaçlar · fiil nerede?</h2>
       <div class="plural-note" style="margin-top:0;">
         Bağlacın <strong>türüne</strong> göre fiilin yeri değişir. Önce bağlacın hangi grupta olduğunu hatırla, sonra fiili yerleştir.
       </div>
@@ -2486,25 +2643,30 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>deshalb / deswegen / darum:</strong> üçü de "bu yüzden", aynı kullanılır, fiil hemen arkasında.<br>
         <strong>Virgül:</strong> weil / dass / wenn / als / ob / obwohl / damit / bevor / nachdem / während'den önce her zaman virgül konur.
       </div>
-    </section>
-    <section class="panel">
-      <h2>nicht ile Olumsuzluk — hızlı referans</h2>
-      <div class="rule-grid" style="grid-template-columns:1fr 1fr;">
-        <div class="rule-card der">
-          <div class="title">Fiil + nicht</div>
-          <div class="sfx">nicht, genelde cümlenin <strong>sonuna</strong> gelir.</div>
-          <div class="ex">Ich komme nicht.<br>Er versteht das nicht.<br>Wir arbeiten heute nicht.</div>
-        </div>
-        <div class="rule-card die">
-          <div class="title">nicht + Sıfat</div>
-          <div class="sfx">nicht, sıfatın hemen <strong>önüne</strong> gelir.</div>
-          <div class="ex">Das ist nicht teuer.<br>Sie ist nicht müde.<br>Das Buch ist nicht interessant.</div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>Sıra değiştirmeyenler</b><span>und · aber · oder · denn</span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Ich lerne, <span class="wx-hl">denn</span> ich habe morgen eine Prüfung.</div>
+          <div class="wx-tr">Çalışıyorum çünkü yarın sınavım var.</div>
+          <div class="wx-why">Fiil normal yerinde (2.).</div>
         </div>
       </div>
-      <div class="plural-note">Kural: Bir <strong>fiili/eylemi</strong> olumsuzluyorsan nicht sona gider; bir <strong>sıfatı/özelliği</strong> olumsuzluyorsan nicht o sıfatın hemen önüne gelir.</div>
+      <div class="wx-card f">
+        <div class="wx-head"><b>Fiili sona atanlar</b><span>weil · dass · wenn · ob</span></div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ich lerne, <span class="wx-hl">weil</span> ich morgen eine Prüfung <span class="wx-hl">habe</span>.</div>
+          <div class="wx-tr">…çünkü yarın sınavım var.</div>
+          <div class="wx-why">weil → fiil cümlenin SONUNA gider.</div>
+        </div>
+      </div>
+      <div class="plural-note"><strong>💡 İpucu:</strong> "denn" yerinde bırakır, "weil" fiili sona gönderir.</div>
+    </section>
+iil &amp; Cümle Kuruluşu → <strong>nicht / kein</strong>.
+      </div>
+    
     </section>
     <section class="panel kein-card">
-      <h2>kein mi, nicht mi? — Olumsuzlaştırma rehberi</h2>
+      <h2>🚫 Olumsuzluk · nicht, kein ve gern</h2>
       <div class="plural-note" style="margin-top:0;">
         Almancada iki olumsuzlama kelimesi var: <strong>kein</strong> (isimler için) ve <strong>nicht</strong> (geri kalan her şey için). Karar tek soruya iner:<br>
         <strong>Olumsuzladığım şey "ein" ile gelen ya da artikelsiz bir isim mi? → kein.</strong> Değilse (fiil, sıfat, zarf, yer, zaman, belirli artikelli isim) → <strong>nicht</strong>.
@@ -2575,31 +2737,34 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Olumsuz soruya olumlu cevap:</strong> Hast du kein Geld? — <strong>Doch</strong>, ich habe Geld. <span style="color:var(--x-tx-555555);">(Soru-cevap kartına bak: ja / nein / doch)</span><br>
         <strong>Pratik:</strong> Test → Gramer → Fiil &amp; Cümle Kuruluşu → <strong>nicht / kein</strong>.
       </div>
-    </section>
-    <section class="panel">
-      <h2>gern / nicht gern — Kelime Sırası</h2>
-      <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
-        <thead>
-          <tr style="border-bottom:2px solid var(--brass);">
-            <th style="text-align:left; padding:8px;">Cümle tipi</th>
-            <th style="text-align:left; padding:8px;">Örnek</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;">Düz cümle</td><td style="padding:8px;">Ich koche <strong>gern</strong>. / Ich koche <strong>nicht gern</strong>.</td></tr>
-          <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;">W-Frage</td><td style="padding:8px;">Was kochst du <strong>gern</strong>?</td></tr>
-          <tr><td style="padding:8px;">Evet/Hayır sorusu</td><td style="padding:8px;">Kochst du <strong>gern</strong>?</td></tr>
-        </tbody>
-      </table>
-      <div class="plural-note">
-        <strong>Kural:</strong> "gern"/"nicht gern" her zaman FİİLDEN SONRA gelir, nesneden ÖNCE gelir — "Ich spiele gern Tennis." (Ich spiele Tennis gern DEĞİL). Konum, cümle tipinden (düz/soru) bağımsız olarak hep fiilin hemen ardındadır.
+      <div class="wx-card f">
+        <div class="wx-head"><b>kein → isim olumsuzu</b><span>ein / çıplak isim</span></div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ich habe <span class="wx-hl">keinen</span> Hund.</div>
+          <div class="wx-tr">Köpeğim yok.</div>
+          <div class="wx-why">ein/einen yerine kein-.</div>
+        </div>
       </div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>nicht → fiil, sıfat, belirli isim</b><span></span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Ich komme <span class="wx-hl">nicht</span>.</div>
+          <div class="wx-tr">Gelmiyorum.</div>
+          <div class="wx-why">fiil olumsuzu.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">Das ist <span class="wx-hl">nicht</span> gut.</div>
+          <div class="wx-tr">Bu iyi değil.</div>
+          <div class="wx-why">sıfat olumsuzu.</div>
+        </div>
+      </div>
+      <div class="plural-note"><strong>💡 İpucu:</strong> Kural: ein / çıplak isim → <b>kein</b>; diğer her şey → <b>nicht</b>.</div>
     </section>
     </div>
     <div id="refGroupZamir" class="ref-group" style="display:none;">
-      <h2 class="referans-group-title">📌 Zamirler & İyelik — Gramer Kuralları</h2>
+      <h2 class="referans-group-title">🔤 Zamirler &amp; iyelik · Pronomen</h2>
     <section class="panel">
-      <h2>Akkusativ Zamirler (Personalpronomen im Akkusativ) — hızlı referans</h2>
+      <h2>🎯 Akkusativ zamirler · mich, dich, ihn…</h2>
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:14px;">
         <thead>
           <tr style="border-bottom:2px solid var(--brass);">
@@ -2623,9 +2788,24 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Sadece 3 tanesi gerçekten değişiyor</strong> (dikkat çekici olanlar): <strong>ich→mich, du→dich, er→ihn</strong>. Geri kalanlar (sie, es, wir→uns, ihr→euch) da değişiyor ama daha kolay ezberlenir — <strong>wir/ihr</strong>'in Akkusativ hâli her zaman <strong>-s</strong> ile bitmez, "un<strong>s</strong>" ve "euch" şeklini alır.<br>
         <strong>Türkçe mantığı:</strong> Nominativ zamirler "ben/sen/o" (özne — eylemi yapan), Akkusativ zamirler ise "beni/seni/onu" (nesne — eylemden doğrudan etkilenen) şeklinde düşünülebilir.
       </div>
+      <div class="wx-card akk">
+        <div class="wx-head"><b>Nesne (beni, seni, onu…)</b><span></span></div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ich liebe <span class="wx-hl">dich</span>.</div>
+          <div class="wx-tr">Seni seviyorum.</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-de">Kennst du <span class="wx-hl">ihn</span>?</div>
+          <div class="wx-tr">Onu tanıyor musun?</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-de">Sie besucht <span class="wx-hl">uns</span>.</div>
+          <div class="wx-tr">Bizi ziyaret ediyor.</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Dativ Şahıs Zamirleri</h2>
+      <h2>🎁 Dativ zamirler · mir, dir, ihm…</h2>
       <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
         <thead><tr style="border-bottom:2px solid var(--brass);">
@@ -2647,9 +2827,74 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Örnekler:</strong> Ich helfe <strong>dir</strong>. (Sana yardım ediyorum.) — Das Fahrrad gehört <strong>ihm</strong>. (Bisiklet ona ait.) — Kannst du <strong>mir</strong> den Stift geben? (Bana kalemi verebilir misin?)<br>
         <strong>Fark:</strong> "Ich sehe <strong>dich</strong>." (seni görüyorum — Akkusativ) ↔ "Ich helfe <strong>dir</strong>." (sana yardım ediyorum — Dativ). Fiil hangisini istiyorsa o hâl kullanılır.
       </div>
+      <div class="wx-card dat">
+        <div class="wx-head"><b>Kime? (bana, sana, ona…)</b><span></span></div>
+        <div class="wx-row dat">
+          <div class="wx-de">Ich helfe <span class="wx-hl">dir</span>.</div>
+          <div class="wx-tr">Sana yardım ediyorum.</div>
+        </div>
+        <div class="wx-row dat">
+          <div class="wx-de">Das Buch gehört <span class="wx-hl">mir</span>.</div>
+          <div class="wx-tr">Kitap bana ait.</div>
+        </div>
+        <div class="wx-row dat">
+          <div class="wx-de">Wie geht es <span class="wx-hl">Ihnen</span>?</div>
+          <div class="wx-tr">Nasılsınız?</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>İyelik Zamirleri (Possessivartikel) — hızlı referans</h2>
+      <h2>🧠 Akkusativ mu, Dativ mi? · zamirle hızlı karar</h2>
+      <div class="wx-legend">Hâl rengi: <span class="wx-pill akk">Akkusativ</span><span class="wx-pill dat">Dativ</span></div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>🎯 Kimi? Neyi? → Akkusativ</b><span>mich · dich · ihn · sie · es · uns · euch</span></div>
+        <div class="wx-row akk">
+          <div class="wx-qa">Kimi görüyorsun?</div>
+          <div class="wx-de">Ich sehe <span class="wx-hl">ihn</span>.</div>
+          <div class="wx-tr">Onu görüyorum.</div>
+          <div class="wx-why">Türkçede "-i" hâli (onu, beni) → Akkusativ.</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-qa">Seni kim arıyor?</div>
+          <div class="wx-de">Er ruft <span class="wx-hl">dich</span> an.</div>
+          <div class="wx-tr">Seni arıyor.</div>
+          <div class="wx-why">anrufen kişiyi Akkusativ ile alır.</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-qa">Kimden rica ediyorsun?</div>
+          <div class="wx-de">Ich bitte <span class="wx-hl">sie</span> um Hilfe.</div>
+          <div class="wx-tr">Ondan yardım rica ediyorum.</div>
+          <div class="wx-why">bitten + Akk (kişi) + um + Akk.</div>
+        </div>
+      </div>
+      <div class="wx-card f">
+        <div class="wx-head"><b>🎁 Kime? → Dativ</b><span>mir · dir · ihm · ihr · ihm · uns · euch · ihnen</span></div>
+        <div class="wx-row dat">
+          <div class="wx-qa">Kime yardım ediyorsun?</div>
+          <div class="wx-de">Ich helfe <span class="wx-hl">ihm</span>.</div>
+          <div class="wx-tr">Ona yardım ediyorum.</div>
+          <div class="wx-why">Türkçede "-e" hâli (ona, bana) → Dativ.</div>
+        </div>
+        <div class="wx-row dat">
+          <div class="wx-qa">Sana ne veriyorum?</div>
+          <div class="wx-de">Ich gebe <span class="wx-hl">dir</span> das Buch.</div>
+          <div class="wx-tr">Sana kitabı veriyorum.</div>
+          <div class="wx-why">geben: kişi Dativ, şey Akkusativ.</div>
+        </div>
+        <div class="wx-row dat">
+          <div class="wx-qa">Bana ne gösteriyor?</div>
+          <div class="wx-de">Er zeigt <span class="wx-hl">mir</span> den Weg.</div>
+          <div class="wx-tr">Bana yolu gösteriyor.</div>
+          <div class="wx-why">zeigen: kişi Dativ, yol Akkusativ.</div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>Kısa kural:</strong> Türkçe çeviride <strong>-i</strong> (onu, beni) çıkıyorsa Akkusativ, <strong>-e</strong> (ona, bana) çıkıyorsa Dativ. İki nesne varsa: <strong>kişi → Dativ, şey → Akkusativ</strong>. Sadece Dativ isteyen fiiller: helfen, danken, gefallen, gehören, antworten.
+      </div>
+    </section>
+    <section class="panel">
+      <h2>👤 İyelik zamirleri · mein, dein, sein / ihr…</h2>
+      <h3 style="margin:4px 0 6px; font-size:15px;">mein, dein, sein, ihr… tablosu</h3>
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px; margin-bottom:14px;">
         <thead>
           <tr style="border-bottom:2px solid var(--brass);">
@@ -2674,9 +2919,8 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Altın kural:</strong> İyelik zamirleri ile olumsuz artikel <strong>kein</strong>'in ekleri BİREBİR AYNIDIR — der/das'ta hiç ek almaz, die ve çoğulda <strong>-e</strong> eki alır. "kein/keine" kalıbını biliyorsan, iyelik zamirlerini de zaten biliyorsun demektir!<br>
         <strong>Dikkat:</strong> <em>euer</em> kelimesi -e eki alınca "euer+e" değil, kısalıp <strong>eure</strong> olur (bazı kaynaklarda "euere" de görülebilir ama "eure" standarttır).
       </div>
-    </section>
-    <section class="panel">
-      <h2>3. Tekil Şahıs İyelik Zamirleri: sein vs ihr</h2>
+    
+      <h3 style="margin:20px 0 6px; font-size:15px;">sein mi, ihr mi? · 3. tekil şahıs</h3>
       <div class="plural-note" style="margin-top:0;">
         En çok karışan nokta budur: <strong>hangi iyelik zamirinin seçileceği SAHİBİN cinsiyetine göre belirlenir</strong> (İngilizcedeki his/her mantığı gibi — Türkçede ikisi de "onun" olduğu için ayrım yapmak zor gelir).
       </div>
@@ -2695,9 +2939,28 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       <div class="plural-note">
         <strong>Unutma:</strong> sein/ihr'in kendisi de (mein/dein gibi) sahiplenilen NESNENİN cinsiyetine göre çekilir — "sein Computer" (der, ek yok) ama "seine Wohnung" (die, -e eki). Yani BURADA İKİ AYRI KURAL AYNI ANDA ÇALIŞIYOR: (1) sein/ihr seçimi SAHİBİN cinsiyetine, (2) -e eki alıp almaması SAHİPLENİLEN NESNENİN cinsiyetine bağlıdır.
       </div>
+    
+      <div class="wx-card m">
+        <div class="wx-head"><b>Sahip + isim uyumu</b><span></span></div>
+        <div class="wx-row nom">
+          <div class="wx-de"><span class="wx-hl">Mein</span> Vater ist Kapitän.</div>
+          <div class="wx-tr">Babam kaptan.</div>
+          <div class="wx-why">Mein: eril, Nominativ.</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ich liebe <span class="wx-hl">meinen</span> Vater.</div>
+          <div class="wx-tr">Babamı seviyorum.</div>
+          <div class="wx-why">Akkusativ eril: mein → meinen.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de"><span class="wx-hl">Ihre</span> Tasche ist rot.</div>
+          <div class="wx-tr">Onun (kadın) çantası kırmızı.</div>
+          <div class="wx-why">Sahibi dişi → ihr-; çanta dişil → ihre.</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>İşaret Zamiri — dieser / diese / dieses (bu)</h2>
+      <h2>👆 İşaret zamiri · dieser, diese, dieses</h2>
       <p class="example-de" style="font-size:15px;"><strong>dieser</strong> belirli artikelle (der/die/das) <strong>aynı mantıkla çekilir</strong>: der→dieser, die→diese, das→dieses.</p>
       <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
@@ -2715,9 +2978,22 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         Örnek: <strong>Dieser</strong> Mann ist nett. · Ich kenne <strong>diesen</strong> Mann. · Ich spreche mit <strong>diesem</strong> Mann. · Mit <strong>dieser</strong> Frau · Mit <strong>diesen</strong> Leuten.<br>
         <strong>Hangi?</strong> sorusu için aynı ekler: <strong>welcher / welche / welches</strong> (Welches Rezept?).
       </div>
+      <div class="wx-card n">
+        <div class="wx-head"><b>dieser · diese · dieses</b><span>bu</span></div>
+        <div class="wx-row nom">
+          <div class="wx-de"><span class="wx-hl">Dieser</span> Mann ist nett.</div>
+          <div class="wx-tr">Bu adam iyi.</div>
+          <div class="wx-why">der Mann → dieser.</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ich kaufe <span class="wx-hl">dieses</span> Buch.</div>
+          <div class="wx-tr">Bu kitabı alıyorum.</div>
+          <div class="wx-why">das Buch → dieses.</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Hangi? — welcher? → dieser</h2>
+      <h2>❓ Hangi? · welcher → dieser</h2>
       <p class="example-de" style="font-size:15px;"><strong>welcher</strong> (hangi?) tıpkı <strong>dieser</strong> gibi çekilir. Soruda <strong>welcher</strong>, cevapta <strong>dieser</strong> kullanılır. Üç hâlin hepsinde sonlar aynı mantıkla değişir.</p>
 <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
@@ -2844,7 +3120,7 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       </div>
     </section>
     <section class="panel">
-      <h2>man — belirsiz özne zamiri</h2>
+      <h2>👥 man · belirsiz özne</h2>
       <div class="plural-note" style="margin-top:0;">
         <strong>man</strong>, belirli bir kişiyi değil, <strong>genel olarak insanları</strong> kastettiğinde kullanılır — Türkçedeki <strong>"-ılır/-ilir" pasif yapısına</strong> ya da genel "insan" kullanımına karşılık gelir. Kim yaptığı önemli değildir, kural/genel bilgi anlatılır.
       </div>
@@ -2871,9 +3147,21 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Türkçe karşılaştırma:</strong> Türkçede bunu genelde fiili PASİF yaparak çözeriz ("yapılır", "denir", "içilmez") — özneyi hiç söylemeyiz. Almanca ise özneyi somut bir kelimeyle ("man") söyler, ama bu kelime "belirli biri" değil, "insanlar genel olarak" demektir.<br>
         <strong>Dikkat:</strong> "man" ile "Mann" (adam) karıştırılmasın — "man" tek n ile yazılır ve küçük harfle başlar (isim değildir).
       </div>
+      <div class="wx-card p">
+        <div class="wx-head"><b>man = genel özne</b><span>Türkçede edilgen</span></div>
+        <div class="wx-row nom">
+          <div class="wx-de"><span class="wx-hl">Man</span> spricht hier Deutsch.</div>
+          <div class="wx-tr">Burada Almanca konuşulur.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">Wie schreibt <span class="wx-hl">man</span> das?</div>
+          <div class="wx-tr">Bu nasıl yazılır?</div>
+          <div class="wx-why">Fiil er/sie gibi çekilir.</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Genitiv-s: Özel İsimlerde Aitlik — hızlı referans</h2>
+      <h2>🔑 Genitiv-s · Peters Auto</h2>
       <div class="plural-note" style="margin-top:0;">
         Genitiv (isim tamlaması hâli), bir şeyin <strong>kime ait olduğunu</strong> gösterir — Türkçedeki "-in/-ın" tamlama ekine benzer. Ama Almancada bu ek SAHİPLENİLEN NESNEYE değil, <strong>SAHİBE (özel isme)</strong> eklenir.
       </div>
@@ -2899,12 +3187,24 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Sıra da farklı:</strong> Almancada özel isim + -s İLK gelir, sahip olunan nesne SONRA gelir — Türkçedeki gibi ("Caroline'ın arabası" → "Carolines Auto", ters çevirme yok).<br>
         <strong>Günlük hayatta:</strong> Konuşurken "von + isim" çok daha yaygındır, "-s" eki daha çok yazı dilinde görülür.
       </div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>Sahip + s</b><span>kesme işareti yok</span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Peter<span class="wx-hl">s</span> Auto ist neu.</div>
+          <div class="wx-tr">Peter'in arabası yeni.</div>
+          <div class="wx-why">Almancada apostrof yok.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">Das ist Annas Tasche.</div>
+          <div class="wx-tr">Bu Anna'nın çantası.</div>
+        </div>
+      </div>
     </section>
     </div>
     <div id="refGroupVerben" class="ref-group" style="display:none;">
-      <h2 class="referans-group-title">📌 Fiiller (Verben) — Gramer Kuralları</h2>
+      <h2 class="referans-group-title">🧱 Fiiller · Verben</h2>
     <section class="panel">
-      <h2>sein · haben · werden — en önemli 3 fiil (Çekim Tablosu)</h2>
+      <h2>⭐ sein · haben · werden · çekim</h2>
       <p style="margin:0 0 8px; font-size:13.5px;"><strong>Şimdiki zaman (Präsens)</strong> — bu üçü düzensizdir, ezberlenir.</p>
       <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:14px;">
@@ -2948,9 +3248,34 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         </div>
       </div>
       <p style="margin:12px 0 0; font-size:13px;"><strong>Hatırlatma:</strong> <em>du</em> ve <em>er</em> çekimleri düzensizdir (bist · ist / hast · hat / wirst · wird). <em>wir</em> ve <em>sie/Sie</em> her zaman mastar ile aynıdır, istisna yalnız <em>sein</em> için <strong>sind</strong>. Ne zaman <em>hatte</em>, ne zaman <em>war</em> sorusu için Geçmiş Zaman bölümüne bak.</p>
+      <div class="wx-card m">
+        <div class="wx-head"><b>sein · olmak</b><span></span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Ich <span class="wx-hl">bin</span> Kapitän.</div>
+          <div class="wx-tr">Ben kaptanım.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">Er <span class="wx-hl">ist</span> müde.</div>
+          <div class="wx-tr">O yorgun.</div>
+        </div>
+      </div>
+      <div class="wx-card n">
+        <div class="wx-head"><b>haben · sahip olmak</b><span></span></div>
+        <div class="wx-row akk">
+          <div class="wx-de">Wir <span class="wx-hl">haben</span> ein Schiff.</div>
+          <div class="wx-tr">Bir gemimiz var.</div>
+        </div>
+      </div>
+      <div class="wx-card f">
+        <div class="wx-head"><b>werden · olmak/-ecek</b><span></span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Es <span class="wx-hl">wird</span> kalt.</div>
+          <div class="wx-tr">Hava soğuyor.</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>essen, geben, nehmen — Düzensiz Çekim</h2>
+      <h2>🔁 Düzensiz çekim · essen, geben, nehmen</h2>
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:14px;">
         <thead>
           <tr style="border-bottom:2px solid var(--brass);">
@@ -2970,9 +3295,27 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       <div class="plural-note">
         <strong>Kural:</strong> Bu üç fiil (ve genel olarak kök ünlüsü "e" olan birçok düzensiz fiil) sadece <strong>du</strong> ve <strong>er/es/sie</strong> formlarında değişir — ünlü değişimi (e→i/ie) ya da ekstra harf ekleniyor. wir/ihr/sie formları her zaman düzenli kalır.
       </div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>e → i / ie</b><span>du ve er/sie/es'de</span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Ich esse, du <span class="wx-hl">isst</span>.</div>
+          <div class="wx-tr">Ben yiyorum, sen yiyorsun.</div>
+          <div class="wx-why">essen: e → i</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">Er <span class="wx-hl">gibt</span> mir das Buch.</div>
+          <div class="wx-tr">O bana kitabı veriyor.</div>
+          <div class="wx-why">geben: e → i</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">Sie <span class="wx-hl">liest</span> ein Buch.</div>
+          <div class="wx-tr">O bir kitap okuyor.</div>
+          <div class="wx-why">lesen: e → ie</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Modalverben: können / wollen / müssen / dürfen / sollen — hızlı referans</h2>
+      <h2>🧰 Modalverben · können, wollen, müssen…</h2>
       <div class="rule-grid cols-5">
         <div class="rule-card der">
           <div class="title">können</div>
@@ -3007,9 +3350,25 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>⚠️ EN SIK YAPILAN HATA — nicht müssen ≠ nicht dürfen:</strong> Türkçede ikisi de "yapmamalı/yapmak zorunda değil" gibi dursa da Almancada TAM TERS iki anlam taşır! <strong>"nicht müssen"</strong> = zorunluluk YOK, istersen yaparsın istemezsen yapmazsın (serbest) — "Du musst nicht kommen." (Gelmek zorunda değilsin, istersen gelme istersen gel.) <strong>"nicht dürfen"</strong> = YASAK, kesinlikle yapılmaması gerekir — "Du darfst nicht kommen." (Gelmen yasak / gelemezsin.)<br>
         <strong>möchte vs wollen:</strong> İkisi de "istemek" anlamına gelir ama <strong>möchte</strong> çok daha <strong>nazik/kibar</strong> bir istektir (İngilizcedeki "would like" gibi), <strong>wollen</strong> ise daha <strong>direkt/sert</strong> bir irade bildirir — Bir kafede "Ich möchte einen Kaffee." (Bir kahve rica ediyorum) demek nazikken, "Ich will einen Kaffee." (Bir kahve istiyorum!) daha kaba/buyurgan durur. Çekimi: ich möchte, du möchtest, er möchte, wir möchten, ihr möchtet, sie möchten.
       </div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>Modal + mastar sonda</b><span></span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Ich <span class="wx-hl">kann</span> gut schwimmen.</div>
+          <div class="wx-tr">İyi yüzebilirim.</div>
+          <div class="wx-why">Mastar cümlenin sonuna gider.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">Du <span class="wx-hl">musst</span> heute arbeiten.</div>
+          <div class="wx-tr">Bugün çalışmak zorundasın.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">Wir <span class="wx-hl">wollen</span> nach Hause gehen.</div>
+          <div class="wx-tr">Eve gitmek istiyoruz.</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Imperativ (Emir Kipi) — hızlı referans</h2>
+      <h2>📣 Imperativ · emir kipi</h2>
       <div class="rule-grid">
         <div class="rule-card der">
           <div class="title">du-Form</div>
@@ -3031,9 +3390,25 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>En önemli kural:</strong> Emir kipinde normal kelime sırası bozulur — fiil <strong>her zaman cümlenin en başına</strong> gelir (du/ihr formunda özne bile hiç söylenmez!). Nezaket için cümle sonuna <strong>bitte</strong> eklenir: "Bringen Sie den Kaffee, bitte."<br>
         Hangi kelimeler imperative olur? <strong>Her fiilin</strong> kendi du/ihr/Sie emir hâli vardır — yukarıdaki 3 kurala göre türetilir, ezber gerektiren ayrı bir kelime listesi değildir.
       </div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>du · ihr · Sie</b><span></span></div>
+        <div class="wx-row nom">
+          <div class="wx-de"><span class="wx-hl">Komm</span> bitte!</div>
+          <div class="wx-tr">Gel lütfen! (du)</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de"><span class="wx-hl">Kommt</span> bitte!</div>
+          <div class="wx-tr">Gelin lütfen! (ihr)</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de"><span class="wx-hl">Kommen</span> Sie bitte!</div>
+          <div class="wx-tr">Gelin lütfen! (Sie)</div>
+          <div class="wx-why">Sie'de özne kalır.</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Bölünen Fiiller (Trennbare Verben) — Cümle Parantezi</h2>
+      <h2>🪢 Bölünen fiiller · Trennbare Verben</h2>
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px; margin-bottom:14px;">
         <thead>
           <tr style="border-bottom:2px solid var(--brass);">
@@ -3061,9 +3436,26 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         "Wir <strong>müssen</strong> unsere Freunde <strong>einladen</strong>." (bölünmüyor!)<br>
         Yani: <strong>modal fiil yoksa</strong> → bölünür, ön ek sona gider. <strong>Modal fiil varsa</strong> → bölünmez, bütün fiil (mastar) sona gider.
       </div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>Ön ek sona gider</b><span></span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Ich <span class="wx-hl">stehe</span> um 6 Uhr <span class="wx-hl">auf</span>.</div>
+          <div class="wx-tr">Saat 6'da kalkıyorum.</div>
+          <div class="wx-why">aufstehen: stehe … auf</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">Er <span class="wx-hl">ruft</span> mich <span class="wx-hl">an</span>.</div>
+          <div class="wx-tr">Beni arıyor.</div>
+          <div class="wx-why">anrufen: ruft … an</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">Wir <span class="wx-hl">kaufen</span> im Supermarkt <span class="wx-hl">ein</span>.</div>
+          <div class="wx-tr">Süpermarketten alışveriş yapıyoruz.</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>gefallen vs finden — hızlı referans</h2>
+      <h2>👍 gefallen ↔ finden</h2>
       <div class="plural-note" style="margin-top:0;">
         İkisi de "beğenmek/hoşlanmak" anlamına gelir ama <strong>gramer yapıları tamamen farklıdır</strong> — bu, Türkçeden Almancaya geçerken en çok karıştırılan noktalardan biridir.
       </div>
@@ -3082,9 +3474,24 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       <div class="plural-note">
         <strong>Aynı anlamı iki farklı şekilde kur:</strong> "Der Film gefällt mir." = "Ich finde den Film gut." — ikisi de "Filmi beğeniyorum" demek, ama <strong>gefallen</strong>'de ÖZNE ŞEY, <strong>finden</strong>'de ÖZNE KİŞİdir. Kafan karışırsa: gefallen cümlesinde "kime hoş geliyor?" (mir/dir/ihm...) sorusunu, finden cümlesinde "kim buluyor?" (ich/du/er...) sorusunu sor.
       </div>
+      <div class="wx-card dat">
+        <div class="wx-head"><b>gefallen · hoşuna gitmek</b><span>Dativ</span></div>
+        <div class="wx-row dat">
+          <div class="wx-de">Das Auto <span class="wx-hl">gefällt</span> <span class="wx-hl">mir</span>.</div>
+          <div class="wx-tr">Araba hoşuma gidiyor.</div>
+          <div class="wx-why">Hoşlanan kişi Dativ.</div>
+        </div>
+      </div>
+      <div class="wx-card akk">
+        <div class="wx-head"><b>finden · bulmak / düşünmek</b><span>Akkusativ</span></div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ich <span class="wx-hl">finde</span> das Auto toll.</div>
+          <div class="wx-tr">Arabayı harika buluyorum.</div>
+        </div>
+      </div>
     </section>
     <section class="panel" style="margin-top:0;">
-      <h2>Sport: İsim + Fiil mi, Sadece Fiil mi? — hızlı referans</h2>
+      <h2>⚽ Sport · isim + fiil mi, sadece fiil mi?</h2>
       <div class="rule-grid" style="grid-template-columns:1fr 1fr;">
         <div class="rule-card der">
           <div class="title">İsim + Fiil ile anlatılanlar</div>
@@ -3100,12 +3507,25 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       <div class="plural-note">
         <strong>Kural yok, ezber gerekir:</strong> Bazı sporlar "isim + machen/spielen/fahren" kalıbıyla, bazıları TEK BAŞINA bir fiille anlatılır — hangi sporun hangi kalıba girdiğini kelimeyle birlikte öğrenmek gerekir.
       </div>
+      <div class="wx-card n">
+        <div class="wx-head"><b>Fiil kalıpları</b><span></span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Ich <span class="wx-hl">spiele</span> Fußball.</div>
+          <div class="wx-tr">Futbol oynuyorum.</div>
+          <div class="wx-why">spielen + oyun</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">Ich <span class="wx-hl">gehe</span> schwimmen.</div>
+          <div class="wx-tr">Yüzmeye gidiyorum.</div>
+          <div class="wx-why">gehen + mastar</div>
+        </div>
+      </div>
     </section>
     </div>
     <div id="refGroupPerfekt" class="ref-group" style="display:none;">
-      <h2 class="referans-group-title">📌 Geçmiş Zaman (Perfekt & Präteritum) — Gramer Kuralları</h2>
+      <h2 class="referans-group-title">⏪ Geçmiş zaman · Perfekt &amp; Präteritum</h2>
     <section class="panel" style="margin-top:0;">
-      <h2>haben ve sein — Geçmiş Zaman (Präteritum: hatte / war)</h2>
+      <h2>🕰️ Präteritum · war ve hatte</h2>
       <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
         <thead><tr style="border-bottom:2px solid var(--brass);">
@@ -3138,9 +3558,21 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Neden önemli:</strong> Almanca günlük konuşmada çoğu fiilin geçmişi için başka bir kalıp (Perfekt) kullanılır, ama <strong>haben ve sein</strong> için konuşurken bile bu kısa geçmiş biçimler (hatte / war) kullanılır.<br>
         <strong>Dikkat:</strong> "hat" geçmiş değil, haben'in <strong>şimdiki zaman</strong> er/sie/es biçimidir; geçmişi "hatte"dir. (Perfekt'te "hat" yardımcı fiil olarak da karşına çıkacak, o ayrı konu.)
       </div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>war · hatte</b><span></span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Ich <span class="wx-hl">war</span> gestern müde.</div>
+          <div class="wx-tr">Dün yorgundum.</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-de">Wir <span class="wx-hl">hatten</span> keine Zeit.</div>
+          <div class="wx-tr">Vaktimiz yoktu.</div>
+        </div>
+      </div>
     </section>
-    <section class="panel" style="margin-top:0;">
-      <h2>Perfekt (konuşma geçmişi) — mantığı ve yapısı</h2>
+    <section class="panel">
+      <h2>⏪ Perfekt · yapı ve yardımcı fiil</h2>
+      <h3 style="margin:4px 0 6px; font-size:15px;">Perfekt (konuşma geçmişi) · mantığı ve yapısı</h3>
       <p class="example-de" style="font-size:15px;">Günlük konuşmada geçmişi anlatmanın en yaygın yolu: <strong>haben / sein</strong> (yardımcı fiil) + <strong>Partizip II</strong> (asıl fiilin geçmiş ortacı).</p>
       <div class="rule-grid" style="grid-template-columns:1fr 1fr; margin-top:14px;">
         <div class="rule-card der"><div class="title">haben + Partizip II</div><div class="ex">Ich <strong>habe</strong> Pizza <strong>gegessen</strong>.<br>Wir <strong>haben</strong> Deutsch <strong>gelernt</strong>.<br><span style="color:var(--x-tx-999999);">(Pizza yedim. / Almanca öğrendik.)</span></div></div>
@@ -3153,9 +3585,8 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Yardımcı fiil özneye göre çekilir</strong> (ich habe/bin, du hast/bist, er hat/ist, wir haben/sind, ihr habt/seid, sie haben/sind). Partizip II ise <strong>hiç değişmez</strong>.<br>
         <strong>Türkçe mantığı:</strong> "yedim" = Almancada "ich habe gegessen" (iki parça). Anlam aynı, ama haben/sein'ı <strong>doğru seçmek</strong> gerekir.
       </div>
-    </section>
-    <section class="panel">
-      <h2>haben mı, sein mi? — mantığı</h2>
+    
+      <h3 style="margin:20px 0 6px; font-size:15px;">haben mi, sein mi? · yardımcı fiil</h3>
       <p class="example-de" style="font-size:15px;"><strong>Varsayılan haben'dir.</strong> Fiilin kendisi hareketle veya durum değişimiyle ilgiliyse <strong>sein</strong> gelir.</p>
       <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
@@ -3176,9 +3607,25 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>İpucu 3 — Hep haben olanlar:</strong> Akkusativ'li fiiller (kaufen, machen, sehen, essen, trinken, lesen, schreiben, nehmen, finden), <strong>modal fiiller</strong> (können, müssen…), <strong>dönüşlü fiiller</strong> (sich freuen), <strong>haben</strong> kendisi (ich habe gehabt), <strong>anfangen</strong> (Der Film hat angefangen), <strong>schlafen, arbeiten, wohnen, warten</strong>.<br>
         <strong>Dikkat:</strong> sein'ın kendi Perfekt'i de sein'la: Ich <strong>bin</strong> gewesen. Ama konuşmada war / hatte (Präteritum) tercih edilir: Ich <strong>war</strong> müde. (Ich bin müde gewesen demek de doğru ama daha az doğal.)
       </div>
+    
+      <div class="wx-card m">
+        <div class="wx-head"><b>haben + Partizip II</b><span></span></div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ich <span class="wx-hl">habe</span> Kaffee <span class="wx-hl">getrunken</span>.</div>
+          <div class="wx-tr">Kahve içtim.</div>
+          <div class="wx-why">Partizip sonda.</div>
+        </div>
+      </div>
+      <div class="wx-card f">
+        <div class="wx-head"><b>sein + Partizip II</b><span>hareket / durum değişimi</span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Er <span class="wx-hl">ist</span> nach Hause <span class="wx-hl">gegangen</span>.</div>
+          <div class="wx-tr">Eve gitti.</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Partizip II nasıl yapılır? — kurallar</h2>
+      <h2>🔧 Partizip II · nasıl yapılır?</h2>
       <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
         <thead><tr style="border-bottom:2px solid var(--brass);"><th style="padding:8px; vertical-align:top; text-align:left;">Fiil türü</th><th style="padding:8px; vertical-align:top; text-align:left;">Kalıp</th><th style="padding:8px; vertical-align:top; text-align:left;">Örnek</th></tr>
@@ -3198,9 +3645,25 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Ezber ipucu:</strong> düzensiz fiilleri her zaman <strong>3'lü</strong> öğren: <em>gehen – ging – gegangen</em>. Sözlükte Partizip II hep verilir, listemizdeki fiillerin yanına bakarak ezberle.<br>
         <strong>Öneki ayır:</strong> ayrılabilir mi? Cümlede ayrılıyorsa (Ich stehe um 6 auf) → ge- ortaya girer (aufgestanden). Ayrılmıyorsa (Ich besuche dich) → ge- hiç yok (besucht).
       </div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>ge- … -t / ge- … -en</b><span></span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">machen → <span class="wx-hl">gemacht</span></div>
+          <div class="wx-tr">yapmak</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">trinken → <span class="wx-hl">getrunken</span></div>
+          <div class="wx-tr">içmek</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">aufstehen → <span class="wx-hl">aufgestanden</span></div>
+          <div class="wx-tr">kalkmak</div>
+          <div class="wx-why">ayrılan fiil: ge ortada.</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Sık fiiller — yardımcı fiil + Partizip II</h2>
+      <h2>📚 Sık fiiller · yardımcı fiil + Partizip II</h2>
       <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
         <thead><tr style="border-bottom:2px solid var(--brass);"><th style="padding:8px; vertical-align:top; text-align:left;">Fiil</th><th style="padding:8px; vertical-align:top; text-align:left;">Partizip II</th><th style="padding:8px; vertical-align:top; text-align:left;">Perfekt (ich)</th><th style="padding:8px; vertical-align:top; text-align:left;">Türkçesi</th></tr>
@@ -3248,33 +3711,10 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
     </section>
     </div>
     <div id="refGroupDativ" class="ref-group" style="display:none;">
-      <h2 class="referans-group-title">📌 Akkusativ & Dativ (Hâller) — Gramer Kuralları</h2>
+      <h2 class="referans-group-title">📍 Akkusativ &amp; Dativ · Hâller</h2>
     <section class="panel">
-      <h2>Akkusativ ne zaman kullanılır? — hızlı referans</h2>
-      <div class="rule-grid">
-        <div class="rule-card der">
-          <div class="title">1. Direkt Nesne</div>
-          <div class="sfx">Fiile "kimi? neyi?" diye sor — cevap Akkusativ'dir.</div>
-          <div class="ex">Ich sehe <strong>den</strong> Mann.<br>Ich kaufe <strong>einen</strong> Apfel.</div>
-        </div>
-        <div class="rule-card die">
-          <div class="title">2. Sabit Edatlar</div>
-          <div class="sfx"><strong>für, durch, ohne, gegen, um</strong> — bu edatlardan sonra HER ZAMAN Akkusativ gelir.</div>
-          <div class="ex">Das ist für <strong>dich</strong>.<br>Ich gehe ohne <strong>meinen</strong> Bruder.</div>
-        </div>
-        <div class="rule-card das">
-          <div class="title">3. "Wohin?" (nereye?)</div>
-          <div class="sfx">Hareket varsa Akkusativ, konum/durum varsa Dativ (A2 konusu ama sık görülür).</div>
-          <div class="ex">Ich gehe in <strong>die</strong> Schule. (hareket)<br>Ich bin in <strong>der</strong> Schule. (konum)</div>
-        </div>
-      </div>
-      <div class="plural-note">
-        <strong>4. es gibt</strong> yapısından sonra da her zaman Akkusativ gelir: "Es gibt <strong>einen</strong> Park hier."<br>
-        <strong>Pratik ipucu:</strong> Nominativ = "kim/ne yapıyor" (özne). Akkusativ = "kime/neye yapılıyor" (doğrudan etkilenen). Sadece eril (der) hâlde görünür değişim vardır — bkz. yukarıdaki der/ein/kein tablosu.
-      </div>
-    </section>
-    <section class="panel" style="margin-top:0;">
-      <h2>Nominativ, Akkusativ, Dativ — en basit hâliyle</h2>
+      <h2>🎯 Hâller · Nominativ, Akkusativ, Dativ</h2>
+      <h3 style="margin:4px 0 6px; font-size:15px;">Nominativ, Akkusativ, Dativ · en basit hâliyle</h3>
       <div class="plural-note" style="margin-top:0;">
         Bir cümlede herkesin bir <strong>rolü</strong> var: kim yapıyor, kime yapıyor, neyi yapıyor. Almanca bu rolleri kelimenin değil, <strong>artikelin</strong> (der/die/das/ein/mein...) üzerine ek koyarak belli eder — Türkçenin kelime sonuna ek koymasına benzer, sadece ek Almancada artikelin üstünde.
       </div>
@@ -3324,9 +3764,31 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       <div class="plural-note">
         <strong>Kafanda çalışacak 3 adım:</strong> ① Eylemi kim yapıyor? → o kelime Nominativ, dokunma (dişilse -e ekle). ② "Kimi/neyi?" diye sorabiliyor musun? → cevap Akkusativ. ③ "Kime?" diye sorabiliyor musun? → cevap Dativ.
       </div>
-    </section>
-    <section class="panel" style="margin-top:0;">
-      <h2>Dativ nedir? (wem? = kime?)</h2>
+    
+      <h3 style="margin:20px 0 6px; font-size:15px;">Akkusativ ne zaman kullanılır?</h3>
+      <div class="rule-grid">
+        <div class="rule-card der">
+          <div class="title">1. Direkt Nesne</div>
+          <div class="sfx">Fiile "kimi? neyi?" diye sor — cevap Akkusativ'dir.</div>
+          <div class="ex">Ich sehe <strong>den</strong> Mann.<br>Ich kaufe <strong>einen</strong> Apfel.</div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">2. Sabit Edatlar</div>
+          <div class="sfx"><strong>für, durch, ohne, gegen, um</strong> — bu edatlardan sonra HER ZAMAN Akkusativ gelir.</div>
+          <div class="ex">Das ist für <strong>dich</strong>.<br>Ich gehe ohne <strong>meinen</strong> Bruder.</div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">3. "Wohin?" (nereye?)</div>
+          <div class="sfx">Hareket varsa Akkusativ, konum/durum varsa Dativ (A2 konusu ama sık görülür).</div>
+          <div class="ex">Ich gehe in <strong>die</strong> Schule. (hareket)<br>Ich bin in <strong>der</strong> Schule. (konum)</div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>4. es gibt</strong> yapısından sonra da her zaman Akkusativ gelir: "Es gibt <strong>einen</strong> Park hier."<br>
+        <strong>Pratik ipucu:</strong> Nominativ = "kim/ne yapıyor" (özne). Akkusativ = "kime/neye yapılıyor" (doğrudan etkilenen). Sadece eril (der) hâlde görünür değişim vardır — bkz. yukarıdaki der/ein/kein tablosu.
+      </div>
+    
+      <h3 style="margin:20px 0 6px; font-size:15px;">Dativ nedir? (wem? = kime?)</h3>
       <div class="plural-note" style="margin-top:0;">
         Dativ, cümlede işin <strong>kime / kimin için</strong> yapıldığını gösterir — Türkçedeki <strong>yönelme hâli (-e/-a)</strong> gibi düşün. Akkusativ ise "kimi / neyi" (belirtme hâli, -i/-ı) sorusuna cevap verir.
       </div>
@@ -3342,9 +3804,32 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
           <div class="ex">Ich schenke meiner Mutter <strong>eine Tasche</strong>.<br><span style="color:var(--x-tx-999999);">(Anneme bir çantayı hediye ediyorum.)</span></div>
         </div>
       </div>
+    
+      <div class="wx-card m">
+        <div class="wx-head"><b>Nominativ · Akkusativ · Dativ</b><span></span></div>
+        <div class="wx-row nom">
+          <div class="wx-qa">Kim?</div>
+          <div class="wx-de"><span class="wx-hl">Der Mann</span> gibt dem Kind einen Apfel.</div>
+          <div class="wx-tr">Adam çocuğa elma veriyor.</div>
+          <div class="wx-why">özne</div>
+        </div>
+        <div class="wx-row dat">
+          <div class="wx-qa">Kime?</div>
+          <div class="wx-de">Der Mann gibt <span class="wx-hl">dem Kind</span> einen Apfel.</div>
+          <div class="wx-tr"></div>
+          <div class="wx-why">Dativ</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-qa">Neyi?</div>
+          <div class="wx-de">Der Mann gibt dem Kind <span class="wx-hl">einen Apfel</span>.</div>
+          <div class="wx-tr"></div>
+          <div class="wx-why">Akkusativ</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Deklination mit bestimmtem Artikel (der / die / das)</h2>
+      <h2>🔡 Artikel çekimi · belirli ve belirsiz</h2>
+      <h3 style="margin:4px 0 6px; font-size:15px;">Belirli artikel (der, die, das)</h3>
       <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
         <thead><tr style="border-bottom:2px solid var(--brass);">
@@ -3361,9 +3846,8 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Dikkat 1:</strong> Dativ'de eril ve nötr aynıdır (<strong>dem</strong>), dişil <strong>der</strong> olur — ama "der" Nominativ eril ile de aynı yazılır, cümledeki göreve bakarak ayır.<br>
         <strong>Dikkat 2:</strong> Çoğulda Dativ'de artikel <strong>den</strong> olur VE isme <strong>-n</strong> eklenir: die Kinder → <strong>den Kindern</strong>. (Çoğul zaten -n ya da -s ile bitiyorsa ek gelmez: den Frauen, den Autos.)
       </div>
-    </section>
-    <section class="panel">
-      <h2>Deklination mit unbestimmtem Artikel (ein / kein)</h2>
+    
+      <h3 style="margin:20px 0 6px; font-size:15px;">Belirsiz artikel (ein, kein)</h3>
       <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
         <thead><tr style="border-bottom:2px solid var(--brass);">
@@ -3380,9 +3864,28 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Not:</strong> "ein" çoğulda yoktur (Türkçedeki "bir çocuklar" gibi olmaz). Ama olumsuz "kein" çoğulda vardır ve Dativ'de <strong>keinen</strong> + isme -n alır: "Ich helfe keinen Kindern" gibi.<br>
         Aynı yapı <strong>mein / dein / sein / ihr / unser / euer</strong> için de geçerlidir: meinem Vater, meiner Schwester, meinen Eltern (-n).
       </div>
+    
+      <div class="wx-card f">
+        <div class="wx-head"><b>Dativ'da artikel</b><span></span></div>
+        <div class="wx-row dat">
+          <div class="wx-de">Ich helfe <span class="wx-hl">dem</span> Mann.</div>
+          <div class="wx-tr">Adama yardım ediyorum.</div>
+          <div class="wx-why">der → dem</div>
+        </div>
+        <div class="wx-row dat">
+          <div class="wx-de">Ich helfe <span class="wx-hl">der</span> Frau.</div>
+          <div class="wx-tr">Kadına yardım ediyorum.</div>
+          <div class="wx-why">die → der</div>
+        </div>
+        <div class="wx-row dat">
+          <div class="wx-de">Ich helfe <span class="wx-hl">dem</span> Kind.</div>
+          <div class="wx-tr">Çocuğa yardım ediyorum.</div>
+          <div class="wx-why">das → dem</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Çoğulda Dativ: den + isme -n (çok önemli)</h2>
+      <h2>⚠️ Çoğulda Dativ · den + isme -n</h2>
       <div class="plural-note" style="margin-top:0;">
         Çoğul bir isim Dativ'e girince <strong>iki şey birden</strong> olur: (1) artikel her cinsiyette <strong>den</strong> olur, (2) isme <strong>-n</strong> eklenir. Konuşmada ve sınavda en çok unutulan kural budur.
       </div>
@@ -3407,11 +3910,31 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Dativ isteyen fiillerle:</strong> Ich helfe den Kindern. (Çocuklara yardım ediyorum.) — Wir danken den Lehrern. (Öğretmenlere teşekkür ediyoruz.) — Das Buch gehört den Studenten. (Kitap öğrencilere ait.)<br>
         <strong>Ezber ipucu:</strong> "wem?" (kime/kimlere) sorusunun cevabı çoğulsa isim <strong>-n ile biter</strong> — Türkçedeki "-lere" gibi düşün.
       </div>
+      <div class="wx-card p">
+        <div class="wx-head"><b>den + isim-n</b><span></span></div>
+        <div class="wx-row dat">
+          <div class="wx-de">Ich helfe <span class="wx-hl">den Kindern</span>.</div>
+          <div class="wx-tr">Çocuklara yardım ediyorum.</div>
+          <div class="wx-why">Kinder → Kindern</div>
+        </div>
+        <div class="wx-row dat">
+          <div class="wx-de">Mit <span class="wx-hl">den Freunden</span> spiele ich.</div>
+          <div class="wx-tr">Arkadaşlarla oynuyorum.</div>
+          <div class="wx-why">Freunde → Freunden</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Akkusativ Alan Fiiller (Geçişli Fiiller) — hızlı referans</h2>
+      <h2>🧭 Fiiller · Akkusativ, Dativ ya da ikisi</h2>
+      <h3 style="margin:4px 0 6px; font-size:15px;">Akkusativ isteyen fiiller</h3>
       <div class="plural-note" style="margin-top:0;">
         <strong>Türkçe mantığı:</strong> Bir fiile "kimi? neyi?" diye sorabiliyorsan, o fiil Akkusativ nesne ister — cevap her zaman Akkusativ hâlinde olur ("Ich habe <strong>einen Hund</strong>." — Ne'im var? Bir köpeğim var.)
+      </div>
+      <div class="plural-note" style="margin-top:8px;">
+        <strong>🙏 Özel kalıp · bitten + Akk (kişi) + um + Akk (istenen şey):</strong> Kişi Akkusativ, rica edilen şey de <strong>um</strong> sonrası Akkusativ olur.<br>
+        Ich bitte <strong>ihn</strong> um <strong>einen</strong> Gefallen. → Ondan bir iyilik rica ediyorum.<br>
+        Wir bitten <strong>Sie</strong> um <strong>Ihre</strong> Mithilfe. → Sizden yardımınızı rica ediyoruz.<br>
+        <em>Dikkat:</em> "helfen" gibi Dativ değil — bitten'de kişi Akkusativ'dir (<strong>ihn</strong>, ihm değil).
       </div>
       <div class="rule-grid">
         <div class="rule-card der">
@@ -3430,9 +3953,8 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
           <div class="ex">Ich nehme <strong>das Buch</strong>.<br>Ich öffne <strong>die Tür</strong>.</div>
         </div>
       </div>
-    </section>
-    <section class="panel">
-      <h2>Dativ isteyen fiiller</h2>
+    
+      <h3 style="margin:20px 0 6px; font-size:15px;">Dativ isteyen fiiller</h3>
       <div class="rule-grid">
         <div class="rule-card der">
           <div class="title">helfen / danken</div>
@@ -3455,9 +3977,8 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         Ich zeige <strong>der Frau</strong> <strong>das Haus</strong>. (Kadına evi gösteriyorum.)<br>
         <strong>İleri ipucu:</strong> Akkusativ bir zamirse (es, ihn...) o öne geçer: Ich zeige <strong>es</strong> der Frau.
       </div>
-    </section>
-    <section class="panel">
-      <h2>Fiiller: Sadece Akkusativ mi, Sadece Dativ mi, İkisi mi?</h2>
+    
+      <h3 style="margin:20px 0 6px; font-size:15px;">Akkusativ mı, Dativ mi, ikisi mi?</h3>
       <div class="plural-note" style="margin-top:0;">
         Bir fiilin hangi hâli istediği EZBERLE öğrenilir, anlamdan tahmin edilemez. Fiili öğrenirken hangi gruba girdiğini de birlikte öğren — 3 net grup var:
       </div>
@@ -3482,12 +4003,20 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Nasıl ayırt edilir:</strong> Fiile "kimi/neyi?" diye sorabiliyorsan cevap Akkusativ'dir (① ve ③'te var). "Kime?" diye sorabiliyorsan cevap Dativ'dir (② ve ③'te var). ③ grubundaki fiillerde HER İKİ soru da cevaplanabilir — bu yüzden iki nesne birden alırlar.<br>
         <strong>Tuzak:</strong> "kennen" (tanımak) Akkusativ alır ("Ich kenne <strong>ihn</strong>.") ama "danken" (teşekkür etmek) Dativ alır ("Ich danke <strong>ihm</strong>.") — anlamları benzer görünse de hâlleri FARKLIDIR, tek tek ezberlemek gerekir.
       </div>
+    
+      <div class="wx-card dat">
+        <div class="wx-head"><b>İki nesne</b><span>kişi Dativ + şey Akkusativ</span></div>
+        <div class="wx-row dat">
+          <div class="wx-de">Ich gebe <span class="wx-hl">dir</span> das Buch.</div>
+          <div class="wx-tr">Sana kitabı veriyorum.</div>
+        </div>
+      </div>
     </section>
     </div>
     <div id="refGroupSaatler" class="ref-group" style="display:none;">
-      <h2 class="referans-group-title">📌 Saatler & Takvim — Gramer Kuralları</h2>
+      <h2 class="referans-group-title">⏰ Saatler &amp; takvim · Uhrzeit</h2>
     <section class="panel" style="margin-top:0;">
-      <h2>Saat Söyleme Kuralları — ince noktalar</h2>
+      <h2>🕐 Saat söyleme · ince noktalar</h2>
       <div class="rule-grid">
         <div class="rule-card der">
           <div class="title">Tam saat</div>
@@ -3510,18 +4039,22 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         3:10 → zehn nach drei &nbsp;|&nbsp; 3:50 → zehn vor vier<br>
         <strong>En sık yapılan hata:</strong> "halb" kelimesi Türkçedeki gibi "şu saат buçuk" değil, her zaman <strong>gelecek saate yarım kalmış</strong> anlamındadır — yani 2:30 Almancada kafanda "3'e yarım var" gibi düşünülür.
       </div>
-    </section>
-    <section class="panel">
-      <h2>von / bis — hızlı referans</h2>
-      <p class="example-de" style="font-size:15px;">Bir zaman aralığını belirtmek için <strong>von</strong> (-den) ve <strong>bis</strong> (-e kadar) birlikte kullanılır.</p>
-      <div class="plural-note">
-        <strong>von 9 bis 17 Uhr</strong> — saat 9'dan 17'ye kadar<br>
-        <strong>von Montag bis Freitag</strong> — pazartesiden cumaya kadar<br>
-        Kural: <strong>von</strong> başlangıcı, <strong>bis</strong> bitişi gösterir — ikisi her zaman birlikte kullanılır.
+      <div class="wx-card m">
+        <div class="wx-head"><b>Resmi ve günlük</b><span></span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Es ist <span class="wx-hl">halb</span> acht.</div>
+          <div class="wx-tr">Saat 7:30 (sekize yarım).</div>
+          <div class="wx-why">halb = bir sonraki saate doğru yarım.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">Es ist <span class="wx-hl">Viertel nach</span> drei.</div>
+          <div class="wx-tr">Üçü çeyrek geçiyor.</div>
+        </div>
       </div>
     </section>
     <section class="panel">
-      <h2>im / am / um (+ bei, als, von) — hızlı referans</h2>
+      <h2>📅 Zaman edatları · im, am, um, von … bis</h2>
+      <h3 style="margin:4px 0 6px; font-size:15px;">im · am · um (+ bei, als, von)</h3>
       <div class="rule-grid">
         <div class="rule-card der">
           <div class="title">im</div>
@@ -3545,9 +4078,36 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>von</strong>: başlangıç noktası / aitlik / kaynak — <strong>von 9 bis 17 Uhr</strong> (saatten saate), <strong>das Auto von meinem Vater</strong> (babamın arabası).<br>
         En sık karışan kural: Tekrar eden / şimdiki / gelecek olaylarda "-dığında" için <strong>wenn</strong> kullanılır — sadece geçmişte <strong>tek seferlik</strong> olaylarda <strong>als</strong> kullanılır.
       </div>
+    
+      <h3 style="margin:20px 0 6px; font-size:15px;">von … bis (-den … -e kadar)</h3>
+      <p class="example-de" style="font-size:15px;">Bir zaman aralığını belirtmek için <strong>von</strong> (-den) ve <strong>bis</strong> (-e kadar) birlikte kullanılır.</p>
+      <div class="plural-note">
+        <strong>von 9 bis 17 Uhr</strong> — saat 9'dan 17'ye kadar<br>
+        <strong>von Montag bis Freitag</strong> — pazartesiden cumaya kadar<br>
+        Kural: <strong>von</strong> başlangıcı, <strong>bis</strong> bitişi gösterir — ikisi her zaman birlikte kullanılır.
+      </div>
+    
+      <div class="wx-card m">
+        <div class="wx-head"><b>am · um · im</b><span></span></div>
+        <div class="wx-row dat">
+          <div class="wx-qa">Gün</div>
+          <div class="wx-de"><span class="wx-hl">Am</span> Montag arbeite ich.</div>
+          <div class="wx-tr">Pazartesi çalışıyorum.</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-qa">Saat</div>
+          <div class="wx-de"><span class="wx-hl">Um</span> 8 Uhr stehe ich auf.</div>
+          <div class="wx-tr">Saat 8'de kalkıyorum.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-qa">Ay</div>
+          <div class="wx-de"><span class="wx-hl">Im</span> Juli ist es heiß.</div>
+          <div class="wx-tr">Temmuz'da hava sıcak.</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Randevu önerme: "Geht es …?" ve "Ich bitte um …"</h2>
+      <h2>🗓️ Randevu önerme · Geht es …?</h2>
       <div class="plural-note" style="margin-top:0;">
         <strong>Geht es am Montag um 10 Uhr?</strong> = "Pazartesi saat 10'da olur mu?" Bir gün/saat önerip karşı tarafın uygun olup olmadığını sorarken kullanılır. Evet/hayır sorusu olduğu için <strong>fiil (geht) cümlenin başındadır</strong>.
       </div>
@@ -3587,9 +4147,24 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Dikkat:</strong> Gün için <strong>am</strong>, saat için <strong>um</strong> — ikisi birlikte gelir: am Montag <strong>um</strong> 10 Uhr. (Detay: "im / am / um" kartı)<br>
         <em>Not: "Geht es …?" ve "Ich bitte um Rückmeldung" yazışmalarda sık geçen yardımcı kalıplardır; "Das geht leider nicht" ve "Viele Grüße" de aynı bağlamda birlikte öğretildiği için ekledim.</em>
       </div>
+      <div class="wx-card f">
+        <div class="wx-head"><b>Öner / kabul / reddet</b><span></span></div>
+        <div class="wx-row nom">
+          <div class="wx-de"><span class="wx-hl">Geht es</span> am Freitag?</div>
+          <div class="wx-tr">Cuma olur mu?</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ja, das <span class="wx-hl">passt</span> mir gut.</div>
+          <div class="wx-tr">Evet, bana uyar.</div>
+        </div>
+        <div class="wx-row dat">
+          <div class="wx-de">Nein, da <span class="wx-hl">habe ich keine Zeit</span>.</div>
+          <div class="wx-tr">Hayır, o zaman vaktim yok.</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Sıra Sayıları (Ordinalzahlen) — hızlı referans</h2>
+      <h2>🥇 Sıra sayıları · Ordinalzahlen</h2>
       <div class="rule-grid">
         <div class="rule-card der">
           <div class="title">1. 1–19 arası: -te</div>
@@ -3611,12 +4186,33 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Yazılı kısaltma:</strong> Sayının yanına nokta konur, bu "sıra sayısı" olduğunu gösterir — <strong>der 10.05.</strong> = "der zehnte Mai", <strong>am 10.05.</strong> = "am zehnten Mai".<br>
         Örnek: "Vom 1. bis zum 27. Juni" = "Vom ersten bis zum siebenundzwanzigsten Juni" (1'den 27'ye kadar).
       </div>
+      <div class="wx-card n">
+        <div class="wx-head"><b>Tarih</b><span></span></div>
+        <div class="wx-row dat">
+          <div class="wx-de">Heute ist der <span class="wx-hl">dritte</span> Mai.</div>
+          <div class="wx-tr">Bugün 3 Mayıs.</div>
+          <div class="wx-why">1.–19. -te; 20+ -ste.</div>
+        </div>
+        <div class="wx-row dat">
+          <div class="wx-de">Ich habe am <span class="wx-hl">ersten</span> Mai Geburtstag.</div>
+          <div class="wx-tr">Doğum günüm 1 Mayıs.</div>
+        </div>
+      </div>
     </section>
     </div>
     <div id="refGroupFrage" class="ref-group" style="display:none;">
-      <h2 class="referans-group-title">📌 Soru Kelimeleri (W-Fragen) — Gramer Kuralları</h2>
+      <h2 class="referans-group-title">❓ Soru kelimeleri · W-Fragen</h2>
     <section class="panel">
-      <h2>Wer? Wen? Wem? — kim? kimi? kime?</h2>
+      <h2>❓ Soru kelimeleri · W-Fragen ve Wer / Wen / Wem</h2>
+      <h3 style="margin:4px 0 6px; font-size:15px;">W-Fragen · soru kelimeleri</h3>
+      <p class="example-de" style="font-size:15px;">Soru kelimesi her zaman cümlenin <strong>1. sırasında</strong>, çekimli fiil ise hemen <strong>2. sırada</strong> gelir (Wortstellung kuralıyla aynı mantık).</p>
+      <div class="plural-note">
+        <strong>Wann</strong> kommst du? — Ne zaman geliyorsun?<br>
+        <strong>Wo</strong> wohnst du? — Nerede oturuyorsun?<br>
+        Kural: Evet/Hayır sorusundan farkı — W-Fragen'de cevap "ja/nein" değil, sorulan bilgidir.
+      </div>
+    
+      <h3 style="margin:20px 0 6px; font-size:15px;">Wer? Wen? Wem? · kim, kimi, kime</h3>
       <p class="example-de" style="font-size:15px;">Kişiyi soran soru kelimesi de <strong>artikel gibi hâl alır</strong>: soru kelimesinin şekli cümledeki görevini gösterir.</p>
       <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
@@ -3634,18 +4230,25 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         Edat varsa edatın hâli geçerlidir: <strong>für wen?</strong> (Akk) · <strong>mit wem?</strong> (Dativ) · <strong>auf wen warten</strong> (Akk).<br>
         Eşya için <strong>was?</strong> (ne?) kullanılır: Was ist das? — Wer ist das? yalnızca kişi için.
       </div>
-    </section>
-    <section class="panel">
-      <h2>W-Fragen — hızlı referans</h2>
-      <p class="example-de" style="font-size:15px;">Soru kelimesi her zaman cümlenin <strong>1. sırasında</strong>, çekimli fiil ise hemen <strong>2. sırada</strong> gelir (Wortstellung kuralıyla aynı mantık).</p>
-      <div class="plural-note">
-        <strong>Wann</strong> kommst du? — Ne zaman geliyorsun?<br>
-        <strong>Wo</strong> wohnst du? — Nerede oturuyorsun?<br>
-        Kural: Evet/Hayır sorusundan farkı — W-Fragen'de cevap "ja/nein" değil, sorulan bilgidir.
+    
+      <div class="wx-card m">
+        <div class="wx-head"><b>Wer · Wen · Wem</b><span>kim · kimi · kime</span></div>
+        <div class="wx-row nom">
+          <div class="wx-de"><span class="wx-hl">Wer</span> ist das?</div>
+          <div class="wx-tr">Bu kim?</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-de"><span class="wx-hl">Wen</span> siehst du?</div>
+          <div class="wx-tr">Kimi görüyorsun?</div>
+        </div>
+        <div class="wx-row dat">
+          <div class="wx-de"><span class="wx-hl">Wem</span> hilfst du?</div>
+          <div class="wx-tr">Kime yardım ediyorsun?</div>
+        </div>
       </div>
     </section>
     <section class="panel">
-      <h2>ja / nein / doch — hızlı referans</h2>
+      <h2>💬 ja · nein · doch</h2>
       <div class="plural-note" style="margin-top:0;">
         Olumsuz bir soruya <strong>olumlu (evet anlamında)</strong> cevap verirken sade "ja" yetmez — özel olarak <strong>doch</strong> kullanılır. Türkçede tam karşılığı olmayan bu ayrım, Almancada belirsizliği ortadan kaldırır.
       </div>
@@ -3666,12 +4269,24 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       <div class="plural-note">
         <strong>Formül:</strong> Olumsuz soru + olumlu (düzeltme) cevap → her zaman <strong>doch</strong>. Olumlu soruya normal "ja/nein" kullanılır, "doch" gerekmez.
       </div>
+      <div class="wx-card f">
+        <div class="wx-head"><b>doch = olumsuza "hayır, öyle değil"</b><span></span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Kommst du nicht? – <span class="wx-hl">Doch</span>, ich komme!</div>
+          <div class="wx-tr">Gelmiyor musun? – Gelirim tabii!</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">Kommst du nicht? – <span class="wx-hl">Nein</span>, ich komme nicht.</div>
+          <div class="wx-tr">Hayır, gelmiyorum.</div>
+        </div>
+      </div>
     </section>
     </div>
     <div id="refGroupPraep" class="ref-group" style="display:none;">
-      <h2 class="referans-group-title">📌 Edatlar (Präpositionen) — Gramer Kuralları</h2>
-    <section class="panel" style="margin-top:0;">
-      <h2>Tüm edatlar — büyük özet tablosu</h2>
+      <h2 class="referans-group-title">🧭 Edatlar · Präpositionen</h2>
+    <section class="panel">
+      <h2>🧭 Edatlara genel bakış · özet tablo ve 3 grup</h2>
+      <h3 style="margin:4px 0 6px; font-size:15px;">Özet tablo</h3>
       <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
         <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Grup</th><th style="text-align:left; padding:8px;">Edatlar</th><th style="text-align:left; padding:8px;">Hangi hâl?</th></tr></thead>
@@ -3685,9 +4300,8 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       <div class="plural-note">
         <strong>Karışıklığı çözmenin en hızlı yolu:</strong> Önce edatın hangi GRUPTA olduğunu hatırla (yukarıdaki 3 grup). Sadece Wechselpräpositionen için EK BİR SORU sormana gerek var: "wo?" mi "wohin?" mi. Diğer 12 edat (5 Akkusativ + 7 Dativ) için hiç düşünmeden hep aynı hâli kullan.
       </div>
-    </section>
-    <section class="panel">
-      <h2>Präpositionen (Edatlar) — hızlı referans</h2>
+    
+      <h3 style="margin:20px 0 6px; font-size:15px;">3 grup</h3>
       <div class="rule-grid">
         <div class="rule-card der">
           <div class="title">Sadece Akkusativ</div>
@@ -3708,9 +4322,72 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       <div class="plural-note">
         <strong>Wechselpräpositionen</strong> (değişken edatlar) hem Akkusativ hem Dativ alabilir: <strong>hareket/yön</strong> varsa ("nereye?") Akkusativ, <strong>konum/durum</strong> varsa ("nerede?") Dativ kullanılır. Bu 9 edatı ezberlemek işini kolaylaştırır: <strong>in, an, auf, über, unter, vor, hinter, neben, zwischen</strong>.
       </div>
+    
+      <div class="wx-card akk">
+        <div class="wx-head"><b>Akkusativ</b><span>für · durch · ohne · gegen · um</span></div>
+        <div class="wx-row akk">
+          <div class="wx-de">Das Geschenk ist <span class="wx-hl">für</span> <span class="wx-hl">dich</span>.</div>
+          <div class="wx-tr">Hediye senin için.</div>
+        </div>
+      </div>
+      <div class="wx-card dat">
+        <div class="wx-head"><b>Dativ</b><span>aus · bei · mit · nach · seit · von · zu</span></div>
+        <div class="wx-row dat">
+          <div class="wx-de">Ich fahre <span class="wx-hl">mit</span> <span class="wx-hl">dem</span> Bus.</div>
+          <div class="wx-tr">Otobüsle gidiyorum.</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Dativ edatları: aus · bei · mit · nach · seit · von · zu</h2>
+      <h2>➡️ Akkusativ edatları · für, durch, ohne, gegen, um</h2>
+      <div class="plural-note" style="margin-top:0;">
+        Bu 5 edattan sonra isim <strong>her zaman Akkusativ</strong> olur, istisnası yoktur. Ezber kalıbı: <strong>"für – durch – ohne – gegen – um"</strong>. Her birinin asıl işi aşağıda ayrı ayrı:
+      </div>
+      <div class="rule-grid">
+        <div class="rule-card der">
+          <div class="title">für — için (kime/neye)</div>
+          <div class="sfx">① Kimin için: bir kişiye yönelik<br>② Ne için: amaç/sebep<br>③ Süre: bir zaman aralığı boyunca</div>
+          <div class="ex">Das Geschenk ist <strong>für</strong> meine Mutter.<br><span style="color:var(--x-tx-999999);">(Hediye annem için.)</span><br>Vielen Dank <strong>für</strong> die Einladung.<br><span style="color:var(--x-tx-999999);">(Davet için çok teşekkürler.)</span></div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">durch — içinden · aracılığıyla</div>
+          <div class="sfx">① Bir şeyin İÇİNDEN geçerek<br>② Bir ARAÇ/YÖNTEM sayesinde (bir kursla, biri sayesinde)</div>
+          <div class="ex">Ich gehe <strong>durch</strong> den Park.<br><span style="color:var(--x-tx-999999);">(Parkın içinden geçiyorum.)</span><br>Er lernt Deutsch <strong>durch</strong> einen Kurs.<br><span style="color:var(--x-tx-999999);">(Bir kurs sayesinde Almanca öğreniyor.)</span></div>
+        </div>
+        <div class="rule-card das">
+          <div class="title">ohne — -sız / -siz</div>
+          <div class="sfx">Bir şey OLMADAN, bir şey/biri EKSİK iken</div>
+          <div class="ex">Ich trinke Kaffee <strong>ohne</strong> Zucker.<br><span style="color:var(--x-tx-999999);">(Şekersiz kahve içerim.)</span><br>Er kommt <strong>ohne</strong> seinen Bruder.<br><span style="color:var(--x-tx-999999);">(Kardeşi olmadan geliyor.)</span></div>
+        </div>
+        <div class="rule-card der">
+          <div class="title">gegen — -e karşı · yaklaşık</div>
+          <div class="sfx">① Karşı taraf: bir rakibe/duvara karşı<br>② Yaklaşık zaman: "-e doğru, civarında"</div>
+          <div class="ex">Er spielt <strong>gegen</strong> seinen Freund.<br><span style="color:var(--x-tx-999999);">(Arkadaşına karşı oynuyor.)</span><br>Ich komme <strong>gegen</strong> acht Uhr.<br><span style="color:var(--x-tx-999999);">(Saat sekiz civarında geliyorum.)</span></div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">um — etrafında · saat</div>
+          <div class="sfx">① Bir şeyin ETRAFINDA (çember gibi)<br>② Saat söylerken: um + saat (kesin saat)</div>
+          <div class="ex">Die Kinder sitzen <strong>um</strong> den Tisch.<br><span style="color:var(--x-tx-999999);">(Çocuklar masanın etrafında oturuyor.)</span><br>Der Film beginnt <strong>um</strong> sieben Uhr.<br><span style="color:var(--x-tx-999999);">(Film saat yedide başlıyor.)</span></div>
+        </div>
+      </div>
+      <div class="wx-card akk">
+        <div class="wx-head"><b></b><span></span></div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ich gehe <span class="wx-hl">durch</span> den Park.</div>
+          <div class="wx-tr">Parkın içinden geçiyorum.</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-de">Wir kommen <span class="wx-hl">ohne</span> ihn.</div>
+          <div class="wx-tr">Onsuz geliyoruz.</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-de">Das Auto fährt <span class="wx-hl">gegen</span> die Wand.</div>
+          <div class="wx-tr">Araba duvara çarpıyor.</div>
+        </div>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>🎁 Dativ edatları · aus, bei, mit, nach, seit, von, zu</h2>
       <div class="plural-note" style="margin-top:0;">
         Bu 7 edattan sonra isim <strong>her zaman Dativ</strong> olur, istisnası yoktur. Ezber kalıbı: <strong>"aus – bei – mit – nach – seit – von – zu"</strong>. Türkçede hepsi "-den, -de, -e, ile" gibi birkaç ekin içine sıkıştığı için karışıyor. Her birinin asıl işi aşağıda ayrı ayrı:
       </div>
@@ -3751,9 +4428,25 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
           <div class="ex">Ich gehe <strong>zu</strong> meinem Freund. <span style="color:var(--x-tx-999999);">(Arkadaşıma gidiyorum.)</span><br>Wir gehen <strong>zu</strong> Fuß. <span style="color:var(--x-tx-999999);">(Yürüyerek gidiyoruz.)</span><br>Ich bin heute <strong>zu</strong> Hause. <span style="color:var(--x-tx-999999);">(Bugün evdeyim.)</span></div>
         </div>
       </div>
+      <div class="wx-card dat">
+        <div class="wx-head"><b></b><span></span></div>
+        <div class="wx-row dat">
+          <div class="wx-de">Ich komme <span class="wx-hl">aus</span> der Türkei.</div>
+          <div class="wx-tr">Türkiye'denim.</div>
+        </div>
+        <div class="wx-row dat">
+          <div class="wx-de">Er wohnt <span class="wx-hl">bei</span> seinen Eltern.</div>
+          <div class="wx-tr">Ailesinin yanında yaşıyor.</div>
+        </div>
+        <div class="wx-row dat">
+          <div class="wx-de">Wir gehen <span class="wx-hl">nach</span> dem Essen.</div>
+          <div class="wx-tr">Yemekten sonra gidiyoruz.</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Karıştırılan edatlar — farkı bil</h2>
+      <h2>🔀 Karışan edatlar &amp; soruya bak, edatı seç</h2>
+      <h3 style="margin:4px 0 6px; font-size:15px;">Karışan edatlar · farkını bil</h3>
       <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
         <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Çift</th><th style="text-align:left; padding:8px;">Fark ve örnek</th></tr></thead>
@@ -3766,9 +4459,8 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         </tbody>
       </table>
       </div>
-    </section>
-    <section class="panel">
-      <h2>Soruya bak, edatı seç</h2>
+    
+      <h3 style="margin:20px 0 6px; font-size:15px;">Soruya bak, edatı seç</h3>
       <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
         <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Soru</th><th style="text-align:left; padding:8px;">Edat</th><th style="text-align:left; padding:8px;">Örnek cevap</th></tr></thead>
@@ -3783,42 +4475,28 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         </tbody>
       </table>
       </div>
-    </section>
-    <section class="panel">
-      <h2>Akkusativ edatları: für · durch · ohne · gegen · um</h2>
-      <div class="plural-note" style="margin-top:0;">
-        Bu 5 edattan sonra isim <strong>her zaman Akkusativ</strong> olur, istisnası yoktur. Ezber kalıbı: <strong>"für – durch – ohne – gegen – um"</strong>. Her birinin asıl işi aşağıda ayrı ayrı:
-      </div>
-      <div class="rule-grid">
-        <div class="rule-card der">
-          <div class="title">für — için (kime/neye)</div>
-          <div class="sfx">① Kimin için: bir kişiye yönelik<br>② Ne için: amaç/sebep<br>③ Süre: bir zaman aralığı boyunca</div>
-          <div class="ex">Das Geschenk ist <strong>für</strong> meine Mutter.<br><span style="color:var(--x-tx-999999);">(Hediye annem için.)</span><br>Vielen Dank <strong>für</strong> die Einladung.<br><span style="color:var(--x-tx-999999);">(Davet için çok teşekkürler.)</span></div>
+    
+      <div class="wx-card f">
+        <div class="wx-head"><b>für ↔ zu · nach ↔ in</b><span></span></div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ich gehe <span class="wx-hl">zu</span> meinem Arzt.</div>
+          <div class="wx-tr">Doktoruma gidiyorum.</div>
+          <div class="wx-why">kişiye → zu</div>
         </div>
-        <div class="rule-card die">
-          <div class="title">durch — içinden · aracılığıyla</div>
-          <div class="sfx">① Bir şeyin İÇİNDEN geçerek<br>② Bir ARAÇ/YÖNTEM sayesinde (bir kursla, biri sayesinde)</div>
-          <div class="ex">Ich gehe <strong>durch</strong> den Park.<br><span style="color:var(--x-tx-999999);">(Parkın içinden geçiyorum.)</span><br>Er lernt Deutsch <strong>durch</strong> einen Kurs.<br><span style="color:var(--x-tx-999999);">(Bir kurs sayesinde Almanca öğreniyor.)</span></div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ich fahre <span class="wx-hl">nach</span> Berlin.</div>
+          <div class="wx-tr">Berlin'e gidiyorum.</div>
+          <div class="wx-why">şehir → nach</div>
         </div>
-        <div class="rule-card das">
-          <div class="title">ohne — -sız / -siz</div>
-          <div class="sfx">Bir şey OLMADAN, bir şey/biri EKSİK iken</div>
-          <div class="ex">Ich trinke Kaffee <strong>ohne</strong> Zucker.<br><span style="color:var(--x-tx-999999);">(Şekersiz kahve içerim.)</span><br>Er kommt <strong>ohne</strong> seinen Bruder.<br><span style="color:var(--x-tx-999999);">(Kardeşi olmadan geliyor.)</span></div>
-        </div>
-        <div class="rule-card der">
-          <div class="title">gegen — -e karşı · yaklaşık</div>
-          <div class="sfx">① Karşı taraf: bir rakibe/duvara karşı<br>② Yaklaşık zaman: "-e doğru, civarında"</div>
-          <div class="ex">Er spielt <strong>gegen</strong> seinen Freund.<br><span style="color:var(--x-tx-999999);">(Arkadaşına karşı oynuyor.)</span><br>Ich komme <strong>gegen</strong> acht Uhr.<br><span style="color:var(--x-tx-999999);">(Saat sekiz civarında geliyorum.)</span></div>
-        </div>
-        <div class="rule-card die">
-          <div class="title">um — etrafında · saat</div>
-          <div class="sfx">① Bir şeyin ETRAFINDA (çember gibi)<br>② Saat söylerken: um + saat (kesin saat)</div>
-          <div class="ex">Die Kinder sitzen <strong>um</strong> den Tisch.<br><span style="color:var(--x-tx-999999);">(Çocuklar masanın etrafında oturuyor.)</span><br>Der Film beginnt <strong>um</strong> sieben Uhr.<br><span style="color:var(--x-tx-999999);">(Film saat yedide başlıyor.)</span></div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ich fahre <span class="wx-hl">in</span> die Türkei.</div>
+          <div class="wx-tr">Türkiye'ye gidiyorum.</div>
+          <div class="wx-why">ülke (artikelli) → in</div>
         </div>
       </div>
     </section>
     <section class="panel">
-      <h2>zu, sehr oder nicht? — hızlı referans</h2>
+      <h2>🧩 zu · sehr · nicht</h2>
       <div class="plural-note" style="margin-top:0;">
         Üçü de bir sıfatın önüne gelip onu güçlendirir/değiştirir ama <strong>anlamları taban tabana zıttır</strong> — bu yüzden karıştırmak ciddi anlam hatalarına yol açar.
       </div>
@@ -3843,12 +4521,24 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Aradaki fark net görülsün:</strong> "sehr teuer" (çok pahalı ama alınabilir, sadece bilgi veriyor) ile "zu teuer" (o kadar pahalı ki almam/alamam, bir ENGEL var) tamamen farklı anlam taşır. "nicht teuer" ise "pahalı değil, ucuz" demektir — sıfatın anlamını 180 derece çevirir.<br>
         <strong>Dikkat:</strong> "zu" burada gördüğün "zu" edatından (-e/-ye, Dativ) <strong>farklı bir kullanımdır</strong> — aynı kelime, sıfattan önce gelince "fazla/aşırı" anlamına geçer.
       </div>
+      <div class="wx-card n">
+        <div class="wx-head"><b>zu = fazla · sehr = çok</b><span></span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Der Kaffee ist <span class="wx-hl">sehr</span> gut.</div>
+          <div class="wx-tr">Kahve çok iyi.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">Der Kaffee ist <span class="wx-hl">zu</span> heiß.</div>
+          <div class="wx-tr">Kahve fazla sıcak.</div>
+          <div class="wx-why">zu olumsuz çağrışımlı.</div>
+        </div>
+      </div>
     </section>
     </div>
     <div id="refGroupWechsel" class="ref-group" style="display:none;">
-      <h2 class="referans-group-title">📌 Wechselpräpositionen & Kısaltmalar — Gramer Kuralları</h2>
+      <h2 class="referans-group-title">🔀 Wechsel edatları &amp; kısaltmalar</h2>
     <section class="panel">
-      <h2>Wechselpräpositionen (9 tanesi tek tek): in · an · auf · über · unter · vor · hinter · neben · zwischen</h2>
+      <h2>🔀 Wechsel edatları · 9 edat tek tek</h2>
       <div class="plural-note" style="margin-top:0;">
         Bu 9 edat DURUMA göre hem Dativ hem Akkusativ alır — <strong>tek soruyla</strong> karar ver: <strong>"Wo?" (nerede? — hareket yok) → Dativ</strong>, <strong>"Wohin?" (nereye? — hareket var) → Akkusativ</strong>. Her edatın anlamı ve iki hâldeki örneği aşağıda:
       </div>
@@ -3903,9 +4593,23 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Pratik kural:</strong> Cümlede "stehen, liegen, hängen, sein, sitzen" (durmak, yatmak, asılı olmak, olmak, oturmak) gibi bir DURUM fiili varsa → Dativ. "Legen, stellen, hängen (asmak), setzen, gehen" gibi bir HAREKET fiili varsa → Akkusativ.<br>
         <strong>Dikkat:</strong> "hängen" hem durum ("asılı olmak" → Dativ) hem hareket ("asmak" → Akkusativ) anlamında kullanılabilir — cümlenin GENELİNE bak, sadece fiile değil.
       </div>
+      <div class="wx-card akk">
+        <div class="wx-head"><b>Wohin? → Akkusativ</b><span>hareket</span></div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ich gehe <span class="wx-hl">in</span> <span class="wx-hl">die</span> Küche.</div>
+          <div class="wx-tr">Mutfağa gidiyorum.</div>
+        </div>
+      </div>
+      <div class="wx-card dat">
+        <div class="wx-head"><b>Wo? → Dativ</b><span>durum</span></div>
+        <div class="wx-row dat">
+          <div class="wx-de">Ich bin <span class="wx-hl">in</span> <span class="wx-hl">der</span> Küche.</div>
+          <div class="wx-tr">Mutfaktayım.</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Wo ist …? — Eşyanın yerini sorma ve söyleme</h2>
+      <h2>📍 Wo ist …? · yer sorma ve söyleme</h2>
       <div class="plural-note" style="margin-top:0;">
         Bir şeyin <strong>nerede durduğunu</strong> sorarken <strong>"Wo ist …?"</strong> (çoğulda "Wo sind …?") kullanılır. Cevapta 9 edattan biri + <strong>Dativ</strong> gelir (çünkü hareket yok, "wo?" sorusu).<br>
         <strong>Edatlar:</strong> auf · unter · neben · an · vor · hinter · zwischen · in · über
@@ -3931,9 +4635,21 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Dikkat — artikel hâlleri (Dativ):</strong> der/das → <strong>dem</strong> (dem Tisch, dem Fenster) · die → <strong>der</strong> (der Wand, der Tür) · çoğul → <strong>den + -n</strong> (zwischen den Stühlen, neben den Pflanzen).<br>
         <strong>Kısaltmalar:</strong> an dem = <strong>am</strong> · in dem = <strong>im</strong> (der/die ile kısaltma olmaz: an der Wand).
       </div>
+      <div class="wx-card dat">
+        <div class="wx-head"><b>Yer sorma</b><span></span></div>
+        <div class="wx-row dat">
+          <div class="wx-de">Wo ist die Katze? – Sie ist <span class="wx-hl">auf dem</span> Tisch.</div>
+          <div class="wx-tr">Kedi nerede? – Masanın üstünde.</div>
+        </div>
+        <div class="wx-row dat">
+          <div class="wx-de">Das Bild hängt <span class="wx-hl">an der</span> Wand.</div>
+          <div class="wx-tr">Resim duvarda asılı.</div>
+        </div>
+      </div>
     </section>
     <section class="panel">
-      <h2>Kısaltmalar ve Wechselpräpositionen</h2>
+      <h2>✂️ Kısaltmalar · am, im, ans, ins…</h2>
+      <h3 style="margin:4px 0 6px; font-size:15px;">Kısaltmalar ve Wechsel edatları</h3>
       <div class="plural-note" style="margin-top:0;">
         <strong>Kısaltmalar (edat + dem/der birleşir):</strong> zu + dem = <strong>zum</strong> · zu + der = <strong>zur</strong> · bei + dem = <strong>beim</strong> · von + dem = <strong>vom</strong> · in + dem = <strong>im</strong> · an + dem = <strong>am</strong><br>
         Ich gehe <strong>zum</strong> Arzt. — Wir sind <strong>beim</strong> Bäcker. — Das kommt <strong>vom</strong> Markt.
@@ -3942,9 +4658,8 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <strong>Wechselpräpositionen (in, an, auf, ...):</strong> konum (wo?) = <strong>Dativ</strong>, yön/hareket (wohin?) = <strong>Akkusativ</strong>.<br>
         Das Buch liegt <strong>auf dem Tisch</strong>. (nerede? → Dativ) ↔ Ich lege das Buch <strong>auf den Tisch</strong>. (nereye? → Akkusativ)
       </div>
-    </section>
-    <section class="panel">
-      <h2>Akkusativ kısaltmaları (Wechselpräpositionen ile)</h2>
+    
+      <h3 style="margin:20px 0 6px; font-size:15px;">Akkusativ kısaltmaları · ans, aufs, ins</h3>
       <div class="plural-note" style="margin-top:0;">
         Tıpkı Dativ'deki <strong>zum, beim, im, am</strong> gibi, Akkusativ yön bildirirken de edat + <strong>das</strong> kısaltılır:
       </div>
@@ -3961,12 +4676,31 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       <div class="plural-note">
         Bu kısaltmalar SADECE Akkusativ + <strong>das</strong> (nötr) ile olur. der/die ile kısaltma yapılmaz — "in die Schule" kısalmaz, öyle kalır.
       </div>
+    
+      <div class="wx-card m">
+        <div class="wx-head"><b>Edat + artikel</b><span></span></div>
+        <div class="wx-row dat">
+          <div class="wx-de"><span class="wx-hl">im</span> = in dem</div>
+          <div class="wx-tr"></div>
+          <div class="wx-why">im Haus</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-de"><span class="wx-hl">ins</span> = in das</div>
+          <div class="wx-tr"></div>
+          <div class="wx-why">ins Kino</div>
+        </div>
+        <div class="wx-row dat">
+          <div class="wx-de"><span class="wx-hl">am</span> = an dem</div>
+          <div class="wx-tr"></div>
+          <div class="wx-why">am Montag</div>
+        </div>
+      </div>
     </section>
     </div>
     <div id="refGroupKonjunktiv" class="ref-group" style="display:none;">
-      <h2 class="referans-group-title">🎭 Konjunktiv I & II — Gramer Kuralları</h2>
+      <h2 class="referans-group-title">🎭 Konjunktiv I &amp; II</h2>
     <section class="panel">
-      <h2>Konjunktiv nedir? — üç kip</h2>
+      <h2>🎭 Konjunktiv nedir? · üç kip</h2>
       <p class="example-de" style="font-size:15px;">Fiil sadece <strong>zamanı</strong> değil, konuşanın <strong>tavrını</strong> da gösterir. Buna <strong>kip (Modus)</strong> denir. Üç kip var:</p>
       <div class="rule-grid">
         <div class="rule-card der"><div class="title">Indikativ — gerçek</div><div class="sfx">Olan, doğru olan şey</div><div class="ex">Ich <strong>habe</strong> Zeit. (Vaktim var.)<br>Er <strong>ist</strong> krank. (O hasta.)</div></div>
@@ -3988,7 +4722,7 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       </div>
     </section>
     <section class="panel">
-      <h2>hatte ↔ hätte (ve war ↔ wäre)</h2>
+      <h2>🔍 hatte ↔ hätte · war ↔ wäre</h2>
       <p class="example-de" style="font-size:15px;">En çok karışan çift! <strong>hatte</strong> = geçmişte <em>vardı</em> (gerçek, olmuş). <strong>hätte</strong> = <em>olsaydı / isterdim</em> (gerçek değil, dilek ya da nazik rica).</p>
       <div class="plural-note" style="margin-top:6px;">
         <strong>🎯 Akılda tutma yolu:</strong> <strong>ä (iki nokta) = "havada kalan, gerçek olmayan" şey</strong> → dilek, hayal, nazik rica.<br>
@@ -4035,7 +4769,7 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       </div>
     </section>
     <section class="panel">
-      <h2>Konjunktiv II çekimi: haben · sein · werden · modal fiiller</h2>
+      <h2>🔧 Konjunktiv II çekimi · haben, sein, modal</h2>
       <p class="example-de" style="font-size:15px;"><strong>Formül:</strong> Präteritum kökü + (<strong>ä · ö · ü</strong>) + <strong>-e · -est · -e · -en · -et · -en</strong>. En sık kullanılanlar:</p>
 <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
@@ -4058,7 +4792,7 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       </div>
     </section>
     <section class="panel">
-      <h2>würde + mastar — "-erdim / -ardım"</h2>
+      <h2>➕ würde + mastar · -erdim</h2>
       <p class="example-de" style="font-size:15px;">Haben, sein ve modal fiiller dışındaki fiillerde Konjunktiv II genelde <strong>würde + mastar</strong> ile kurulur. <strong>würde</strong> 2. sırada, <strong>mastar cümle sonunda</strong>.</p>
       <div class="rule-grid">
         <div class="rule-card der"><div class="title">Dilek</div><div class="sfx">Ich würde gern … + mastar</div><div class="ex">Ich <strong>würde</strong> gern nach Deutschland <strong>reisen</strong>.<br><span style="color:var(--x-tx-999999);">(Almanya'ya gitmek isterdim.)</span></div></div>
@@ -4070,7 +4804,7 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       </div>
     </section>
     <section class="panel">
-      <h2>Konjunktiv II ne zaman kullanılır? (5 durum)</h2>
+      <h2>🎯 Konjunktiv II ne zaman? · 5 durum</h2>
       <div class="wx-card m">
         <div class="wx-head"><b>1 · Nazik rica / istek</b><span>Bitte, Entschuldigung, vielleicht</span></div>
         <div class="wx-row akk"><span class="wx-pill akk">Rica</span><div class="wx-de">Ich <b class="wx-hl">hätte</b> gern ein Glas Wasser.</div><div class="wx-tr">Bir bardak su alabilir miyim?</div><div class="wx-why">💡 Restoran, mağaza, resmi konuşma. "Ich will" çok sert kaçar.</div></div>
@@ -4101,7 +4835,7 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
       </div>
     </section>
     <section class="panel">
-      <h2>Konjunktiv I — dolaylı anlatım (indirekte Rede)</h2>
+      <h2>📰 Konjunktiv I · dolaylı anlatım</h2>
       <p class="example-de" style="font-size:15px;">Başkasının söylediğini aktarırken haber ve gazete dilinde kullanılır: <em>Er sagt, er <strong>sei</strong> krank.</em> En çok <strong>er / sie / es</strong> (3. tekil) için görürsün.</p>
       <div class="plural-note" style="margin-top:6px;"><strong>Formül:</strong> mastar kökü + <strong>-e · -est · -e · -en · -et · -en</strong> (3. tekil hep <strong>-e</strong>). <strong>sein</strong> düzensiz: <em>sei</em>.</div>
 <div style="overflow-x:auto;">
@@ -4325,6 +5059,7 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
         <div class="btn-grid grid-2">
           <button class="btn-ghost btn-test" onclick="askQuestion('sentence-fill')">📝 Cümle Tamamlama</button>
           <button class="btn-ghost btn-test" onclick="askQuestion('order-quiz')">🧩 Cümle Kurma</button>
+          <button class="btn-ghost btn-test" onclick="askQuestion('order-gram')">🧱 Gramer Cümle Kurma<br><span style="font-size:11px; font-weight:400;">fiil yeri · Perfekt · Dativ</span></button>
           <button class="btn-ghost btn-test" onclick="askQuestion('prep-quiz')">🔤 Küçük Kelimeler<br><span style="font-size:11px; font-weight:400;">im · am · zu · sehr · nicht</span></button>
         
           <button class="btn-ghost btn-test" onclick="openReadingModal()">📖 Basit Okuma</button>
@@ -7698,7 +8433,7 @@ function markAsked(cycleKey, items, keyFn){
   saveRecentAsked();
 }
 
-const CYCLE_MODES = ["artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "order-quiz", "sentence-fill", "nomakk-quiz", "listening-quiz", "plural-guess-quiz", "irregular-verb-quiz", "dativ-artikel-quiz", "dativ-plural-quiz"];
+const CYCLE_MODES = ["order-gram","artikel-only", "noun-quiz", "verb-quiz", "adj-quiz", "plural-only", "order-quiz", "sentence-fill", "nomakk-quiz", "listening-quiz", "plural-guess-quiz", "irregular-verb-quiz", "dativ-artikel-quiz", "dativ-plural-quiz"];
 
 function markShownWord(word, category){
   if(!currentTestMode || !(CYCLE_MODES.includes(currentTestMode) || (typeof GQ_BANK !== "undefined" && GQ_BANK[currentTestMode]))) return;
@@ -9740,6 +10475,28 @@ function gqQuestion(bank, it){
     options: shuffleArray([target, ...it[2]]), answered:false
   };
 }
+function buildGramOrderPool(){
+  const out = [], seen = {};
+  GQ_ORDER.forEach(m => {
+    const b = GQ_BANK[m]; if(!b || b.choose) return;
+    b.items.forEach(it => {
+      if(!it[0] || it[0].indexOf("___") < 0) return;
+      const sent = it[0].replace("___", it[1]).trim();
+      const n = sent.split(/\s+/).length;
+      if(n < 4 || n > 10 || seen[sent]) return;
+      seen[sent] = 1;
+      out.push({sentence:sent, translation:it[3], emoji:b.emoji});
+    });
+  });
+  return out;
+}
+function buildRefMini(){
+  const names = (window.__refMiniBanks || []).filter(m => GQ_BANK[m]);
+  const banks = names.length ? names : ["gq-verbpos"];
+  let all = [];
+  banks.forEach(m => { const b = GQ_BANK[m]; all = all.concat(shuffleArray(b.items).slice(0, 3).map(it => gqQuestion(b, it))); });
+  return shuffleArray(all).slice(0, 3);
+}
 function buildGqSession(mode){
   if(mode === "gq-mix"){
     let all = [];
@@ -9779,8 +10536,9 @@ function dativFindByKey(key){
 
 function buildSession(testMode){
   if(typeof testMode === "string" && testMode.startsWith("gq-")) return buildGqSession(testMode);
-  if(testMode === "order-quiz"){
-    const fullPool = buildOrderPool();
+  if(testMode === "ref-mini") return buildRefMini();
+  if(testMode === "order-quiz" || testMode === "order-gram"){
+    const fullPool = testMode === "order-gram" ? buildGramOrderPool() : buildOrderPool();
     const pool = getUnseenPool(testMode, fullPool, p => p.sentence);
     const picked = shuffleArray(pool).slice(0, 20);
     return picked.map(p => {
@@ -9964,7 +10722,7 @@ function askQuestion(testMode, opts){
     alert("Cümle tamamlama testi için örnek cümlesi olan kelime bulunamadı.");
     return;
   }
-  if(testMode === "order-quiz" && buildOrderPool().length === 0){
+  if((testMode === "order-quiz" && buildOrderPool().length === 0) || (testMode === "order-gram" && buildGramOrderPool().length === 0)){
     alert("Cümle kurma testi için uygun cümle bulunamadı.");
     return;
   }
@@ -10730,7 +11488,7 @@ let reportLastSend = 0;
 const TEST_NAMES = {
   "artikel-only":"Artikel Testi","plural-only":"Çoğul Artikel Testi","nomakk-quiz":"Nominativ/Akkusativ Testi","plural-guess-quiz":"Çoğul Tahmin Testi",
   "favorites-quiz":"Favori Kelimeler Testi","noun-quiz":"İsim Testi","verb-quiz":"Fiil Testi","adj-quiz":"Sıfat Testi","irregular-verb-quiz":"Düzensiz Fiil Çekim Testi",
-  "uhrzeit-quiz":"Saat Okuma Testi","frage-quiz":"W-Frage Testi","ordinal-quiz":"Sıra Sayıları Testi","sentence-fill":"Cümle Tamamlama","order-quiz":"Cümle Kurma",
+  "uhrzeit-quiz":"Saat Okuma Testi","frage-quiz":"W-Frage Testi","ordinal-quiz":"Sıra Sayıları Testi","sentence-fill":"Cümle Tamamlama","order-quiz":"Cümle Kurma","order-gram":"Gramer Cümle Kurma","ref-mini":"Mini Tekrar",
   "prep-quiz":"Küçük Kelimeler (im/am/zu/sehr/nicht)","zeitort-quiz":"Küçük Kelimeler: zaman & yer","listening-quiz":"Basit Dinleme","review-mistakes":"Yanlışlarımı Tekrar Et",
   "dativ-prep-quiz":"Dativ Edatı Seç","dativ-artikel-quiz":"Dativ Artikel","dativ-plural-quiz":"Dativ Çoğul","dativ-pronoun-quiz":"Dativ Zamir","dativ-mix-quiz":"Dativ Karışık",
   "gq-akkprep":"Akkusativ Edatı","gq-datprep":"Dativ Edatı","gq-wechsel":"Wechsel Edat","gq-praet":"war / hatte","gq-doch":"ja / nein / doch","gq-man":"man","gq-genitiv":"Genitiv-s",
@@ -11644,7 +12402,7 @@ const POOL_GROUPS = [
   ["Kelime", ["noun-quiz","verb-quiz","adj-quiz","irregular-verb-quiz"]],
   ["Gramer", ["par-akkdat","par-prep","par-perfekt","par-imperativ","gq-akkprep","gq-datprep","gq-wechsel","gq-praet","gq-doch","gq-man","gq-genitiv","gq-geht","gq-verbpos","gq-konj","gq-quant","gq-gefallen","gq-poss","gq-wer","gq-dieser","gq-welcher","gq-hatte","gq-konj2","gq-konj1","gq-hs","gq-partizip","gq-perfekt","gq-modal","gq-imperativ","gq-nicht","gq-trennbar"]],
   ["Dativ", ["gq-kasus","dativ-artikel-quiz","dativ-plural-quiz","dativ-prep-quiz","dativ-pronoun-quiz"]],
-  ["Pratik", ["order-quiz","sentence-fill","listening-quiz","prep-quiz","zeitort-quiz"]]
+  ["Pratik", ["order-quiz","order-gram","sentence-fill","listening-quiz","prep-quiz","zeitort-quiz"]]
 ];
 function poolName(key){ return (typeof TEST_NAMES !== "undefined" && TEST_NAMES[key]) || key; }
 function poolSeen(key){ const e = recentAsked[key]; return e && Array.isArray(e.seen) ? e.seen.length : 0; }
@@ -13842,6 +14600,69 @@ document.addEventListener("click",function(e){
   var h=e.target.closest&&e.target.closest("h2.ref-toggle"); if(!h)return;
   setTimeout(function(){ var sec=h.parentElement; if(sec&&sec.classList.contains("open")){ try{ sec.scrollIntoView({block:"start",behavior:"smooth"}); }catch(x){} } },140);
 });
+</script>
+<script>
+(function(){
+  "use strict";
+  var RK="artikel_refread", VK="artikel_refrev";
+  function ld(k){ try{ return JSON.parse(localStorage.getItem(k)||"{}")||{}; }catch(e){ return {}; } }
+  function sv(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+  function day(d){ d=d||new Date(); return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2); }
+  var MAP={nomen:["gq-quant"],satz:["gq-verbpos","gq-hs","gq-konj"],zamir:["gq-poss","gq-dieser","gq-welcher","gq-man","gq-genitiv"],verben:["gq-gefallen","gq-verbpos"],perfekt:["gq-perfekt","gq-partizip","gq-praet","gq-hatte"],dativ:["gq-kasus","gq-akkprep","gq-gefallen"],saatler:["gq-geht"],frage:["gq-wer","gq-doch"],praep:["gq-akkprep","gq-datprep","gq-wechsel"],wechsel:["gq-wechsel"],konjunktiv:["gq-konj2","gq-konj1","gq-hatte"]};
+  var GN={nomen:"İsimler",satz:"Cümle yapısı",zamir:"Zamirler",verben:"Fiiller",perfekt:"Geçmiş zaman",dativ:"Akkusativ & Dativ",saatler:"Saatler & takvim",frage:"Soru kelimeleri",praep:"Edatlar",wechsel:"Wechsel edatları",konjunktiv:"Konjunktiv"};
+  document.addEventListener("click",function(e){
+    var t=e.target.closest&&e.target.closest(".ref-toggle"); if(!t) return;
+    setTimeout(function(){
+      var sec=t.closest(".ref-sec"), g=t.closest(".ref-group"); if(!sec||!g||!sec.classList.contains("open")) return;
+      var k=g.id.replace("refGroup","").toLowerCase(); if(!MAP[k]) return;
+      var m=ld(RK), h=t.querySelector("h2")||t; m[k]={d:day(),t:(h.textContent||"").replace(/\s+/g," ").trim().slice(0,60)}; sv(RK,m);
+    },0);
+  });
+  function pending(){
+    var m=ld(RK), v=ld(VK), td=day(), best=null;
+    Object.keys(m).forEach(function(k){ var r=m[k]; if(!r||r.d>=td||!MAP[k]) return; if(v[k]&&v[k]>=r.d) return; if(!best||r.d>best.r.d) best={k:k,r:r}; });
+    return best;
+  }
+  window.__refMini=function(k){
+    window.__refMiniBanks=MAP[k]||[]; var v=ld(VK); v[k]=day(); sv(VK,v);
+    askQuestion("ref-mini");
+  };
+  var old=window.__resumeGrid;
+  window.__resumeGrid=function(){
+    var h=old?old():"", p=pending(); if(!p) return h;
+    var tile='<button type="button" class="tcg-tile" style="--tc:#7B4FB0" onclick="__refMini(\''+p.k+'\')"><span class="tcg-ic">🔁</span><span class="tcg-t"><small>Dünkü konu · '+(GN[p.k]||"")+'</small><b>3 soruluk mini tekrar</b></span><span class="tcg-go">▶</span></button>';
+    var i=h.lastIndexOf("</div>"); return i<0?h+tile:h.slice(0,i)+tile+h.slice(i);
+  };
+  try{ var hs=document.getElementById("homeScreen"); if(hs&&hs.style.display!=="none"&&typeof renderHome==="function") renderHome(); }catch(e){}
+  // zayıf konular (İlerleme)
+  function weakTopics(){
+    var out=[]; if(typeof GQ_BANK==="undefined"||typeof wordStats==="undefined") return out;
+    GQ_ORDER.forEach(function(m){
+      var b=GQ_BANK[m]; if(!b) return; var w=0,c=0;
+      b.items.forEach(function(it){ var st=wordStats[gqFull(b,it)]; if(st){ w+=st.wrong||0; c+=st.correct||0; } });
+      if(w>0) out.push({m:m,w:w,pct:Math.round(100*w/Math.max(1,w+c))});
+    });
+    return out.sort(function(a,b){ return b.w-a.w; }).slice(0,4);
+  }
+  function refGroupFor(m){ for(var k in MAP){ if(MAP[k].indexOf(m)>=0) return k; } return null; }
+  window.__goRef=function(k){
+    switchTab("referans"); setTimeout(function(){ try{ switchReferansGroup(k); }catch(e){} },60);
+  };
+  var oldP=window.renderIlerleme;
+  window.renderIlerleme=function(){
+    if(oldP) oldP.apply(this,arguments);
+    var el=document.getElementById("ilerlemeView")||document.querySelector("#ilerleme, .pg-tiles"); 
+    var host=document.querySelector(".pg-tiles"); host=host&&host.closest("section")&&host.closest("section").parentNode; if(!host) return;
+    var wt=weakTopics(); if(!wt.length) return;
+    var name=function(m){ return (typeof TEST_NAMES!=="undefined"&&TEST_NAMES[m])||m; };
+    var h='<section class="panel"><h2>Zayıf konular</h2><p class="pg-hint">En çok yanlış yaptığın gramer testleri. Önce konuyu oku, sonra testi çöz.</p><ul class="pg-list">'+wt.map(function(x){
+      var g=refGroupFor(x.m);
+      return '<li style="flex-wrap:wrap;gap:6px"><span class="pg-ww">'+name(x.m)+'</span><span class="pg-wp"><i style="width:'+x.pct+'%"></i></span><span class="pg-wn">'+x.w+' yanlış</span><span style="flex-basis:100%;display:flex;gap:8px"><button type="button" class="btn-ghost" style="flex:1;padding:8px" onclick="askQuestion(\''+x.m+'\')">Testi çöz</button>'+(g?'<button type="button" class="btn-ghost" style="flex:1;padding:8px" onclick="__goRef(\''+g+'\')">Konuyu oku</button>':'')+'</span></li>';
+    }).join("")+'</ul></section>';
+    var secs=host.querySelectorAll("section.panel"), at=secs.length>2?secs[2]:null;
+    var d=document.createElement("div"); d.innerHTML=h; if(at) host.insertBefore(d.firstChild,at); else host.appendChild(d.firstChild);
+  };
+})();
 </script>
 <script>
 if("serviceWorker" in navigator && /^https?:$/.test(location.protocol)){ window.addEventListener("load", function(){ navigator.serviceWorker.register("sw.js").catch(function(){}); }); }
