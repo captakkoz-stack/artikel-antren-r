@@ -14826,29 +14826,6 @@ document.addEventListener("click",function(e){
   function day(d){ d=d||new Date(); return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2); }
   var MAP={nomen:["gq-quant"],satz:["gq-verbpos","gq-hs","gq-konj"],zamir:["gq-poss","gq-dieser","gq-welcher","gq-man","gq-genitiv"],verben:["gq-gefallen","gq-verbpos"],perfekt:["gq-perfekt","gq-partizip","gq-praet","gq-hatte"],dativ:["gq-kasus","gq-akkprep","gq-gefallen"],saatler:["gq-geht"],frage:["gq-wer","gq-doch"],praep:["gq-akkprep","gq-datprep","gq-wechsel"],wechsel:["gq-wechsel"],konjunktiv:["gq-konj2","gq-konj1","gq-hatte"]};
   var GN={nomen:"İsimler",satz:"Cümle yapısı",zamir:"Zamirler",verben:"Fiiller",perfekt:"Geçmiş zaman",dativ:"Akkusativ & Dativ",saatler:"Saatler & takvim",frage:"Soru kelimeleri",praep:"Edatlar",wechsel:"Wechsel edatları",konjunktiv:"Konjunktiv"};
-  document.addEventListener("click",function(e){
-    var t=e.target.closest&&e.target.closest(".ref-toggle"); if(!t) return;
-    setTimeout(function(){
-      var sec=t.closest(".ref-sec"), g=t.closest(".ref-group"); if(!sec||!g||!sec.classList.contains("open")) return;
-      var k=g.id.replace("refGroup","").toLowerCase(); if(!MAP[k]) return;
-      var m=ld(RK), h=t.querySelector("h2")||t; m[k]={d:day(),t:(h.textContent||"").replace(/\s+/g," ").trim().slice(0,60)}; sv(RK,m);
-    },0);
-  });
-  function pending(){
-    var m=ld(RK), v=ld(VK), td=day(), best=null;
-    Object.keys(m).forEach(function(k){ var r=m[k]; if(!r||r.d>=td||!MAP[k]) return; if(v[k]&&v[k]>=r.d) return; if(!best||r.d>best.r.d) best={k:k,r:r}; });
-    return best;
-  }
-  window.__refMini=function(k){
-    window.__refMiniBanks=MAP[k]||[]; var v=ld(VK); v[k]=day(); sv(VK,v);
-    askQuestion("ref-mini");
-  };
-  var old=window.__resumeGrid;
-  window.__resumeGrid=function(){
-    var h=old?old():"", p=pending(); if(!p) return h;
-    var tile='<button type="button" class="tcg-tile" style="--tc:#7B4FB0" onclick="__refMini(\''+p.k+'\')"><span class="tcg-ic">🔁</span><span class="tcg-t"><small>Dünkü konu · '+(GN[p.k]||"")+'</small><b>3 soruluk mini tekrar</b></span><span class="tcg-go">▶</span></button>';
-    var i=h.lastIndexOf("</div>"); return i<0?h+tile:h.slice(0,i)+tile+h.slice(i);
-  };
   try{ var hs=document.getElementById("homeScreen"); if(hs&&hs.style.display!=="none"&&typeof renderHome==="function") renderHome(); }catch(e){}
   // zayıf konular (İlerleme)
   function weakTopics(){
