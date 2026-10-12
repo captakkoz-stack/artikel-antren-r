@@ -5160,6 +5160,7 @@ tr.hs-flash td{animation:hsFlash 2.6s ease-out;} .adj-side.hs-flash{animation:hs
     <p id="poolPromptText" class="pool-help"></p>
     <div class="rp-actions" style="flex-direction:column;">
       <button class="btn-main" onclick="poolPromptReset()">♻️ Sıfırla ve baştan başla</button>
+      <button class="btn-ghost" id="poolWrongBtn" onclick="poolPromptWrongOnly()" style="display:none;">❌ Sadece yanlışlarımı test et</button>
       <button class="btn-ghost" onclick="poolPromptContinue()">Sıfırlamadan devam et (sorular tekrar eder)</button>
     </div>
     <div class="add-actions"><button class="btn-ghost" onclick="poolPromptCancel()">Vazgeç</button></div>
@@ -12495,6 +12496,26 @@ function showPoolPrompt(testMode, built, exhaustedKeys, rebuild){
   const names = exhaustedKeys.map(poolName).join(", ");
   document.getElementById("poolPromptText").textContent = "«" + names + "» için tüm sorular en az bir kez soruldu. Havuzu sıfırlayıp baştan başlayabilir ya da sıfırlamadan devam edebilirsin (bu durumda sorular tekrar eder).";
   document.getElementById("poolPromptOverlay").classList.add("show");
+  const wb = document.getElementById("poolWrongBtn"); if(wb){ const n = wrongItemsFor(testMode).length; wb.style.display = n ? "" : "none"; wb.textContent = "❌ Sadece yanlışlarımı test et" + (n ? " (" + n + ")" : ""); }
+}
+function wrongItemsFor(mode){
+  try{
+    if(typeof GQ_BANK !== "undefined" && GQ_BANK[mode]){
+      const b = GQ_BANK[mode];
+      return b.items.filter(it => { const st = wordStats[gqFull(b, it)]; return st && st.wrong > 0; });
+    }
+    return Object.values(wordStats).some(st => st.wrong > 0) ? [1] : [];
+  }catch(e){ return []; }
+}
+function poolPromptWrongOnly(){
+  const pend = __poolPending; if(!pend) return;
+  document.getElementById("poolPromptOverlay").classList.remove("show"); __poolPending = null;
+  const mode = pend.testMode;
+  if(typeof GQ_BANK !== "undefined" && GQ_BANK[mode]){
+    const b = GQ_BANK[mode], items = wrongItemsFor(mode);
+    if(items.length){ startSession(mode, shuffleArray(items).map(it => gqQuestion(b, it))); return; }
+  }
+  askQuestion("review-mistakes");
 }
 function poolPromptReset(){
   const pend = __poolPending; if(!pend) return;
