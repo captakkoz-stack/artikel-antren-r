@@ -1973,7 +1973,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
     </div>
     <div class="header-right">
       <div class="signature"><span class="sig-note">Persönliche Lernnotizen</span><span class="sig-divider"></span><span class="sig-name">⚓ Erstellt von Capt. Aykut Akkoz</span></div>
-      <div class="last-updated">Zuletzt aktualisiert: 15.10.2026</div>
+      <div class="last-updated">Zuletzt aktualisiert: 17.10.2026</div>
     </div>
   </div>
 </header>
@@ -11374,7 +11374,7 @@ function gqQuestion(bank, it){
     word:{sentence:full, translation:tr, emoji:bank.emoji},
     category:"gq", mode:"sentence", kind:"gq",
     target, sentence:full, display, translation:tr, emoji:bank.emoji,
-    qtype:bank.qtype, inlineTr: bank.choose ? "" : tr, hint:bank.hint, noExample:true,
+    qtype:bank.qtype, inlineTr: bank.choose ? "" : tr, hideTr: !!bank.hideTr, hint:bank.hint, noExample:true,
     options: shuffleArray([target, ...it[2]]), answered:false
   };
 }
@@ -11747,6 +11747,19 @@ function showSessionQuestion(){
       const sub = document.createElement("div");
       sub.style.cssText = "font-size:15px; color:#8a8a8a; font-weight:400; margin-top:8px; font-family: system-ui, Helvetica, Arial, sans-serif; line-height:1.35;";
       sub.textContent = currentQ.inlineTr;
+      if(currentQ.hideTr){
+        sub.style.display = "none";
+        const tb = document.createElement("button");
+        tb.type = "button";
+        tb.textContent = "🇹🇷 Türkçesini göster";
+        tb.style.cssText = "display:block; margin:10px auto 0; padding:6px 14px; border-radius:999px; border:1px solid var(--line); background:transparent; color:var(--tx-teal); font-size:13px; font-weight:600; font-family: system-ui, Helvetica, Arial, sans-serif; cursor:pointer;";
+        tb.onclick = () => {
+          const open = sub.style.display === "none";
+          sub.style.display = open ? "block" : "none";
+          tb.textContent = open ? "🙈 Türkçesini gizle" : "🇹🇷 Türkçesini göster";
+        };
+        qw.appendChild(tb);
+      }
       qw.appendChild(sub);
     } else {
       qw.textContent = shownText;
@@ -15464,6 +15477,7 @@ function foldRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"); }
   if(typeof TEST_NAMES!=="undefined"){ TEST_NAMES["gq-sifat"]="Sıfat: cümlede doğru sıfat"; TEST_NAMES["gq-zit"]="Zıt anlamlılar (100 kelime)"; }
   if(typeof POOL_GROUPS!=="undefined"){ POOL_GROUPS.forEach(function(g){ if(g[0]==="Kelime"){ g[1].push("gq-sifat","gq-zit"); } }); }
 })();
+(function(){ ["gq-isim","gq-artikel","gq-cogul","gq-fiil","gq-sifat","gq-ppall"].forEach(function(k){ if(typeof GQ_BANK!=="undefined" && GQ_BANK[k]) GQ_BANK[k].hideTr=true; }); })();
 
 
 
