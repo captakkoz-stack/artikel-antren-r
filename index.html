@@ -1973,7 +1973,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
     </div>
     <div class="header-right">
       <div class="signature"><span class="sig-note">Persönliche Lernnotizen</span><span class="sig-divider"></span><span class="sig-name">⚓ Erstellt von Capt. Aykut Akkoz</span></div>
-      <div class="last-updated">Zuletzt aktualisiert: 17.10.2026</div>
+      <div class="last-updated">Zuletzt aktualisiert: 20.10.2026</div>
     </div>
   </div>
 </header>
@@ -8808,9 +8808,32 @@ function recordWordStat(word, isCorrect){
   } else {
     wordStats[word].wrong++;
     wordStats[word].streak = 0;
+    try{ requeueWrongQuestion(); }catch(e){}
   }
   saveWordStats();
   renderMistakeStats();
+}
+
+
+// Yanlış yanıtlanan soru "yapıldı" sayılmaz: havuzdaki görülenlerden çıkar, oturumda birkaç soru sonra tekrar sor.
+function requeueWrongQuestion(){
+  if(typeof sessionQuestions === "undefined" || !sessionQuestions || !currentQ) return;
+  const q = sessionQuestions[sessionIndex];
+  if(!q || q !== currentQ || q.requeued) return;
+  q.requeued = true;
+  try{
+    const mode = currentTestMode;
+    const e = mode && recentAsked[mode];
+    if(e && Array.isArray(e.seen)){
+      const k = getItemKey(q.word, q.category || "noun");
+      const i = e.seen.indexOf(k);
+      if(i >= 0){ e.seen.splice(i,1); saveRecentAsked(); }
+    }
+  }catch(e){}
+  const copy = Object.assign({}, q, {answered:false, requeued:false, retry:true, solved:false, locked:false});
+  if(Array.isArray(copy.options)) copy.options = shuffleArray(copy.options.slice());
+  const pos = Math.min(sessionQuestions.length, sessionIndex + 4);
+  sessionQuestions.splice(pos, 0, copy);
 }
 
 const MISTAKE_TOP_N = 10;
@@ -11365,6 +11388,89 @@ Object.assign(GQ_BANK, {
 GQ_ORDER.push("gq-datprep");
 
 function gqFull(bank, it){ return bank.choose ? it[1] : it[0].replace("___", it[1]); }
+
+// ---- Kelimeye dokununca anlam (cümle testleri) ----
+var GQ_FN={"der": "belirli tanım (eril) · die/das ile aynı işlevde", "die": "belirli tanım (dişil / çoğul)", "das": "belirli tanım (nötr) · \"şu / bu\" da olabilir", "den": "belirli tanım (eril, Akkusativ) · çoğul Dativ'de \"den\"", "dem": "belirli tanım (Dativ: eril / nötr) → -e/-a", "des": "belirli tanım (Genitiv: eril / nötr) → -in", "ein": "bir (eril / nötr)", "eine": "bir (dişil)", "einen": "bir (eril, Akkusativ)", "einem": "bir (Dativ: eril / nötr)", "einer": "bir (Dativ / Genitiv: dişil)", "eines": "bir (Genitiv)", "kein": "hiç / değil (eril / nötr)", "keine": "hiç / değil (dişil / çoğul)", "keinen": "hiç (eril, Akkusativ)", "keinem": "hiç (Dativ)", "ich": "ben", "du": "sen (tek kişi)", "er": "o (erkek, tekil)", "sie": "o (kadın, tekil) VEYA onlar (çoğul) — fiile bak: -t = tekil, -en = çoğul", "es": "o (nötr, tekil)", "wir": "biz", "ihr": "siz (çoğul, birden fazla kişiye) · ayrıca: ona (Dativ, kadına) · ya da: onun / onların (iyelik)", "euch": "sizi / size (ihr'in nesne hâli)", "mich": "beni", "mir": "bana", "dich": "seni", "dir": "sana", "ihn": "onu (erkek)", "ihm": "ona (erkek / nötr)", "ihnen": "onlara", "uns": "bizi / bize", "sich": "kendini / kendine", "mein": "benim", "meine": "benim (dişil / çoğul)", "meinen": "benim (Akkusativ eril)", "meinem": "benim (Dativ)", "meiner": "benim (Dativ dişil)", "dein": "senin", "deine": "senin (dişil / çoğul)", "deinen": "senin (Akkusativ eril)", "deinem": "senin (Dativ)", "sein": "onun (erkek) · ayrıca \"olmak\"", "seine": "onun (dişil / çoğul)", "seinen": "onun (Akkusativ eril)", "seinem": "onun (Dativ)", "seiner": "onun (Dativ dişil)", "ihre": "onun (kadın) / onların · iyelik", "ihren": "onun / onların (Akkusativ eril / Dativ çoğul)", "ihrem": "onun / onların (Dativ)", "ihrer": "onun / onların (Dativ dişil)", "unser": "bizim", "unsere": "bizim (dişil / çoğul)", "unseren": "bizim (Akkusativ eril)", "unserem": "bizim (Dativ)", "euer": "sizin", "eure": "sizin (dişil / çoğul)", "und": "ve", "oder": "veya", "aber": "ama", "denn": "çünkü", "weil": "çünkü (fiil sona gider)", "dass": "ki / -dığını (fiil sona gider)", "wenn": "eğer / -ince, -dığında", "als": "-dığında (geçmiş) · -den / -dan (karşılaştırma) · olarak", "ob": "-ip -mediğini", "damit": "-sin diye · onunla", "obwohl": "-diği hâlde", "während": "-iken, sırasında", "bevor": "-meden önce", "nachdem": "-dikten sonra", "sondern": "aksine / -değil, ... -dir", "nicht": "değil / -me", "nie": "asla / hiç", "niemals": "asla", "nichts": "hiçbir şey", "nur": "sadece", "auch": "de / da, ayrıca", "noch": "hâlâ / daha", "schon": "zaten / çoktan", "immer": "her zaman", "oft": "sık sık", "manchmal": "bazen", "selten": "nadiren", "meistens": "çoğunlukla", "sehr": "çok", "viel": "çok", "viele": "birçok", "wenig": "az", "wenige": "az sayıda", "mehr": "daha fazla", "zu": "-e / -a · fazla (çok) · -mek için", "zum": "zu + dem: -e (Dativ)", "zur": "zu + der: -e (Dativ)", "in": "içinde / -e (yön)", "im": "in + dem: içinde", "ins": "in + das: içine", "an": "-de / -e (yüzeye bitişik)", "am": "an + dem: -de / (gün) -de", "ans": "an + das", "auf": "üstünde / üstüne", "aufs": "auf + das", "aus": "-den / -dan (içinden)", "bei": "-in yanında / -de", "beim": "bei + dem: -rken", "mit": "ile / -le", "nach": "-den sonra · -e (şehir/ülke)", "seit": "-den beri", "von": "-den / -in", "vom": "von + dem", "vor": "önünde · önce", "für": "için", "gegen": "karşı / -e doğru", "ohne": "-siz", "um": "etrafında · saat -de", "durch": "içinden", "über": "üzerinde / hakkında", "unter": "altında / arasında", "zwischen": "arasında", "hinter": "arkasında", "neben": "yanında", "bis": "-e kadar", "ab": "-den itibaren", "wegen": "yüzünden", "trotz": "rağmen", "statt": "yerine", "außer": "-den başka", "entlang": "boyunca", "gegenüber": "karşısında", "hier": "burada", "da": "orada", "dort": "orada", "dorthin": "oraya", "hierher": "buraya", "wo": "nerede", "wohin": "nereye", "woher": "nereden", "wann": "ne zaman", "wie": "nasıl / gibi", "was": "ne", "wer": "kim", "wen": "kimi", "wem": "kime", "wessen": "kimin", "warum": "neden", "wieso": "neden", "welche": "hangi (çoğul / dişil)", "welcher": "hangi (eril)", "welchen": "hangi (Akkusativ eril)", "welches": "hangi (nötr)", "wieviel": "kaç / ne kadar", "wie viel": "kaç / ne kadar", "wie viele": "kaç tane", "jetzt": "şimdi", "heute": "bugün", "morgen": "yarın · sabah", "gestern": "dün", "abends": "akşamları", "morgens": "sabahları", "nachts": "geceleri", "mittags": "öğlenleri", "dann": "sonra / o zaman", "danach": "ondan sonra", "vorher": "önceden", "zuerst": "önce", "zuletzt": "en son", "später": "daha sonra", "früher": "eskiden", "bald": "yakında", "gleich": "hemen / aynı", "sofort": "hemen", "endlich": "sonunda", "plötzlich": "aniden", "wieder": "tekrar", "dabei": "yanında / bu sırada", "darauf": "üzerine", "dafür": "bunun için", "davon": "bundan", "dazu": "buna / bunun yanında", "deshalb": "bu yüzden", "deswegen": "bu yüzden", "trotzdem": "yine de", "also": "yani / demek ki", "doch": "ama / \"hayır, öyle değil\" (olumsuza itiraz)", "ja": "evet", "nein": "hayır", "bitte": "lütfen / rica ederim", "danke": "teşekkürler", "hallo": "merhaba", "ganz": "tamamen / bütün", "total": "tamamen", "zusammen": "birlikte", "allein": "yalnız", "alle": "hepsi / herkes", "alles": "her şey", "jeder": "her biri / herkes", "jede": "her (dişil)", "jeden": "her (Akkusativ)", "jedem": "her (Dativ)", "jedes": "her (nötr)", "man": "insan(lar) / \"biri\" (genel özne)", "etwas": "bir şey / biraz", "jemand": "biri", "niemand": "kimse", "andere": "diğer", "anderen": "diğer", "anderer": "diğer", "beide": "ikisi de", "diese": "bu (dişil / çoğul)", "dieser": "bu (eril)", "diesen": "bu (Akkusativ eril)", "diesem": "bu (Dativ)", "dieses": "bu (nötr)", "solche": "böyle", "manche": "bazı", "mancher": "bazı", "einige": "bazı / birkaç", "mehrere": "birkaç", "ganze": "bütün", "ganzen": "bütün", "ganzer": "bütün", "ganzes": "bütün", "erste": "birinci", "ersten": "birinci", "zweite": "ikinci", "dritte": "üçüncü", "letzte": "son / geçen", "letzten": "son / geçen", "nächste": "gelecek / bir sonraki", "nächsten": "gelecek / bir sonraki", "jeden tag": "her gün", "ist": "-dir / -dır (sein: olmak)", "sind": "-dir (çoğul) / -iz / -ler", "bin": "-im (ben)", "bist": "-sin", "seid": "-siniz (ihr)", "war": "idi / oldu (tekil)", "waren": "idiler / idik", "wird": "olacak / olur (werden, tekil)", "werden": "olmak · olacak (çoğul / biz)", "wirst": "olacaksın", "werde": "olacağım", "wurde": "oldu", "wurden": "oldular", "hat": "var (haben, o) · yardımcı fiil: -di", "haben": "sahip olmak · yardımcı fiil", "habe": "var (ben)", "hast": "var (sen)", "habt": "var (siz)", "hatte": "vardı", "hatten": "vardılar", "kann": "-ebilir (o / ben)", "kannst": "-ebilirsin", "können": "-ebilmek", "könnt": "-ebilirsiniz", "muss": "-meli (ben / o)", "musst": "-melisin", "müssen": "-mek zorunda (biz / onlar)", "müsst": "-melisiniz", "will": "istiyor (ben / o)", "willst": "istiyorsun", "wollen": "istemek (biz / onlar)", "wollt": "istiyorsunuz", "soll": "-meli (o / ben) · tavsiye", "sollst": "-melisin", "sollen": "-meli (biz / onlar)", "sollt": "-melisiniz", "darf": "-ebilir (izin) (ben / o)", "darfst": "-ebilirsin (izin)", "dürfen": "izinli olmak (biz / onlar)", "dürft": "izniniz var", "mag": "sever (ben / o)", "magst": "seversin", "mögen": "sevmek", "möchte": "-mek istiyorum (nazik)", "möchtest": "-mek istersin", "möchten": "-mek isterim / istiyoruz (nazik)", "möchtet": "-mek istersiniz", "lässt": "bırakır / yaptırır", "lasse": "bırakırım", "würde": "-erdim (nazik / varsayım)", "würden": "-erdik", "hätte": "olsaydı / olurdu", "wäre": "olsaydı", "gern": "severek / seve seve", "gerne": "seve seve", "lieber": "tercihen / daha çok", "am liebsten": "en çok", "gut": "iyi", "besser": "daha iyi", "am besten": "en iyi", "schlecht": "kötü", "neu": "yeni", "alt": "eski / yaşlı", "groß": "büyük", "klein": "küçük", "heute abend": "bu akşam", "im moment": "şu anda", "zum beispiel": "örneğin", "uhr": "saat", "uhr.": "saat", "mal": "kere", "eben": "az önce / tam", "halt": "işte (günlük)", "etwa": "yaklaşık", "ungefähr": "yaklaşık", "circa": "yaklaşık", "fast": "neredeyse", "genau": "tam / kesin", "leider": "maalesef", "vielleicht": "belki", "bestimmt": "kesinlikle", "wirklich": "gerçekten", "eigentlich": "aslında", "natürlich": "elbette", "nun": "şimdi", "sogar": "hatta", "kaum": "neredeyse hiç", "zu viel": "çok fazla", "so": "böyle / o kadar", "solch": "böyle", "doppelt": "iki kat", "einmal": "bir kere", "zweimal": "iki kere", "dreimal": "üç kere", "gar": "hiç (gar nicht = hiç değil)", "jedoch": "ancak", "sonst": "yoksa / başka", "sowieso": "zaten", "überall": "her yerde", "nirgends": "hiçbir yerde", "irgendwo": "bir yerde", "irgendwie": "bir şekilde", "draußen": "dışarıda", "drinnen": "içeride", "oben": "yukarıda", "unten": "aşağıda", "links": "solda", "rechts": "sağda", "geradeaus": "dümdüz", "zurück": "geri", "weg": "uzakta / gitmiş"};
+(function(){ var X={"nächstes":"gelecek / bir sonraki (nötr)", "zwei": "iki", "drei": "üç", "vier": "dört", "fünf": "beş", "sechs": "altı", "sieben": "yedi", "acht": "sekiz", "neun": "dokuz", "zehn": "on", "elf": "on bir", "zwölf": "on iki", "fünfzehn": "on beş", "zwanzig": "yirmi", "dreißig": "otuz", "vierzig": "kırk", "fünfzig": "elli", "siebzig": "yetmiş", "achtzig": "seksen", "neunzig": "doksan", "hundert": "yüz", "tausend": "bin", "einunddreißig": "otuz bir", "siebzigtausend": "yetmiş bin", "eins": "bir", "null": "sıfır", "zehnmal": "on kere", "halb": "yarım / buçuk", "katalog": "katalog", "gegenteil": "zıt anlam, karşıt", "ne": "ne", "demek": "demek (Türkçe)", "abend": "akşam (der Abend)", "minuten": "dakika (çoğul)", "minute": "dakika", "stunde": "saat (süre)", "stunden": "saat (çoğul)", "stundenlang": "saatlerce", "nacht": "gece", "nachmittag": "öğleden sonra", "vormittag": "öğleden önce", "mittag": "öğle", "mitternacht": "gece yarısı", "sonntag": "Pazar", "montag": "Pazartesi", "dienstag": "Salı", "mittwoch": "Çarşamba", "donnerstag": "Perşembe", "freitag": "Cuma", "samstag": "Cumartesi", "sonntags": "pazar günleri", "montags": "pazartesi günleri", "dienstags": "salı günleri", "samstags": "cumartesi günleri", "freitagabend": "Cuma akşamı", "samstagabend": "Cumartesi akşamı", "januar": "Ocak", "februar": "Şubat", "märz": "Mart", "mai": "Mayıs", "juni": "Haziran", "juli": "Temmuz", "oktober": "Ekim", "september": "Eylül", "berlin": "Berlin (şehir)", "köln": "Köln (şehir)", "hamburg": "Hamburg (şehir)", "münchen": "Münih", "wien": "Viyana", "rom": "Roma", "frankfurt": "Frankfurt (şehir)", "heidelberg": "Heidelberg (şehir)", "nürnberg": "Nürnberg (şehir)", "bayreuth": "Bayreuth (şehir)", "istanbul": "İstanbul", "izmir": "İzmir", "ankara": "Ankara", "italien": "İtalya", "spanien": "İspanya", "deutschland": "Almanya", "deutschlands": "Almanya'nın", "österreich": "Avusturya", "frankreich": "Fransa", "griechenland": "Yunanistan", "kanada": "Kanada", "norwegen": "Norveç", "island": "İzlanda", "afrika": "Afrika", "asien": "Asya", "australien": "Avustralya", "europa": "Avrupa", "europas": "Avrupa'nın", "bayern": "Bayern (Bavyera)", "alpen": "Alpler", "rhein": "Ren nehri", "eiffelturm": "Eyfel Kulesi", "südsee": "Güney Denizi", "anna": "Anna (kadın adı)", "annas": "Anna'nın", "max": "Max (erkek adı)", "peter": "Peter (erkek adı)", "peters": "Peter'in", "tom": "Tom (erkek adı)", "lena": "Lena (kadın adı)", "lenas": "Lena'nın", "lisa": "Lisa (kadın adı)", "mia": "Mia (kadın adı)", "leo": "Leo (erkek adı)", "leos": "Leo'nun", "sara": "Sara (kadın adı)", "lukas": "Lukas (erkek adı)", "tim": "Tim (erkek adı)", "emma": "Emma (kadın adı)", "karl": "Karl (erkek adı)", "hans": "Hans (erkek adı)", "ali": "Ali (erkek adı)", "alis": "Ali'nin", "maria": "Maria (kadın adı)", "marias": "Maria'nın", "moritz": "Moritz (erkek adı)", "felix": "Felix (erkek adı)", "paul": "Paul (erkek adı)", "mehmet": "Mehmet (erkek adı)", "jonas": "Jonas (erkek adı)", "jana": "Jana (kadın adı)", "ella": "Ella (kadın adı)", "nina": "Nina (kadın adı)", "caroline": "Caroline (kadın adı)", "carolines": "Caroline'in", "weber": "Weber (soyadı)", "roth": "Roth (soyadı)", "schmidt": "Schmidt (soyadı)", "özdemir": "Özdemir (soyadı)", "meier": "Meier (soyadı)", "yilmaz": "Yılmaz (soyadı)", "kaya": "Kaya (soyadı)", "aksoy": "Aksoy (soyadı)", "beethoven": "Beethoven (besteci)", "herr": "Bay", "herrn": "Bay (Akkusativ/Dativ)", "euro": "Euro", "€": "Euro", "kilometer": "kilometre", "grad": "derece", "meines": "benim (Genitiv)", "meiner": "benim (Dativ dişil)", "unserer": "bizim (dişil Dativ)", "unseres": "bizim (Genitiv)", "eurer": "sizin (dişil Dativ)", "euren": "sizin (Akkusativ eril / Dativ çoğul)", "deiner": "senin (dişil Dativ)", "weh": "ağrı / acı (weh tun = acımak)", "café": "kafe", "firma": "firma, şirket", "kam": "geldi (kommen, geçmiş)", "dorf": "köy", "frei": "serbest / boş", "mitten": "tam ortasında", "direkt": "doğrudan", "letztes": "geçen (nötr)", "post": "posta", "spannend": "heyecan verici", "autobahn": "otoyol", "per": "ile (yolla)", "seite": "sayfa / yan", "seiten": "sayfalar / yanlar", "selbst": "kendisi / bizzat", "medizin": "ilaç / tıp", "ofen": "fırın / soba", "frisst": "yiyor (hayvan; fressen)", "zentrum": "merkez", "reif": "olgun / olmuş", "dicht": "kapalı / sık", "hätten": "sahip olsalardı (haben, Konjunktiv)", "hättest": "sahip olsaydın", "untersucht": "inceliyor / muayene ediyor", "großeltern": "büyükanne ve büyükbaba", "sport": "spor", "hof": "avlu / çiftlik", "brennt": "yanıyor", "…": "(üç nokta)", "→": "(ok işareti)", "–": "(tire)", "pause": "ara / mola", "freude": "sevinç", "lärm": "gürültü", "stimmung": "ruh hâli, atmosfer", "erledigt": "hallolmuş / yorgun", "überrascht": "şaşırmış", "entfernt": "uzakta", "kreuzung": "kavşak", "saftig": "sulu", "nachttisch": "komodin", "kollektion": "koleksiyon", "riesig": "devasa", "prüft": "kontrol ediyor", "wunderbar": "harika", "beträgt": "tutarı ... (betragen)", "fußgängerzone": "yaya bölgesi", "gold": "altın", "herrlich": "muhteşem", "garderobe": "vestiyer, gardırop", "wahl": "seçim", "serviert": "servis ediyor", "gestrichen": "boyanmış", "liefert": "teslim ediyor", "früchten": "meyveler (Dativ)", "winkt": "el sallıyor", "babys": "bebekler", "erfrischend": "ferahlatıcı", "duftet": "güzel kokuyor", "stadtrand": "şehir çevresi", "zettel": "not kağıdı", "warst": "idin (sein)", "hattest": "vardı (sen)", "rauchen": "sigara içmek", "schirm": "şemsiye", "besteht": "oluşuyor / var olmak", "welchem": "hangi (Dativ)", "solltest": "-meliydin / -melisin", "wolle": "istesin (Konjunktiv)", "schuld": "suç / kabahat", "hauptbahnhof": "ana tren istasyonu", "hinaus": "dışarı", "fließt": "akıyor", "erst": "ancak / önce", "kopfschmerzen": "baş ağrısı", "satz": "cümle", "unbedingt": "mutlaka", "kantine": "kantin", "zelt": "çadır", "lächeln": "gülümsemek", "baby": "bebek", "feier": "kutlama", "märchen": "masal", "versuchen": "denemek", "gemütlich": "rahat, samimi", "sturz": "düşüş", "innenstadt": "şehir merkezi", "webseite": "web sitesi", "vertrag": "sözleşme", "küchentisch": "mutfak masası", "mitarbeiter": "çalışan", "zaun": "çit", "mathematik": "matematik", "kälte": "soğuk", "bellt": "havlıyor", "gras": "çimen", "hitze": "sıcak (aşırı)", "trainiert": "antrenman yapıyor", "grüßt": "selamlıyor", "wanderung": "doğa yürüyüşü", "tiere": "hayvanlar", "angenehm": "hoş", "wart": "idiniz (sein)", "hattet": "vardınız", "beeil": "acele et (sich beeilen)", "würdest": "-erdin", "schmerzen": "ağrılar", "service": "hizmet", "darüber": "bunun hakkında / üzerinde", "mama": "anne", "vorschlag": "öneri", "großmutter": "büyükanne", "passwort": "şifre", "hohen": "yüksek (çekimli)", "spaziergang": "gezinti", "paar": "birkaç / çift", "bar": "bar / nakit", "menschen": "insanlar", "umschlag": "zarf", "anstrengend": "yorucu", "notdienst": "acil servis", "gilt": "geçerli", "politikers": "siyasetçinin", "kunst": "sanat", "anlegen": "yatırmak / yanaştırmak", "wirft": "atıyor", "jugendclub": "gençlik kulübü", "sporttasche": "spor çantası", "gebrochen": "kırık", "voran": "ileri", "gästezimmer": "misafir odası", "notizen": "notlar", "fensterbrett": "pencere kenarı", "jahrestag": "yıldönümü", "schaufenster": "vitrin", "klebe": "yapıştırıyorum", "sängerin": "kadın şarkıcı", "fahrgast": "yolcu", "speichere": "kaydediyorum", "schokoladenpudding": "çikolatalı puding", "meerblick": "deniz manzarası", "dosenöffner": "konserve açacağı", "noten": "notlar / nota", "beantworte": "cevaplıyorum", "nebenan": "yan tarafta", "linken": "sol (çekimli)", "briefkasten": "posta kutusu", "ändere": "değiştiriyorum", "kostenlos": "ücretsiz", "rezeption": "resepsiyon", "holztisch": "ahşap masa", "währung": "para birimi", "kontrolleur": "kontrolör", "bauern": "çiftçiler", "weltberühmt": "dünyaca ünlü", "quadratmeter": "metrekare", "online": "çevrimiçi", "landet": "iniyor (uçak)", "lächelt": "gülümsüyor", "verbringe": "geçiriyorum", "braut": "gelin", "büfett": "büfe", "geschwollen": "şişmiş", "rollt": "yuvarlanıyor", "straßenseite": "caddenin kenarı", "safe": "kasa", "goldenen": "altın (çekimli)", "drachen": "ejderha / uçurtma", "strahlt": "parlıyor", "angst": "korku", "beliebteste": "en sevilen", "knackig": "çıtır", "leder": "deri", "blond": "sarışın", "befindet": "bulunuyor", "steak": "biftek", "mathe": "matematik", "kariert": "ekose", "radfahren": "bisiklete binmek", "färbt": "boyuyor", "cousine": "kuzen (kız)", "kamin": "şömine", "imker": "arıcı", "durchgebraten": "iyi pişmiş", "interessiert": "ilgili / ilgileniyor", "autofirma": "otomobil şirketi", "politiker": "siyasetçi", "neffen": "yeğen (Akkusativ/Dativ)", "neffe": "yeğen", "abgelaufen": "süresi dolmuş", "artikel": "artikel / makale", "minister": "bakan", "tradition": "gelenek", "cremig": "kremsi", "etagen": "katlar", "silber": "gümüş", "vitamin": "vitamin", "c": "C harfi", "schullandheim": "okul kampı", "button": "düğme", "abgefallen": "düşmüş", "würzt": "baharatlıyor", "wächst": "büyüyor", "buchhaltung": "muhasebe", "eichenholz": "meşe ahşap", "verziert": "süslüyor", "torte": "pasta", "misst": "ölçüyor", "geschwächt": "zayıflamış", "zimt": "tarçın", "ablaufdatum": "son kullanma tarihi", "angegossen": "sulanmış", "korrigiert": "düzeltiyor", "treppenhaus": "merdiven boşluğu", "eiskalt": "buz gibi", "brüllt": "bağırıyor", "pro": "başına", "sorgen": "endişeler", "wechselt": "değiştiriyor", "reifen": "lastik", "bremsen": "fren yapmak", "stumpf": "küt / donuk", "stoff": "kumaş", "besitzt": "sahip", "villen": "villalar", "kohlensäure": "gaz (karbondioksit)", "näht": "dikiyor", "landung": "iniş", "aufregend": "heyecan verici", "karneval": "karnaval", "brei": "lapa", "melodie": "melodi", "geige": "keman", "pudding": "puding", "ununterbrochen": "durmadan", "blockieren": "engellemek", "fruchtig": "meyveli", "enkeln": "torunlar (Dativ)", "stadtmitte": "şehir merkezi", "sinfonie": "senfoni", "ländlich": "kırsal", "geprägt": "damgalanmış", "reisetasche": "seyahat çantası", "spritze": "şırınga", "passagiere": "yolcular", "giftig": "zehirli", "steinofen": "taş fırın", "wirbt": "reklam yapıyor", "regelt": "düzenliyor", "verkehr": "trafik", "rennwagen": "yarış arabası", "gelöst": "çözülmüş", "highlights": "öne çıkanlar", "reisebüro": "seyahat acentesi", "platt": "düz / patlak", "haustür": "ev kapısı", "traum": "rüya", "rolle": "rol", "finger": "parmak", "kräftig": "güçlü", "positiv": "olumlu", "geschlagen": "dövülmüş / yenilmiş", "eimer": "kova", "schaufel": "kürek", "hobby": "hobi", "box": "kutu", "nervt": "sinir ediyor", "klemmt": "sıkışıyor", "bauernhof": "çiftlik", "glasklar": "cam gibi berrak", "lavendel": "lavanta", "verbindet": "bağlıyor", "anrufer": "arayan kişi", "innerhalb": "içinde", "krankenwagens": "ambulansın", "haut": "cilt", "spendet": "bağışlıyor", "schatten": "gölge", "köstlich": "lezzetli", "beschlagen": "buğulanmış", "fasst": "tutuyor / sığdırıyor", "zuschauer": "izleyici", "dom": "katedral", "reicht": "yetiyor / uzatıyor", "jahrhundert": "yüzyıl", "leuchtet": "ışık veriyor", "abgebrannt": "yanmış", "ausgefallen": "iptal olmuş / sıra dışı", "doktorarbeit": "doktora tezi", "umgeworfen": "devrilmiş", "klima": "iklim / klima", "köchelt": "kaynıyor (kısık ateşte)", "streifenmuster": "çizgi desen", "couchtisch": "sehpa", "wirkt": "etkiliyor / görünüyor", "klassenzimmer": "sınıf", "kürbissuppe": "balkabağı çorbası", "jackentasche": "ceket cebi", "blick": "bakış / manzara", "weinberg": "bağ", "stadtzentrum": "şehir merkezi", "loch": "delik", "übersetzt": "tercüme ediyor", "kapitels": "bölümün", "besetzt": "dolu / meşgul", "schlimm": "kötü", "uroma": "büyük büyükanne", "gutgetan": "iyi gelmiş", "tulpen": "laleler", "brett": "tahta", "elektronikladen": "elektronik mağaza", "ware": "mal", "netz": "ağ", "knusprig": "çıtır", "tickt": "tik tak ediyor", "trocknet": "kuruyor", "geräusche": "sesler", "wunder": "mucize", "lehrbuch": "ders kitabı", "auswendig": "ezbere", "besiedelt": "iskân edilmiş", "voraus": "ileride", "weht": "esiyor", "verbringen": "geçirmek", "geburt": "doğum", "mittelpunkt": "merkez", "ausgelegt": "döşenmiş / tasarlanmış", "thema": "konu", "fotografie": "fotoğrafçılık", "senf": "hardal", "kauen": "çiğnemek", "bohrt": "deliyor", "waschbecken": "lavabo", "vergeht": "geçiyor", "würzig": "baharatlı", "temperatur": "sıcaklık", "sitzung": "toplantı", "einfahrt": "giriş yolu", "völlig": "tamamen", "streit": "kavga", "super": "süper", "endet": "bitiyor", "sobald": "-er etmez", "solange": "-dığı sürece", "zurückkomme": "geri geliyorum", "sowohl": "hem", "weder": "ne ... ne de", "entweder": "ya ... ya da", "anschließend": "ardından", "meinst": "düşünüyorsun / demek istiyorsun", "damals": "o zaman", "könntest": "-ebilirdin", "wären": "olsalardı", "müsstest": "-meliydin", "müsse": "-meli (Konjunktiv)", "könne": "-ebilsin", "wisse": "bilsin", "entschuldigung": "özür / pardon", "beschwerden": "şikâyetler", "apfelstrudel": "elmalı strudel", "leiter": "merdiven / yönetici", "gehängt": "asılmış", "lieblingskuchen": "en sevilen pasta", "herein": "içeri", "sportschuhe": "spor ayakkabı", "rauche": "sigara içiyorum", "recht": "haklı", "her": "buraya doğru", "sprachen": "diller / konuştular", "grippe": "grip", "aperitif": "aperatif", "fußballverein": "futbol kulübü", "jobangebot": "iş teklifi", "lokführer": "makinist", "gummistiefel": "lastik çizme", "asthma": "astım", "geburtstagskind": "doğum günü çocuğu", "plätzchen": "kurabiye", "vorstellung": "tanıtım / gösteri", "zeuge": "tanık", "enkelkind": "torun", "ausführlich": "ayrıntılı", "wellnessbereich": "spa bölümü", "vorstellungsgespräch": "iş görüşmesi", "abflug": "kalkış (uçak)", "grillfest": "mangal partisi", "abwaschen": "bulaşık yıkamak", "heizung": "kalorifer", "tomatensuppe": "domates çorbası", "teilnehmer": "katılımcı", "ausgang": "çıkış", "hofft": "umuyor", "finale": "final", "bestandenen": "geçilmiş (sınav)", "rückenschmerzen": "sırt ağrısı", "bisschen": "biraz", "freie": "boş / serbest", "schlimmer": "daha kötü", "spezialitäten": "özel lezzetler", "tagelang": "günlerce", "klopfen": "kapı çalmak", "notfall": "acil durum", "bescheid": "haber / bilgi", "münzen": "madeni paralar", "aller": "hepsinin", "mindestens": "en az", "vanille": "vanilya", "zeilen": "satırlar", "tagebuch": "günlük", "tal": "vadi", "chor": "koro", "winterferien": "kış tatili", "fließend": "akıcı", "spanisch": "İspanyolca", "italienisch": "İtalyanca", "dran": "sırada", "rennen": "koşmak", "wohnungstür": "daire kapısı", "esstisch": "yemek masası", "glatten": "kaygan", "treppe": "merdiven", "anzug": "takım elbise", "krawatte": "kravat", "kindheit": "çocukluk", "weinende": "ağlayan", "marsch": "yürüyüş", "ice": "hızlı tren (ICE)", "physik": "fizik", "gymnasium": "lise", "ausland": "yurt dışı", "jederzeit": "her zaman", "menü": "menü", "kritik": "eleştiri", "temperaturen": "sıcaklıklar", "wasserverbrauch": "su tüketimi", "schultag": "okul günü", "überlegen": "düşünmek", "antrag": "başvuru", "würstchen": "sosis", "montage": "montaj", "link": "bağlantı", "alkohol": "alkol", "verbrauch": "tüketim", "zwillinge": "ikizler", "großvater": "büyükbaba", "zirkus": "sirk", "sänger": "şarkıcı", "touristen": "turistler", "regenbogen": "gökkuşağı", "uniform": "üniforma", "abendkleid": "gece elbisesi", "tapete": "duvar kağıdı", "wüste": "çöl", "minus": "eksi", "schnecke": "salyangoz", "club": "kulüp", "aubergine": "patlıcan", "clown": "palyaço", "werk": "fabrika / eser", "stadtrats": "belediye meclisinin", "zuhören": "dinlemek", "präsidenten": "başkan (Akkusativ/Dativ)", "besitzer": "sahip", "fabrik": "fabrika", "putzen": "temizlemek", "gasse": "dar sokak", "durchpasst": "sığıyor", "rabe": "kuzgun", "mathe-aufgabe": "matematik ödevi", "bodybuilder": "vücut geliştirmeci", "detail": "ayrıntı", "freundschaftlich": "dostça", "glatteis": "buzlanma", "pünktlichkeit": "dakiklik", "sonnenuntergang": "gün batımı", "lächelnd": "gülümseyerek", "belügt": "yalan söylüyor", "feuerwehrmann": "itfaiyeci", "rettet": "kurtarıyor", "erzieherin": "kadın eğitmen", "löst": "çözüyor", "durchdacht": "iyi düşünülmüş", "erfolg": "başarı", "neueste": "en yeni", "technik": "teknik", "gardinen": "perdeler", "siebzigern": "yetmişler", "gegend": "bölge", "strömung": "akıntı", "absenderin": "kadın gönderen", "fach": "ders / bölme", "arbeitszeit": "çalışma saati", "streng": "katı", "sommerjacke": "yazlık ceket", "daunen": "tüy", "abseits": "uzakta", "brunnen": "çeşme / kuyu", "führt": "götürüyor", "kurve": "viraj", "gewachsen": "büyümüş", "gipfel": "zirve", "bakterium": "bakteri", "mitglieder": "üyeler", "teilnahme": "katılım", "leitet": "yönetiyor", "klinik": "klinik", "beschwert": "şikâyet ediyor", "handwerker": "usta / esnaf", "abschlusszeugnis": "diploma", "deutschlernen": "Almanca öğrenmek", "batterie": "pil", "taschenlampe": "el feneri", "parkt": "park ediyor", "entschieden": "karar vermiş", "entscheiden": "karar vermek", "pflanzenmittel": "bitki ilacı", "dunklen": "koyu (çekimli)", "niemandem": "hiç kimseye", "beißt": "ısırıyor", "erklärung": "açıklama"}; Object.keys(X).forEach(function(k){ if(!GQ_FN[k]) GQ_FN[k]=X[k]; }); })();
+var __glossIdx=null, __glossSig="";
+function glossBuild(){
+  var sig=words.length+"/"+verbs.length+"/"+adjectives.length;
+  if(__glossIdx && __glossSig===sig) return __glossIdx;
+  var ix={}; __glossSig=sig;
+  function add(k,t){ if(!k) return; k=String(k).toLowerCase(); (ix[k]=ix[k]||[]); if(ix[k].indexOf(t)<0) ix[k].push(t); }
+  words.forEach(function(w){
+    add(w.word, w.artikel+" "+w.word+" — "+w.tr);
+    if(w.plural && w.plural!=="-"){
+      var pl=String(w.plural).split(/[\/,]/)[0].trim();
+      if(pl && pl!==w.word) add(pl, "die "+pl+" — "+w.tr+" (çoğul · tekil: "+w.word+")");
+      if(pl && !/n$/.test(pl)) add(pl+"n", "die "+pl+" + n (Dativ çoğul) — "+w.tr);
+    }
+    if(w.artikel!=="die"){ add(w.word+"s", w.word+"s (Genitiv: -in) — "+w.tr); add(w.word+"es", w.word+"es (Genitiv: -in) — "+w.tr); }
+    add(w.word+"n", w.word+"n (hâl eki) — "+w.tr); add(w.word+"en", w.word+"en (hâl eki) — "+w.tr);
+  });
+  verbs.forEach(function(v){
+    var lem=v.verb.replace(/^sich /,""); var tr=v.tr;
+    add(lem, lem+" (mastar) — "+tr);
+    var pf=(v.perf||"").split(" "); if(pf.length>1){ pf.shift(); if(pf[0]==="sich") pf.shift(); add(pf[pf.length-1], pf[pf.length-1]+" = "+lem+" (Partizip II) — "+tr); }
+    var names={ich:"ich",du:"du",er:"er/sie/es",wir:"wir",ihr:"ihr",sie:"sie/Sie"};
+    Object.keys(v.conj||{}).forEach(function(p){
+      var parts=String(v.conj[p]).split(" "); var f=parts[0];
+      add(f, f+" = "+lem+" ("+names[p]+" çekimi) — "+tr);
+      if(parts.length>1 && parts[parts.length-1]!=="sich" && parts[parts.length-1]!==f) add(parts[parts.length-1], parts[parts.length-1]+" = "+lem+" fiilinin ayrılan ön eki — "+tr);
+    });
+    if(v.imperativ){ Object.keys(v.imperativ).forEach(function(p){ var f=String(v.imperativ[p]).replace(/[!]/g,"").replace(/ Sie$/,"").split(" ")[0]; add(f, f+" = "+lem+" (emir) — "+tr); }); }
+  });
+  adjectives.forEach(function(a){
+    add(a.adj, a.adj+" — "+a.tr);
+    ["e","en","em","er","es"].forEach(function(e){ add(a.adj+e, a.adj+e+" = "+a.adj+" (çekimli) — "+a.tr); });
+    if(a.komparativ){ add(a.komparativ, a.komparativ+" (Komparativ) — daha "+a.tr); ["e","en","em","er","es"].forEach(function(e){ add(a.komparativ+e, a.komparativ+e+" (Komparativ, çekimli) — daha "+a.tr); }); }
+    if(a.superlativ){ var su=String(a.superlativ).replace(/^am /,""); add(su, su+" (Superlativ) — en "+a.tr); ["e","en","em","er","es"].forEach(function(e){ add(su+e, su+e+" (Superlativ, çekimli) — en "+a.tr); }); }
+  });
+  if(typeof STARTER_ADV!=="undefined"){ STARTER_ADV.forEach(function(a){ add(a.adv, a.adv+" — "+a.tr); }); }
+  ix.__fn=GQ_FN;
+  __glossIdx=ix; return ix;
+}
+function glossLookup(tok){
+  var ix=glossBuild(); var k=String(tok||"").toLowerCase().replace(/\u200b/g,"").replace(/'s?$/,""); if(!k) return "";
+  var out=[];
+  if(GQ_FN[k]) out.push(k+" — "+GQ_FN[k]);
+  if(ix[k]) ix[k].forEach(function(t){ out.push(t); });
+  if(!out.length && /^[\d.,:]+$/.test(k)) return k+" — sayı";
+  if(!out.length && k.length>4){
+    var tries=[k.replace(/(en|er|es|em|e|n|s)$/,""), k.replace(/(en|er|es|em|e|n|s)$/,"")+"e"];
+    for(var i=0;i<tries.length && !out.length;i++){ var t=tries[i]; if(t!==k && t.length>2 && ix[t]) ix[t].slice(0,2).forEach(function(x){ out.push(x); }); }
+  }
+  return out.slice(0,3).join("\n");
+}
+function gqPersonNote(sent, form){
+  var n=[]; var s=String(sent||"");
+  var T={ich:"ich = ben (1. tekil kişi)",du:"du = sen (2. tekil kişi, tek kişiye)",er:"er / sie / es = o (3. tekil kişi)",wir:"wir = biz (1. çoğul kişi)",
+    ihr:"ihr = siz (2. çoğul kişi: birden fazla kişiye 'sizler'; tek kişiye resmî 'Sie')",sie:"sie = onlar (3. çoğul kişi) — özne çoğul isim, fiil çoğul (-en) olur; tekil 'o' olsaydı fiil -t alırdı"};
+  if(form && T[form]) n.push(T[form]);
+  var m;
+  var re=/\b([Ss]ie)\b(?: [a-zäöüß]+)?/g;
+  var hasSie=/\b[Ss]ie\b/.test(s);
+  if(hasSie){
+    var ms=/\b(Sie|sie)\b/.exec(s); var atStart=ms.index===0 || /[.!?] $/.test(s.slice(Math.max(0,ms.index-2),ms.index));
+    var after=(/\b[Ss]ie ([a-zäöüß_]+)/.exec(s)||[])[1]||"";
+    if(ms[1]==="Sie" && !atStart) n.push("Sie (cümle ortasında büyük harf) = siz (resmî, tek ya da çoğul kişiye)");
+    else if(/^(hat|ist|wird|kann|muss|will|soll|darf|mag|möchte)$/.test(after)) n.push("sie + "+after+" = o (kadın, tekil) — 'onlar' olsaydı: haben / sind / können…");
+    else if(/^(haben|sind|werden|können|müssen|wollen|sollen|dürfen|mögen|möchten)$/.test(after)) n.push("sie + "+after+" = onlar (çoğul). Cümle başında büyük 'Sie' resmî 'siz' de olabilir");
+  }
+  if(form!=="ihr" && /\b[Ii]hr\b/.test(s)){
+    var mi=/\b([Ii]hr)\b ?([^ ]*)/.exec(s); var nx=mi?mi[2]:"";
+    var prev=s.slice(0,mi.index).trim().split(" ").pop()||"";
+    if(/^[A-ZÄÖÜ]/.test(nx) && nx!=="___") n.push("ihr + isim = onun (kadın) / onların (iyelik); 'siz' için 'euer' kullanılır");
+    else if(/(habt|seid|werdet|könnt|müsst|wollt|sollt|dürft)$/.test(nx+" "+prev) || nx==="___" || prev==="___" || mi.index===0 || /^(wenn|dass|weil|ob|und|oder|denn|aber|wo|wann|was|wie|warum|wieso|bitte|heute|jetzt|dann|da|hier|morgen|gestern|oft|nie|immer)$/i.test(prev) || /[a-zäöüß]t$/.test(nx) || /^[a-zäöüß]+[^aeiouäöü ]t$/.test(prev)) n.push("ihr = siz (2. çoğul: birden fazla kişiye 'sizler')");
+    else n.push("ihr (fiilden sonra) = ona (kadına, Dativ) — özne 'siz' değil");
+  }
+  if(/\bihn\b/.test(s)) n.push("ihn = onu (erkek, Akkusativ)");
+  if(/\bihm\b/.test(s)) n.push("ihm = ona (erkek / nötr, Dativ)");
+  if(/\bihnen\b/.test(s)) n.push("ihnen = onlara (Dativ)");
+  if(/\beuch\b/.test(s)) n.push("euch = sizi / size (ihr'in nesne hâli, çoğul)");
+  return n.join("\n");
+}
+
 function gqQuestion(bank, it){
   const full = gqFull(bank, it);
   const target = bank.choose ? it[1] : it[1];
@@ -11375,6 +11481,7 @@ function gqQuestion(bank, it){
     category:"gq", mode:"sentence", kind:"gq",
     target, sentence:full, display, translation:tr, emoji:bank.emoji,
     qtype:bank.qtype, inlineTr: bank.choose ? "" : tr, hideTr: !!bank.hideTr, hint:bank.hint, noExample:true,
+    personNote: bank.choose ? "" : gqPersonNote(it[0].replace("___", it[1]), it[4]), tapWords: !bank.choose,
     options: shuffleArray([target, ...it[2]]), answered:false
   };
 }
@@ -11743,10 +11850,41 @@ function showSessionQuestion(){
     const shownText = currentQ.display || blankSentence(currentQ.sentence, currentQ.target);
     if(currentQ.inlineTr){
       qw.textContent = "";
-      qw.appendChild(document.createTextNode(shownText));
+      let glossBox = null;
+      if(currentQ.tapWords){
+        const parts = shownText.split(/(\s+)/);
+        parts.forEach(function(pt){
+          if(!pt || /^\s+$/.test(pt) || pt.indexOf("___")>=0){ qw.appendChild(document.createTextNode(pt)); return; }
+          const core = pt.replace(/^[„"“(\[]+|[.,!?;:"“”)\]\u200b]+$/g, "");
+          if(!core){ qw.appendChild(document.createTextNode(pt)); return; }
+          const i0 = pt.indexOf(core);
+          if(i0>0) qw.appendChild(document.createTextNode(pt.slice(0,i0)));
+          const sp = document.createElement("span");
+          sp.className = "tapw"; sp.textContent = core;
+          sp.style.cssText = "cursor:pointer; border-bottom:1px dotted #9aa; ";
+          sp.onclick = function(ev){
+            ev.stopPropagation();
+            qw.querySelectorAll(".tapw").forEach(function(x){ x.style.background=""; });
+            sp.style.background = "rgba(80,160,160,.25)";
+            if(glossBox){ glossBox.style.display="block"; glossBox.textContent = glossLookup(core) || (core + " — bu kelimenin anlamı sözlükte yok"); }
+          };
+          qw.appendChild(sp);
+          if(i0+core.length < pt.length) qw.appendChild(document.createTextNode(pt.slice(i0+core.length)));
+        });
+        glossBox = document.createElement("div");
+        glossBox.id = "gqGloss";
+        glossBox.style.cssText = "display:none; white-space:pre-line; font-size:14px; font-weight:500; text-align:left; margin:10px auto 0; padding:8px 12px; max-width:92%; border-radius:10px; border:1px solid var(--line); color:var(--ink); font-family: system-ui, Helvetica, Arial, sans-serif; line-height:1.4;";
+        const hintEl = document.createElement("div");
+        hintEl.style.cssText = "font-size:11px; color:#9a9a9a; font-weight:400; margin-top:6px; font-family: system-ui, Helvetica, Arial, sans-serif;";
+        hintEl.textContent = "👆 Bir kelimeye dokun, anlamını gör";
+        qw.appendChild(hintEl);
+        qw.appendChild(glossBox);
+      } else {
+        qw.appendChild(document.createTextNode(shownText));
+      }
       const sub = document.createElement("div");
-      sub.style.cssText = "font-size:15px; color:#8a8a8a; font-weight:400; margin-top:8px; font-family: system-ui, Helvetica, Arial, sans-serif; line-height:1.35;";
-      sub.textContent = currentQ.inlineTr;
+      sub.style.cssText = "font-size:15px; color:#8a8a8a; font-weight:400; margin-top:8px; font-family: system-ui, Helvetica, Arial, sans-serif; line-height:1.35; white-space:pre-line;";
+      sub.textContent = currentQ.inlineTr + (currentQ.personNote ? "\n\n👤 " + currentQ.personNote.split("\n").join("\n👤 ") : "");
       if(currentQ.hideTr){
         sub.style.display = "none";
         const tb = document.createElement("button");
@@ -12053,7 +12191,7 @@ function checkSentenceAnswer(chosen, btnEl){
   const isCorrect = chosen === correct;
   showResultIcon(isCorrect);
   const key = getItemKey(currentQ.word, currentQ.category);
-  const trTail = ((currentQ.inlineTr && currentQ.category === "dativ-prep") || currentQ.category === "gq") ? " — " + currentQ.translation : "";
+  const trTail = (((currentQ.inlineTr && currentQ.category === "dativ-prep") || currentQ.category === "gq") ? " — " + currentQ.translation : "") + (currentQ.personNote ? " · 👤 " + currentQ.personNote.split("\n").join(" · ") : "");
   if(isCorrect){
     document.getElementById("qFeedback").textContent = "Doğru! " + currentQ.sentence + trTail;
   } else {
@@ -14991,7 +15129,7 @@ function foldRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"); }
   ["atmen", "inf", "Bei Asthma ist es schwer, richtig zu ___.", "Astımda doğru nefes almak zor."],
   ["aufbauen", "pp", "Die Kinder haben im Garten ein großes Zelt ___.", "Çocuklar bahçede büyük bir çadır kurdu."],
   ["aufhängen", "inf", "Ich muss noch die nasse Wäsche ___.", "Hâlâ ıslak çamaşırları asmam gerekiyor."],
-  ["aufmachen", "du", "Kannst du bitte das Fenster ___? Es ist so warm.", "Lütfen pencereyi açar mısın? Çok sıcak."],
+  ["aufmachen", "inf", "Kannst du bitte das Fenster ___? Es ist so warm.", "Lütfen pencereyi açar mısın? Çok sıcak."],
   ["aufräumen", "ihr", "Bevor die Gäste kommen, ___ ihr bitte das Wohnzimmer auf.", "Misafirler gelmeden önce lütfen oturma odasını toplayın."],
   ["aufschreiben", "inf", "Darf ich mir deine Telefonnummer schnell ___?", "Telefon numaranı çabucak yazabilir miyim?"],
   ["aufstehen", "ich", "An Wochenenden ___ ich nie vor neun Uhr auf.", "Hafta sonları hiç dokuzdan önce kalkmam."],
@@ -15000,7 +15138,7 @@ function foldRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"); }
   ["ausdrucken", "inf", "Ich muss die Fahrkarte noch zu Hause ___.", "Bileti daha evde yazdırmam gerekiyor."],
   ["ausfüllen", "inf", "Sie müssen das Formular vollständig ___.", "Formu eksiksiz doldurmanız gerekiyor."],
   ["auspacken", "pp", "Die Kinder haben ihre Geschenke sofort ___.", "Çocuklar hediyelerini hemen açtı."],
-  ["ausschalten", "du", "Bitte ___ du das Licht aus, wenn du das Zimmer verlässt.", "Odadan çıkarken lütfen ışığı kapat."],
+  ["ausschalten", "du", "Warum ___ du nie das Licht aus, wenn du das Zimmer verlässt?", "Odadan çıkarken neden hiç ışığı kapatmıyorsun?"],
   ["aussehen", "er", "Dein Bruder ___ heute richtig müde aus.", "Erkek kardeşin bugün gerçekten yorgun görünüyor."],
   ["aussteigen", "inf", "Sie müssen an der nächsten Haltestelle ___.", "Bir sonraki durakta inmeniz gerekiyor."],
   ["backen", "ich", "Zu Weihnachten ___ ich immer viele Plätzchen.", "Noel'de hep bir sürü kurabiye pişiririm."],
@@ -15041,7 +15179,7 @@ function foldRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"); }
   ["einnehmen", "inf", "Sie müssen diese Tabletten dreimal täglich ___.", "Bu hapları günde üç kez almalısınız."],
   ["einpacken", "pp", "Ich habe die Geschenke schön in buntes Papier ___.", "Hediyeleri güzelce renkli kâğıda paketledim."],
   ["einräumen", "inf", "Nach dem Abwaschen muss ich die Teller in den Schrank ___.", "Bulaşıktan sonra tabakları dolaba yerleştirmem gerekiyor."],
-  ["einschalten", "du", "Kannst du bitte die Heizung ___? Mir ist kalt.", "Lütfen kaloriferi açar mısın? Üşüyorum."],
+  ["einschalten", "inf", "Kannst du bitte die Heizung ___? Mir ist kalt.", "Lütfen kaloriferi açar mısın? Üşüyorum."],
   ["einschlafen", "pp", "Der Kleine ist im Auto sofort ___.", "Küçük çocuk arabada hemen uykuya daldı."],
   ["einsteigen", "inf", "Bitte nicht ___, die Türen schließen gleich!", "Lütfen binmeyin, kapılar birazdan kapanıyor!"],
   ["empfehlen", "ich", "Als Vorspeise ___ ich Ihnen die Tomatensuppe.", "Başlangıç olarak size domates çorbasını öneririm."],
@@ -15105,7 +15243,7 @@ function foldRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"); }
   ["lieben", "ich", "Ich ___ meine Familie mehr als alles andere.", "Ailemi her şeyden çok seviyorum."],
   ["liegen", "er", "Das Buch ___ schon seit Tagen auf dem Küchentisch.", "Kitap günlerdir mutfak masasının üstünde duruyor."],
   ["machen", "ich", "Nach der Arbeit ___ ich oft einen langen Spaziergang.", "İşten sonra sık sık uzun bir yürüyüş yaparım."],
-  ["melden", "ihr", "Bitte ___ ihr euch sofort bei mir, wenn ihr Hilfe braucht.", "Yardıma ihtiyacınız olursa lütfen hemen bana haber verin."],
+  ["melden", "ihr", "Warum ___ ihr euch nie bei mir, wenn ihr Hilfe braucht?", "Neden yardıma ihtiyacınız olduğunda hiç bana haber vermiyorsunuz?"],
   ["mitbringen", "inf", "Ich möchte ein Geschenk zur Party ___.", "Partiye bir hediye getirmek istiyorum."],
   ["mitgehen", "inf", "Möchtest du heute Abend zum Konzert ___?", "Bu akşam konsere bizimle gelmek ister misin?"],
   ["mitkommen", "inf", "Wir fahren zum See. Willst du ___?", "Göle gidiyoruz. Sen de gelmek ister misin?"],
@@ -15264,6 +15402,25 @@ function foldRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"); }
   ];
   var POOL_H=["backen","gießen","bügeln","singen","tanzen","fischen","zeichnen","grillen","surfen","schlafen","sammeln"];
   var POOL_S=["schwimmen","springen","sterben","klettern","wandern","joggen","fliegen","fallen"];
+  var BLK={backen:/brot|kuchen|pizza|plätzchen|torte|ofen|teig|küche|essen|kochen|brötchen|keks|mehl|zucker|ei\b|eier/,
+    "gießen":/blume|pflanze|garten|wasser|regen|tee|kaffee|glas|trinken|saft|milch|suppe|wein|bier|dusch|bad|pool|kanne|flasche|tasse/,
+    "bügeln":/hemd|wäsche|kleid|hose|kleidung|bluse|anzug|rock|jacke|pullover|t-shirt|shirt|schrank|koffer|anziehen|tragen/,
+    singen:/lied|chor|musik|konzert|party|bad\b|dusche|dusch|radio|stimme|geburtstag|weihnacht|fest|feier/,
+    tanzen:/party|musik|disco|hochzeit|fest\b|konzert|club|feier|abend|tanz/,
+    fischen:/see\b|fluss|angel|meer|boot|fisch|teich|wasser|urlaub|wochenende/,
+    zeichnen:/bild|stift|papier|kunst|skizze|schule|heft|kind|plan|karte|schreib|mal/,
+    grillen:/fleisch|wurst|würstchen|garten|sommer|grill|park|feuer|abend|wochenende|party|feier|essen|hunger|mittag/,
+    surfen:/internet|meer|welle|wind|urlaub|computer|handy|seite|netz|online|laptop|strand|see\b|website|wlan/,
+    schlafen:/bett|müde|nacht|hotel|zimmer|abend|sofa|uhr|morgen|wach|ruhe|traum|krank|lange|früh|spät|zug|flugzeug|schon|wochenende|baby|kind/,
+    sammeln:/briefmarke|münze|pilz|müll|stein|muschel|daten|hobby|beere|geld|punkte|karten|bild|ding|obst|freizeit/,
+    schwimmen:/see\b|meer|pool|wasser|fluss|bad\b|schwimm|sommer|urlaub|strand|teich|fisch|boot|hallenbad|freibad/,
+    springen:/wasser|pool|seil|hoch|tisch|stuhl|fenster|treppe|mauer|tür|bett|sofa|graben|hund|kind|sport|turm|brücke|ball|schnell/,
+    sterben:/krank|alt\b|leben|tod|opfer|hunger|unfall|krieg|pflanze|blume|baum|tier|hund|katze|großvater|großmutter|oma|opa|krebs|unglück/,
+    klettern:/berg|baum|fels|leiter|wand|mauer|garten|haus|dach|treppe|gebirge|spiel|kind|hoch|zaun|turm|alpen|gipfel|sport/,
+    wandern:/berg|wald|wochenende|urlaub|natur|weg\b|wetter|sonne|park|hügel|alpen|schuhe|rucksack|tal\b|see\b|gipfel|wander|sommer|ausflug|karte/,
+    joggen:/park|morgen|sport|fit|wald|laufen|lauf|schuhe|gesund|abend|kondition|runde|wochenende|training|weg\b|strecke|marathon/,
+    fliegen:/flugzeug|flug|urlaub|reise|vogel|himmel|luft|wolke|flughafen|ferien|pilot|ausland|london|spanien|reisen|land\b|stadt|insel|amerika|türkei|nach /,
+    fallen:/eis\b|glatt|schnee|treppe|boden|herbst|blatt|regen|stuhl|baum|fenster|tisch|stolper|kind|unfall|dunkel|rutsch|tasse|glas|teller|aus der|vom |von der|auf den|nass|stein|preis|temperatur/};
   var MODAL={"dürfen":1,"können":1,"möchten":1,"mögen":1,"müssen":1,"sollen":1,"wollen":1};
   function find(l){ for(var i=0;i<verbs.length;i++) if(verbs[i].verb===l) return verbs[i]; return null; }
   function aux(v){ return (v.perf||"").split(" ")[0]; }
@@ -15284,12 +15441,13 @@ function foldRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"); }
     var cands=pool.map(find).filter(function(c){
       if(!c || c.verb===v.verb || c.kat===v.kat) return false;
       if(low.indexOf(c.verb.slice(0,4).toLowerCase())>=0) return false;
+      var bl=BLK[c.verb]; if(bl && bl.test(low)) return false;
       var w=formOf(c,f); return w && w!==ans;
     });
     var seen={}, wrong=[];
     shuffleArray(cands).forEach(function(c){ var w=formOf(c,f); if(wrong.length<3 && !seen[w]){ seen[w]=1; wrong.push(w); } });
     if(wrong.length<3) return;
-    items.push([sent,ans,wrong,tr]);
+    items.push([sent,ans,wrong,tr,f]);
   });
   GQ_BANK["gq-fiil"]={emoji:"🎯",qtype:"HANGİ FİİL? (yeni cümleler)",hint:"Cümlenin anlamına bak ve boşluğa uyan fiili seç. Özneye (ich, du, er, wir…) ve cümlenin yapısına (modal fiil + mastar, haben / sein + Partizip II) dikkat et.",items:items};
   if(typeof TEST_NAMES!=="undefined") TEST_NAMES["gq-fiil"]="Fiil sınavı: yeni cümleler";
