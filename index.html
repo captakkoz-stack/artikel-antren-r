@@ -1519,6 +1519,9 @@ html[data-theme="dark"] .test-subtab:nth-child(5){border-color:#ee8fa5;}
   @media (min-width:901px){ .home-grid{grid-template-columns:repeat(4,minmax(0,1fr));} .home-grid.g3{grid-template-columns:repeat(3,minmax(0,1fr));} }
   .home-tile .ht-de{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:13.5px;color:var(--teal);margin-top:-2px;overflow-wrap:anywhere;}
   .home-tile .ht-s{margin-top:auto;font-size:11.5px;letter-spacing:.3px;text-transform:uppercase;opacity:.85;}
+  .home-tile .ht-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto;padding-top:4px;}
+  .home-tile .ht-chip{font-family:system-ui,Helvetica,Arial,sans-serif;font-size:10px;line-height:1.25;font-weight:500;padding:3px 8px;border-radius:999px;background:rgba(30,150,120,.10);border:1px solid rgba(30,150,120,.25);color:var(--x-tx-555555,#555);text-transform:none;letter-spacing:0;}
+  html[data-theme="dark"] .home-tile .ht-chip{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:#cfc9b8;}
   .home-tile.wide .ht-de{color:#D3B27A;}
   .home-tile.wide .ht-s{margin-top:0;text-transform:none;font-size:12.5px;}
   html[data-theme="dark"] .home-tile .ht-de{color:#d3b27a;}
@@ -8582,8 +8585,20 @@ function renderRefMenu(){
   let h = '<div class="home-grid">';
   REF_GROUPS.forEach(g => {
     const gel = document.getElementById("refGroup" + refCap(g.id));
-    const n = gel ? gel.querySelectorAll("section.ref-sec").length : 0;
-    h += '<button type="button" class="home-tile" onclick="switchReferansGroup(\''+g.id+'\')"><span class="ht-ic">'+(window.__ico?window.__ico("ref-"+g.id,g.ic):g.ic)+'</span><span class="ht-t">'+g.n+'</span><span class="ht-de">'+g.de+'</span><span class="ht-s">'+n+' kart</span></button>';
+    const secs = gel ? gel.querySelectorAll("section.ref-sec") : [];
+    const n = secs.length;
+    const esc = t => String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    const chips = [];
+    secs.forEach(sc => {
+      const h = sc.querySelector("h2"); if(!h) return;
+      let t = h.textContent.replace(/^[^\p{L}\p{N}]+/u,"").trim();
+      const parts = t.split(" · "); let lab = parts[0], i = 1;
+      while(lab.length < 5 && i < parts.length){ lab += " · " + parts[i++]; }
+      lab = lab.trim(); if(lab.length > 26) lab = lab.slice(0,25).replace(/[ ,·+-]+$/,"") + "…";
+      if(lab.toLowerCase() === g.n.toLowerCase() || chips.indexOf(lab) >= 0) return;
+      chips.push(lab);
+    });
+    h += '<button type="button" class="home-tile" onclick="switchReferansGroup(\''+g.id+'\')"><span class="ht-ic">'+(window.__ico?window.__ico("ref-"+g.id,g.ic):g.ic)+'</span><span class="ht-t">'+g.n+'</span><span class="ht-de">'+g.de+'</span><span class="ht-chips">'+(chips.length ? chips.map(c => '<span class="ht-chip">'+esc(c)+'</span>').join("") : '<span class="ht-chip">'+n+' kart</span>')+'</span></button>';
   });
   el.innerHTML = h + '</div>';
 }
