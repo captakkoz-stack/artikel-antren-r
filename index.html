@@ -405,7 +405,7 @@ html[data-theme="dark"] .kg-wrap{
     border:1px solid var(--brass);
     color:var(--tx-deep);
     padding:8px 6px;
-    border-radius:16px;
+    border-radius:20px;
     font-size:12px;
     font-weight:700;
     font-family: system-ui, Helvetica, Arial, sans-serif;
@@ -904,12 +904,23 @@ html[data-theme="dark"] .kg-wrap{
   .plural-note{
     margin-top:10px;
     font-family: system-ui, Helvetica, Arial, sans-serif;
-    font-size:12.5px;
-    color:var(--x-tx-555555);
+    font-size:13px;
+    line-height:1.55;
+    color:var(--ink);
     background:var(--cream);
-    padding:8px 10px;
-    border-radius:2px;
+    padding:10px 13px;
+    border-radius:8px;
+    border-left:3px solid var(--brass);
   }
+  .plural-note strong{color:var(--ink);}
+  .plural-note + .plural-note{margin-top:8px;}
+  .plural-note.pn-rule{border-left-color:var(--brass); background:rgba(201,166,107,.13);}
+  .plural-note.pn-tip{border-left-color:var(--der); background:rgba(43,91,138,.08);}
+  .plural-note.pn-warn{border-left-color:var(--coral); background:rgba(181,80,47,.08);}
+  html[data-theme="dark"] .plural-note{background:#18242e; border-left-color:var(--brass);}
+  html[data-theme="dark"] .plural-note.pn-rule{background:rgba(201,166,107,.15);}
+  html[data-theme="dark"] .plural-note.pn-tip{background:rgba(134,184,234,.13); border-left-color:var(--der);}
+  html[data-theme="dark"] .plural-note.pn-warn{background:rgba(229,142,110,.13); border-left-color:var(--coral);}
   .overlay{
     position:fixed;inset:0;background:rgba(15,42,61,0.72);
     display:none;align-items:center;justify-content:center;z-index:50;padding:20px;
@@ -1280,9 +1291,9 @@ html[data-theme="dark"] .kg-wrap{
 .kg-main{max-width:640px;margin:0 auto;padding:18px 16px 28px;}
 .kg-home .kg-main, .kg-home .kg-switch{max-width:1000px;}
 
-.kg-switch{display:flex;gap:8px;padding:10px 16px 0;max-width:640px;margin:0 auto;}
-.kg-switch button{flex:1;padding:10px 8px;border-radius:8px 8px 0 0;font-weight:600;color:var(--kg-muted);border-bottom:3px solid transparent;}
-.kg-switch button[aria-current="page"]{color:var(--kg-teal);border-bottom-color:var(--kg-teal);background:var(--kg-surface);}
+.kg-switch{display:flex;gap:8px;padding:12px 16px 10px;max-width:640px;margin:0 auto;flex-wrap:wrap;}
+.kg-switch button{flex:1;min-width:0;padding:9px 10px;border-radius:20px;font-weight:700;font-size:13px;color:var(--tx-deep);background:var(--x-bg-ffffff);border:1px solid var(--brass);transition:background .15s,color .15s;}
+.kg-switch button[aria-current="page"]{color:#fff;background:var(--deep);border-color:var(--deep);}
 
 .kg-brand{font-family:var(--kg-serif);font-weight:700;font-size:28px;line-height:1.1;letter-spacing:-.01em;margin:6px 0 4px;}
 .kg-sub{color:var(--kg-muted);margin:0 0 18px;}
@@ -1293,7 +1304,7 @@ html[data-theme="dark"] .kg-wrap{
 .kg-cats{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;margin:-4px 0 6px;scrollbar-width:none;}.kg-cats::-webkit-scrollbar{display:none;}
 .kg-chip-c{white-space:nowrap;flex:0 0 auto;font-size:13px;padding:6px 12px;}.kg-chip-c small{opacity:.6;font-weight:500;}
 .kg-switch{overflow-x:auto;scrollbar-width:none;max-width:1000px;}.kg-switch::-webkit-scrollbar{display:none;}
-.kg-switch button{flex:1 0 auto;white-space:nowrap;padding:10px 14px;}
+.kg-switch button{flex:1 0 auto;white-space:nowrap;padding:9px 16px;}
 .kg-hd{position:relative;height:120px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:2px 0 4px;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.28),transparent 55%),linear-gradient(145deg,var(--c),color-mix(in srgb,var(--c) 55%,#000));}
 .kg-hd-em{font-size:56px;filter:drop-shadow(0 3px 6px rgba(0,0,0,.3));}
 .kg-pill{position:absolute;right:10px;bottom:10px;background:rgba(255,255,255,.92);color:#22303a;font-weight:700;font-size:13px;padding:6px 12px;border-radius:99px;font-family:system-ui,Helvetica,Arial,sans-serif;}
@@ -1606,9 +1617,9 @@ html[data-theme="dark"] .side-tab:nth-child(7){--tc:#e5d27a;--tcbg:#463f22;}
 html[data-theme="dark"] .side-tab:nth-child(8){--tc:#e58e6e;--tcbg:#4a3027;}
 html[data-theme="dark"] .side-tab:nth-child(9){--tc:#a9b8f0;--tcbg:#2f3857;}
 html[data-theme="dark"] .side-tab:nth-child(10){--tc:#d3b27a;--tcbg:#463a25;}
-html[data-theme="dark"] .test-subtab,html[data-theme="dark"] .ref-subtab{background:#18262e;border-color:#3a4c56;color:#d9d3c4;}
+html[data-theme="dark"] .test-subtab,html[data-theme="dark"] .ref-subtab,html[data-theme="dark"] .kg-switch button{background:#18262e;border-color:#3a4c56;color:#d9d3c4;}
 html[data-theme="dark"] .test-subtab:hover,html[data-theme="dark"] .ref-subtab:hover{background:#1f3039;}
-html[data-theme="dark"] .test-subtab.active,html[data-theme="dark"] .ref-subtab.active{background:#2a5568;border-color:#d3b27a;color:#f6efdc;box-shadow:inset 0 0 0 1px #d3b27a;}
+html[data-theme="dark"] .test-subtab.active,html[data-theme="dark"] .ref-subtab.active,html[data-theme="dark"] .kg-switch button[aria-current="page"]{background:#2a5568;border-color:#d3b27a;color:#f6efdc;box-shadow:inset 0 0 0 1px #d3b27a;}
 html[data-theme="dark"] .test-subtab:nth-child(1){border-color:#86b8ea;}
 html[data-theme="dark"] .test-subtab:nth-child(2){border-color:#7fcf9a;}
 html[data-theme="dark"] .test-subtab:nth-child(3){border-color:#c9a3e0;}
@@ -2612,7 +2623,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Ich kaufe ein Glas Marmelade.<br>Gib mir eine Packung Reis.</div>
         </div>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Kural:</strong> Miktar belirteci + isim arasında hiçbir bağlaç ya da ek gerekmez — direkt yan yana gelirler: "ein Kilo <strong>Äpfel</strong>", "eine Flasche <strong>Öl</strong>". Miktar belirteci de kendi sıfat/isim gibi Akkusativ'e göre değişebilir (einen Becher, eine Flasche gibi).
       </div>
     
@@ -2630,7 +2641,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <tr><td style="padding:8px;">2,40 €</td><td style="padding:8px;">zwei Euro vierzig / zwei vierzig</td></tr>
         </tbody>
       </table>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Kural:</strong> 1 euro altı (< 1,00 €) sadece Cent olarak söylenir. 1 euro üstü için iki yol var: "X Euro Y" (tam söyleniş) ya da kısaca "X Y" (Euro kelimesi düşürülüp sadece iki sayı art arda söylenir — "zwei vierzig" gibi).
       </div>
     
@@ -2738,7 +2749,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="wx-why">Ticket nötr → das Zugticket.</div>
         </div>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-tip">
         <strong>Okuma ipucu:</strong> Uzun bir kelime gördüğünde sona bak — hem artikeli hem ana anlamı oradadır. <em>die Bundesligamannschaft</em> → sonu "Mannschaft" (takım, dişil).
       </div>
       <div class="plural-note">
@@ -2770,10 +2781,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Gehst du heute ins Kino?<br>Wohin gehst du?</div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>ALTIN KURAL (V2 kuralı):</strong> Düz cümlede çekimli fiil <strong>her zaman 2. sıradadır</strong> — cümleye özne, zaman (heute), yer, ya da nesne ile başlaman fiilin yerini değiştirmez, sadece özne kayar. Yani "bazen devrik bazen normal" diye bir şey yok — tek bir kural var, değişen sadece 1. sırayı kimin doldurduğu.<br>
-        <strong>İstisna:</strong> weil / dass / wenn / als gibi bağlaçlı yan cümlelerde fiil cümlenin <strong>en sonuna</strong> gider (bkz. Bağlaçlar sekmesi).
-      </div>
+      <div class="plural-note pn-rule"><strong>ALTIN KURAL (V2 kuralı):</strong> Düz cümlede çekimli fiil <strong>her zaman 2. sıradadır</strong> — cümleye özne, zaman (heute), yer, ya da nesne ile başlaman fiilin yerini değiştirmez, sadece özne kayar. Yani "bazen devrik bazen normal" diye bir şey yok — tek bir kural var, değişen sadece 1. sırayı kimin doldurduğu.</div>
+      <div class="plural-note"><strong>İstisna:</strong> weil / dass / wenn / als gibi bağlaçlı yan cümlelerde fiil cümlenin <strong>en sonuna</strong> gider (bkz. Bağlaçlar sekmesi).</div>
       <h3 class="ref-h3">Örnekler: başa ne gelirse gelsin</h3>
 
       <div class="wx-card m">
@@ -2821,7 +2830,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Ich fahre <strong>morgen</strong> <strong>mit dem Auto</strong> <strong>nach Berlin</strong>.</div>
         </div>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Pratik kural:</strong> Almancada <strong>"Zeit vor Ort"</strong> (zaman, yerden önce) ezberlemeye değer bir kısayoldur — Türkçede sıra ters olabildiği için ("Berlin'e yarın gidiyorum" gibi) bu noktada hata yapmak kolaydır. Cümlenin ortasında (fiilden sonra) sıra genelde şöyledir: <strong>Özne → Zaman → Nesne/Nasıl → Yer</strong>.
       </div>
       <h3 class="ref-h3">Örnekler: cümleyi sıraya diz</h3>
@@ -2878,11 +2887,9 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
-        <strong>Sık yapılan hata:</strong> "Zuerst <span style="color:var(--coral);">ich spüle</span> …" ✗ — fiil 2. sırada olmalı: "Zuerst <strong>spüle ich</strong> …" ✓<br>
-        <strong>Ayrılabilir fiillerde:</strong> fiil 2. sırada, ön ek en sonda: "Danach <strong>hole</strong> ich meine Tochter <strong>ab</strong>." (abholen)<br>
-        <strong>İpucu:</strong> Bu 5 kelime Bağlaçlar sekmesinde de var. Sıralı anlatırken ("önce… sonra… daha sonra…") hepsini art arda kullanabilirsin.
-      </div>
+      <div class="plural-note pn-warn"><strong>Sık yapılan hata:</strong> "Zuerst <span style="color:var(--coral);">ich spüle</span> …" ✗ — fiil 2. sırada olmalı: "Zuerst <strong>spüle ich</strong> …" ✓</div>
+      <div class="plural-note"><strong>Ayrılabilir fiillerde:</strong> fiil 2. sırada, ön ek en sonda: "Danach <strong>hole</strong> ich meine Tochter <strong>ab</strong>." (abholen)</div>
+      <div class="plural-note"><strong>İpucu:</strong> Bu 5 kelime Bağlaçlar sekmesinde de var. Sıralı anlatırken ("önce… sonra… daha sonra…") hepsini art arda kullanabilirsin.</div>
       <h3 class="ref-h3">Örnekler: fiil nerede kalır?</h3>
 
       <div class="wx-card m">
@@ -3032,11 +3039,9 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
-        <strong>Ayrılan fiil</strong> weil'de birleşir: ich stehe … <strong>auf</strong> → weil ich … <strong>aufstehe</strong>.<br>
-        <strong>Modal fiil</strong>: çekimli olan (muss, will, möchte…) en sondadır, mastar ondan önce: weil er arbeiten <strong>muss</strong>.<br>
-        <strong>Perfekt</strong>: yardımcı fiil en sondadır: weil er nach Berlin gefahren <strong>ist</strong>.
-      </div>
+      <div class="plural-note"><strong>Ayrılan fiil</strong> weil'de birleşir: ich stehe … <strong>auf</strong> → weil ich … <strong>aufstehe</strong>.</div>
+      <div class="plural-note"><strong>Modal fiil</strong>: çekimli olan (muss, will, möchte…) en sondadır, mastar ondan önce: weil er arbeiten <strong>muss</strong>.</div>
+      <div class="plural-note"><strong>Perfekt</strong>: yardımcı fiil en sondadır: weil er nach Berlin gefahren <strong>ist</strong>.</div>
       <h3 class="ref-h3">weil cümlesi başa gelirse</h3>
       <div class="wx-card m">
         <div class="wx-head"><b>Yan cümle = 1. yer</b><span>fiil hemen virgülden sonra</span></div>
@@ -3047,11 +3052,9 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </div>
       </div>
       <h3 class="ref-h3">weil mi, denn mi?</h3>
-      <div class="plural-note">
-        <strong>weil</strong> → fiil sonda: Fallschirmspringen ist teuer, weil man ein Flugzeug <strong>braucht</strong>.<br>
-        <strong>denn</strong> → fiil 2. sırada, cümle başa gelmez: Fallschirmspringen ist teuer, denn man <strong>braucht</strong> ein Flugzeug.<br>
-        Pratik: fiili sona atmak istemiyorsan <strong>denn</strong>; sınavda ve günlük dilde en sık <strong>weil</strong> çıkar. Konuşma dilinde "weil ich habe keine Zeit" duyabilirsin, sınavda bu yanlış sayılır.
-      </div>
+      <div class="plural-note"><strong>weil</strong> → fiil sonda: Fallschirmspringen ist teuer, weil man ein Flugzeug <strong>braucht</strong>.</div>
+      <div class="plural-note"><strong>denn</strong> → fiil 2. sırada, cümle başa gelmez: Fallschirmspringen ist teuer, denn man <strong>braucht</strong> ein Flugzeug.</div>
+      <div class="plural-note">Pratik: fiili sona atmak istemiyorsan <strong>denn</strong>; sınavda ve günlük dilde en sık <strong>weil</strong> çıkar. Konuşma dilinde "weil ich habe keine Zeit" duyabilirsin, sınavda bu yanlış sayılır.</div>
       <div class="plural-note">🧪 Pratik: Testler → Gramer → <strong>weil: fiil sona</strong> · <strong>Weil başta</strong> · <strong>weil mi, denn mi?</strong>
       </div>
     
@@ -3101,17 +3104,15 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
-        <strong>weil ↔ denn:</strong> ikisi de "çünkü" demektir ama <strong>weil</strong>'de fiil sona gider ("…, weil ich krank <strong>bin</strong>"), <strong>denn</strong>'de sıra normal kalır ("…, denn ich <strong>bin</strong> krank").<br>
-        <strong>aber ↔ sondern:</strong> "nicht … sondern" (olumsuzdan sonra aksini söylerken): Er trinkt keinen Tee, <strong>sondern</strong> Kaffee. Diğer durumlarda "ama" = aber.<br>
-        <strong>als ↔ wenn:</strong> <strong>als</strong> = geçmişte tek seferlik ("Als ich acht war, …"), <strong>wenn</strong> = tekrar eden / şimdiki / gelecek ("Wenn es regnet, …").<br>
-        <strong>Yan cümle başa geçerse:</strong> ana cümlenin fiili hemen virgülden sonra gelir: "<strong>Wenn</strong> es regnet, <strong>bleibe</strong> ich zu Hause."<br>
-        <strong>obwohl ↔ trotzdem:</strong> ikisi de "-diği halde / yine de" ama <strong>obwohl</strong> yan cümledir (fiil sona): "Ich gehe, <strong>obwohl</strong> ich krank <strong>bin</strong>." <strong>trotzdem</strong>'de fiil hemen arkasında: "Ich bin krank, <strong>trotzdem gehe ich</strong>."<br>
-        <strong>damit ↔ um … zu:</strong> ikisi de "-mek için". Öznen aynıysa <strong>um … zu</strong> (Ich lerne, <strong>um</strong> besser <strong>zu</strong> sprechen). Özneler farklıysa <strong>damit</strong> (Ich spreche langsam, <strong>damit du</strong> mich <strong>verstehst</strong>).<br>
-        <strong>bevor ↔ nachdem:</strong> bevor = -meden önce, nachdem = -dikten sonra (nachdem'li yan cümlede genelde Perfekt kullanılır: Nachdem ich gegessen <strong>habe</strong>, …).<br>
-        <strong>deshalb / deswegen / darum:</strong> üçü de "bu yüzden", aynı kullanılır, fiil hemen arkasında.<br>
-        <strong>Virgül:</strong> weil / dass / wenn / als / ob / obwohl / damit / bevor / nachdem / während'den önce her zaman virgül konur.
-      </div>
+      <div class="plural-note"><strong>weil ↔ denn:</strong> ikisi de "çünkü" demektir ama <strong>weil</strong>'de fiil sona gider ("…, weil ich krank <strong>bin</strong>"), <strong>denn</strong>'de sıra normal kalır ("…, denn ich <strong>bin</strong> krank").</div>
+      <div class="plural-note"><strong>aber ↔ sondern:</strong> "nicht … sondern" (olumsuzdan sonra aksini söylerken): Er trinkt keinen Tee, <strong>sondern</strong> Kaffee. Diğer durumlarda "ama" = aber.</div>
+      <div class="plural-note"><strong>als ↔ wenn:</strong> <strong>als</strong> = geçmişte tek seferlik ("Als ich acht war, …"), <strong>wenn</strong> = tekrar eden / şimdiki / gelecek ("Wenn es regnet, …").</div>
+      <div class="plural-note"><strong>Yan cümle başa geçerse:</strong> ana cümlenin fiili hemen virgülden sonra gelir: "<strong>Wenn</strong> es regnet, <strong>bleibe</strong> ich zu Hause."</div>
+      <div class="plural-note"><strong>obwohl ↔ trotzdem:</strong> ikisi de "-diği halde / yine de" ama <strong>obwohl</strong> yan cümledir (fiil sona): "Ich gehe, <strong>obwohl</strong> ich krank <strong>bin</strong>." <strong>trotzdem</strong>'de fiil hemen arkasında: "Ich bin krank, <strong>trotzdem gehe ich</strong>."</div>
+      <div class="plural-note"><strong>damit ↔ um … zu:</strong> ikisi de "-mek için". Öznen aynıysa <strong>um … zu</strong> (Ich lerne, <strong>um</strong> besser <strong>zu</strong> sprechen). Özneler farklıysa <strong>damit</strong> (Ich spreche langsam, <strong>damit du</strong> mich <strong>verstehst</strong>).</div>
+      <div class="plural-note"><strong>bevor ↔ nachdem:</strong> bevor = -meden önce, nachdem = -dikten sonra (nachdem'li yan cümlede genelde Perfekt kullanılır: Nachdem ich gegessen <strong>habe</strong>, …).</div>
+      <div class="plural-note"><strong>deshalb / deswegen / darum:</strong> üçü de "bu yüzden", aynı kullanılır, fiil hemen arkasında.</div>
+      <div class="plural-note"><strong>Virgül:</strong> weil / dass / wenn / als / ob / obwohl / damit / bevor / nachdem / während'den önce her zaman virgül konur.</div>
       <h3 class="ref-h3">Örnekler: denn mi, weil mi?</h3>
 
       <div class="wx-card m">
@@ -3203,19 +3204,15 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="wx-why">aber ve denn öncesinde virgül şart.</div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>Kısaltma kuralı:</strong> 1. ve 2. cümlede <strong>özne (ve fiil) aynıysa</strong>, <strong>und · oder · aber</strong> sonrasındaki 2. cümlede özne ve fiil <strong>tekrar edilmeyebilir</strong>.<br>
-        Ich arbeite viel <strong>und</strong> <span style="opacity:.6">(ich)</span> habe nicht oft Urlaub. · Man arbeitet zu Hause <strong>oder</strong> <span style="opacity:.6">(man)</span> mietet ein Büro.<br>
-        Aynı özne ve fiil tekrar etmez: Ich arbeite gern <strong>und</strong> viel. (= … und <span style="opacity:.6">(ich arbeite)</span> viel.)<br>
-        <strong>denn</strong>'de ise 2. cümle çoğunlukla kendi öznesi ve fiiliyle tam yazılır: …, denn <strong>das ist</strong> praktisch.
-      </div>
+      <div class="plural-note pn-rule"><strong>Kısaltma kuralı:</strong> 1. ve 2. cümlede <strong>özne (ve fiil) aynıysa</strong>, <strong>und · oder · aber</strong> sonrasındaki 2. cümlede özne ve fiil <strong>tekrar edilmeyebilir</strong>.</div>
+      <div class="plural-note">Ich arbeite viel <strong>und</strong> <span style="opacity:.6">(ich)</span> habe nicht oft Urlaub. · Man arbeitet zu Hause <strong>oder</strong> <span style="opacity:.6">(man)</span> mietet ein Büro.</div>
+      <div class="plural-note">Aynı özne ve fiil tekrar etmez: Ich arbeite gern <strong>und</strong> viel. (= … und <span style="opacity:.6">(ich arbeite)</span> viel.)</div>
+      <div class="plural-note"><strong>denn</strong>'de ise 2. cümle çoğunlukla kendi öznesi ve fiiliyle tam yazılır: …, denn <strong>das ist</strong> praktisch.</div>
       <h3 class="ref-h3">Sıra: Position 0</h3>
-      <div class="plural-note">
-        <strong>und · oder · aber · denn</strong> + <strong>özne + fiil</strong> (normal sıra).<br>
-        ✅ Ich bin krank, <strong>denn</strong> ich habe Fieber. &nbsp;·&nbsp; ❌ …, denn ich Fieber habe.<br>
-        <strong>weil</strong> ise fiili sona gönderir: …, <strong>weil</strong> ich Fieber <strong>habe</strong>.<br>
-        <strong>💡 Hatırlatma:</strong> <strong>ADUSO</strong> = <strong>A</strong>ber · <strong>D</strong>enn · <strong>U</strong>nd · <strong>S</strong>ondern · <strong>O</strong>der.
-      </div>
+      <div class="plural-note"><strong>und · oder · aber · denn</strong> + <strong>özne + fiil</strong> (normal sıra).</div>
+      <div class="plural-note">✅ Ich bin krank, <strong>denn</strong> ich habe Fieber. &nbsp;·&nbsp; ❌ …, denn ich Fieber habe.</div>
+      <div class="plural-note"><strong>weil</strong> ise fiili sona gönderir: …, <strong>weil</strong> ich Fieber <strong>habe</strong>.</div>
+      <div class="plural-note pn-tip"><strong>💡 Hatırlatma:</strong> <strong>ADUSO</strong> = <strong>A</strong>ber · <strong>D</strong>enn · <strong>U</strong>nd · <strong>S</strong>ondern · <strong>O</strong>der.</div>
     
           <div class="dlg"><div class="dlg-h"><span>💬 Mini diyalog · Im Büro</span><button type="button" class="dlg-play" data-say="Neden bu kadar yorgunsun? Yorgunum çünkü dün uzun çalıştım. Bence daha çok uyuman gerekiyor. Evet, umarım bugün erken eve gidebilirim.">▶️ Dinle</button></div>
         <div class="dlg-row a"><div class="dlg-b"><div class="dlg-de"><span class="dlg-who">A</span>Warum bist du so müde?</div><div class="dlg-tr">Neden bu kadar yorgunsun?</div></div></div>
@@ -3257,7 +3254,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <tr><td style="padding:8px;">Evet/Hayır sorusu</td><td style="padding:8px;">Kochst du <strong>gern</strong>?</td></tr>
         </tbody>
       </table>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Kural:</strong> "gern"/"nicht gern" her zaman FİİLDEN SONRA gelir, nesneden ÖNCE gelir — "Ich spiele gern Tennis." (Ich spiele Tennis gern DEĞİL). Konum, cümle tipinden (düz/soru) bağımsız olarak hep fiilin hemen ardındadır.
       </div>
     
@@ -3317,7 +3314,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-warn">
         <strong>Sık yapılan hatalar:</strong><br>
         <span style="color:var(--coral); font-weight:700;">✗</span> Ich habe nicht Zeit. → <span style="color:var(--sea); font-weight:700;">✓</span> Ich habe <strong>keine</strong> Zeit.<br>
         <span style="color:var(--coral); font-weight:700;">✗</span> Ich habe nicht ein Auto. → <span style="color:var(--sea); font-weight:700;">✓</span> Ich habe <strong>kein</strong> Auto.<br>
@@ -3326,12 +3323,10 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         <span style="color:var(--coral); font-weight:700;">✗</span> Das ist kein mein Buch. → <span style="color:var(--sea); font-weight:700;">✓</span> Das ist <strong>nicht</strong> mein Buch. <span style="color:var(--x-tx-555555);">(iyelikle kein olmaz)</span><br>
         <span style="color:var(--coral); font-weight:700;">✗</span> Ich kenne keinen den Mann. → <span style="color:var(--sea); font-weight:700;">✓</span> Ich kenne den Mann <strong>nicht</strong>. <span style="color:var(--x-tx-555555);">(belirli artikelle kein olmaz)</span>
       </div>
-      <div class="plural-note">
-        <strong>nicht nereye gelir?</strong> Cümlenin tamamını/fiili olumsuzluyorsan <strong>sona</strong> (Ich kenne ihn nicht.). Sadece bir parçayı olumsuzluyorsan o parçanın <strong>hemen önüne</strong> (Ich fahre nicht heute, sondern morgen.).<br>
-        <strong>Düzeltme için:</strong> nicht/kein … <strong>sondern</strong> (aksine): Das ist <strong>kein</strong> Tee, <strong>sondern</strong> Kaffee. · Er kommt <strong>nicht</strong> heute, <strong>sondern</strong> morgen.<br>
-        <strong>Olumsuz soruya olumlu cevap:</strong> Hast du kein Geld? — <strong>Doch</strong>, ich habe Geld. <span style="color:var(--x-tx-555555);">(Soru-cevap kartına bak: ja / nein / doch)</span><br>
-        <strong>Pratik:</strong> Test → Gramer → Fiil &amp; Cümle Kuruluşu → <strong>nicht / kein</strong>.
-      </div>
+      <div class="plural-note"><strong>nicht nereye gelir?</strong> Cümlenin tamamını/fiili olumsuzluyorsan <strong>sona</strong> (Ich kenne ihn nicht.). Sadece bir parçayı olumsuzluyorsan o parçanın <strong>hemen önüne</strong> (Ich fahre nicht heute, sondern morgen.).</div>
+      <div class="plural-note"><strong>Düzeltme için:</strong> nicht/kein … <strong>sondern</strong> (aksine): Das ist <strong>kein</strong> Tee, <strong>sondern</strong> Kaffee. · Er kommt <strong>nicht</strong> heute, <strong>sondern</strong> morgen.</div>
+      <div class="plural-note"><strong>Olumsuz soruya olumlu cevap:</strong> Hast du kein Geld? — <strong>Doch</strong>, ich habe Geld. <span style="color:var(--x-tx-555555);">(Soru-cevap kartına bak: ja / nein / doch)</span></div>
+      <div class="plural-note pn-rule"><strong>Pratik:</strong> Test → Gramer → Fiil &amp; Cümle Kuruluşu → <strong>nicht / kein</strong>.</div>
     
 <div class="wx-card f">
         <div class="wx-head"><b>kein → isim olumsuzu</b><span>ein / çıplak isim</span></div>
@@ -3382,10 +3377,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <tr><td style="padding:8px;"><strong>sie / Sie</strong> (onlar / siz-nazik)</td><td style="padding:8px; color:var(--coral); font-weight:700;">sie / Sie</td><td style="padding:8px;">Ich kenne <strong>sie</strong>. / Ich kenne <strong>Sie</strong>.</td></tr>
         </tbody>
       </table>
-      <div class="plural-note">
-        <strong>Sadece 3 tanesi gerçekten değişiyor</strong> (dikkat çekici olanlar): <strong>ich→mich, du→dich, er→ihn</strong>. Geri kalanlar (sie, es, wir→uns, ihr→euch) da değişiyor ama daha kolay ezberlenir — <strong>wir/ihr</strong>'in Akkusativ hâli her zaman <strong>-s</strong> ile bitmez, "un<strong>s</strong>" ve "euch" şeklini alır.<br>
-        <strong>Türkçe mantığı:</strong> Nominativ zamirler "ben/sen/o" (özne — eylemi yapan), Akkusativ zamirler ise "beni/seni/onu" (nesne — eylemden doğrudan etkilenen) şeklinde düşünülebilir.
-      </div>
+      <div class="plural-note"><strong>Sadece 3 tanesi gerçekten değişiyor</strong> (dikkat çekici olanlar): <strong>ich→mich, du→dich, er→ihn</strong>. Geri kalanlar (sie, es, wir→uns, ihr→euch) da değişiyor ama daha kolay ezberlenir — <strong>wir/ihr</strong>'in Akkusativ hâli her zaman <strong>-s</strong> ile bitmez, "un<strong>s</strong>" ve "euch" şeklini alır.</div>
+      <div class="plural-note"><strong>Türkçe mantığı:</strong> Nominativ zamirler "ben/sen/o" (özne — eylemi yapan), Akkusativ zamirler ise "beni/seni/onu" (nesne — eylemden doğrudan etkilenen) şeklinde düşünülebilir.</div>
       <h3 class="ref-h3">Örnekler: beni, seni, onu</h3>
 
       <div class="wx-card akk">
@@ -3433,10 +3426,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
-        <strong>Örnekler:</strong> Ich helfe <strong>dir</strong>. (Sana yardım ediyorum.) — Das Fahrrad gehört <strong>ihm</strong>. (Bisiklet ona ait.) — Kannst du <strong>mir</strong> den Stift geben? (Bana kalemi verebilir misin?)<br>
-        <strong>Fark:</strong> "Ich sehe <strong>dich</strong>." (seni görüyorum — Akkusativ) ↔ "Ich helfe <strong>dir</strong>." (sana yardım ediyorum — Dativ). Fiil hangisini istiyorsa o hâl kullanılır.
-      </div>
+      <div class="plural-note"><strong>Örnekler:</strong> Ich helfe <strong>dir</strong>. (Sana yardım ediyorum.) — Das Fahrrad gehört <strong>ihm</strong>. (Bisiklet ona ait.) — Kannst du <strong>mir</strong> den Stift geben? (Bana kalemi verebilir misin?)</div>
+      <div class="plural-note pn-rule"><strong>Fark:</strong> "Ich sehe <strong>dich</strong>." (seni görüyorum — Akkusativ) ↔ "Ich helfe <strong>dir</strong>." (sana yardım ediyorum — Dativ). Fiil hangisini istiyorsa o hâl kullanılır.</div>
       <h3 class="ref-h3">Örnekler: bana, sana, ona</h3>
 
       <div class="wx-card dat">
@@ -3514,7 +3505,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="wx-why">zeigen: kişi Dativ, yol Akkusativ.</div>
         </div>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Kısa kural:</strong> Türkçe çeviride <strong>-i</strong> (onu, beni) çıkıyorsa Akkusativ, <strong>-e</strong> (ona, bana) çıkıyorsa Dativ. İki nesne varsa: <strong>kişi → Dativ, şey → Akkusativ</strong>. Sadece Dativ isteyen fiiller: helfen, danken, gefallen, gehören, antworten.
       </div>
           <div class="trap"><div class="trap-h">🇹🇷 Türkçede böyle, Almanca'da şöyle</div><div class="trap-n">Türkçedeki -i / -e hâlleri fiile göre değişmez; Almanca'da <strong>fiil hangi hâli istediğini belirler</strong>.</div>
@@ -3546,10 +3537,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <tr><td style="padding:8px;"><strong>sie / Sie</strong> (onlar/nazik)</td><td style="padding:8px;">ihr / Ihr</td><td style="padding:8px;">ihr / Ihr</td><td style="padding:8px;">ihre / Ihre</td><td style="padding:8px;">ihre / Ihre</td></tr>
         </tbody>
       </table>
-      <div class="plural-note" style="margin-top:0;">
-        <strong>Altın kural:</strong> İyelik zamirleri ile olumsuz artikel <strong>kein</strong>'in ekleri BİREBİR AYNIDIR — der/das'ta hiç ek almaz, die ve çoğulda <strong>-e</strong> eki alır. "kein/keine" kalıbını biliyorsan, iyelik zamirlerini de zaten biliyorsun demektir!<br>
-        <strong>Dikkat:</strong> <em>euer</em> kelimesi -e eki alınca "euer+e" değil, kısalıp <strong>eure</strong> olur (bazı kaynaklarda "euere" de görülebilir ama "eure" standarttır).
-      </div>
+      <div class="plural-note pn-rule"><strong>Altın kural:</strong> İyelik zamirleri ile olumsuz artikel <strong>kein</strong>'in ekleri BİREBİR AYNIDIR — der/das'ta hiç ek almaz, die ve çoğulda <strong>-e</strong> eki alır. "kein/keine" kalıbını biliyorsan, iyelik zamirlerini de zaten biliyorsun demektir!</div>
+      <div class="plural-note pn-warn"><strong>Dikkat:</strong> <em>euer</em> kelimesi -e eki alınca "euer+e" değil, kısalıp <strong>eure</strong> olur (bazı kaynaklarda "euere" de görülebilir ama "eure" standarttır).</div>
     
       <h3 class="ref-h3">sein mi, ihr mi? · 3. tekil şahıs</h3>
       <div class="plural-note" style="margin-top:0;">
@@ -3567,7 +3556,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Das ist Frau Schmidt. <strong>Ihre</strong> Wohnung ist klein.<br><span style="color:var(--x-tx-999999);">(Onun evi — sahip kadın)</span></div>
         </div>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-warn">
         <strong>Unutma:</strong> sein/ihr'in kendisi de (mein/dein gibi) sahiplenilen NESNENİN cinsiyetine göre çekilir — "sein Computer" (der, ek yok) ama "seine Wohnung" (die, -e eki). Yani BURADA İKİ AYRI KURAL AYNI ANDA ÇALIŞIYOR: (1) sein/ihr seçimi SAHİBİN cinsiyetine, (2) -e eki alıp almaması SAHİPLENİLEN NESNENİN cinsiyetine bağlıdır.
       </div>
     
@@ -3613,11 +3602,9 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
-        <strong>Kural:</strong> sonlar belirli artikelin sonlarıyla aynı: <strong>-er / -es / -e / -e</strong> (Nominativ), eril Akkusativ <strong>-en</strong>, Dativ <strong>-em / -em / -er / -en</strong>.<br>
-        Örnek: <strong>Dieser</strong> Mann ist nett. · Ich kenne <strong>diesen</strong> Mann. · Ich spreche mit <strong>diesem</strong> Mann. · Mit <strong>dieser</strong> Frau · Mit <strong>diesen</strong> Leuten.<br>
-        <strong>Hangi?</strong> sorusu için aynı ekler: <strong>welcher / welche / welches</strong> (Welches Rezept?).
-      </div>
+      <div class="plural-note pn-rule"><strong>Kural:</strong> sonlar belirli artikelin sonlarıyla aynı: <strong>-er / -es / -e / -e</strong> (Nominativ), eril Akkusativ <strong>-en</strong>, Dativ <strong>-em / -em / -er / -en</strong>.</div>
+      <div class="plural-note">Örnek: <strong>Dieser</strong> Mann ist nett. · Ich kenne <strong>diesen</strong> Mann. · Ich spreche mit <strong>diesem</strong> Mann. · Mit <strong>dieser</strong> Frau · Mit <strong>diesen</strong> Leuten.</div>
+      <div class="plural-note"><strong>Hangi?</strong> sorusu için aynı ekler: <strong>welcher / welche / welches</strong> (Welches Rezept?).</div>
       <h3 class="ref-h3">Örnekler: bu … yu / bu … ye</h3>
 
       <div class="wx-card n">
@@ -3651,7 +3638,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Kural:</strong> Akkusativ'de sadece <strong>eril</strong> değişir (-en). Dativ'de hepsi değişir: <strong>-em / -em / -er / -en</strong>. Çoğul Dativ'de isme de <strong>-n</strong> eklenir: mit diesen Schuhe<strong>n</strong>.
       </div>
       <h3 class="ref-h3">Örnekler: soru → cevap → neden?</h3>
@@ -3753,17 +3740,13 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </div>
       </div>
       <h3 class="ref-h3">Hangi hâl? Nasıl bulurum?</h3>
-      <div class="plural-note" style="margin-top:6px;">
-        <strong>1.</strong> Önce <strong>özneyi</strong> bul (Wer? kim?) → <span class="wx-pill nom">Nominativ</span>. <em>Dieser Rock gefällt mir</em> → Rock özne.<br>
-        <strong>2.</strong> Kalan ismi Türkçede düşün: <strong>-i hâli</strong> (kimi/neyi) → <span class="wx-pill akk">Akkusativ</span> · <strong>-e hâli</strong> (kime) → <span class="wx-pill dat">Dativ</span>.<br>
-        <strong>3.</strong> <strong>Edat</strong> var mı? für · um · durch · ohne · gegen → Akkusativ. mit · zu · bei · von · aus · nach · seit → Dativ.<br>
-        <strong>4.</strong> <strong>Fiil</strong> Dativ'li mi? gefallen · helfen · gehören · danken · antworten → kişi Dativ. <em>Der Rock gefällt <strong>mir</strong>.</em><br>
-        <strong>5.</strong> Sonra cinse bak: sadece eril Akkusativ'de değişir. das / die / çoğulda Nominativ = Akkusativ.
-      </div>
-      <div class="plural-note" style="margin-top:10px;">
-        <strong>Üç hâl bir arada:</strong> <em>Dieser Rock</em> gefällt mir (Nominativ). Ich kaufe <em>diesen Rock</em> (Akkusativ). Ich gehe mit <em>diesem Rock</em> zur Party (Dativ).<br>
-        <strong>İpucu:</strong> <strong>da / hier</strong> ile birlikte kullanılır: <strong>Diesen da</strong> = şunu (orada), <strong>Diesen hier</strong> = bunu (burada).
-      </div>
+      <div class="plural-note"><strong>1.</strong> Önce <strong>özneyi</strong> bul (Wer? kim?) → <span class="wx-pill nom">Nominativ</span>. <em>Dieser Rock gefällt mir</em> → Rock özne.</div>
+      <div class="plural-note"><strong>2.</strong> Kalan ismi Türkçede düşün: <strong>-i hâli</strong> (kimi/neyi) → <span class="wx-pill akk">Akkusativ</span> · <strong>-e hâli</strong> (kime) → <span class="wx-pill dat">Dativ</span>.</div>
+      <div class="plural-note"><strong>3.</strong> <strong>Edat</strong> var mı? für · um · durch · ohne · gegen → Akkusativ. mit · zu · bei · von · aus · nach · seit → Dativ.</div>
+      <div class="plural-note"><strong>4.</strong> <strong>Fiil</strong> Dativ'li mi? gefallen · helfen · gehören · danken · antworten → kişi Dativ. <em>Der Rock gefällt <strong>mir</strong>.</em></div>
+      <div class="plural-note"><strong>5.</strong> Sonra cinse bak: sadece eril Akkusativ'de değişir. das / die / çoğulda Nominativ = Akkusativ.</div>
+      <div class="plural-note"><strong>Üç hâl bir arada:</strong> <em>Dieser Rock</em> gefällt mir (Nominativ). Ich kaufe <em>diesen Rock</em> (Akkusativ). Ich gehe mit <em>diesem Rock</em> zur Party (Dativ).</div>
+      <div class="plural-note"><strong>İpucu:</strong> <strong>da / hier</strong> ile birlikte kullanılır: <strong>Diesen da</strong> = şunu (orada), <strong>Diesen hier</strong> = bunu (burada).</div>
           <div class="trap"><div class="trap-h">🇹🇷 Türkçede böyle, Almanca'da şöyle</div>
         <div class="trap-row"><div class="trap-x">❌ Welche Mann ist das?</div><div class="trap-ok">✅ <strong>Welcher</strong> Mann ist das?</div><div class="trap-why">der → welcher.</div></div>
         <div class="trap-row"><div class="trap-x">❌ Welcher Tisch gefällt dir? – Diese Tisch.</div><div class="trap-ok">✅ Welcher Tisch gefällt dir? – <strong>Dieser</strong> Tisch.</div><div class="trap-why">Soruda welcher, cevapta dieser: aynı sonlar.</div></div>
@@ -3795,11 +3778,9 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">In diesem Restaurant isst <strong>man</strong> gut.<br><span style="color:var(--x-tx-999999);">(Bu restoranda güzel yenir.)</span></div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>Tek gramer kuralı:</strong> "man" her zaman <strong>3. tekil şahıs (er/sie/es)</strong> gibi çekilir — man mach<strong>t</strong>, man kann, man muss, man darf, man sag<strong>t</strong>. Başka hiçbir çekim yoktur, hep bu tek form kullanılır.<br>
-        <strong>Türkçe karşılaştırma:</strong> Türkçede bunu genelde fiili PASİF yaparak çözeriz ("yapılır", "denir", "içilmez") — özneyi hiç söylemeyiz. Almanca ise özneyi somut bir kelimeyle ("man") söyler, ama bu kelime "belirli biri" değil, "insanlar genel olarak" demektir.<br>
-        <strong>Dikkat:</strong> "man" ile "Mann" (adam) karıştırılmasın — "man" tek n ile yazılır ve küçük harfle başlar (isim değildir).
-      </div>
+      <div class="plural-note pn-rule"><strong>Tek gramer kuralı:</strong> "man" her zaman <strong>3. tekil şahıs (er/sie/es)</strong> gibi çekilir — man mach<strong>t</strong>, man kann, man muss, man darf, man sag<strong>t</strong>. Başka hiçbir çekim yoktur, hep bu tek form kullanılır.</div>
+      <div class="plural-note"><strong>Türkçe karşılaştırma:</strong> Türkçede bunu genelde fiili PASİF yaparak çözeriz ("yapılır", "denir", "içilmez") — özneyi hiç söylemeyiz. Almanca ise özneyi somut bir kelimeyle ("man") söyler, ama bu kelime "belirli biri" değil, "insanlar genel olarak" demektir.</div>
+      <div class="plural-note pn-warn"><strong>Dikkat:</strong> "man" ile "Mann" (adam) karıştırılmasın — "man" tek n ile yazılır ve küçük harfle başlar (isim değildir).</div>
       <h3 class="ref-h3">Örnekler: "genel özne" cümleleri</h3>
 
       <div class="wx-card p">
@@ -3831,10 +3812,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
-        <strong>jemand / niemand hâl alır:</strong> ayrıntılı tablo ve örnekler aşağıda (🎯 bölümü).<br>
-        <strong>man</strong> sadece <strong>özne</strong> olur ve fiili 3. tekil gibi çeker: man kann, man muss, man isst. Türkçede genelde edilgen kurarsın.
-      </div>
+      <div class="plural-note"><strong>jemand / niemand hâl alır:</strong> ayrıntılı tablo ve örnekler aşağıda (🎯 bölümü).</div>
+      <div class="plural-note"><strong>man</strong> sadece <strong>özne</strong> olur ve fiili 3. tekil gibi çeker: man kann, man muss, man isst. Türkçede genelde edilgen kurarsın.</div>
       <h3 class="ref-h3">🎯 jemand / niemand · Nominativ, Akkusativ, Dativ</h3>
       <div class="plural-note" style="margin-top:0;">
         <strong>jemand</strong> ve <strong>niemand</strong> artikel gibi <strong>hâl alır</strong>: cümledeki göreve göre sonu değişir. Hâli bulmak için fiile soru sor: <strong>Wer?</strong> (kim?) → Nominativ · <strong>Wen?</strong> (kimi?) → Akkusativ · <strong>Wem?</strong> (kime?) → Dativ.
@@ -3883,15 +3862,13 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
-        <strong>Sık hatalar:</strong><br>
-        ✗ Ich kenne <em>niemand</em>. → ✓ Ich kenne <strong>niemanden</strong>. (kennen → Akkusativ)<br>
-        ✗ Ich helfe <em>niemanden</em>. → ✓ Ich helfe <strong>niemandem</strong>. (helfen → Dativ)<br>
-        ✗ Ich gehe mit <em>jemanden</em>. → ✓ Ich gehe mit <strong>jemandem</strong>. (mit → Dativ)<br>
-        ✗ Ich kenne <em>nicht niemanden</em>. → ✓ Ich kenne <strong>niemanden</strong>. (niemand zaten olumsuz, nicht ekleme)<br>
-        <strong>Günlük konuşma:</strong> Almanlar konuşurken sık sık sondaki hâl ekini yutar ("Ich kenne niemand"). Yazıda ve sınavda tam hâli kullan.<br>
-        <strong>Genitiv</strong> çok nadir: jemandes / niemandes (Das ist <strong>niemandes</strong> Schuld. → Bu kimsenin suçu değil). A2'de gerekmez.
-      </div>
+      <div class="plural-note pn-warn"><strong>Sık hatalar:</strong></div>
+      <div class="plural-note">✗ Ich kenne <em>niemand</em>. → ✓ Ich kenne <strong>niemanden</strong>. (kennen → Akkusativ)</div>
+      <div class="plural-note">✗ Ich helfe <em>niemanden</em>. → ✓ Ich helfe <strong>niemandem</strong>. (helfen → Dativ)</div>
+      <div class="plural-note">✗ Ich gehe mit <em>jemanden</em>. → ✓ Ich gehe mit <strong>jemandem</strong>. (mit → Dativ)</div>
+      <div class="plural-note">✗ Ich kenne <em>nicht niemanden</em>. → ✓ Ich kenne <strong>niemanden</strong>. (niemand zaten olumsuz, nicht ekleme)</div>
+      <div class="plural-note pn-tip"><strong>Günlük konuşma:</strong> Almanlar konuşurken sık sık sondaki hâl ekini yutar ("Ich kenne niemand"). Yazıda ve sınavda tam hâli kullan.</div>
+      <div class="plural-note"><strong>Genitiv</strong> çok nadir: jemandes / niemandes (Das ist <strong>niemandes</strong> Schuld. → Bu kimsenin suçu değil). A2'de gerekmez.</div>
       <h3 class="ref-h3">man de hâl alır (kısa not)</h3>
       <div class="plural-note">
         <strong>man</strong> sadece Nominativ'dir (özne). Nesne olması gerekirse yerine <strong>einen</strong> (Akkusativ) ve <strong>einem</strong> (Dativ) gelir:<br>
@@ -3957,11 +3934,9 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Die Kamera <strong>von Max</strong>.<br><span style="color:var(--x-tx-999999);">(Max'ın kamerası)</span></div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>Dikkat — Türkçeden farkı:</strong> Türkçede İKİ taraf da ek alır ("Caroline'<strong>ın</strong> kamera<strong>sı</strong>"), Almancada SADECE sahip olan isim ek alır ("<strong>Carolines</strong> Kamera" — "Kamera" hiç değişmez).<br>
-        <strong>Sıra da farklı:</strong> Almancada özel isim + -s İLK gelir, sahip olunan nesne SONRA gelir — Türkçedeki gibi ("Caroline'ın arabası" → "Carolines Auto", ters çevirme yok).<br>
-        <strong>Günlük hayatta:</strong> Konuşurken "von + isim" çok daha yaygındır, "-s" eki daha çok yazı dilinde görülür.
-      </div>
+      <div class="plural-note pn-warn"><strong>Dikkat — Türkçeden farkı:</strong> Türkçede İKİ taraf da ek alır ("Caroline'<strong>ın</strong> kamera<strong>sı</strong>"), Almancada SADECE sahip olan isim ek alır ("<strong>Carolines</strong> Kamera" — "Kamera" hiç değişmez).</div>
+      <div class="plural-note pn-rule"><strong>Sıra da farklı:</strong> Almancada özel isim + -s İLK gelir, sahip olunan nesne SONRA gelir — Türkçedeki gibi ("Caroline'ın arabası" → "Carolines Auto", ters çevirme yok).</div>
+      <div class="plural-note pn-tip"><strong>Günlük hayatta:</strong> Konuşurken "von + isim" çok daha yaygındır, "-s" eki daha çok yazı dilinde görülür.</div>
       <h3 class="ref-h3">Örnekler: Peters Auto, Annas Tasche</h3>
 
       <div class="wx-card m">
@@ -4088,7 +4063,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-warn">
         <strong>Dikkat:</strong> du <strong>wirst</strong> · er <strong>wird</strong> (e → i değişimi, düzensiz). Perfekt'te <strong>haben değil sein</strong> kullanılır, çünkü werden bir <em>durum değişimi</em> bildirir.
       </div>
       <h3 class="ref-h3">1 · Değişim: bir şey olmak / hâle gelmek</h3>
@@ -4130,10 +4105,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="wx-why">Tahmin / gelecek.</div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>Günlük dilde</strong> gelecek için genelde Präsens + zaman zarfı yeter: "<em>Morgen fahre ich nach Izmir.</em>" <strong>werden + mastar</strong> daha çok tahmin, söz ve plan için kullanılır.<br>
-        <strong>Karıştırma:</strong> <strong>werden</strong> (olmak) ≠ <strong>wollen</strong> (istemek) ≠ <strong>bekommen</strong> (almak). "Ich werde ein Eis" yanlış, "Ich bekomme ein Eis" doğru.
-      </div>
+      <div class="plural-note pn-tip"><strong>Günlük dilde</strong> gelecek için genelde Präsens + zaman zarfı yeter: "<em>Morgen fahre ich nach Izmir.</em>" <strong>werden + mastar</strong> daha çok tahmin, söz ve plan için kullanılır.</div>
+      <div class="plural-note pn-warn"><strong>Karıştırma:</strong> <strong>werden</strong> (olmak) ≠ <strong>wollen</strong> (istemek) ≠ <strong>bekommen</strong> (almak). "Ich werde ein Eis" yanlış, "Ich bekomme ein Eis" doğru.</div>
           <h3 class="ref-h3">🎨 Cümle blokları</h3>
       <div class="sb-leg"><span class="sb-b s">özne</span><span class="sb-b v">çekimli fiil</span><span class="sb-b k">bağlaç</span><span class="sb-b p">fiilin 2. parçası</span><span class="sb-b o">diğer</span></div>
       <div class="sb-group"><div class="sb-cap">werden + mastar (gelecek)</div><div class="sb" data-say="Ich werde morgen arbeiten"><span class="sb-b s">Ich</span><span class="sb-b v">werde</span><span class="sb-b o">morgen</span><span class="sb-b p">arbeiten</span></div><div class="sb-arrow">⬇</div><div class="sb" data-say="Er wird Arzt"><span class="sb-b s">Er</span><span class="sb-b v">wird</span><span class="sb-b o">Arzt</span></div></div>
@@ -4200,10 +4173,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="wx-why">es wird + <b>fiil mastarı</b> (sonda): regnen / schneien.</div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>Özet:</strong> şimdi → <strong>Es ist</strong> sonnig. · tahmin → <strong>Es wird</strong> sonnig. · yağış tahmini → <strong>Es wird regnen / schneien</strong>.<br>
-        <strong>Wetterbericht</strong> (hava raporu): Laut Wetterbericht <strong>wird</strong> es morgen regnen.
-      </div>
+      <div class="plural-note pn-rule"><strong>Özet:</strong> şimdi → <strong>Es ist</strong> sonnig. · tahmin → <strong>Es wird</strong> sonnig. · yağış tahmini → <strong>Es wird regnen / schneien</strong>.</div>
+      <div class="plural-note"><strong>Wetterbericht</strong> (hava raporu): Laut Wetterbericht <strong>wird</strong> es morgen regnen.</div>
           <div class="trap"><div class="trap-h">🇹🇷 Türkçede böyle, Almanca'da şöyle</div>
         <div class="trap-row"><div class="trap-x">❌ Es ist regnen.</div><div class="trap-ok">✅ Es <strong>regnet</strong>.</div><div class="trap-why">Yağmur, kar: fiil (regnet, schneit).</div></div>
         <div class="trap-row"><div class="trap-x">❌ Es regnet kalt.</div><div class="trap-ok">✅ Es <strong>ist</strong> kalt.</div><div class="trap-why">Sıcaklık: es ist + sıfat.</div></div>
@@ -4236,7 +4207,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <tr><td style="padding:8px;">wir/ihr/sie</td><td style="padding:8px;">essen / esst / essen</td><td style="padding:8px;">geben / gebt / geben</td><td style="padding:8px;">nehmen / nehmt / nehmen</td></tr>
         </tbody>
       </table>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Kural:</strong> Bu üç fiil (ve genel olarak kök ünlüsü "e" olan birçok düzensiz fiil) sadece <strong>du</strong> ve <strong>er/es/sie</strong> formlarında değişir — ünlü değişimi (e→i/ie) ya da ekstra harf ekleniyor. wir/ihr/sie formları her zaman düzenli kalır.
       </div>
       <h3 class="ref-h3">Örnekler: du ve er/sie/es</h3>
@@ -4296,13 +4267,11 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Du sollst mehr Wasser trinken.<br><strong>+ nicht:</strong> Du sollst nicht so viel arbeiten. <span style="color:var(--x-tx-999999);">(tavsiye edilmiyor)</span></div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>Kelime sırası kuralı:</strong> Modal fiil (kann/will/muss/darf/soll...) cümlenin <strong>2. sırasında</strong> çekilir, asıl eylem ise <strong>mastar hâlinde cümlenin en sonuna</strong> gider — "Ich <strong>kann</strong> gut Deutsch <strong>sprechen</strong>." "Ich <strong>muss</strong> heute <strong>arbeiten</strong>."<br>
-        <strong>sollen vs müssen:</strong> "müssen" kendi zorunluluğun/gereksinimin ("Ich muss arbeiten." — çalışmam gerekiyor, kendi durumumdan), "sollen" ise BAŞKASININ isteği/tavsiyesi/beklentisi ("Der Arzt sagt, ich soll mehr schlafen." — doktor öyle söylüyor, tavsiye/beklenti dışarıdan geliyor).<br>
-        <strong>dürfen vs können:</strong> "dürfen" izin/kurala dayalı imkânı ("Kurallara göre yapabilirim/yapamam"), "können" ise yetenek/fiziksel imkânı ("elimden gelir/gelmez") anlatır — "Ich darf nicht rauchen." (yasak) ile "Ich kann nicht schwimmen." (beceremem) farkı gibi.<br>
-        <strong>⚠️ EN SIK YAPILAN HATA — nicht müssen ≠ nicht dürfen:</strong> Türkçede ikisi de "yapmamalı/yapmak zorunda değil" gibi dursa da Almancada TAM TERS iki anlam taşır! <strong>"nicht müssen"</strong> = zorunluluk YOK, istersen yaparsın istemezsen yapmazsın (serbest) — "Du musst nicht kommen." (Gelmek zorunda değilsin, istersen gelme istersen gel.) <strong>"nicht dürfen"</strong> = YASAK, kesinlikle yapılmaması gerekir — "Du darfst nicht kommen." (Gelmen yasak / gelemezsin.)<br>
-        <strong>möchte vs wollen:</strong> İkisi de "istemek" anlamına gelir ama <strong>möchte</strong> çok daha <strong>nazik/kibar</strong> bir istektir (İngilizcedeki "would like" gibi), <strong>wollen</strong> ise daha <strong>direkt/sert</strong> bir irade bildirir — Bir kafede "Ich möchte einen Kaffee." (Bir kahve rica ediyorum) demek nazikken, "Ich will einen Kaffee." (Bir kahve istiyorum!) daha kaba/buyurgan durur. Çekimi: ich möchte, du möchtest, er möchte, wir möchten, ihr möchtet, sie möchten.
-      </div>
+      <div class="plural-note pn-rule"><strong>Kelime sırası kuralı:</strong> Modal fiil (kann/will/muss/darf/soll...) cümlenin <strong>2. sırasında</strong> çekilir, asıl eylem ise <strong>mastar hâlinde cümlenin en sonuna</strong> gider — "Ich <strong>kann</strong> gut Deutsch <strong>sprechen</strong>." "Ich <strong>muss</strong> heute <strong>arbeiten</strong>."</div>
+      <div class="plural-note"><strong>sollen vs müssen:</strong> "müssen" kendi zorunluluğun/gereksinimin ("Ich muss arbeiten." — çalışmam gerekiyor, kendi durumumdan), "sollen" ise BAŞKASININ isteği/tavsiyesi/beklentisi ("Der Arzt sagt, ich soll mehr schlafen." — doktor öyle söylüyor, tavsiye/beklenti dışarıdan geliyor).</div>
+      <div class="plural-note"><strong>dürfen vs können:</strong> "dürfen" izin/kurala dayalı imkânı ("Kurallara göre yapabilirim/yapamam"), "können" ise yetenek/fiziksel imkânı ("elimden gelir/gelmez") anlatır — "Ich darf nicht rauchen." (yasak) ile "Ich kann nicht schwimmen." (beceremem) farkı gibi.</div>
+      <div class="plural-note pn-warn"><strong>⚠️ EN SIK YAPILAN HATA — nicht müssen ≠ nicht dürfen:</strong> Türkçede ikisi de "yapmamalı/yapmak zorunda değil" gibi dursa da Almancada TAM TERS iki anlam taşır! <strong>"nicht müssen"</strong> = zorunluluk YOK, istersen yaparsın istemezsen yapmazsın (serbest) — "Du musst nicht kommen." (Gelmek zorunda değilsin, istersen gelme istersen gel.) <strong>"nicht dürfen"</strong> = YASAK, kesinlikle yapılmaması gerekir — "Du darfst nicht kommen." (Gelmen yasak / gelemezsin.)</div>
+      <div class="plural-note"><strong>möchte vs wollen:</strong> İkisi de "istemek" anlamına gelir ama <strong>möchte</strong> çok daha <strong>nazik/kibar</strong> bir istektir (İngilizcedeki "would like" gibi), <strong>wollen</strong> ise daha <strong>direkt/sert</strong> bir irade bildirir — Bir kafede "Ich möchte einen Kaffee." (Bir kahve rica ediyorum) demek nazikken, "Ich will einen Kaffee." (Bir kahve istiyorum!) daha kaba/buyurgan durur. Çekimi: ich möchte, du möchtest, er möchte, wir möchten, ihr möchtet, sie möchten.</div>
       <h3 class="ref-h3">Örnekler: modal + mastar sonda</h3>
 
       <div class="wx-card m">
@@ -4360,10 +4329,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </div>
       </div>
       <h3 class="ref-h3">⏱️ Zaman ipuçları</h3>
-      <div class="plural-note">
-        <strong>Präsens:</strong> heute · jetzt · im Moment · morgen · jeden Tag<br>
-        <strong>Präteritum:</strong> gestern · letzte Woche · letztes Jahr · früher · damals · als Kind · vor einer Stunde
-      </div>
+      <div class="plural-note"><strong>Präsens:</strong> heute · jetzt · im Moment · morgen · jeden Tag</div>
+      <div class="plural-note"><strong>Präteritum:</strong> gestern · letzte Woche · letztes Jahr · früher · damals · als Kind · vor einer Stunde</div>
     
       <h3 class="ref-h3" style="margin-top:26px;">📚 Präteritum · bol örnek</h3>
 
@@ -4571,7 +4538,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Geben Sie mir 100 g Käse.<br>Bringen Sie noch einen Apfelsaft, bitte.</div>
         </div>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>En önemli kural:</strong> Emir kipinde normal kelime sırası bozulur — fiil <strong>her zaman cümlenin en başına</strong> gelir (du/ihr formunda özne bile hiç söylenmez!). Nezaket için cümle sonuna <strong>bitte</strong> eklenir: "Bringen Sie den Kaffee, bitte."<br>
         Hangi kelimeler imperative olur? <strong>Her fiilin</strong> kendi du/ihr/Sie emir hâli vardır — yukarıdaki 3 kurala göre türetilir, ezber gerektiren ayrı bir kelime listesi değildir.
       </div>
@@ -4628,7 +4595,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <tr><td style="padding:8px;"><strong>Sie</strong></td><td style="padding:8px; color:var(--brass); font-weight:700;">bringt</td><td style="padding:8px;">einen Kuchen</td><td style="padding:8px; color:var(--coral); font-weight:700;">mit.</td></tr>
         </tbody>
       </table>
-      <div class="plural-note" style="margin-top:0;">
+      <div class="plural-note pn-rule" style="margin-top:0;">
         <strong>Kural:</strong> Fiilin kökü (anfangen→fang, einkaufen→kauf) her zamanki gibi <strong>2. sırada çekilir</strong>, ama <strong>ön eki</strong> (an, ein, ab, mit, auf, zurück...) cümlenin <strong>en sonuna</strong> gider — cümlenin başını ve sonunu bir "parantez" gibi sarar, buna <strong>Satzklammer (cümle parantezi)</strong> denir.<br>
         Diğer örnekler: einladen → "Ich lade dich <strong>ein</strong>." / abholen → "Er holt mich <strong>ab</strong>." / mitbringen → "Sie bringt einen Kuchen <strong>mit</strong>." / aufräumen → "Wir räumen das Zimmer <strong>auf</strong>."
       </div>
@@ -4692,7 +4659,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Ich <strong>finde den Film gut</strong>.<br><span style="color:var(--x-tx-999999);">(Filmi iyi buluyorum — aynı anlam!)</span><br>Ich <strong>finde die Schuhe</strong> nicht <strong>schön</strong>.<br><span style="color:var(--x-tx-999999);">(Ayakkabıları güzel bulmuyorum.)</span></div>
         </div>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Aynı anlamı iki farklı şekilde kur:</strong> "Der Film gefällt mir." = "Ich finde den Film gut." — ikisi de "Filmi beğeniyorum" demek, ama <strong>gefallen</strong>'de ÖZNE ŞEY, <strong>finden</strong>'de ÖZNE KİŞİdir. Kafan karışırsa: gefallen cümlesinde "kime hoş geliyor?" (mir/dir/ihm...) sorusunu, finden cümlesinde "kim buluyor?" (ich/du/er...) sorusunu sor.
       </div>
       <h3 class="ref-h3">Örnekler: hoşlanma ve görüş</h3>
@@ -4734,7 +4701,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Er schwimmt jeden Tag.<br>Sie wandert am Wochenende.</div>
         </div>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Kural yok, ezber gerekir:</strong> Bazı sporlar "isim + machen/spielen/fahren" kalıbıyla, bazıları TEK BAŞINA bir fiille anlatılır — hangi sporun hangi kalıba girdiğini kelimeyle birlikte öğrenmek gerekir.
       </div>
       <h3 class="ref-h3">Örnekler: spielen mi, gehen mi?</h3>
@@ -4779,7 +4746,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <tr><td style="padding:7px;">sie/Sie</td><td style="padding:7px; color:var(--coral); font-weight:700;">sich</td><td style="padding:7px;">Sie freuen <strong>sich</strong>.</td></tr>
         </tbody>
       </table>
-      <div class="plural-note" style="margin-top:12px;">
+      <div class="plural-note pn-rule" style="margin-top:12px;">
         <strong>Fark:</strong> Sadece <em>er/sie/es</em> ve <em>sie/Sie</em> için <strong>sich</strong>; diğerleri Akkusativ zamirlerle (mich, dich, uns, euch) aynı.
       </div>
       <h3 class="ref-h3">Sık dönüşlü fiiller</h3>
@@ -4799,7 +4766,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="wx-why">Bölünen + dönüşlü: ich … mich … an.</div>
         </div>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-tip">
         <strong>Not:</strong> Bazı fiiller Dativ dönüşlü zamir ister (bir nesneyle): <em>Ich wasche <strong>mir</strong> die Hände.</em> (Ellerimi yıkıyorum.) Burada el nesne, "mir" dönüşlü Dativ.
       </div>
     </section>
@@ -4836,13 +4803,11 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Gestern <strong>war</strong> ich müde.<br>Er <strong>hatte</strong> Hunger.<br><span style="color:var(--x-tx-999999);">(Dün yorgundum. / Onun karnı açtı.)</span></div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>Örnekler:</strong> Wo <strong>warst</strong> du gestern? (Dün neredeydin?) — Am Sonntag <strong>hatten</strong> wir keine Zeit. (Pazar günü vaktimiz yoktu.) — <strong>Hattest</strong> du Durst? (Susamış mıydın?)<br>
-        <strong>Kural 1:</strong> ich ve er/es/sie geçmişte <strong>aynı</strong> biçimdedir: ich hatte / er hatte, ich war / er war (ek almaz).<br>
-        <strong>Kural 2:</strong> Kelime sırası aynı kalır: fiil 2. sırada (V2), soruda başa gelir. "Gestern" gibi zaman ifadesi başa geçerse özne fiilden sonra gelir: Gestern war <strong>ich</strong> müde.<br>
-        <strong>Neden önemli:</strong> Almanca günlük konuşmada çoğu fiilin geçmişi için başka bir kalıp (Perfekt) kullanılır, ama <strong>haben ve sein</strong> için konuşurken bile bu kısa geçmiş biçimler (hatte / war) kullanılır.<br>
-        <strong>Dikkat:</strong> "hat" geçmiş değil, haben'in <strong>şimdiki zaman</strong> er/sie/es biçimidir; geçmişi "hatte"dir. (Perfekt'te "hat" yardımcı fiil olarak da karşına çıkacak, o ayrı konu.)
-      </div>
+      <div class="plural-note"><strong>Örnekler:</strong> Wo <strong>warst</strong> du gestern? (Dün neredeydin?) — Am Sonntag <strong>hatten</strong> wir keine Zeit. (Pazar günü vaktimiz yoktu.) — <strong>Hattest</strong> du Durst? (Susamış mıydın?)</div>
+      <div class="plural-note pn-rule"><strong>Kural 1:</strong> ich ve er/es/sie geçmişte <strong>aynı</strong> biçimdedir: ich hatte / er hatte, ich war / er war (ek almaz).</div>
+      <div class="plural-note pn-rule"><strong>Kural 2:</strong> Kelime sırası aynı kalır: fiil 2. sırada (V2), soruda başa gelir. "Gestern" gibi zaman ifadesi başa geçerse özne fiilden sonra gelir: Gestern war <strong>ich</strong> müde.</div>
+      <div class="plural-note pn-rule"><strong>Neden önemli:</strong> Almanca günlük konuşmada çoğu fiilin geçmişi için başka bir kalıp (Perfekt) kullanılır, ama <strong>haben ve sein</strong> için konuşurken bile bu kısa geçmiş biçimler (hatte / war) kullanılır.</div>
+      <div class="plural-note pn-warn"><strong>Dikkat:</strong> "hat" geçmiş değil, haben'in <strong>şimdiki zaman</strong> er/sie/es biçimidir; geçmişi "hatte"dir. (Perfekt'te "hat" yardımcı fiil olarak da karşına çıkacak, o ayrı konu.)</div>
       <h3 class="ref-h3">Örnekler: dün, geçen yıl…</h3>
 
       <div class="wx-card m">
@@ -4878,13 +4843,11 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         <div class="rule-card der"><div class="title">haben + Partizip II</div><div class="ex">Ich <strong>habe</strong> Pizza <strong>gegessen</strong>.<br>Wir <strong>haben</strong> Deutsch <strong>gelernt</strong>.<br><span style="color:var(--x-tx-999999);">(Pizza yedim. / Almanca öğrendik.)</span></div></div>
         <div class="rule-card die"><div class="title">sein + Partizip II</div><div class="ex">Ich <strong>bin</strong> nach Berlin <strong>gefahren</strong>.<br>Er <strong>ist</strong> um 6 Uhr <strong>aufgestanden</strong>.<br><span style="color:var(--x-tx-999999);">(Berlin'e gittim. / O saat 6'da kalktı.)</span></div></div>
       </div>
-      <div class="plural-note">
-        <strong>Kelime sırası (Satzklammer / çerçeve):</strong> yardımcı fiil <strong>2. sırada</strong>, Partizip II <strong>cümlenin en sonunda</strong>. Aradaki her şey bu çerçevenin içine girer:<br>
-        Ich <strong>habe</strong> gestern mit meiner Mutter im Park Kaffee <strong>getrunken</strong>.<br>
-        Zaman ifadesi başa geçerse özne fiilden sonra gelir: Gestern <strong>habe</strong> ich … <strong>getrunken</strong>. Soruda yardımcı fiil başa gelir: <strong>Hast</strong> du schon <strong>gegessen</strong>?<br>
-        <strong>Yardımcı fiil özneye göre çekilir</strong> (ich habe/bin, du hast/bist, er hat/ist, wir haben/sind, ihr habt/seid, sie haben/sind). Partizip II ise <strong>hiç değişmez</strong>.<br>
-        <strong>Türkçe mantığı:</strong> "yedim" = Almancada "ich habe gegessen" (iki parça). Anlam aynı, ama haben/sein'ı <strong>doğru seçmek</strong> gerekir.
-      </div>
+      <div class="plural-note pn-rule"><strong>Kelime sırası (Satzklammer / çerçeve):</strong> yardımcı fiil <strong>2. sırada</strong>, Partizip II <strong>cümlenin en sonunda</strong>. Aradaki her şey bu çerçevenin içine girer:</div>
+      <div class="plural-note">Ich <strong>habe</strong> gestern mit meiner Mutter im Park Kaffee <strong>getrunken</strong>.</div>
+      <div class="plural-note">Zaman ifadesi başa geçerse özne fiilden sonra gelir: Gestern <strong>habe</strong> ich … <strong>getrunken</strong>. Soruda yardımcı fiil başa gelir: <strong>Hast</strong> du schon <strong>gegessen</strong>?</div>
+      <div class="plural-note"><strong>Yardımcı fiil özneye göre çekilir</strong> (ich habe/bin, du hast/bist, er hat/ist, wir haben/sind, ihr habt/seid, sie haben/sind). Partizip II ise <strong>hiç değişmez</strong>.</div>
+      <div class="plural-note"><strong>Türkçe mantığı:</strong> "yedim" = Almancada "ich habe gegessen" (iki parça). Anlam aynı, ama haben/sein'ı <strong>doğru seçmek</strong> gerekir.</div>
     
       <h3 class="ref-h3">haben mi, sein mi? · yardımcı fiil</h3>
       <p class="example-de" style="font-size:15px;"><strong>Varsayılan haben'dir.</strong> Fiilin kendisi hareketle veya durum değişimiyle ilgiliyse <strong>sein</strong> gelir.</p>
@@ -4901,12 +4864,10 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
-        <strong>İpucu 1 — Akkusativ testi:</strong> "Neyi?" sorusuna cevap veren bir nesne varsa neredeyse her zaman <strong>haben</strong> (Ich habe <u>das Auto</u> gefahren = arabayı sürdüm). "Nereye?" cevabı varsa <strong>sein</strong> (Ich bin <u>nach Hause</u> gefahren = eve gittim). Aynı fiil iki şekilde de olabilir!<br>
-        <strong>İpucu 2 — Yön testi:</strong> hareket + <strong>wohin?</strong> (nereye?) → sein. Hareketin kendisi (süre) → haben: Ich <strong>bin</strong> ins Wasser geschwommen, ama Ich <strong>habe</strong> zwei Stunden geschwommen.<br>
-        <strong>İpucu 3 — Hep haben olanlar:</strong> Akkusativ'li fiiller (kaufen, machen, sehen, essen, trinken, lesen, schreiben, nehmen, finden), <strong>modal fiiller</strong> (können, müssen…), <strong>dönüşlü fiiller</strong> (sich freuen), <strong>haben</strong> kendisi (ich habe gehabt), <strong>anfangen</strong> (Der Film hat angefangen), <strong>schlafen, arbeiten, wohnen, warten</strong>.<br>
-        <strong>Dikkat:</strong> sein'ın kendi Perfekt'i de sein'la: Ich <strong>bin</strong> gewesen. Ama konuşmada war / hatte (Präteritum) tercih edilir: Ich <strong>war</strong> müde. (Ich bin müde gewesen demek de doğru ama daha az doğal.)
-      </div>
+      <div class="plural-note"><strong>İpucu 1 — Akkusativ testi:</strong> "Neyi?" sorusuna cevap veren bir nesne varsa neredeyse her zaman <strong>haben</strong> (Ich habe <u>das Auto</u> gefahren = arabayı sürdüm). "Nereye?" cevabı varsa <strong>sein</strong> (Ich bin <u>nach Hause</u> gefahren = eve gittim). Aynı fiil iki şekilde de olabilir!</div>
+      <div class="plural-note"><strong>İpucu 2 — Yön testi:</strong> hareket + <strong>wohin?</strong> (nereye?) → sein. Hareketin kendisi (süre) → haben: Ich <strong>bin</strong> ins Wasser geschwommen, ama Ich <strong>habe</strong> zwei Stunden geschwommen.</div>
+      <div class="plural-note"><strong>İpucu 3 — Hep haben olanlar:</strong> Akkusativ'li fiiller (kaufen, machen, sehen, essen, trinken, lesen, schreiben, nehmen, finden), <strong>modal fiiller</strong> (können, müssen…), <strong>dönüşlü fiiller</strong> (sich freuen), <strong>haben</strong> kendisi (ich habe gehabt), <strong>anfangen</strong> (Der Film hat angefangen), <strong>schlafen, arbeiten, wohnen, warten</strong>.</div>
+      <div class="plural-note pn-warn"><strong>Dikkat:</strong> sein'ın kendi Perfekt'i de sein'la: Ich <strong>bin</strong> gewesen. Ama konuşmada war / hatte (Präteritum) tercih edilir: Ich <strong>war</strong> müde. (Ich bin müde gewesen demek de doğru ama daha az doğal.)</div>
     
       <h3 class="ref-h3">Örnekler: haben mi, sein mi?</h3>
 
@@ -4958,11 +4919,9 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
-        <strong>Karma (karışık) fiiller:</strong> ünlü değişir ama -t alır: bringen → gebracht, denken → gedacht, wissen → gewusst, kennen → gekannt.<br>
-        <strong>Ezber ipucu:</strong> düzensiz fiilleri her zaman <strong>3'lü</strong> öğren: <em>gehen – ging – gegangen</em>. Sözlükte Partizip II hep verilir, listemizdeki fiillerin yanına bakarak ezberle.<br>
-        <strong>Öneki ayır:</strong> ayrılabilir mi? Cümlede ayrılıyorsa (Ich stehe um 6 auf) → ge- ortaya girer (aufgestanden). Ayrılmıyorsa (Ich besuche dich) → ge- hiç yok (besucht).
-      </div>
+      <div class="plural-note"><strong>Karma (karışık) fiiller:</strong> ünlü değişir ama -t alır: bringen → gebracht, denken → gedacht, wissen → gewusst, kennen → gekannt.</div>
+      <div class="plural-note pn-rule"><strong>Ezber ipucu:</strong> düzensiz fiilleri her zaman <strong>3'lü</strong> öğren: <em>gehen – ging – gegangen</em>. Sözlükte Partizip II hep verilir, listemizdeki fiillerin yanına bakarak ezberle.</div>
+      <div class="plural-note"><strong>Öneki ayır:</strong> ayrılabilir mi? Cümlede ayrılıyorsa (Ich stehe um 6 auf) → ge- ortaya girer (aufgestanden). Ayrılmıyorsa (Ich besuche dich) → ge- hiç yok (besucht).</div>
       <h3 class="ref-h3">Örnekler: fiilden partizipe</h3>
 
       <div class="wx-card m">
@@ -5080,10 +5039,10 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Ich gebe meiner Mutter <strong>meinen Stift</strong>.<br><span style="color:var(--x-tx-999999);">(Anneme kalemimi veriyorum.)</span></div>
         </div>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Tek cümlede üçü birden:</strong> "Ich gebe meiner Mutter meinen Stift." — Ich (kim veriyor → Nominativ), meiner Mutter (kime → Dativ), meinen Stift (neyi → Akkusativ). Fiil (geben) hem "kime" hem "neyi" istediği için iki nesnesi var; çoğu fiil sadece birini ister (essen/kaufen → sadece Akkusativ; helfen/danken → sadece Dativ).
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Asıl sır — sadece 5 ek var:</strong>
       </div>
       <div style="overflow-x:auto;">
@@ -5106,7 +5065,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
       <div class="plural-note">
         Bu 5 ek (-e, -en, -em, -er + "ek yok") HEM der/die/das'ta HEM mein/dein/sein/ihr/unser/euer'de HEM ein/kein'de <strong>aynı şekilde</strong> çalışır — tek tablo, her yerde geçerli. Örnek: mein → mein<strong>e</strong> / mein<strong>en</strong> / mein<strong>em</strong> / mein<strong>er</strong> (mein Vater, mein<strong>en</strong> Vater, mein<strong>em</strong> Vater gibi).
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Kafanda çalışacak 3 adım:</strong> ① Eylemi kim yapıyor? → o kelime Nominativ, dokunma (dişilse -e ekle). ② "Kimi/neyi?" diye sorabiliyor musun? → cevap Akkusativ. ③ "Kime?" diye sorabiliyor musun? → cevap Dativ.
       </div>
     
@@ -5128,10 +5087,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Ich gehe in <strong>die</strong> Schule. (hareket)<br>Ich bin in <strong>der</strong> Schule. (konum)</div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>4. es gibt</strong> yapısından sonra da her zaman Akkusativ gelir: "Es gibt <strong>einen</strong> Park hier."<br>
-        <strong>Pratik ipucu:</strong> Nominativ = "kim/ne yapıyor" (özne). Akkusativ = "kime/neye yapılıyor" (doğrudan etkilenen). Sadece eril (der) hâlde görünür değişim vardır — bkz. yukarıdaki der/ein/kein tablosu.
-      </div>
+      <div class="plural-note"><strong>4. es gibt</strong> yapısından sonra da her zaman Akkusativ gelir: "Es gibt <strong>einen</strong> Park hier."</div>
+      <div class="plural-note pn-rule"><strong>Pratik ipucu:</strong> Nominativ = "kim/ne yapıyor" (özne). Akkusativ = "kime/neye yapılıyor" (doğrudan etkilenen). Sadece eril (der) hâlde görünür değişim vardır — bkz. yukarıdaki der/ein/kein tablosu.</div>
     
       <h3 class="ref-h3">Dativ nedir? (wem? = kime?)</h3>
       <div class="plural-note" style="margin-top:0;">
@@ -5196,10 +5153,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
-        <strong>Dikkat 1:</strong> Dativ'de eril ve nötr aynıdır (<strong>dem</strong>), dişil <strong>der</strong> olur — ama "der" Nominativ eril ile de aynı yazılır, cümledeki göreve bakarak ayır.<br>
-        <strong>Dikkat 2:</strong> Çoğulda Dativ'de artikel <strong>den</strong> olur VE isme <strong>-n</strong> eklenir: die Kinder → <strong>den Kindern</strong>. (Çoğul zaten -n ya da -s ile bitiyorsa ek gelmez: den Frauen, den Autos.)
-      </div>
+      <div class="plural-note pn-warn"><strong>Dikkat 1:</strong> Dativ'de eril ve nötr aynıdır (<strong>dem</strong>), dişil <strong>der</strong> olur — ama "der" Nominativ eril ile de aynı yazılır, cümledeki göreve bakarak ayır.</div>
+      <div class="plural-note pn-warn"><strong>Dikkat 2:</strong> Çoğulda Dativ'de artikel <strong>den</strong> olur VE isme <strong>-n</strong> eklenir: die Kinder → <strong>den Kindern</strong>. (Çoğul zaten -n ya da -s ile bitiyorsa ek gelmez: den Frauen, den Autos.)</div>
     
       <h3 class="ref-h3">Belirsiz artikel (ein, kein)</h3>
       <div style="overflow-x:auto;">
@@ -5214,7 +5169,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-tip">
         <strong>Not:</strong> "ein" çoğulda yoktur (Türkçedeki "bir çocuklar" gibi olmaz). Ama olumsuz "kein" çoğulda vardır ve Dativ'de <strong>keinen</strong> + isme -n alır: "Ich helfe keinen Kindern" gibi.<br>
         Aynı yapı <strong>mein / dein / sein / ihr / unser / euer</strong> için de geçerlidir: meinem Vater, meiner Schwester, meinen Eltern (-n).
       </div>
@@ -5267,12 +5222,10 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
-        <strong>3 adımda uygula:</strong> ① Önce çoğul biçimi bul (das Kind → die Kinder). ② Artikeli <strong>den</strong> yap. ③ Çoğul <strong>-n</strong> ya da <strong>-s</strong> ile bitmiyorsa sonuna <strong>-n</strong> ekle (Kinder → Kindern).<br>
-        <strong>Artikelsiz çoğulda da aynıdır:</strong> mit Freunden (arkadaşlarla), bei Freunden (arkadaşların yanında).<br>
-        <strong>Dativ isteyen fiillerle:</strong> Ich helfe den Kindern. (Çocuklara yardım ediyorum.) — Wir danken den Lehrern. (Öğretmenlere teşekkür ediyoruz.) — Das Buch gehört den Studenten. (Kitap öğrencilere ait.)<br>
-        <strong>Ezber ipucu:</strong> "wem?" (kime/kimlere) sorusunun cevabı çoğulsa isim <strong>-n ile biter</strong> — Türkçedeki "-lere" gibi düşün.
-      </div>
+      <div class="plural-note pn-rule"><strong>3 adımda uygula:</strong> ① Önce çoğul biçimi bul (das Kind → die Kinder). ② Artikeli <strong>den</strong> yap. ③ Çoğul <strong>-n</strong> ya da <strong>-s</strong> ile bitmiyorsa sonuna <strong>-n</strong> ekle (Kinder → Kindern).</div>
+      <div class="plural-note"><strong>Artikelsiz çoğulda da aynıdır:</strong> mit Freunden (arkadaşlarla), bei Freunden (arkadaşların yanında).</div>
+      <div class="plural-note"><strong>Dativ isteyen fiillerle:</strong> Ich helfe den Kindern. (Çocuklara yardım ediyorum.) — Wir danken den Lehrern. (Öğretmenlere teşekkür ediyoruz.) — Das Buch gehört den Studenten. (Kitap öğrencilere ait.)</div>
+      <div class="plural-note pn-rule"><strong>Ezber ipucu:</strong> "wem?" (kime/kimlere) sorusunun cevabı çoğulsa isim <strong>-n ile biter</strong> — Türkçedeki "-lere" gibi düşün.</div>
       <h3 class="ref-h3">Örnekler: çoğul + Dativ</h3>
 
       <div class="wx-card p">
@@ -5299,7 +5252,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
       <div class="plural-note" style="margin-top:0;">
         <strong>Türkçe mantığı:</strong> Bir fiile "kimi? neyi?" diye sorabiliyorsan, o fiil Akkusativ nesne ister — cevap her zaman Akkusativ hâlinde olur ("Ich habe <strong>einen Hund</strong>." — Ne'im var? Bir köpeğim var.)
       </div>
-      <div class="plural-note" style="margin-top:8px;">
+      <div class="plural-note pn-rule" style="margin-top:8px;">
         <strong>🙏 Özel kalıp · bitten + Akk (kişi) + um + Akk (istenen şey):</strong> Kişi Akkusativ, rica edilen şey de <strong>um</strong> sonrası Akkusativ olur.<br>
         Ich bitte <strong>ihn</strong> um <strong>einen</strong> Gefallen. → Ondan bir iyilik rica ediyorum.<br>
         Wir bitten <strong>Sie</strong> um <strong>Ihre</strong> Mithilfe. → Sizden yardımınızı rica ediyoruz.<br>
@@ -5341,11 +5294,9 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Die Suppe schmeckt dem Kind.<br>Die Schuhe passen ihm nicht.</div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>İki nesneli fiiller (geben, zeigen, schenken, bringen, schreiben):</strong> "kime" = Dativ, "neyi" = Akkusativ. İkisi de isimse sıra: <strong>önce Dativ, sonra Akkusativ</strong>.<br>
-        Ich zeige <strong>der Frau</strong> <strong>das Haus</strong>. (Kadına evi gösteriyorum.)<br>
-        <strong>İleri ipucu:</strong> Akkusativ bir zamirse (es, ihn...) o öne geçer: Ich zeige <strong>es</strong> der Frau.
-      </div>
+      <div class="plural-note"><strong>İki nesneli fiiller (geben, zeigen, schenken, bringen, schreiben):</strong> "kime" = Dativ, "neyi" = Akkusativ. İkisi de isimse sıra: <strong>önce Dativ, sonra Akkusativ</strong>.</div>
+      <div class="plural-note">Ich zeige <strong>der Frau</strong> <strong>das Haus</strong>. (Kadına evi gösteriyorum.)</div>
+      <div class="plural-note pn-tip"><strong>İleri ipucu:</strong> Akkusativ bir zamirse (es, ihn...) o öne geçer: Ich zeige <strong>es</strong> der Frau.</div>
     
       <h3 class="ref-h3">Akkusativ mı, Dativ mi, ikisi mi?</h3>
       <div class="plural-note" style="margin-top:0;">
@@ -5368,10 +5319,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Ich gebe <strong>dir</strong> <strong>das Buch</strong>.<br>Er schenkt <strong>seiner Frau</strong> <strong>Blumen</strong>.</div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>Nasıl ayırt edilir:</strong> Fiile "kimi/neyi?" diye sorabiliyorsan cevap Akkusativ'dir (① ve ③'te var). "Kime?" diye sorabiliyorsan cevap Dativ'dir (② ve ③'te var). ③ grubundaki fiillerde HER İKİ soru da cevaplanabilir — bu yüzden iki nesne birden alırlar.<br>
-        <strong>Tuzak:</strong> "kennen" (tanımak) Akkusativ alır ("Ich kenne <strong>ihn</strong>.") ama "danken" (teşekkür etmek) Dativ alır ("Ich danke <strong>ihm</strong>.") — anlamları benzer görünse de hâlleri FARKLIDIR, tek tek ezberlemek gerekir.
-      </div>
+      <div class="plural-note pn-rule"><strong>Nasıl ayırt edilir:</strong> Fiile "kimi/neyi?" diye sorabiliyorsan cevap Akkusativ'dir (① ve ③'te var). "Kime?" diye sorabiliyorsan cevap Dativ'dir (② ve ③'te var). ③ grubundaki fiillerde HER İKİ soru da cevaplanabilir — bu yüzden iki nesne birden alırlar.</div>
+      <div class="plural-note pn-warn"><strong>Tuzak:</strong> "kennen" (tanımak) Akkusativ alır ("Ich kenne <strong>ihn</strong>.") ama "danken" (teşekkür etmek) Dativ alır ("Ich danke <strong>ihm</strong>.") — anlamları benzer görünse de hâlleri FARKLIDIR, tek tek ezberlemek gerekir.</div>
     
       <h3 class="ref-h3">Örnekler: iki nesneli cümleler</h3>
 
@@ -5397,10 +5346,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
       <h2>🤕 Ağrı · weh tun</h2>
       <p class="example-de" style="font-size:15px;">Almanca'da "başım ağrıyor" diye <strong>ben</strong> özne olmaz. Ağrıyan <strong>vücut bölümü özne</strong>dir, ağrıyan kişi ise <strong>Dativ</strong> olur: <strong>Mir tut der Kopf weh.</strong> (kelimesi kelimesine: "bana baş acı yapar") Ayrıca <strong>Ich habe Kopfschmerzen.</strong> da denir (aşağıda).</p>
       <h3 class="ref-h3">Kalıp</h3>
-      <div class="plural-note">
-        <strong>Dativ kişi</strong> + <strong>tut / tun</strong> + <strong>vücut bölümü</strong> (özne) + <strong>weh</strong><br>
-        <strong>weh</strong> cümlenin <strong>sonunda</strong> kalır. Fiil <strong>vücut bölümüne</strong> uyar: tek ise <strong>tut</strong>, çoğul ise <strong>tun</strong>.
-      </div>
+      <div class="plural-note"><strong>Dativ kişi</strong> + <strong>tut / tun</strong> + <strong>vücut bölümü</strong> (özne) + <strong>weh</strong></div>
+      <div class="plural-note"><strong>weh</strong> cümlenin <strong>sonunda</strong> kalır. Fiil <strong>vücut bölümüne</strong> uyar: tek ise <strong>tut</strong>, çoğul ise <strong>tun</strong>.</div>
       <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
         <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Kim?</th><th style="text-align:left; padding:8px;">Dativ</th><th style="text-align:left; padding:8px;">Örnek (tek)</th></tr></thead>
@@ -5502,10 +5449,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="wx-why">Bölgeyi söylerken: im / am / in der + Dativ.</div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>Kural:</strong> <strong>Kopf + Schmerzen = Kopfschmerzen</strong> (tek kelime, hep çoğul, artikelsiz). Vücut bölümü çoğulsa araya <strong>-en</strong> girer: <strong>Ohr → Ohrenschmerzen</strong>.<br>
-        <strong>Fark:</strong> <strong>weh tun</strong>'da ağrıyan yer özne, kişi Dativ (<em>Mir tut …</em>). <strong>haben</strong>'de kişi özne (<em>Ich habe …</em>). Anlam aynı.
-      </div>
+      <div class="plural-note pn-rule"><strong>Kural:</strong> <strong>Kopf + Schmerzen = Kopfschmerzen</strong> (tek kelime, hep çoğul, artikelsiz). Vücut bölümü çoğulsa araya <strong>-en</strong> girer: <strong>Ohr → Ohrenschmerzen</strong>.</div>
+      <div class="plural-note pn-rule"><strong>Fark:</strong> <strong>weh tun</strong>'da ağrıyan yer özne, kişi Dativ (<em>Mir tut …</em>). <strong>haben</strong>'de kişi özne (<em>Ich habe …</em>). Anlam aynı.</div>
       <h3 class="ref-h3">Soru · olumsuz · geçmiş</h3>
       <div class="wx-card f">
         <div class="wx-head"><b>weh tun</b><span>soru, olumsuz, Perfekt</span></div>
@@ -5531,11 +5476,9 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </div>
       </div>
       <h3 class="ref-h3">Dikkat: sich wehtun ve leid tun</h3>
-      <div class="plural-note">
-        <strong>sich wehtun:</strong> kendini incitmek. Ich habe <strong>mir</strong> wehgetan. · Du hast <strong>dir</strong> wehgetan. (Dativ yansımalı zamir)<br>
-        <strong>Es tut mir leid</strong> = özür dilerim (üzgünüm). <strong>weh</strong> değil, <strong>leid</strong>! "Es tut mir weh" = bana acı veriyor.<br>
-        <strong>💡 Hatırlatma:</strong> kişi hep <strong>Dativ</strong> (mir, dir, ihm…), vücut bölümü <strong>Nominativ</strong> (der Kopf, die Füße).
-      </div>
+      <div class="plural-note"><strong>sich wehtun:</strong> kendini incitmek. Ich habe <strong>mir</strong> wehgetan. · Du hast <strong>dir</strong> wehgetan. (Dativ yansımalı zamir)</div>
+      <div class="plural-note"><strong>Es tut mir leid</strong> = özür dilerim (üzgünüm). <strong>weh</strong> değil, <strong>leid</strong>! "Es tut mir weh" = bana acı veriyor.</div>
+      <div class="plural-note pn-tip"><strong>💡 Hatırlatma:</strong> kişi hep <strong>Dativ</strong> (mir, dir, ihm…), vücut bölümü <strong>Nominativ</strong> (der Kopf, die Füße).</div>
           <div class="trap"><div class="trap-h">🇹🇷 Türkçede böyle, Almanca'da şöyle</div><div class="trap-n">Türkçede "başım ağrıyor" kişi özne gibi; Almanca'da <strong>ağrıyan organ özne</strong>, kişi Dativ.</div>
         <div class="trap-row"><div class="trap-x">❌ Ich tue Kopf weh.</div><div class="trap-ok">✅ <strong>Mir</strong> tut der Kopf weh.</div><div class="trap-why">Özne ağrıyan organ; kişi Dativ.</div></div>
         <div class="trap-row"><div class="trap-x">❌ Mein Kopf tut ich weh.</div><div class="trap-ok">✅ Mein Kopf tut <strong>mir</strong> weh.</div><div class="trap-why">Dativ: mir.</div></div>
@@ -5572,11 +5515,9 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">2:30 → halb drei<br>(halb zwei DEĞİL!)</div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>Dakikalarla:</strong> 30'dan azsa <strong>X nach</strong> (geçe), 30'dan fazlaysa bir sonraki saate göre <strong>X vor</strong> (kala) kullanılır.<br>
-        3:10 → zehn nach drei &nbsp;|&nbsp; 3:50 → zehn vor vier<br>
-        <strong>En sık yapılan hata:</strong> "halb" kelimesi Türkçedeki gibi "şu saат buçuk" değil, her zaman <strong>gelecek saate yarım kalmış</strong> anlamındadır — yani 2:30 Almancada kafanda "3'e yarım var" gibi düşünülür.
-      </div>
+      <div class="plural-note"><strong>Dakikalarla:</strong> 30'dan azsa <strong>X nach</strong> (geçe), 30'dan fazlaysa bir sonraki saate göre <strong>X vor</strong> (kala) kullanılır.</div>
+      <div class="plural-note">3:10 → zehn nach drei &nbsp;|&nbsp; 3:50 → zehn vor vier</div>
+      <div class="plural-note pn-warn"><strong>En sık yapılan hata:</strong> "halb" kelimesi Türkçedeki gibi "şu saат buçuk" değil, her zaman <strong>gelecek saate yarım kalmış</strong> anlamındadır — yani 2:30 Almancada kafanda "3'e yarım var" gibi düşünülür.</div>
       <h3 class="ref-h3">Örnekler: halb, Viertel…</h3>
 
       <div class="wx-card m">
@@ -5616,20 +5557,16 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">um drei Uhr<br>um Mitternacht</div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>bei</strong>: yer, şirket, faaliyet sırasında — <strong>bei der Arbeit</strong>, <strong>beim Essen</strong>.<br>
-        <strong>als</strong>: (1) geçmişte <strong>TEK SEFERLİK</strong> bir olay için "-dığında" — <strong>Als ich acht war, ...</strong> (2) karşılaştırmada "-den daha" — <strong>größer als</strong> (3) meslek/rol tanıtırken "olarak" — <strong>Er arbeitet als Lehrer.</strong><br>
-        <strong>von</strong>: başlangıç noktası / aitlik / kaynak — <strong>von 9 bis 17 Uhr</strong> (saatten saate), <strong>das Auto von meinem Vater</strong> (babamın arabası).<br>
-        En sık karışan kural: Tekrar eden / şimdiki / gelecek olaylarda "-dığında" için <strong>wenn</strong> kullanılır — sadece geçmişte <strong>tek seferlik</strong> olaylarda <strong>als</strong> kullanılır.
-      </div>
+      <div class="plural-note"><strong>bei</strong>: yer, şirket, faaliyet sırasında — <strong>bei der Arbeit</strong>, <strong>beim Essen</strong>.</div>
+      <div class="plural-note"><strong>als</strong>: (1) geçmişte <strong>TEK SEFERLİK</strong> bir olay için "-dığında" — <strong>Als ich acht war, ...</strong> (2) karşılaştırmada "-den daha" — <strong>größer als</strong> (3) meslek/rol tanıtırken "olarak" — <strong>Er arbeitet als Lehrer.</strong></div>
+      <div class="plural-note"><strong>von</strong>: başlangıç noktası / aitlik / kaynak — <strong>von 9 bis 17 Uhr</strong> (saatten saate), <strong>das Auto von meinem Vater</strong> (babamın arabası).</div>
+      <div class="plural-note">En sık karışan kural: Tekrar eden / şimdiki / gelecek olaylarda "-dığında" için <strong>wenn</strong> kullanılır — sadece geçmişte <strong>tek seferlik</strong> olaylarda <strong>als</strong> kullanılır.</div>
     
       <h3 class="ref-h3">von … bis (-den … -e kadar)</h3>
       <p class="example-de" style="font-size:15px;">Bir zaman aralığını belirtmek için <strong>von</strong> (-den) ve <strong>bis</strong> (-e kadar) birlikte kullanılır.</p>
-      <div class="plural-note">
-        <strong>von 9 bis 17 Uhr</strong> — saat 9'dan 17'ye kadar<br>
-        <strong>von Montag bis Freitag</strong> — pazartesiden cumaya kadar<br>
-        Kural: <strong>von</strong> başlangıcı, <strong>bis</strong> bitişi gösterir — ikisi her zaman birlikte kullanılır.
-      </div>
+      <div class="plural-note"><strong>von 9 bis 17 Uhr</strong> — saat 9'dan 17'ye kadar</div>
+      <div class="plural-note"><strong>von Montag bis Freitag</strong> — pazartesiden cumaya kadar</div>
+      <div class="plural-note">Kural: <strong>von</strong> başlangıcı, <strong>bis</strong> bitişi gösterir — ikisi her zaman birlikte kullanılır.</div>
     
       <h3 class="ref-h3">Örnekler: gün, saat, ay</h3>
 
@@ -5694,12 +5631,10 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
-        <strong>bitten um + Akkusativ:</strong> "um" her zaman Akkusativ ister: Ich bitte um <strong>eine</strong> Antwort. · Ich bitte um <strong>eine</strong> Rückmeldung bis Freitag. (bis = ... e kadar)<br>
-        <strong>Mini e-posta örneği:</strong> "Guten Tag Frau Weber, geht es am Dienstag um 11 Uhr? Ich bitte um eine Rückmeldung bis Montag. Viele Grüße"<br>
-        <strong>Dikkat:</strong> Gün için <strong>am</strong>, saat için <strong>um</strong> — ikisi birlikte gelir: am Montag <strong>um</strong> 10 Uhr. (Detay: "im / am / um" kartı)<br>
-        <em>Not: "Geht es …?" ve "Ich bitte um Rückmeldung" yazışmalarda sık geçen yardımcı kalıplardır; "Das geht leider nicht" ve "Viele Grüße" de aynı bağlamda birlikte öğretildiği için ekledim.</em>
-      </div>
+      <div class="plural-note"><strong>bitten um + Akkusativ:</strong> "um" her zaman Akkusativ ister: Ich bitte um <strong>eine</strong> Antwort. · Ich bitte um <strong>eine</strong> Rückmeldung bis Freitag. (bis = ... e kadar)</div>
+      <div class="plural-note"><strong>Mini e-posta örneği:</strong> "Guten Tag Frau Weber, geht es am Dienstag um 11 Uhr? Ich bitte um eine Rückmeldung bis Montag. Viele Grüße"</div>
+      <div class="plural-note pn-warn"><strong>Dikkat:</strong> Gün için <strong>am</strong>, saat için <strong>um</strong> — ikisi birlikte gelir: am Montag <strong>um</strong> 10 Uhr. (Detay: "im / am / um" kartı)</div>
+      <div class="plural-note"><em>Not: "Geht es …?" ve "Ich bitte um Rückmeldung" yazışmalarda sık geçen yardımcı kalıplardır; "Das geht leider nicht" ve "Viele Grüße" de aynı bağlamda birlikte öğretildiği için ekledim.</em></div>
       <h3 class="ref-h3">Örnekler: öner, kabul et, reddet</h3>
 
       <div class="wx-card f">
@@ -5797,7 +5732,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <tr><td style="padding:7px;">3:50</td><td style="padding:7px; color:var(--coral); font-weight:700;">zehn vor vier</td><td style="padding:7px;">dörde on kala</td></tr>
         </tbody>
       </table>
-      <div class="plural-note" style="margin-top:12px;">
+      <div class="plural-note pn-rule" style="margin-top:12px;">
         <strong>En kritik nokta — "halb":</strong> <em>halb vier</em> = 4'e yarım = <strong>3:30</strong> (3:30 değil 4:30 değil!). Almanca gelecek saate doğru sayar. <em>halb acht</em> = 7:30.
       </div>
       <h3 class="ref-h3">Resmî / dijital (tren, randevu, radyo)</h3>
@@ -5816,11 +5751,9 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
       <h2>❓ Soru kelimeleri · W-Fragen ve Wer / Wen / Wem</h2>
       <h3 class="ref-h3" style="margin-top:4px;">W-Fragen · soru kelimeleri</h3>
       <p class="example-de" style="font-size:15px;">Soru kelimesi her zaman cümlenin <strong>1. sırasında</strong>, çekimli fiil ise hemen <strong>2. sırada</strong> gelir (Wortstellung kuralıyla aynı mantık).</p>
-      <div class="plural-note">
-        <strong>Wann</strong> kommst du? — Ne zaman geliyorsun?<br>
-        <strong>Wo</strong> wohnst du? — Nerede oturuyorsun?<br>
-        Kural: Evet/Hayır sorusundan farkı — W-Fragen'de cevap "ja/nein" değil, sorulan bilgidir.
-      </div>
+      <div class="plural-note"><strong>Wann</strong> kommst du? — Ne zaman geliyorsun?</div>
+      <div class="plural-note"><strong>Wo</strong> wohnst du? — Nerede oturuyorsun?</div>
+      <div class="plural-note">Kural: Evet/Hayır sorusundan farkı — W-Fragen'de cevap "ja/nein" değil, sorulan bilgidir.</div>
     
       <h3 class="ref-h3">Wer? Wen? Wem? · kim, kimi, kime</h3>
       <p class="example-de" style="font-size:15px;">Kişiyi soran soru kelimesi de <strong>artikel gibi hâl alır</strong>: soru kelimesinin şekli cümledeki görevini gösterir.</p>
@@ -5835,7 +5768,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Nasıl seçilir?</strong> Cümlede özne soruluyorsa <strong>wer</strong>; fiilin nesnesi soruluyorsa <strong>wen</strong> (sehen, treffen, besuchen, lieben, kennen…); "kime" diye soruluyorsa <strong>wem</strong> (helfen, danken, gehören, gefallen, antworten + mit / bei / von / zu / nach / aus).<br>
         Edat varsa edatın hâli geçerlidir: <strong>für wen?</strong> (Akk) · <strong>mit wem?</strong> (Dativ) · <strong>auf wen warten</strong> (Akk).<br>
         Eşya için <strong>was?</strong> (ne?) kullanılır: Was ist das? — Wer ist das? yalnızca kişi için.
@@ -5894,7 +5827,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <tr><td style="padding:8px;">Hast du kein Geld?</td><td style="padding:8px;"><strong>Doch</strong>, ich habe Geld.</td><td style="padding:8px;">Hayır, param var!</td></tr>
         </tbody>
       </table>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Formül:</strong> Olumsuz soru + olumlu (düzeltme) cevap → her zaman <strong>doch</strong>. Olumlu soruya normal "ja/nein" kullanılır, "doch" gerekmez.
       </div>
       <h3 class="ref-h3">Örnekler: olumsuz soruya cevap</h3>
@@ -5942,7 +5875,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <tr><td style="padding:7px; color:var(--coral); font-weight:700;">Wessen?</td><td style="padding:7px;">Kimin? (iyelik)</td><td style="padding:7px;"><strong>Wessen</strong> Tasche ist das? — Bu kimin çantası?</td></tr>
         </tbody>
       </table>
-      <div class="plural-note" style="margin-top:12px;">
+      <div class="plural-note pn-warn" style="margin-top:12px;">
         <strong>Dikkat:</strong> <em>Wo?</em> (nerede, sabit yer) ↔ <em>Wohin?</em> (nereye, hareket) ↔ <em>Woher?</em> (nereden). Türkçede "nerede/nereye/nereden" ayrımının tam karşılığı.
       </div>
     </section>
@@ -5962,7 +5895,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex"><u>Kommst</u> du heute?<br><u>Wohnt</u> er hier?<br><span style="color:var(--x-tx-999999);">Bugün geliyor musun? / Burada mı oturuyor?</span></div>
         </div>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-tip">
         <strong>Hatırla:</strong> Düz cümlede fiil hep 2. sıradadır (<em>Du kommst heute.</em>). Ja/Nein sorusunda fiili başa alırsın (<em>Kommst du heute?</em>). W-sorusunda ise soru kelimesi başa gelir, fiil yine 2. sırada kalır.
       </div>
       <div class="trap"><div class="trap-h">🇹🇷 Sık yapılan hata</div>
@@ -6239,10 +6172,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Das ist <strong>nicht gut</strong>.<br><span style="color:var(--x-tx-999999);">(Bu iyi değil.)</span></div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>Aradaki fark net görülsün:</strong> "sehr teuer" (çok pahalı ama alınabilir, sadece bilgi veriyor) ile "zu teuer" (o kadar pahalı ki almam/alamam, bir ENGEL var) tamamen farklı anlam taşır. "nicht teuer" ise "pahalı değil, ucuz" demektir — sıfatın anlamını 180 derece çevirir.<br>
-        <strong>Dikkat:</strong> "zu" burada gördüğün "zu" edatından (-e/-ye, Dativ) <strong>farklı bir kullanımdır</strong> — aynı kelime, sıfattan önce gelince "fazla/aşırı" anlamına geçer.
-      </div>
+      <div class="plural-note pn-rule"><strong>Aradaki fark net görülsün:</strong> "sehr teuer" (çok pahalı ama alınabilir, sadece bilgi veriyor) ile "zu teuer" (o kadar pahalı ki almam/alamam, bir ENGEL var) tamamen farklı anlam taşır. "nicht teuer" ise "pahalı değil, ucuz" demektir — sıfatın anlamını 180 derece çevirir.</div>
+      <div class="plural-note pn-warn"><strong>Dikkat:</strong> "zu" burada gördüğün "zu" edatından (-e/-ye, Dativ) <strong>farklı bir kullanımdır</strong> — aynı kelime, sıfattan önce gelince "fazla/aşırı" anlamına geçer.</div>
       <h3 class="ref-h3">Örnekler: fazla ↔ çok</h3>
 
       <div class="wx-card n">
@@ -6404,10 +6335,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex"><strong>wo? (Dativ):</strong> Der Ball liegt <strong>zwischen den</strong> Stühlen.<br><strong>wohin? (Akkusativ):</strong> Ich lege den Ball <strong>zwischen die</strong> Stühle.</div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>Pratik kural:</strong> Cümlede "stehen, liegen, hängen, sein, sitzen" (durmak, yatmak, asılı olmak, olmak, oturmak) gibi bir DURUM fiili varsa → Dativ. "Legen, stellen, hängen (asmak), setzen, gehen" gibi bir HAREKET fiili varsa → Akkusativ.<br>
-        <strong>Dikkat:</strong> "hängen" hem durum ("asılı olmak" → Dativ) hem hareket ("asmak" → Akkusativ) anlamında kullanılabilir — cümlenin GENELİNE bak, sadece fiile değil.
-      </div>
+      <div class="plural-note pn-rule"><strong>Pratik kural:</strong> Cümlede "stehen, liegen, hängen, sein, sitzen" (durmak, yatmak, asılı olmak, olmak, oturmak) gibi bir DURUM fiili varsa → Dativ. "Legen, stellen, hängen (asmak), setzen, gehen" gibi bir HAREKET fiili varsa → Akkusativ.</div>
+      <div class="plural-note pn-warn"><strong>Dikkat:</strong> "hängen" hem durum ("asılı olmak" → Dativ) hem hareket ("asmak" → Akkusativ) anlamında kullanılabilir — cümlenin GENELİNE bak, sadece fiile değil.</div>
       <h3 class="ref-h3">Örnekler: Wohin? Wo?</h3>
 
       <div class="wx-card akk">
@@ -6446,7 +6375,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         Bir şeyin <strong>nerede durduğunu</strong> sorarken <strong>"Wo ist …?"</strong> (çoğulda "Wo sind …?") kullanılır. Cevapta 9 edattan biri + <strong>Dativ</strong> gelir (çünkü hareket yok, "wo?" sorusu).<br>
         <strong>Edatlar:</strong> auf · unter · neben · an · vor · hinter · zwischen · in · über
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Kalıp:</strong> Wo ist die Lampe? → Die Lampe ist <strong>über dem</strong> Tisch / <strong>neben dem</strong> Sofa / <strong>an der</strong> Decke.
       </div>
       <div style="overflow-x:auto;">
@@ -6463,10 +6392,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
-        <strong>Dikkat — artikel hâlleri (Dativ):</strong> der/das → <strong>dem</strong> (dem Tisch, dem Fenster) · die → <strong>der</strong> (der Wand, der Tür) · çoğul → <strong>den + -n</strong> (zwischen den Stühlen, neben den Pflanzen).<br>
-        <strong>Kısaltmalar:</strong> an dem = <strong>am</strong> · in dem = <strong>im</strong> (der/die ile kısaltma olmaz: an der Wand).
-      </div>
+      <div class="plural-note pn-warn"><strong>Dikkat — artikel hâlleri (Dativ):</strong> der/das → <strong>dem</strong> (dem Tisch, dem Fenster) · die → <strong>der</strong> (der Wand, der Tür) · çoğul → <strong>den + -n</strong> (zwischen den Stühlen, neben den Pflanzen).</div>
+      <div class="plural-note"><strong>Kısaltmalar:</strong> an dem = <strong>am</strong> · in dem = <strong>im</strong> (der/die ile kısaltma olmaz: an der Wand).</div>
       <h3 class="ref-h3">Örnekler: Wo ist …?</h3>
 
       <div class="wx-card dat">
@@ -6555,7 +6482,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Ich bin <strong>in dem</strong> Park.<br>Die Lampe steht <strong>auf dem</strong> Tisch.<br><span style="color:var(--x-tx-999999);">Parktayım / Lamba masanın üstünde duruyor</span></div>
         </div>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-tip">
         <strong>Fiil ipucu verir:</strong> gehen, fahren, legen, stellen, setzen, hängen (bir yere) → <strong>hareket → Akkusativ</strong>. sein, bleiben, liegen, stehen, sitzen, hängen (bir yerde) → <strong>konum → Dativ</strong>.
       </div>
       <h3 class="ref-h3">Aynı edat, iki hâl — yan yana</h3>
@@ -6603,7 +6530,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <tr><td style="padding:8px;"><strong>Sie</strong> (siz-nazik)</td><td style="padding:8px; color:var(--coral); font-weight:700;">Ihr</td><td style="padding:8px;">Ihr Buch — kitabınız (resmî)</td></tr>
         </tbody>
       </table>
-      <div class="plural-note" style="margin-top:12px;">
+      <div class="plural-note pn-warn" style="margin-top:12px;">
         <strong>Dikkat:</strong> Türkçede hem “onun (erkek)” hem “onun (kadın)” aynıdır, ama Almancada <strong>sein</strong> (erkek/nötr sahip) ve <strong>ihr</strong> (kadın sahip) ayrışır. Sahibin kim olduğuna bak.
       </div>
     </section>
@@ -6627,13 +6554,13 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <tr><td style="padding:8px;"><strong>Dativ</strong><br><span style="color:var(--x-tx-999999);">(-e/-de)</span></td><td style="padding:8px; color:var(--coral); font-weight:700;">meinem</td><td style="padding:8px; color:var(--coral); font-weight:700;">meinem</td><td style="padding:8px; color:var(--coral); font-weight:700;">meiner</td><td style="padding:8px; color:var(--coral); font-weight:700;">meinen</td></tr>
         </tbody>
       </table>
-      <div class="plural-note" style="margin-top:12px;">
+      <div class="plural-note pn-rule" style="margin-top:12px;">
         <strong>Kısa yol:</strong><br>
         • <strong>Nominativ:</strong> eril ve nötrde ek YOK, dişil ve çoğulda <strong>-e</strong>.<br>
         • <strong>Akkusativ:</strong> Nominativ ile aynı — <u>tek fark</u> eril artık <strong>-en</strong> (meinen). Dişil, nötr, çoğul değişmez.<br>
         • <strong>Dativ:</strong> her şey değişir → eril/nötr <strong>-em</strong>, dişil <strong>-er</strong>, çoğul <strong>-en</strong>.
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Altın kural:</strong> Bu ekler <strong>ein / kein</strong> ile <u>birebir aynıdır</u>. “kein” çekimini biliyorsan tüm iyelik zamirlerini (mein, dein, sein, ihr, unser, euer, Ihr) da biliyorsun demektir.
       </div>
     </section>
@@ -6655,7 +6582,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">Maria liebt <strong>ihren</strong> Mann.<br><span style="color:var(--x-tx-999999);">Maria eşini seviyor. (sahip kadın)</span></div>
         </div>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-warn">
         <strong>Unutma:</strong> sein / ihr kökü seçildikten sonra, ek yine <strong>sahiplenilen ismin</strong> cinsiyet ve hâline göre gelir: <em>sein Hund</em> (der, ek yok) ama <em>seinen Hund</em> (Akkusativ eril → -en).
       </div>
     </section>
@@ -6742,7 +6669,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
 <div class="rule-card der"><div class="title">Sıfat isimden ÖNCE → ek var</div><div class="sfx">Attributiv</div><div class="ex">der neu<strong>e</strong> Mantel<br>ein alt<strong>es</strong> Haus<br>mit klein<strong>en</strong> Kindern</div></div>
 <div class="rule-card die"><div class="title">Sıfat cümlenin sonunda → ek YOK</div><div class="sfx">Prädikativ (sein · werden · bleiben)</div><div class="ex">Der Mantel ist <strong>neu</strong>.<br>Das Haus ist <strong>alt</strong>.<br>Die Kinder sind <strong>klein</strong>.</div></div>
 </div>
-<div class="plural-note"><strong>Önce şunu sor:</strong> Sıfatın <u>hemen arkasında isim</u> var mı? Evet → ek ver. Hayır (ist/sind/bleibt + sıfat) → ek yok.</div>
+<div class="plural-note pn-rule"><strong>Önce şunu sor:</strong> Sıfatın <u>hemen arkasında isim</u> var mı? Evet → ek ver. Hayır (ist/sind/bleibt + sıfat) → ek yok.</div>
 </section>
 <section class="panel"><h2>⭐ Altın kural · -e ve -en</h2>
 <p class="example-de" style="font-size:15px;">Üç tablo var ama ezber kolay: <strong>der / die / das</strong> sonrasındaki (zayıf) tabloda ek sadece <strong>-e</strong> ya da <strong>-en</strong>'dir.</p>
@@ -6753,8 +6680,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
 <div class="plural-note">💡 <strong>Hafıza kancası:</strong> Tek başına duran (N/A) <em>der-das-die</em> sıfata "yük" bırakmaz (-e). Artikel zaten bilgi veriyor. <strong>den / dem / des / çoğul</strong> gibi "ağır" hallerde sıfat -en alır.</div>
 </section>
 <section class="panel"><h2>🅰️ Tablo 1 · der / die / das sonrası <small style="font-weight:500;opacity:.7;">(zayıf)</small></h2><p class="example-de" style="font-size:14px;">Artikel hâli gösterdiği için sıfat sadece <strong>-e</strong> / <strong>-en</strong>. Aynı tablo <strong>dieser, jeder, welcher, alle</strong> için de geçerli.</p><div style="overflow-x:auto;"><table class="adjtbl W"><thead><tr><th></th><th>maskulin<small>der Mann</small></th><th>neutrum<small>das Haus</small></th><th>feminin<small>die Frau</small></th><th>Plural<small>die Kinder</small></th></tr></thead><tbody><tr class=""><th class="cs nom">Nom.</th><td><span class="aa">der</span><br>neu<b class="ae e">e</b></td><td><span class="aa">das</span><br>neu<b class="ae e">e</b></td><td><span class="aa">die</span><br>neu<b class="ae e">e</b></td><td><span class="aa">die</span><br>neu<b class="ae n">en</b></td></tr><tr class=""><th class="cs akk">Akk.</th><td><span class="aa">den</span><br>neu<b class="ae n">en</b></td><td><span class="aa">das</span><br>neu<b class="ae e">e</b></td><td><span class="aa">die</span><br>neu<b class="ae e">e</b></td><td><span class="aa">die</span><br>neu<b class="ae n">en</b></td></tr><tr class=""><th class="cs dat">Dat.</th><td><span class="aa">dem</span><br>neu<b class="ae n">en</b></td><td><span class="aa">dem</span><br>neu<b class="ae n">en</b></td><td><span class="aa">der</span><br>neu<b class="ae n">en</b></td><td><span class="aa">den</span><br>neu<b class="ae n">en</b></td></tr><tr class="gen"><th class="cs gen">Gen.</th><td><span class="aa">des</span><br>neu<b class="ae n">en</b></td><td><span class="aa">des</span><br>neu<b class="ae n">en</b></td><td><span class="aa">der</span><br>neu<b class="ae n">en</b></td><td><span class="aa">der</span><br>neu<b class="ae n">en</b></td></tr></tbody></table></div><div class="adj-key"><span class="ae e">-e</span> 5 hücre <span class="ae n">-en</span> geri kalanı</div></section>
-<section class="panel"><h2>🅱️ Tablo 2 · ein / kein / mein sonrası <small style="font-weight:500;opacity:.7;">(karışık)</small></h2><p class="example-de" style="font-size:14px;"><strong>ein-kelimeleri</strong> (ein, kein, mein, dein, sein, ihr, unser, euer) bazı hücrelerde <strong>takısız</strong> kalır: <em>ein Mann, ein Haus</em>. Orada bilgiyi <strong>sıfat</strong> taşır.</p><div style="overflow-x:auto;"><table class="adjtbl M"><thead><tr><th></th><th>maskulin<small>der Mann</small></th><th>neutrum<small>das Haus</small></th><th>feminin<small>die Frau</small></th><th>Plural<small>die Kinder</small></th></tr></thead><tbody><tr class=""><th class="cs nom">Nom.</th><td><span class="aa">ein</span><br>neu<b class="ae x">er</b></td><td><span class="aa">ein</span><br>neu<b class="ae x">es</b></td><td><span class="aa">eine</span><br>neu<b class="ae e">e</b></td><td><span class="aa">keine</span><br>neu<b class="ae n">en</b></td></tr><tr class=""><th class="cs akk">Akk.</th><td><span class="aa">einen</span><br>neu<b class="ae n">en</b></td><td><span class="aa">ein</span><br>neu<b class="ae x">es</b></td><td><span class="aa">eine</span><br>neu<b class="ae e">e</b></td><td><span class="aa">keine</span><br>neu<b class="ae n">en</b></td></tr><tr class=""><th class="cs dat">Dat.</th><td><span class="aa">einem</span><br>neu<b class="ae n">en</b></td><td><span class="aa">einem</span><br>neu<b class="ae n">en</b></td><td><span class="aa">einer</span><br>neu<b class="ae n">en</b></td><td><span class="aa">keinen</span><br>neu<b class="ae n">en</b></td></tr><tr class="gen"><th class="cs gen">Gen.</th><td><span class="aa">eines</span><br>neu<b class="ae n">en</b></td><td><span class="aa">eines</span><br>neu<b class="ae n">en</b></td><td><span class="aa">einer</span><br>neu<b class="ae n">en</b></td><td><span class="aa">keiner</span><br>neu<b class="ae n">en</b></td></tr></tbody></table></div><div class="adj-key"><span class="ae x">-er · -es</span> sıfat artikelin yerini tutuyor (N eril, N+A nötr) <span class="ae e">-e</span> <span class="ae n">-en</span> öncekiyle aynı</div><div class="plural-note"><strong>Fark sadece 3 yerde:</strong> N eril <b>ein neuer</b> Mann · N nötr <b>ein neues</b> Haus · A nötr <b>ein neues</b> Haus. Gerisi Tablo 1 ile aynı!</div></section>
-<section class="panel"><h2>🅲 Tablo 3 · artikelsiz <small style="font-weight:500;opacity:.7;">(güçlü)</small></h2><p class="example-de" style="font-size:14px;">Artikel yok → sıfat <strong>artikelin sonunu</strong> üstlenir: <em>der → -er, das → -es, die → -e, dem → -em</em>. Madde adları, çoğullar ve miktarlar (<em>Kaffee, Wasser, Milch, Kinder, Leute</em>) bu tabloya girer.</p><div style="overflow-x:auto;"><table class="adjtbl S"><thead><tr><th></th><th>maskulin<small>der Mann</small></th><th>neutrum<small>das Haus</small></th><th>feminin<small>die Frau</small></th><th>Plural<small>die Kinder</small></th></tr></thead><tbody><tr class=""><th class="cs nom">Nom.</th><td>neu<b class="ae x">er</b></td><td>neu<b class="ae x">es</b></td><td>neu<b class="ae e">e</b></td><td>neu<b class="ae e">e</b></td></tr><tr class=""><th class="cs akk">Akk.</th><td>neu<b class="ae n">en</b></td><td>neu<b class="ae x">es</b></td><td>neu<b class="ae e">e</b></td><td>neu<b class="ae e">e</b></td></tr><tr class=""><th class="cs dat">Dat.</th><td>neu<b class="ae x">em</b></td><td>neu<b class="ae x">em</b></td><td>neu<b class="ae x">er</b></td><td>neu<b class="ae n">en</b></td></tr><tr class="gen"><th class="cs gen">Gen.</th><td>neu<b class="ae n">en</b></td><td>neu<b class="ae n">en</b></td><td>neu<b class="ae x">er</b></td><td>neu<b class="ae x">er</b></td></tr></tbody></table></div><div class="adj-key"><span class="ae x">-er · -es · -em</span> artikel sonu gibi <span class="ae e">-e</span> <span class="ae n">-en</span></div><div class="plural-note"><strong>Tek ayrıcalık:</strong> Genitiv eril/nötr <b>-en</b> (guten Mutes), Dativ <b>-em / -er / -en</b>. Pratikte karşına çıkan: <em>frisches Brot · kalte Milch · mit frischem Brot · mit netten Leuten</em>.</div></section>
+<section class="panel"><h2>🅱️ Tablo 2 · ein / kein / mein sonrası <small style="font-weight:500;opacity:.7;">(karışık)</small></h2><p class="example-de" style="font-size:14px;"><strong>ein-kelimeleri</strong> (ein, kein, mein, dein, sein, ihr, unser, euer) bazı hücrelerde <strong>takısız</strong> kalır: <em>ein Mann, ein Haus</em>. Orada bilgiyi <strong>sıfat</strong> taşır.</p><div style="overflow-x:auto;"><table class="adjtbl M"><thead><tr><th></th><th>maskulin<small>der Mann</small></th><th>neutrum<small>das Haus</small></th><th>feminin<small>die Frau</small></th><th>Plural<small>die Kinder</small></th></tr></thead><tbody><tr class=""><th class="cs nom">Nom.</th><td><span class="aa">ein</span><br>neu<b class="ae x">er</b></td><td><span class="aa">ein</span><br>neu<b class="ae x">es</b></td><td><span class="aa">eine</span><br>neu<b class="ae e">e</b></td><td><span class="aa">keine</span><br>neu<b class="ae n">en</b></td></tr><tr class=""><th class="cs akk">Akk.</th><td><span class="aa">einen</span><br>neu<b class="ae n">en</b></td><td><span class="aa">ein</span><br>neu<b class="ae x">es</b></td><td><span class="aa">eine</span><br>neu<b class="ae e">e</b></td><td><span class="aa">keine</span><br>neu<b class="ae n">en</b></td></tr><tr class=""><th class="cs dat">Dat.</th><td><span class="aa">einem</span><br>neu<b class="ae n">en</b></td><td><span class="aa">einem</span><br>neu<b class="ae n">en</b></td><td><span class="aa">einer</span><br>neu<b class="ae n">en</b></td><td><span class="aa">keinen</span><br>neu<b class="ae n">en</b></td></tr><tr class="gen"><th class="cs gen">Gen.</th><td><span class="aa">eines</span><br>neu<b class="ae n">en</b></td><td><span class="aa">eines</span><br>neu<b class="ae n">en</b></td><td><span class="aa">einer</span><br>neu<b class="ae n">en</b></td><td><span class="aa">keiner</span><br>neu<b class="ae n">en</b></td></tr></tbody></table></div><div class="adj-key"><span class="ae x">-er · -es</span> sıfat artikelin yerini tutuyor (N eril, N+A nötr) <span class="ae e">-e</span> <span class="ae n">-en</span> öncekiyle aynı</div><div class="plural-note pn-rule"><strong>Fark sadece 3 yerde:</strong> N eril <b>ein neuer</b> Mann · N nötr <b>ein neues</b> Haus · A nötr <b>ein neues</b> Haus. Gerisi Tablo 1 ile aynı!</div></section>
+<section class="panel"><h2>🅲 Tablo 3 · artikelsiz <small style="font-weight:500;opacity:.7;">(güçlü)</small></h2><p class="example-de" style="font-size:14px;">Artikel yok → sıfat <strong>artikelin sonunu</strong> üstlenir: <em>der → -er, das → -es, die → -e, dem → -em</em>. Madde adları, çoğullar ve miktarlar (<em>Kaffee, Wasser, Milch, Kinder, Leute</em>) bu tabloya girer.</p><div style="overflow-x:auto;"><table class="adjtbl S"><thead><tr><th></th><th>maskulin<small>der Mann</small></th><th>neutrum<small>das Haus</small></th><th>feminin<small>die Frau</small></th><th>Plural<small>die Kinder</small></th></tr></thead><tbody><tr class=""><th class="cs nom">Nom.</th><td>neu<b class="ae x">er</b></td><td>neu<b class="ae x">es</b></td><td>neu<b class="ae e">e</b></td><td>neu<b class="ae e">e</b></td></tr><tr class=""><th class="cs akk">Akk.</th><td>neu<b class="ae n">en</b></td><td>neu<b class="ae x">es</b></td><td>neu<b class="ae e">e</b></td><td>neu<b class="ae e">e</b></td></tr><tr class=""><th class="cs dat">Dat.</th><td>neu<b class="ae x">em</b></td><td>neu<b class="ae x">em</b></td><td>neu<b class="ae x">er</b></td><td>neu<b class="ae n">en</b></td></tr><tr class="gen"><th class="cs gen">Gen.</th><td>neu<b class="ae n">en</b></td><td>neu<b class="ae n">en</b></td><td>neu<b class="ae x">er</b></td><td>neu<b class="ae x">er</b></td></tr></tbody></table></div><div class="adj-key"><span class="ae x">-er · -es · -em</span> artikel sonu gibi <span class="ae e">-e</span> <span class="ae n">-en</span></div><div class="plural-note pn-rule"><strong>Tek ayrıcalık:</strong> Genitiv eril/nötr <b>-en</b> (guten Mutes), Dativ <b>-em / -er / -en</b>. Pratikte karşına çıkan: <em>frisches Brot · kalte Milch · mit frischem Brot · mit netten Leuten</em>.</div></section>
 <section class="panel"><h2>🧭 Hangi tabloyu kullanacağım?</h2>
 <p class="example-de" style="font-size:14px;">Sıfatın <strong>önündeki kelimeye</strong> bak:</p>
 <div class="rule-grid">
@@ -6782,7 +6709,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
 <div class="wx-row akk"><div class="wx-de"><s>Ich kaufe das <span class="wx-hl">neues</span> Kleid.</s> → das <span class="wx-hl">neue</span> Kleid.</div><div class="wx-tr">das sonrası -e (-es sadece ein-/artikelsiz).</div></div>
 <div class="wx-row dat"><div class="wx-de"><s>Mit <span class="wx-hl">frische</span> Milch.</s> → Mit <span class="wx-hl">frischer</span> Milch.</div><div class="wx-tr">Artikelsiz dişil Dativ: -er.</div></div>
 <div class="wx-row nom"><div class="wx-de"><s>Zwei <span class="wx-hl">kleinen</span> Kinder.</s> → Zwei <span class="wx-hl">kleine</span> Kinder.</div><div class="wx-tr">Sayı sonrası çoğul (artikelsiz) N/A: -e.</div></div></div>
-<div class="plural-note"><strong>Cinsiyeti unutma:</strong> Sıfat eki, <em>isme</em> göre seçilir. Önce <b>der / das / die</b> bul, sonra hâle bak.</div></section>
+<div class="plural-note pn-warn"><strong>Cinsiyeti unutma:</strong> Sıfat eki, <em>isme</em> göre seçilir. Önce <b>der / das / die</b> bul, sonra hâle bak.</div></section>
 <section class="panel"><h2>🧩 Özel durumlar</h2>
 <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
 <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Durum</th><th style="text-align:left; padding:8px;">Örnek</th></tr></thead><tbody>
@@ -6796,7 +6723,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
 <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;vertical-align:top;"><strong>alle · beide</strong> + sıfat (Tablo 1 gibi -en)</td><td style="padding:8px;">alle <b>kleinen</b> Kinder</td></tr>
 <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;vertical-align:top;"><strong>etwas · nichts · viel · alles</strong> + büyük harfli sıfat</td><td style="padding:8px;">etwas <b>Neues</b> · nichts <b>Gutes</b> · alles <b>Gute</b>!</td></tr>
 </tbody></table></section>
-<section class="panel"><h2>📋 Tek bakışta · üç tablo yan yana</h2><p class="example-de" style="font-size:14px;">Sadece <strong>sıfat eki</strong> (Nom · Akk · Dat). <span class="ae e">-e</span> yalnızca 5 yerde (zayıf).</p><div style="overflow-x:auto;"><table class="adjtbl sum"><thead><tr><th></th><th colspan="4">① der/die/das</th><th colspan="4">② ein/kein</th><th colspan="4">③ artikelsiz</th></tr><tr><th></th><th class="g">m</th><th class="g">n</th><th class="g">f</th><th class="g">pl</th><th class="g">m</th><th class="g">n</th><th class="g">f</th><th class="g">pl</th><th class="g">m</th><th class="g">n</th><th class="g">f</th><th class="g">pl</th></tr></thead><tbody><tr><th class="cs nom">Nom.</th><td><b class="ae e">-e</b></td><td><b class="ae e">-e</b></td><td><b class="ae e">-e</b></td><td><b class="ae n">-en</b></td><td><b class="ae x">-er</b></td><td><b class="ae x">-es</b></td><td><b class="ae e">-e</b></td><td><b class="ae n">-en</b></td><td><b class="ae x">-er</b></td><td><b class="ae x">-es</b></td><td><b class="ae e">-e</b></td><td><b class="ae e">-e</b></td></tr><tr><th class="cs akk">Akk.</th><td><b class="ae n">-en</b></td><td><b class="ae e">-e</b></td><td><b class="ae e">-e</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae x">-es</b></td><td><b class="ae e">-e</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae x">-es</b></td><td><b class="ae e">-e</b></td><td><b class="ae e">-e</b></td></tr><tr><th class="cs dat">Dat.</th><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae x">-em</b></td><td><b class="ae x">-em</b></td><td><b class="ae x">-er</b></td><td><b class="ae n">-en</b></td></tr></tbody></table></div><div class="plural-note"><strong>Kısa ezber:</strong> Tablo 1: <b>e e e en / en e e en / en en en en</b> · Tablo 2: yalnızca N eril <b>er</b>, N+A nötr <b>es</b> farklı · Tablo 3: <b>artikel sonu gibi</b> (er es e e / en es e e / em em er en).</div></section>
+<section class="panel"><h2>📋 Tek bakışta · üç tablo yan yana</h2><p class="example-de" style="font-size:14px;">Sadece <strong>sıfat eki</strong> (Nom · Akk · Dat). <span class="ae e">-e</span> yalnızca 5 yerde (zayıf).</p><div style="overflow-x:auto;"><table class="adjtbl sum"><thead><tr><th></th><th colspan="4">① der/die/das</th><th colspan="4">② ein/kein</th><th colspan="4">③ artikelsiz</th></tr><tr><th></th><th class="g">m</th><th class="g">n</th><th class="g">f</th><th class="g">pl</th><th class="g">m</th><th class="g">n</th><th class="g">f</th><th class="g">pl</th><th class="g">m</th><th class="g">n</th><th class="g">f</th><th class="g">pl</th></tr></thead><tbody><tr><th class="cs nom">Nom.</th><td><b class="ae e">-e</b></td><td><b class="ae e">-e</b></td><td><b class="ae e">-e</b></td><td><b class="ae n">-en</b></td><td><b class="ae x">-er</b></td><td><b class="ae x">-es</b></td><td><b class="ae e">-e</b></td><td><b class="ae n">-en</b></td><td><b class="ae x">-er</b></td><td><b class="ae x">-es</b></td><td><b class="ae e">-e</b></td><td><b class="ae e">-e</b></td></tr><tr><th class="cs akk">Akk.</th><td><b class="ae n">-en</b></td><td><b class="ae e">-e</b></td><td><b class="ae e">-e</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae x">-es</b></td><td><b class="ae e">-e</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae x">-es</b></td><td><b class="ae e">-e</b></td><td><b class="ae e">-e</b></td></tr><tr><th class="cs dat">Dat.</th><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae x">-em</b></td><td><b class="ae x">-em</b></td><td><b class="ae x">-er</b></td><td><b class="ae n">-en</b></td></tr></tbody></table></div><div class="plural-note pn-rule"><strong>Kısa ezber:</strong> Tablo 1: <b>e e e en / en e e en / en en en en</b> · Tablo 2: yalnızca N eril <b>er</b>, N+A nötr <b>es</b> farklı · Tablo 3: <b>artikel sonu gibi</b> (er es e e / en es e e / em em er en).</div></section>
 
     <section class="panel">
       <h2>📈 Komparativ · daha … (-er)</h2>
@@ -6837,10 +6764,8 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <div class="ex">das <strong>schnellste</strong> Auto<br><span style="color:var(--x-tx-999999);">en hızlı araba</span></div>
         </div>
       </div>
-      <div class="plural-note">
-        <strong>Yapı:</strong> Üç basamak → <em>schnell · schneller · am schnellsten</em>. <br>
-        <strong>-t, -d, -s, -ß, -z</strong> ile biten sıfatlarda araya <strong>e</strong> girer: <em>alt → am <strong>älte</strong>sten</em>, <em>kurz → am kürz<strong>e</strong>sten</em>.
-      </div>
+      <div class="plural-note pn-rule"><strong>Yapı:</strong> Üç basamak → <em>schnell · schneller · am schnellsten</em>.</div>
+      <div class="plural-note"><strong>-t, -d, -s, -ß, -z</strong> ile biten sıfatlarda araya <strong>e</strong> girer: <em>alt → am <strong>älte</strong>sten</em>, <em>kurz → am kürz<strong>e</strong>sten</em>.</div>
     </section>
 
     <section class="panel">
@@ -6864,7 +6789,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
           <tr><td style="padding:7px;">groß</td><td style="padding:7px; color:var(--coral); font-weight:700;">größer</td><td style="padding:7px; color:var(--coral); font-weight:700;">am größten</td><td style="padding:7px;">büyük</td></tr>
         </tbody>
       </table>
-      <div class="plural-note" style="margin-top:12px;">
+      <div class="plural-note pn-tip" style="margin-top:12px;">
         <strong>En sık kullanılan:</strong> <em>Ich spiele <strong>gern</strong> Fußball, aber <strong>lieber</strong> Tennis, und <strong>am liebsten</strong> schwimme ich.</em> (… severim, daha çok … tercih ederim, en çok … severim.)
       </div>
     </section>
@@ -6890,18 +6815,16 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-tip">
         <strong>Günlük hayatta en çok işine yarayan:</strong> <strong>Konjunktiv II</strong> (hätte gern, könnten Sie, wäre, würde). <strong>Konjunktiv I</strong>'i çoğunlukla haber dilinde görürsün; A2 seviyesinde tanıman yeterli.
       </div>
     </section>
     <section class="panel">
       <h2>🔍 hatte ↔ hätte · war ↔ wäre</h2>
       <p class="example-de" style="font-size:15px;">En çok karışan çift! <strong>hatte</strong> = geçmişte <em>vardı</em> (gerçek, olmuş). <strong>hätte</strong> = <em>olsaydı / isterdim</em> (gerçek değil, dilek ya da nazik rica).</p>
-      <div class="plural-note" style="margin-top:6px;">
-        <strong>🎯 Akılda tutma yolu:</strong> <strong>ä (iki nokta) = "havada kalan, gerçek olmayan" şey</strong> → dilek, hayal, nazik rica.<br>
-        <strong>a (noktasız) = ayağı yere basan, gerçek geçmiş.</strong><br>
-        <strong>İpucu kelimeler:</strong> <em>gestern · früher · damals · letzte Woche · als Kind</em> → <strong>hatte / war</strong>. <em>wenn · gern · bitte · so gern · vielleicht · an deiner Stelle</em> → <strong>hätte / wäre</strong>.
-      </div>
+      <div class="plural-note pn-tip"><strong>🎯 Akılda tutma yolu:</strong> <strong>ä (iki nokta) = "havada kalan, gerçek olmayan" şey</strong> → dilek, hayal, nazik rica.</div>
+      <div class="plural-note"><strong>a (noktasız) = ayağı yere basan, gerçek geçmiş.</strong></div>
+      <div class="plural-note"><strong>İpucu kelimeler:</strong> <em>gestern · früher · damals · letzte Woche · als Kind</em> → <strong>hatte / war</strong>. <em>wenn · gern · bitte · so gern · vielleicht · an deiner Stelle</em> → <strong>hätte / wäre</strong>.</div>
       <div class="wx-legend">Renkler: <span class="wx-pill nom">Präteritum (gerçek geçmiş)</span><span class="wx-pill akk">Konjunktiv II (dilek / nazik)</span></div>
       <div class="wx-card m">
         <div class="wx-head"><b>haben: hatte ↔ hätte</b><span>vardı ↔ olsaydı / isterdim</span></div>
@@ -6937,7 +6860,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-warn">
         <strong>Dikkat:</strong> Çoğulda <strong>hatten ↔ hätten</strong> ve <strong>waren ↔ wären</strong> sadece <em>ä</em> ile ayrılır. Yazarken ve okurken noktaya bak!
       </div>
           <div class="trap"><div class="trap-h">🇹🇷 Türkçede böyle, Almanca'da şöyle</div>
@@ -6964,9 +6887,9 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </tbody>
       </table>
       </div>
-      <div class="plural-note">
-        <strong>sollen</strong> ve <strong>wollen</strong>'de Konjunktiv II = Präteritum (aynı yazılır). Cümledeki bağlama bak: <em>Du solltest mehr schlafen</em> = daha çok uyumalısın (öneri).<br><strong>möchte</strong> = mögen'in Konjunktiv II'si; "istemek" anlamında en yaygın nazik kalıp: <em>Ich möchte einen Tee.</em><br><strong>Diğer fiiller:</strong> çoğunlukla <strong>würde + mastar</strong> kullanılır (aşağıda). Birkaç fiilin kendi Konjunktiv II'si de yaygın: <em>wissen → wüsste · kommen → käme · gehen → ginge · tun → täte</em>.
-      </div>
+      <div class="plural-note"><strong>sollen</strong> ve <strong>wollen</strong>'de Konjunktiv II = Präteritum (aynı yazılır). Cümledeki bağlama bak: <em>Du solltest mehr schlafen</em> = daha çok uyumalısın (öneri).</div>
+      <div class="plural-note"><strong>möchte</strong> = mögen'in Konjunktiv II'si; "istemek" anlamında en yaygın nazik kalıp: <em>Ich möchte einen Tee.</em></div>
+      <div class="plural-note"><strong>Diğer fiiller:</strong> çoğunlukla <strong>würde + mastar</strong> kullanılır (aşağıda). Birkaç fiilin kendi Konjunktiv II'si de yaygın: <em>wissen → wüsste · kommen → käme · gehen → ginge · tun → täte</em>.</div>
           <div class="trap"><div class="trap-h">🇹🇷 Türkçede böyle, Almanca'da şöyle</div>
         <div class="trap-row"><div class="trap-x">❌ Er hättet Zeit.</div><div class="trap-ok">✅ Er <strong>hätte</strong> Zeit.</div><div class="trap-why">er = ich: -e.</div></div>
       </div>
@@ -6979,7 +6902,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         <div class="rule-card die"><div class="title">Nazik rica</div><div class="sfx">Würden Sie bitte … + mastar?</div><div class="ex"><strong>Würden</strong> Sie bitte das Fenster <strong>öffnen</strong>?<br><span style="color:var(--x-tx-999999);">(Pencereyi açar mısınız lütfen?)</span></div></div>
         <div class="rule-card das"><div class="title">Tavsiye</div><div class="sfx">An deiner Stelle würde ich …</div><div class="ex">An deiner Stelle <strong>würde</strong> ich zum Arzt <strong>gehen</strong>.<br><span style="color:var(--x-tx-999999);">(Senin yerinde olsam doktora giderdim.)</span></div></div>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-warn">
         <strong>Yasak:</strong> <em>würde</em> ile <em>haben / sein / modal</em> kullanılmaz: <s>Ich würde Zeit haben</s> → <strong>Ich hätte Zeit.</strong> · <s>Ich würde gern Pilot sein</s> → <strong>Ich wäre gern Pilot.</strong>
       </div>
           <h3 class="ref-h3">🎨 Cümle blokları</h3>
@@ -7017,7 +6940,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         <div class="wx-row akk"><span class="wx-pill akk">Yumuşatma</span><div class="wx-de">Ich <b class="wx-hl">hätte</b> eine Frage.</div><div class="wx-tr">Bir sorum olacaktı.</div><div class="wx-why">💡 Doğrudan "Ich habe eine Frage" yerine daha kibar.</div></div>
         <div class="wx-row akk"><span class="wx-pill akk">Yumuşatma</span><div class="wx-de">Es <b class="wx-hl">wäre</b> besser, wenn du früher kommst.</div><div class="wx-tr">Daha erken gelirsen daha iyi olur.</div><div class="wx-why">💡 Öneri yumuşak yapılıyor.</div></div>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-rule">
         <strong>Wenn-cümlesi kuralı:</strong> <em>Wenn</em> + özne + … + <strong>Konjunktiv II fiili (sonda)</strong>, <strong>würde</strong> + özne + … + <strong>mastar (sonda)</strong>.<br>Örnek: <em>Wenn ich Zeit hätte, würde ich dich besuchen.</em> = Vaktim olsaydı seni ziyaret ederdim.
       </div>
           <div class="dlg"><div class="dlg-h"><span>💬 Mini diyalog · Im Café</span><button type="button" class="dlg-play" data-say="Boş bir masanız olur mu? Evet, tabii. Ne içmek istersiniz? Bir kahve rica ediyorum. Bana menüyü getirebilir misiniz? Memnuniyetle, hemen getiriyorum.">▶️ Dinle</button></div>
@@ -7030,7 +6953,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
     <section class="panel">
       <h2>📰 Konjunktiv I · dolaylı anlatım</h2>
       <p class="example-de" style="font-size:15px;">Başkasının söylediğini aktarırken haber ve gazete dilinde kullanılır: <em>Er sagt, er <strong>sei</strong> krank.</em> En çok <strong>er / sie / es</strong> (3. tekil) için görürsün.</p>
-      <div class="plural-note" style="margin-top:6px;"><strong>Formül:</strong> mastar kökü + <strong>-e · -est · -e · -en · -et · -en</strong> (3. tekil hep <strong>-e</strong>). <strong>sein</strong> düzensiz: <em>sei</em>.</div>
+      <div class="plural-note pn-rule" style="margin-top:6px;"><strong>Formül:</strong> mastar kökü + <strong>-e · -est · -e · -en · -et · -en</strong> (3. tekil hep <strong>-e</strong>). <strong>sein</strong> düzensiz: <em>sei</em>.</div>
 <div style="overflow-x:auto;">
       <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
         <thead><tr style="border-bottom:2px solid var(--brass);"><th style="text-align:left; padding:8px;">Fiil</th><th style="text-align:left; padding:8px;">Indikativ (er)</th><th style="text-align:left; padding:8px;">Konjunktiv I (er)</th></tr></thead>
@@ -7067,7 +6990,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         <div class="wx-row akk"><span class="wx-pill akk">Doğru kullanım</span><div class="wx-de">Sie sagen, sie <b class="wx-hl">hätten</b> keine Zeit.</div><div class="wx-tr">Vakitleri olmadığını söylüyorlar.</div><div class="wx-why">💡 Konjunktiv I Indikativ ile aynıysa → <b>Konjunktiv II</b> (hätten, wären, würden + mastar).</div></div>
         <div class="wx-row akk"><span class="wx-pill akk">Doğru kullanım</span><div class="wx-de">Sie sagen, sie <b class="wx-hl">würden</b> später <b class="wx-hl">kommen</b>.</div><div class="wx-tr">Daha sonra geleceklerini söylüyorlar.</div><div class="wx-why">💡 kommen aynı olduğu için würden + mastar.</div></div>
       </div>
-      <div class="plural-note">
+      <div class="plural-note pn-tip">
         <strong>Günlük konuşmada:</strong> insanlar çoğu zaman Konjunktiv I yerine düz Indikativ kullanır: <em>Er sagt, dass er krank ist.</em> Konjunktiv I haber dilinde ve yazıda öne çıkar. <strong>A2 için:</strong> sei · habe · komme gibi formları görünce "aktarılan söz" olduğunu tanıman yeterli.
       </div>
     </section>
@@ -7342,22 +7265,23 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         </details>
       </div>
 
-      <div class="group-label">Diğer</div>
-      <button class="btn-ghost" onclick="openPoolManager()" style="width:100%;">♻️ Soru Havuzunu Sıfırla…</button>
-
-      <div class="group-label">Geri bildirim</div>
-      <button class="btn-ghost" onclick="openReport('oneri')" style="width:100%;">💡 Tavsiye / Öneri Gönder</button>
-
-      <div style="margin-top:16px; text-align:right;">
-        <button class="btn-ghost" onclick="resetStats()" style="font-size:12px; padding:6px 12px;">İstatistiği Sıfırla</button>
-      </div>
-
-      <p class="empty-note" style="margin-top:18px;">
-        Not: Bu araç bir tarayıcı sekmesi olarak çalışır, gerçek bir arka plan uygulaması değildir.
-        Artikel Testi ve İsim Testi kendi isim listesini; Fiil/Sıfat testleri kendi listelerini kullanır.
-        Artikel Testi'nde bilgisayarda <strong>Enter</strong> tuşuyla bir sonraki soruya hızlıca geçebilirsin.
-        Başka bir sekmedeyken otomatik Artikel sorusu gelirse, sekme başlığı yanıp söner ve (izin verirsen) bildirim gösterilir.
-      </p>
+      <details class="test-details test-settings" data-gkey="_settings" style="margin-top:20px;">
+        <summary><span>⚙️ Ayarlar &amp; bilgi</span></summary>
+        <div class="inner">
+          <div class="group-label" style="margin-top:4px;">Soru havuzu</div>
+          <button class="btn-ghost" onclick="openPoolManager()" style="width:100%;">♻️ Soru Havuzunu Sıfırla…</button>
+          <div class="group-label">İstatistik</div>
+          <button class="btn-ghost" onclick="resetStats()" style="width:100%;">🔄 İstatistiği Sıfırla</button>
+          <div class="group-label">Geri bildirim</div>
+          <button class="btn-ghost" onclick="openReport('oneri')" style="width:100%;">💡 Tavsiye / Öneri Gönder</button>
+          <p class="empty-note" style="margin-top:14px;">
+            Not: Bu araç bir tarayıcı sekmesi olarak çalışır, gerçek bir arka plan uygulaması değildir.
+            Artikel Testi ve İsim Testi kendi isim listesini; Fiil/Sıfat testleri kendi listelerini kullanır.
+            Artikel Testi'nde bilgisayarda <strong>Enter</strong> tuşuyla bir sonraki soruya hızlıca geçebilirsin.
+            Başka bir sekmedeyken otomatik Artikel sorusu gelirse, sekme başlığı yanıp söner ve (izin verirsen) bildirim gösterilir.
+          </p>
+        </div>
+      </details>
     </section>
 
   </div>
