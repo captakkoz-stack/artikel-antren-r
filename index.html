@@ -376,6 +376,8 @@ html[data-theme="dark"] .kg-wrap{
   .ref-tools{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 6px;}
   .ref-tools .btn-ghost{font-size:12.5px; padding:6px 12px; white-space:normal;}
   .ref-sec > h2.ref-toggle{cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:10px; user-select:none;}
+  .ref-toggle > .ref-ttl{flex:1 1 auto; min-width:0; display:block; overflow-wrap:break-word;}
+  .ref-toggle > .ref-ttl small{white-space:nowrap; margin-left:4px;}
   .ref-sec > h2.ref-toggle::after{content:"▾"; color:var(--brass); font-size:16px; flex-shrink:0; transition:transform .15s;}
   .ref-sec.open > h2.ref-toggle::after{transform:rotate(180deg);}
   .ref-sec > h2.ref-toggle:hover{color:var(--tx-deep);}
@@ -2403,7 +2405,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
       <button class="ref-subtab" id="refTabPraep" onclick="switchReferansGroup('praep')">🧭 Edatlar (Präpositionen)</button>
       <button class="ref-subtab" id="refTabWechsel" onclick="switchReferansGroup('wechsel')">🔀 Wechsel & Kısaltmalar</button>
       <button class="ref-subtab" id="refTabKonjunktiv" onclick="switchReferansGroup('konjunktiv')">🎭 Konjunktiv I & II</button>
-      <button class="ref-subtab" id="refTabAdjdekl" onclick="switchReferansGroup('adjdekl')">🎨 Sıfat Çekimi (Adjektivdeklination)</button>
+      <button class="ref-subtab" id="refTabAdjdekl" onclick="switchReferansGroup('adjdekl')">🎨 Sıfatlar (çekim + karşılaştırma)</button>
     </div>
     <div id="refGroupNomen" class="ref-group" style="display:none;">
       <h2 class="referans-group-title">🏷️ İsimler · Nomen</h2>
@@ -2711,6 +2713,36 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         <div class="dlg-row b"><div class="dlg-b"><div class="dlg-de"><span class="dlg-who">B</span>Ich gehe aufs <strong>Gymnasium</strong>. Mathe ist ein <strong>Pflichtfach</strong>, Kunst ein <strong>Wahlfach</strong>.</div><div class="dlg-tr">Gymnasium'a gidiyorum. Matematik zorunlu, resim seçmeli.</div></div></div>
         <div class="dlg-row a"><div class="dlg-b"><div class="dlg-de"><span class="dlg-who">A</span>Wie ist dein <strong>Zeugnis</strong>?</div><div class="dlg-tr">Peki karnen nasıl?</div></div></div>
         <div class="dlg-row b"><div class="dlg-b"><div class="dlg-de"><span class="dlg-who">B</span>Ziemlich gut: in Deutsch eine Eins.</div><div class="dlg-tr">Oldukça iyi: Almancadan bir (1).</div></div></div>
+      </div>
+    </section>
+
+    
+    <section class="panel">
+      <h2>🚪 Bileşik isimler · Komposita</h2>
+      <p class="ref-p">Almanca uzun kelimeleri sever: iki-üç ismi birleştirir. <strong>Artikeli her zaman SON kelime belirler.</strong> Anlam da sondan başa okunur.</p>
+      <div class="wx-card m">
+        <div class="wx-head"><b>Son kelime = artikel</b><span>Komposita</span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">die Hand + der Schuh → <span class="wx-hl">der</span> Handschuh</div>
+          <div class="wx-tr">eldiven (el ayakkabısı 🙂)</div>
+          <div class="wx-why">Schuh eril → der Handschuh.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">das Haus + die Tür → <span class="wx-hl">die</span> Haustür</div>
+          <div class="wx-tr">ev kapısı</div>
+          <div class="wx-why">Tür dişil → die Haustür.</div>
+        </div>
+        <div class="wx-row nom">
+          <div class="wx-de">der Zug + das Ticket → <span class="wx-hl">das</span> Zugticket</div>
+          <div class="wx-tr">tren bileti</div>
+          <div class="wx-why">Ticket nötr → das Zugticket.</div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>Okuma ipucu:</strong> Uzun bir kelime gördüğünde sona bak — hem artikeli hem ana anlamı oradadır. <em>die Bundesligamannschaft</em> → sonu "Mannschaft" (takım, dişil).
+      </div>
+      <div class="plural-note">
+        Bazen araya kaynaştırma harfi girer: <strong>-s-</strong> (Arbeit<strong>s</strong>platz, Geburt<strong>s</strong>tag) veya <strong>-n-</strong> (Straße<strong>n</strong>bahn). Kuralı ezberlemeye gerek yok; kelimeyle birlikte öğrenilir.
       </div>
     </section>
 
@@ -4725,6 +4757,53 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         <div class="trap-row"><div class="trap-x">❌ Ich mache Fußball.</div><div class="trap-ok">✅ Ich <strong>spiele</strong> Fußball.</div><div class="trap-why">Top oyunu: spielen.</div></div>
       </div>
     </section>
+    
+    <section class="panel">
+      <h2>🔄 Reflexive Verben · dönüşlü fiiller</h2>
+      <p class="ref-p">Bazı fiiller <strong>sich</strong> ile gelir: eylem yapanın kendisine döner (yıkanmak, dinlenmek, sevinmek). Türkçedeki "-n-" / "kendini" mantığına benzer: <em>sich waschen</em> = (kendini) yıkamak.</p>
+      <h3 class="ref-h3" style="margin-top:4px;">Dönüşlü zamirler (Akkusativ)</h3>
+      <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--brass);">
+            <th style="text-align:left; padding:7px;">Kişi</th>
+            <th style="text-align:left; padding:7px;">Zamir</th>
+            <th style="text-align:left; padding:7px;">Örnek (sich freuen · sevinmek)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px;">ich</td><td style="padding:7px; color:var(--coral); font-weight:700;">mich</td><td style="padding:7px;">Ich freue <strong>mich</strong>.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px;">du</td><td style="padding:7px; color:var(--coral); font-weight:700;">dich</td><td style="padding:7px;">Du freust <strong>dich</strong>.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px;">er/sie/es</td><td style="padding:7px; color:var(--coral); font-weight:700;">sich</td><td style="padding:7px;">Er freut <strong>sich</strong>.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px;">wir</td><td style="padding:7px; color:var(--coral); font-weight:700;">uns</td><td style="padding:7px;">Wir freuen <strong>uns</strong>.</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px;">ihr</td><td style="padding:7px; color:var(--coral); font-weight:700;">euch</td><td style="padding:7px;">Ihr freut <strong>euch</strong>.</td></tr>
+          <tr><td style="padding:7px;">sie/Sie</td><td style="padding:7px; color:var(--coral); font-weight:700;">sich</td><td style="padding:7px;">Sie freuen <strong>sich</strong>.</td></tr>
+        </tbody>
+      </table>
+      <div class="plural-note" style="margin-top:12px;">
+        <strong>Fark:</strong> Sadece <em>er/sie/es</em> ve <em>sie/Sie</em> için <strong>sich</strong>; diğerleri Akkusativ zamirlerle (mich, dich, uns, euch) aynı.
+      </div>
+      <h3 class="ref-h3">Sık dönüşlü fiiller</h3>
+      <div class="plural-note" style="margin-top:0;">
+        sich freuen (sevinmek) · sich waschen (yıkanmak) · sich anziehen (giyinmek) · sich setzen (oturmak) · sich treffen (buluşmak) · sich ausruhen (dinlenmek) · sich fühlen (hissetmek) · sich erinnern (hatırlamak) · sich interessieren für (ilgilenmek)
+      </div>
+      <div class="wx-card m">
+        <div class="wx-head"><b>Cümlede yeri</b><span>sich</span></div>
+        <div class="wx-row nom">
+          <div class="wx-de">Ich wasche <span class="wx-hl">mich</span>.</div>
+          <div class="wx-tr">Yıkanıyorum.</div>
+          <div class="wx-why">Dönüşlü zamir fiilden sonra.</div>
+        </div>
+        <div class="wx-row akk">
+          <div class="wx-de">Am Morgen ziehe ich <span class="wx-hl">mich</span> schnell an.</div>
+          <div class="wx-tr">Sabah çabucak giyiniyorum.</div>
+          <div class="wx-why">Bölünen + dönüşlü: ich … mich … an.</div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>Not:</strong> Bazı fiiller Dativ dönüşlü zamir ister (bir nesneyle): <em>Ich wasche <strong>mir</strong> die Hände.</em> (Ellerimi yıkıyorum.) Burada el nesne, "mir" dönüşlü Dativ.
+      </div>
+    </section>
+
     </div>
     <div id="refGroupPerfekt" class="ref-group" style="display:none;">
       <h2 class="referans-group-title">⏪ Geçmiş zaman · Perfekt &amp; Präteritum</h2>
@@ -5696,6 +5775,40 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         <div class="dlg-row b"><div class="dlg-b"><div class="dlg-de"><span class="dlg-who">B</span>Dann feiern wir zusammen!</div><div class="dlg-tr">O zaman birlikte kutlarız!</div></div></div>
       </div>
     </section>
+    
+    <section class="panel">
+      <h2>🕒 Saat kaç? · Uhrzeit</h2>
+      <p class="ref-p">Soru: <strong>Wie spät ist es?</strong> veya <strong>Wie viel Uhr ist es?</strong> — Cevap hep <strong>Es ist …</strong> ile başlar.</p>
+      <h3 class="ref-h3" style="margin-top:4px;">Günlük konuşmada (resmî olmayan)</h3>
+      <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--brass);">
+            <th style="text-align:left; padding:7px;">Saat</th>
+            <th style="text-align:left; padding:7px;">Almanca</th>
+            <th style="text-align:left; padding:7px;">Mantık</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px;">3:00</td><td style="padding:7px; color:var(--coral); font-weight:700;">Es ist drei (Uhr).</td><td style="padding:7px;">tam saat</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px;">3:15</td><td style="padding:7px; color:var(--coral); font-weight:700;">Viertel nach drei</td><td style="padding:7px;">üçü çeyrek geçe (nach = geçe)</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px;">3:30</td><td style="padding:7px; color:var(--coral); font-weight:700;">halb vier</td><td style="padding:7px;"><strong>DİKKAT:</strong> "dörde yarım" = 3:30. Bir sonraki saati söyler!</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px;">3:45</td><td style="padding:7px; color:var(--coral); font-weight:700;">Viertel vor vier</td><td style="padding:7px;">dörde çeyrek var (vor = kala)</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px;">3:10</td><td style="padding:7px; color:var(--coral); font-weight:700;">zehn nach drei</td><td style="padding:7px;">üçü on geçe</td></tr>
+          <tr><td style="padding:7px;">3:50</td><td style="padding:7px; color:var(--coral); font-weight:700;">zehn vor vier</td><td style="padding:7px;">dörde on kala</td></tr>
+        </tbody>
+      </table>
+      <div class="plural-note" style="margin-top:12px;">
+        <strong>En kritik nokta — "halb":</strong> <em>halb vier</em> = 4'e yarım = <strong>3:30</strong> (3:30 değil 4:30 değil!). Almanca gelecek saate doğru sayar. <em>halb acht</em> = 7:30.
+      </div>
+      <h3 class="ref-h3">Resmî / dijital (tren, randevu, radyo)</h3>
+      <div class="plural-note" style="margin-top:0;">
+        24 saat sistemi, dakikayı düz okur: <strong>13:45 → dreizehn Uhr fünfundvierzig</strong>. 20:30 → zwanzig Uhr dreißig. Saati sormak için saat öncesinde <strong>um</strong>: <em>Um wie viel Uhr? — Um acht Uhr.</em>
+      </div>
+      <div class="trap"><div class="trap-h">🇹🇷 Tuzak</div>
+        <div class="trap-row"><div class="trap-x">❌ halb vier = 4:30</div><div class="trap-ok">✅ halb vier = <strong>3:30</strong></div><div class="trap-w">bir sonraki saate yarım</div></div>
+      </div>
+    </section>
+
     </div>
     <div id="refGroupFrage" class="ref-group" style="display:none;">
       <h2 class="referans-group-title">❓ Soru kelimeleri · W-Fragen</h2>
@@ -5801,6 +5914,63 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         <div class="trap-row"><div class="trap-x">❌ Kommst du nicht? – Ja, ich komme.</div><div class="trap-ok">✅ Kommst du nicht? – <strong>Doch</strong>, ich komme.</div><div class="trap-why">Olumsuz soruya olumlu cevap: doch.</div></div>
       </div>
     </section>
+    
+    <section class="panel">
+      <h2>🔎 W-Soru kelimeleri · tek tek</h2>
+      <p class="ref-p">Almancada soru kelimelerinin çoğu <strong>W</strong> ile başlar (bu yüzden "W-Fragen"). İşte en sık kullanılanlar, anlamları ve örnekleriyle:</p>
+      <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--brass);">
+            <th style="text-align:left; padding:7px;">Soru</th>
+            <th style="text-align:left; padding:7px;">Anlamı</th>
+            <th style="text-align:left; padding:7px;">Örnek</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px; color:var(--coral); font-weight:700;">Wer?</td><td style="padding:7px;">Kim? (özne)</td><td style="padding:7px;"><strong>Wer</strong> kommt heute? — Kim geliyor?</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px; color:var(--coral); font-weight:700;">Was?</td><td style="padding:7px;">Ne?</td><td style="padding:7px;"><strong>Was</strong> machst du? — Ne yapıyorsun?</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px; color:var(--coral); font-weight:700;">Wo?</td><td style="padding:7px;">Nerede? (yer)</td><td style="padding:7px;"><strong>Wo</strong> wohnst du? — Nerede oturuyorsun?</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px; color:var(--coral); font-weight:700;">Wohin?</td><td style="padding:7px;">Nereye? (yön)</td><td style="padding:7px;"><strong>Wohin</strong> gehst du? — Nereye gidiyorsun?</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px; color:var(--coral); font-weight:700;">Woher?</td><td style="padding:7px;">Nereden?</td><td style="padding:7px;"><strong>Woher</strong> kommst du? — Nereden geliyorsun?</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px; color:var(--coral); font-weight:700;">Wann?</td><td style="padding:7px;">Ne zaman?</td><td style="padding:7px;"><strong>Wann</strong> beginnt der Film? — Film ne zaman başlıyor?</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px; color:var(--coral); font-weight:700;">Warum?</td><td style="padding:7px;">Neden?</td><td style="padding:7px;"><strong>Warum</strong> lernst du Deutsch? — Neden Almanca öğreniyorsun?</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px; color:var(--coral); font-weight:700;">Wie?</td><td style="padding:7px;">Nasıl?</td><td style="padding:7px;"><strong>Wie</strong> geht es dir? — Nasılsın?</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px; color:var(--coral); font-weight:700;">Wie viel?</td><td style="padding:7px;">Ne kadar? (sayılamayan)</td><td style="padding:7px;"><strong>Wie viel</strong> kostet das? — Bu ne kadar?</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px; color:var(--coral); font-weight:700;">Wie viele?</td><td style="padding:7px;">Kaç tane? (sayılabilen)</td><td style="padding:7px;"><strong>Wie viele</strong> Kinder hast du? — Kaç çocuğun var?</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px; color:var(--coral); font-weight:700;">Wie lange?</td><td style="padding:7px;">Ne kadar süre?</td><td style="padding:7px;"><strong>Wie lange</strong> wohnst du hier? — Ne zamandır burada oturuyorsun?</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px; color:var(--coral); font-weight:700;">Welcher?</td><td style="padding:7px;">Hangi? (isimle)</td><td style="padding:7px;"><strong>Welches</strong> Buch liest du? — Hangi kitabı okuyorsun?</td></tr>
+          <tr><td style="padding:7px; color:var(--coral); font-weight:700;">Wessen?</td><td style="padding:7px;">Kimin? (iyelik)</td><td style="padding:7px;"><strong>Wessen</strong> Tasche ist das? — Bu kimin çantası?</td></tr>
+        </tbody>
+      </table>
+      <div class="plural-note" style="margin-top:12px;">
+        <strong>Dikkat:</strong> <em>Wo?</em> (nerede, sabit yer) ↔ <em>Wohin?</em> (nereye, hareket) ↔ <em>Woher?</em> (nereden). Türkçede "nerede/nereye/nereden" ayrımının tam karşılığı.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>🏗️ Soru cümlesi nasıl kurulur?</h2>
+      <p class="ref-p">Almancada iki tür soru vardır. İkisinde de fiilin yeri farklıdır:</p>
+      <div class="rule-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="rule-card der">
+          <div class="title">1) W-Frage (açık uçlu)</div>
+          <div class="sfx">Soru kelimesi + <strong>fiil 2. sırada</strong></div>
+          <div class="ex"><strong>Wann</strong> <u>kommst</u> du?<br><strong>Wo</strong> <u>wohnt</u> er?<br><span style="color:var(--x-tx-999999);">Ne zaman geliyorsun? / Nerede oturuyor?</span></div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">2) Ja/Nein-Frage (evet/hayır)</div>
+          <div class="sfx"><strong>Fiil 1. sırada</strong>, soru kelimesi yok</div>
+          <div class="ex"><u>Kommst</u> du heute?<br><u>Wohnt</u> er hier?<br><span style="color:var(--x-tx-999999);">Bugün geliyor musun? / Burada mı oturuyor?</span></div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>Hatırla:</strong> Düz cümlede fiil hep 2. sıradadır (<em>Du kommst heute.</em>). Ja/Nein sorusunda fiili başa alırsın (<em>Kommst du heute?</em>). W-sorusunda ise soru kelimesi başa gelir, fiil yine 2. sırada kalır.
+      </div>
+      <div class="trap"><div class="trap-h">🇹🇷 Sık yapılan hata</div>
+        <div class="trap-row"><div class="trap-x">❌ Wann du kommst?</div><div class="trap-ok">✅ Wann <strong>kommst</strong> du?</div><div class="trap-w">W-soruda fiil 2. sırada</div></div>
+        <div class="trap-row"><div class="trap-x">❌ Du kommst heute? (soru niyetiyle)</div><div class="trap-ok">✅ <strong>Kommst</strong> du heute?</div><div class="trap-w">Ja/Nein: fiil başa</div></div>
+      </div>
+    </section>
+
     </div>
     <div id="refGroupPraep" class="ref-group" style="display:none;">
       <h2 class="referans-group-title">🧭 Edatlar · Präpositionen</h2>
@@ -6369,6 +6539,44 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
         <div class="trap-row"><div class="trap-x">❌ Ich gehe in dem Kino.</div><div class="trap-ok">✅ Ich gehe <strong>ins</strong> Kino. / Ich bin <strong>im</strong> Kino.</div><div class="trap-why">ins = in das (wohin), im = in dem (wo).</div></div>
       </div>
     </section>
+    
+    <section class="panel">
+      <h2>🎯 Wohin mi, Wo mu? · hareket ↔ yer</h2>
+      <p class="ref-p">Wechsel edatlarının (in, an, auf, über, unter, vor, hinter, neben, zwischen) püf noktası tek soru: <strong>hareket var mı, yok mu?</strong></p>
+      <div class="rule-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="rule-card der">
+          <div class="title">Wohin? → AKKUSATIV</div>
+          <div class="sfx">Hareket / yön var. "nereye?"</div>
+          <div class="ex">Ich gehe <strong>in den</strong> Park.<br>Ich stelle die Lampe <strong>auf den</strong> Tisch.<br><span style="color:var(--x-tx-999999);">Parka gidiyorum / Lambayı masaya koyuyorum</span></div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">Wo? → DATIV</div>
+          <div class="sfx">Sabit yer / konum. "nerede?"</div>
+          <div class="ex">Ich bin <strong>in dem</strong> Park.<br>Die Lampe steht <strong>auf dem</strong> Tisch.<br><span style="color:var(--x-tx-999999);">Parktayım / Lamba masanın üstünde duruyor</span></div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>Fiil ipucu verir:</strong> gehen, fahren, legen, stellen, setzen, hängen (bir yere) → <strong>hareket → Akkusativ</strong>. sein, bleiben, liegen, stehen, sitzen, hängen (bir yerde) → <strong>konum → Dativ</strong>.
+      </div>
+      <h3 class="ref-h3">Aynı edat, iki hâl — yan yana</h3>
+      <div class="wx-card m">
+        <div class="wx-head"><b>stellen (Akk) ↔ stehen (Dativ)</b><span>auf</span></div>
+        <div class="wx-row akk">
+          <div class="wx-de">Ich stelle das Glas <span class="wx-hl">auf den</span> Tisch.</div>
+          <div class="wx-tr">Bardağı masaya koyuyorum.</div>
+          <div class="wx-why">Hareket → Akkusativ (den).</div>
+        </div>
+        <div class="wx-row dat">
+          <div class="wx-de">Das Glas steht <span class="wx-hl">auf dem</span> Tisch.</div>
+          <div class="wx-tr">Bardak masanın üstünde duruyor.</div>
+          <div class="wx-why">Konum → Dativ (dem).</div>
+        </div>
+      </div>
+      <div class="trap"><div class="trap-h">🇹🇷 Tuzak</div>
+        <div class="trap-row"><div class="trap-x">❌ Ich gehe in dem Park. (gitmek)</div><div class="trap-ok">✅ Ich gehe <strong>in den</strong> Park.</div><div class="trap-w">gehen = hareket → Akk</div></div>
+      </div>
+    </section>
+
     </div>
 <div id="refGroupIyelik" class="ref-group" style="display:none;">
       <h2 class="referans-group-title">👨‍👩‍👧 İyelik · Possessivartikel</h2>
@@ -6527,7 +6735,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
 </div>
 
 <div id="refGroupAdjdekl" class="ref-group" style="display:none;">
-<h2 class="referans-group-title">🎨 Sıfat Çekimi · Adjektivdeklination</h2>
+<h2 class="referans-group-title">🎨 Sıfatlar · çekim + karşılaştırma</h2>
 <section class="panel"><h2>🎨 Sıfata neden ek geliyor?</h2>
 <p class="example-de" style="font-size:15px;">Sıfat <strong>isimden önce</strong> geliyorsa sonuna <strong>ek (-e, -en, -er, -es, -em)</strong> alır. Bu ek, ismin <strong>cinsiyetini, hâlini ve sayısını</strong> gösterir. Türkçede "yeni ev, yeni evi, yeni evde": Türkçede sıfat hiç değişmez; Almancada değişir.</p>
 <div class="rule-grid">
@@ -6589,7 +6797,79 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
 <tr style="border-bottom:1px solid var(--line);"><td style="padding:8px;vertical-align:top;"><strong>etwas · nichts · viel · alles</strong> + büyük harfli sıfat</td><td style="padding:8px;">etwas <b>Neues</b> · nichts <b>Gutes</b> · alles <b>Gute</b>!</td></tr>
 </tbody></table></section>
 <section class="panel"><h2>📋 Tek bakışta · üç tablo yan yana</h2><p class="example-de" style="font-size:14px;">Sadece <strong>sıfat eki</strong> (Nom · Akk · Dat). <span class="ae e">-e</span> yalnızca 5 yerde (zayıf).</p><div style="overflow-x:auto;"><table class="adjtbl sum"><thead><tr><th></th><th colspan="4">① der/die/das</th><th colspan="4">② ein/kein</th><th colspan="4">③ artikelsiz</th></tr><tr><th></th><th class="g">m</th><th class="g">n</th><th class="g">f</th><th class="g">pl</th><th class="g">m</th><th class="g">n</th><th class="g">f</th><th class="g">pl</th><th class="g">m</th><th class="g">n</th><th class="g">f</th><th class="g">pl</th></tr></thead><tbody><tr><th class="cs nom">Nom.</th><td><b class="ae e">-e</b></td><td><b class="ae e">-e</b></td><td><b class="ae e">-e</b></td><td><b class="ae n">-en</b></td><td><b class="ae x">-er</b></td><td><b class="ae x">-es</b></td><td><b class="ae e">-e</b></td><td><b class="ae n">-en</b></td><td><b class="ae x">-er</b></td><td><b class="ae x">-es</b></td><td><b class="ae e">-e</b></td><td><b class="ae e">-e</b></td></tr><tr><th class="cs akk">Akk.</th><td><b class="ae n">-en</b></td><td><b class="ae e">-e</b></td><td><b class="ae e">-e</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae x">-es</b></td><td><b class="ae e">-e</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae x">-es</b></td><td><b class="ae e">-e</b></td><td><b class="ae e">-e</b></td></tr><tr><th class="cs dat">Dat.</th><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae n">-en</b></td><td><b class="ae x">-em</b></td><td><b class="ae x">-em</b></td><td><b class="ae x">-er</b></td><td><b class="ae n">-en</b></td></tr></tbody></table></div><div class="plural-note"><strong>Kısa ezber:</strong> Tablo 1: <b>e e e en / en e e en / en en en en</b> · Tablo 2: yalnızca N eril <b>er</b>, N+A nötr <b>es</b> farklı · Tablo 3: <b>artikel sonu gibi</b> (er es e e / en es e e / em em er en).</div></section>
-</div>
+
+    <section class="panel">
+      <h2>📈 Komparativ · daha … (-er)</h2>
+      <p class="ref-p">Bir şeyi başka bir şeyle karşılaştırırken sıfata <strong>-er</strong> eklenir (Türkçedeki "daha"). Karşılaştırmada "-den/-dan" yerine <strong>als</strong> kullanılır.</p>
+      <div class="rule-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="rule-card der">
+          <div class="title">Kural: sıfat + er</div>
+          <div class="sfx">klein → klein<strong>er</strong> · schnell → schnell<strong>er</strong></div>
+          <div class="ex">Berlin ist <strong>größer als</strong> Izmir.<br><span style="color:var(--x-tx-999999);">Berlin İzmir'den daha büyük.</span></div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">Tek heceliler → Umlaut</div>
+          <div class="sfx">a→ä, o→ö, u→ü sık olur</div>
+          <div class="ex">alt → <strong>älter</strong> · groß → <strong>größer</strong> · jung → <strong>jünger</strong><br><span style="color:var(--x-tx-999999);">daha yaşlı / daha büyük / daha genç</span></div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>als = -den/-dan:</strong> "X, Y'<u>den</u> daha büyük" → X ist größer <strong>als</strong> Y. <br>
+        Eşitlik için <strong>so … wie</strong> (… kadar): <em>Ich bin <strong>so</strong> groß <strong>wie</strong> mein Bruder.</em> (Kardeşim kadar boyluyum.)
+      </div>
+      <div class="trap"><div class="trap-h">🇹🇷 Tuzak</div>
+        <div class="trap-row"><div class="trap-x">❌ größer wie / größer von</div><div class="trap-ok">✅ größer <strong>als</strong></div><div class="trap-w">karşılaştırmada als</div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>🥇 Superlativ · en … (am -sten)</h2>
+      <p class="ref-p">"En …" demek için iki şekil vardır:</p>
+      <div class="rule-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="rule-card der">
+          <div class="title">Yüklemde: am …-sten</div>
+          <div class="sfx">fiil + sıfat olduğunda</div>
+          <div class="ex">Dieses Auto ist <strong>am schnellsten</strong>.<br><span style="color:var(--x-tx-999999);">Bu araba en hızlısı.</span></div>
+        </div>
+        <div class="rule-card die">
+          <div class="title">İsimden önce: der/die/das …-ste</div>
+          <div class="sfx">sıfat isimle birlikteyse</div>
+          <div class="ex">das <strong>schnellste</strong> Auto<br><span style="color:var(--x-tx-999999);">en hızlı araba</span></div>
+        </div>
+      </div>
+      <div class="plural-note">
+        <strong>Yapı:</strong> Üç basamak → <em>schnell · schneller · am schnellsten</em>. <br>
+        <strong>-t, -d, -s, -ß, -z</strong> ile biten sıfatlarda araya <strong>e</strong> girer: <em>alt → am <strong>älte</strong>sten</em>, <em>kurz → am kürz<strong>e</strong>sten</em>.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>⚠️ Düzensiz karşılaştırma · ezberle</h2>
+      <p class="ref-p">Birkaç çok sık sıfat/zarf kuralsız çekilir — bunları ezberlemek gerekir:</p>
+      <table class="mtbl" style="width:100%; border-collapse:collapse; font-family: system-ui, Helvetica, Arial, sans-serif; font-size:13.5px;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--brass);">
+            <th style="text-align:left; padding:7px;">Temel</th>
+            <th style="text-align:left; padding:7px;">Komparativ</th>
+            <th style="text-align:left; padding:7px;">Superlativ</th>
+            <th style="text-align:left; padding:7px;">Anlam</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px;">gut</td><td style="padding:7px; color:var(--coral); font-weight:700;">besser</td><td style="padding:7px; color:var(--coral); font-weight:700;">am besten</td><td style="padding:7px;">iyi</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px;">viel</td><td style="padding:7px; color:var(--coral); font-weight:700;">mehr</td><td style="padding:7px; color:var(--coral); font-weight:700;">am meisten</td><td style="padding:7px;">çok</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px;">gern</td><td style="padding:7px; color:var(--coral); font-weight:700;">lieber</td><td style="padding:7px; color:var(--coral); font-weight:700;">am liebsten</td><td style="padding:7px;">severek (tercih)</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px;">hoch</td><td style="padding:7px; color:var(--coral); font-weight:700;">höher</td><td style="padding:7px; color:var(--coral); font-weight:700;">am höchsten</td><td style="padding:7px;">yüksek</td></tr>
+          <tr style="border-bottom:1px solid var(--line);"><td style="padding:7px;">nah</td><td style="padding:7px; color:var(--coral); font-weight:700;">näher</td><td style="padding:7px; color:var(--coral); font-weight:700;">am nächsten</td><td style="padding:7px;">yakın</td></tr>
+          <tr><td style="padding:7px;">groß</td><td style="padding:7px; color:var(--coral); font-weight:700;">größer</td><td style="padding:7px; color:var(--coral); font-weight:700;">am größten</td><td style="padding:7px;">büyük</td></tr>
+        </tbody>
+      </table>
+      <div class="plural-note" style="margin-top:12px;">
+        <strong>En sık kullanılan:</strong> <em>Ich spiele <strong>gern</strong> Fußball, aber <strong>lieber</strong> Tennis, und <strong>am liebsten</strong> schwimme ich.</em> (… severim, daha çok … tercih ederim, en çok … severim.)
+      </div>
+    </section>
+
+    </div>
     <div id="refGroupKonjunktiv" class="ref-group" style="display:none;">
       <h2 class="referans-group-title">🎭 Konjunktiv I &amp; II</h2>
     <section class="panel">
@@ -10147,7 +10427,7 @@ const REF_GROUPS = [
   {id:"praep", ic:"🧭", n:"Edatlar", de:"Präpositionen"},
   {id:"wechsel", ic:"🔀", n:"Wechsel & Kısaltmalar", de:"Wechsel & Abkürzungen"},
   {id:"konjunktiv", ic:"🎭", n:"Konjunktiv I & II", de:"Dilek · Nazik · Dolaylı anlatım"},
-  {id:"adjdekl", ic:"🎨", n:"Sıfat Çekimi", de:"Adjektivdeklination"}
+  {id:"adjdekl", ic:"🎨", n:"Sıfatlar", de:"Çekim · Karşılaştırma"}
 ];
 window.__refGroup = null;
 function refCap(g){ return g.charAt(0).toUpperCase() + g.slice(1); }
@@ -15064,6 +15344,7 @@ function initRefAccordion(){
     sec.appendChild(body);
     sec.classList.add("ref-sec");
     h.classList.add("ref-toggle");
+    if(!h.querySelector(":scope > .ref-ttl")){ var _ttl=document.createElement("span"); _ttl.className="ref-ttl"; while(h.firstChild){ _ttl.appendChild(h.firstChild); } h.appendChild(_ttl); }
     h.setAttribute("role","button"); h.setAttribute("tabindex","0"); h.setAttribute("aria-expanded","false");
     const toggle = () => { delete sec.dataset.auto; setRefOpen(sec, !sec.classList.contains("open")); };
     h.addEventListener("click", toggle);
