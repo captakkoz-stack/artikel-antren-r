@@ -2129,7 +2129,7 @@ html[data-theme="dark"] .hs-ic{stroke:#8FD0F5 !important;}
     </div>
   </div>
 </header>
-<div id="subBar"><button type="button" onclick="switchTab('home')" aria-label="Ana sayfaya dön">← Ana Sayfa</button><button type="button" id="subBarBack2" onclick="refBackToMenu()">← Referans</button><span id="subBarTitle"></span></div>
+<div id="subBar"><button type="button" id="subBarBack1" onclick="backToSection()" aria-label="Geri">← Ana Sayfa</button><button type="button" id="subBarBack2" onclick="refBackToMenu()">← Referans</button><span id="subBarTitle"></span></div>
 <div id="homeScreen" aria-label="Ana sayfa"></div>
 
 <main>
@@ -10318,19 +10318,40 @@ window.__resumeGrid=function(){
   h+='<button type="button" class="tcg-tile" style="--tc:#B5503A" onclick="askQuestion(\'review-mistakes\')"><span class="tcg-ic">🔁</span><span class="tcg-t"><small>'+(weak?weak+' zayıf kelime':'Yanlış yok, harika')+'</small><b>Yanlışlarım</b></span><span class="tcg-go">▶</span></button>';
   return h+'</div>';
 };
+const SECTIONS = [
+  {id:"home", ic:"\ud83c\udfe0", n:"Ana Sayfa"},
+  {id:"sozluk", ic:"\ud83d\udcda", n:"S\u00f6zl\u00fck", title:"S\u00f6zl\u00fck", de:"Kelime hazinesi \u00b7 isim, fiil, s\u0131fat, zarf\u2026", tools:["artikel","verben","adj","adv","konj","praep","frage","saat"]},
+  {id:"pratik", ic:"\ud83c\udfaf", n:"Pratik", title:"Pratik", de:"Test \u00b7 kelime kart\u0131 \u00b7 tekrar", tools:["testler","kartlar","ilerleme"]},
+  {id:"oku", ic:"\ud83d\udcd6", n:"Oku", title:"Oku & Dinle", de:"Hik\u00e2yeler \u00b7 diyaloglar", tools:["hikayeler","diyalog"]},
+  {id:"gramer", ic:"\ud83d\udccc", n:"Gramer", redirect:"referans"}
+];
+const SECTIONS_MAP = {}; SECTIONS.forEach(function(s){ SECTIONS_MAP[s.id]=s; });
+const SECTION_IDS = new Set(["home","sozluk","pratik","oku"]);
+const TILE_BY_ID = {}; if(typeof HOME_TILES!=="undefined"){ HOME_TILES.forEach(function(g){ g.items.forEach(function(i){ TILE_BY_ID[i.t]=i; }); }); }
+const TOOL_SECTION = {}; SECTIONS.forEach(function(s){ (s.tools||[]).forEach(function(tt){ TOOL_SECTION[tt]=s.id; }); }); TOOL_SECTION["referans"]="gramer";
+function setBottomNavActive(secId){ try{ document.querySelectorAll("#bottomNav .bn-item").forEach(function(b){ b.classList.toggle("active", b.dataset.sec===secId); }); }catch(e){} }
+function backToSection(){ var s=TOOL_SECTION[activeTab]||"home"; if(!SECTION_IDS.has(s)) s="home"; switchTab(s); }
 function renderHome(){
   const el = document.getElementById("homeScreen"); if(!el) return;
   let last = null;
   try{ last = localStorage.getItem("artikel_last_tab"); }catch(e){}
-  let h = (window.__todayCard ? window.__todayCard() : "");
-  HOME_TILES.forEach(g=>{
-    h += '<div class="home-group-title">'+g.g+'</div><div class="home-grid'+(g.items.length===3?' g3':'')+'">';
-    g.items.forEach(i=>{
-      if(g.wide) h += '<button type="button" class="home-tile wide" style="--tc:'+i.c+'" onclick="switchTab(\''+i.t+'\')"><span class="ht-ic">'+(window.__ico?window.__ico(i.t,i.ic):i.ic)+'</span><span class="ht-txt"><span class="ht-t">'+i.n+'</span><span class="ht-de">'+i.de+'</span><span class="ht-s">'+i.s()+'</span></span><span class="ht-go">›</span></button>';
-      else h += '<button type="button" class="home-tile" style="--tc:'+i.c+'" onclick="switchTab(\''+i.t+'\')"><span class="ht-ic">'+(window.__ico?window.__ico(i.t,i.ic):i.ic)+'</span><span class="ht-t">'+i.n+'</span><span class="ht-de">'+i.de+'</span><span class="ht-s">'+i.s()+'</span></button>';
-    });
-    h += '</div>';
-  });
+  const sec = window.__section || "home";
+  let h;
+  if(sec === "home"){
+    h = (window.__todayCard ? window.__todayCard() : "");
+  } else {
+    const S = (typeof SECTIONS_MAP!=="undefined") ? SECTIONS_MAP[sec] : null;
+    h = "";
+    if(S && S.tools){
+      h += '<div class="sec-head"><h1>'+S.ic+' '+S.title+'</h1><p>'+S.de+'</p></div>';
+      h += '<div class="home-grid'+(S.tools.length===3?' g3':'')+'">';
+      S.tools.forEach(function(tid){
+        const i = TILE_BY_ID[tid]; if(!i) return;
+        h += '<button type="button" class="home-tile" style="--tc:'+i.c+'" onclick="switchTab(\''+i.t+'\')"><span class="ht-ic">'+(window.__ico?window.__ico(i.t,i.ic):i.ic)+'</span><span class="ht-t">'+i.n+'</span><span class="ht-de">'+i.de+'</span><span class="ht-s">'+i.s()+'</span></button>';
+      });
+      h += '</div>';
+    }
+  }
   el.innerHTML = h;
 }
 window.__popping = false;
@@ -10351,12 +10372,14 @@ function switchTab(tab){
       if(cur !== tab) history.pushState({tab:tab, g:null}, "", location.pathname + location.search);
     }
   }catch(e){}
-  if(tab === "home"){
+  if(tab === "home" || SECTION_IDS.has(tab)){
+    window.__section = tab;
     renderHome();
     if(hs) hs.style.display = "block";
     if(hdr) hdr.style.display = "";
     if(sb) sb.style.display = "none";
     if(mn) mn.style.display = "none";
+    setBottomNavActive(tab);
     try{ window.scrollTo(0, 0); }catch(e){}
     return;
   }
@@ -10365,6 +10388,7 @@ function switchTab(tab){
   if(sb){ sb.style.display = "flex"; const st = document.getElementById("subBarTitle"); if(st) st.textContent = TAB_TITLES[tab] || ""; }
   if(mn) mn.style.display = "";
   try{ document.documentElement.style.setProperty("--tabc", TAB_COLORS[tab] || "#C9A66B"); }catch(e){}
+  try{ window.__section = TOOL_SECTION[tab] || "home"; setBottomNavActive(window.__section); var _bb=document.getElementById("subBarBack1"); if(_bb){ var _bs = SECTION_IDS.has(window.__section)?window.__section:"home"; _bb.textContent = "\u2190 " + (SECTIONS_MAP[_bs]?SECTIONS_MAP[_bs].n:"Ana Sayfa"); } }catch(e){}
   try{ localStorage.setItem("artikel_last_tab", tab); }catch(e){}
   switchTabInner(tab);
 }
@@ -19263,7 +19287,7 @@ var oST=window.switchTab; if(typeof oST==="function"){ window.switchTab=function
 var sig=document.querySelector("#appHeader .signature"), lu=document.querySelector("#appHeader .last-updated");
 var sigH=sig?sig.outerHTML:"", luH=lu?lu.outerHTML:"";
 var oRH=window.renderHome;
-if(typeof oRH==="function"){ window.renderHome=function(){ var r=oRH.apply(this,arguments); var el=document.getElementById("homeScreen"); if(el && !el.querySelector(".home-foot")) el.insertAdjacentHTML("beforeend",'<div class="home-foot">'+sigH+luH+'</div>'); return r; }; window.renderHome(); }
+if(typeof oRH==="function"){ window.renderHome=function(){ var r=oRH.apply(this,arguments); var el=document.getElementById("homeScreen"); if(el && (window.__section||"home")==="home" && !el.querySelector(".home-foot")) el.insertAdjacentHTML("beforeend",'<div class="home-foot">'+sigH+luH+'</div>'); return r; }; window.renderHome(); }
 })();
 
 </script>
@@ -19374,5 +19398,30 @@ document.addEventListener("click",function(e){
 <script>
 if("serviceWorker" in navigator && /^https?:$/.test(location.protocol)){ window.addEventListener("load", function(){ navigator.serviceWorker.register("sw.js").catch(function(){}); }); }
 </script>
+<nav id="bottomNav" aria-label="Ana menü">
+  <button class="bn-item active" data-sec="home" onclick="switchTab('home')"><span class="bn-ic">🏠</span><span class="bn-t">Ana Sayfa</span></button>
+  <button class="bn-item" data-sec="sozluk" onclick="switchTab('sozluk')"><span class="bn-ic">📚</span><span class="bn-t">Sözlük</span></button>
+  <button class="bn-item" data-sec="pratik" onclick="switchTab('pratik')"><span class="bn-ic">🎯</span><span class="bn-t">Pratik</span></button>
+  <button class="bn-item" data-sec="oku" onclick="switchTab('oku')"><span class="bn-ic">📖</span><span class="bn-t">Oku</span></button>
+  <button class="bn-item" data-sec="gramer" onclick="switchTab('referans')"><span class="bn-ic">📌</span><span class="bn-t">Gramer</span></button>
+</nav>
+<style id="navStyles">
+#bottomNav{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;background:#0F2A3D;border-top:1px solid rgba(255,255,255,.08);padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 14px rgba(0,0,0,.2);}
+#bottomNav .bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:none;border:0;cursor:pointer;padding:8px 2px 7px;color:rgba(255,255,255,.58);font-family:inherit;font-size:11px;line-height:1;transition:color .15s;-webkit-tap-highlight-color:transparent;}
+#bottomNav .bn-ic{font-size:21px;line-height:1;opacity:.72;transition:opacity .15s, transform .15s;}
+#bottomNav .bn-item.active{color:#E9C98A;}
+#bottomNav .bn-item.active .bn-ic{opacity:1;transform:translateY(-1px);}
+#bottomNav .bn-t{font-weight:600;letter-spacing:.2px;}
+#bottomNav .bn-item:active .bn-ic{transform:scale(.9);}
+#homeScreen, main{padding-bottom:88px !important;}
+.report-fab{bottom:calc(70px + env(safe-area-inset-bottom)) !important;}
+.sec-head{margin:4px 2px 16px;}
+.sec-head h1{font-family:Georgia,"Times New Roman",serif;font-size:23px;font-weight:700;margin:0 0 4px;color:var(--ink);letter-spacing:.2px;}
+.sec-head p{margin:0;color:var(--x-tx-8a8a8a,#8a8a8a);font-size:13.5px;}
+html[data-theme="dark"] #bottomNav{background:#0A1118;border-top-color:rgba(255,255,255,.07);}
+html[data-theme="dark"] #bottomNav .bn-item{color:rgba(230,225,210,.5);}
+html[data-theme="dark"] #bottomNav .bn-item.active{color:#E9C98A;}
+</style>
+<script>try{setBottomNavActive(window.__section||"home");}catch(e){}</script>
 </body>
 </html>
